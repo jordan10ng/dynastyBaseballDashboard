@@ -5,11 +5,6 @@ node_modules/
 .next/
 out/
 
-# Data — history too large for git
-data/history/
-
-# Keep all other data files (players.json, db.json, stats.json, model/, rankings/)
-
 # Env
 .env.local
 .env*.local
@@ -19,5 +14,6 @@ data/history/
 
 # Debug
 npm-debug.log*
-.claude/
+
+# Claude
 .claude/
