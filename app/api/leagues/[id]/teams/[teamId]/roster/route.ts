@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { queryAll, loadPlayers } from '@/lib/db'
 
-export async function GET(_req: NextRequest, { params }: { params: { id: string; teamId: string } }) {
-  const { id: leagueId, teamId } = params
+export async function GET(_req: NextRequest, { params }: { params: Promise<{ id: string; teamId: string }> }) {
+  const { id: leagueId, teamId } = await params
   const playerMap = loadPlayers()
   const rosters = await queryAll('SELECT * FROM rosters', [leagueId])
   const teamRoster = rosters.filter((r: any) => r.team_id === teamId)
