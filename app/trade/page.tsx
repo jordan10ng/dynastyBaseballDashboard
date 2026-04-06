@@ -156,7 +156,7 @@ export default function TradePage() {
           label="Team A" color="#3b82f6"
           players={teamA} value={valA}
           leagueTeams={leagueTeams} selectedTeamId={teamA_id} onSelectTeam={setTeamA_id}
-          onRemove={p => setTeamA(prev => prev.filter(x => x.id !== p.id))}
+          onRemove={(p: any) => setTeamA((prev: any) => prev.filter((x: any) => x.id !== p.id))}
           isLeagueMode={isLeagueMode} teamAssets={assetsA}
           onTogglePlayer={togglePlayerA} minorsIds={minorsIds}
           onAdd={() => { setAddingTo('A'); setSearch('') }}
@@ -187,7 +187,7 @@ export default function TradePage() {
           label="Team B" color="#a855f7"
           players={teamB} value={valB}
           leagueTeams={leagueTeams} selectedTeamId={teamB_id} onSelectTeam={setTeamB_id}
-          onRemove={p => setTeamB(prev => prev.filter(x => x.id !== p.id))}
+          onRemove={(p: any) => setTeamB((prev: any) => prev.filter((x: any) => x.id !== p.id))}
           isLeagueMode={isLeagueMode} teamAssets={assetsB}
           onTogglePlayer={togglePlayerB} minorsIds={minorsIds}
           onAdd={() => { setAddingTo('B'); setSearch('') }}
