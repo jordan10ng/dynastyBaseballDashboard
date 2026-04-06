@@ -1,9 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
 import fs from 'fs'
 import path from 'path'
-import os from 'os'
 
-const DATA_DIR = path.join(os.homedir(), 'Desktop', 'fantasy-baseball', 'data')
+const DATA_DIR = path.join(process.cwd(), 'data')
 const PLAYERS_PATH = path.join(DATA_DIR, 'players.json')
 
 function parseCSV(text: string): string[][] {
@@ -43,7 +42,6 @@ export async function POST(req: NextRequest) {
     age:      header.findIndex(h => h === 'age'),
   }
 
-  // Build player map in memory
   const players: Record<string, any> = {}
   for (let i = 1; i < rows.length; i++) {
     const cols = rows[i]
@@ -62,7 +60,6 @@ export async function POST(req: NextRequest) {
     }
   }
 
-  // Write to separate players.json
   if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true })
   fs.writeFileSync(PLAYERS_PATH, JSON.stringify(players, null, 2), 'utf-8')
 

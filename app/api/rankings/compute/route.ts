@@ -1,9 +1,8 @@
 import { NextResponse } from 'next/server'
 import fs from 'fs'
 import path from 'path'
-import os from 'os'
 
-const BASE = path.join(os.homedir(), 'Desktop', 'fantasy-baseball', 'data')
+const BASE = path.join(process.cwd(), 'data')
 const SOURCES_DIR = path.join(BASE, 'rankings', 'sources')
 const RANKINGS_OUT = path.join(BASE, 'rankings', 'rankings.json')
 const PLAYERS_PATH = path.join(BASE, 'players.json')
@@ -20,6 +19,41 @@ function stalenessWeight(dateStr: string): number {
   const d = daysOld(dateStr)
   if (d >= 365) return 0
   return Math.max(0, 1 - d / 365)
+}
+
+function matchPlayer(
+  row: { name: string; position: string; team: string },
+  nameMap: Record<string, string[]>,
+  players: Record<string, any>
+): string | null {
+  const key = normalize(row.name)
+  const candidates = nameMap[key]
+  if (!candidates || candidates.length === 0) return null
+  if (candidates.length === 1) return candidates[0]
+  const pos = normalize(row.position)
+  const team = normalize(row.team)
+  const scored = candidates.map(id => {
+    const p = players[id]
+    let score = 0
+    if (pos && normalize(p.positions ?? '').includes(pos)) score++
+    if (team && normalize(p.team ?? '') === team) score++
+    return { id, score }
+  })
+  const best = scored.sort((a, b) => b.score - a.score)
+  if (best[0].score === 0 && best.length > 1) return null
+  return best[0].id
+}
+
+function resolveIds(
+  row: { name: string; position: string; team: string },
+  nameMap: Record<string, string[]>,
+  players: Record<string, any>
+): string[] {
+  const id = matchPlayer(row, nameMap, players)
+  if (id) return [id]
+  const key = normalize(row.name)
+  const candidates = nameMap[key]
+  return candidates && candidates.length > 0 ? candidates : []
 }
 
 export async function POST() {
@@ -52,33 +86,6 @@ export async function POST() {
       else overallSources.push(source)
     }
 
-    function matchPlayer(row: { name: string; position: string; team: string }): string | null {
-      const key = normalize(row.name)
-      const candidates = nameMap[key]
-      if (!candidates || candidates.length === 0) return null
-      if (candidates.length === 1) return candidates[0]
-      const pos = normalize(row.position)
-      const team = normalize(row.team)
-      const scored = candidates.map(id => {
-        const p = players[id]
-        let score = 0
-        if (pos && normalize(p.positions ?? '').includes(pos)) score++
-        if (team && normalize(p.team ?? '') === team) score++
-        return { id, score }
-      })
-      const best = scored.sort((a, b) => b.score - a.score)
-      if (best[0].score === 0 && best.length > 1) return null
-      return best[0].id
-    }
-
-    function resolveIds(row: { name: string; position: string; team: string }): string[] {
-      const id = matchPlayer(row)
-      if (id) return [id]
-      const key = normalize(row.name)
-      const candidates = nameMap[key]
-      return candidates && candidates.length > 0 ? candidates : []
-    }
-
     // --- OVERALL ---
     const overallData: Record<string, { weightedSum: number; weightSum: number; name: string; position: string; team: string }> = {}
     for (const source of overallSources) {
@@ -86,7 +93,7 @@ export async function POST() {
       const penalty = maxRank + 1
       for (const row of source.players) {
         const rank = row.rank ?? penalty
-        for (const pid of resolveIds(row)) {
+        for (const pid of resolveIds(row, nameMap, players)) {
           if (!overallData[pid]) overallData[pid] = { weightedSum: 0, weightSum: 0, name: players[pid]?.name ?? row.name, position: row.position, team: row.team }
           overallData[pid].weightedSum += rank * source.weight
           overallData[pid].weightSum += source.weight
@@ -112,16 +119,14 @@ export async function POST() {
     const overallRankById: Record<string, number> = {}
     for (const p of overallResult) overallRankById[p.id] = p.rank
 
-    // --- FULL PROSPECT RANKING (includes everyone in prospect sources, even if in O) ---
-    // This is used ONLY for anchor lookup — so "P position 10" means the 10th best
-    // prospect according to prospect sources, regardless of whether they're in O
+    // --- FULL PROSPECT RANKING ---
     const fullProspectData: Record<string, { weightedSum: number; weightSum: number; name: string }> = {}
     for (const source of prospectSources) {
       const maxRank = Math.max(...source.players.map((p: any) => p.rank ?? 0))
       const penalty = maxRank + 1
       for (const row of source.players) {
         const rank = row.rank ?? penalty
-        for (const pid of resolveIds(row)) {
+        for (const pid of resolveIds(row, nameMap, players)) {
           if (!fullProspectData[pid]) fullProspectData[pid] = { weightedSum: 0, weightSum: 0, name: players[pid]?.name ?? row.name }
           fullProspectData[pid].weightedSum += rank * source.weight
           fullProspectData[pid].weightSum += source.weight
@@ -129,7 +134,6 @@ export async function POST() {
       }
     }
 
-    // fullProspectRanked[0] = best prospect, fullProspectRanked[9] = 10th best prospect
     const fullProspectRanked: Array<{ id: string; name: string; avgRank: number }> = []
     for (const [id, data] of Object.entries(fullProspectData)) {
       if (data.weightSum === 0) continue
@@ -137,47 +141,39 @@ export async function POST() {
     }
     fullProspectRanked.sort((a, b) => a.avgRank - b.avgRank)
 
-    // --- PROSPECT-ONLY ranking (excludes O players) for final slotting after O ---
+    // --- PROSPECT-ONLY ranking ---
     const prospectOnlyRanked: Array<{ id: string; name: string; position: string; team: string; avgRank: number }> = []
     for (const [id, data] of Object.entries(fullProspectData)) {
       if (data.weightSum === 0) continue
       if (overallIds.has(id)) continue
-      const pData = fullProspectData[id]
-      prospectOnlyRanked.push({ id, name: pData.name, position: players[id]?.positions ?? '', team: players[id]?.team ?? '', avgRank: pData.weightedSum / pData.weightSum })
+      prospectOnlyRanked.push({ id, name: data.name, position: players[id]?.positions ?? '', team: players[id]?.team ?? '', avgRank: data.weightedSum / data.weightSum })
     }
     prospectOnlyRanked.sort((a, b) => a.avgRank - b.avgRank)
     const prospectOnlyIds = new Set(prospectOnlyRanked.map(p => p.id))
 
     // --- OPEN UNIVERSE ---
-    // X player rank (e.g. 10) = target position in fullProspectRanked (1-indexed)
-    // Find that player → get their O rank → anchor X there in the E list
     type XPlayer = { id: string | null; name: string; position: string; team: string; targetPPosition: number }
     const xPlayers: XPlayer[] = []
 
     for (const source of openSources) {
       for (const row of source.players) {
         if (!row.rank) continue
-        const ids = resolveIds(row)
+        const ids = resolveIds(row, nameMap, players)
         const id = ids.length >= 1 ? ids[0] : null
-        // Skip if already in O or named prospect sources
         if (id && (overallIds.has(id) || prospectOnlyIds.has(id))) continue
         xPlayers.push({ id, name: row.name, position: row.position ?? '', team: row.team ?? '', targetPPosition: row.rank })
       }
     }
 
-    // For each X: look up fullProspectRanked[targetPPosition - 1] → get their O rank
     type XSlot = XPlayer & { oRankAnchor: number | null; pOnlyPosition: number | null }
     const xWithAnchor: XSlot[] = xPlayers.map(xp => {
       const pIndex = xp.targetPPosition - 1
       const anchorProspect = fullProspectRanked[pIndex]
       if (!anchorProspect) return { ...xp, oRankAnchor: null, pOnlyPosition: null }
-
       const oRank = overallRankById[anchorProspect.id]
       if (oRank != null) {
-        // Anchor prospect is in O — slot X right after them in O
         return { ...xp, oRankAnchor: oRank, pOnlyPosition: null }
       } else {
-        // Anchor prospect is NOT in O — find their position in prospectOnlyRanked
         const pOnlyPos = prospectOnlyRanked.findIndex(p => p.id === anchorProspect.id)
         return { ...xp, oRankAnchor: null, pOnlyPosition: pOnlyPos >= 0 ? pOnlyPos + 1 : null }
       }
@@ -223,7 +219,6 @@ export async function POST() {
     }
 
     for (const xp of xFallback) {
-      // slot after the P-only player at pOnlyPosition
       const sortKey = xp.pOnlyPosition != null ? xp.pOnlyPosition + 0.5 : 99999
       pxEntries.push({ id: xp.id ?? '', name: xp.name, sortKey, source: 'X' })
     }

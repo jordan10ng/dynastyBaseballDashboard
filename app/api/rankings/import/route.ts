@@ -1,12 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server'
 import fs from 'fs'
 import path from 'path'
-import os from 'os'
 
-const RANKINGS_DIR = path.join(os.homedir(), 'Desktop', 'fantasy-baseball', 'data', 'rankings', 'sources')
+const RANKINGS_DIR = path.join(process.cwd(), 'data', 'rankings', 'sources')
 
 function ensureDir() {
-  const parent = path.join(os.homedir(), 'Desktop', 'fantasy-baseball', 'data', 'rankings')
+  const parent = path.join(process.cwd(), 'data', 'rankings')
   if (!fs.existsSync(parent)) fs.mkdirSync(parent, { recursive: true })
   if (!fs.existsSync(RANKINGS_DIR)) fs.mkdirSync(RANKINGS_DIR, { recursive: true })
 }
@@ -40,7 +39,6 @@ function stalenessWeight(dateStr: string): number {
   return Math.max(0, 1 - d / 365)
 }
 
-// "Top 50" → 50, anything else → null
 function parseTier(val: string | undefined): number | null {
   if (!val) return null
   const m = val.trim().match(/^Top\s+(\d+)$/i)
@@ -84,8 +82,8 @@ export async function POST(req: NextRequest) {
   const date = form.get('date') as string
   const rankType = (form.get('rankType') as string) ?? 'overall'
   const colMappingRaw = form.get('colMapping') as string
-  const tierColumn = (form.get('tierColumn') as string) ?? ''   // column name to use as tier, if any
-  const orderColumn = (form.get('orderColumn') as string) ?? '' // column to sort within tier
+  const tierColumn = (form.get('tierColumn') as string) ?? ''
+  const orderColumn = (form.get('orderColumn') as string) ?? ''
 
   if (!file || !sourceName || !date || !colMappingRaw) {
     return NextResponse.json({ error: 'Missing required fields' }, { status: 400 })
@@ -113,14 +111,11 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Player column is required' }, { status: 400 })
   }
 
-  // For tier mode we don't need a rank column (tier IS the rank)
-  // For normal mode we need rank
   const isTierMode = tierColumn && idxTier >= 0
   if (!isTierMode && idxRank < 0) {
     return NextResponse.json({ error: 'Rank column is required for non-tier imports' }, { status: 400 })
   }
 
-  // Parse all rows first
   const rawRows: Array<{ name: string; position: string; team: string; rank: number | null; tier: number | null; order: number }> = []
   for (let i = 1; i < rows.length; i++) {
     const cols = rows[i]
@@ -139,10 +134,7 @@ export async function POST(req: NextRequest) {
   let players: Array<{ name: string; rank: number | null; position: string; team: string }>
 
   if (isTierMode) {
-    // Sort by order column (open universe rank) so within a tier higher-ranked gets lower number
     rawRows.sort((a, b) => a.order - b.order)
-
-    // Assign ranks: first player in tier gets tier number, subsequent get tier+1, tier+2...
     const tierCounters: Record<number, number> = {}
     players = rawRows.map(row => {
       const tier = row.tier

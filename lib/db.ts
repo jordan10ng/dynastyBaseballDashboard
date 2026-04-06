@@ -1,8 +1,7 @@
 import fs from 'fs'
 import path from 'path'
-import os from 'os'
 
-const DATA_DIR = path.join(os.homedir(), 'Desktop', 'fantasy-baseball', 'data')
+const DATA_DIR = path.join(process.cwd(), 'data')
 if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true })
 
 const DB_PATH      = path.join(DATA_DIR, 'db.json')

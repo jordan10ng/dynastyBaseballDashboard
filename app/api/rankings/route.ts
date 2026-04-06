@@ -1,9 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
 import fs from 'fs'
 import path from 'path'
-import os from 'os'
 
-const PLAYERS_PATH = path.join(os.homedir(), 'Desktop', 'fantasy-baseball', 'data', 'players.json')
+const PLAYERS_PATH = path.join(process.cwd(), 'data', 'players.json')
 
 function parseCSV(text: string): string[][] {
   const rows: string[][] = []
