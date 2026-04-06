@@ -1,13 +1,17 @@
 'use client'
-import { Users, ListOrdered, ArrowLeftRight, RefreshCw } from 'lucide-react'
+import { Users, ListOrdered, ArrowLeftRight, RefreshCw, Flame } from 'lucide-react'
 import Link from 'next/link'
 
-const cards = [
-  { href: '/players',  icon: Users,          label: 'Players',    desc: 'Full player universe with league, team, ownership, and minors filters.', color: '#22c55e' },
-  { href: '/rankings', icon: ListOrdered,    label: 'Rankings',   desc: 'Upload your CSV rankings and manage your player values.', color: '#3b82f6' },
-  { href: '/trade',    icon: ArrowLeftRight, label: 'Trade Calc', desc: 'Build trades between teams and score them using your rankings.', color: '#a855f7' },
-  { href: '/sync',     icon: RefreshCw,      label: 'Sync',       desc: 'Connect Fantrax and keep your league data up to date.', color: '#f59e0b' },
+const ALL_CARDS = [
+  { href: '/players',  icon: Users,          label: 'Players',    desc: 'Full player universe with league, team, ownership, and minors filters.', color: '#22c55e', admin: false },
+  { href: '/hot-sheet',icon: Flame,          label: 'Hot Sheet',  desc: 'Biggest model score gainers this season.', color: '#ef4444', admin: false },
+  { href: '/rankings', icon: ListOrdered,    label: 'Rankings',   desc: 'Upload your CSV rankings and manage your player values.', color: '#3b82f6', admin: true },
+  { href: '/trade',    icon: ArrowLeftRight, label: 'Trade Calc', desc: 'Build trades between teams and score them using your rankings.', color: '#a855f7', admin: false },
+  { href: '/sync',     icon: RefreshCw,      label: 'Sync',       desc: 'Connect Fantrax and keep your league data up to date.', color: '#f59e0b', admin: true },
 ]
+
+const showAdmin = process.env.NEXT_PUBLIC_SHOW_ADMIN === 'true'
+const cards = ALL_CARDS.filter(c => !c.admin || showAdmin)
 
 export default function Home() {
   return (
