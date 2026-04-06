@@ -105,10 +105,12 @@ export const PlayerRow = memo(function PlayerRow({
         {player.rank ?? '—'}
       </div>
 
-      {/* Position */}
-      <div style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.72rem', color: 'var(--muted)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', position: 'sticky', left: '72px', background: 'var(--bg)', zIndex: 2 }}>
-        {cleanPositions(player.positions)}
-      </div>
+      {/* Position — hidden in All mode (shown inline with name) */}
+      {batArmsFilter !== 'all' ? (
+        <div style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.72rem', color: 'var(--muted)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', position: 'sticky', left: '72px', background: 'var(--bg)', zIndex: 2 }}>
+          {cleanPositions(player.positions)}
+        </div>
+      ) : <div />}
 
       {/* Player name + badges */}
       <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', minWidth: 0, position: 'sticky', left: '162px', background: 'var(--bg)', zIndex: 2 }}>
@@ -116,6 +118,11 @@ export const PlayerRow = memo(function PlayerRow({
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', flexWrap: 'nowrap' }}>
             <span style={{ fontWeight: 500, fontSize: '0.875rem', color: 'var(--text)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{player.name}</span>
             {isMinors && <span style={{ color: '#4ade80', fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: '0.7rem', flexShrink: 0 }}>M</span>}
+            {batArmsFilter === 'all' && (
+              <span style={{ fontSize: '0.68rem', color: 'var(--muted)', fontFamily: 'var(--font-display)', fontWeight: 600, whiteSpace: 'nowrap', flexShrink: 0 }}>
+                {[cleanPositions(player.positions), player.team, stats?._level ?? player.level].filter(Boolean).join(' · ')}
+              </span>
+            )}
             <div style={{ display: 'flex', gap: '4px', flexShrink: 0 }}>
               {LEAGUES.map(league => {
                 const teamName = pOwnership[league.id]
@@ -127,7 +134,7 @@ export const PlayerRow = memo(function PlayerRow({
               })}
             </div>
           </div>
-          {(!showExtraCol || batArmsFilter === 'all') && statLine && (
+          {statLine && (
             <div style={{ fontSize: '0.7rem', color: 'var(--muted)', opacity: 0.7, marginTop: '1px', whiteSpace: 'nowrap' }}>
               {statLine}
             </div>
@@ -135,18 +142,18 @@ export const PlayerRow = memo(function PlayerRow({
         </div>
       </div>
 
-      {/* Team */}
-      <div style={{ fontSize: '0.78rem', color: 'var(--muted)', fontFamily: 'var(--font-display)', fontWeight: 600, whiteSpace: 'nowrap' }}>
-        {player.team}
-      </div>
-
-      {/* Age */}
-      <div style={{ fontSize: '0.78rem', color: 'var(--muted)' }}>
-        {player.age ?? '—'}
-      </div>
-
-      {/* Level (only when stat/tool cols visible) */}
-      {showExtraCol && (
+      {/* Team / Age / Level — hidden in All mode (folded into name subline) */}
+      {batArmsFilter !== 'all' && (
+        <div style={{ fontSize: '0.78rem', color: 'var(--muted)', fontFamily: 'var(--font-display)', fontWeight: 600, whiteSpace: 'nowrap' }}>
+          {player.team}
+        </div>
+      )}
+      {batArmsFilter !== 'all' && (
+        <div style={{ fontSize: '0.78rem', color: 'var(--muted)' }}>
+          {player.age ?? '—'}
+        </div>
+      )}
+      {batArmsFilter !== 'all' && showExtraCol && (
         <div style={{ fontSize: '0.72rem', color: 'var(--muted)', fontFamily: 'var(--font-display)', fontWeight: 600 }}>
           {stats?._level ?? '—'}
         </div>

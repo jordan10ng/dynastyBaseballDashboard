@@ -506,15 +506,19 @@ export default function PlayersPage() {
   const hasAdvancedFilters = !!(rankMin || rankMax || ageMin || ageMax || selectedPosFilters.length || selectedMlbTeam || selectedLevelFilters.length || statFilters.length)
 
   const playerColWidth = batArmsFilter === 'all' ? '1fr' : '200px'
-  const baseColDef = showExtraCol
-    ? (showOwnership ? `28px 44px 90px ${playerColWidth} 52px 36px 40px 1fr` : `28px 44px 90px ${playerColWidth} 52px 36px 40px`)
-    : (showOwnership ? '28px 44px 90px 1fr 52px 36px 1fr' : '28px 44px 90px 1fr 52px 36px')
+  const baseColDef = batArmsFilter === 'all'
+    ? (showOwnership ? '28px 44px 90px 1fr 1fr' : '28px 44px 90px 1fr')
+    : (showExtraCol
+        ? (showOwnership ? `28px 44px 90px ${playerColWidth} 52px 36px 40px 1fr` : `28px 44px 90px ${playerColWidth} 52px 36px 40px`)
+        : (showOwnership ? '28px 44px 90px 1fr 52px 36px 1fr' : '28px 44px 90px 1fr 52px 36px'))
   const statColDef = showStatCols ? activeCols.map(() => '64px').join(' ') + (batArmsFilter === 'all' ? ' 56px' : '') : showToolCols ? activeToolKeys.map(() => '56px').join(' ') : batArmsFilter === 'all' ? '56px' : ''
   const cols = [baseColDef, statColDef].filter(Boolean).join(' ')
 
-  const baseHeaders = showExtraCol
-    ? (showOwnership ? ['#','CONS RK','POS','PLAYER','TEAM','AGE','LEV','OWNED BY'] : ['#','CONS RK','POS','PLAYER','TEAM','AGE','LEV'])
-    : (showOwnership ? ['#','CONS RK','POS','PLAYER','TEAM','AGE','OWNED BY'] : ['#','CONS RK','POS','PLAYER','TEAM','AGE'])
+  const baseHeaders = batArmsFilter === 'all'
+    ? (showOwnership ? ['#','RK','POS','PLAYER','OWNED BY'] : ['#','RK','POS','PLAYER'])
+    : (showExtraCol
+        ? (showOwnership ? ['#','RK','POS','PLAYER','TEAM','AGE','LEV','OWNED BY'] : ['#','RK','POS','PLAYER','TEAM','AGE','LEV'])
+        : (showOwnership ? ['#','RK','POS','PLAYER','TEAM','AGE','OWNED BY'] : ['#','RK','POS','PLAYER','TEAM','AGE']))
 
   const sortOptions: { val: SortMode; label: string }[] = [{ val: 'rank', label: 'Rank' }]
   if (selectedTeam) sortOptions.push({ val: 'position', label: 'Position' })
@@ -575,13 +579,6 @@ export default function PlayersPage() {
       <div style={{ display: 'flex', gap: '0.65rem', alignItems: 'center', flexWrap: 'wrap', marginBottom: '1rem' }}>
         <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Search players..."
           style={{ background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 6, padding: '0.4rem 0.75rem', color: 'var(--text)', fontSize: '0.875rem', outline: 'none', width: 200 }} />
-
-        <div style={{ display: 'flex', gap: 4 }}>
-          <span style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.68rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--muted)', alignSelf: 'center', marginRight: 2 }}>Sort</span>
-          {sortOptions.map(opt => (
-            <button key={opt.val} onClick={() => { setSortMode(opt.val); setStatSortKey('') }} style={btn(sortMode === opt.val && statSortKey === '')}>{opt.label}</button>
-          ))}
-        </div>
 
         <div style={{ display: 'flex', gap: 4, marginLeft: '0.5rem' }}>
           {([{ val: 'all', label: 'All' }, { val: 'mine', label: 'Mine' }, { val: 'owned', label: 'Owned' }, { val: 'fa', label: 'FA' }, { val: 'mine+fa', label: 'Mine+FA' }] as { val: OwnFilter; label: string }[]).map(opt => (
@@ -762,8 +759,19 @@ export default function PlayersPage() {
           {baseHeaders.map((h, i) => {
             const stickyLeft = i === 0 ? 0 : i === 1 ? 28 : i === 2 ? 72 : i === 3 ? 162 : undefined
             const isSticky = stickyLeft !== undefined
+            const isRankCol = h === '#' || h === 'RK'
+            const rankActive = isRankCol && sortMode === 'rank' && !statSortKey && !toolSortKey
             return (
-              <div key={i} style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.62rem', letterSpacing: '0.08em', color: 'var(--muted)', ...(isSticky ? { position: 'sticky', left: stickyLeft, background: 'var(--bg)', zIndex: 3 } : {}) }}>{h}</div>
+              <div key={i}
+                onClick={isRankCol ? () => { setSortMode('rank'); setStatSortKey(''); setToolSortKey('') } : undefined}
+                style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.62rem', letterSpacing: '0.08em',
+                  color: rankActive ? 'var(--accent)' : 'var(--muted)',
+                  cursor: isRankCol ? 'pointer' : 'default',
+                  userSelect: isRankCol ? 'none' : undefined,
+                  display: isRankCol ? 'flex' : undefined, alignItems: isRankCol ? 'center' : undefined, gap: isRankCol ? '2px' : undefined,
+                  ...(isSticky ? { position: 'sticky', left: stickyLeft, background: 'var(--bg)', zIndex: 3 } : {}) }}>
+                {h}{rankActive && h === 'RK' && <span style={{ fontSize: '0.55rem' }}>▲</span>}
+              </div>
             )
           })}
           {showStatCols && activeCols.map(col => (
