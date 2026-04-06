@@ -106,14 +106,14 @@ export const PlayerRow = memo(function PlayerRow({
       </div>
 
       {/* Position — hidden in All mode (shown inline with name) */}
-      {batArmsFilter !== 'all' ? (
+      {batArmsFilter !== 'all' && (
         <div style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.72rem', color: 'var(--muted)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', position: 'sticky', left: '72px', background: 'var(--bg)', zIndex: 2 }}>
           {cleanPositions(player.positions)}
         </div>
-      ) : <div />}
+      )}
 
       {/* Player name + badges */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', minWidth: 0, position: 'sticky', left: '162px', background: 'var(--bg)', zIndex: 2 }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', minWidth: 0, position: 'sticky', left: batArmsFilter === 'all' ? '72px' : '162px', background: 'var(--bg)', zIndex: 2 }}>
         <div style={{ minWidth: 0, overflow: 'hidden' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', flexWrap: 'nowrap' }}>
             <span style={{ fontWeight: 500, fontSize: '0.875rem', color: 'var(--text)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{player.name}</span>

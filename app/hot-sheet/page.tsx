@@ -184,9 +184,12 @@ export default function HotSheetPage() {
 
                 {/* Info stack */}
                 <div style={{ minWidth: 0, flex: 1 }}>
-                  {/* Name + rank + dots */}
+                  {/* Name + pos/team/level + rank + dots */}
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', flexWrap: 'nowrap', overflow: 'hidden' }}>
                     <span style={{ fontWeight: 600, fontSize: '0.88rem', color: myTeamOwned ? '#f59e0b' : 'var(--text)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{r.name}</span>
+                    <span style={{ fontSize: '0.65rem', color: 'var(--muted)', fontFamily: 'var(--font-display)', fontWeight: 600, whiteSpace: 'nowrap', flexShrink: 0 }}>
+                      {[cleanPositions(r.positions), player?.team, level].filter(Boolean).join(' · ')}
+                    </span>
                     {r.rank && <span style={{ fontSize: '0.62rem', fontFamily: 'var(--font-display)', color: 'var(--muted)', flexShrink: 0 }}>#{r.rank}</span>}
                     <div style={{ display: 'flex', gap: '3px', flexShrink: 0 }}>
                       {LEAGUES.map(league => {
@@ -196,20 +199,25 @@ export default function HotSheetPage() {
                       })}
                     </div>
                   </div>
-                  {/* Pos · Team · Level */}
-                  <div style={{ fontSize: '0.65rem', color: 'var(--muted)', fontFamily: 'var(--font-display)', fontWeight: 600, marginTop: '1px' }}>
-                    {[cleanPositions(r.positions), player?.team, level].filter(Boolean).join(' · ')}
-                  </div>
                   {/* Stat line */}
                   {statLine && (
                     <div style={{ fontSize: '0.62rem', color: 'var(--muted)', marginTop: '1px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                       {statLine}
                     </div>
                   )}
-                  {/* Tool line */}
-                  {toolLine && (
-                    <div style={{ fontSize: '0.62rem', fontFamily: 'var(--font-display)', fontWeight: 700, marginTop: '2px', color: toolColor(ms?.overall ?? null), whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                      {toolLine}
+                  {/* Tool line — colored per tool */}
+                  {ms && (
+                    <div style={{ fontSize: '0.62rem', fontFamily: 'var(--font-display)', fontWeight: 700, marginTop: '2px', display: 'flex', gap: '0.4rem', flexWrap: 'nowrap', overflow: 'hidden' }}>
+                      {tab === 'bats' ? <>
+                        {ms.hit != null && <span style={{ color: toolColor(ms.hit) }}>HIT+ {ms.hit}</span>}
+                        {ms.power != null && <span style={{ color: toolColor(ms.power) }}>PWR+ {ms.power}</span>}
+                        {ms.speed != null && <span style={{ color: toolColor(ms.speed) }}>SPD+ {ms.speed}</span>}
+                        {ms.overall != null && <span style={{ color: toolColor(ms.overall) }}>OVR+ {ms.overall}</span>}
+                      </> : <>
+                        {ms.stuff != null && <span style={{ color: toolColor(ms.stuff) }}>STF+ {ms.stuff}</span>}
+                        {ms.control != null && <span style={{ color: toolColor(ms.control) }}>CTL+ {ms.control}</span>}
+                        {ms.overall != null && <span style={{ color: toolColor(ms.overall) }}>OVR+ {ms.overall}</span>}
+                      </>}
                     </div>
                   )}
                 </div>

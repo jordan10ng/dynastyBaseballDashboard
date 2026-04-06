@@ -507,7 +507,7 @@ export default function PlayersPage() {
 
   const playerColWidth = batArmsFilter === 'all' ? '1fr' : '200px'
   const baseColDef = batArmsFilter === 'all'
-    ? (showOwnership ? '28px 44px 90px 1fr 1fr' : '28px 44px 90px 1fr')
+    ? (showOwnership ? '28px 44px 1fr 1fr' : '28px 44px 1fr')
     : (showExtraCol
         ? (showOwnership ? `28px 44px 90px ${playerColWidth} 52px 36px 40px 1fr` : `28px 44px 90px ${playerColWidth} 52px 36px 40px`)
         : (showOwnership ? '28px 44px 90px 1fr 52px 36px 1fr' : '28px 44px 90px 1fr 52px 36px'))
@@ -515,7 +515,7 @@ export default function PlayersPage() {
   const cols = [baseColDef, statColDef].filter(Boolean).join(' ')
 
   const baseHeaders = batArmsFilter === 'all'
-    ? (showOwnership ? ['#','RK','POS','PLAYER','OWNED BY'] : ['#','RK','POS','PLAYER'])
+    ? (showOwnership ? ['#','RK','PLAYER','OWNED BY'] : ['#','RK','PLAYER'])
     : (showExtraCol
         ? (showOwnership ? ['#','RK','POS','PLAYER','TEAM','AGE','LEV','OWNED BY'] : ['#','RK','POS','PLAYER','TEAM','AGE','LEV'])
         : (showOwnership ? ['#','RK','POS','PLAYER','TEAM','AGE','OWNED BY'] : ['#','RK','POS','PLAYER','TEAM','AGE']))
@@ -727,12 +727,19 @@ export default function PlayersPage() {
               }}>
                 <div style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.65rem', color: 'rgba(100,100,100,0.5)' }}>{p.rank ?? '—'}</div>
                 <div style={{ minWidth: 0 }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', overflow: 'hidden' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', flexWrap: 'nowrap', overflow: 'hidden' }}>
                     <span style={{ fontWeight: 600, fontSize: '0.82rem', color: myTeamOwned ? '#f59e0b' : 'var(--text)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', minWidth: 0 }}>{p.name}</span>
                     {minorsIds.has(p.id) && <span style={{ color: '#4ade80', fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: '0.62rem', flexShrink: 0 }}>M</span>}
-                  </div>
-                  <div style={{ fontSize: '0.65rem', color: 'var(--muted)', fontFamily: 'var(--font-display)', fontWeight: 600, marginBottom: '1px' }}>
-                    {[p.positions?.split(',')[0]?.trim(), p.team, level].filter(Boolean).join(' · ')}
+                    <span style={{ fontSize: '0.65rem', color: 'var(--muted)', fontFamily: 'var(--font-display)', fontWeight: 600, whiteSpace: 'nowrap', flexShrink: 0 }}>
+                      {[p.positions?.split(',')[0]?.trim(), p.team, level].filter(Boolean).join(' · ')}
+                    </span>
+                    <div style={{ display: 'flex', gap: '3px', flexShrink: 0 }}>
+                      {LEAGUES.map((league: { id: string; label: string }) => {
+                        const teamName = pOwn[league.id]
+                        const color = teamName ? (teamName === MY_TEAM ? '#22c55e' : '#eab308') : '#ef4444'
+                        return <div key={league.id} style={{ width: '5px', height: '5px', borderRadius: '50%', background: color, opacity: 0.85 }} />
+                      })}
+                    </div>
                   </div>
                   <div style={{ fontSize: '0.62rem', color: 'var(--muted)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                     {statLineMap[p.id] || '—'}
