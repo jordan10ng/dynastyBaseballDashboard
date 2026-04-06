@@ -212,6 +212,7 @@ export default function PlayersPage() {
   const [dataView, setDataView] = useState<DataView>('stats')
   const [mounted, setMounted] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
+  const [mobileLimit, setMobileLimit] = useState(75)
   useEffect(() => {
     setMounted(true)
     const check = () => setIsMobile(window.innerWidth <= 768)
@@ -266,7 +267,7 @@ export default function PlayersPage() {
   }, [])
 
   // Scroll list back to top whenever filtered result set changes
-  useEffect(() => { listRef.current?.scrollTo(0) }, [search, minorsFilter, batArmsFilter, ownFilter, selectedLeague, selectedTeam, sortMode, statSortKey, toolSortKey])
+  useEffect(() => { listRef.current?.scrollTo(0); setMobileLimit(75) }, [search, minorsFilter, batArmsFilter, ownFilter, selectedLeague, selectedTeam, sortMode, statSortKey, toolSortKey])
 
   const onScrollContainer = useCallback(() => {
     if (floatingHeaderRef.current && scrollContainerRef.current) {
@@ -711,7 +712,7 @@ export default function PlayersPage() {
               <div key={i} style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.58rem', letterSpacing: '0.08em', color: 'var(--muted)', textAlign: i >= 2 ? 'right' : 'left' }}>{h}</div>
             ))}
           </div>
-          {loading ? <div style={{ color: 'var(--muted)', padding: '1rem 0' }}>Loading...</div> : filtered.map((p, i) => {
+          {loading ? <div style={{ color: 'var(--muted)', padding: '1rem 0' }}>Loading...</div> : filtered.slice(0, mobileLimit).map((p, i) => {
             const pOwn = globalOwnership[p.id] || {}
             const myTeamOwned = Object.values(pOwn).includes(MY_TEAM)
             const tools = playerToolsMap[p.id]
@@ -746,6 +747,11 @@ export default function PlayersPage() {
               </div>
             )
           })}
+          {!loading && filtered.length > mobileLimit && (
+            <button onClick={() => setMobileLimit(n => n + 75)} style={{ width: '100%', padding: '0.75rem', marginTop: '0.5rem', background: 'transparent', border: '1px solid var(--border)', borderRadius: 6, color: 'var(--muted)', fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.72rem', letterSpacing: '0.06em', cursor: 'pointer' }}>
+              LOAD MORE ({filtered.length - mobileLimit} remaining)
+            </button>
+          )}
         </div>
       ) : (
       <>
