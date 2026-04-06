@@ -1,0 +1,315 @@
+{
+  "hitters": {
+    "AA": {
+      "k_pct": {
+        "k": 0.011,
+        "n": 651,
+        "corr_age_residual": 0.051
+      },
+      "bb_pct": {
+        "k": 0.0111,
+        "n": 651,
+        "corr_age_residual": 0.048
+      },
+      "iso": {
+        "k": 0.0666,
+        "n": 651,
+        "corr_age_residual": 0.192
+      },
+      "avg": {
+        "k": 0.0073,
+        "n": 651,
+        "corr_age_residual": 0.032
+      },
+      "sb_rate": {
+        "k": -0.0667,
+        "n": 651,
+        "corr_age_residual": -0.154
+      }
+    },
+    "AAA": {
+      "k_pct": {
+        "k": 0.0086,
+        "n": 1539,
+        "corr_age_residual": 0.07
+      },
+      "bb_pct": {
+        "k": 0.0086,
+        "n": 1539,
+        "corr_age_residual": 0.065
+      },
+      "iso": {
+        "k": 0.0348,
+        "n": 1539,
+        "corr_age_residual": 0.176
+      },
+      "avg": {
+        "k": 0.0048,
+        "n": 1539,
+        "corr_age_residual": 0.036
+      },
+      "sb_rate": {
+        "k": -0.0317,
+        "n": 1539,
+        "corr_age_residual": -0.155
+      }
+    },
+    "Complex": {
+      "k_pct": {
+        "k": 0.064,
+        "n": 120,
+        "corr_age_residual": 0.156
+      },
+      "bb_pct": {
+        "k": 0.0357,
+        "n": 120,
+        "corr_age_residual": 0.082
+      },
+      "iso": {
+        "k": 0.0019,
+        "n": 120,
+        "corr_age_residual": 0.003
+      },
+      "avg": {
+        "k": 0.0327,
+        "n": 120,
+        "corr_age_residual": 0.076
+      },
+      "sb_rate": {
+        "k": 0.0356,
+        "n": 120,
+        "corr_age_residual": 0.06
+      }
+    },
+    "DSL": {
+      "k_pct": {
+        "k": -0.1318,
+        "n": 46,
+        "corr_age_residual": -0.296
+      },
+      "bb_pct": {
+        "k": -0.1301,
+        "n": 46,
+        "corr_age_residual": -0.262
+      },
+      "iso": {
+        "k": -0.0467,
+        "n": 46,
+        "corr_age_residual": -0.062
+      },
+      "avg": {
+        "k": -0.1281,
+        "n": 46,
+        "corr_age_residual": -0.261
+      },
+      "sb_rate": {
+        "k": 0.0732,
+        "n": 46,
+        "corr_age_residual": 0.087
+      }
+    },
+    "High-A": {
+      "k_pct": {
+        "k": 0.0333,
+        "n": 455,
+        "corr_age_residual": 0.119
+      },
+      "bb_pct": {
+        "k": 0.0435,
+        "n": 455,
+        "corr_age_residual": 0.146
+      },
+      "iso": {
+        "k": 0.0371,
+        "n": 455,
+        "corr_age_residual": 0.088
+      },
+      "avg": {
+        "k": 0.0358,
+        "n": 455,
+        "corr_age_residual": 0.119
+      },
+      "sb_rate": {
+        "k": -0.0014,
+        "n": 455,
+        "corr_age_residual": -0.003
+      }
+    },
+    "Rookie": {
+      "k_pct": {
+        "k": 0.0058,
+        "n": 203,
+        "corr_age_residual": 0.02
+      },
+      "bb_pct": {
+        "k": -0.0111,
+        "n": 203,
+        "corr_age_residual": -0.036
+      },
+      "iso": {
+        "k": 0.0309,
+        "n": 203,
+        "corr_age_residual": 0.071
+      },
+      "avg": {
+        "k": -0.0183,
+        "n": 203,
+        "corr_age_residual": -0.059
+      },
+      "sb_rate": {
+        "k": 0.0119,
+        "n": 203,
+        "corr_age_residual": 0.024
+      }
+    },
+    "Single-A": {
+      "k_pct": {
+        "k": 0.0432,
+        "n": 350,
+        "corr_age_residual": 0.144
+      },
+      "bb_pct": {
+        "k": 0.0402,
+        "n": 350,
+        "corr_age_residual": 0.126
+      },
+      "iso": {
+        "k": 0.1095,
+        "n": 350,
+        "corr_age_residual": 0.231
+      },
+      "avg": {
+        "k": 0.0391,
+        "n": 350,
+        "corr_age_residual": 0.123
+      },
+      "sb_rate": {
+        "k": 0.0067,
+        "n": 350,
+        "corr_age_residual": 0.015
+      }
+    }
+  },
+  "pitchers": {
+    "AA": {
+      "k_pct": {
+        "k": 0.0527,
+        "n": 295,
+        "corr_age_residual": 0.148
+      },
+      "bb_pct": {
+        "k": -0.0417,
+        "n": 295,
+        "corr_age_residual": -0.137
+      },
+      "baa": {
+        "k": 0.0563,
+        "n": 295,
+        "corr_age_residual": 0.147
+      }
+    },
+    "AAA": {
+      "k_pct": {
+        "k": 0.0101,
+        "n": 628,
+        "corr_age_residual": 0.067
+      },
+      "bb_pct": {
+        "k": -0.0142,
+        "n": 628,
+        "corr_age_residual": -0.112
+      },
+      "baa": {
+        "k": 0.0263,
+        "n": 628,
+        "corr_age_residual": 0.163
+      }
+    },
+    "Complex": {
+      "k_pct": {
+        "k": 0.0,
+        "n": 25,
+        "note": "insufficient data"
+      },
+      "bb_pct": {
+        "k": 0.0,
+        "n": 25,
+        "note": "insufficient data"
+      },
+      "baa": {
+        "k": 0.0,
+        "n": 25,
+        "note": "insufficient data"
+      }
+    },
+    "DSL": {
+      "k_pct": {
+        "k": 0.0,
+        "n": 19,
+        "note": "insufficient data"
+      },
+      "bb_pct": {
+        "k": 0.0,
+        "n": 19,
+        "note": "insufficient data"
+      },
+      "baa": {
+        "k": 0.0,
+        "n": 19,
+        "note": "insufficient data"
+      }
+    },
+    "High-A": {
+      "k_pct": {
+        "k": 0.0643,
+        "n": 200,
+        "corr_age_residual": 0.121
+      },
+      "bb_pct": {
+        "k": -0.0611,
+        "n": 200,
+        "corr_age_residual": -0.146
+      },
+      "baa": {
+        "k": 0.0572,
+        "n": 200,
+        "corr_age_residual": 0.106
+      }
+    },
+    "Rookie": {
+      "k_pct": {
+        "k": 0.0226,
+        "n": 76,
+        "corr_age_residual": 0.05
+      },
+      "bb_pct": {
+        "k": -0.0803,
+        "n": 76,
+        "corr_age_residual": -0.218
+      },
+      "baa": {
+        "k": 0.0077,
+        "n": 76,
+        "corr_age_residual": 0.016
+      }
+    },
+    "Single-A": {
+      "k_pct": {
+        "k": 0.0351,
+        "n": 141,
+        "corr_age_residual": 0.075
+      },
+      "bb_pct": {
+        "k": -0.0911,
+        "n": 141,
+        "corr_age_residual": -0.227
+      },
+      "baa": {
+        "k": 0.0569,
+        "n": 141,
+        "corr_age_residual": 0.114
+      }
+    }
+  },
+  "default": 0.05
+}

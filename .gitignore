@@ -1,0 +1,23 @@
+# Dependencies
+node_modules/
+
+# Next.js
+.next/
+out/
+
+# Data — history too large for git
+data/history/
+
+# Keep all other data files (players.json, db.json, stats.json, model/, rankings/)
+
+# Env
+.env.local
+.env*.local
+
+# OS
+.DS_Store
+
+# Debug
+npm-debug.log*
+.claude/
+.claude/

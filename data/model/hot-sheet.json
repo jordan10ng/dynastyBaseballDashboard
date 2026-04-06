@@ -1,0 +1,396 @@
+{
+  "bats": [
+    {
+      "id": "06ag6",
+      "name": "Rodney Green",
+      "rank": 1735,
+      "positions": "LF,CF,OF",
+      "isPit": false,
+      "delta": 2,
+      "overall": 106,
+      "prevOverall": 104,
+      "sample": 625,
+      "confidence": {
+        "hit": 76,
+        "power": 76,
+        "speed": 76
+      }
+    },
+    {
+      "id": "05tzh",
+      "name": "Branden Boissiere",
+      "positions": "1B,INF",
+      "isPit": false,
+      "delta": 2,
+      "overall": 100,
+      "prevOverall": 98,
+      "sample": 1601,
+      "confidence": {
+        "hit": 89,
+        "power": 89,
+        "speed": 89
+      }
+    },
+    {
+      "id": "06434",
+      "name": "Jimmy Crooks",
+      "rank": 868,
+      "positions": "C",
+      "isPit": false,
+      "delta": 1,
+      "overall": 112,
+      "prevOverall": 111,
+      "sample": 1392,
+      "confidence": {
+        "hit": 87,
+        "power": 87,
+        "speed": 87
+      }
+    },
+    {
+      "id": "05ucg",
+      "name": "Jonathan Mejia",
+      "positions": "2B,SS,INF",
+      "isPit": false,
+      "delta": 1,
+      "overall": 104,
+      "prevOverall": 103,
+      "sample": 905,
+      "confidence": {
+        "hit": 82,
+        "power": 82,
+        "speed": 82
+      }
+    },
+    {
+      "id": "05h2t",
+      "name": "Milan Tolentino",
+      "positions": "2B,3B,SS,INF",
+      "isPit": false,
+      "delta": 1,
+      "overall": 106,
+      "prevOverall": 105,
+      "sample": 2052,
+      "confidence": {
+        "hit": 91,
+        "power": 91,
+        "speed": 91
+      }
+    },
+    {
+      "id": "04mln",
+      "name": "Luis Verdugo",
+      "positions": "1B,3B,INF",
+      "isPit": false,
+      "delta": 1,
+      "overall": 100,
+      "prevOverall": 99,
+      "sample": 2106,
+      "confidence": {
+        "hit": 91,
+        "power": 91,
+        "speed": 91
+      }
+    },
+    {
+      "id": "06pgs",
+      "name": "Jacob Friend",
+      "positions": "C",
+      "isPit": false,
+      "delta": 1,
+      "overall": 105,
+      "prevOverall": 104,
+      "sample": 230,
+      "confidence": {
+        "hit": 53,
+        "power": 53,
+        "speed": 53
+      }
+    }
+  ],
+  "arms": [
+    {
+      "id": "06rsx",
+      "name": "Bryan Balzer",
+      "positions": "SP",
+      "isPit": true,
+      "delta": 5,
+      "overall": 100,
+      "prevOverall": 95,
+      "sample": 61,
+      "confidence": {
+        "stuff": 43,
+        "control": 43
+      }
+    },
+    {
+      "id": "06fuv",
+      "name": "Zach Penrod",
+      "positions": "SP,RP",
+      "isPit": true,
+      "delta": 3,
+      "overall": 100,
+      "prevOverall": 97,
+      "sample": 129,
+      "confidence": {
+        "stuff": 62,
+        "control": 62
+      }
+    },
+    {
+      "id": "06fwg",
+      "name": "Khristian Curtis",
+      "positions": "SP",
+      "isPit": true,
+      "delta": 2,
+      "overall": 105,
+      "prevOverall": 103,
+      "sample": 191,
+      "confidence": {
+        "stuff": 70,
+        "control": 70
+      }
+    },
+    {
+      "id": "05xpp",
+      "name": "Chad Dallas",
+      "positions": "SP",
+      "isPit": true,
+      "delta": 2,
+      "overall": 101,
+      "prevOverall": 99,
+      "sample": 281,
+      "confidence": {
+        "stuff": 78,
+        "control": 78
+      }
+    },
+    {
+      "id": "0518g",
+      "name": "Trevor McDonald",
+      "rank": 732,
+      "positions": "SP",
+      "isPit": true,
+      "delta": 1,
+      "overall": 101,
+      "prevOverall": 100,
+      "sample": 454,
+      "confidence": {
+        "stuff": 85,
+        "control": 85
+      }
+    },
+    {
+      "id": "05ubl",
+      "name": "Gabriel Hughes",
+      "rank": 1752,
+      "positions": "SP",
+      "isPit": true,
+      "delta": 1,
+      "overall": 102,
+      "prevOverall": 101,
+      "sample": 180,
+      "confidence": {
+        "stuff": 69,
+        "control": 69
+      }
+    },
+    {
+      "id": "06dqg",
+      "name": "Kade Morris",
+      "positions": "SP",
+      "isPit": true,
+      "delta": 1,
+      "overall": 100,
+      "prevOverall": 99,
+      "sample": 300,
+      "confidence": {
+        "stuff": 79,
+        "control": 79
+      }
+    },
+    {
+      "id": "05uce",
+      "name": "Brendan Beck",
+      "positions": "SP",
+      "isPit": true,
+      "delta": 1,
+      "overall": 105,
+      "prevOverall": 104,
+      "sample": 175,
+      "confidence": {
+        "stuff": 69,
+        "control": 69
+      }
+    },
+    {
+      "id": "04mu1",
+      "name": "Robinson Ortiz",
+      "positions": "SP,RP",
+      "isPit": true,
+      "delta": 1,
+      "overall": 101,
+      "prevOverall": 100,
+      "sample": 240,
+      "confidence": {
+        "stuff": 75,
+        "control": 75
+      }
+    },
+    {
+      "id": "0648i",
+      "name": "Trace Bright",
+      "positions": "SP,RP",
+      "isPit": true,
+      "delta": 1,
+      "overall": 101,
+      "prevOverall": 100,
+      "sample": 314,
+      "confidence": {
+        "stuff": 80,
+        "control": 80
+      }
+    },
+    {
+      "id": "065uw",
+      "name": "Tyler Schweitzer",
+      "positions": "SP,RP",
+      "isPit": true,
+      "delta": 1,
+      "overall": 101,
+      "prevOverall": 100,
+      "sample": 344,
+      "confidence": {
+        "stuff": 81,
+        "control": 81
+      }
+    },
+    {
+      "id": "04yds",
+      "name": "Jerming Rosario",
+      "positions": "RP",
+      "isPit": true,
+      "delta": 1,
+      "overall": 103,
+      "prevOverall": 102,
+      "sample": 455,
+      "confidence": {
+        "stuff": 85,
+        "control": 85
+      }
+    },
+    {
+      "id": "064nv",
+      "name": "Alex Hoppe",
+      "positions": "RP",
+      "isPit": true,
+      "delta": 1,
+      "overall": 102,
+      "prevOverall": 101,
+      "sample": 179,
+      "confidence": {
+        "stuff": 69,
+        "control": 69
+      }
+    },
+    {
+      "id": "05jpf",
+      "name": "Trenton Denholm",
+      "positions": "SP,RP",
+      "isPit": true,
+      "delta": 1,
+      "overall": 101,
+      "prevOverall": 100,
+      "sample": 459,
+      "confidence": {
+        "stuff": 85,
+        "control": 85
+      }
+    },
+    {
+      "id": "04qnh",
+      "name": "Gerardo Carrillo",
+      "positions": "RP",
+      "isPit": true,
+      "delta": 1,
+      "overall": 104,
+      "prevOverall": 103,
+      "sample": 369,
+      "confidence": {
+        "stuff": 82,
+        "control": 82
+      }
+    },
+    {
+      "id": "05jr6",
+      "name": "Adam Seminaris",
+      "positions": "SP",
+      "isPit": true,
+      "delta": 1,
+      "overall": 100,
+      "prevOverall": 99,
+      "sample": 452,
+      "confidence": {
+        "stuff": 85,
+        "control": 85
+      }
+    },
+    {
+      "id": "041vj",
+      "name": "Julian Garcia",
+      "positions": "SP",
+      "isPit": true,
+      "delta": 1,
+      "overall": 101,
+      "prevOverall": 100,
+      "sample": 391,
+      "confidence": {
+        "stuff": 83,
+        "control": 83
+      }
+    },
+    {
+      "id": "06fzd",
+      "name": "Thomas Schultz",
+      "positions": "RP",
+      "isPit": true,
+      "delta": 1,
+      "overall": 101,
+      "prevOverall": 100,
+      "sample": 136,
+      "confidence": {
+        "stuff": 63,
+        "control": 63
+      }
+    },
+    {
+      "id": "05y7j",
+      "name": "Robby Ahlstrom",
+      "positions": "RP",
+      "isPit": true,
+      "delta": 1,
+      "overall": 102,
+      "prevOverall": 101,
+      "sample": 275,
+      "confidence": {
+        "stuff": 77,
+        "control": 77
+      }
+    },
+    {
+      "id": "063gm",
+      "name": "Amilcar Chirinos",
+      "positions": "RP",
+      "isPit": true,
+      "delta": 1,
+      "overall": 101,
+      "prevOverall": 100,
+      "sample": 189,
+      "confidence": {
+        "stuff": 70,
+        "control": 70
+      }
+    }
+  ],
+  "generatedAt": "2026-04-06T04:45:24.257Z"
+}
