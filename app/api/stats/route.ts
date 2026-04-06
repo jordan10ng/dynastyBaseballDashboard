@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server'
 import fs from 'fs'
 import path from 'path'
 
-const STATS_PATH = path.join(process.env.HOME!, 'Desktop/fantasy-baseball/data/stats.json')
+const STATS_PATH = path.join(process.cwd(), 'data/stats.json')
 
 export async function GET() {
   try {

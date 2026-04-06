@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server'
 import fs from 'fs'
 import path from 'path'
 
-const HOTSHEET_PATH = path.join(process.cwd(), 'data/model/hot-sheet.json')
+const HOTSHEET_PATH = path.join(process.env.HOME!, 'Desktop/fantasy-baseball/data/model/hot-sheet.json')
 
 export async function GET() {
   try {

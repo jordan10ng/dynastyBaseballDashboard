@@ -3,9 +3,9 @@ import { loadPlayers } from '@/lib/db'
 import fs from 'fs'
 import path from 'path'
 
-const PLAYERS_PATH = path.join(process.cwd(), 'data/players.json')
-const RAZZBALL_PATH = path.join(process.cwd(), 'data/razzball.csv')
-const PROGRESS_PATH = path.join(process.cwd(), 'data/link-progress.json')
+const PLAYERS_PATH = path.join(process.env.HOME!, 'Desktop/fantasy-baseball/data/players.json')
+const RAZZBALL_PATH = path.join(process.env.HOME!, 'Desktop/fantasy-baseball/data/razzball.csv')
+const PROGRESS_PATH = path.join(process.env.HOME!, 'Desktop/fantasy-baseball/data/link-progress.json')
 
 function parseCSV(text: string): Record<string, string>[] {
   const lines = text.trim().split('\n')
@@ -61,6 +61,7 @@ export async function POST() {
     try { fs.writeFileSync(PROGRESS_PATH, JSON.stringify({ stage, current, total, ts: Date.now() })) } catch {}
   }
 
+  // --- Phase 1: Razzball CSV join ---
   writeProgress('razzball', 0, 1)
   const csvText = fs.readFileSync(RAZZBALL_PATH, 'utf-8')
   const rows = parseCSV(csvText)
@@ -88,6 +89,7 @@ export async function POST() {
   fs.writeFileSync(PLAYERS_PATH, JSON.stringify(players, null, 2))
   console.log(`Razzball matched: ${razzMatched}. Already linked: ${alreadyLinked}.`)
 
+  // --- Phase 2: MLB API fallback, 10 concurrent ---
   const unmatched = Object.entries(players).filter(([, p]: any) => !p.mlbam_id)
   console.log(`MLB API fallback for ${unmatched.length} players (10 concurrent)...`)
 

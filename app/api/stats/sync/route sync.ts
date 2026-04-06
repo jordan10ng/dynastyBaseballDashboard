@@ -4,8 +4,10 @@ import { loadPlayers } from '@/lib/db'
 import fs from 'fs'
 import path from 'path'
 
-const STATS_PATH = path.join(process.cwd(), 'data/stats.json')
-const PROGRESS_PATH = path.join(process.cwd(), 'data/stats-progress.json')
+const STATS_PATH = path.join(process.env.HOME!, 'Desktop/fantasy-baseball/data/stats.json')
+
+const PROGRESS_PATH = path.join(process.env.HOME!, 'Desktop/fantasy-baseball/data/stats-progress.json')
+
 const CURRENT_SEASON = 2026
 
 function fmt3(n: number): string {
@@ -78,7 +80,10 @@ function sumPitch(splits: any[]): any {
   const ip = `${Math.floor(totalOuts / 3)}.${totalOuts % 3}`
   const era = totalOuts ? (t.earnedRuns * 27 / totalOuts).toFixed(2) : null
   const whip = totalOuts ? ((t.hits + t.baseOnBalls) / (totalOuts / 3)).toFixed(2) : null
+  // Opponent slash — hits allowed / atBats faced
   const oAvg = t.atBats ? fmt3(t.hits / t.atBats) : null
+  // oOBP and oSLG not calculable from counting stats alone without TB-allowed, store from API on single-team splits
+  // For summed rows we store oAvg only; oObp/oSlg come from API on single splits
   return { ...t, inningsPitched: ip, era, whip, oAvg }
 }
 
@@ -108,6 +113,7 @@ async function fetchStats(mlbamId: string, group: string): Promise<any> {
     if (mlbSplits.length > 0) {
       const statObjs = mlbSplits.map((s: any) => s.stat)
       const summed = group === 'pitching' ? sumPitch(statObjs) : sumBat(statObjs)
+      // For single-team MLB players, grab oObp/oSlg directly from API
       if (mlbSplits.length === 1 && group === 'pitching') {
         const raw = mlbSplits[0].stat
         summed.oObp = raw.obp ?? null
@@ -203,7 +209,8 @@ export async function POST() {
   fs.writeFileSync(STATS_PATH, JSON.stringify(stats))
   try { fs.unlinkSync(PROGRESS_PATH) } catch {}
 
-  const SCRIPTS = path.join(process.cwd(), 'scripts')
+  // Rebuild model pipeline
+  const SCRIPTS = path.join(process.env.HOME!, 'Desktop/fantasy-baseball/scripts')
   const modelSteps = [
     { cmd: `node "${SCRIPTS}/build-norms.js"`, label: 'norms' },
     { cmd: `python3 "${SCRIPTS}/build-mlb-tools.py"`, label: 'mlb-tools' },

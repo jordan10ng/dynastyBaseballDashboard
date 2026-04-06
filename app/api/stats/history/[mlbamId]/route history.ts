@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import fs from 'fs'
 import path from 'path'
 
-const DATA_DIR = path.join(process.cwd(), 'data/history')
+const DATA_DIR = path.join(process.env.HOME ?? '', 'Desktop/fantasy-baseball/data/history')
 const YEARS = ['2015','2016','2017','2018','2019','2020','2021','2022','2023','2024','2025','2026']
 
 export async function GET(_req: NextRequest, { params }: { params: Promise<{ mlbamId: string }> }) {

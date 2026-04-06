@@ -3,7 +3,7 @@ import fs from 'fs'
 import path from 'path'
 
 export async function GET() {
-  const filePath = path.join(process.cwd(), 'data/model/mlb-tools.json')
+  const filePath = path.join(process.env.HOME!, 'Desktop/fantasy-baseball/data/model/mlb-tools.json')
   try {
     const raw = fs.readFileSync(filePath, 'utf8')
     const data = JSON.parse(raw)
