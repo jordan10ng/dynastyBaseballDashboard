@@ -229,7 +229,7 @@ function run() {
     }
     const composite = wtot > 0 ? wsum / wtot : null;
 
-    rawPool[id] = { toolScores, toolWeights, composite, totalSample, isPitcher, wtdAgeDiff: playerWtdAgeDiff };
+    rawPool[id] = { toolScores, toolWeights, composite, totalSample, isPitcher, wtdAgeDiff: playerWtdAgeDiff, hasCY: false, cySample: 0 };
   }
 
   // Normalize each tool across prospect pool
@@ -292,67 +292,66 @@ function run() {
       _sample: Math.round(totalSample),
     };
     scored++;
+
+    // Compute ex-CY overall for hot sheet (single pass, stored on rawPool)
+    {
+      const tw_weights = isPitcher ? COMPOSITE_WEIGHTS.pitcher : COMPOSITE_WEIGHTS.hitter;
+      const C = isPitcher ? AGE_BONUS_C.pitcher : AGE_BONUS_C.hitter;
+      const wtdAgeDiff = rawPool[id].wtdAgeDiff ?? 0;
+      let wsumEx = 0, wtotEx = 0, allToolsNoHistory = true, hasCY = false;
+      let cySample = 0;
+      for (const [tool, w] of Object.entries(tw_weights)) {
+        const tw = rawPool[id].toolWeights[tool];
+        if (!tw || !toolVals[tool]) continue;
+        if (tw.cyTot > 0) { hasCY = true; cySample = Math.max(cySample, tw.cyTot); }
+        const { mean, stdev } = toolVals[tool];
+        const wTotEx = tw.wTot - tw.cyTot;
+        const wSumEx = tw.wSum - tw.cySum;
+        if (wTotEx > 0) {
+          allToolsNoHistory = false;
+          const rawEx = wSumEx / wTotEx;
+          const normedEx = 100 + ((rawEx - mean) / stdev) * 15 + wtdAgeDiff * C;
+          wsumEx += normedEx * w;
+          wtotEx += w;
+        } else {
+          // no prior data for this tool — use league avg + age bonus as baseline
+          wsumEx += (100 + wtdAgeDiff * C) * w;
+          wtotEx += w;
+        }
+      }
+      const exCYOverallRaw = (wtotEx > 0 && !allToolsNoHistory) ? wsumEx / wtotEx : null;
+      const exCYOverall = exCYOverallRaw != null ? Math.round(shrink(exCYOverallRaw, totalSample, isPitcher)) : null;
+      rawPool[id].hasCY = hasCY;
+      rawPool[id].cySample = cySample;
+      rawPool[id].exCYOverall = exCYOverall;
+      rawPool[id].allToolsNoHistory = allToolsNoHistory;
+    }
   }
 
   // ── Hot sheet ─────────────────────────────────────────────────────────────
-  // For each player: compute normalized overall WITH current year (= model_scores.overall)
-  // vs WITHOUT current year (exclude cySum/cyTot from weighted average then normalize same way)
-  // Delta = with - without. Sort by delta descending.
-  const hotSheetData = [];
-  const MIN_CAREER_PA = 150, MIN_CAREER_IP = 60, MIN_OVERALL = 100;
+  // Risers: has prior history, overall improved vs ex-CY baseline, delta >= 1
+  const MIN_OVERALL = 100, MIN_RISER_DELTA = 1;
+  const risers = [];
 
-  for (const [id, { toolWeights, isPitcher }] of Object.entries(rawPool)) {
+  for (const [id, pool] of Object.entries(rawPool)) {
     const player = updatedPlayers[id];
     const ms = player.model_scores;
     if (!ms?.overall || ms.overall < MIN_OVERALL) continue;
-    if (isPitcher && ms._sample < MIN_CAREER_IP) continue;
-    if (!isPitcher && ms._sample < MIN_CAREER_PA) continue;
-
-    const weights = isPitcher ? COMPOSITE_WEIGHTS.pitcher : COMPOSITE_WEIGHTS.hitter;
-
-    // Compute normalized overall without current year
-    let wsumEx = 0, wtotEx = 0;
-    let hasCY = false;
-
-    for (const [tool, w] of Object.entries(weights)) {
-      const tw = toolWeights[tool];
-      if (!tw || !toolVals[tool]) continue;
-      const { mean, stdev } = toolVals[tool];
-
-      // Check if current year contributed anything for this tool
-      if (tw.cyTot > 0) hasCY = true;
-
-      // Score without current year: subtract cy contribution from weighted sum
-      const wTotEx = tw.wTot - tw.cyTot;
-      const wSumEx = tw.wSum - tw.cySum;
-      if (wTotEx <= 0) continue;
-
-      const rawEx = wSumEx / wTotEx;
-      const normedExBase = 100 + ((rawEx - mean) / stdev) * 15;
-      const Chs = isPitcher ? AGE_BONUS_C.pitcher : AGE_BONUS_C.hitter;
-      const normedEx = normedExBase + (rawPool[id]?.wtdAgeDiff ?? 0) * Chs;
-      wsumEx += normedEx * w;
-      wtotEx += w;
-    }
-
-    // Must have current year data and a valid without-CY score
-    if (!hasCY || wtotEx === 0) continue;
-
-    const overallWithout = Math.round(wsumEx / wtotEx);
-    const delta = ms.overall - overallWithout;
-    if (delta <= 0) continue;
-
-    hotSheetData.push({
+    if (!pool.hasCY || pool.allToolsNoHistory || pool.exCYOverall == null) continue;
+    const delta = ms.overall - pool.exCYOverall;
+    if (delta < MIN_RISER_DELTA) continue;
+    risers.push({
       id, name: player.name, rank: player.rank, positions: player.positions,
-      isPit: isPitcher, delta,
-      overall: ms.overall, prevOverall: overallWithout,
+      isPit: pool.isPitcher, overall: ms.overall,
       sample: ms._sample, confidence: ms._confidence,
+      delta, prevOverall: pool.exCYOverall,
     });
   }
 
-  hotSheetData.sort((a, b) => b.delta - a.delta);
-  const hotBats = hotSheetData.filter(r => !r.isPit).slice(0, 20);
-  const hotArms = hotSheetData.filter(r => r.isPit).slice(0, 20);
+  risers.sort((a, b) => b.delta - a.delta || b.overall - a.overall);
+  const hotBats = risers.filter(r => !r.isPit).slice(0, 20);
+  const hotArms = risers.filter(r => r.isPit).slice(0, 20);
+
   fs.writeFileSync(HOTSHEET_PATH, JSON.stringify({ bats: hotBats, arms: hotArms, generatedAt: new Date().toISOString() }, null, 2));
   console.log(`Hot sheet written: ${hotBats.length} bats, ${hotArms.length} arms`);
 
@@ -375,7 +374,7 @@ function run() {
   top.forEach((p, i) => {
     const s   = p.model_scores;
     const rk  = p.rank ? `#${p.rank}` : 'UR';
-    const conf = `${s._confidence}%`;
+    const conf = typeof s._confidence === 'object' ? `${Object.values(s._confidence||{})[0]??'?'}%` : `${s._confidence??'?'}%`;
     const isPit = (p.positions||'').includes('P');
     const tools = isPit
       ? `stuff=${s.stuff??'?'} ctrl=${s.control??'?'}`
