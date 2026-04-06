@@ -211,7 +211,14 @@ export default function PlayersPage() {
   const [mlbToolsMap, setMlbToolsMap] = useState<Record<string, any>>({})
   const [dataView, setDataView] = useState<DataView>('stats')
   const [mounted, setMounted] = useState(false)
-  useEffect(() => setMounted(true), [])
+  const [isMobile, setIsMobile] = useState(false)
+  useEffect(() => {
+    setMounted(true)
+    const check = () => setIsMobile(window.innerWidth <= 768)
+    check()
+    window.addEventListener('resize', check)
+    return () => window.removeEventListener('resize', check)
+  }, [])
   const [toolSortKey, setToolSortKey] = useState('')
   const [selectedLeague, setSelectedLeague] = useState('')
   const [selectedTeam, setSelectedTeam] = useState('')
@@ -695,6 +702,53 @@ export default function PlayersPage() {
         </div>
       )}
 
+      {/* Mobile list */}
+      {isMobile ? (
+        <div style={{ display: 'flex', flexDirection: 'column' }}>
+          {/* Mobile header */}
+          <div style={{ display: 'grid', gridTemplateColumns: '36px 1fr 44px', gap: '0.4rem', padding: '0.2rem 0rem', marginBottom: '0.25rem', borderBottom: '1px solid var(--border)' }}>
+            {['RK','PLAYER','OVR+'].map((h, i) => (
+              <div key={i} style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.58rem', letterSpacing: '0.08em', color: 'var(--muted)', textAlign: i >= 2 ? 'right' : 'left' }}>{h}</div>
+            ))}
+          </div>
+          {loading ? <div style={{ color: 'var(--muted)', padding: '1rem 0' }}>Loading...</div> : filtered.map((p, i) => {
+            const pOwn = globalOwnership[p.id] || {}
+            const myTeamOwned = Object.values(pOwn).includes(MY_TEAM)
+            const tools = playerToolsMap[p.id]
+            const ovr = tools?.overall ?? null
+            const s = statsMap[p.id]
+            const level = s?._level ?? p.level ?? '—'
+            return (
+              <div key={p.id} onClick={() => setSelectedPlayer(p)} style={{
+                display: 'grid', gridTemplateColumns: '36px 1fr 44px', gap: '0.4rem',
+                padding: '0.5rem 0rem', borderBottom: '1px solid rgba(48,54,61,0.4)',
+                alignItems: 'center', cursor: 'pointer',
+                borderLeft: myTeamOwned ? '2px solid #f59e0b' : '2px solid transparent',
+                marginLeft: myTeamOwned ? '-2px' : '0',
+                background: myTeamOwned ? 'rgba(245,158,11,0.04)' : 'transparent',
+              }}>
+                <div style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.65rem', color: 'rgba(100,100,100,0.5)' }}>{p.rank ?? '—'}</div>
+                <div style={{ minWidth: 0 }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', overflow: 'hidden' }}>
+                    <span style={{ fontWeight: 600, fontSize: '0.82rem', color: myTeamOwned ? '#f59e0b' : 'var(--text)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', minWidth: 0 }}>{p.name}</span>
+                    {minorsIds.has(p.id) && <span style={{ color: '#4ade80', fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: '0.62rem', flexShrink: 0 }}>M</span>}
+                  </div>
+                  <div style={{ fontSize: '0.65rem', color: 'var(--muted)', fontFamily: 'var(--font-display)', fontWeight: 600, marginBottom: '1px' }}>
+                    {[p.positions?.split(',')[0]?.trim(), p.team, level].filter(Boolean).join(' · ')}
+                  </div>
+                  <div style={{ fontSize: '0.62rem', color: 'var(--muted)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                    {statLineMap[p.id] || '—'}
+                  </div>
+                </div>
+                <div style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: '0.82rem', color: ovr == null ? 'rgba(100,100,100,0.35)' :
+                  ovr >= 130 ? '#ef4444' : ovr >= 115 ? '#fca5a5' : ovr >= 95 ? 'var(--text)' : ovr >= 80 ? '#93c5fd' : '#3b82f6',
+                  textAlign: 'right' }}>{ovr ?? '—'}</div>
+              </div>
+            )
+          })}
+        </div>
+      ) : (
+      <>
       {/* One scroll container — header + rows together */}
       <div ref={hdrRef} style={{ overflowX: 'scroll', position: 'sticky', top: 0, zIndex: 10, background: 'var(--bg)', scrollbarWidth: 'none' } as any}>
         {!mounted ? null : (
@@ -776,6 +830,8 @@ export default function PlayersPage() {
           </List>
         )}
       </div>
+      </>
+      )}
 
       {selectedPlayer && (
         <PlayerDrawer

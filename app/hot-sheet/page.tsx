@@ -42,17 +42,21 @@ function fmtStatLine(r: any, tab: 'bats' | 'arms', statsMap: Record<string, any>
     const kPct = bf && s.strikeOuts != null ? (s.strikeOuts / bf * 100).toFixed(1) + '%' : null
     const bbPct = bf && s.baseOnBalls != null ? (s.baseOnBalls / bf * 100).toFixed(1) + '%' : null
     const wl = s.wins != null && s.losses != null ? `${s.wins}-${s.losses}` : null
-    const ip = s.inningsPitched ?? null
-    const era = s.era ?? null
-    return [wl, ip ? `${ip} IP` : null, era ? `${era} ERA` : null, kPct ? `${kPct} K%` : null, bbPct ? `${bbPct} BB%` : null].filter(Boolean).join(' · ')
+    return [wl, s.inningsPitched ? `${s.inningsPitched} IP` : null, s.era ? `${s.era} ERA` : null, kPct ? `${kPct} K%` : null, bbPct ? `${bbPct} BB%` : null].filter(Boolean).join(' · ')
   } else {
     const pa = s.plateAppearances ?? 0
     const kPct = pa && s.strikeOuts != null ? (s.strikeOuts / pa * 100).toFixed(1) + '%' : null
     const bbPct = pa && s.baseOnBalls != null ? (s.baseOnBalls / pa * 100).toFixed(1) + '%' : null
-    const ops = s.ops ?? null
-    const hr = s.homeRuns != null ? `${s.homeRuns} HR` : null
-    const sb = s.stolenBases != null ? `${s.stolenBases} SB` : null
-    return [ops ? `${ops} OPS` : null, kPct ? `${kPct} K%` : null, bbPct ? `${bbPct} BB%` : null, hr, sb].filter(Boolean).join(' · ')
+    return [s.ops ? `${s.ops} OPS` : null, kPct ? `${kPct} K%` : null, bbPct ? `${bbPct} BB%` : null, s.homeRuns != null ? `${s.homeRuns} HR` : null, s.stolenBases != null ? `${s.stolenBases} SB` : null].filter(Boolean).join(' · ')
+  }
+}
+
+function fmtToolLine(ms: any, tab: 'bats' | 'arms'): string {
+  if (!ms) return ''
+  if (tab === 'bats') {
+    return [ms.hit != null ? `HIT+ ${ms.hit}` : null, ms.power != null ? `PWR+ ${ms.power}` : null, ms.speed != null ? `SPD+ ${ms.speed}` : null, ms.overall != null ? `OVR+ ${ms.overall}` : null].filter(Boolean).join(' · ')
+  } else {
+    return [ms.stuff != null ? `STF+ ${ms.stuff}` : null, ms.control != null ? `CTL+ ${ms.control}` : null, ms.overall != null ? `OVR+ ${ms.overall}` : null].filter(Boolean).join(' · ')
   }
 }
 
@@ -63,8 +67,16 @@ export default function HotSheetPage() {
   const [allRosters, setAllRosters] = useState<any[]>([])
   const [allPlayers, setAllPlayers] = useState<any[]>([])
   const [selectedPlayer, setSelectedPlayer] = useState<any>(null)
+  const [isMobile, setIsMobile] = useState(false)
 
   const { statsMap, mlbToolsMap } = useDrawerData()
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth <= 768)
+    check()
+    window.addEventListener('resize', check)
+    return () => window.removeEventListener('resize', check)
+  }, [])
 
   useEffect(() => {
     Promise.all([
@@ -119,7 +131,7 @@ export default function HotSheetPage() {
   const gridCols = tab === 'bats' ? batCols : armCols
 
   return (
-    <div style={{ padding: '2rem' }}>
+    <div style={{ padding: isMobile ? '1rem' : '2rem' }}>
       <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', marginBottom: '1.5rem', flexWrap: 'wrap', gap: '0.5rem' }}>
         <div>
           <div style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '1.4rem', color: 'var(--text)', letterSpacing: '-0.02em' }}>
@@ -139,7 +151,74 @@ export default function HotSheetPage() {
         <div style={{ color: 'var(--muted)' }}>Loading...</div>
       ) : rows.length === 0 ? (
         <div style={{ color: 'var(--muted)', fontSize: '0.85rem' }}>No hot sheet data yet — run a Sync Stats to generate.</div>
+      ) : isMobile ? (
+        /* ── Mobile layout ── */
+        <div style={{ display: 'flex', flexDirection: 'column' }}>
+          {rows.map((r: any, i: number) => {
+            const player = playerMap[r.id]
+            const pOwn = globalOwnership[r.id] || {}
+            const myTeamOwned = Object.values(pOwn).includes(MY_TEAM)
+            const ms = player?.model_scores
+            const level = statsMap[r.id]?._level ?? '—'
+            const statLine = fmtStatLine(r, tab, statsMap)
+            const toolLine = fmtToolLine(ms, tab)
+
+            return (
+              <div
+                key={r.id ?? i}
+                onClick={() => player && setSelectedPlayer(player)}
+                style={{
+                  display: 'flex', gap: '0.75rem', padding: '0.75rem 0',
+                  borderBottom: '1px solid rgba(48,54,61,0.4)',
+                  borderLeft: myTeamOwned ? '2px solid #f59e0b' : '2px solid transparent',
+                  paddingLeft: myTeamOwned ? '0.5rem' : '0',
+                  background: myTeamOwned ? 'rgba(245,158,11,0.04)' : 'transparent',
+                  cursor: player ? 'pointer' : 'default',
+                  alignItems: 'center',
+                }}
+              >
+                {/* Delta */}
+                <div style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: '1rem', color: deltaColor(r.delta), flexShrink: 0, width: 36, textAlign: 'center' }}>
+                  +{r.delta}
+                </div>
+
+                {/* Info stack */}
+                <div style={{ minWidth: 0, flex: 1 }}>
+                  {/* Name + rank + dots */}
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', flexWrap: 'nowrap', overflow: 'hidden' }}>
+                    <span style={{ fontWeight: 600, fontSize: '0.88rem', color: myTeamOwned ? '#f59e0b' : 'var(--text)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{r.name}</span>
+                    {r.rank && <span style={{ fontSize: '0.62rem', fontFamily: 'var(--font-display)', color: 'var(--muted)', flexShrink: 0 }}>#{r.rank}</span>}
+                    <div style={{ display: 'flex', gap: '3px', flexShrink: 0 }}>
+                      {LEAGUES.map(league => {
+                        const teamName = pOwn[league.id]
+                        const color = teamName ? (teamName === MY_TEAM ? '#22c55e' : '#eab308') : '#ef4444'
+                        return <div key={league.id} style={{ width: '5px', height: '5px', borderRadius: '50%', background: color, opacity: 0.85 }} />
+                      })}
+                    </div>
+                  </div>
+                  {/* Pos · Team · Level */}
+                  <div style={{ fontSize: '0.65rem', color: 'var(--muted)', fontFamily: 'var(--font-display)', fontWeight: 600, marginTop: '1px' }}>
+                    {[cleanPositions(r.positions), player?.team, level].filter(Boolean).join(' · ')}
+                  </div>
+                  {/* Stat line */}
+                  {statLine && (
+                    <div style={{ fontSize: '0.62rem', color: 'var(--muted)', marginTop: '1px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                      {statLine}
+                    </div>
+                  )}
+                  {/* Tool line */}
+                  {toolLine && (
+                    <div style={{ fontSize: '0.62rem', fontFamily: 'var(--font-display)', fontWeight: 700, marginTop: '2px', color: toolColor(ms?.overall ?? null), whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                      {toolLine}
+                    </div>
+                  )}
+                </div>
+              </div>
+            )
+          })}
+        </div>
       ) : (
+        /* ── Desktop layout ── */
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
           <div style={{
             display: 'grid', gridTemplateColumns: gridCols,
@@ -193,14 +272,8 @@ export default function HotSheetPage() {
                 </div>
                 <div style={{ minWidth: 0 }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', flexWrap: 'nowrap' }}>
-                    <span style={{
-                      fontWeight: 600, fontSize: '0.875rem',
-                      color: myTeamOwned ? '#f59e0b' : 'var(--text)',
-                      whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis',
-                    }}>{r.name}</span>
-                    {r.rank && (
-                      <span style={{ fontSize: '0.65rem', fontFamily: 'var(--font-display)', color: 'var(--muted)', flexShrink: 0 }}>#{r.rank}</span>
-                    )}
+                    <span style={{ fontWeight: 600, fontSize: '0.875rem', color: myTeamOwned ? '#f59e0b' : 'var(--text)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{r.name}</span>
+                    {r.rank && <span style={{ fontSize: '0.65rem', fontFamily: 'var(--font-display)', color: 'var(--muted)', flexShrink: 0 }}>#{r.rank}</span>}
                     <div style={{ display: 'flex', gap: '3px', flexShrink: 0 }}>
                       {LEAGUES.map(league => {
                         const teamName = pOwn[league.id]
@@ -212,7 +285,7 @@ export default function HotSheetPage() {
                   </div>
                   <div style={{ fontSize: '0.68rem', color: 'var(--muted)', marginTop: '1px' }}>
                     {player?.team ?? ''}
-                    {(() => { const sl = fmtStatLine(r, tab, statsMap); return sl ? <span style={{ marginLeft: player?.team ? ' · '.length > 0 ? '0' : '0' : '0' }}>{player?.team ? ' · ' : ''}{sl}</span> : null })()}
+                    {(() => { const sl = fmtStatLine(r, tab, statsMap); return sl ? <span>{player?.team ? ' · ' : ''}{sl}</span> : null })()}
                   </div>
                 </div>
                 <div style={{ textAlign: 'right', fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.72rem', color: 'var(--muted)' }}>
