@@ -4,14 +4,16 @@ import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { LayoutDashboard, Users, ListOrdered, ArrowLeftRight, RefreshCw, Flame } from 'lucide-react'
 
-const nav = [
-  { href: '/',          label: 'Home',     icon: LayoutDashboard },
-  { href: '/players',   label: 'Players',  icon: Users },
-  { href: '/hot-sheet', label: 'Hot',      icon: Flame },
-  { href: '/rankings',  label: 'Rankings', icon: ListOrdered },
-  { href: '/trade',     label: 'Trade',    icon: ArrowLeftRight },
-  { href: '/sync',      label: 'Sync',     icon: RefreshCw },
+const ALL_NAV = [
+  { href: '/',          label: 'Home',     icon: LayoutDashboard, admin: false },
+  { href: '/players',   label: 'Players',  icon: Users,           admin: false },
+  { href: '/hot-sheet', label: 'Hot',      icon: Flame,           admin: false },
+  { href: '/rankings',  label: 'Rankings', icon: ListOrdered,     admin: true  },
+  { href: '/trade',     label: 'Trade',    icon: ArrowLeftRight,  admin: false },
+  { href: '/sync',      label: 'Sync',     icon: RefreshCw,       admin: true  },
 ]
+const showAdmin = process.env.NEXT_PUBLIC_SHOW_ADMIN === 'true'
+const nav = ALL_NAV.filter(n => !n.admin || showAdmin)
 
 export default function Sidebar() {
   const path = usePathname()
