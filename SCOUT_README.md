@@ -135,7 +135,7 @@ fantasy-baseball/
 - All mode shows compact stat blurb below name (OPS·K%·BB%·HR·SB for bats, W-L·IP·ERA·K%·BB% for arms)
 - Bats columns: G · BA · OBP · SLG · OPS · SO · BB · PA · AB · H · 2B · 3B · HR · R · RBI · SB · CS · ISO · K% · BB% · XBH%
 - Arms columns: G · W-L · IP · BAA · ERA · WHIP · H · R · ER · HR · BB · SO · K% · BB% · K-BB%
-- Freeze panes: #/CONS RK/POS/PLAYER sticky left; header syncs horizontally with rows
+- Freeze panes: #/RK/POS/PLAYER sticky left (POS dropped in All mode); header syncs horizontally with rows
 - Mobile: slim 2-col layout, paginated 75 at a time
 
 ## Player Drawer (full screen)
@@ -173,7 +173,7 @@ Click any player → full screen overlay. Escape or ✕ to close.
 
 **Per-tool shrinkage** individually; overall = pure weighted blend. _raw = pre-shrinkage ceiling.
 
-**Hot sheet:** delta = overall(with CY) - overall(without CY). Filters: overall ≥ 100, ≥150 PA / 60 IP career, delta > 0.
+**Hot sheet:** Risers = players with prior history whose overall(with CY) - overall(without CY) ≥ 1. No sample thresholds — shrinkage handles noise. Sorted by delta desc, then overall.
 
 ## Trade Calculator
 - Open mode or league mode (pick teams)
@@ -214,10 +214,12 @@ export async function GET(_req: NextRequest, { params }: { params: Promise<{ id:
 - build-scores.js overall fixed (was double-normalized)
 - Recency decay (0.75/year) + 3-year recency requirement added
 - Per-tool shrinkage + _raw ceiling field added
-- Hot sheet implemented with correct normalized delta
+- Hot sheet rebuilt — risers (ex-CY delta ≥ 1) replaces old integer-delta approach; emerging dropped
+- Hot sheet: G/IP added to stat line; mobile tool colors per-tool; pos/team/level on name line
 - Mine+FA filter added
 - All mode stat blurb added to players page
-- Players page: # display rank, CONS RK, freeze panes, OVR+ sortable in All mode
+- Players page: RK column clickable sort; Sort button removed; All mode folds pos/team/level into name line, drops POS column
+- Players page mobile: pos/team/level + dots on name line
 - Career stats from local history files (no external API call)
 - Drawer tool tiles with ceiling + confidence
 - **Mobile layout** — bottom tab nav, mobile players/hot-sheet/trade, pagination
