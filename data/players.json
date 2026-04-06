@@ -6541,9 +6541,26 @@
     "positions": "2B,SS,INF",
     "level": "MLB",
     "age": 19,
-    "mlbam_id": "434524",
+    "mlbam_id": "821270",
     "rank": 142,
-    "birthDate": "1983-01-10"
+    "birthDate": "2006-11-13",
+    "model_scores": {
+      "hit": 116,
+      "power": 112,
+      "speed": 123,
+      "overall": 123,
+      "_raw": {
+        "hit": 121,
+        "power": 116,
+        "speed": 131
+      },
+      "_confidence": {
+        "hit": 75,
+        "power": 75,
+        "speed": 75
+      },
+      "_sample": 606
+    }
   },
   "031d4": {
     "id": "031d4",
@@ -7397,7 +7414,7 @@
       "hit": 106,
       "power": 107,
       "speed": 118,
-      "overall": 109,
+      "overall": 108,
       "_raw": {
         "hit": 111,
         "power": 113,
@@ -9242,7 +9259,7 @@
     "model_scores": {
       "hit": 116,
       "power": 105,
-      "speed": 92,
+      "speed": 91,
       "overall": 117,
       "_raw": {
         "hit": 118,
@@ -10885,7 +10902,7 @@
       "_raw": {
         "hit": 103,
         "power": 121,
-        "speed": 132
+        "speed": 131
       },
       "_confidence": {
         "hit": 86,
@@ -11731,7 +11748,7 @@
     "rank": 667,
     "birthDate": "2002-02-28",
     "model_scores": {
-      "hit": 118,
+      "hit": 117,
       "power": 112,
       "speed": 85,
       "overall": 115,
@@ -19513,7 +19530,7 @@
       "overall": 105,
       "_raw": {
         "hit": 99,
-        "power": 106,
+        "power": 105,
         "speed": 122
       },
       "_confidence": {
@@ -21264,7 +21281,7 @@
     "model_scores": {
       "hit": 89,
       "power": 108,
-      "speed": 120,
+      "speed": 119,
       "overall": 105,
       "_raw": {
         "hit": 88,
@@ -24486,7 +24503,7 @@
     "model_scores": {
       "hit": 101,
       "power": 102,
-      "speed": 100,
+      "speed": 99,
       "overall": 107,
       "_raw": {
         "hit": 101,
@@ -24757,7 +24774,7 @@
       "overall": 109,
       "_raw": {
         "hit": 105,
-        "power": 146,
+        "power": 145,
         "speed": 78
       },
       "_confidence": {
@@ -26396,7 +26413,7 @@
       "_raw": {
         "hit": 115,
         "power": 116,
-        "speed": 129
+        "speed": 128
       },
       "_confidence": {
         "hit": 77,
@@ -26792,7 +26809,7 @@
       "hit": 98,
       "power": 102,
       "speed": 99,
-      "overall": 109,
+      "overall": 108,
       "_raw": {
         "hit": 97,
         "power": 103,
@@ -27587,7 +27604,7 @@
     "rank": 1277,
     "birthDate": "2000-04-21",
     "model_scores": {
-      "hit": 116,
+      "hit": 115,
       "power": 89,
       "speed": 96,
       "overall": 103,
@@ -28482,7 +28499,7 @@
       "overall": 111,
       "_raw": {
         "hit": 116,
-        "power": 102,
+        "power": 101,
         "speed": 120
       },
       "_confidence": {
@@ -29050,7 +29067,7 @@
     "model_scores": {
       "hit": 106,
       "power": 109,
-      "speed": 96,
+      "speed": 95,
       "overall": 111,
       "_raw": {
         "hit": 107,
@@ -30231,7 +30248,7 @@
       "speed": 85,
       "overall": 111,
       "_raw": {
-        "hit": 105,
+        "hit": 104,
         "power": 113,
         "speed": 84
       },
@@ -32248,7 +32265,7 @@
       "_raw": {
         "hit": 80,
         "power": 112,
-        "speed": 92
+        "speed": 91
       },
       "_confidence": {
         "hit": 83,
@@ -32749,7 +32766,7 @@
     "birthDate": "1999-02-01",
     "model_scores": {
       "hit": 95,
-      "power": 104,
+      "power": 103,
       "speed": 94,
       "overall": 103,
       "_raw": {
@@ -33235,7 +33252,7 @@
       "_raw": {
         "hit": 106,
         "power": 137,
-        "speed": 101
+        "speed": 100
       },
       "_confidence": {
         "hit": 87,
@@ -33405,7 +33422,7 @@
     "mlbam_id": "692348",
     "birthDate": "2003-03-16",
     "model_scores": {
-      "hit": 96,
+      "hit": 95,
       "power": 94,
       "speed": 91,
       "overall": 101,
@@ -34103,7 +34120,7 @@
       "hit": 101,
       "power": 90,
       "speed": 108,
-      "overall": 101,
+      "overall": 100,
       "_raw": {
         "hit": 101,
         "power": 88,
@@ -36338,7 +36355,7 @@
       "speed": 98,
       "overall": 105,
       "_raw": {
-        "hit": 114,
+        "hit": 113,
         "power": 108,
         "speed": 96
       },
@@ -36480,7 +36497,7 @@
     "model_scores": {
       "hit": 119,
       "power": 102,
-      "speed": 111,
+      "speed": 110,
       "overall": 112,
       "_raw": {
         "hit": 124,
@@ -36594,7 +36611,7 @@
     "model_scores": {
       "hit": 104,
       "power": 102,
-      "speed": 120,
+      "speed": 119,
       "overall": 109,
       "_raw": {
         "hit": 105,
@@ -38179,7 +38196,7 @@
       "overall": 103,
       "_raw": {
         "hit": 107,
-        "power": 106,
+        "power": 105,
         "speed": 85
       },
       "_confidence": {
@@ -38362,7 +38379,7 @@
     "birthDate": "2003-05-14",
     "model_scores": {
       "hit": 113,
-      "power": 100,
+      "power": 99,
       "speed": 96,
       "overall": 107,
       "_raw": {
@@ -38465,7 +38482,7 @@
       "speed": 94,
       "overall": 108,
       "_raw": {
-        "hit": 111,
+        "hit": 110,
         "power": 103,
         "speed": 93
       },
@@ -42019,7 +42036,7 @@
       "speed": 118,
       "overall": 112,
       "_raw": {
-        "hit": 112,
+        "hit": 111,
         "power": 105,
         "speed": 122
       },
@@ -42941,7 +42958,7 @@
     "rank": 1716,
     "birthDate": "2002-12-25",
     "model_scores": {
-      "hit": 120,
+      "hit": 119,
       "power": 91,
       "speed": 106,
       "overall": 112,
@@ -44895,7 +44912,7 @@
     "birthDate": "1999-11-01",
     "model_scores": {
       "hit": 106,
-      "power": 102,
+      "power": 101,
       "speed": 105,
       "overall": 107,
       "_raw": {
@@ -46376,7 +46393,7 @@
     "model_scores": {
       "hit": 115,
       "power": 71,
-      "speed": 108,
+      "speed": 107,
       "overall": 97,
       "_raw": {
         "hit": 118,
@@ -48567,7 +48584,7 @@
     "model_scores": {
       "hit": 84,
       "power": 115,
-      "speed": 134,
+      "speed": 133,
       "overall": 102,
       "_raw": {
         "hit": 83,
@@ -56418,7 +56435,7 @@
       "speed": 89,
       "overall": 116,
       "_raw": {
-        "hit": 125,
+        "hit": 124,
         "power": 130,
         "speed": 85
       },
@@ -57851,7 +57868,7 @@
       "overall": 103,
       "_raw": {
         "hit": 100,
-        "power": 99,
+        "power": 98,
         "speed": 95
       },
       "_confidence": {
@@ -59222,13 +59239,13 @@
     "birthDate": "2003-06-16",
     "model_scores": {
       "hit": 92,
-      "power": 107,
+      "power": 106,
       "speed": 108,
       "overall": 101,
       "_raw": {
         "hit": 90,
         "power": 108,
-        "speed": 111
+        "speed": 110
       },
       "_confidence": {
         "hit": 81,
@@ -60516,7 +60533,7 @@
       "speed": 100,
       "overall": 107,
       "_raw": {
-        "hit": 106,
+        "hit": 105,
         "power": 107,
         "speed": 100
       },
@@ -62303,7 +62320,7 @@
     "birthDate": "2005-10-20",
     "model_scores": {
       "hit": 102,
-      "power": 101,
+      "power": 100,
       "speed": 87,
       "overall": 104,
       "_raw": {
@@ -62710,7 +62727,7 @@
       "_raw": {
         "hit": 69,
         "power": 114,
-        "speed": 112
+        "speed": 111
       },
       "_confidence": {
         "hit": 92,
@@ -63533,7 +63550,7 @@
       "_raw": {
         "hit": 102,
         "power": 124,
-        "speed": 93
+        "speed": 92
       },
       "_confidence": {
         "hit": 91,
@@ -66087,7 +66104,7 @@
       "speed": 101,
       "overall": 103,
       "_raw": {
-        "hit": 100,
+        "hit": 99,
         "power": 122,
         "speed": 105
       },
@@ -66682,7 +66699,7 @@
       "speed": 113,
       "overall": 102,
       "_raw": {
-        "hit": 88,
+        "hit": 87,
         "power": 112,
         "speed": 116
       },
@@ -68278,7 +68295,7 @@
     "model_scores": {
       "hit": 105,
       "power": 99,
-      "speed": 110,
+      "speed": 109,
       "overall": 103,
       "_raw": {
         "hit": 110,
@@ -70410,7 +70427,7 @@
     "model_scores": {
       "hit": 105,
       "power": 105,
-      "speed": 108,
+      "speed": 107,
       "overall": 105,
       "_raw": {
         "hit": 107,
@@ -70475,7 +70492,7 @@
       "speed": 94,
       "overall": 98,
       "_raw": {
-        "hit": 111,
+        "hit": 110,
         "power": 87,
         "speed": 92
       },
@@ -70748,7 +70765,7 @@
       "speed": 98,
       "overall": 108,
       "_raw": {
-        "hit": 116,
+        "hit": 115,
         "power": 113,
         "speed": 96
       },
@@ -71123,7 +71140,7 @@
       "speed": 102,
       "overall": 104,
       "_raw": {
-        "hit": 99,
+        "hit": 98,
         "power": 104,
         "speed": 105
       },
@@ -71368,7 +71385,7 @@
     "model_scores": {
       "hit": 113,
       "power": 112,
-      "speed": 94,
+      "speed": 93,
       "overall": 108,
       "_raw": {
         "hit": 116,
@@ -71892,7 +71909,7 @@
       "overall": 85,
       "_raw": {
         "hit": 77,
-        "power": 71,
+        "power": 70,
         "speed": 94
       },
       "_confidence": {
@@ -71961,7 +71978,7 @@
       "hit": 113,
       "power": 91,
       "speed": 94,
-      "overall": 102,
+      "overall": 101,
       "_raw": {
         "hit": 124,
         "power": 84,
@@ -72984,7 +73001,7 @@
     "model_scores": {
       "hit": 88,
       "power": 94,
-      "speed": 110,
+      "speed": 109,
       "overall": 92,
       "_raw": {
         "hit": 81,
@@ -73223,7 +73240,7 @@
     "model_scores": {
       "hit": 114,
       "power": 97,
-      "speed": 99,
+      "speed": 98,
       "overall": 106,
       "_raw": {
         "hit": 124,
@@ -73629,7 +73646,7 @@
       "hit": 100,
       "power": 94,
       "speed": 86,
-      "overall": 98,
+      "overall": 97,
       "_raw": {
         "hit": 100,
         "power": 93,
@@ -75143,7 +75160,7 @@
     "model_scores": {
       "hit": 103,
       "power": 95,
-      "speed": 113,
+      "speed": 112,
       "overall": 103,
       "_raw": {
         "hit": 104,
@@ -77603,7 +77620,7 @@
     "model_scores": {
       "hit": 121,
       "power": 83,
-      "speed": 105,
+      "speed": 104,
       "overall": 105,
       "_raw": {
         "hit": 123,
@@ -78435,7 +78452,7 @@
       "hit": 104,
       "power": 110,
       "speed": 110,
-      "overall": 110,
+      "overall": 109,
       "_raw": {
         "hit": 106,
         "power": 115,
@@ -80060,7 +80077,7 @@
       "speed": 141,
       "overall": 102,
       "_raw": {
-        "hit": 109,
+        "hit": 108,
         "power": 86,
         "speed": 163
       },
@@ -80116,7 +80133,7 @@
       "_raw": {
         "hit": 96,
         "power": 105,
-        "speed": 137
+        "speed": 136
       },
       "_confidence": {
         "hit": 34,
@@ -91154,7 +91171,7 @@
     "model_scores": {
       "hit": 101,
       "power": 84,
-      "speed": 110,
+      "speed": 109,
       "overall": 99,
       "_raw": {
         "hit": 101,
@@ -91219,7 +91236,7 @@
     "model_scores": {
       "hit": 87,
       "power": 101,
-      "speed": 124,
+      "speed": 123,
       "overall": 101,
       "_raw": {
         "hit": 85,
@@ -91789,7 +91806,7 @@
     "model_scores": {
       "hit": 103,
       "power": 92,
-      "speed": 94,
+      "speed": 93,
       "overall": 96,
       "_raw": {
         "hit": 104,
@@ -92222,7 +92239,7 @@
     "birthDate": "2002-11-16",
     "model_scores": {
       "hit": 106,
-      "power": 104,
+      "power": 103,
       "speed": 107,
       "overall": 107,
       "_raw": {
@@ -92525,7 +92542,7 @@
     "mlbam_id": "814394",
     "birthDate": "2001-08-04",
     "model_scores": {
-      "hit": 100,
+      "hit": 99,
       "power": 104,
       "speed": 88,
       "overall": 98,
@@ -93560,7 +93577,7 @@
       "speed": 97,
       "overall": 91,
       "_raw": {
-        "hit": 87,
+        "hit": 86,
         "power": 95,
         "speed": 96
       },
@@ -95082,7 +95099,7 @@
     "model_scores": {
       "hit": 116,
       "power": 99,
-      "speed": 103,
+      "speed": 102,
       "overall": 107,
       "_raw": {
         "hit": 120,
@@ -97118,7 +97135,7 @@
     "fangraphs_id": "sa3004969",
     "birthDate": "1999-10-25",
     "model_scores": {
-      "hit": 99,
+      "hit": 98,
       "power": 108,
       "speed": 94,
       "overall": 105,
@@ -99265,7 +99282,7 @@
       "overall": 100,
       "_raw": {
         "hit": 124,
-        "power": 85,
+        "power": 84,
         "speed": 80
       },
       "_confidence": {
@@ -103720,7 +103737,7 @@
       "speed": 103,
       "overall": 102,
       "_raw": {
-        "hit": 127,
+        "hit": 126,
         "power": 86,
         "speed": 106
       },
@@ -104969,7 +104986,7 @@
     "model_scores": {
       "hit": 103,
       "power": 98,
-      "speed": 110,
+      "speed": 109,
       "overall": 99,
       "_raw": {
         "hit": 105,
@@ -105346,9 +105363,9 @@
       "speed": 103,
       "overall": 100,
       "_raw": {
-        "hit": 85,
+        "hit": 84,
         "power": 103,
-        "speed": 106
+        "speed": 105
       },
       "_confidence": {
         "hit": 56,
@@ -105794,7 +105811,7 @@
     "mlbam_id": "821672",
     "birthDate": "2007-02-14",
     "model_scores": {
-      "hit": 112,
+      "hit": 111,
       "power": 95,
       "speed": 100,
       "overall": 103,
@@ -107571,7 +107588,7 @@
       "speed": 107,
       "overall": 105,
       "_raw": {
-        "hit": 106,
+        "hit": 105,
         "power": 115,
         "speed": 114
       },
@@ -107762,7 +107779,7 @@
       "_raw": {
         "hit": 108,
         "power": 95,
-        "speed": 106
+        "speed": 105
       },
       "_confidence": {
         "hit": 38,
@@ -109231,7 +109248,7 @@
       "_raw": {
         "hit": 90,
         "power": 90,
-        "speed": 98
+        "speed": 97
       },
       "_confidence": {
         "hit": 57,
@@ -109912,7 +109929,7 @@
       "speed": 94,
       "overall": 99,
       "_raw": {
-        "hit": 91,
+        "hit": 90,
         "power": 108,
         "speed": 92
       },
@@ -113596,7 +113613,7 @@
     "model_scores": {
       "hit": 101,
       "power": 107,
-      "speed": 112,
+      "speed": 111,
       "overall": 106,
       "_raw": {
         "hit": 102,
@@ -114396,7 +114413,7 @@
       "speed": 90,
       "overall": 103,
       "_raw": {
-        "hit": 105,
+        "hit": 104,
         "power": 106,
         "speed": 85
       },
@@ -114443,7 +114460,7 @@
     "birthDate": "2000-07-08",
     "model_scores": {
       "hit": 116,
-      "power": 101,
+      "power": 100,
       "speed": 96,
       "overall": 109,
       "_raw": {
@@ -117343,7 +117360,7 @@
     "model_scores": {
       "hit": 67,
       "power": 101,
-      "speed": 119,
+      "speed": 118,
       "overall": 90,
       "_raw": {
         "hit": 56,
@@ -118537,7 +118554,7 @@
       "speed": 98,
       "overall": 105,
       "_raw": {
-        "hit": 114,
+        "hit": 113,
         "power": 108,
         "speed": 96
       },
@@ -119830,7 +119847,7 @@
     "model_scores": {
       "hit": 88,
       "power": 106,
-      "speed": 113,
+      "speed": 112,
       "overall": 100,
       "_raw": {
         "hit": 85,
@@ -120367,7 +120384,7 @@
       "overall": 102,
       "_raw": {
         "hit": 100,
-        "power": 106,
+        "power": 105,
         "speed": 90
       },
       "_confidence": {
@@ -121340,7 +121357,7 @@
       "_raw": {
         "hit": 77,
         "power": 73,
-        "speed": 93
+        "speed": 92
       },
       "_confidence": {
         "hit": 45,
@@ -121508,7 +121525,7 @@
     "model_scores": {
       "hit": 90,
       "power": 108,
-      "speed": 111,
+      "speed": 110,
       "overall": 102,
       "_raw": {
         "hit": 84,
@@ -121588,7 +121605,7 @@
       "_raw": {
         "hit": 107,
         "power": 90,
-        "speed": 118
+        "speed": 117
       },
       "_confidence": {
         "hit": 83,
@@ -122523,7 +122540,7 @@
     "model_scores": {
       "hit": 102,
       "power": 102,
-      "speed": 110,
+      "speed": 109,
       "overall": 104,
       "_raw": {
         "hit": 103,
@@ -124357,7 +124374,7 @@
       "_raw": {
         "hit": 103,
         "power": 98,
-        "speed": 117
+        "speed": 116
       },
       "_confidence": {
         "hit": 36,
@@ -128265,7 +128282,7 @@
       "_raw": {
         "hit": 116,
         "power": 95,
-        "speed": 111
+        "speed": 110
       },
       "_confidence": {
         "hit": 69,
@@ -130451,7 +130468,7 @@
       "_raw": {
         "hit": 92,
         "power": 95,
-        "speed": 103
+        "speed": 102
       },
       "_confidence": {
         "hit": 34,
@@ -137140,7 +137157,7 @@
       "hit": 104,
       "power": 103,
       "speed": 94,
-      "overall": 102,
+      "overall": 101,
       "_raw": {
         "hit": 108,
         "power": 105,
@@ -139132,7 +139149,7 @@
       "speed": 103,
       "overall": 100,
       "_raw": {
-        "hit": 106,
+        "hit": 105,
         "power": 96,
         "speed": 105
       },
@@ -139766,7 +139783,7 @@
     "mlbam_id": "800253",
     "birthDate": "2004-10-02",
     "model_scores": {
-      "hit": 108,
+      "hit": 107,
       "power": 106,
       "speed": 91,
       "overall": 108,
@@ -140006,7 +140023,7 @@
       "hit": 100,
       "power": 112,
       "speed": 90,
-      "overall": 105,
+      "overall": 104,
       "_raw": {
         "hit": 100,
         "power": 114,
@@ -142702,7 +142719,7 @@
       "_raw": {
         "hit": 94,
         "power": 105,
-        "speed": 125
+        "speed": 124
       },
       "_confidence": {
         "hit": 70,
@@ -142807,7 +142824,7 @@
     "mlbam_id": "643271",
     "birthDate": "1995-07-12",
     "model_scores": {
-      "hit": 80,
+      "hit": 79,
       "power": 106,
       "speed": 105,
       "overall": 99,
@@ -145780,7 +145797,7 @@
     "model_scores": {
       "hit": 101,
       "power": 107,
-      "speed": 112,
+      "speed": 111,
       "overall": 106,
       "_raw": {
         "hit": 102,
@@ -149053,7 +149070,7 @@
       "speed": 103,
       "overall": 97,
       "_raw": {
-        "hit": 99,
+        "hit": 98,
         "power": 85,
         "speed": 103
       },
@@ -149402,7 +149419,7 @@
     "birthDate": "2005-08-17",
     "model_scores": {
       "hit": 96,
-      "power": 95,
+      "power": 94,
       "speed": 104,
       "overall": 98,
       "_raw": {
@@ -151753,7 +151770,7 @@
       "hit": 89,
       "power": 112,
       "speed": 98,
-      "overall": 100,
+      "overall": 99,
       "_raw": {
         "hit": 88,
         "power": 113,
@@ -155235,7 +155252,7 @@
       "speed": 97,
       "overall": 97,
       "_raw": {
-        "hit": 70,
+        "hit": 69,
         "power": 82,
         "speed": 78
       },
@@ -155765,7 +155782,7 @@
     "model_scores": {
       "hit": 94,
       "power": 96,
-      "speed": 105,
+      "speed": 104,
       "overall": 97,
       "_raw": {
         "hit": 90,
@@ -158170,7 +158187,7 @@
       "hit": 105,
       "power": 98,
       "speed": 108,
-      "overall": 102,
+      "overall": 101,
       "_raw": {
         "hit": 116,
         "power": 93,
@@ -158194,7 +158211,7 @@
     "mlbam_id": "696487",
     "birthDate": "1999-07-02",
     "model_scores": {
-      "hit": 106,
+      "hit": 105,
       "power": 96,
       "speed": 92,
       "overall": 95,
@@ -159190,7 +159207,7 @@
     "birthDate": "2005-11-13",
     "model_scores": {
       "hit": 101,
-      "power": 101,
+      "power": 100,
       "speed": 95,
       "overall": 99,
       "_raw": {
@@ -160301,7 +160318,7 @@
       "overall": 98,
       "_raw": {
         "hit": 99,
-        "power": 94,
+        "power": 93,
         "speed": 105
       },
       "_confidence": {
@@ -160497,7 +160514,7 @@
       "_raw": {
         "hit": 102,
         "power": 111,
-        "speed": 98
+        "speed": 97
       },
       "_confidence": {
         "hit": 58,
@@ -161117,7 +161134,7 @@
     "birthDate": "2005-03-27",
     "model_scores": {
       "hit": 99,
-      "power": 95,
+      "power": 94,
       "speed": 113,
       "overall": 100,
       "_raw": {
@@ -161598,7 +161615,7 @@
       "overall": 100,
       "_raw": {
         "hit": 137,
-        "power": 73,
+        "power": 72,
         "speed": 111
       },
       "_confidence": {
@@ -161765,7 +161782,7 @@
     "model_scores": {
       "hit": 107,
       "power": 93,
-      "speed": 100,
+      "speed": 99,
       "overall": 101,
       "_raw": {
         "hit": 112,
@@ -165764,7 +165781,7 @@
     "birthDate": "2006-09-15",
     "model_scores": {
       "hit": 105,
-      "power": 96,
+      "power": 95,
       "speed": 97,
       "overall": 100,
       "_raw": {
@@ -167335,7 +167352,7 @@
     "birthDate": "1999-04-06",
     "model_scores": {
       "hit": 98,
-      "power": 83,
+      "power": 82,
       "speed": 111,
       "overall": 89,
       "_raw": {
@@ -167628,7 +167645,7 @@
       "_raw": {
         "hit": 74,
         "power": 89,
-        "speed": 122
+        "speed": 121
       },
       "_confidence": {
         "hit": 56,
@@ -168936,7 +168953,7 @@
     "birthDate": "2006-11-15",
     "model_scores": {
       "hit": 91,
-      "power": 100,
+      "power": 99,
       "speed": 104,
       "overall": 96,
       "_raw": {
@@ -169283,7 +169300,7 @@
       "speed": 95,
       "overall": 101,
       "_raw": {
-        "hit": 105,
+        "hit": 104,
         "power": 104,
         "speed": 93
       },
@@ -182001,7 +182018,7 @@
       "_raw": {
         "hit": 108,
         "power": 65,
-        "speed": 98
+        "speed": 97
       },
       "_confidence": {
         "hit": 80,
@@ -187265,7 +187282,7 @@
       "speed": 89,
       "overall": 99,
       "_raw": {
-        "hit": 116,
+        "hit": 115,
         "power": 89,
         "speed": 81
       },
@@ -191359,7 +191376,7 @@
     "model_scores": {
       "hit": 101,
       "power": 84,
-      "speed": 110,
+      "speed": 109,
       "overall": 99,
       "_raw": {
         "hit": 101,
@@ -195052,7 +195069,7 @@
     "model_scores": {
       "hit": 97,
       "power": 80,
-      "speed": 90,
+      "speed": 89,
       "overall": 85,
       "_raw": {
         "hit": 97,
@@ -197994,7 +198011,7 @@
       "_raw": {
         "hit": 97,
         "power": 43,
-        "speed": 120
+        "speed": 119
       },
       "_confidence": {
         "hit": 10,
@@ -200057,7 +200074,7 @@
       "hit": 95,
       "power": 99,
       "speed": 94,
-      "overall": 97,
+      "overall": 96,
       "_raw": {
         "hit": 90,
         "power": 97,
@@ -202964,7 +202981,7 @@
       "_raw": {
         "hit": 98,
         "power": 79,
-        "speed": 140
+        "speed": 139
       },
       "_confidence": {
         "hit": 7,
@@ -203278,7 +203295,7 @@
       "hit": 111,
       "power": 100,
       "speed": 105,
-      "overall": 97,
+      "overall": 96,
       "_raw": {
         "hit": 112,
         "power": 100,
@@ -204269,7 +204286,7 @@
       "_raw": {
         "hit": 100,
         "power": 82,
-        "speed": 148
+        "speed": 147
       },
       "_confidence": {
         "hit": 84,
@@ -204694,7 +204711,7 @@
       "_raw": {
         "hit": 89,
         "power": 92,
-        "speed": 100
+        "speed": 99
       },
       "_confidence": {
         "hit": 18,
@@ -205033,9 +205050,9 @@
       "speed": 105,
       "overall": 100,
       "_raw": {
-        "hit": 106,
+        "hit": 105,
         "power": 100,
-        "speed": 109
+        "speed": 108
       },
       "_confidence": {
         "hit": 54,
@@ -209672,7 +209689,7 @@
     "model_scores": {
       "hit": 94,
       "power": 96,
-      "speed": 101,
+      "speed": 100,
       "overall": 99,
       "_raw": {
         "hit": 93,
