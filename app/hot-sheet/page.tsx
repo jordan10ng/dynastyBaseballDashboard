@@ -42,12 +42,12 @@ function fmtStatLine(r: any, tab: 'bats' | 'arms', statsMap: Record<string, any>
     const kPct = bf && s.strikeOuts != null ? (s.strikeOuts / bf * 100).toFixed(1) + '%' : null
     const bbPct = bf && s.baseOnBalls != null ? (s.baseOnBalls / bf * 100).toFixed(1) + '%' : null
     const wl = s.wins != null && s.losses != null ? `${s.wins}-${s.losses}` : null
-    return [wl, s.inningsPitched ? `${s.inningsPitched} IP` : null, s.era ? `${s.era} ERA` : null, kPct ? `${kPct} K%` : null, bbPct ? `${bbPct} BB%` : null].filter(Boolean).join(' · ')
+    return [s.gamesPlayed != null ? `${s.gamesPlayed} G` : null, wl, s.inningsPitched ? `${s.inningsPitched} IP` : null, s.era ? `${s.era} ERA` : null, kPct ? `${kPct} K%` : null, bbPct ? `${bbPct} BB%` : null].filter(Boolean).join(' · ')
   } else {
     const pa = s.plateAppearances ?? 0
     const kPct = pa && s.strikeOuts != null ? (s.strikeOuts / pa * 100).toFixed(1) + '%' : null
     const bbPct = pa && s.baseOnBalls != null ? (s.baseOnBalls / pa * 100).toFixed(1) + '%' : null
-    return [s.ops ? `${s.ops} OPS` : null, kPct ? `${kPct} K%` : null, bbPct ? `${bbPct} BB%` : null, s.homeRuns != null ? `${s.homeRuns} HR` : null, s.stolenBases != null ? `${s.stolenBases} SB` : null].filter(Boolean).join(' · ')
+    return [s.gamesPlayed != null ? `${s.gamesPlayed} G` : null, s.ops ? `${s.ops} OPS` : null, kPct ? `${kPct} K%` : null, bbPct ? `${bbPct} BB%` : null, s.homeRuns != null ? `${s.homeRuns} HR` : null, s.stolenBases != null ? `${s.stolenBases} SB` : null].filter(Boolean).join(' · ')
   }
 }
 
