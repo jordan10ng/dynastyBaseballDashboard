@@ -1,5 +1,5 @@
 # DIAMOND — Fantasy Baseball Dashboard
-Built with the user in successive Claude sessions. Local only, no deployment.
+Built with the user in successive Claude sessions. Deployed at https://dynasty-baseball-dashboard.vercel.app/
 
 ## Start
 ```bash
@@ -456,7 +456,8 @@ Absolute path to `~/Desktop/fantasy-baseball/data/`. Key exports: `queryAll`, `q
 - **useDrawerData.ts** — hook that fetches current season stats and mlb-tools data
 
 ## Next Priorities (in order)
-1. **Statcast pitcher chart** — unified release point + movement plot as described above
+1. **Mobile-friendly view** — responsive layout for phone browsers
+2. **Statcast pitcher chart** — unified release point + movement plot as described above
 2. **Model as consensus source** — add model scores as source type M in ranking engine
 3. **Roster moves** — add/drop via Fantrax API, needs session auth
 4. **Trade calculator** — connect to model scores instead of placeholder exponential decay
