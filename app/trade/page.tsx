@@ -42,6 +42,13 @@ export default function TradePage() {
   const [selectedPlayer, setSelectedPlayer] = useState<any>(null)
 
   const { statsMap, mlbToolsMap } = useDrawerData()
+  const [isMobile, setIsMobile] = useState(false)
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth <= 768)
+    check()
+    window.addEventListener('resize', check)
+    return () => window.removeEventListener('resize', check)
+  }, [])
 
   useEffect(() => {
     Promise.all([
@@ -131,7 +138,7 @@ export default function TradePage() {
   })
 
   return (
-    <div style={{ padding: '2.5rem 2rem' }}>
+    <div style={{ padding: isMobile ? '1rem' : '2.5rem 2rem' }}>
       <h1 style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: '2rem', letterSpacing: '0.04em', textTransform: 'uppercase', margin: '0 0 0.4rem' }}>Trade Calculator</h1>
       <p style={{ color: 'var(--muted)', marginBottom: '1.5rem', fontSize: '0.9rem' }}>
         Add players to each side. Values are derived from your uploaded rankings.
@@ -151,7 +158,7 @@ export default function TradePage() {
         </div>
       )}
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr auto 1fr', gap: '1.5rem', alignItems: 'start' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr auto 1fr', gap: '1.5rem', alignItems: 'start' }}>
         <TradeSide
           label="Team A" color="#3b82f6"
           players={teamA} value={valA}
