@@ -130,22 +130,6 @@ function statLine(s: any): string {
   }
 }
 
-function statLineCompact(s: any): string {
-  if (!s) return ''
-  if (s.group === 'pitching') {
-    const bf = s?.battersFaced || ((s?.atBats??0)+(s?.baseOnBalls??0)+(s?.hitByPitch??0))
-    const kPct = bf && s.strikeOuts != null ? (s.strikeOuts/bf*100).toFixed(1)+'%' : null
-    const bbPct = bf && s.baseOnBalls != null ? (s.baseOnBalls/bf*100).toFixed(1)+'%' : null
-    const wl = s.wins!=null && s.losses!=null ? `${s.wins}-${s.losses}` : null
-    return [wl, s.inningsPitched ? `${s.inningsPitched} IP` : null, s.era ? `${s.era} ERA` : null, kPct ? `${kPct} K%` : null, bbPct ? `${bbPct} BB%` : null].filter(Boolean).join(' · ')
-  } else {
-    const pa = s.plateAppearances ?? 0
-    const kPct = pa && s.strikeOuts != null ? (s.strikeOuts/pa*100).toFixed(1)+'%' : null
-    const bbPct = pa && s.baseOnBalls != null ? (s.baseOnBalls/pa*100).toFixed(1)+'%' : null
-    return [s.ops ? `${s.ops} OPS` : null, kPct ? `${kPct} K%` : null, bbPct ? `${bbPct} BB%` : null, s.homeRuns!=null ? `${s.homeRuns} HR` : null, s.stolenBases!=null ? `${s.stolenBases} SB` : null].filter(Boolean).join(' · ')
-  }
-}
-
 function toolColor(val: any) {
   if (val == null) return 'var(--muted)'
   if (val >= 130) return '#ef4444'
@@ -201,7 +185,7 @@ const advInputStyle = {
 
 let statFilterIdSeq = 0
 
-const ROW_HEIGHT = 58
+const ROW_HEIGHT = 46
 
 export default function PlayersPage() {
   const [allPlayers, setAllPlayers] = useState<any[]>([])
@@ -210,8 +194,6 @@ export default function PlayersPage() {
   const [statsMap, setStatsMap] = useState<Record<string, any>>({})
   const [mlbToolsMap, setMlbToolsMap] = useState<Record<string, any>>({})
   const [dataView, setDataView] = useState<DataView>('stats')
-  const [mounted, setMounted] = useState(false)
-  useEffect(() => setMounted(true), [])
   const [toolSortKey, setToolSortKey] = useState('')
   const [selectedLeague, setSelectedLeague] = useState('')
   const [selectedTeam, setSelectedTeam] = useState('')
@@ -309,9 +291,9 @@ export default function PlayersPage() {
   // Pre-compute stat lines once
   const statLineMap = useMemo(() => {
     const map: Record<string, string> = {}
-    for (const p of allPlayers) map[p.id] = batArmsFilter === 'all' ? statLineCompact(statsMap[p.id]) : statLine(statsMap[p.id])
+    for (const p of allPlayers) map[p.id] = statLine(statsMap[p.id])
     return map
-  }, [allPlayers, statsMap, batArmsFilter])
+  }, [allPlayers, statsMap])
 
   // Memoize derived display values so filtered dep array stays stable
   const activeCols = useMemo<StatCol[]>(
@@ -497,9 +479,8 @@ export default function PlayersPage() {
   const showOwnership = !!selectedLeague && !selectedTeam
   const hasAdvancedFilters = !!(rankMin || rankMax || ageMin || ageMax || selectedPosFilters.length || selectedMlbTeam || selectedLevelFilters.length || statFilters.length)
 
-  const playerColWidth = batArmsFilter === 'all' ? '1fr' : '200px'
   const baseColDef = showExtraCol
-    ? (showOwnership ? `28px 44px 90px ${playerColWidth} 52px 36px 40px 1fr` : `28px 44px 90px ${playerColWidth} 52px 36px 40px`)
+    ? (showOwnership ? '28px 44px 90px 200px 52px 36px 40px 1fr' : '28px 44px 90px 200px 52px 36px 40px')
     : (showOwnership ? '28px 44px 90px 1fr 52px 36px 1fr' : '28px 44px 90px 1fr 52px 36px')
   const statColDef = showStatCols ? activeCols.map(() => '64px').join(' ') + (batArmsFilter === 'all' ? ' 56px' : '') : showToolCols ? activeToolKeys.map(() => '56px').join(' ') : batArmsFilter === 'all' ? '56px' : ''
   const cols = [baseColDef, statColDef].filter(Boolean).join(' ')
@@ -697,7 +678,6 @@ export default function PlayersPage() {
 
       {/* One scroll container — header + rows together */}
       <div ref={hdrRef} style={{ overflowX: 'scroll', position: 'sticky', top: 0, zIndex: 10, background: 'var(--bg)', scrollbarWidth: 'none' } as any}>
-        {!mounted ? null : (
         <div style={{ display: 'grid', gridTemplateColumns: cols, gap: '0.5rem', padding: '0.2rem 0.5rem', marginBottom: '0.25rem', marginLeft: '-0.5rem', minWidth: showExtraCol ? 'max-content' : undefined }}>
           {baseHeaders.map((h, i) => {
             const stickyLeft = i === 0 ? 0 : i === 1 ? 28 : i === 2 ? 72 : i === 3 ? 162 : undefined
@@ -722,7 +702,6 @@ export default function PlayersPage() {
             </div>
           ))}
         </div>
-        )}
       </div>
       <div style={{ overflowX: showExtraCol ? 'auto' : 'visible' }}>
         {loading ? (

@@ -111,7 +111,7 @@ export const PlayerRow = memo(function PlayerRow({
       </div>
 
       {/* Player name + badges */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', minWidth: 0, overflow: 'hidden', position: 'sticky', left: '162px', background: 'var(--bg)', zIndex: 2 }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', minWidth: 0, position: 'sticky', left: '162px', background: 'var(--bg)', zIndex: 2 }}>
         <div style={{ minWidth: 0, overflow: 'hidden' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', flexWrap: 'nowrap' }}>
             <span style={{ fontWeight: 500, fontSize: '0.875rem', color: 'var(--text)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{player.name}</span>
@@ -127,8 +127,8 @@ export const PlayerRow = memo(function PlayerRow({
               })}
             </div>
           </div>
-          {!showExtraCol && statLine && (
-            <div style={{ fontSize: '0.7rem', color: 'var(--muted)', opacity: 0.7, marginTop: '1px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+          {(!showExtraCol || batArmsFilter === 'all') && statLine && (
+            <div style={{ fontSize: '0.7rem', color: 'var(--muted)', opacity: 0.7, marginTop: '1px', whiteSpace: 'nowrap' }}>
               {statLine}
             </div>
           )}

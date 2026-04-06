@@ -84,3 +84,12 @@ body {
   padding: 2px 7px;
   border-radius: 4px;
 }
+
+/* ── Mobile ─────────────────────────────────────────── */
+@media (max-width: 768px) {
+  /* Push page content above bottom nav */
+  main { padding-bottom: 64px !important; }
+
+  /* Tighten page padding */
+  .mobile-page { padding: 1rem !important; }
+}
