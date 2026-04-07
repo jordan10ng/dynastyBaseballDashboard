@@ -50,13 +50,13 @@
       },
       "Complex": {
         "k_pct": {
-          "slope": 2.8031,
-          "intercept": 98.4085,
+          "slope": 2.8039,
+          "intercept": 98.4084,
           "corr": 0.3547,
           "n": 206
         },
         "bb_pct": {
-          "slope": 0.483,
+          "slope": 0.4829,
           "intercept": 99.2746,
           "corr": 0.0652,
           "n": 206
@@ -78,7 +78,7 @@
       },
       "Single-A": {
         "k_pct": {
-          "slope": 3.1189,
+          "slope": 3.119,
           "intercept": 98.5541,
           "corr": 0.375,
           "n": 502
@@ -98,8 +98,8 @@
           "n": 652
         },
         "bb_pct": {
-          "slope": 0.8668,
-          "intercept": 99.449,
+          "slope": 0.8669,
+          "intercept": 99.4489,
           "corr": 0.123,
           "n": 652
         }
@@ -144,7 +144,7 @@
       },
       "Complex": {
         "iso": {
-          "slope": 1.5191,
+          "slope": 1.5193,
           "intercept": 99.5475,
           "corr": 0.1691,
           "n": 206
@@ -160,7 +160,7 @@
       },
       "Single-A": {
         "iso": {
-          "slope": 2.8164,
+          "slope": 2.8165,
           "intercept": 98.7055,
           "corr": 0.279,
           "n": 502
@@ -202,8 +202,8 @@
       },
       "Complex": {
         "sb_rate": {
-          "slope": 5.8859,
-          "intercept": 101.2337,
+          "slope": 5.886,
+          "intercept": 101.2341,
           "corr": 0.4934,
           "n": 206
         }

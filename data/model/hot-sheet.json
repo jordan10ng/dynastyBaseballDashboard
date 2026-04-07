@@ -159,21 +159,6 @@
       "prevOverall": 110
     },
     {
-      "id": "05ucg",
-      "name": "Jonathan Mejia",
-      "positions": "2B,SS,INF",
-      "isPit": false,
-      "overall": 104,
-      "sample": 905,
-      "confidence": {
-        "hit": 82,
-        "power": 82,
-        "speed": 82
-      },
-      "delta": 2,
-      "prevOverall": 102
-    },
-    {
       "id": "06zh4",
       "name": "AJ Salgado",
       "positions": "1B,INF",
@@ -312,6 +297,22 @@
       },
       "delta": 1,
       "prevOverall": 116
+    },
+    {
+      "id": "06plc",
+      "name": "Sam Antonacci",
+      "rank": 672,
+      "positions": "2B,3B,INF",
+      "isPit": false,
+      "overall": 114,
+      "sample": 653,
+      "confidence": {
+        "hit": 77,
+        "power": 77,
+        "speed": 77
+      },
+      "delta": 1,
+      "prevOverall": 113
     }
   ],
   "arms": [
@@ -604,5 +605,5 @@
       "prevOverall": 112
     }
   ],
-  "generatedAt": "2026-04-06T22:55:58.771Z"
+  "generatedAt": "2026-04-07T02:58:13.810Z"
 }

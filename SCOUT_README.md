@@ -193,6 +193,8 @@ export async function GET(_req: NextRequest, { params }: { params: Promise<{ id:
 2. **Model as consensus source** — add model scores as source type M in ranking engine
 3. **Roster moves** — add/drop via Fantrax API, needs session auth
 4. **Trade calculator** — connect to model scores instead of placeholder exponential decay
+5. **mlb tools weighted average with minor tools** so guys like basallo keep their tools
+6. **emerging** best new raw tools with X confidence
 
 ## Known Issues
 - ~13% of rostered players not in players.json (post-export prospects)

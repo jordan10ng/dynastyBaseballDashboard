@@ -6010,51 +6010,51 @@
     "level": "Complex",
     "year": "2024",
     "hitters": {
-      "n": 382,
+      "n": 383,
       "avg": {
-        "mean": 0.248,
-        "stdev": 0.0586,
-        "n": 382
+        "mean": 0.2483,
+        "stdev": 0.059,
+        "n": 383
       },
       "obp": {
-        "mean": 0.3602,
-        "stdev": 0.0593,
-        "n": 382
+        "mean": 0.3604,
+        "stdev": 0.0594,
+        "n": 383
       },
       "slg": {
-        "mean": 0.3693,
-        "stdev": 0.1057,
-        "n": 382
+        "mean": 0.3699,
+        "stdev": 0.1061,
+        "n": 383
       },
       "ops": {
-        "mean": 0.7295,
-        "stdev": 0.1522,
-        "n": 382
+        "mean": 0.7303,
+        "stdev": 0.1528,
+        "n": 383
       },
       "iso": {
-        "mean": 0.1213,
+        "mean": 0.1215,
         "stdev": 0.0643,
-        "n": 382
+        "n": 383
       },
       "k_pct": {
-        "mean": 0.2481,
-        "stdev": 0.0812,
-        "n": 382
+        "mean": 0.2476,
+        "stdev": 0.0815,
+        "n": 383
       },
       "bb_pct": {
-        "mean": 0.1315,
+        "mean": 0.1314,
         "stdev": 0.0474,
-        "n": 382
+        "n": 383
       },
       "sb_rate": {
-        "mean": 0.1231,
-        "stdev": 0.111,
-        "n": 382
+        "mean": 0.1239,
+        "stdev": 0.1122,
+        "n": 383
       },
       "xbh_rate": {
-        "mean": 0.0757,
-        "stdev": 0.0357,
-        "n": 382
+        "mean": 0.0758,
+        "stdev": 0.0359,
+        "n": 383
       }
     },
     "pitchers": {
@@ -6556,51 +6556,51 @@
     "level": "High-A",
     "year": "2025",
     "hitters": {
-      "n": 637,
+      "n": 638,
       "avg": {
-        "mean": 0.2302,
-        "stdev": 0.048,
-        "n": 637
+        "mean": 0.2301,
+        "stdev": 0.0481,
+        "n": 638
       },
       "obp": {
-        "mean": 0.3254,
-        "stdev": 0.0543,
-        "n": 637
+        "mean": 0.3253,
+        "stdev": 0.0544,
+        "n": 638
       },
       "slg": {
-        "mean": 0.3487,
-        "stdev": 0.0892,
-        "n": 637
+        "mean": 0.3486,
+        "stdev": 0.0891,
+        "n": 638
       },
       "ops": {
-        "mean": 0.6741,
-        "stdev": 0.1323,
-        "n": 637
+        "mean": 0.6739,
+        "stdev": 0.1324,
+        "n": 638
       },
       "iso": {
-        "mean": 0.1184,
+        "mean": 0.1185,
         "stdev": 0.0576,
-        "n": 637
+        "n": 638
       },
       "k_pct": {
         "mean": 0.2409,
         "stdev": 0.0716,
-        "n": 637
+        "n": 638
       },
       "bb_pct": {
-        "mean": 0.1094,
+        "mean": 0.1093,
         "stdev": 0.0402,
-        "n": 637
+        "n": 638
       },
       "sb_rate": {
-        "mean": 0.1122,
-        "stdev": 0.1057,
-        "n": 637
+        "mean": 0.1123,
+        "stdev": 0.1056,
+        "n": 638
       },
       "xbh_rate": {
         "mean": 0.0719,
-        "stdev": 0.0286,
-        "n": 637
+        "stdev": 0.0285,
+        "n": 638
       }
     },
     "pitchers": {
@@ -6647,51 +6647,51 @@
     "level": "Single-A",
     "year": "2025",
     "hitters": {
-      "n": 669,
+      "n": 670,
       "avg": {
-        "mean": 0.2327,
+        "mean": 0.2329,
         "stdev": 0.0507,
-        "n": 669
+        "n": 670
       },
       "obp": {
-        "mean": 0.3368,
+        "mean": 0.3369,
         "stdev": 0.0534,
-        "n": 669
+        "n": 670
       },
       "slg": {
-        "mean": 0.3385,
-        "stdev": 0.0894,
-        "n": 669
+        "mean": 0.3387,
+        "stdev": 0.0895,
+        "n": 670
       },
       "ops": {
-        "mean": 0.6753,
-        "stdev": 0.1319,
-        "n": 669
+        "mean": 0.6756,
+        "stdev": 0.132,
+        "n": 670
       },
       "iso": {
-        "mean": 0.1057,
+        "mean": 0.1058,
         "stdev": 0.0557,
-        "n": 669
+        "n": 670
       },
       "k_pct": {
-        "mean": 0.2401,
+        "mean": 0.2399,
         "stdev": 0.0704,
-        "n": 669
+        "n": 670
       },
       "bb_pct": {
         "mean": 0.1199,
         "stdev": 0.0402,
-        "n": 669
+        "n": 670
       },
       "sb_rate": {
-        "mean": 0.126,
-        "stdev": 0.1058,
-        "n": 669
+        "mean": 0.1264,
+        "stdev": 0.1061,
+        "n": 670
       },
       "xbh_rate": {
-        "mean": 0.0662,
+        "mean": 0.0663,
         "stdev": 0.029,
-        "n": 669
+        "n": 670
       }
     },
     "pitchers": {
@@ -16180,9 +16180,9 @@
     "differs_pitch": true,
     "max_z_diff": 0.297,
     "stat_diffs": {
-      "bat_ops": 0.114,
-      "bat_avg": 0.128,
-      "bat_k_pct": 0.094,
+      "bat_ops": 0.109,
+      "bat_avg": 0.122,
+      "bat_k_pct": 0.099,
       "pitch_era": 0.297,
       "pitch_whip": 0.287,
       "pitch_k_pct": 0.142
@@ -16810,9 +16810,9 @@
     "differs_pitch": true,
     "max_z_diff": 0.271,
     "stat_diffs": {
-      "bat_ops": 0.136,
-      "bat_avg": 0.154,
-      "bat_k_pct": 0.111,
+      "bat_ops": 0.141,
+      "bat_avg": 0.158,
+      "bat_k_pct": 0.104,
       "pitch_era": 0.271,
       "pitch_whip": 0.261,
       "pitch_k_pct": 0.129
@@ -17543,10 +17543,10 @@
     "differs_from_level": true,
     "differs_bat": true,
     "differs_pitch": false,
-    "max_z_diff": 0.191,
+    "max_z_diff": 0.19,
     "stat_diffs": {
-      "bat_ops": 0.191,
-      "bat_avg": 0.152,
+      "bat_ops": 0.19,
+      "bat_avg": 0.15,
       "bat_k_pct": 0.142,
       "pitch_era": 0.079,
       "pitch_whip": 0.124,
@@ -17650,59 +17650,59 @@
     "differs_pitch": true,
     "max_z_diff": 0.167,
     "stat_diffs": {
-      "bat_ops": 0.075,
-      "bat_avg": 0.11,
-      "bat_k_pct": 0.166,
+      "bat_ops": 0.071,
+      "bat_avg": 0.106,
+      "bat_k_pct": 0.165,
       "pitch_era": 0.001,
       "pitch_whip": 0.09,
       "pitch_k_pct": 0.167
     },
     "hitters": {
-      "n": 245,
+      "n": 246,
       "avg": {
-        "mean": 0.2355,
-        "stdev": 0.0453,
-        "n": 245
+        "mean": 0.2352,
+        "stdev": 0.0454,
+        "n": 246
       },
       "obp": {
-        "mean": 0.33,
-        "stdev": 0.0507,
-        "n": 245
+        "mean": 0.3296,
+        "stdev": 0.0511,
+        "n": 246
       },
       "slg": {
-        "mean": 0.354,
-        "stdev": 0.0828,
-        "n": 245
+        "mean": 0.3538,
+        "stdev": 0.0827,
+        "n": 246
       },
       "ops": {
-        "mean": 0.684,
-        "stdev": 0.1231,
-        "n": 245
+        "mean": 0.6833,
+        "stdev": 0.1233,
+        "n": 246
       },
       "iso": {
-        "mean": 0.1185,
-        "stdev": 0.0548,
-        "n": 245
+        "mean": 0.1186,
+        "stdev": 0.0547,
+        "n": 246
       },
       "k_pct": {
-        "mean": 0.229,
-        "stdev": 0.0673,
-        "n": 245
+        "mean": 0.2291,
+        "stdev": 0.0671,
+        "n": 246
       },
       "bb_pct": {
-        "mean": 0.1111,
-        "stdev": 0.0401,
-        "n": 245
+        "mean": 0.1108,
+        "stdev": 0.0402,
+        "n": 246
       },
       "sb_rate": {
         "mean": 0.1163,
-        "stdev": 0.1043,
-        "n": 245
+        "stdev": 0.1041,
+        "n": 246
       },
       "xbh_rate": {
         "mean": 0.0739,
         "stdev": 0.0277,
-        "n": 245
+        "n": 246
       }
     },
     "pitchers": {
@@ -17753,10 +17753,10 @@
     "differs_from_level": true,
     "differs_bat": true,
     "differs_pitch": true,
-    "max_z_diff": 0.28,
+    "max_z_diff": 0.282,
     "stat_diffs": {
-      "bat_ops": 0.28,
-      "bat_avg": 0.125,
+      "bat_ops": 0.282,
+      "bat_avg": 0.127,
       "bat_k_pct": 0.02,
       "pitch_era": 0.163,
       "pitch_whip": 0.078,
@@ -17963,11 +17963,11 @@
     "differs_from_level": false,
     "differs_bat": false,
     "differs_pitch": false,
-    "max_z_diff": 0.09,
+    "max_z_diff": 0.088,
     "stat_diffs": {
-      "bat_ops": 0.09,
-      "bat_avg": 0.022,
-      "bat_k_pct": 0.034,
+      "bat_ops": 0.088,
+      "bat_avg": 0.026,
+      "bat_k_pct": 0.031,
       "pitch_era": 0.069,
       "pitch_whip": 0.055,
       "pitch_k_pct": 0.029
@@ -18068,11 +18068,11 @@
     "differs_from_level": true,
     "differs_bat": true,
     "differs_pitch": false,
-    "max_z_diff": 0.197,
+    "max_z_diff": 0.193,
     "stat_diffs": {
-      "bat_ops": 0.13,
-      "bat_avg": 0.197,
-      "bat_k_pct": 0.006,
+      "bat_ops": 0.127,
+      "bat_avg": 0.193,
+      "bat_k_pct": 0.009,
       "pitch_era": 0.131,
       "pitch_whip": 0.11,
       "pitch_k_pct": 0.051
@@ -18173,61 +18173,61 @@
     "differs_from_level": true,
     "differs_bat": true,
     "differs_pitch": false,
-    "max_z_diff": 0.168,
+    "max_z_diff": 0.164,
     "stat_diffs": {
-      "bat_ops": 0.168,
-      "bat_avg": 0.108,
-      "bat_k_pct": 0.027,
+      "bat_ops": 0.164,
+      "bat_avg": 0.107,
+      "bat_k_pct": 0.023,
       "pitch_era": 0.144,
       "pitch_whip": 0.119,
       "pitch_k_pct": 0.005
     },
     "hitters": {
-      "n": 260,
+      "n": 261,
       "avg": {
-        "mean": 0.2272,
-        "stdev": 0.0497,
-        "n": 260
+        "mean": 0.2275,
+        "stdev": 0.0499,
+        "n": 261
       },
       "obp": {
-        "mean": 0.3305,
+        "mean": 0.3307,
         "stdev": 0.0529,
-        "n": 260
+        "n": 261
       },
       "slg": {
-        "mean": 0.3227,
-        "stdev": 0.0822,
-        "n": 260
+        "mean": 0.3232,
+        "stdev": 0.0825,
+        "n": 261
       },
       "ops": {
-        "mean": 0.6532,
-        "stdev": 0.1233,
-        "n": 260
+        "mean": 0.6539,
+        "stdev": 0.1236,
+        "n": 261
       },
       "iso": {
-        "mean": 0.0955,
-        "stdev": 0.0509,
-        "n": 260
+        "mean": 0.0957,
+        "stdev": 0.051,
+        "n": 261
       },
       "k_pct": {
-        "mean": 0.242,
-        "stdev": 0.0771,
-        "n": 260
+        "mean": 0.2415,
+        "stdev": 0.0772,
+        "n": 261
       },
       "bb_pct": {
-        "mean": 0.1178,
-        "stdev": 0.0416,
-        "n": 260
+        "mean": 0.1177,
+        "stdev": 0.0415,
+        "n": 261
       },
       "sb_rate": {
-        "mean": 0.1381,
-        "stdev": 0.1127,
-        "n": 260
+        "mean": 0.1389,
+        "stdev": 0.1133,
+        "n": 261
       },
       "xbh_rate": {
-        "mean": 0.0611,
+        "mean": 0.0612,
         "stdev": 0.0274,
-        "n": 260
+        "n": 261
       }
     },
     "pitchers": {
