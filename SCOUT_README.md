@@ -195,6 +195,7 @@ export async function GET(_req: NextRequest, { params }: { params: Promise<{ id:
 4. **Trade calculator** — connect to model scores instead of placeholder exponential decay
 5. **mlb tools weighted average with minor tools** so guys like basallo keep their tools
 6. **emerging** best new raw tools with X confidence
+7. **stabilize** BAT: K% 60PA - BB% 120 PA - ISO 120 AB, ARM: K% 20 IP, BB% 40 IP
 
 ## Known Issues
 - ~13% of rostered players not in players.json (post-export prospects)
