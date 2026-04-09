@@ -1,8 +1,6 @@
 """
 build-regression.py
 Builds a blended prospect scoring model using per-level correlation weights.
-For each tool, each level contributes: slope * z_adj, weighted by corr * sample.
-Handles missing levels gracefully — absence = no signal, not zero.
 Output: data/model/regression.json
 """
 import json, os, glob, math
@@ -10,7 +8,7 @@ from collections import defaultdict
 import numpy as np
 from datetime import datetime
 
-BASE         = os.path.expanduser('~/Desktop/fantasy-baseball/data')
+BASE         = os.environ.get('DATA_BASE', os.path.expanduser('~/Desktop/fantasy-baseball/data'))
 PLAYERS_PATH = os.path.join(BASE, 'players.json')
 NORMS_PATH   = os.path.join(BASE, 'model', 'norms.json')
 TOOLS_PATH   = os.path.join(BASE, 'model', 'mlb-tools.json')
@@ -28,7 +26,6 @@ AVG_AGES     = {'AAA':26.5,'AA':24.5,'High-A':23.0,'Single-A':21.5,
 MILB_LEVELS  = set(AVG_AGES.keys())
 LEVELS_ORDER = ['DSL','Complex','Rookie','Single-A','High-A','AA','AAA']
 
-# Tool definitions: which stats feed each tool, and player type
 TOOL_STATS = {
     'hit':     ('hitter',  ['k_pct','bb_pct']),
     'power':   ('hitter',  ['iso']),
@@ -39,7 +36,6 @@ TOOL_STATS = {
 
 mlbam_to_player = {str(p['mlbam_id']): p for p in players.values() if p.get('mlbam_id')}
 
-# ── Load history ──────────────────────────────────────────────────────────────
 history = defaultdict(list)
 for path in sorted(glob.glob(os.path.join(BASE, 'history', '*.json'))):
     fname = os.path.basename(path).replace('.json','')
@@ -66,17 +62,14 @@ def get_age(dob, year):
         return age
     except: return None
 
-# Age weight constants — how much each year young-for-level boosts sample weight
 AGE_C = {'hitter': 0.15, 'pitcher': 0.10}
-SPEED_STATS = {'sb_rate'}  # exempt from age weighting
+SPEED_STATS = {'sb_rate'}
 
 def get_age_weight(is_p, stat, age_diff):
-    if stat in SPEED_STATS:
-        return 1.0
+    if stat in SPEED_STATS: return 1.0
     c = AGE_C['pitcher'] if is_p else AGE_C['hitter']
     return math.exp(c * age_diff)
 
-# ── Collect observations per tool × level × stat ─────────────────────────────
 obs = defaultdict(lambda: defaultdict(lambda: defaultdict(list)))
 
 for mlbam, tools in mlb_tools.items():
@@ -101,7 +94,6 @@ for mlbam, tools in mlb_tools.items():
         age      = get_age(player.get('birthDate'), year) or AVG_AGES[level]
         age_diff = AVG_AGES[level] - age
 
-        # Compute raw stats
         raw = {}
         if not is_p:
             pa = sample
@@ -131,18 +123,12 @@ for mlbam, tools in mlb_tools.items():
                 if (not is_p and stat == 'k_pct') or (is_p and stat == 'bb_pct'):
                     z = -z
 
-                age_w  = get_age_weight(is_p, stat, age_diff)
+                age_w    = get_age_weight(is_p, stat, age_diff)
                 w_sample = sample * age_w
-
                 obs[tool][level][stat].append((z, outcome, w_sample))
 
-# ── Fit per-level linear models ───────────────────────────────────────────────
-# For each tool × level × stat: fit outcome = slope * z_adj + intercept
-# Store slope, intercept, corr, n — these become the scoring weights
-
 MIN_N = 20
-
-level_models = {}  # level_models[tool][level][stat] = {slope, intercept, corr, n}
+level_models = {}
 
 print('='*75)
 print('  FITTED MODELS PER TOOL × LEVEL × STAT')
@@ -165,9 +151,9 @@ for tool, (ptype, stats) in TOOL_STATS.items():
                 print(f'  {level:<12} {stat:<10} {"--":>7} {"--":>8} {"--":>10} {n:>6}  (insufficient)')
                 continue
 
-            zs      = np.array([p[0] for p in pairs])
-            outcomes= np.array([p[1] for p in pairs])
-            samples = np.array([p[2] for p in pairs])
+            zs       = np.array([p[0] for p in pairs])
+            outcomes = np.array([p[1] for p in pairs])
+            samples  = np.array([p[2] for p in pairs])
 
             corr = float(np.corrcoef(zs, outcomes)[0,1])
             X    = np.column_stack([zs, np.ones(len(zs))])
@@ -182,13 +168,11 @@ for tool, (ptype, stats) in TOOL_STATS.items():
             }
             print(f'  {level:<12} {stat:<10} {corr:>7.3f} {slope:>8.3f} {intercept:>10.3f} {n:>6}')
 
-# ── Validate: score training players and check R² per tool ───────────────────
 print(f'\n{"="*75}')
 print('  VALIDATION: R² on training set per tool')
 print('='*75)
 
 def score_player_tool(mlbam, is_p, tool, player):
-    """Score a single player on a single tool using the blended level model."""
     stats_for_tool = TOOL_STATS[tool][1]
     seasons = history.get(str(mlbam), [])
     milb = [s for s in seasons if s.get('level') in MILB_LEVELS
@@ -236,8 +220,7 @@ def score_player_tool(mlbam, is_p, tool, player):
             if (not is_p and stat == 'k_pct') or (is_p and stat == 'bb_pct'):
                 z = -z
 
-            age_w = get_age_weight(is_p, stat, age_diff)
-
+            age_w     = get_age_weight(is_p, stat, age_diff)
             predicted = model['slope'] * z + model['intercept']
             weight    = model['corr'] * sample * age_w
 
@@ -273,9 +256,7 @@ for tool, (ptype, stats) in TOOL_STATS.items():
     corr    = np.corrcoef(preds, actuals)[0,1]
     print(f'  {tool.upper()}+:  R²={r2:.3f}  corr={corr:.3f}  n={len(preds)}')
 
-# ── Write output ──────────────────────────────────────────────────────────────
 output = {'tools': TOOL_STATS, 'models': level_models}
-# Convert TOOL_STATS tuples to serializable format
 output['tools'] = {t: {'type': v[0], 'stats': v[1]} for t, v in TOOL_STATS.items()}
 
 with open(REGR_PATH, 'w') as f: json.dump(output, f, indent=2)

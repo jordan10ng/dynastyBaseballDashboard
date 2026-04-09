@@ -7,7 +7,7 @@ Output: data/model/mlb-tools.json
 import json, os, glob, math
 from collections import defaultdict
 
-BASE       = os.path.expanduser('~/Desktop/fantasy-baseball/data')
+BASE       = os.environ.get('DATA_BASE', os.path.expanduser('~/Desktop/fantasy-baseball/data'))
 PLAYERS    = os.path.join(BASE, 'players.json')
 HIST_DIR   = os.path.join(BASE, 'history')
 NORMS_PATH = os.path.join(BASE, 'model', 'norms.json')
@@ -21,7 +21,6 @@ MIN_GS      = 5
 with open(PLAYERS) as f: players = json.load(f)
 with open(NORMS_PATH) as f: norms = json.load(f)
 
-# ── Load history ──────────────────────────────────────────────────────────────
 history = defaultdict(list)
 for path in sorted(glob.glob(os.path.join(HIST_DIR, '*.json'))):
     fname = os.path.basename(path).replace('.json','')
@@ -49,7 +48,6 @@ def zscore(val, norm_entry, stat, invert=False):
     z = (val - s['mean']) / s['stdev']
     return -z if invert else z
 
-# ── Career tool grades ────────────────────────────────────────────────────────
 def career_hitter(pid):
     mlb = [s for s in history.get(str(pid), [])
            if s.get('level') == 'MLB' and s.get('type') == 'hitting'
@@ -158,7 +156,6 @@ def career_pitcher(pid):
         '_z': {k: round(v,3) for k,v in career_z.items()},
     }
 
-# ── Build output ──────────────────────────────────────────────────────────────
 output = {}
 skipped = 0
 
@@ -179,27 +176,4 @@ print(f'Skipped (insufficient): {skipped}')
 
 os.makedirs(os.path.dirname(OUTPUT), exist_ok=True)
 with open(OUTPUT, 'w') as f: json.dump(output, f, indent=2)
-print(f'Wrote {len(output)} tool grades → model/mlb-tools.json\n')
-
-# ── Spot checks ───────────────────────────────────────────────────────────────
-print('─── TOP 10 HIT+ ───')
-top_hit = sorted([v for v in output.values() if v['type']=='hitter'], key=lambda x: -x['hit'])[:10]
-for p in top_hit:
-    print(f"  {p['name']:<24} hit={p['hit']:>3} power={p['power']:>3} speed={p['speed']:>3}  ({p['_seasons']}yr {p['_pa']}PA)")
-
-print('\n─── TOP 10 STUFF+ ───')
-top_stuff = sorted([v for v in output.values() if v['type']=='pitcher'], key=lambda x: -x['stuff'])[:10]
-for p in top_stuff:
-    print(f"  {p['name']:<24} stuff={p['stuff']:>3} ctrl={p['control']:>3}  ({p['_seasons']}yr {p['_ip']}IP)")
-
-print('\n─── KNOWN PLAYERS ───')
-known = ['Freddie Freeman','Mike Trout','Mookie Betts','Juan Soto',
-         'Ronald Acuna Jr.','Gerrit Cole','Jacob deGrom','Sandy Alcantara','Zack Wheeler']
-for name in known:
-    p = next((v for v in output.values() if v['name']==name), None)
-    if not p:
-        print(f"  {name:<24} NOT FOUND")
-    elif p['type']=='hitter':
-        print(f"  {name:<24} hit={p['hit']:>3} power={p['power']:>3} speed={p['speed']:>3}  ({p['_seasons']}yr)")
-    else:
-        print(f"  {name:<24} stuff={p['stuff']:>3} ctrl={p['control']:>3}  ({p['_seasons']}yr)")
+print(f'Wrote {len(output)} tool grades → model/mlb-tools.json')

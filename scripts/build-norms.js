@@ -1,7 +1,8 @@
 const fs = require('fs'), os = require('os')
 
-const HISTORY_DIR = os.homedir() + '/Desktop/fantasy-baseball/data/history/'
-const OUT_PATH = os.homedir() + '/Desktop/fantasy-baseball/data/model/norms.json'
+const BASE = process.env.DATA_BASE || (os.homedir() + '/Desktop/fantasy-baseball/data')
+const HISTORY_DIR = BASE + '/history/'
+const OUT_PATH = BASE + '/model/norms.json'
 
 const YEARS = ['2015','2016','2017','2018','2019','2021','2022','2023','2024','2025','2026']
 const MIN_PA = 50
@@ -32,7 +33,6 @@ function calcHitterStats(line) {
     k_pct:   pa > 0 ? so / pa : null,
     bb_pct:  pa > 0 ? bb / pa : null,
     sb_rate: onBase > 0 ? sb / onBase : null,
-    xbh_rate: ab > 0 ? (doubles + triples + hr) / ab : null,
     xbh_rate: ab > 0 ? (doubles + triples + hr) / ab : null,
   }
 }
@@ -84,7 +84,6 @@ function summarizeBucket(bucket) {
   return { hitters: { n: hN, ...hitters }, pitchers: { n: pN, ...pitchers } }
 }
 
-// --- Accumulate ---
 const levelBuckets = {}
 const leagueBuckets = {}
 
@@ -128,17 +127,14 @@ for (const year of YEARS) {
   console.log(`  ${year}: ${lines} qualifying lines`)
 }
 
-// --- Build norms ---
 console.log('Computing norms...')
 const norms = {}
 
-// Level norms (includes MLB)
 for (const [lk, bucket] of Object.entries(levelBuckets)) {
   const [level, year] = lk.split('|')
   norms[lk] = { type: 'level', level, year, ...summarizeBucket(bucket) }
 }
 
-// League norms — include all with n >= MIN_LEAGUE_N, store diff as metadata
 let kept = 0, dropped = 0
 for (const [lgk, bucket] of Object.entries(leagueBuckets)) {
   const parts = lgk.split('|')
@@ -152,7 +148,6 @@ for (const [lgk, bucket] of Object.entries(leagueBuckets)) {
 
   const confidence = +(Math.min(Math.max(hN, pN), CONFIDENCE_CAP) / CONFIDENCE_CAP).toFixed(3)
 
-  // Compute diffs vs level norm — stored as metadata, not used as gate
   const levelNorm = norms[`${level}|${year}`]
   let maxZDiff = 0
   let differsBat = false, differsPitch = false
@@ -182,22 +177,16 @@ for (const [lgk, bucket] of Object.entries(leagueBuckets)) {
   }
 
   norms[`${level}|${league}|${year}`] = {
-    type: 'league',
-    level,
-    league,
-    year,
-    confidence,
+    type: 'league', level, league, year, confidence,
     differs_from_level: differsBat || differsPitch,
-    differs_bat: differsBat,
-    differs_pitch: differsPitch,
-    max_z_diff: +maxZDiff.toFixed(3),
-    stat_diffs: statDiffs,
+    differs_bat: differsBat, differs_pitch: differsPitch,
+    max_z_diff: +maxZDiff.toFixed(3), stat_diffs: statDiffs,
     ...summary
   }
   kept++
 }
 
-fs.mkdirSync(os.homedir() + '/Desktop/fantasy-baseball/data/model', { recursive: true })
+fs.mkdirSync(BASE + '/model', { recursive: true })
 fs.writeFileSync(OUT_PATH, JSON.stringify(norms, null, 2))
 
 console.log(`\nDone!`)
@@ -205,18 +194,3 @@ console.log(`Level norms: ${Object.values(norms).filter(v => v.type === 'level')
 console.log(`League norms kept: ${kept}`)
 console.log(`League norms dropped (n < ${MIN_LEAGUE_N}): ${dropped}`)
 console.log(`Total norm keys: ${Object.keys(norms).length}`)
-
-console.log('\n=== Sanity Check: AA|2023 hitters ===')
-const aa23 = norms['AA|2023']
-if (aa23) {
-  console.log('n:', aa23.hitters.n)
-  for (const [stat, s] of Object.entries(aa23.hitters)) {
-    if (typeof s === 'object') console.log(` ${stat}: mean=${s.mean} stdev=${s.stdev} n=${s.n}`)
-  }
-}
-
-console.log('\n=== League norms 2023 (sorted by confidence) ===')
-Object.entries(norms)
-  .filter(([k, v]) => v.type === 'league' && v.year === '2023')
-  .sort((a, b) => b[1].confidence - a[1].confidence)
-  .forEach(([k, v]) => console.log(` ${k.padEnd(45)} conf:${v.confidence} differs:${v.differs_from_level} maxZ:${v.max_z_diff}`))

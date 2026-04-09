@@ -1,20 +1,18 @@
 const fs   = require('fs');
 const path = require('path');
+const os   = require('os');
 
-const BASE         = path.join(process.env.HOME, 'Desktop/fantasy-baseball/data');
+const BASE         = process.env.DATA_BASE || path.join(os.homedir(), 'Desktop/fantasy-baseball/data');
 const PLAYERS_PATH = path.join(BASE, 'players.json');
 const HOTSHEET_PATH = path.join(BASE, 'model/hot-sheet.json');
 const REGR_PATH    = path.join(BASE, 'model/regression.json');
 const NORMS_PATH   = path.join(BASE, 'model/norms.json');
-const ELAST_PATH   = path.join(BASE, 'model/age-elasticity.json');
 const HISTORY_DIR  = path.join(BASE, 'history');
 
 const regression  = JSON.parse(fs.readFileSync(REGR_PATH, 'utf8'));
 const players     = JSON.parse(fs.readFileSync(PLAYERS_PATH, 'utf8'));
 const norms       = JSON.parse(fs.readFileSync(NORMS_PATH, 'utf8'));
-// elasticity file no longer used — age handled via sample weighting
 
-// ── Load history ──────────────────────────────────────────────────────────
 const VALID_YEARS = new Set([2015,2016,2017,2018,2019,2021,2022,2023,2024,2025,2026]);
 const CURRENT_YEAR = new Date().getFullYear();
 const history = {};
@@ -37,7 +35,6 @@ const AVG_AGES = {
 };
 const MILB_LEVELS = new Set(Object.keys(AVG_AGES));
 
-// Tool definitions
 const TOOL_STATS = {
   hit:     { type: 'hitter',  stats: ['k_pct','bb_pct'] },
   power:   { type: 'hitter',  stats: ['iso'] },
@@ -46,13 +43,11 @@ const TOOL_STATS = {
   control: { type: 'pitcher', stats: ['bb_pct'] },
 };
 
-// Composite weights derived from fantasy value correlation
 const COMPOSITE_WEIGHTS = {
   hitter:  { hit: 0.42, power: 0.47, speed: 0.11 },
   pitcher: { stuff: 0.70, control: 0.30 },
 };
 
-// Shrinkage: sample at which confidence = 50%
 const SHRINK_K = { hitter: 200, pitcher: 80 };
 
 function ipToFloat(ip) {
@@ -70,8 +65,6 @@ function getAge(dob, year) {
   } catch { return null; }
 }
 
-// Additive age bonus: points per year young-for-level, applied after prediction
-// Speed (sb_rate) is exempt — age doesn't predict stolen base translation
 const AGE_BONUS_C = { hitter: 3.0, pitcher: 2.0 };
 const SPEED_STATS = new Set(['sb_rate']);
 
@@ -83,7 +76,6 @@ function getNorm(level, year) {
   return null;
 }
 
-// ── Rookie eligibility ────────────────────────────────────────────────────
 function isRookieEligible(mlbamId, isPitcher) {
   const seasons = history[String(mlbamId)] || [];
   const mlb = seasons.filter(s => s.level === 'MLB');
@@ -96,10 +88,6 @@ function isRookieEligible(mlbamId, isPitcher) {
   }
 }
 
-// ── Score a single tool ───────────────────────────────────────────────────
-// Returns score plus raw weighted sums needed for hot sheet:
-// wSum/wTot = full career weighted sum/weight
-// cySum/cyTot = current year only weighted sum/weight
 function scoreTool(mlbamId, player, tool, isPitcher) {
   const { stats: statKeys } = TOOL_STATS[tool];
   const model = regression.models?.[tool];
@@ -110,7 +98,7 @@ function scoreTool(mlbamId, player, tool, isPitcher) {
 
   let wSum = 0.0, wTot = 0.0, totalSample = 0.0;
   let cySum = 0.0, cyTot = 0.0;
-  let ageWSum = 0.0, ageWTot = 0.0; // for PA-weighted ageDiff
+  let ageWSum = 0.0, ageWTot = 0.0;
 
   for (const s of seasons) {
     const { year, level } = s;
@@ -141,7 +129,6 @@ function scoreTool(mlbamId, player, tool, isPitcher) {
 
     const isCurrentYear = year === CURRENT_YEAR;
 
-    // Accumulate PA-weighted ageDiff for additive age bonus (speed tool exempt)
     if (!SPEED_STATS.has(statKeys[0])) {
       ageWSum += ageDiff * sample;
       ageWTot += sample;
@@ -174,7 +161,6 @@ function scoreTool(mlbamId, player, tool, isPitcher) {
   return { score: wSum / wTot, wSum, wTot, cySum, cyTot, sample: totalSample, wtdAgeDiff };
 }
 
-// ── Apply shrinkage toward 100 ────────────────────────────────────────────
 function shrink(score, sample, isPitcher) {
   if (score == null) return null;
   const k = isPitcher ? SHRINK_K.pitcher : SHRINK_K.hitter;
@@ -182,7 +168,6 @@ function shrink(score, sample, isPitcher) {
   return 100 + (score - 100) * confidence;
 }
 
-// ── Main ──────────────────────────────────────────────────────────────────
 function run() {
   console.log('Scoring prospects...');
   const updatedPlayers = { ...players };
@@ -199,14 +184,13 @@ function run() {
     const isPitcher = (player.positions || '').includes('P');
     if (!isRookieEligible(mlbamId, isPitcher)) { notRookie++; continue; }
 
-    // Must have data within last 3 seasons
     const recentSeasons = (history[String(mlbamId)] || [])
       .filter(s => MILB_LEVELS.has(s.level) && s.year >= CURRENT_YEAR - 3 && s.team);
     if (!recentSeasons.length) { noData++; continue; }
 
     const toolList = isPitcher ? ['stuff','control'] : ['hit','power','speed'];
     const toolScores = {};
-    const toolWeights = {}; // stores wSum/wTot/cySum/cyTot per tool for hot sheet
+    const toolWeights = {};
     let playerWtdAgeDiff = 0;
     let totalSample = 0;
     let hasAny = false;
@@ -232,7 +216,6 @@ function run() {
     rawPool[id] = { toolScores, toolWeights, composite, totalSample, isPitcher, wtdAgeDiff: playerWtdAgeDiff, hasCY: false, cySample: 0 };
   }
 
-  // Normalize each tool across prospect pool
   const toolVals = {};
   for (const toolList of [['hit','power','speed'],['stuff','control']]) {
     for (const tool of toolList) {
@@ -264,14 +247,6 @@ function run() {
     const normedOverall = normedOverallBase != null ? normedOverallBase + ageBonus : null;
     const shrunkOverall = shrink(normedOverall, totalSample, isPitcher);
 
-    // Per-tool sample (recompute from history for shrinkage)
-    const toolSamples = {};
-    for (const tool of Object.keys(normedTools)) {
-      const seasons = (history[String(rawPool[id]?.composite != null ? id : id)] || [])
-      toolSamples[tool] = totalSample // use totalSample as approximation per tool
-    }
-
-    // Per-tool shrunk values and confidence
     const shrunkTools = {};
     const rawTools = {};
     const confTools = {};
@@ -279,9 +254,9 @@ function run() {
       if (normed == null) { shrunkTools[tool] = null; rawTools[tool] = null; confTools[tool] = null; continue; }
       const k = isPitcher ? SHRINK_K.pitcher : SHRINK_K.hitter;
       const conf = totalSample / (totalSample + k);
-      shrunkTools[tool] = Math.round(100 + (normed - 100) * conf)
-      rawTools[tool] = Math.round(normed)
-      confTools[tool] = Math.round(conf * 100)
+      shrunkTools[tool] = Math.round(100 + (normed - 100) * conf);
+      rawTools[tool] = Math.round(normed);
+      confTools[tool] = Math.round(conf * 100);
     }
 
     updatedPlayers[id].model_scores = {
@@ -293,7 +268,6 @@ function run() {
     };
     scored++;
 
-    // Compute ex-CY overall for hot sheet (single pass, stored on rawPool)
     {
       const tw_weights = isPitcher ? COMPOSITE_WEIGHTS.pitcher : COMPOSITE_WEIGHTS.hitter;
       const C = isPitcher ? AGE_BONUS_C.pitcher : AGE_BONUS_C.hitter;
@@ -314,7 +288,6 @@ function run() {
           wsumEx += normedEx * w;
           wtotEx += w;
         } else {
-          // no prior data for this tool — use league avg + age bonus as baseline
           wsumEx += (100 + wtdAgeDiff * C) * w;
           wtotEx += w;
         }
@@ -328,8 +301,6 @@ function run() {
     }
   }
 
-  // ── Hot sheet ─────────────────────────────────────────────────────────────
-  // Risers: has prior history, overall improved vs ex-CY baseline, delta >= 1
   const MIN_OVERALL = 100, MIN_RISER_DELTA = 1;
   const risers = [];
 
@@ -361,26 +332,6 @@ function run() {
   console.log(`  Scored:            ${scored}`);
   console.log(`  Not rookie elig:   ${notRookie}`);
   console.log(`  No MiLB data:      ${noData}`);
-
-  // Top 50
-  const top = Object.values(updatedPlayers)
-    .filter(p => p.model_scores?.overall != null)
-    .sort((a,b) => b.model_scores.overall - a.model_scores.overall)
-    .slice(0, 50);
-
-  console.log(`\n--- TOP 50 BY MODEL SCORE ---`);
-  console.log(`  ${'#'.padStart(3)}  ${'RNK'.padStart(5)}  ${'NAME'.padEnd(24)} ${'OVR'.padStart(4)}  ${'CONF'.padStart(5)}  TOOLS`);
-  console.log(`  ${'─'.repeat(75)}`);
-  top.forEach((p, i) => {
-    const s   = p.model_scores;
-    const rk  = p.rank ? `#${p.rank}` : 'UR';
-    const conf = typeof s._confidence === 'object' ? `${Object.values(s._confidence||{})[0]??'?'}%` : `${s._confidence??'?'}%`;
-    const isPit = (p.positions||'').includes('P');
-    const tools = isPit
-      ? `stuff=${s.stuff??'?'} ctrl=${s.control??'?'}`
-      : `hit=${s.hit??'?'} pwr=${s.power??'?'} spd=${s.speed??'?'}`;
-    console.log(`  ${String(i+1).padStart(3)}  ${rk.padStart(5)}  ${p.name.padEnd(24)} ${String(s.overall).padStart(4)}  ${conf.padStart(5)}  ${tools}`);
-  });
 }
 
 run();

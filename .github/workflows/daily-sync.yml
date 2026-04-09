@@ -1,0 +1,64 @@
+name: Daily Stats + Model Sync
+
+on:
+  schedule:
+    - cron: '0 9 * * *'  # 1am PT (9am UTC)
+  workflow_dispatch:       # allow manual trigger from GitHub UI
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GH_PAT }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Python deps
+        run: pip install numpy
+
+      - name: Sync current season stats (MLB API)
+        env:
+          DATA_BASE: ${{ github.workspace }}/data
+        run: |
+          node scripts/sync-stats-gha.js
+
+      - name: Build norms
+        env:
+          DATA_BASE: ${{ github.workspace }}/data
+        run: node scripts/build-norms.js
+
+      - name: Build MLB tools
+        env:
+          DATA_BASE: ${{ github.workspace }}/data
+        run: python3 scripts/build-mlb-tools.py
+
+      - name: Build regression
+        env:
+          DATA_BASE: ${{ github.workspace }}/data
+        run: python3 scripts/build-regression.py
+
+      - name: Build scores + hot sheet
+        env:
+          DATA_BASE: ${{ github.workspace }}/data
+        run: node scripts/build-scores.js
+
+      - name: Commit updated data
+        run: |
+          git config user.name "DIAMOND Bot"
+          git config user.email "bot@diamond.local"
+          git add data/stats.json data/model/norms.json data/model/mlb-tools.json data/model/regression.json data/model/hot-sheet.json data/model/scores-snapshot.json data/players.json
+          git diff --cached --quiet || git commit -m "chore: daily sync $(date -u '+%Y-%m-%d')"
+          git push
