@@ -15,13 +15,27 @@ caffeinate -i & npm run dev
 
 ## Deployment
 - Deployed on Vercel at https://dynasty-baseball-dashboard.vercel.app/
-- GitHub: https://github.com/jordan10ng/dynastyBaseballDashboard
+- GitHub: https://github.com/jordan10ng/dynastyBaseballDashboard (public repo)
 - Push to deploy: `git add -A && git commit -m "..." && git push`
 - Rankings and Sync pages hidden on deployed version via `NEXT_PUBLIC_SHOW_ADMIN` env var
 - Set `NEXT_PUBLIC_SHOW_ADMIN=true` in `.env.local` to show them locally
+- ⚠️ GHA bot commits cause a rebase conflict if you push while workflow is running — always `git pull --rebase && git push` if push is rejected
+
+## Daily Sync (GitHub Actions)
+- Runs every night at 1am PT (9am UTC) via `.github/workflows/daily-sync.yml`
+- Pipeline: fetch MLB API stats → build-norms → build-mlb-tools → build-regression → build-scores
+- Commits updated `data/stats.json`, `data/players.json`, `data/model/*.json` to GitHub
+- Vercel detects the push → auto-redeploys with fresh data
+- Can also trigger manually: https://github.com/jordan10ng/dynastyBaseballDashboard/actions → Daily Stats + Model Sync → Run workflow
+- `GH_PAT` secret (repo + workflow scope) stored in GitHub repo secrets — needed for bot commits
+- `DATA_BASE` env var controls data root in all scripts — defaults to `~/Desktop/fantasy-baseball/data` locally, set to `$GITHUB_WORKSPACE/data` in GHA
+- Local sync still works unchanged via the Sync page (admin only)
 
 ## Directory Tree
 fantasy-baseball/
+├── .github/
+│   └── workflows/
+│       └── daily-sync.yml                # GHA cron — 1am PT daily stats + model rebuild
 ├── app/
 │   ├── page.tsx                          # Home/command center
 │   ├── players/page.tsx                  # Main hub
@@ -65,11 +79,12 @@ fantasy-baseball/
 │   ├── build-mlb-tools.py               # MLB career tool grades → data/model/mlb-tools.json
 │   ├── build-age-elasticity.py          # Per-stat age elasticity → data/model/age-elasticity.json
 │   ├── build-regression.py              # Blended level model → data/model/regression.json
-│   └── build-scores.js                  # Scores prospects → players.json model_scores + hot-sheet.json
+│   ├── build-scores.js                  # Scores prospects → players.json model_scores + hot-sheet.json
+│   └── sync-stats-gha.js               # Standalone stats sync for GHA (mirrors route.ts logic, no Next.js)
 ├── data/
 │   ├── players.json                      # PERMANENT — never wipe. Has birthDate, mlbam_id, rank, model_scores.
 │   ├── db.json                           # LIVE — safe to re-sync
-│   ├── stats.json                        # LIVE — safe to re-sync (2026 current season)
+│   ├── stats.json                        # LIVE — current season stats keyed by Fantrax ID. ⚠️ Planned retirement — see Planned Refactors
 │   ├── razzball.csv                      # ID bridge, update periodically
 │   ├── rankings/
 │   │   ├── sources/                      # Raw imported ranking sources (YYYYMMDD_name.json)
@@ -90,7 +105,7 @@ fantasy-baseball/
 ## Mobile
 - Responsive layout for phone browsers (768px breakpoint)
 - **Sidebar** — hidden on mobile, replaced with bottom tab bar (icons + labels)
-- **Players page** — mobile renders slim list: RK · PLAYER (name/pos/team/level/stats) · OVR+. Paginated 75 at a time with Load More. Desktop full table unchanged.
+- **Players page** — mobile renders slim list: RK · PLAYER (name/pos/team/level/stats) · OVR+. Paginated 75 at a time with Load More. RK and OVR+ headers are both tappable to sort. All desktop filters work on mobile.
 - **Hot sheet** — mobile renders delta + stacked info (name · pos/team/level · stat line · tool line). Desktop grid unchanged.
 - **Trade calculator** — stacks Team A / verdict / Team B vertically on mobile instead of side-by-side.
 - **Player drawer** — already worked well on mobile, unchanged.
@@ -98,7 +113,7 @@ fantasy-baseball/
 ## Data Architecture
 - **players.json** — ~10k players. id, name, team, positions, level, age, rank, mlbam_id, fangraphs_id, birthDate, model_scores. Never wipe. `rank` written by compute engine. `model_scores` written by build-scores.js.
 - **db.json** — leagues, teams, rosters. Safe to delete + re-sync.
-- **stats.json** — current season (2026) stats keyed by Fantrax ID. Always wiped on sync.
+- **stats.json** — current season (2026) stats keyed by Fantrax ID. Always wiped on sync. ⚠️ Planned for retirement — see Planned Refactors.
 - **rankings/sources/** — one JSON per imported ranking source. Never auto-deleted.
 - **rankings/rankings.json** — computed consensus output. Rewritten on each compute.
 - **history/YYYY.json** — all player stat lines for that year keyed by mlbam_id. Contains both MLB and MiLB lines. 2026.json updated by stats sync, not history scripts.
@@ -136,7 +151,7 @@ fantasy-baseball/
 - Bats columns: G · BA · OBP · SLG · OPS · SO · BB · PA · AB · H · 2B · 3B · HR · R · RBI · SB · CS · ISO · K% · BB% · XBH%
 - Arms columns: G · W-L · IP · BAA · ERA · WHIP · H · R · ER · HR · BB · SO · K% · BB% · K-BB%
 - Freeze panes: #/RK/POS/PLAYER sticky left (POS dropped in All mode); header syncs horizontally with rows
-- Mobile: slim 2-col layout, paginated 75 at a time
+- Mobile: RK and OVR+ headers tappable to sort; all filters available; paginated 75 at a time
 
 ## Player Drawer (full screen)
 Click any player → full screen overlay. Escape or ✕ to close.
@@ -169,7 +184,7 @@ Click any player → full screen overlay. Escape or ✕ to close.
 3. `build-regression.py` → regression.json
 4. `build-scores.js` → model_scores on players.json + hot-sheet.json
 
-**Age boost:** `pred_adjusted = 100 + (pred - 100) × exp(C × ageDiff)`, C=0.15 hitters / C=0.10 pitchers. Speed exempt. Applied post-regression, pre-blend.
+**Age boost:** Additive post-normalization. `overall = normedOverallBase + wtdAgeDiff × C`, C=3 hitters / C=2 pitchers. Speed exempt.
 
 **Per-tool shrinkage** individually; overall = pure weighted blend. _raw = pre-shrinkage ceiling.
 
@@ -188,6 +203,9 @@ export async function GET(_req: NextRequest, { params }: { params: Promise<{ id:
 }
 ```
 
+## Planned Refactors
+- **Retire stats.json** — Players page should read current season stats from `history/2026.json` (keyed by mlbam_id) instead of `stats.json` (keyed by Fantrax ID). Enables future "show career stats" toggle on players page. Match to Fantrax ID as needed. stats.json goes away.
+
 ## Next Priorities (in order)
 1. **Statcast pitcher chart** — unified release point + movement plot
 2. **Model as consensus source** — add model scores as source type M in ranking engine
@@ -205,14 +223,13 @@ export async function GET(_req: NextRequest, { params }: { params: Promise<{ id:
 - Statcast pitcher chart incomplete (movement only, no release point scatter)
 - ~20 remaining mlbam_id duplicate pairs — benign
 - ⚠️ `build-age-elasticity.py` and `build-mlb-scores.js` NOT in auto-run pipeline — run manually
-- ⚠️ Sync Stats timeout is 5 min per model step — bump `timeout` in api/stats/sync/route.ts if needed
 - Hot sheet early season produces mostly +1 deltas — correct behavior, weights handle small samples
 
 ## Fixed (Apr 2026)
 - sportId=21 phantom entries excluded — 17,663 rows scrubbed
 - DSL mislabeled as Complex — fixed by splitting on league name
 - Pitcher regression zero coefficients — k/bb_allowed field name mismatch fixed
-- Age weighting rebuilt — prediction-level boost replaces multiplicative z-score adjustment
+- Age weighting rebuilt — additive post-normalization bonus replaces multiplicative z-score adjustment
 - M badge now uses mlb-tools.json presence check
 - build-scores.js overall fixed (was double-normalized)
 - Recency decay (0.75/year) + 3-year recency requirement added
@@ -222,12 +239,13 @@ export async function GET(_req: NextRequest, { params }: { params: Promise<{ id:
 - Mine+FA filter added
 - All mode stat blurb added to players page
 - Players page: RK column clickable sort; Sort button removed; All mode folds pos/team/level into name line, drops POS column
-- Players page mobile: pos/team/level + dots on name line
+- Players page mobile: pos/team/level + dots on name line; RK + OVR+ headers tappable to sort
 - Career stats from local history files (no external API call)
 - Drawer tool tiles with ceiling + confidence
 - **Mobile layout** — bottom tab nav, mobile players/hot-sheet/trade, pagination
 - **Deployed to Vercel** — https://dynasty-baseball-dashboard.vercel.app/
 - **Admin pages hidden on deploy** via NEXT_PUBLIC_SHOW_ADMIN env var
+- **GitHub Actions daily sync** — 1am PT cron, full pipeline, auto-deploys to Vercel
 
 ## How We Work
 - Scout has direct read/write access to ~/Desktop/fantasy-baseball via mounted folder
