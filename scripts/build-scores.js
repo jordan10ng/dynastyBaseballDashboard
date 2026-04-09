@@ -59,6 +59,16 @@ const COMPOSITE_WEIGHTS = {
 };
 
 const SHRINK_K = { hitter: 200, pitcher: 80 };
+// Per-stat stabilization points
+const STAT_SHRINK_K = {
+  k_pct_hitter: 60, bb_pct_hitter: 120, iso: 120, sb_rate: 60,
+  k_pct_pitcher: 20, bb_pct_pitcher: 40,
+};
+function statShrinkK(stat, isPitcher) {
+  if (stat === 'k_pct') return isPitcher ? STAT_SHRINK_K.k_pct_pitcher : STAT_SHRINK_K.k_pct_hitter;
+  if (stat === 'bb_pct') return isPitcher ? STAT_SHRINK_K.bb_pct_pitcher : STAT_SHRINK_K.bb_pct_hitter;
+  return STAT_SHRINK_K[stat] ?? (isPitcher ? SHRINK_K.pitcher : SHRINK_K.hitter);
+}
 
 function ipToFloat(ip) {
   const parts = String(ip || 0).split('.');
@@ -152,7 +162,8 @@ function scoreTool(mlbamId, player, tool, isPitcher) {
 
       const pred         = levelModel.slope * z + levelModel.intercept;
       const recencyDecay = Math.pow(0.75, CURRENT_YEAR - year);
-      const weight       = levelModel.corr * sample * recencyDecay;
+      const statConf     = sample / (sample + statShrinkK(stat, isPitcher));
+      const weight       = levelModel.corr * statConf * recencyDecay;
 
       wSum += pred * weight;
       wTot += weight;

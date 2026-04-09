@@ -59,30 +59,56 @@ export function PlayerDrawer({ player, onClose, globalOwnership, minorsIds, mlbT
   }, [allPlayers, player.id, player.rank, primaryPos])
 
   const toolGrades = useMemo(() => {
-    if (mlbamId && mlbToolsMap[mlbamId]) {
-      const t = mlbToolsMap[mlbamId]
-      if (t.overall!=null) return t
-      const isPit = t.type==='pitcher'
+    const mlbEntry = mlbamId ? mlbToolsMap[String(mlbamId)] : null
+    const model = player.model_scores
+    const withOvr = (t: any) => {
+      if (t.overall != null) return t
+      const isPit = t.type === 'pitcher'
       let overall = null
       if (isPit && t.stuff!=null && t.control!=null) overall=Math.round(t.stuff*0.70+t.control*0.30)
       else if (!isPit && t.hit!=null && t.power!=null && t.speed!=null) overall=Math.round(t.hit*0.42+t.power*0.47+t.speed*0.11)
       else if (!isPit && t.hit!=null && t.power!=null) overall=Math.round((t.hit*0.42+t.power*0.47)/0.89)
       return { ...t, overall }
     }
-    return player.model_scores ?? null
+    if (!mlbEntry) return model ?? null
+    if (!model) return withOvr(mlbEntry)
+    const mlbSample = mlbEntry._pa ?? mlbEntry._bf ?? 0
+    const milbSample = model._sample ?? 0
+    const total = mlbSample + milbSample
+    if (total === 0) return withOvr(mlbEntry)
+    const mlbW = mlbSample / total
+    const milbW = milbSample / total
+    const bv = (a: any, b: any) => a == null && b == null ? null : a == null ? b : b == null ? a : Math.round(a*mlbW + b*milbW)
+    const isPit = mlbEntry.type === 'pitcher'
+    if (isPit) {
+      const stuff = bv(mlbEntry.stuff, model.stuff)
+      const control = bv(mlbEntry.control, model.control)
+      const overall = stuff != null && control != null ? Math.round(stuff*0.70+control*0.30) : null
+      return { stuff, control, overall, type: 'pitcher', _raw: model._raw, _confidence: model._confidence, _sample: milbSample, _mlbSample: mlbSample }
+    } else {
+      const hit   = bv(mlbEntry.hit,   model.hit)
+      const power = bv(mlbEntry.power, model.power)
+      const speed = bv(mlbEntry.speed, model.speed)
+      const overall = hit != null && power != null && speed != null ? Math.round(hit*0.42+power*0.47+speed*0.11) : null
+      return { hit, power, speed, overall, type: 'hitter', _raw: model._raw, _confidence: model._confidence, _sample: milbSample, _mlbSample: mlbSample }
+    }
   }, [mlbamId, mlbToolsMap, player.model_scores])
 
   const tiles = useMemo(() => {
     if (!toolGrades) return []
+    // Hide raw ceiling + confidence for graduated players (blended tools)
+    const isBlended = toolGrades._mlbSample != null
+    const raw = (key: string) => isBlended ? null : (toolGrades._raw?.[key] ?? null)
+    const conf = (key: string) => isBlended ? null : (toolGrades._confidence?.[key] ?? null)
     if (pitch) return [
-      toolGrades.stuff!=null?{label:'STF+',val:toolGrades.stuff,color:toolColor(toolGrades.stuff),raw:toolGrades._raw?.stuff??null,conf:toolGrades._confidence?.stuff??null}:null,
-      toolGrades.control!=null?{label:'CTL+',val:toolGrades.control,color:toolColor(toolGrades.control),raw:toolGrades._raw?.control??null,conf:toolGrades._confidence?.control??null}:null,
+      toolGrades.stuff!=null?{label:'STF+',val:toolGrades.stuff,color:toolColor(toolGrades.stuff),raw:raw('stuff'),conf:conf('stuff')}:null,
+      toolGrades.control!=null?{label:'CTL+',val:toolGrades.control,color:toolColor(toolGrades.control),raw:raw('control'),conf:conf('control')}:null,
       toolGrades.overall!=null?{label:'OVR+',val:toolGrades.overall,color:toolColor(toolGrades.overall)}:null,
     ].filter(Boolean)
     return [
-      toolGrades.hit!=null?{label:'HIT+',val:toolGrades.hit,color:toolColor(toolGrades.hit),raw:toolGrades._raw?.hit??null,conf:toolGrades._confidence?.hit??null}:null,
-      toolGrades.power!=null?{label:'PWR+',val:toolGrades.power,color:toolColor(toolGrades.power),raw:toolGrades._raw?.power??null,conf:toolGrades._confidence?.power??null}:null,
-      toolGrades.speed!=null?{label:'SPD+',val:toolGrades.speed,color:toolColor(toolGrades.speed),raw:toolGrades._raw?.speed??null,conf:toolGrades._confidence?.speed??null}:null,
+      toolGrades.hit!=null?{label:'HIT+',val:toolGrades.hit,color:toolColor(toolGrades.hit),raw:raw('hit'),conf:conf('hit')}:null,
+      toolGrades.power!=null?{label:'PWR+',val:toolGrades.power,color:toolColor(toolGrades.power),raw:raw('power'),conf:conf('power')}:null,
+      toolGrades.speed!=null?{label:'SPD+',val:toolGrades.speed,color:toolColor(toolGrades.speed),raw:raw('speed'),conf:conf('speed')}:null,
       toolGrades.overall!=null?{label:'OVR+',val:toolGrades.overall,color:toolColor(toolGrades.overall)}:null,
     ].filter(Boolean)
   }, [toolGrades, pitch])
