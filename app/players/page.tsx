@@ -705,9 +705,13 @@ export default function PlayersPage() {
         <div style={{ display: 'flex', flexDirection: 'column' }}>
           {/* Mobile header */}
           <div style={{ display: 'grid', gridTemplateColumns: '36px 1fr 44px', gap: '0.4rem', padding: '0.2rem 0rem', marginBottom: '0.25rem', borderBottom: '1px solid var(--border)' }}>
-            {['RK','PLAYER','OVR+'].map((h, i) => (
-              <div key={i} style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.58rem', letterSpacing: '0.08em', color: 'var(--muted)', textAlign: i >= 2 ? 'right' : 'left' }}>{h}</div>
-            ))}
+            <div onClick={() => { setToolSortKey(''); setSortMode('rank') }} style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.58rem', letterSpacing: '0.08em', color: sortMode === 'rank' ? 'var(--accent)' : 'var(--muted)', cursor: 'pointer', userSelect: 'none', display: 'flex', alignItems: 'center', gap: '2px' }}>
+              RK{sortMode === 'rank' && <span style={{ fontSize: '0.5rem' }}>▲</span>}
+            </div>
+            <div style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.58rem', letterSpacing: '0.08em', color: 'var(--muted)' }}>PLAYER</div>
+            <div onClick={() => { if (toolSortKey === 'overall') { setToolSortKey(''); setSortMode('rank') } else { setToolSortKey('overall'); setSortMode('tool') } }} style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.58rem', letterSpacing: '0.08em', color: toolSortKey === 'overall' ? 'var(--accent)' : 'var(--muted)', cursor: 'pointer', userSelect: 'none', textAlign: 'right', display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: '2px' }}>
+              {toolSortKey === 'overall' && <span style={{ fontSize: '0.5rem' }}>▼</span>}OVR+
+            </div>
           </div>
           {loading ? <div style={{ color: 'var(--muted)', padding: '1rem 0' }}>Loading...</div> : filtered.slice(0, mobileLimit).map((p, i) => {
             const pOwn = globalOwnership[p.id] || {}
