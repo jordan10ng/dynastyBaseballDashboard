@@ -249,8 +249,10 @@ function run() {
     const confTools   = {};
     for (const [tool, normed] of Object.entries(normedTools)) {
       if (normed == null) { shrunkTools[tool] = null; rawTools[tool] = null; confTools[tool] = null; continue; }
-      const k    = isPitcher ? SHRINK_K.pitcher : SHRINK_K.hitter;
-      const conf = totalSample / (totalSample + k);
+      const toolDef = TOOL_STATS[tool];
+      const statKs = toolDef ? toolDef.stats.map(s => statShrinkK(s, isPitcher)) : [isPitcher ? SHRINK_K.pitcher : SHRINK_K.hitter];
+      const avgK = statKs.reduce((a,b) => a+b, 0) / statKs.length;
+      const conf = totalSample / (totalSample + avgK);
       shrunkTools[tool] = Math.round(shrink(normed, totalSample, isPitcher));
       rawTools[tool]    = Math.round(normed);
       confTools[tool]   = Math.round(conf * 100);
@@ -314,7 +316,7 @@ function run() {
 
   risers.sort((a, b) => b.delta - a.delta || b.overall - a.overall);
   const hotBats = risers.filter(r => !r.isPit).slice(0, 20);
-  const hotArms = risers.filter(r =>  r.isPit).slice(0, 20);
+  const hotArms = risers.filter(r => r.isPit && (r.positions || '').includes('SP')).slice(0, 20);
 
   fs.writeFileSync(HOTSHEET_PATH, JSON.stringify({ bats: hotBats, arms: hotArms, generatedAt: new Date().toISOString() }, null, 2));
   console.log(`Hot sheet written: ${hotBats.length} bats, ${hotArms.length} arms`);
