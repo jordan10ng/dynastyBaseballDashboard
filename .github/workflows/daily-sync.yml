@@ -59,6 +59,6 @@ jobs:
         run: |
           git config user.name "DIAMOND Bot"
           git config user.email "your-real-github-email@here.com"
-          git add data/stats.json data/model/norms.json data/model/mlb-tools.json data/model/regression.json data/model/hot-sheet.json data/model/scores-snapshot.json data/players.json
+          git add data/history/2026.json data/model/norms.json data/model/mlb-tools.json data/model/regression.json data/model/hot-sheet.json data/model/scores-snapshot.json data/players.json
           git diff --cached --quiet || git commit -m "chore: daily sync $(date -u '+%Y-%m-%d')"
           git push

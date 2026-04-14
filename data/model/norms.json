@@ -6824,6 +6824,188 @@
       }
     }
   },
+  "MLB|2026": {
+    "type": "level",
+    "level": "MLB",
+    "year": "2026",
+    "hitters": {
+      "n": 189,
+      "avg": {
+        "mean": 0.2439,
+        "stdev": 0.0614,
+        "n": 189
+      },
+      "obp": {
+        "mean": 0.3277,
+        "stdev": 0.0669,
+        "n": 189
+      },
+      "slg": {
+        "mean": 0.3987,
+        "stdev": 0.1278,
+        "n": 189
+      },
+      "ops": {
+        "mean": 0.7264,
+        "stdev": 0.1823,
+        "n": 189
+      },
+      "iso": {
+        "mean": 0.1549,
+        "stdev": 0.0874,
+        "n": 189
+      },
+      "k_pct": {
+        "mean": 0.2199,
+        "stdev": 0.0774,
+        "n": 189
+      },
+      "bb_pct": {
+        "mean": 0.1029,
+        "stdev": 0.0497,
+        "n": 189
+      },
+      "sb_rate": {
+        "mean": 0.0684,
+        "stdev": 0.095,
+        "n": 189
+      },
+      "xbh_rate": {
+        "mean": 0.0839,
+        "stdev": 0.0409,
+        "n": 189
+      }
+    },
+    "pitchers": {
+      "n": 22,
+      "era": {
+        "mean": 3.2894,
+        "stdev": 1.6239,
+        "n": 22
+      },
+      "whip": {
+        "mean": 1.1569,
+        "stdev": 0.3274,
+        "n": 22
+      },
+      "k_pct": {
+        "mean": 0.2235,
+        "stdev": 0.0615,
+        "n": 22
+      },
+      "bb_pct": {
+        "mean": 0.0757,
+        "stdev": 0.0337,
+        "n": 22
+      },
+      "k_bb_pct": {
+        "mean": 0.1479,
+        "stdev": 0.0686,
+        "n": 22
+      },
+      "baa": {
+        "mean": 0.2097,
+        "stdev": 0.0733,
+        "n": 22
+      },
+      "ip_per_gs": {
+        "mean": 5.758,
+        "stdev": 0.7647,
+        "n": 22
+      }
+    }
+  },
+  "AAA|2026": {
+    "type": "level",
+    "level": "AAA",
+    "year": "2026",
+    "hitters": {
+      "n": 139,
+      "avg": {
+        "mean": 0.2557,
+        "stdev": 0.0674,
+        "n": 139
+      },
+      "obp": {
+        "mean": 0.3557,
+        "stdev": 0.0704,
+        "n": 139
+      },
+      "slg": {
+        "mean": 0.4147,
+        "stdev": 0.1376,
+        "n": 139
+      },
+      "ops": {
+        "mean": 0.7704,
+        "stdev": 0.1902,
+        "n": 139
+      },
+      "iso": {
+        "mean": 0.159,
+        "stdev": 0.0952,
+        "n": 139
+      },
+      "k_pct": {
+        "mean": 0.2279,
+        "stdev": 0.0784,
+        "n": 139
+      },
+      "bb_pct": {
+        "mean": 0.1266,
+        "stdev": 0.0575,
+        "n": 139
+      },
+      "sb_rate": {
+        "mean": 0.1019,
+        "stdev": 0.1077,
+        "n": 139
+      },
+      "xbh_rate": {
+        "mean": 0.0887,
+        "stdev": 0.0431,
+        "n": 139
+      }
+    },
+    "pitchers": {
+      "n": 2,
+      "era": {
+        "mean": 1.9134,
+        "stdev": 0.8963,
+        "n": 2
+      },
+      "whip": {
+        "mean": 1.0402,
+        "stdev": 0.0035,
+        "n": 2
+      },
+      "k_pct": {
+        "mean": 0.1978,
+        "stdev": 0.0311,
+        "n": 2
+      },
+      "bb_pct": {
+        "mean": 0.0879,
+        "stdev": 0.0311,
+        "n": 2
+      },
+      "k_bb_pct": {
+        "mean": 0.1099,
+        "stdev": 0,
+        "n": 2
+      },
+      "baa": {
+        "mean": 0.1682,
+        "stdev": 0.0283,
+        "n": 2
+      },
+      "ip_per_gs": {
+        "mean": 6.1708,
+        "stdev": 1.2669,
+        "n": 2
+      }
+    }
+  },
   "AAA|International League|2016": {
     "type": "league",
     "level": "AAA",

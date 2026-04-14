@@ -1,605 +1,594 @@
 {
   "bats": [
     {
-      "id": "06kkg",
-      "name": "Kyle DeBarge",
-      "rank": 984,
-      "positions": "2B,SS,INF",
+      "id": "062jb",
+      "name": "Blake Burke",
+      "rank": 814,
+      "positions": "1B,INF",
       "isPit": false,
-      "overall": 111,
-      "sample": 663,
-      "confidence": {
-        "hit": 77,
-        "power": 77,
-        "speed": 77
-      },
-      "delta": 8,
-      "prevOverall": 103
-    },
-    {
-      "id": "06q33",
-      "name": "Brendan Tunink",
-      "rank": 1301,
-      "positions": "CF,OF",
-      "isPit": false,
-      "overall": 105,
-      "sample": 172,
-      "confidence": {
-        "hit": 46,
-        "power": 46,
-        "speed": 46
-      },
-      "delta": 8,
-      "prevOverall": 97
-    },
-    {
-      "id": "066ir",
-      "name": "James Tibbs",
-      "rank": 1809,
-      "positions": "RF,OF",
-      "isPit": false,
-      "overall": 112,
-      "sample": 707,
-      "confidence": {
-        "hit": 78,
-        "power": 78,
-        "speed": 78
-      },
-      "delta": 7,
-      "prevOverall": 105
-    },
-    {
-      "id": "06ag6",
-      "name": "Rodney Green",
-      "rank": 1735,
-      "positions": "LF,CF,OF",
-      "isPit": false,
-      "overall": 109,
-      "sample": 625,
+      "overall": 120,
+      "sample": 628,
       "confidence": {
         "hit": 76,
         "power": 76,
         "speed": 76
       },
-      "delta": 7,
-      "prevOverall": 102
+      "delta": 12,
+      "prevOverall": 108
     },
     {
-      "id": "06pgs",
-      "name": "Jacob Friend",
+      "id": "06hu4",
+      "name": "Hunter Fitz-Gerald",
+      "positions": "1B,INF",
+      "isPit": false,
+      "overall": 107,
+      "sample": 774,
+      "confidence": {
+        "hit": 79,
+        "power": 79,
+        "speed": 79
+      },
+      "delta": 8,
+      "prevOverall": 99
+    },
+    {
+      "id": "066co",
+      "name": "Gavin Logan",
       "positions": "C",
       "isPit": false,
-      "overall": 103,
-      "sample": 230,
+      "overall": 105,
+      "sample": 792,
       "confidence": {
-        "hit": 53,
-        "power": 53,
-        "speed": 53
+        "hit": 80,
+        "power": 80,
+        "speed": 80
+      },
+      "delta": 8,
+      "prevOverall": 97
+    },
+    {
+      "id": "0669x",
+      "name": "Connor Charping",
+      "positions": "C",
+      "isPit": false,
+      "overall": 101,
+      "sample": 542,
+      "confidence": {
+        "hit": 73,
+        "power": 73,
+        "speed": 73
+      },
+      "delta": 8,
+      "prevOverall": 93
+    },
+    {
+      "id": "06af4",
+      "name": "Carson Roccaforte",
+      "rank": 1462,
+      "positions": "CF,OF",
+      "isPit": false,
+      "overall": 116,
+      "sample": 1267,
+      "confidence": {
+        "hit": 86,
+        "power": 86,
+        "speed": 86
       },
       "delta": 7,
-      "prevOverall": 96
+      "prevOverall": 109
     },
     {
-      "id": "06j3h",
-      "name": "Cole Mathis",
-      "rank": 1684,
-      "positions": "3B,INF",
+      "id": "06b72",
+      "name": "George Lombard Jr.",
+      "rank": 305,
+      "positions": "SS,INF",
       "isPit": false,
-      "overall": 104,
-      "sample": 134,
+      "overall": 112,
+      "sample": 1167,
       "confidence": {
-        "hit": 40,
-        "power": 40,
-        "speed": 40
+        "hit": 85,
+        "power": 85,
+        "speed": 85
       },
-      "delta": 6,
-      "prevOverall": 98
-    },
-    {
-      "id": "04nb4",
-      "name": "Rece Hinds",
-      "rank": 1344,
-      "positions": "RF,OF",
-      "isPit": false,
-      "overall": 110,
-      "sample": 1908,
-      "confidence": {
-        "hit": 91,
-        "power": 91,
-        "speed": 91
-      },
-      "delta": 5,
+      "delta": 7,
       "prevOverall": 105
     },
     {
-      "id": "06434",
-      "name": "Jimmy Crooks",
-      "rank": 868,
-      "positions": "C",
+      "id": "06lfg",
+      "name": "Chris Suero",
+      "rank": 1792,
+      "positions": "C,LF,OF",
       "isPit": false,
-      "overall": 109,
-      "sample": 1392,
+      "overall": 112,
+      "sample": 1171,
+      "confidence": {
+        "hit": 85,
+        "power": 85,
+        "speed": 85
+      },
+      "delta": 7,
+      "prevOverall": 105
+    },
+    {
+      "id": "0664t",
+      "name": "Brett Squires",
+      "positions": "1B,INF",
+      "isPit": false,
+      "overall": 112,
+      "sample": 1316,
       "confidence": {
         "hit": 87,
         "power": 87,
         "speed": 87
       },
-      "delta": 5,
-      "prevOverall": 104
-    },
-    {
-      "id": "06zb2",
-      "name": "Chase Heath",
-      "positions": "C",
-      "isPit": false,
-      "overall": 101,
-      "sample": 62,
-      "confidence": {
-        "hit": 24,
-        "power": 24,
-        "speed": 24
-      },
-      "delta": 5,
-      "prevOverall": 96
-    },
-    {
-      "id": "06hsz",
-      "name": "John Gil",
-      "rank": 1205,
-      "positions": "SS,INF",
-      "isPit": false,
-      "overall": 109,
-      "sample": 1064,
-      "confidence": {
-        "hit": 84,
-        "power": 84,
-        "speed": 84
-      },
-      "delta": 4,
+      "delta": 7,
       "prevOverall": 105
     },
     {
-      "id": "05rcj",
-      "name": "Edwin Arroyo",
-      "rank": 1061,
-      "positions": "SS,INF",
+      "id": "06485",
+      "name": "David McCabe",
+      "positions": "1B,3B,INF",
       "isPit": false,
-      "overall": 107,
-      "sample": 1720,
+      "overall": 106,
+      "sample": 1371,
       "confidence": {
-        "hit": 90,
-        "power": 90,
-        "speed": 90
+        "hit": 87,
+        "power": 87,
+        "speed": 87
       },
-      "delta": 4,
-      "prevOverall": 103
-    },
-    {
-      "id": "06658",
-      "name": "Ben Ross",
-      "positions": "3B,SS,INF,CF,OF",
-      "isPit": false,
-      "overall": 107,
-      "sample": 1544,
-      "confidence": {
-        "hit": 89,
-        "power": 89,
-        "speed": 89
-      },
-      "delta": 4,
-      "prevOverall": 103
-    },
-    {
-      "id": "061zu",
-      "name": "Thomas Sosa",
-      "positions": "RF,OF",
-      "isPit": false,
-      "overall": 104,
-      "sample": 975,
-      "confidence": {
-        "hit": 83,
-        "power": 83,
-        "speed": 83
-      },
-      "delta": 4,
-      "prevOverall": 100
-    },
-    {
-      "id": "05tzh",
-      "name": "Branden Boissiere",
-      "positions": "1B,INF",
-      "isPit": false,
-      "overall": 103,
-      "sample": 1601,
-      "confidence": {
-        "hit": 89,
-        "power": 89,
-        "speed": 89
-      },
-      "delta": 4,
+      "delta": 7,
       "prevOverall": 99
     },
     {
-      "id": "05ucg",
-      "name": "Jonathan Mejia",
-      "positions": "2B,SS,INF",
+      "id": "05rci",
+      "name": "Alex Mooney",
+      "positions": "2B,3B,SS,INF",
       "isPit": false,
-      "overall": 102,
-      "sample": 905,
-      "confidence": {
-        "hit": 82,
-        "power": 82,
-        "speed": 82
-      },
-      "delta": 4,
-      "prevOverall": 98
-    },
-    {
-      "id": "06pq8",
-      "name": "Dylan Fien",
-      "positions": "C",
-      "isPit": false,
-      "overall": 100,
-      "sample": 376,
-      "confidence": {
-        "hit": 65,
-        "power": 65,
-        "speed": 65
-      },
-      "delta": 4,
-      "prevOverall": 96
-    },
-    {
-      "id": "067yp",
-      "name": "Ralphy Velazquez",
-      "rank": 386,
-      "positions": "1B,INF",
-      "isPit": false,
-      "overall": 120,
-      "sample": 1029,
+      "overall": 106,
+      "sample": 1020,
       "confidence": {
         "hit": 84,
         "power": 84,
         "speed": 84
       },
-      "delta": 3,
-      "prevOverall": 117
+      "delta": 7,
+      "prevOverall": 99
     },
     {
-      "id": "04nq4",
-      "name": "Blaze Jordan",
-      "rank": 693,
-      "positions": "1B,3B,INF",
+      "id": "06hps",
+      "name": "Drew Cavanaugh",
+      "positions": "C",
       "isPit": false,
-      "overall": 116,
-      "sample": 2105,
+      "overall": 104,
+      "sample": 683,
+      "confidence": {
+        "hit": 77,
+        "power": 77,
+        "speed": 77
+      },
+      "delta": 7,
+      "prevOverall": 97
+    },
+    {
+      "id": "05rbd",
+      "name": "Manuel Pena",
+      "positions": "1B,INF",
+      "isPit": false,
+      "overall": 108,
+      "sample": 1970,
       "confidence": {
         "hit": 91,
         "power": 91,
         "speed": 91
       },
-      "delta": 3,
-      "prevOverall": 113
+      "delta": 6,
+      "prevOverall": 102
     },
     {
-      "id": "06626",
-      "name": "Alfredo Duno",
-      "rank": 361,
+      "id": "050k5",
+      "name": "Jhon Diaz",
+      "positions": "LF,RF,OF",
+      "isPit": false,
+      "overall": 108,
+      "sample": 3112,
+      "confidence": {
+        "hit": 94,
+        "power": 94,
+        "speed": 94
+      },
+      "delta": 6,
+      "prevOverall": 102
+    },
+    {
+      "id": "06gjz",
+      "name": "Dakota Harris",
+      "positions": "1B,2B,3B,INF",
+      "isPit": false,
+      "overall": 107,
+      "sample": 1000,
+      "confidence": {
+        "hit": 83,
+        "power": 83,
+        "speed": 83
+      },
+      "delta": 6,
+      "prevOverall": 101
+    },
+    {
+      "id": "05175",
+      "name": "Darrien Miller",
       "positions": "C",
       "isPit": false,
-      "overall": 115,
-      "sample": 834,
+      "overall": 107,
+      "sample": 1791,
       "confidence": {
-        "hit": 81,
-        "power": 81,
-        "speed": 81
+        "hit": 90,
+        "power": 90,
+        "speed": 90
       },
-      "delta": 3,
-      "prevOverall": 112
+      "delta": 6,
+      "prevOverall": 101
     },
     {
-      "id": "05tcc",
-      "name": "Zach Kokoska",
-      "positions": "1B,INF,RF,OF",
+      "id": "05uxv",
+      "name": "Anderson De Los Santos",
+      "positions": "1B,3B,INF",
       "isPit": false,
-      "overall": 115,
-      "sample": 1410,
+      "overall": 106,
+      "sample": 1536,
       "confidence": {
         "hit": 88,
         "power": 88,
         "speed": 88
       },
-      "delta": 3,
-      "prevOverall": 112
-    }
-  ],
-  "arms": [
-    {
-      "id": "06fwg",
-      "name": "Khristian Curtis",
-      "positions": "SP",
-      "isPit": true,
-      "overall": 109,
-      "sample": 191,
-      "confidence": {
-        "stuff": 70,
-        "control": 70
-      },
-      "delta": 8,
-      "prevOverall": 101
+      "delta": 6,
+      "prevOverall": 100
     },
     {
-      "id": "06s3r",
-      "name": "Jervis Alfaro",
-      "positions": "SP",
-      "isPit": true,
-      "overall": 99,
-      "sample": 202,
-      "confidence": {
-        "stuff": 72,
-        "control": 72
-      },
-      "delta": 7,
-      "prevOverall": 92
-    },
-    {
-      "id": "05uce",
-      "name": "Brendan Beck",
-      "positions": "SP",
-      "isPit": true,
+      "id": "06k6s",
+      "name": "Sam Kulasingam",
+      "positions": "2B,INF",
+      "isPit": false,
       "overall": 106,
-      "sample": 175,
+      "sample": 682,
       "confidence": {
-        "stuff": 69,
-        "control": 69
+        "hit": 77,
+        "power": 77,
+        "speed": 77
       },
       "delta": 6,
       "prevOverall": 100
     },
     {
-      "id": "06p61",
-      "name": "Dylan Jordan",
-      "rank": 1491,
-      "positions": "SP",
-      "isPit": true,
+      "id": "06ibi",
+      "name": "Caleb Lomavita",
+      "positions": "C",
+      "isPit": false,
       "overall": 104,
-      "sample": 81,
+      "sample": 545,
       "confidence": {
-        "stuff": 50,
-        "control": 50
+        "hit": 73,
+        "power": 73,
+        "speed": 73
       },
       "delta": 6,
       "prevOverall": 98
     },
     {
-      "id": "060vg",
-      "name": "Jake Brooks",
-      "positions": "SP",
-      "isPit": true,
-      "overall": 102,
-      "sample": 243,
+      "id": "06qhz",
+      "name": "Jon Jon Gazdar",
+      "positions": "2B,3B,SS,INF",
+      "isPit": false,
+      "overall": 103,
+      "sample": 575,
       "confidence": {
-        "stuff": 75,
-        "control": 75
+        "hit": 74,
+        "power": 74,
+        "speed": 74
       },
-      "delta": 5,
+      "delta": 6,
       "prevOverall": 97
     },
     {
-      "id": "06qp2",
-      "name": "Nate Payne",
-      "rank": 1541,
-      "positions": "SP",
-      "isPit": true,
-      "overall": 99,
-      "sample": 60,
-      "confidence": {
-        "stuff": 43,
-        "control": 43
-      },
-      "delta": 5,
-      "prevOverall": 94
-    },
-    {
-      "id": "06rsx",
-      "name": "Bryan Balzer",
-      "positions": "SP",
-      "isPit": true,
+      "id": "051jn",
+      "name": "Karson Simas",
+      "positions": "2B,INF",
+      "isPit": false,
       "overall": 95,
-      "sample": 61,
+      "sample": 1277,
       "confidence": {
-        "stuff": 43,
-        "control": 43
+        "hit": 86,
+        "power": 86,
+        "speed": 86
       },
-      "delta": 5,
-      "prevOverall": 90
+      "delta": 6,
+      "prevOverall": 89
+    }
+  ],
+  "arms": [
+    {
+      "id": "02nbw",
+      "name": "Tejay Antone",
+      "positions": "RP",
+      "isPit": true,
+      "overall": 109,
+      "sample": 597,
+      "confidence": {
+        "stuff": 88,
+        "control": 88
+      },
+      "delta": 16,
+      "prevOverall": 93
     },
     {
-      "id": "05u6r",
-      "name": "Robert Gasser",
-      "rank": 886,
+      "id": "05r0t",
+      "name": "Anderson Severino",
+      "positions": "RP",
+      "isPit": true,
+      "overall": 103,
+      "sample": 268,
+      "confidence": {
+        "stuff": 77,
+        "control": 77
+      },
+      "delta": 16,
+      "prevOverall": 87
+    },
+    {
+      "id": "04eoi",
+      "name": "Ricky Vanasco",
       "positions": "SP",
       "isPit": true,
-      "overall": 110,
-      "sample": 343,
+      "overall": 118,
+      "sample": 285,
       "confidence": {
-        "stuff": 81,
-        "control": 81
+        "stuff": 78,
+        "control": 78
       },
-      "delta": 4,
-      "prevOverall": 106
+      "delta": 15,
+      "prevOverall": 103
+    },
+    {
+      "id": "05191",
+      "name": "Brendan Cellucci",
+      "positions": "RP",
+      "isPit": true,
+      "overall": 112,
+      "sample": 263,
+      "confidence": {
+        "stuff": 77,
+        "control": 77
+      },
+      "delta": 15,
+      "prevOverall": 97
     },
     {
       "id": "06308",
       "name": "William Kempner",
       "positions": "RP",
       "isPit": true,
-      "overall": 106,
-      "sample": 142,
+      "overall": 116,
+      "sample": 146,
+      "confidence": {
+        "stuff": 65,
+        "control": 65
+      },
+      "delta": 13,
+      "prevOverall": 103
+    },
+    {
+      "id": "03dww",
+      "name": "Gabe Klobosits",
+      "positions": "RP",
+      "isPit": true,
+      "overall": 104,
+      "sample": 145,
       "confidence": {
         "stuff": 64,
         "control": 64
       },
-      "delta": 4,
-      "prevOverall": 102
+      "delta": 13,
+      "prevOverall": 91
+    },
+    {
+      "id": "05uc7",
+      "name": "Noah Schultz",
+      "rank": 445,
+      "positions": "SP",
+      "isPit": true,
+      "overall": 115,
+      "sample": 202,
+      "confidence": {
+        "stuff": 72,
+        "control": 72
+      },
+      "delta": 12,
+      "prevOverall": 103
+    },
+    {
+      "id": "05uce",
+      "name": "Brendan Beck",
+      "positions": "SP",
+      "isPit": true,
+      "overall": 112,
+      "sample": 180,
+      "confidence": {
+        "stuff": 69,
+        "control": 69
+      },
+      "delta": 12,
+      "prevOverall": 100
+    },
+    {
+      "id": "05zd4",
+      "name": "Hagen Smith",
+      "rank": 374,
+      "positions": "SP",
+      "isPit": true,
+      "overall": 112,
+      "sample": 92,
+      "confidence": {
+        "stuff": 54,
+        "control": 54
+      },
+      "delta": 11,
+      "prevOverall": 101
+    },
+    {
+      "id": "0515j",
+      "name": "Jack Ralston",
+      "positions": "RP",
+      "isPit": true,
+      "overall": 110,
+      "sample": 283,
+      "confidence": {
+        "stuff": 78,
+        "control": 78
+      },
+      "delta": 11,
+      "prevOverall": 99
     },
     {
       "id": "0514a",
       "name": "Gunner Mayer",
       "positions": "RP",
       "isPit": true,
-      "overall": 103,
-      "sample": 274,
+      "overall": 110,
+      "sample": 276,
       "confidence": {
-        "stuff": 77,
-        "control": 77
+        "stuff": 78,
+        "control": 78
       },
-      "delta": 4,
+      "delta": 11,
       "prevOverall": 99
     },
     {
-      "id": "06v2i",
-      "name": "Geury Rodriguez",
+      "id": "04qnh",
+      "name": "Gerardo Carrillo",
       "positions": "RP",
       "isPit": true,
-      "overall": 103,
-      "sample": 87,
+      "overall": 109,
+      "sample": 375,
       "confidence": {
-        "stuff": 52,
-        "control": 52
+        "stuff": 82,
+        "control": 82
       },
-      "delta": 4,
-      "prevOverall": 99
+      "delta": 11,
+      "prevOverall": 98
     },
     {
-      "id": "06hol",
-      "name": "Luke Fox",
+      "id": "072fv",
+      "name": "Jean Henriquez",
+      "positions": "RP",
+      "isPit": true,
+      "overall": 101,
+      "sample": 32,
+      "confidence": {
+        "stuff": 29,
+        "control": 29
+      },
+      "delta": 11,
+      "prevOverall": 90
+    },
+    {
+      "id": "0516q",
+      "name": "Connor Gillispie",
       "positions": "SP",
       "isPit": true,
-      "overall": 102,
-      "sample": 142,
+      "overall": 99,
+      "sample": 487,
       "confidence": {
-        "stuff": 64,
-        "control": 64
+        "stuff": 86,
+        "control": 86
       },
-      "delta": 4,
-      "prevOverall": 98
+      "delta": 11,
+      "prevOverall": 88
+    },
+    {
+      "id": "05r1e",
+      "name": "Eric Cerantola",
+      "positions": "SP",
+      "isPit": true,
+      "overall": 114,
+      "sample": 239,
+      "confidence": {
+        "stuff": 75,
+        "control": 75
+      },
+      "delta": 10,
+      "prevOverall": 104
+    },
+    {
+      "id": "061xq",
+      "name": "Miguel Ullola",
+      "rank": 1166,
+      "positions": "SP",
+      "isPit": true,
+      "overall": 113,
+      "sample": 443,
+      "confidence": {
+        "stuff": 85,
+        "control": 85
+      },
+      "delta": 10,
+      "prevOverall": 103
+    },
+    {
+      "id": "04w0m",
+      "name": "Yovanny Cruz",
+      "positions": "RP",
+      "isPit": true,
+      "overall": 109,
+      "sample": 259,
+      "confidence": {
+        "stuff": 76,
+        "control": 76
+      },
+      "delta": 10,
+      "prevOverall": 99
     },
     {
       "id": "04eg2",
       "name": "Charlie Barnes",
       "positions": "SP",
       "isPit": true,
-      "overall": 99,
-      "sample": 404,
+      "overall": 104,
+      "sample": 409,
       "confidence": {
-        "stuff": 83,
-        "control": 83
+        "stuff": 84,
+        "control": 84
       },
-      "delta": 4,
-      "prevOverall": 95
-    },
-    {
-      "id": "05ubl",
-      "name": "Gabriel Hughes",
-      "rank": 1752,
-      "positions": "SP",
-      "isPit": true,
-      "overall": 98,
-      "sample": 180,
-      "confidence": {
-        "stuff": 69,
-        "control": 69
-      },
-      "delta": 4,
+      "delta": 10,
       "prevOverall": 94
-    },
-    {
-      "id": "02nbw",
-      "name": "Tejay Antone",
-      "positions": "RP",
-      "isPit": true,
-      "overall": 97,
-      "sample": 594,
-      "confidence": {
-        "stuff": 88,
-        "control": 88
-      },
-      "delta": 4,
-      "prevOverall": 93
-    },
-    {
-      "id": "06su2",
-      "name": "Luis Carias",
-      "positions": "SP",
-      "isPit": true,
-      "overall": 96,
-      "sample": 105,
-      "confidence": {
-        "stuff": 57,
-        "control": 57
-      },
-      "delta": 4,
-      "prevOverall": 92
-    },
-    {
-      "id": "06ahu",
-      "name": "Sean Sullivan",
-      "rank": 1143,
-      "positions": "SP",
-      "isPit": true,
-      "overall": 111,
-      "sample": 456,
-      "confidence": {
-        "stuff": 85,
-        "control": 85
-      },
-      "delta": 3,
-      "prevOverall": 108
-    },
-    {
-      "id": "0519h",
-      "name": "Hunter Bigge",
-      "rank": 1250,
-      "positions": "RP",
-      "isPit": true,
-      "overall": 110,
-      "sample": 168,
-      "confidence": {
-        "stuff": 68,
-        "control": 68
-      },
-      "delta": 3,
-      "prevOverall": 107
     },
     {
       "id": "05lb8",
       "name": "Zach McCambley",
       "positions": "SP,RP",
       "isPit": true,
-      "overall": 110,
-      "sample": 324,
+      "overall": 116,
+      "sample": 328,
       "confidence": {
         "stuff": 80,
         "control": 80
       },
-      "delta": 3,
+      "delta": 9,
       "prevOverall": 107
     },
     {
-      "id": "05oyx",
-      "name": "Peyton Gray",
+      "id": "064nv",
+      "name": "Alex Hoppe",
       "positions": "RP",
       "isPit": true,
-      "overall": 110,
-      "sample": 146,
+      "overall": 107,
+      "sample": 182,
       "confidence": {
-        "stuff": 65,
-        "control": 65
+        "stuff": 69,
+        "control": 69
       },
-      "delta": 3,
-      "prevOverall": 107
+      "delta": 9,
+      "prevOverall": 98
     }
   ],
-  "generatedAt": "2026-04-13T12:13:05.512Z"
+  "generatedAt": "2026-04-14T02:00:55.159Z"
 }
