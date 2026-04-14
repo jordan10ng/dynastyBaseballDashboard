@@ -27,3 +27,10 @@ export const toolColor = (val: any) => {
   if (val >= 80)  return '#93c5fd'
   return '#3b82f6'
 }
+
+export function fmtLevel(level: string | undefined): string {
+  if (!level) return "—"
+  if (level === "High-A") return "A+"
+  if (level === "Single-A") return "A"
+  return level
+}

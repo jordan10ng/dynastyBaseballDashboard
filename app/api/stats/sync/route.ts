@@ -15,13 +15,17 @@ function fmt3(n: number): string {
 
 const LEVEL_ORDER = ['AAA','AA','A+','A','ROK']
 
-function sportAbbrToLevel(abbr: string): string {
-  if (abbr === 'AAA') return 'AAA'
-  if (abbr === 'AA') return 'AA'
-  if (abbr === 'A+' || abbr === 'HiA') return 'A+'
-  if (abbr === 'A' || abbr === 'LoA' || abbr === 'A(Short)') return 'A'
-  if (abbr === 'ROK' || abbr === 'Rk') return 'ROK'
-  return 'Other'
+const SPORT_ID_TO_LEVEL: Record<number,string> = { 1: 'MLB', 11: 'AAA', 12: 'AA', 13: 'High-A', 14: 'Single-A', 15: 'ROK', 16: 'DSL', 17: 'ROK', 19: 'ROK' };
+function sportAbbrToLevel(sport: any): string {
+  if (!sport) return 'Other';
+  if (sport.id && SPORT_ID_TO_LEVEL[sport.id]) return SPORT_ID_TO_LEVEL[sport.id];
+  const abbr = sport.abbreviation || '';
+  if (abbr === 'AAA') return 'AAA';
+  if (abbr === 'AA') return 'AA';
+  if (abbr === 'A+' || abbr === 'HiA') return 'High-A';
+  if (abbr === 'A' || abbr === 'LoA' || abbr === 'A(Short)') return 'Single-A';
+  if (abbr === 'ROK' || abbr === 'Rk') return 'ROK';
+  return 'Other';
 }
 
 function splitsToRow(splits: any[], group: string, isMLB: boolean): any {
@@ -51,7 +55,7 @@ function splitsToRow(splits: any[], group: string, isMLB: boolean): any {
   const level = isMLB ? 'MLB' : (() => {
     const abbrs = splits.map((s: any) => s.sport?.abbreviation ?? '')
     for (const lv of LEVEL_ORDER) {
-      if (abbrs.some((a: string) => sportAbbrToLevel(a) === lv)) return lv
+      if (abbrs.some((a: string) => sportAbbrToLevel({abbreviation: a}) === lv)) return lv
     }
     return 'MiLB'
   })()

@@ -25,15 +25,19 @@ function fmt3(n) {
   return n.toFixed(3).replace(/^0\./, '.')
 }
 
-const LEVEL_ORDER = ['AAA','AA','A+','A','ROK']
+const LEVEL_ORDER = ['AAA','AA','High-A','Single-A','ROK','DSL']
 
-function sportAbbrToLevel(abbr) {
-  if (abbr === 'AAA') return 'AAA'
-  if (abbr === 'AA') return 'AA'
-  if (abbr === 'A+' || abbr === 'HiA') return 'A+'
-  if (abbr === 'A' || abbr === 'LoA' || abbr === 'A(Short)') return 'A'
-  if (abbr === 'ROK' || abbr === 'Rk') return 'ROK'
-  return 'Other'
+const SPORT_ID_TO_LEVEL = { 1: 'MLB', 11: 'AAA', 12: 'AA', 13: 'High-A', 14: 'Single-A', 15: 'ROK', 16: 'DSL', 17: 'ROK', 19: 'ROK' };
+function sportAbbrToLevel(sport) {
+  if (!sport) return 'Other';
+  if (sport.id && SPORT_ID_TO_LEVEL[sport.id]) return SPORT_ID_TO_LEVEL[sport.id];
+  const abbr = sport.abbreviation || '';
+  if (abbr === 'AAA') return 'AAA';
+  if (abbr === 'AA') return 'AA';
+  if (abbr === 'A+' || abbr === 'HiA') return 'High-A';
+  if (abbr === 'A' || abbr === 'LoA' || abbr === 'A(Short)') return 'Single-A';
+  if (abbr === 'ROK' || abbr === 'Rk') return 'ROK';
+  return 'Other';
 }
 
 function splitsToRow(splits, group, isMLB) {
@@ -62,9 +66,9 @@ function splitsToRow(splits, group, isMLB) {
   }
 
   const level = isMLB ? 'MLB' : (() => {
-    const abbrs = splits.map(s => s.sport?.abbreviation ?? '')
+    const levels = splits.map(s => sportAbbrToLevel(s.sport))
     for (const lv of LEVEL_ORDER) {
-      if (abbrs.some(a => sportAbbrToLevel(a) === lv)) return lv
+      if (levels.includes(lv)) return lv
     }
     return 'MiLB'
   })()

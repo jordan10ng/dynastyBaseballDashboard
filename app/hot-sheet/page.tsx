@@ -1,4 +1,5 @@
 'use client'
+import { fmtLevel } from '@/lib/players-config'
 import { useState, useEffect, useMemo } from 'react'
 import { PlayerDrawer } from '../../components/players/PlayerDrawer'
 import { useDrawerData } from '../../lib/useDrawerData'
@@ -159,7 +160,7 @@ export default function HotSheetPage() {
             const pOwn = globalOwnership[r.id] || {}
             const myTeamOwned = Object.values(pOwn).includes(MY_TEAM)
             const ms = player?.model_scores
-            const level = statsMap[r.id]?._level ?? '—'
+            const level = fmtLevel(statsMap[r.id]?._level)
             const statLine = fmtStatLine(r, tab, statsMap)
             const toolLine = fmtToolLine(ms, tab)
 
@@ -297,7 +298,7 @@ export default function HotSheetPage() {
                   </div>
                 </div>
                 <div style={{ textAlign: 'right', fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.72rem', color: 'var(--muted)' }}>
-                  {statsMap[r.id]?._level ?? '—'}
+                  {fmtLevel(statsMap[r.id]?._level)}
                 </div>
                 {tab === 'bats' ? <>
                   <div style={{ textAlign: 'right', fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.78rem', color: toolColor(ms?.hit ?? null) }}>{ms?.hit ?? '—'}</div>

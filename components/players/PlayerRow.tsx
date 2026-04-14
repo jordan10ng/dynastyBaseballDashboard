@@ -1,4 +1,5 @@
 'use client'
+import { fmtLevel } from '@/lib/players-config'
 import { memo } from 'react'
 
 const MY_TEAM = 'Winston Salem Dash'
@@ -120,7 +121,7 @@ export const PlayerRow = memo(function PlayerRow({
             {isMinors && <span style={{ color: '#4ade80', fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: '0.7rem', flexShrink: 0 }}>M</span>}
             {batArmsFilter === 'all' && (
               <span style={{ fontSize: '0.68rem', color: 'var(--muted)', fontFamily: 'var(--font-display)', fontWeight: 600, whiteSpace: 'nowrap', flexShrink: 0 }}>
-                {[cleanPositions(player.positions), player.team, stats?._level ?? player.level].filter(Boolean).join(' · ')}
+                {[cleanPositions(player.positions), player.team, fmtLevel(stats?._level ?? player.level)].filter(Boolean).join(' · ')}
               </span>
             )}
             <div style={{ display: 'flex', gap: '4px', flexShrink: 0 }}>
@@ -155,7 +156,7 @@ export const PlayerRow = memo(function PlayerRow({
       )}
       {batArmsFilter !== 'all' && showExtraCol && (
         <div style={{ fontSize: '0.72rem', color: 'var(--muted)', fontFamily: 'var(--font-display)', fontWeight: 600 }}>
-          {stats?._level ?? '—'}
+          {fmtLevel(stats?._level)}
         </div>
       )}
 
