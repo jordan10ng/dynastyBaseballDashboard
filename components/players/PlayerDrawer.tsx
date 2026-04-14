@@ -187,10 +187,17 @@ export function PlayerDrawer({ player, onClose, globalOwnership, minorsIds, mlbT
     const group=pitch?'pitching':'hitting', season=new Date().getFullYear(), playerType=pitch?'pitcher':'batter'
     Promise.all([
       fetch(`https://statsapi.mlb.com/api/v1/people/${mlbamId}/stats?stats=statSplits&group=${group}&season=${season}&sitCodes=vl,vr,h,a&gameType=R`).then(r=>r.json()),
+      fetch(`https://statsapi.mlb.com/api/v1/people/${mlbamId}/stats?stats=statSplits&group=${group}&season=${season}&sitCodes=vl,vr,h,a&gameType=R&leagueListId=milb_all`).then(r=>r.json()),
       fetch(`https://statsapi.mlb.com/api/v1/people/${mlbamId}/stats?stats=gameLog&group=${group}&season=${season}&gameType=R`).then(r=>r.json()),
-    ]).then(([situData,gameLogData])=>{
-      setSituSplits(situData.stats?.[0]?.splits??[])
-      const logs=gameLogData.stats?.[0]?.splits??[]
+      fetch(`https://statsapi.mlb.com/api/v1/people/${mlbamId}/stats?stats=gameLog&group=${group}&season=${season}&gameType=R&leagueListId=milb_all`).then(r=>r.json()),
+    ]).then(([situData,milbSituData,gameLogData,milbGameLogData])=>{
+      const mlbSitu=situData.stats?.[0]?.splits??[]
+      const milbSitu=milbSituData.stats?.[0]?.splits??[]
+      const mergedSitu=mlbSitu.length>0?mlbSitu:milbSitu
+      setSituSplits(mergedSitu)
+      const mlbLogs=gameLogData.stats?.[0]?.splits??[]
+      const milbLogs=milbGameLogData.stats?.[0]?.splits??[]
+      const logs=[...mlbLogs,...milbLogs]
       const cutoff=new Date(); cutoff.setDate(cutoff.getDate()-90)
       const recent=logs.filter((g:any)=>g.date&&new Date(g.date)>=cutoff)
       recent.sort((a:any,b:any)=>(b.date??'').localeCompare(a.date??''))
@@ -227,7 +234,7 @@ export function PlayerDrawer({ player, onClose, globalOwnership, minorsIds, mlbT
   const batHeaders=['Year','Team','Lev','G','BA','OBP','SLG','OPS','SO','BB','PA','AB','H','2B','3B','HR','R','RBI','SB','CS','ISO','K%','BB%','XBH%']
   const pitchHeaders=['Year','Team','Lev','G','W-L','IP','BAA','ERA','WHIP','H','R','ER','HR','BB','SO','K%','BB%','K-BB%']
   const headers=pitch?pitchHeaders:batHeaders
-  const splitLabels:Record<string,string>={vl:'vs LHP',vr:'vs RHP',h:'Home',a:'Away'}
+  const splitLabels:Record<string,string>=pitch?{vl:'vs LHB',vr:'vs RHB',h:'Home',a:'Away'}:{vl:'vs LHP',vr:'vs RHP',h:'Home',a:'Away'}
 
   function calcISO(st:any){if(!st?.slg||!st?.avg)return '—';return(parseFloat('0'+st.slg)-parseFloat('0'+st.avg)).toFixed(3).replace(/^0\./,'.')}
   function calcXBHPct(st:any){if(!st?.atBats)return '—';return(((st.doubles??0)+(st.triples??0)+(st.homeRuns??0))/st.atBats*100).toFixed(1)+'%'}
@@ -312,7 +319,7 @@ export function PlayerDrawer({ player, onClose, globalOwnership, minorsIds, mlbT
                 </table>
               </div>
             )}
-            {mlbamId&&!drawerLoading&&(<><SectionHeader title="Recent — L7 / L30 / L90"/>{extraLoading?<div style={{color:'var(--muted)',fontSize:'0.85rem'}}>Loading...</div>:renderRecentTable()}<SectionHeader title="Splits — vs L/R · Home/Away"/>{extraLoading?<div style={{color:'var(--muted)',fontSize:'0.85rem'}}>Loading...</div>:renderSplitTable()}<SectionHeader title="Game Log — Last 90 Days"/>{extraLoading?<div style={{color:'var(--muted)',fontSize:'0.85rem'}}>Loading...</div>:renderGameLog()}</>)}
+            {mlbamId&&!drawerLoading&&(<><SectionHeader title="Recent — L7 / L30 / L90"/>{extraLoading?<div style={{color:'var(--muted)',fontSize:'0.85rem'}}>Loading...</div>:renderRecentTable()}<SectionHeader title={pitch?"Splits — vs LHB/RHB · Home/Away":"Splits — vs LHP/RHP · Home/Away"}/>{extraLoading?<div style={{color:'var(--muted)',fontSize:'0.85rem'}}>Loading...</div>:renderSplitTable()}<SectionHeader title="Game Log — Last 90 Days"/>{extraLoading?<div style={{color:'var(--muted)',fontSize:'0.85rem'}}>Loading...</div>:renderGameLog()}</>)}
           </>)}
 
           {activeTab==='statcast'&&(
