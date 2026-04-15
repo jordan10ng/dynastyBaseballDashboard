@@ -5,7 +5,7 @@ const HISTORY_DIR = BASE + '/history/'
 const OUT_PATH = BASE + '/model/norms.json'
 
 const YEARS = ['2015','2016','2017','2018','2019','2021','2022','2023','2024','2025','2026']
-const MIN_PA = 50
+const MIN_PA = 0
 const MIN_IP = 20
 const MIN_LEAGUE_N = 50
 const CONFIDENCE_CAP = 200
@@ -184,6 +184,48 @@ for (const [lgk, bucket] of Object.entries(leagueBuckets)) {
     ...summary
   }
   kept++
+}
+
+// Blend current year level norms with prior year based on sample size
+// At n=0 -> 100% prior year. At n>=BLEND_FULL_N -> 100% current year.
+const CURRENT_NORM_YEAR = new Date().getFullYear()
+const BLEND_FULL_N = 400  // n at which current year gets full weight
+
+for (const level of ['DSL','Complex','Rookie','Single-A','High-A','AA','AAA']) {
+  const curKey  = `${level}|${CURRENT_NORM_YEAR}`
+  const prevKey = `${level}|${CURRENT_NORM_YEAR - 1}`
+  const cur  = norms[curKey]
+  const prev = norms[prevKey]
+  if (!prev) continue  // no prior year to blend with
+
+  const curN = cur ? (cur.hitters?.n || cur.pitchers?.n || 0) : 0
+  const blend = Math.min(curN / BLEND_FULL_N, 1.0)  // 0 = all prior, 1 = all current
+
+  const blended = { type: 'level', level, year: String(CURRENT_NORM_YEAR), _blended: true, _blend_weight: +blend.toFixed(3), _cur_n: curN }
+
+  for (const group of ['hitters', 'pitchers']) {
+    const pg = prev[group] || {}
+    const cg = (cur && cur[group]) || {}
+    blended[group] = { n: curN }
+    const stats = group === 'hitters'
+      ? ['avg','obp','slg','ops','iso','k_pct','bb_pct','sb_rate','xbh_rate']
+      : ['era','whip','k_pct','bb_pct','k_bb_pct','baa','ip_per_gs']
+    for (const stat of stats) {
+      const ps = pg[stat]
+      const cs = cg[stat]
+      if (!ps) continue  // no prior year stat, skip
+      if (!cs || curN === 0) {
+        // no current data — use prior year entirely
+        blended[group][stat] = ps
+      } else {
+        // blend mean and stdev
+        const mean  = blend * cs.mean  + (1 - blend) * ps.mean
+        const stdev = blend * cs.stdev + (1 - blend) * ps.stdev
+        blended[group][stat] = { mean: +mean.toFixed(4), stdev: +stdev.toFixed(4), n: curN }
+      }
+    }
+  }
+  norms[curKey] = blended
 }
 
 fs.mkdirSync(BASE + '/model', { recursive: true })
