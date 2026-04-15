@@ -1,9 +1,9 @@
 """
 build-regression.py
-Builds a blended prospect scoring model using per-level correlation weights.
+Two-feature regression: pred = slope_z * z + slope_age * age_diff + intercept
 Output: data/model/regression.json
 """
-import json, os, glob, math
+import json, os, glob
 from collections import defaultdict
 import numpy as np
 from datetime import datetime
@@ -12,19 +12,18 @@ BASE         = os.environ.get('DATA_BASE', os.path.expanduser('~/Desktop/fantasy
 PLAYERS_PATH = os.path.join(BASE, 'players.json')
 NORMS_PATH   = os.path.join(BASE, 'model', 'norms.json')
 TOOLS_PATH   = os.path.join(BASE, 'model', 'mlb-tools.json')
-ELAST_PATH   = os.path.join(BASE, 'model', 'age-elasticity.json')
 REGR_PATH    = os.path.join(BASE, 'model', 'regression.json')
 
-with open(PLAYERS_PATH) as f: players    = json.load(f)
-with open(NORMS_PATH)   as f: norms      = json.load(f)
-with open(TOOLS_PATH)   as f: mlb_tools  = json.load(f)
-with open(ELAST_PATH)   as f: elasticity = json.load(f)
+with open(PLAYERS_PATH) as f: players   = json.load(f)
+with open(NORMS_PATH)   as f: norms     = json.load(f)
+with open(TOOLS_PATH)   as f: mlb_tools = json.load(f)
 
 VALID_YEARS  = {2015,2016,2017,2018,2019,2021,2022,2023,2024,2025}
-AVG_AGES     = {'AAA':26.5,'AA':24.5,'High-A':23.0,'Single-A':21.5,
-                'Complex':19.5,'DSL':17.5,'Rookie':20.0}
+AVG_AGES     = {'AAA':26.4,'AA':24.0,'High-A':22.6,'Single-A':21.3,
+                'Complex':19.9,'DSL':17.9,'Rookie':20.4}
 MILB_LEVELS  = set(AVG_AGES.keys())
 LEVELS_ORDER = ['DSL','Complex','Rookie','Single-A','High-A','AA','AAA']
+SPEED_STATS  = {'sb_rate'}
 
 TOOL_STATS = {
     'hit':     ('hitter',  ['k_pct','bb_pct']),
@@ -62,14 +61,6 @@ def get_age(dob, year):
         return age
     except: return None
 
-AGE_C = {'hitter': 0.15, 'pitcher': 0.10}
-SPEED_STATS = {'sb_rate'}
-
-def get_age_weight(is_p, stat, age_diff):
-    if stat in SPEED_STATS: return 1.0
-    c = AGE_C['pitcher'] if is_p else AGE_C['hitter']
-    return math.exp(c * age_diff)
-
 obs = defaultdict(lambda: defaultdict(lambda: defaultdict(list)))
 
 for mlbam, tools in mlb_tools.items():
@@ -99,7 +90,6 @@ for mlbam, tools in mlb_tools.items():
             pa = sample
             raw['k_pct']   = (s.get('so') or 0) / pa
             raw['bb_pct']  = (s.get('bb') or 0) / pa
-            raw['avg']     = float(s.get('avg') or 0)
             raw['iso']     = float(s.get('slg') or 0) - float(s.get('avg') or 0)
             tob = (s.get('h') or 0) + (s.get('bb') or 0) + (s.get('hbp') or 0)
             raw['sb_rate'] = (s.get('sb') or 0) / tob if tob > 0 else 0
@@ -123,15 +113,13 @@ for mlbam, tools in mlb_tools.items():
                 if (not is_p and stat == 'k_pct') or (is_p and stat == 'bb_pct'):
                     z = -z
 
-                age_w    = get_age_weight(is_p, stat, age_diff)
-                w_sample = sample * age_w
-                obs[tool][level][stat].append((z, outcome, w_sample))
+                obs[tool][level][stat].append((z, age_diff, outcome, sample))
 
 MIN_N = 20
 level_models = {}
 
 print('='*75)
-print('  FITTED MODELS PER TOOL × LEVEL × STAT')
+print('  FITTED MODELS PER TOOL x LEVEL x STAT  (slope_z, slope_age, intercept)')
 print('='*75)
 
 for tool, (ptype, stats) in TOOL_STATS.items():
@@ -139,8 +127,8 @@ for tool, (ptype, stats) in TOOL_STATS.items():
     print(f'\n{"─"*75}')
     print(f'  {tool.upper()}+  ({ptype})')
     print(f'{"─"*75}')
-    print(f'  {"level":<12} {"stat":<10} {"corr":>7} {"slope":>8} {"intercept":>10} {"n":>6}')
-    print(f'  {"-"*55}')
+    print(f'  {"level":<12} {"stat":<10} {"corr":>7} {"slope_z":>9} {"slope_age":>10} {"intercept":>10} {"n":>6}')
+    print(f'  {"-"*62}')
 
     for level in LEVELS_ORDER:
         level_models[tool][level] = {}
@@ -148,25 +136,32 @@ for tool, (ptype, stats) in TOOL_STATS.items():
             pairs = obs[tool][level][stat]
             n = len(pairs)
             if n < MIN_N:
-                print(f'  {level:<12} {stat:<10} {"--":>7} {"--":>8} {"--":>10} {n:>6}  (insufficient)')
+                print(f'  {level:<12} {stat:<10} {"--":>7} {"--":>9} {"--":>10} {"--":>10} {n:>6}  (insufficient)')
                 continue
 
             zs       = np.array([p[0] for p in pairs])
-            outcomes = np.array([p[1] for p in pairs])
-            samples  = np.array([p[2] for p in pairs])
+            ages     = np.array([p[1] for p in pairs])
+            outcomes = np.array([p[2] for p in pairs])
 
             corr = float(np.corrcoef(zs, outcomes)[0,1])
-            X    = np.column_stack([zs, np.ones(len(zs))])
-            coef, _, _, _ = np.linalg.lstsq(X, outcomes, rcond=None)
-            slope, intercept = float(coef[0]), float(coef[1])
+
+            if stat in SPEED_STATS:
+                X = np.column_stack([zs, np.ones(n)])
+                coef, _, _, _ = np.linalg.lstsq(X, outcomes, rcond=None)
+                slope_z, slope_age, intercept = float(coef[0]), 0.0, float(coef[1])
+            else:
+                X = np.column_stack([zs, ages, np.ones(n)])
+                coef, _, _, _ = np.linalg.lstsq(X, outcomes, rcond=None)
+                slope_z, slope_age, intercept = float(coef[0]), float(coef[1]), float(coef[2])
 
             level_models[tool][level][stat] = {
-                'slope':     round(slope, 4),
+                'slope_z':   round(slope_z, 4),
+                'slope_age': round(slope_age, 4),
                 'intercept': round(intercept, 4),
                 'corr':      round(corr, 4),
                 'n':         n,
             }
-            print(f'  {level:<12} {stat:<10} {corr:>7.3f} {slope:>8.3f} {intercept:>10.3f} {n:>6}')
+            print(f'  {level:<12} {stat:<10} {corr:>7.3f} {slope_z:>9.3f} {slope_age:>10.3f} {intercept:>10.3f} {n:>6}')
 
 print(f'\n{"="*75}')
 print('  VALIDATION: R² on training set per tool')
@@ -199,7 +194,6 @@ def score_player_tool(mlbam, is_p, tool, player):
             pa = sample
             raw['k_pct']   = (s.get('so') or 0) / pa
             raw['bb_pct']  = (s.get('bb') or 0) / pa
-            raw['avg']     = float(s.get('avg') or 0)
             raw['iso']     = float(s.get('slg') or 0) - float(s.get('avg') or 0)
             tob = (s.get('h') or 0) + (s.get('bb') or 0) + (s.get('hbp') or 0)
             raw['sb_rate'] = (s.get('sb') or 0) / tob if tob > 0 else 0
@@ -220,12 +214,12 @@ def score_player_tool(mlbam, is_p, tool, player):
             if (not is_p and stat == 'k_pct') or (is_p and stat == 'bb_pct'):
                 z = -z
 
-            age_w     = get_age_weight(is_p, stat, age_diff)
-            predicted = model['slope'] * z + model['intercept']
-            weight    = model['corr'] * sample * age_w
+            slope_age = model.get('slope_age', 0.0)
+            predicted = model['slope_z'] * z + slope_age * age_diff + model['intercept']
+            weight    = model['corr'] * sample
 
-            weighted_sum  += predicted * weight
-            total_weight  += weight
+            weighted_sum += predicted * weight
+            total_weight += weight
 
     if total_weight == 0: return None
     return weighted_sum / total_weight
@@ -256,8 +250,8 @@ for tool, (ptype, stats) in TOOL_STATS.items():
     corr    = np.corrcoef(preds, actuals)[0,1]
     print(f'  {tool.upper()}+:  R²={r2:.3f}  corr={corr:.3f}  n={len(preds)}')
 
-output = {'tools': TOOL_STATS, 'models': level_models}
-output['tools'] = {t: {'type': v[0], 'stats': v[1]} for t, v in TOOL_STATS.items()}
+output = {'tools': {t: {'type': v[0], 'stats': v[1]} for t, v in TOOL_STATS.items()},
+          'models': level_models}
 
 with open(REGR_PATH, 'w') as f: json.dump(output, f, indent=2)
 print(f'\nWrote regression.json')

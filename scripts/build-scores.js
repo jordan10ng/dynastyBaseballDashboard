@@ -7,23 +7,18 @@ const PLAYERS_PATH  = path.join(BASE, 'players.json');
 const HOTSHEET_PATH = path.join(BASE, 'model/hot-sheet.json');
 const REGR_PATH     = path.join(BASE, 'model/regression.json');
 const NORMS_PATH    = path.join(BASE, 'model/norms.json');
-const ELAST_PATH    = path.join(BASE, 'model/age-elasticity.json');
 const HISTORY_DIR   = path.join(BASE, 'history');
 
 const regression  = JSON.parse(fs.readFileSync(REGR_PATH, 'utf8'));
 const players     = JSON.parse(fs.readFileSync(PLAYERS_PATH, 'utf8'));
 const norms       = JSON.parse(fs.readFileSync(NORMS_PATH, 'utf8'));
-const elasticity  = JSON.parse(fs.readFileSync(ELAST_PATH, 'utf8'));
 
 const VALID_YEARS   = new Set([2015,2016,2017,2018,2019,2021,2022,2023,2024,2025,2026]);
 const CURRENT_YEAR  = new Date().getFullYear();
 
-// Pool renorm: center=100 (average prospect = 100), stdev=15
-// Shrink toward 88 (prior = below-average MLB)
 const POOL_CENTER   = 100;
 const POOL_STDEV    = 15;
 const SHRINK_TOWARD = 88;
-const AGE_CORR_SCALE = 0.2;
 
 const history = {};
 const histFiles = fs.readdirSync(HISTORY_DIR).filter(f => /^\d{4}\.json$/.test(f));
@@ -40,8 +35,8 @@ for (const file of histFiles) {
 console.log(`  History loaded for ${Object.keys(history).length} players`);
 
 const AVG_AGES = {
-  'AAA': 26.5, 'AA': 24.5, 'High-A': 23.0, 'Single-A': 21.5,
-  'Complex': 19.5, 'DSL': 17.5, 'Rookie': 20.0,
+  'AAA': 26.4, 'AA': 24.0, 'High-A': 22.6, 'Single-A': 21.3,
+  'Complex': 19.9, 'DSL': 17.9, 'Rookie': 20.4,
 };
 const MILB_LEVELS = new Set(Object.keys(AVG_AGES));
 
@@ -59,7 +54,6 @@ const COMPOSITE_WEIGHTS = {
 };
 
 const SHRINK_K = { hitter: 200, pitcher: 80 };
-// Per-stat stabilization points
 const STAT_SHRINK_K = {
   k_pct_hitter: 60, bb_pct_hitter: 120, iso: 120, sb_rate: 60,
   k_pct_pitcher: 20, bb_pct_pitcher: 40,
@@ -89,11 +83,6 @@ function getNorm(level, year) {
     if (entry) return entry;
   }
   return null;
-}
-function getAgeZAdj(isPitcher, level, stat, ageDiff) {
-  const group = isPitcher ? 'pitchers' : 'hitters';
-  const corr = elasticity?.[group]?.[level]?.[stat]?.corr_age_residual ?? 0;
-  return corr * ageDiff * AGE_CORR_SCALE;
 }
 function isRookieEligible(mlbamId, isPitcher) {
   const seasons = history[String(mlbamId)] || [];
@@ -157,10 +146,9 @@ function scoreTool(mlbamId, player, tool, isPitcher) {
       let z = (v - sn.mean) / sn.stdev;
       if ((!isPitcher && stat === 'k_pct') || (isPitcher && stat === 'bb_pct')) z = -z;
 
-      // Age adjustment in z-space, speed exempt
-      if (stat !== 'sb_rate') z += getAgeZAdj(isPitcher, level, stat, ageDiff);
+      const slopeAge = levelModel.slope_age ?? 0;
+      const pred     = levelModel.slope_z * z + slopeAge * ageDiff + levelModel.intercept;
 
-      const pred         = levelModel.slope * z + levelModel.intercept;
       const recencyDecay = Math.pow(0.75, CURRENT_YEAR - year);
       const statConf     = sample / (sample + statShrinkK(stat, isPitcher));
       const weight       = levelModel.corr * statConf * recencyDecay;
@@ -214,7 +202,6 @@ function run() {
     rawPool[id] = { toolScores, toolWeights, totalSample, isPitcher, hasCY: false, cySample: 0 };
   }
 
-  // Pool renorm: center=100, stdev=15 — ranks prospects relative to each other
   const toolVals = {};
   for (const toolList of [['hit','power','speed'],['stuff','control']]) {
     for (const tool of toolList) {
@@ -267,7 +254,6 @@ function run() {
     };
     scored++;
 
-    // ex-CY delta for hot sheet
     {
       let wsumEx = 0, wtotEx = 0, allToolsNoHistory = true, hasCY = false, cySample = 0;
       for (const [tool, w] of Object.entries(weights)) {
