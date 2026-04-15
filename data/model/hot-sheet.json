@@ -202,21 +202,6 @@
       "prevOverall": 97
     },
     {
-      "id": "06zlf",
-      "name": "Anthony DePino",
-      "positions": "1B,INF",
-      "isPit": false,
-      "overall": 103,
-      "sample": 165,
-      "confidence": {
-        "hit": 65,
-        "power": 58,
-        "speed": 73
-      },
-      "delta": 7,
-      "prevOverall": 96
-    },
-    {
       "id": "06qnh",
       "name": "Connor Caskenette",
       "positions": "C",
@@ -292,6 +277,21 @@
       },
       "delta": 6,
       "prevOverall": 99
+    },
+    {
+      "id": "06zlf",
+      "name": "Anthony DePino",
+      "positions": "1B,INF",
+      "isPit": false,
+      "overall": 102,
+      "sample": 165,
+      "confidence": {
+        "hit": 65,
+        "power": 58,
+        "speed": 73
+      },
+      "delta": 6,
+      "prevOverall": 96
     },
     {
       "id": "06yy8",
@@ -599,5 +599,5 @@
       "prevOverall": 98
     }
   ],
-  "generatedAt": "2026-04-15T12:06:37.983Z"
+  "generatedAt": "2026-04-15T14:11:17.882Z"
 }
