@@ -292,17 +292,23 @@ function run() {
     if (!pool.hasCY || pool.allToolsNoHistory || pool.exCYOverall == null) continue;
     const delta = ms.overall - pool.exCYOverall;
     if (delta < MIN_RISER_DELTA) continue;
+    // compute IP/GS from current year MiLB starts
+    const cyRows = (history[String(player.mlbam_id)] || [])
+      .filter(s => s.year === CURRENT_YEAR && MILB_LEVELS.has(s.level) && s.type === 'pitching');
+    const cyIP = cyRows.reduce((sum, s) => sum + ipToFloat(s.ip), 0);
+    const cyGS = cyRows.reduce((sum, s) => sum + (s.gs || 0), 0);
+    const ipPerGs = cyGS > 0 ? cyIP / cyGS : null;
     risers.push({
       id, name: player.name, rank: player.rank, positions: player.positions,
       isPit: pool.isPitcher, overall: ms.overall,
       sample: ms._sample, confidence: ms._confidence,
-      delta, prevOverall: pool.exCYOverall,
+      delta, prevOverall: pool.exCYOverall, ipPerGs,
     });
   }
 
   risers.sort((a, b) => b.delta - a.delta || b.overall - a.overall);
   const hotBats = risers.filter(r => !r.isPit).slice(0, 20);
-  const hotArms = risers.filter(r => r.isPit && (r.positions || '').includes('SP')).slice(0, 20);
+  const hotArms = risers.filter(r => r.isPit && (r.ipPerGs ?? 0) >= 3.0).slice(0, 20);
 
   fs.writeFileSync(HOTSHEET_PATH, JSON.stringify({ bats: hotBats, arms: hotArms, generatedAt: new Date().toISOString() }, null, 2));
   console.log(`Hot sheet written: ${hotBats.length} bats, ${hotArms.length} arms`);

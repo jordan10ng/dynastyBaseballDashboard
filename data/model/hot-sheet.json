@@ -13,7 +13,8 @@
         "speed": 89
       },
       "delta": 9,
-      "prevOverall": 88
+      "prevOverall": 88,
+      "ipPerGs": null
     },
     {
       "id": "05u2m",
@@ -29,7 +30,8 @@
         "speed": 87
       },
       "delta": 8,
-      "prevOverall": 104
+      "prevOverall": 104,
+      "ipPerGs": null
     },
     {
       "id": "06ool",
@@ -45,7 +47,8 @@
         "speed": 86
       },
       "delta": 8,
-      "prevOverall": 90
+      "prevOverall": 90,
+      "ipPerGs": null
     },
     {
       "id": "062jb",
@@ -61,7 +64,8 @@
         "speed": 91
       },
       "delta": 6,
-      "prevOverall": 107
+      "prevOverall": 107,
+      "ipPerGs": null
     },
     {
       "id": "05jqp",
@@ -76,7 +80,8 @@
         "speed": 97
       },
       "delta": 6,
-      "prevOverall": 97
+      "prevOverall": 97,
+      "ipPerGs": null
     },
     {
       "id": "06qth",
@@ -91,7 +96,8 @@
         "speed": 88
       },
       "delta": 6,
-      "prevOverall": 97
+      "prevOverall": 97,
+      "ipPerGs": null
     },
     {
       "id": "06mx1",
@@ -107,7 +113,8 @@
         "speed": 89
       },
       "delta": 6,
-      "prevOverall": 92
+      "prevOverall": 92,
+      "ipPerGs": null
     },
     {
       "id": "06zlf",
@@ -122,7 +129,8 @@
         "speed": 73
       },
       "delta": 6,
-      "prevOverall": 92
+      "prevOverall": 92,
+      "ipPerGs": null
     },
     {
       "id": "06pi0",
@@ -138,7 +146,8 @@
         "speed": 88
       },
       "delta": 5,
-      "prevOverall": 107
+      "prevOverall": 107,
+      "ipPerGs": null
     },
     {
       "id": "066ir",
@@ -154,7 +163,8 @@
         "speed": 93
       },
       "delta": 5,
-      "prevOverall": 104
+      "prevOverall": 104,
+      "ipPerGs": null
     },
     {
       "id": "04nb4",
@@ -170,7 +180,8 @@
         "speed": 97
       },
       "delta": 5,
-      "prevOverall": 103
+      "prevOverall": 103,
+      "ipPerGs": null
     },
     {
       "id": "05y34",
@@ -185,7 +196,8 @@
         "speed": 97
       },
       "delta": 5,
-      "prevOverall": 101
+      "prevOverall": 101,
+      "ipPerGs": null
     },
     {
       "id": "06q33",
@@ -201,7 +213,8 @@
         "speed": 77
       },
       "delta": 5,
-      "prevOverall": 99
+      "prevOverall": 99,
+      "ipPerGs": null
     },
     {
       "id": "060g5",
@@ -216,7 +229,8 @@
         "speed": 89
       },
       "delta": 5,
-      "prevOverall": 99
+      "prevOverall": 99,
+      "ipPerGs": null
     },
     {
       "id": "06qrh",
@@ -231,7 +245,8 @@
         "speed": 74
       },
       "delta": 5,
-      "prevOverall": 96
+      "prevOverall": 96,
+      "ipPerGs": null
     },
     {
       "id": "06qux",
@@ -246,7 +261,8 @@
         "speed": 89
       },
       "delta": 5,
-      "prevOverall": 95
+      "prevOverall": 95,
+      "ipPerGs": null
     },
     {
       "id": "06yy8",
@@ -261,7 +277,8 @@
         "speed": 62
       },
       "delta": 5,
-      "prevOverall": 94
+      "prevOverall": 94,
+      "ipPerGs": null
     },
     {
       "id": "06qig",
@@ -276,7 +293,8 @@
         "speed": 82
       },
       "delta": 5,
-      "prevOverall": 93
+      "prevOverall": 93,
+      "ipPerGs": null
     },
     {
       "id": "06hps",
@@ -291,7 +309,8 @@
         "speed": 92
       },
       "delta": 5,
-      "prevOverall": 93
+      "prevOverall": 93,
+      "ipPerGs": null
     },
     {
       "id": "066co",
@@ -306,38 +325,11 @@
         "speed": 93
       },
       "delta": 5,
-      "prevOverall": 92
+      "prevOverall": 92,
+      "ipPerGs": null
     }
   ],
   "arms": [
-    {
-      "id": "06mwg",
-      "name": "Jacob Kmatz",
-      "positions": "SP",
-      "isPit": true,
-      "overall": 97,
-      "sample": 117,
-      "confidence": {
-        "stuff": 85,
-        "control": 75
-      },
-      "delta": 9,
-      "prevOverall": 88
-    },
-    {
-      "id": "05rht",
-      "name": "Alejandro Hidalgo",
-      "positions": "SP",
-      "isPit": true,
-      "overall": 105,
-      "sample": 216,
-      "confidence": {
-        "stuff": 92,
-        "control": 84
-      },
-      "delta": 8,
-      "prevOverall": 97
-    },
     {
       "id": "060vg",
       "name": "Jake Brooks",
@@ -350,21 +342,38 @@
         "control": 86
       },
       "delta": 8,
-      "prevOverall": 97
+      "prevOverall": 97,
+      "ipPerGs": 5.5
     },
     {
-      "id": "06s3r",
-      "name": "Jervis Alfaro",
-      "positions": "SP",
+      "id": "05r0t",
+      "name": "Anderson Severino",
+      "positions": "RP",
       "isPit": true,
-      "overall": 100,
-      "sample": 206,
+      "overall": 95,
+      "sample": 270,
       "confidence": {
-        "stuff": 91,
-        "control": 84
+        "stuff": 93,
+        "control": 87
+      },
+      "delta": 8,
+      "prevOverall": 87,
+      "ipPerGs": 7.333333333333333
+    },
+    {
+      "id": "06rtp",
+      "name": "Mike Paredes",
+      "positions": "RP",
+      "isPit": true,
+      "overall": 104,
+      "sample": 335,
+      "confidence": {
+        "stuff": 94,
+        "control": 89
       },
       "delta": 7,
-      "prevOverall": 93
+      "prevOverall": 97,
+      "ipPerGs": 5.833333333333333
     },
     {
       "id": "06kru",
@@ -379,7 +388,8 @@
         "control": 70
       },
       "delta": 7,
-      "prevOverall": 90
+      "prevOverall": 90,
+      "ipPerGs": 3.8333333333333335
     },
     {
       "id": "068xx",
@@ -393,7 +403,8 @@
         "control": 85
       },
       "delta": 6,
-      "prevOverall": 97
+      "prevOverall": 97,
+      "ipPerGs": 5.833333333333333
     },
     {
       "id": "06fzc",
@@ -407,7 +418,23 @@
         "control": 83
       },
       "delta": 6,
-      "prevOverall": 92
+      "prevOverall": 92,
+      "ipPerGs": 3.8333333333333335
+    },
+    {
+      "id": "06qqy",
+      "name": "Tyler Switalski",
+      "positions": "RP",
+      "isPit": true,
+      "overall": 98,
+      "sample": 105,
+      "confidence": {
+        "stuff": 84,
+        "control": 72
+      },
+      "delta": 6,
+      "prevOverall": 92,
+      "ipPerGs": 8
     },
     {
       "id": "06qu7",
@@ -421,7 +448,8 @@
         "control": 73
       },
       "delta": 6,
-      "prevOverall": 91
+      "prevOverall": 91,
+      "ipPerGs": 5.333333333333333
     },
     {
       "id": "06fzl",
@@ -435,21 +463,8 @@
         "control": 87
       },
       "delta": 5,
-      "prevOverall": 97
-    },
-    {
-      "id": "06hpq",
-      "name": "Hayden Snelsire",
-      "positions": "SP,RP",
-      "isPit": true,
-      "overall": 102,
-      "sample": 133,
-      "confidence": {
-        "stuff": 87,
-        "control": 77
-      },
-      "delta": 5,
-      "prevOverall": 97
+      "prevOverall": 97,
+      "ipPerGs": 9
     },
     {
       "id": "06qp2",
@@ -464,21 +479,23 @@
         "control": 62
       },
       "delta": 5,
-      "prevOverall": 96
+      "prevOverall": 96,
+      "ipPerGs": 8
     },
     {
-      "id": "06c7a",
-      "name": "Jesus Tillero",
-      "positions": "SP",
+      "id": "06qo0",
+      "name": "Troy Guthrie",
+      "positions": "RP",
       "isPit": true,
       "overall": 101,
-      "sample": 116,
+      "sample": 50,
       "confidence": {
-        "stuff": 85,
-        "control": 74
+        "stuff": 72,
+        "control": 56
       },
       "delta": 5,
-      "prevOverall": 96
+      "prevOverall": 96,
+      "ipPerGs": 7
     },
     {
       "id": "06kzb",
@@ -492,35 +509,8 @@
         "control": 71
       },
       "delta": 5,
-      "prevOverall": 96
-    },
-    {
-      "id": "06iey",
-      "name": "Luis Arestigueta",
-      "positions": "SP",
-      "isPit": true,
-      "overall": 98,
-      "sample": 141,
-      "confidence": {
-        "stuff": 88,
-        "control": 78
-      },
-      "delta": 5,
-      "prevOverall": 93
-    },
-    {
-      "id": "06c4x",
-      "name": "Francis Texido",
-      "positions": "SP,RP",
-      "isPit": true,
-      "overall": 97,
-      "sample": 259,
-      "confidence": {
-        "stuff": 93,
-        "control": 87
-      },
-      "delta": 5,
-      "prevOverall": 92
+      "prevOverall": 96,
+      "ipPerGs": 8
     },
     {
       "id": "06578",
@@ -534,7 +524,8 @@
         "control": 84
       },
       "delta": 4,
-      "prevOverall": 103
+      "prevOverall": 103,
+      "ipPerGs": 3.5
     },
     {
       "id": "04eoi",
@@ -548,7 +539,8 @@
         "control": 88
       },
       "delta": 4,
-      "prevOverall": 102
+      "prevOverall": 102,
+      "ipPerGs": 8.666666666666666
     },
     {
       "id": "06kkm",
@@ -562,7 +554,8 @@
         "control": 79
       },
       "delta": 4,
-      "prevOverall": 101
+      "prevOverall": 101,
+      "ipPerGs": 4.333333333333333
     },
     {
       "id": "06qug",
@@ -576,7 +569,8 @@
         "control": 74
       },
       "delta": 4,
-      "prevOverall": 100
+      "prevOverall": 100,
+      "ipPerGs": 4.5
     },
     {
       "id": "06qny",
@@ -590,8 +584,55 @@
         "control": 66
       },
       "delta": 4,
-      "prevOverall": 99
+      "prevOverall": 99,
+      "ipPerGs": 4.666666666666667
+    },
+    {
+      "id": "066cw",
+      "name": "Brett Gillis",
+      "positions": "SP",
+      "isPit": true,
+      "overall": 102,
+      "sample": 63,
+      "confidence": {
+        "stuff": 76,
+        "control": 61
+      },
+      "delta": 4,
+      "prevOverall": 98,
+      "ipPerGs": 4.333333333333333
+    },
+    {
+      "id": "05ubl",
+      "name": "Gabriel Hughes",
+      "rank": 1752,
+      "positions": "SP",
+      "isPit": true,
+      "overall": 99,
+      "sample": 190,
+      "confidence": {
+        "stuff": 90,
+        "control": 83
+      },
+      "delta": 4,
+      "prevOverall": 95,
+      "ipPerGs": 7.333333333333333
+    },
+    {
+      "id": "06hes",
+      "name": "Braydon Tucker",
+      "positions": "SP",
+      "isPit": true,
+      "overall": 97,
+      "sample": 225,
+      "confidence": {
+        "stuff": 92,
+        "control": 85
+      },
+      "delta": 4,
+      "prevOverall": 93,
+      "ipPerGs": 4.5
     }
   ],
-  "generatedAt": "2026-04-15T23:13:48.147Z"
+  "generatedAt": "2026-04-16T00:48:26.063Z"
 }
