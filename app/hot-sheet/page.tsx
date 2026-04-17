@@ -211,7 +211,7 @@ export default function HotSheetPage() {
                     <div style={{ display: 'flex', gap: '3px', flexShrink: 0 }}>
                       {LEAGUES.map(league => {
                         const teamName = pOwn[league.id]
-                        const fc = league.id === D52_ID ? friendColor(teamName) : null
+                        const fc = league.id === D52_ID ? friendColor(teamName) : friendColor(MY_TEAM === teamName ? teamName : undefined)
                         const color = teamName ? (fc ?? '#eab308') : '#ef4444'
                         return <div key={league.id} style={{ width: '5px', height: '5px', borderRadius: '50%', background: color, opacity: 0.85 }} />
                       })}
@@ -303,7 +303,7 @@ export default function HotSheetPage() {
                     <div style={{ display: 'flex', gap: '3px', flexShrink: 0 }}>
                       {LEAGUES.map(league => {
                         const teamName = pOwn[league.id]
-                        const fc = league.id === D52_ID ? friendColor(teamName) : null
+                        const fc = league.id === D52_ID ? friendColor(teamName) : friendColor(MY_TEAM === teamName ? teamName : undefined)
                         const color = teamName ? (fc ?? '#eab308') : '#ef4444'
                         return <div key={league.id} title={`${league.label}: ${teamName || 'FA'}`}
                           style={{ width: '5px', height: '5px', borderRadius: '50%', background: color, opacity: 0.85 }} />

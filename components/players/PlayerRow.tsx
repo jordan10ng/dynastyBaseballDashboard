@@ -144,7 +144,7 @@ export const PlayerRow = memo(function PlayerRow({
             <div style={{ display: 'flex', gap: '4px', flexShrink: 0 }}>
               {LEAGUES.map(league => {
                 const teamName = pOwnership[league.id]
-                const fc = league.id === 'd3prsagvmgftfdc3' ? friendColor(teamName) : null
+                const fc = league.id === 'd3prsagvmgftfdc3' ? friendColor(teamName) : friendColor(MY_TEAM === teamName ? teamName : undefined)
                 const circleColor = teamName ? (fc ?? '#eab308') : '#ef4444'
                 return (
                   <div key={league.id} title={`${league.label}: ${teamName || 'FA'}`}

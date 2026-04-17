@@ -640,7 +640,22 @@ export default function PlayersPage() {
         <div style={{ display: 'flex', gap: '0.4rem', marginBottom: '1.25rem', borderBottom: '1px solid var(--border)', paddingBottom: '1.25rem', alignItems: 'center', flexWrap: 'wrap' }}>
           <span style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.68rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--muted)', marginRight: 4 }}>Team</span>
           <button onClick={() => toggleTeam('FA')} style={btn(selectedTeam === 'FA')}>Free Agents</button>
-          {leagueTeams.map(t => <button key={t.id} onClick={() => toggleTeam(t.id)} style={btn(selectedTeam === t.id, t.name === MY_TEAM)}>{t.name}</button>)}
+          {leagueTeams.map(t => {
+            const fc = selectedLeague === D52_ID ? FRIEND_TEAMS[t.name] : null
+            const isActive = selectedTeam === t.id
+            const color = fc ?? '#f59e0b'
+            const isOur = !!fc
+            return (
+              <button key={t.id} onClick={() => toggleTeam(t.id)} style={{
+                padding: '0.4rem 0.75rem', borderRadius: 6, border: '1px solid',
+                borderColor: isActive ? color : isOur ? `${color}66` : 'var(--border)',
+                background: isActive ? `${color}1a` : 'transparent',
+                color: isOur ? color : isActive ? '#f59e0b' : 'var(--muted)',
+                fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.75rem',
+                letterSpacing: '0.04em', cursor: 'pointer', whiteSpace: 'nowrap',
+              }}>{t.name}</button>
+            )
+          })}
         </div>
       )}
 
