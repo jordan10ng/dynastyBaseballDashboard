@@ -2,11 +2,36 @@ export function parseStatcastCSV(csv: string): any[] {
   const lines = csv.trim().split('\n')
   if (lines.length < 2) return []
   const headers = lines[0].replace(/"/g, '').split(',')
+
+  function parseCSVLine(line: string): string[] {
+    const result: string[] = []
+    let i = 0
+    while (i < line.length) {
+      if (line[i] === '"') {
+        let j = i + 1
+        while (j < line.length) {
+          if (line[j] === '"' && line[j+1] === '"') { j += 2; continue }
+          if (line[j] === '"') break
+          j++
+        }
+        result.push(line.slice(i+1, j).replace(/""/g, '"'))
+        i = j + 1
+        if (line[i] === ',') i++
+      } else {
+        const end = line.indexOf(',', i)
+        if (end === -1) { result.push(line.slice(i)); break }
+        result.push(line.slice(i, end))
+        i = end + 1
+      }
+    }
+    return result
+  }
+
   return lines.slice(1).map(line => {
-    const vals = line.match(/(".*?"|[^,]+|(?<=,)(?=,)|^(?=,)|(?<=,)$)/g) ?? []
+    const vals = parseCSVLine(line)
     const obj: any = {}
     headers.forEach((h, i) => {
-      const v = (vals[i] ?? '').replace(/^"|"$/g, '').trim()
+      const v = (vals[i] ?? '').trim()
       obj[h] = v === '' ? null : v
     })
     return obj
@@ -15,11 +40,11 @@ export function parseStatcastCSV(csv: string): any[] {
 
 export const PITCH_COLORS: Record<string,string> = {
   'FF':'#ef4444','SI':'#f97316','FC':'#eab308',
-  'SL':'#22c55e','CU':'#06b6d4','SW':'#8b5cf6','KC':'#14b8a6','SV':'#6366f1',
+  'SL':'#22c55e','ST':'#a3e635','CU':'#06b6d4','SW':'#8b5cf6','KC':'#14b8a6','SV':'#6366f1',
   'CH':'#ec4899','FS':'#f43f5e','FO':'#d946ef',
   'CS':'#a78bfa','EP':'#fb923c',
 }
-export const PITCH_ORDER = ['FF','SI','FC','SL','CU','SW','KC','SV','CH','FS','FO','CS','EP']
+export const PITCH_ORDER = ['FF','SI','FC','SL','ST','CU','SW','KC','SV','CH','FS','FO','CS','EP']
 
 export function n(v: any): number { return parseFloat(v) || 0 }
 export function pct(num: number, den: number): string { return den ? (num/den*100).toFixed(1)+'%' : '—' }
