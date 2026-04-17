@@ -210,7 +210,7 @@ Click any player → full screen overlay. Escape or ✕ to close.
 - At season start (n≈0): 100% prior year norms. At ~400 qualifying seasons: 100% current year.
 - Prevents garbage early-season norms from corrupting z-scores (e.g. AA|2026 had n=4 stored vs n=202 actual before fix)
 
-**Hot sheet:** Risers = rookie-eligible players whose overall(with CY) - overall(without CY) ≥ 1. Arms filtered by IP/GS >= 3.0 (excludes relievers regardless of position tag). Sorted by delta desc, then overall.
+**Hot sheet:** Risers = rookie-eligible players whose overall(with CY) - overall(without CY) ≥ 1. Arms filtered by IP/G >= 3.0 (total games denominator, not GS — catches openers, allows RP-tagged starters). Sorted by delta desc, then overall.
 
 **Displayed tools for graduated players:** Blend of MiLB model_scores and mlb-tools.json actuals, weighted by sample (MiLB _sample vs MLB _pa/_bf). Raw ceiling and confidence hidden for blended players.
 
@@ -285,12 +285,35 @@ export async function GET(_req: NextRequest, { params }: { params: Promise<{ id:
   - Weighted by sample: MiLB _sample vs mlb-tools.json _pa/_bf
   - Raw ceiling + confidence hidden in drawer for blended (graduated) players
   - Overall recomputed from blended tools using standard weights
+- **Raw tools view (Apr 2026):** RAW button on players page (Bats/Arms only). Shows pre-shrinkage _raw tool grades. Minors-only — MLB shows —. Sortable. Selecting RAW forces Minors filter; leaving Minors exits RAW.
+- **Friend team colors (Apr 2026):** D52 dots/buttons/league page colored per friend. Jordan green in all leagues. Others D52-only. Ownership filter replaced with named dropdown.
+- **Hot sheet IP/G fix (Apr 2026):** Filter uses total games not GS. Catches openers and RP-tagged starters.
+- **MiLB level resolution fix (Apr 2026):** Both sync files now use sportId fallback. Fixes players labeled MiLB instead of correct level. Backfill applied to 2026.json.
 - **stats.json retired (Apr 2026):**
   - Current season stats now written to history/2026.json (keyed by mlbam_id, array of rows per player)
   - sync-stats-gha.js and api/stats/sync/route.ts both write to history/2026.json
   - api/stats/route.ts bridges mlbam_id → Fantrax ID for players page compatibility
   - GHA commits history/2026.json instead of stats.json
   - Drawer career stats now reflect current season on same sync cycle as model
+
+## Friend Teams (D52 League)
+D52 = "DO MLB - D52" (id: d3prsagvmgftfdc3). Five named teams with assigned colors used for ownership dots, team buttons, and league page highlights:
+- Jordan → Winston Salem Dash → `#22c55e` (green)
+- Matt → Bay Area Bush League → `#a78bfa` (purple)
+- Colin → Team Colin → `#38bdf8` (sky blue)
+- Pat → Team Pat → `#fb923c` (orange)
+- Soo → The Old Gold and Black → `#e879f9` (pink)
+
+Jordan's green applies in ALL leagues (D28, D34, D52). Other friend colors only apply in D52.
+⚠️ FRIEND_TEAMS color map is duplicated in: PlayerRow.tsx, app/players/page.tsx, app/hot-sheet/page.tsx, components/players/PlayerDrawer.tsx, app/leagues/[id]/page.tsx. Keep all in sync when adding/changing teams.
+Ownership filter dropdown: All / Jordan / Matt / Colin / Pat / Soo / FA — all leagues / FA — any league.
+
+## Stats Sync Architecture
+⚠️ Two sync files must stay identical in level resolution logic:
+- `scripts/sync-stats-gha.js` — used by GitHub Actions nightly
+- `app/api/stats/sync/route.ts` — used by local Sync page
+
+Both use SPORT_ID_TO_LEVEL + sportAbbrToLevel() with sportId fallback. If you update level mapping in one, update the other. Fallback chain: sport.id lookup → abbreviation lookup → sportId fallback → 'MiLB'.
 
 ## How We Work
 - **Always start each session by dragging and dropping the full SCOUT_README.md file** — the full context is essential for model work
@@ -301,11 +324,10 @@ export async function GET(_req: NextRequest, { params }: { params: Promise<{ id:
 - Never rewrite entire files — surgical patches only
 - Never hardcode years — use `new Date().getFullYear()` dynamically
 - Before asserting anything about file contents, verify with grep or cat — never assume
-- GHA conflict recovery — ALWAYS run full pipeline after pulling data files from remote:
+- GHA conflict recovery — local is ALWAYS source of truth. Never merge. Force push after rebuilding:
   ```bash
-  git fetch origin
-  git checkout origin/main -- data/history/2026.json data/players.json data/model/norms.json data/model/mlb-tools.json data/model/regression.json data/model/hot-sheet.json data/model/scores-snapshot.json
   node scripts/build-norms.js && python3 scripts/build-regression.py && node scripts/build-scores.js
-  git add -A && git commit -m "..." && git push
+  git add -A && git commit -m "..." && git push --force
   ```
 - Never use `git pull --rebase` — causes detached HEAD
+- Never use `git merge` when GHA has pushed — always `git push --force` after rebuilding locally
