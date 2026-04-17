@@ -3,6 +3,19 @@ import { fmtLevel } from '@/lib/players-config'
 import { memo } from 'react'
 
 const MY_TEAM = 'Winston Salem Dash'
+
+const FRIEND_TEAMS: Record<string, string> = {
+  'Winston Salem Dash':  '#22c55e',
+  'Bay Area Bush League': '#a78bfa',
+  'Team Colin':          '#38bdf8',
+  'Team Pat':            '#fb923c',
+  'The Old Gold and Black': '#e879f9',
+}
+
+function friendColor(teamName: string | undefined): string | null {
+  if (!teamName) return null
+  return FRIEND_TEAMS[teamName] ?? null
+}
 const ARM_POSITIONS = ['SP','RP','P']
 
 const LEAGUES: { id: string; label: string }[] = [
@@ -54,8 +67,10 @@ type PlayerRowProps = {
   showOwnership: boolean
   showStatCols: boolean
   showToolCols: boolean
+  showRawCols: boolean
   activeCols: StatCol[]
   activeToolKeys: string[]
+  activeRawKeys: string[]
   statSortKey: string
   toolSortKey: string
   batArmsFilter: string
@@ -77,8 +92,10 @@ export const PlayerRow = memo(function PlayerRow({
   showOwnership,
   showStatCols,
   showToolCols,
+  showRawCols,
   activeCols,
   activeToolKeys,
+  activeRawKeys,
   statSortKey,
   toolSortKey,
   batArmsFilter,
@@ -127,7 +144,8 @@ export const PlayerRow = memo(function PlayerRow({
             <div style={{ display: 'flex', gap: '4px', flexShrink: 0 }}>
               {LEAGUES.map(league => {
                 const teamName = pOwnership[league.id]
-                const circleColor = teamName ? (teamName === MY_TEAM ? '#22c55e' : '#eab308') : '#ef4444'
+                const fc = league.id === 'd3prsagvmgftfdc3' ? friendColor(teamName) : null
+                const circleColor = teamName ? (fc ?? '#eab308') : '#ef4444'
                 return (
                   <div key={league.id} title={`${league.label}: ${teamName || 'FA'}`}
                     style={{ width: '6px', height: '6px', borderRadius: '50%', background: circleColor, opacity: 0.9 }} />
@@ -212,6 +230,24 @@ export const PlayerRow = memo(function PlayerRow({
           </div>
         )
       })}
+
+      {/* Raw tool columns — minors only */}
+      {showRawCols && activeRawKeys.map(key => {
+        if (pitch && ['hit','power','speed'].includes(key)) return <div key={'raw_'+key} style={{ fontSize: '0.75rem', color: 'rgba(100,100,100,0.35)', textAlign: 'right' as const }}>—</div>
+        if (!pitch && ['stuff','control'].includes(key)) return <div key={'raw_'+key} style={{ fontSize: '0.75rem', color: 'rgba(100,100,100,0.35)', textAlign: 'right' as const }}>—</div>
+        if (!isMinors) return <div key={'raw_'+key} style={{ fontSize: '0.75rem', color: 'rgba(100,100,100,0.35)', textAlign: 'right' as const }}>—</div>
+        const val = tools?._raw?.[key] ?? null
+        const isSorted = toolSortKey === 'raw_'+key
+        return (
+          <div key={'raw_'+key} style={{
+            fontSize: '0.75rem', fontFamily: 'var(--font-display)', fontWeight: 700,
+            color: toolColor(val), textAlign: 'right' as const,
+            opacity: isSorted ? 1 : 0.85,
+          }}>
+            {val ?? '—'}
+          </div>
+        )
+      })}
     </div>
   )
 }, (prev, next) => {
@@ -230,8 +266,10 @@ export const PlayerRow = memo(function PlayerRow({
     prev.showOwnership === next.showOwnership &&
     prev.showStatCols === next.showStatCols &&
     prev.showToolCols === next.showToolCols &&
+    prev.showRawCols === next.showRawCols &&
     prev.activeCols === next.activeCols &&
     prev.activeToolKeys === next.activeToolKeys &&
+    prev.activeRawKeys === next.activeRawKeys &&
     prev.statSortKey === next.statSortKey &&
     prev.toolSortKey === next.toolSortKey
   )

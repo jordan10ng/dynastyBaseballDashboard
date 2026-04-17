@@ -11,6 +11,22 @@ const LEAGUES: { id: string; label: string }[] = [
 ]
 
 const MY_TEAM = 'Winston Salem Dash'
+
+const FRIEND_TEAMS: Record<string, string> = {
+  'Winston Salem Dash':     '#22c55e',
+  'Bay Area Bush League':   '#a78bfa',
+  'Team Colin':             '#38bdf8',
+  'Team Pat':               '#fb923c',
+  'The Old Gold and Black': '#e879f9',
+}
+const FRIEND_NAMES: Record<string, string> = {
+  'Winston Salem Dash':     'Jordan',
+  'Bay Area Bush League':   'Matt',
+  'Team Colin':             'Colin',
+  'Team Pat':               'Pat',
+  'The Old Gold and Black': 'Soo',
+}
+const D52_ID = 'd3prsagvmgftfdc3'
 const BAT_POSITIONS = ['C','1B','2B','SS','3B','INF','LF','CF','RF','OF','UT']
 const ARM_POSITIONS = ['SP','RP','P']
 const ALL_POSITIONS = [...BAT_POSITIONS, ...ARM_POSITIONS]
@@ -209,9 +225,9 @@ function withOverall(t: any): any {
 type StatFilter = { id: number; kind: 'stat' | 'tool'; key: string; min: string; max: string }
 type SortMode = 'rank' | 'position' | 'stat' | 'tool'
 type MinorsFilter = 'all' | 'mlb' | 'minors'
-type OwnFilter = 'all' | 'mine' | 'owned' | 'fa' | 'mine+fa'
+type OwnFilter = 'all' | 'jordan' | 'matt' | 'colin' | 'pat' | 'soo' | 'fa-all' | 'fa-any'
 type BatArmsFilter = 'all' | 'bats' | 'arms'
-type DataView = 'stats' | 'tools'
+type DataView = 'stats' | 'tools' | 'raw'
 
 const TOOL_LABELS: Record<string,string> = { hit:'HIT+', power:'PWR+', speed:'SPD+', stuff:'STF+', control:'CTL+', overall:'OVR+' }
 const BAT_TOOL_KEYS = ['hit','power','speed','overall']
@@ -361,7 +377,8 @@ export default function PlayersPage() {
   )
   const showStatCols = useMemo(() => dataView === 'stats' && batArmsFilter !== 'all', [dataView, batArmsFilter])
   const showToolCols = useMemo(() => dataView === 'tools', [dataView])
-  const showExtraCol = useMemo(() => showStatCols || showToolCols || batArmsFilter === 'all', [showStatCols, showToolCols, batArmsFilter])
+  const showRawCols = useMemo(() => dataView === 'raw' && batArmsFilter !== 'all', [dataView, batArmsFilter])
+  const showExtraCol = useMemo(() => showStatCols || showToolCols || showRawCols || batArmsFilter === 'all', [showStatCols, showToolCols, showRawCols, batArmsFilter])
   const activeToolKeys = useMemo<string[]>(
     () => batArmsFilter === 'bats' ? BAT_TOOL_KEYS : batArmsFilter === 'arms' ? ARM_TOOL_KEYS : ['overall'],
     [batArmsFilter]
@@ -372,11 +389,19 @@ export default function PlayersPage() {
     [batArmsFilter]
   )
 
+  const BAT_RAW_KEYS = ['hit','power','speed']
+  const ARM_RAW_KEYS = ['stuff','control']
+  const activeRawKeys = useMemo<string[]>(
+    () => batArmsFilter === 'bats' ? BAT_RAW_KEYS : batArmsFilter === 'arms' ? ARM_RAW_KEYS : [],
+    [batArmsFilter]
+  )
+
   const availablePositions = useMemo(
     () => batArmsFilter === 'bats' ? BAT_POSITIONS : batArmsFilter === 'arms' ? ARM_POSITIONS : ALL_POSITIONS,
     [batArmsFilter]
   )
 
+  useEffect(() => { if (dataView === 'raw' && minorsFilter !== 'minors') setDataView('tools') }, [minorsFilter])
   useEffect(() => { setSelectedTeam('') }, [selectedLeague])
   useEffect(() => {
     if (!selectedTeam && sortMode === 'position') setSortMode('rank')
@@ -438,16 +463,18 @@ export default function PlayersPage() {
       {
         const pOwn = globalOwnership[p.id] || {}
         const isOwnedAnywhere = Object.keys(pOwn).length > 0
-        const isMineAnywhere = Object.values(pOwn).includes(MY_TEAM)
-        const isOwned = selectedLeague ? !!pOwn[selectedLeague] : isOwnedAnywhere
-        const isMine = selectedLeague ? pOwn[selectedLeague] === MY_TEAM : isMineAnywhere
-        if (ownFilter === 'mine' && !isMine) return false
-        if (ownFilter === 'owned' && !isOwned) return false
-        if (ownFilter === 'fa' && isOwned) return false
-        if (ownFilter === 'mine+fa' && isOwned && !isMine) return false
+        const isOwnedInLeague = (league: string, team: string) => pOwn[league] === team
+        const isOwnedByTeam = (teamName: string) => Object.values(pOwn).includes(teamName)
+        if (ownFilter === 'jordan' && !isOwnedByTeam('Winston Salem Dash')) return false
+        if (ownFilter === 'matt'   && !isOwnedByTeam('Bay Area Bush League')) return false
+        if (ownFilter === 'colin'  && !isOwnedByTeam('Team Colin')) return false
+        if (ownFilter === 'pat'    && !isOwnedByTeam('Team Pat')) return false
+        if (ownFilter === 'soo'    && !isOwnedByTeam('The Old Gold and Black')) return false
+        if (ownFilter === 'fa-all' && isOwnedAnywhere) return false
+        if (ownFilter === 'fa-any' && Object.keys(pOwn).length >= 3) return false
       }
 
-      if (selectedTeam && ownFilter !== 'mine+fa') {
+      if (selectedTeam) {
         const owner = ownershipMap[p.id]
         if (!(owner && selectedTeam === owner.teamId) && !(selectedTeam === 'FA' && !owner)) return false
       }
@@ -488,8 +515,15 @@ export default function PlayersPage() {
 
     if (sortMode === 'tool' && toolSortKey) {
       result = [...result].sort((a, b) => {
-        const va = playerToolsMap[a.id]?.[toolSortKey] ?? null
-        const vb = playerToolsMap[b.id]?.[toolSortKey] ?? null
+        let va, vb
+        if (toolSortKey.startsWith('raw_')) {
+          const rk = toolSortKey.slice(4)
+          va = playerToolsMap[a.id]?._raw?.[rk] ?? null
+          vb = playerToolsMap[b.id]?._raw?.[rk] ?? null
+        } else {
+          va = playerToolsMap[a.id]?.[toolSortKey] ?? null
+          vb = playerToolsMap[b.id]?.[toolSortKey] ?? null
+        }
         if (va == null && vb == null) return 0
         if (va == null) return 1; if (vb == null) return -1
         return vb - va
@@ -544,7 +578,7 @@ export default function PlayersPage() {
     : (showExtraCol
         ? (showOwnership ? `28px 44px 90px ${playerColWidth} 52px 36px 40px 1fr` : `28px 44px 90px ${playerColWidth} 52px 36px 40px`)
         : (showOwnership ? '28px 44px 90px 1fr 52px 36px 1fr' : '28px 44px 90px 1fr 52px 36px'))
-  const statColDef = showStatCols ? activeCols.map(() => '64px').join(' ') + (batArmsFilter === 'all' ? ' 56px' : '') : showToolCols ? activeToolKeys.map(() => '56px').join(' ') : batArmsFilter === 'all' ? '56px' : ''
+  const statColDef = showStatCols ? activeCols.map(() => '64px').join(' ') + (batArmsFilter === 'all' ? ' 56px' : '') : showToolCols ? activeToolKeys.map(() => '56px').join(' ') : showRawCols ? activeRawKeys.map(() => '56px').join(' ') : batArmsFilter === 'all' ? '56px' : ''
   const cols = [baseColDef, statColDef].filter(Boolean).join(' ')
 
   const baseHeaders = batArmsFilter === 'all'
@@ -577,8 +611,10 @@ export default function PlayersPage() {
           showOwnership={showOwnership}
           showStatCols={showStatCols}
           showToolCols={showToolCols}
+          showRawCols={showRawCols}
           activeCols={activeCols}
           activeToolKeys={activeToolKeys}
+          activeRawKeys={activeRawKeys}
           statSortKey={statSortKey}
           toolSortKey={toolSortKey}
           TOOL_LABELS={TOOL_LABELS}
@@ -587,7 +623,7 @@ export default function PlayersPage() {
       </div>
     )
   }, [filtered, statsMap, statLineMap, playerToolsMap, minorsIds, ownershipMap, globalOwnership,
-      cols, showExtraCol, showOwnership, showStatCols, showToolCols, activeCols, activeToolKeys,
+      cols, showExtraCol, showOwnership, showStatCols, showToolCols, showRawCols, activeCols, activeToolKeys, activeRawKeys,
       statSortKey, toolSortKey])
 
   return (
@@ -613,11 +649,16 @@ export default function PlayersPage() {
         <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Search players..."
           style={{ background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 6, padding: '0.4rem 0.75rem', color: 'var(--text)', fontSize: '0.875rem', outline: 'none', width: 200 }} />
 
-        <div style={{ display: 'flex', gap: 4, marginLeft: '0.5rem' }}>
-          {([{ val: 'all', label: 'All' }, { val: 'mine', label: 'Mine' }, { val: 'owned', label: 'Owned' }, { val: 'fa', label: 'FA' }, { val: 'mine+fa', label: 'Mine+FA' }] as { val: OwnFilter; label: string }[]).map(opt => (
-            <button key={opt.val} onClick={() => setOwnFilter(opt.val)} style={btn(ownFilter === opt.val)}>{opt.label}</button>
-          ))}
-        </div>
+        <select value={ownFilter} onChange={e => setOwnFilter(e.target.value as OwnFilter)} style={{ background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 6, padding: '0.4rem 0.6rem', color: 'var(--text)', fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.75rem', cursor: 'pointer', outline: 'none', marginLeft: '0.5rem' }}>
+          <option value="all">All</option>
+          <option value="jordan">Jordan</option>
+          <option value="matt">Matt</option>
+          <option value="colin">Colin</option>
+          <option value="pat">Pat</option>
+          <option value="soo">Soo</option>
+          <option value="fa-all">FA — all leagues</option>
+          <option value="fa-any">FA — any league</option>
+        </select>
 
         <div style={{ display: 'flex', gap: 4, marginLeft: '0.5rem' }}>
           {([{ val: 'all', label: 'All' }, { val: 'mlb', label: 'MLB' }, { val: 'minors', label: 'Minors' }] as { val: MinorsFilter; label: string }[]).map(opt => (
@@ -631,11 +672,13 @@ export default function PlayersPage() {
           ))}
         </div>
 
-        <div style={{ display: 'flex', gap: 4, marginLeft: '0.5rem' }}>
-          {([{ val: 'stats', label: 'Stats' }, { val: 'tools', label: 'Tools' }] as { val: DataView; label: string }[]).map(opt => (
-            <button key={opt.val} onClick={() => { setDataView(opt.val); setStatSortKey(''); setToolSortKey('') }} style={btn(dataView === opt.val)}>{opt.label}</button>
-          ))}
-        </div>
+        {mounted && (
+          <div style={{ display: 'flex', gap: 4, marginLeft: '0.5rem' }}>
+            {([{ val: 'stats', label: 'Stats' }, { val: 'tools', label: 'Tools' }, { val: 'raw', label: 'Raw' }] as { val: DataView; label: string }[]).map(opt => (
+              <button key={opt.val} onClick={() => { setDataView(opt.val); setStatSortKey(''); setToolSortKey(''); if (opt.val === 'raw') setMinorsFilter('minors') }} style={btn(dataView === opt.val)}>{opt.label}</button>
+            ))}
+          </div>
+        )}
 
         <span style={{ color: 'var(--muted)', fontSize: '0.8rem', marginLeft: 'auto' }}>{filtered.length.toLocaleString()} players</span>
       </div>
@@ -833,6 +876,11 @@ export default function PlayersPage() {
               {TOOL_LABELS[key] ?? key}{toolSortKey === key && <span style={{ fontSize: '0.55rem' }}>▼</span>}
             </div>
           ))}
+          {showRawCols && activeRawKeys.map(key => (
+            <div key={'raw_'+key} onClick={() => { if (toolSortKey === 'raw_'+key) { setToolSortKey(''); setSortMode('rank') } else { setToolSortKey('raw_'+key); setSortMode('tool') } }} style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.62rem', letterSpacing: '0.08em', color: toolSortKey === 'raw_'+key ? 'var(--accent)' : 'var(--muted)', cursor: 'pointer', textAlign: 'right', userSelect: 'none', display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: '2px' }}>
+              {(TOOL_LABELS[key] ?? key).replace('+','RAW')}{toolSortKey === 'raw_'+key && <span style={{ fontSize: '0.55rem' }}>▼</span>}
+            </div>
+          ))}
         </div>
         )}
       </div>
@@ -863,8 +911,10 @@ export default function PlayersPage() {
                     showOwnership={showOwnership}
                     showStatCols={showStatCols}
                     showToolCols={showToolCols}
+                    showRawCols={showRawCols}
                     activeCols={activeCols}
                     activeToolKeys={activeToolKeys}
+                    activeRawKeys={activeRawKeys}
                     statSortKey={statSortKey}
                     toolSortKey={toolSortKey}
                     TOOL_LABELS={TOOL_LABELS}

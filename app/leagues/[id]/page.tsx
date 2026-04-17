@@ -10,6 +10,15 @@ const LEAGUE_NAMES: Record<string, string> = {
 
 const MY_TEAM = 'Winston Salem Dash'
 
+const FRIEND_TEAMS: Record<string, string> = {
+  'Winston Salem Dash':     '#22c55e',
+  'Bay Area Bush League':   '#a78bfa',
+  'Team Colin':             '#38bdf8',
+  'Team Pat':               '#fb923c',
+  'The Old Gold and Black': '#e879f9',
+}
+const D52_ID = 'd3prsagvmgftfdc3'
+
 const POS_GROUPS = [
   { label: 'Catchers',    positions: ['C'] },
   { label: 'Infielders',  positions: ['1B','2B','SS','3B','INF'] },
@@ -89,7 +98,7 @@ export default function LeaguePage() {
         </div>
         <div style={{ flex: 1, minWidth: 200 }}>
           <div style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.7rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--muted)', marginBottom: '0.4rem' }}>Team</div>
-          <select value={selectedTeam} onChange={e => setSelectedTeam(e.target.value)} style={{ background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 6, padding: '0.45rem 0.85rem', color: 'var(--text)', fontFamily: 'var(--font-display)', fontWeight: 600, fontSize: '0.85rem', cursor: 'pointer', outline: 'none', minWidth: 220 }}>
+          <select value={selectedTeam} onChange={e => setSelectedTeam(e.target.value)} style={{ background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 6, padding: '0.45rem 0.85rem', color: selectedLeague === D52_ID ? (FRIEND_TEAMS[teams.find((t:any)=>t.id===selectedTeam)?.name??''] ?? 'var(--text)') : 'var(--text)', fontFamily: 'var(--font-display)', fontWeight: 600, fontSize: '0.85rem', cursor: 'pointer', outline: 'none', minWidth: 220 }}>
             {teams.map(t => <option key={t.id} value={t.id}>{t.name}</option>)}
           </select>
         </div>
@@ -106,7 +115,7 @@ export default function LeaguePage() {
       </div>
 
       <div style={{ marginBottom: '1.5rem' }}>
-        <div style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: '1.8rem', letterSpacing: '0.04em', textTransform: 'uppercase' }}>{currentTeam?.name ?? '—'}</div>
+        <div style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: '1.8rem', letterSpacing: '0.04em', textTransform: 'uppercase', color: selectedLeague === D52_ID && currentTeam?.name ? (FRIEND_TEAMS[currentTeam.name] ?? 'var(--text)') : 'var(--text)' }}>{currentTeam?.name ?? '—'}</div>
         <div style={{ color: 'var(--muted)', fontSize: '0.85rem', marginTop: 2 }}>{LEAGUE_NAMES[selectedLeague]} · {roster.length} players</div>
       </div>
 

@@ -11,6 +11,22 @@ const LEAGUES: { id: string; label: string }[] = [
 ]
 const MY_TEAM = 'Winston Salem Dash'
 
+const FRIEND_TEAMS: Record<string, string> = {
+  'Winston Salem Dash':     '#22c55e',
+  'Bay Area Bush League':   '#a78bfa',
+  'Team Colin':             '#38bdf8',
+  'Team Pat':               '#fb923c',
+  'The Old Gold and Black': '#e879f9',
+}
+const D52_ID = 'd3prsagvmgftfdc3'
+function friendColor(teamName: string | undefined): string | null {
+  if (!teamName) return null
+  return FRIEND_TEAMS[teamName] ?? null
+}
+function isOurTeam(teamName: string | undefined): boolean {
+  return !!teamName && teamName in FRIEND_TEAMS
+}
+
 function toolColor(val: number | null): string {
   if (val == null) return 'var(--muted)'
   if (val >= 130) return '#ef4444'
@@ -158,7 +174,7 @@ export default function HotSheetPage() {
           {rows.map((r: any, i: number) => {
             const player = playerMap[r.id]
             const pOwn = globalOwnership[r.id] || {}
-            const myTeamOwned = Object.values(pOwn).includes(MY_TEAM)
+            const myTeamOwned = Object.values(pOwn).some(t => isOurTeam(t))
             const ms = player?.model_scores
             const level = fmtLevel(statsMap[r.id]?._level)
             const statLine = fmtStatLine(r, tab, statsMap)
@@ -195,7 +211,8 @@ export default function HotSheetPage() {
                     <div style={{ display: 'flex', gap: '3px', flexShrink: 0 }}>
                       {LEAGUES.map(league => {
                         const teamName = pOwn[league.id]
-                        const color = teamName ? (teamName === MY_TEAM ? '#22c55e' : '#eab308') : '#ef4444'
+                        const fc = league.id === D52_ID ? friendColor(teamName) : null
+                        const color = teamName ? (fc ?? '#eab308') : '#ef4444'
                         return <div key={league.id} style={{ width: '5px', height: '5px', borderRadius: '50%', background: color, opacity: 0.85 }} />
                       })}
                     </div>
@@ -255,7 +272,7 @@ export default function HotSheetPage() {
           {rows.map((r: any, i: number) => {
             const player = playerMap[r.id]
             const pOwn = globalOwnership[r.id] || {}
-            const myTeamOwned = Object.values(pOwn).includes(MY_TEAM)
+            const myTeamOwned = Object.values(pOwn).some(t => isOurTeam(t))
             const ms = player?.model_scores
 
             return (
@@ -286,7 +303,8 @@ export default function HotSheetPage() {
                     <div style={{ display: 'flex', gap: '3px', flexShrink: 0 }}>
                       {LEAGUES.map(league => {
                         const teamName = pOwn[league.id]
-                        const color = teamName ? (teamName === MY_TEAM ? '#22c55e' : '#eab308') : '#ef4444'
+                        const fc = league.id === D52_ID ? friendColor(teamName) : null
+                        const color = teamName ? (fc ?? '#eab308') : '#ef4444'
                         return <div key={league.id} title={`${league.label}: ${teamName || 'FA'}`}
                           style={{ width: '5px', height: '5px', borderRadius: '50%', background: color, opacity: 0.85 }} />
                       })}
