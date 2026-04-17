@@ -331,21 +331,6 @@
   ],
   "arms": [
     {
-      "id": "05r0t",
-      "name": "Anderson Severino",
-      "positions": "RP",
-      "isPit": true,
-      "overall": 97,
-      "sample": 270,
-      "confidence": {
-        "stuff": 93,
-        "control": 87
-      },
-      "delta": 10,
-      "prevOverall": 87,
-      "ipPerGs": 7.333333333333333
-    },
-    {
       "id": "060vg",
       "name": "Jake Brooks",
       "positions": "SP",
@@ -388,22 +373,7 @@
       },
       "delta": 6,
       "prevOverall": 98,
-      "ipPerGs": 5.833333333333333
-    },
-    {
-      "id": "04eoi",
-      "name": "Ricky Vanasco",
-      "positions": "SP",
-      "isPit": true,
-      "overall": 108,
-      "sample": 286,
-      "confidence": {
-        "stuff": 93,
-        "control": 88
-      },
-      "delta": 5,
-      "prevOverall": 103,
-      "ipPerGs": 9.666666666666666
+      "ipPerGs": 3.888888888888889
     },
     {
       "id": "06rtp",
@@ -418,7 +388,7 @@
       },
       "delta": 5,
       "prevOverall": 98,
-      "ipPerGs": 4.666666666666667
+      "ipPerGs": 3.5
     },
     {
       "id": "05uc7",
@@ -434,7 +404,7 @@
       },
       "delta": 4,
       "prevOverall": 105,
-      "ipPerGs": 7
+      "ipPerGs": 4.666666666666667
     },
     {
       "id": "06c1l",
@@ -530,6 +500,21 @@
       "ipPerGs": 4.083333333333333
     },
     {
+      "id": "06t23",
+      "name": "Tanner Gillis",
+      "positions": "SP",
+      "isPit": true,
+      "overall": 98,
+      "sample": 103,
+      "confidence": {
+        "stuff": 84,
+        "control": 72
+      },
+      "delta": 4,
+      "prevOverall": 94,
+      "ipPerGs": 3.888888888888889
+    },
+    {
       "id": "06hes",
       "name": "Braydon Tucker",
       "positions": "SP",
@@ -577,21 +562,6 @@
       "ipPerGs": 5.5
     },
     {
-      "id": "04ei3",
-      "name": "Parker Mushinski",
-      "positions": "RP",
-      "isPit": true,
-      "overall": 107,
-      "sample": 420,
-      "confidence": {
-        "stuff": 95,
-        "control": 91
-      },
-      "delta": 3,
-      "prevOverall": 104,
-      "ipPerGs": 7.333333333333333
-    },
-    {
       "id": "06qi2",
       "name": "Braden Davis",
       "rank": 1497,
@@ -620,7 +590,7 @@
       },
       "delta": 3,
       "prevOverall": 103,
-      "ipPerGs": 9
+      "ipPerGs": 4.5
     },
     {
       "id": "05zd4",
@@ -637,7 +607,38 @@
       "delta": 3,
       "prevOverall": 102,
       "ipPerGs": 3.25
+    },
+    {
+      "id": "06qng",
+      "name": "Tyson Hardin",
+      "rank": 821,
+      "positions": "SP",
+      "isPit": true,
+      "overall": 102,
+      "sample": 106,
+      "confidence": {
+        "stuff": 84,
+        "control": 73
+      },
+      "delta": 3,
+      "prevOverall": 99,
+      "ipPerGs": 3
+    },
+    {
+      "id": "0669s",
+      "name": "Alex Amalfi",
+      "positions": "SP,RP",
+      "isPit": true,
+      "overall": 102,
+      "sample": 222,
+      "confidence": {
+        "stuff": 92,
+        "control": 85
+      },
+      "delta": 3,
+      "prevOverall": 99,
+      "ipPerGs": 3.8333333333333335
     }
   ],
-  "generatedAt": "2026-04-17T13:47:44.503Z"
+  "generatedAt": "2026-04-17T14:03:47.824Z"
 }

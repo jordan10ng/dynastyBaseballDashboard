@@ -296,8 +296,8 @@ function run() {
     const cyRows = (history[String(player.mlbam_id)] || [])
       .filter(s => s.year === CURRENT_YEAR && MILB_LEVELS.has(s.level) && s.type === 'pitching');
     const cyIP = cyRows.reduce((sum, s) => sum + ipToFloat(s.ip), 0);
-    const cyGS = cyRows.reduce((sum, s) => sum + (s.gs || 0), 0);
-    const ipPerGs = cyGS > 0 ? cyIP / cyGS : null;
+    const cyG = cyRows.reduce((sum, s) => sum + (s.gamesPlayed || s.g || 0), 0);
+    const ipPerGs = cyG > 0 ? cyIP / cyG : null;
     risers.push({
       id, name: player.name, rank: player.rank, positions: player.positions,
       isPit: pool.isPitcher, overall: ms.overall,
