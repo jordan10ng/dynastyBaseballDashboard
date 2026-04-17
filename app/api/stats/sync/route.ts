@@ -140,13 +140,19 @@ export async function POST() {
 
     await Promise.all(chunk.map(async ([, player]: any) => {
       try {
-        const isPitcher = player.positions?.includes('SP') || player.positions?.includes('RP') || player.positions?.includes('P')
-        const group = isPitcher ? 'pitching' : 'hitting'
-        const rows = await fetchRows(player.mlbam_id, group)
-        if (rows) {
+        const pos = (player.positions || '').split(',').map((s: string) => s.trim())
+        const hasArm = pos.some((p: string) => p === 'SP' || p === 'RP' || p === 'P')
+        const hasBat = pos.some((p: string) => p !== 'SP' && p !== 'RP' && p !== 'P')
+        const groups: string[] = (hasArm && hasBat) ? ['pitching','hitting'] : hasArm ? ['pitching'] : ['hitting']
+        const allRows: any[] = []
+        for (const group of groups) {
+          const rows = await fetchRows(player.mlbam_id, group)
+          if (rows) allRows.push(...rows)
+        }
+        if (allRows.length > 0) {
           const existing = history[player.mlbam_id] ?? []
           const priorRows = existing.filter((r: any) => r._season && r._season !== CURRENT_SEASON)
-          history[player.mlbam_id] = [...priorRows, ...rows.map(r => ({ ...r, _season: CURRENT_SEASON, _synced: new Date().toISOString() }))]
+          history[player.mlbam_id] = [...priorRows, ...allRows.map(r => ({ ...r, _season: CURRENT_SEASON, _synced: new Date().toISOString() }))]
           synced++
         } else {
           noStats++

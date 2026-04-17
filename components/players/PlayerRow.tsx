@@ -25,7 +25,11 @@ const LEAGUES: { id: string; label: string }[] = [
 ]
 
 function isPitcher(positions: string) {
-  return ARM_POSITIONS.includes(positions?.split(',')[0]?.trim())
+  return (positions || '').split(',').some(p => ARM_POSITIONS.includes(p.trim()))
+}
+function isTwoWay(positions: string) {
+  const pos = (positions || '').split(',').map(p => p.trim())
+  return pos.some(p => ARM_POSITIONS.includes(p)) && pos.some(p => !ARM_POSITIONS.includes(p))
 }
 
 function cleanPositions(posString: string) {
@@ -216,9 +220,14 @@ export const PlayerRow = memo(function PlayerRow({
 
       {/* Tool columns */}
       {showToolCols && activeToolKeys.map(key => {
-        if (pitch && ['hit','power','speed'].includes(key)) return <div key={key} style={{ fontSize: '0.75rem', color: 'rgba(100,100,100,0.35)', textAlign: 'right' as const }}>—</div>
-        if (!pitch && ['stuff','control'].includes(key)) return <div key={key} style={{ fontSize: '0.75rem', color: 'rgba(100,100,100,0.35)', textAlign: 'right' as const }}>—</div>
-        const val = tools?.[key] ?? null
+        const tw = isTwoWay(player.positions)
+        if (!tw && pitch && ['hit','power','speed'].includes(key)) return <div key={key} style={{ fontSize: '0.75rem', color: 'rgba(100,100,100,0.35)', textAlign: 'right' as const }}>—</div>
+        if (!tw && !pitch && ['stuff','control'].includes(key)) return <div key={key} style={{ fontSize: '0.75rem', color: 'rgba(100,100,100,0.35)', textAlign: 'right' as const }}>—</div>
+        // Two-way: show side-specific overall in bats/arms mode
+        const resolvedKey = (tw && key === 'overall')
+          ? (batArmsFilter === 'bats' ? 'hit_overall' : batArmsFilter === 'arms' ? 'pitch_overall' : 'overall')
+          : key
+        const val = tools?.[resolvedKey] ?? null
         const isSorted = toolSortKey === key
         return (
           <div key={key} style={{
@@ -233,8 +242,9 @@ export const PlayerRow = memo(function PlayerRow({
 
       {/* Raw tool columns — minors only */}
       {showRawCols && activeRawKeys.map(key => {
-        if (pitch && ['hit','power','speed'].includes(key)) return <div key={'raw_'+key} style={{ fontSize: '0.75rem', color: 'rgba(100,100,100,0.35)', textAlign: 'right' as const }}>—</div>
-        if (!pitch && ['stuff','control'].includes(key)) return <div key={'raw_'+key} style={{ fontSize: '0.75rem', color: 'rgba(100,100,100,0.35)', textAlign: 'right' as const }}>—</div>
+        const tw = isTwoWay(player.positions)
+        if (!tw && pitch && ['hit','power','speed'].includes(key)) return <div key={'raw_'+key} style={{ fontSize: '0.75rem', color: 'rgba(100,100,100,0.35)', textAlign: 'right' as const }}>—</div>
+        if (!tw && !pitch && ['stuff','control'].includes(key)) return <div key={'raw_'+key} style={{ fontSize: '0.75rem', color: 'rgba(100,100,100,0.35)', textAlign: 'right' as const }}>—</div>
         if (!isMinors) return <div key={'raw_'+key} style={{ fontSize: '0.75rem', color: 'rgba(100,100,100,0.35)', textAlign: 'right' as const }}>—</div>
         const val = tools?._raw?.[key] ?? null
         const isSorted = toolSortKey === 'raw_'+key

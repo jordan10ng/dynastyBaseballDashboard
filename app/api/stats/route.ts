@@ -27,15 +27,10 @@ export async function GET() {
       const currentRows = rows.filter(r => r._season === CURRENT_SEASON)
       if (currentRows.length === 0) continue
 
-      // Prefer MLB row if present, else highest MiLB row
-      const mlbRow = currentRows.find(r => r.level === 'MLB')
-      const row = mlbRow ?? currentRows[0]
-
-      stats[fantraxId] = {
+      const toStatObj = (row: any, mlbamId: string) => ({
         mlbam_id: mlbamId,
         group: row.type,
         season: CURRENT_SEASON,
-        // hitting fields
         gamesPlayed: row.g,
         atBats: row.ab,
         plateAppearances: row.pa,
@@ -58,7 +53,6 @@ export async function GET() {
         obp: row.obp,
         slg: row.slg,
         ops: row.ops,
-        // pitching fields
         gamesStarted: row.gs,
         wins: row.w,
         losses: row.l,
@@ -75,6 +69,22 @@ export async function GET() {
         oSlg: row.oSlg ?? null,
         _level: row.level,
         _synced: row._synced,
+      })
+
+      const pitchRows = currentRows.filter(r => r.type === 'pitching')
+      const hitRows   = currentRows.filter(r => r.type === 'hitting')
+      const isTwoWay  = pitchRows.length > 0 && hitRows.length > 0
+
+      if (isTwoWay) {
+        // Store both — hitting under fantraxId, pitching under fantraxId + '_pit'
+        const bestHit   = hitRows.find(r => r.level === 'MLB') ?? hitRows[0]
+        const bestPitch = pitchRows.find(r => r.level === 'MLB') ?? pitchRows[0]
+        stats[fantraxId]          = toStatObj(bestHit, mlbamId)
+        stats[fantraxId + '_pit'] = toStatObj(bestPitch, mlbamId)
+      } else {
+        const mlbRow = currentRows.find(r => r.level === 'MLB')
+        const row = mlbRow ?? currentRows[0]
+        stats[fantraxId] = toStatObj(row, mlbamId)
       }
     }
 

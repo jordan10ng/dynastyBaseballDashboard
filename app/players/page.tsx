@@ -93,9 +93,7 @@ const ARM_COLS: StatCol[] = [
   { key: 'era',    label: 'ERA',   lowerBetter: true, getValue: s => s?.era ? parseFloat(s.era) : null,   fmt: s => s?.era ?? '—' },
   { key: 'whip',   label: 'WHIP',  lowerBetter: true, getValue: s => s?.whip ? parseFloat(s.whip) : null, fmt: s => s?.whip ?? '—' },
   { key: 'h',      label: 'H',     lowerBetter: true, getValue: s => s?.hits ?? null,                     fmt: s => s?.hits ?? '—' },
-  { key: 'r',      label: 'R',     lowerBetter: true, getValue: s => s?.runs ?? null,                     fmt: s => s?.runs ?? '—' },
   { key: 'er',     label: 'ER',    lowerBetter: true, getValue: s => s?.earnedRuns ?? null,               fmt: s => s?.earnedRuns ?? '—' },
-  { key: 'hr',     label: 'HR',    lowerBetter: true, getValue: s => s?.homeRuns ?? null,                 fmt: s => s?.homeRuns ?? '—' },
   { key: 'bb',     label: 'BB',    lowerBetter: true, getValue: s => s?.baseOnBalls ?? null,              fmt: s => s?.baseOnBalls ?? '—' },
   { key: 'so',     label: 'SO',    getValue: s => s?.strikeOuts ?? null,                                  fmt: s => s?.strikeOuts ?? '—' },
   { key: 'kpct',   label: 'K%',
@@ -116,7 +114,13 @@ function posOrder(pos: string) {
 }
 
 function isPitcher(positions: string) {
-  return ARM_POSITIONS.includes(positions?.split(',')[0]?.trim())
+  return (positions || '').split(',').some(p => ARM_POSITIONS.includes(p.trim()))
+}
+function isTwoWayPlayer(positions: string) {
+  const pos = (positions || '').split(',').map(p => p.trim())
+  const hasArm = pos.some(p => ARM_POSITIONS.includes(p))
+  const hasBat = pos.some(p => !ARM_POSITIONS.includes(p))
+  return hasArm && hasBat
 }
 
 function statLine(s: any): string {
@@ -176,6 +180,12 @@ function computeTools(player: any, mlbToolsMap: Record<string, any>): any {
   const model = player.model_scores
   const withOvr = (t: any) => {
     if (t.overall != null) return t
+    if (t.type === 'two-way') {
+      const pitch_overall = t.stuff != null && t.control != null ? Math.round(t.stuff*0.70+t.control*0.30) : null
+      const hit_overall   = t.hit != null && t.power != null && t.speed != null ? Math.round(t.hit*0.42+t.power*0.47+t.speed*0.11) : null
+      const overall = pitch_overall != null && hit_overall != null ? Math.round((pitch_overall+hit_overall)/2) : pitch_overall ?? hit_overall ?? null
+      return { ...t, pitch_overall, hit_overall, overall }
+    }
     const isPit = t.type === 'pitcher'
     let overall = null
     if (isPit && t.stuff != null && t.control != null) overall = Math.round(t.stuff*0.70+t.control*0.30)
@@ -192,18 +202,46 @@ function computeTools(player: any, mlbToolsMap: Record<string, any>): any {
   const mlbW = mlbSample / total
   const milbW = milbSample / total
   const bv = (a: any, b: any) => a == null && b == null ? null : a == null ? b : b == null ? a : Math.round(a*mlbW + b*milbW)
-  const isPit = mlbEntry.type === 'pitcher'
-  if (isPit) {
-    const stuff = bv(mlbEntry.stuff, model.stuff)
-    const control = bv(mlbEntry.control, model.control)
+  const entryType = mlbEntry.type
+  if (entryType === 'two-way') {
+    const pitchSample = mlbEntry._ip ?? 0
+    const hitSample   = mlbEntry._pa ?? 0
+    const milbSampleP = model?._sample ?? 0
+    const milbSampleH = model?._sample ?? 0
+    const bvPitch = (a: any, b: any) => {
+      if (a == null && b == null) return null
+      if (a == null) return b ?? null
+      if (b == null || milbSampleP === 0) return a
+      const t = pitchSample + milbSampleP
+      return Math.round(a*(pitchSample/t) + b*(milbSampleP/t))
+    }
+    const bvHit = (a: any, b: any) => {
+      if (a == null && b == null) return null
+      if (a == null) return b ?? null
+      if (b == null || milbSampleH === 0) return a
+      const t = hitSample + milbSampleH
+      return Math.round(a*(hitSample/t) + b*(milbSampleH/t))
+    }
+    const stuff   = bvPitch(mlbEntry.stuff,   model?.stuff)
+    const control = bvPitch(mlbEntry.control, model?.control)
+    const hit     = bvHit(mlbEntry.hit,   model?.hit)
+    const power   = bvHit(mlbEntry.power, model?.power)
+    const speed   = bvHit(mlbEntry.speed, model?.speed)
+    const pitch_overall = stuff != null && control != null ? Math.round(stuff*0.70+control*0.30) : null
+    const hit_overall   = hit != null && power != null && speed != null ? Math.round(hit*0.42+power*0.47+speed*0.11) : null
+    const overall = pitch_overall != null && hit_overall != null ? Math.round((pitch_overall+hit_overall)/2) : pitch_overall ?? hit_overall ?? null
+    return { hit, power, speed, stuff, control, pitch_overall, hit_overall, overall, type: 'two-way', _raw: model?._raw, _confidence: model?._confidence, _sample: milbSample, _mlbSample: mlbSample }
+  } else if (entryType === 'pitcher') {
+    const stuff = bv(mlbEntry.stuff, model?.stuff)
+    const control = bv(mlbEntry.control, model?.control)
     const overall = stuff != null && control != null ? Math.round(stuff*0.70+control*0.30) : null
-    return { stuff, control, overall, type: 'pitcher', _raw: model._raw, _confidence: model._confidence, _sample: milbSample, _mlbSample: mlbSample }
+    return { stuff, control, overall, type: 'pitcher', _raw: model?._raw, _confidence: model?._confidence, _sample: milbSample, _mlbSample: mlbSample }
   } else {
-    const hit   = bv(mlbEntry.hit,   model.hit)
-    const power = bv(mlbEntry.power, model.power)
-    const speed = bv(mlbEntry.speed, model.speed)
+    const hit   = bv(mlbEntry.hit,   model?.hit)
+    const power = bv(mlbEntry.power, model?.power)
+    const speed = bv(mlbEntry.speed, model?.speed)
     const overall = hit != null && power != null && speed != null ? Math.round(hit*0.42+power*0.47+speed*0.11) : null
-    return { hit, power, speed, overall, type: 'hitter', _raw: model._raw, _confidence: model._confidence, _sample: milbSample, _mlbSample: mlbSample }
+    return { hit, power, speed, overall, type: 'hitter', _raw: model?._raw, _confidence: model?._confidence, _sample: milbSample, _mlbSample: mlbSample }
   }
 }
 function blendVal(a: number|null|undefined, b: number|null|undefined, wA: number, wB: number): number|null {
@@ -364,11 +402,25 @@ export default function PlayersPage() {
   }, [allPlayers, mlbToolsMap])
 
   // Pre-compute stat lines once
+  // For two-way players, pick hit or pitch stat object based on filter
+  const effectiveStats = useCallback((p: any) => {
+    const tw = isTwoWayPlayer(p.positions)
+    if (tw && batArmsFilter === 'arms') return statsMap[p.id + '_pit'] ?? statsMap[p.id]
+    if (tw && batArmsFilter === 'bats') {
+      const s = statsMap[p.id]
+      return (s?.group === 'pitching') ? null : s
+    }
+    return statsMap[p.id]
+  }, [statsMap, batArmsFilter])
+
   const statLineMap = useMemo(() => {
     const map: Record<string, string> = {}
-    for (const p of allPlayers) map[p.id] = batArmsFilter === 'all' ? statLineCompact(statsMap[p.id]) : statLine(statsMap[p.id])
+    for (const p of allPlayers) {
+      const s = effectiveStats(p)
+      map[p.id] = batArmsFilter === 'all' ? statLineCompact(s) : statLine(s)
+    }
     return map
-  }, [allPlayers, statsMap, batArmsFilter])
+  }, [allPlayers, effectiveStats, batArmsFilter])
 
   // Memoize derived display values so filtered dep array stays stable
   const activeCols = useMemo<StatCol[]>(
@@ -457,7 +509,7 @@ export default function PlayersPage() {
       if (q && !p.name?.toLowerCase().includes(q) && !p.team?.toLowerCase().includes(q)) return false
       if (minorsFilter === 'mlb' && minorsIds.has(p.id)) return false
       if (minorsFilter === 'minors' && !minorsIds.has(p.id)) return false
-      if (batArmsFilter === 'bats' && isPitcher(p.positions)) return false
+      if (batArmsFilter === 'bats' && isPitcher(p.positions) && !isTwoWayPlayer(p.positions)) return false
       if (batArmsFilter === 'arms' && !isPitcher(p.positions)) return false
 
       {
@@ -532,8 +584,8 @@ export default function PlayersPage() {
       const col = activeCols.find(c => c.key === statSortKey)
       if (col) {
         result = [...result].sort((a, b) => {
-          const va = col.getValue(statsMap[a.id])
-          const vb = col.getValue(statsMap[b.id])
+          const va = col.getValue(effectiveStats(a))
+          const vb = col.getValue(effectiveStats(b))
           if (va == null && vb == null) return 0
           if (va == null) return 1; if (vb == null) return -1
           return col.lowerBetter ? va - vb : vb - va
@@ -600,7 +652,7 @@ export default function PlayersPage() {
           displayRank={index + 1}
           batArmsFilter={batArmsFilter}
           player={player}
-          stats={statsMap[player.id]}
+          stats={effectiveStats(player)}
           statLine={statLineMap[player.id] ?? ''}
           tools={playerToolsMap[player.id]}
           isMinors={minorsIds.has(player.id)}
@@ -664,7 +716,7 @@ export default function PlayersPage() {
         <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Search players..."
           style={{ background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 6, padding: '0.4rem 0.75rem', color: 'var(--text)', fontSize: '0.875rem', outline: 'none', width: 200 }} />
 
-        <select value={ownFilter} onChange={e => setOwnFilter(e.target.value as OwnFilter)} style={{ background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 6, padding: '0.4rem 0.6rem', color: 'var(--text)', fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.75rem', cursor: 'pointer', outline: 'none', marginLeft: '0.5rem' }}>
+        {!mounted ? null : <select value={ownFilter} onChange={e => setOwnFilter(e.target.value as OwnFilter)} style={{ background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 6, padding: '0.4rem 0.6rem', color: 'var(--text)', fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.75rem', cursor: 'pointer', outline: 'none', marginLeft: '0.5rem' }}>
           <option value="all">All</option>
           <option value="jordan">Jordan</option>
           <option value="matt">Matt</option>
@@ -673,7 +725,7 @@ export default function PlayersPage() {
           <option value="soo">Soo</option>
           <option value="fa-all">FA — all leagues</option>
           <option value="fa-any">FA — any league</option>
-        </select>
+        </select>}
 
         <div style={{ display: 'flex', gap: 4, marginLeft: '0.5rem' }}>
           {([{ val: 'all', label: 'All' }, { val: 'mlb', label: 'MLB' }, { val: 'minors', label: 'Minors' }] as { val: MinorsFilter; label: string }[]).map(opt => (
@@ -916,7 +968,7 @@ export default function PlayersPage() {
                     displayRank={filtered.indexOf(p) + 1}
                     batArmsFilter={batArmsFilter}
                     player={p}
-                    stats={statsMap[p.id]}
+                    stats={effectiveStats(p)}
                     statLine={statLineMap[p.id] ?? ''}
                     tools={playerToolsMap[p.id]}
                     isMinors={minorsIds.has(p.id)}

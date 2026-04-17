@@ -110,10 +110,9 @@ def career_hitter(pid):
 def career_pitcher(pid):
     mlb = [s for s in history.get(str(pid), [])
            if s.get('level') == 'MLB' and s.get('type') == 'pitching'
-           and s['year'] in VALID_YEARS
-           and ip_to_float(s.get('ip',0)) >= MIN_IP
-           and (s.get('gs') or 0) >= MIN_GS]
-    if len(mlb) < MIN_SEASONS: return None
+           and s['year'] in VALID_YEARS]
+    if not mlb: return None
+    if sum(ip_to_float(s.get('ip',0)) for s in mlb) < MIN_IP: return None
 
     stat_sums = defaultdict(float)
     total_ip  = 0.0
@@ -156,18 +155,47 @@ def career_pitcher(pid):
         '_z': {k: round(v,3) for k,v in career_z.items()},
     }
 
+def is_two_way(positions):
+    pos = [x.strip() for x in (positions or '').split(',')]
+    has_arm = any(x in ('SP','RP','P') for x in pos)
+    has_bat = any(x not in ('SP','RP','P') for x in pos)
+    return has_arm, has_bat
+
 output = {}
 skipped = 0
 
 for pid, p in players.items():
     mlbam = p.get('mlbam_id')
     if not mlbam: continue
-    is_p = 'P' in (p.get('positions') or '')
-    result = career_pitcher(mlbam) if is_p else career_hitter(mlbam)
-    if not result:
-        skipped += 1
-        continue
-    result['name'] = p['name']
+    has_arm, has_bat = is_two_way(p.get('positions',''))
+
+    if has_arm and has_bat:
+        hit_result   = career_hitter(mlbam)
+        pitch_result = career_pitcher(mlbam)
+        if not hit_result and not pitch_result:
+            skipped += 1
+            continue
+        result = {'type': 'two-way', 'name': p['name']}
+        if hit_result:
+            result['hit']    = hit_result['hit']
+            result['power']  = hit_result['power']
+            result['speed']  = hit_result['speed']
+            result['_pa']    = hit_result['_pa']
+            result['_z_hit'] = hit_result['_z']
+        if pitch_result:
+            result['stuff']    = pitch_result['stuff']
+            result['control']  = pitch_result['control']
+            result['_ip']      = pitch_result['_ip']
+            result['_z_pitch'] = pitch_result['_z']
+    elif has_arm:
+        result = career_pitcher(mlbam)
+        if not result: skipped += 1; continue
+        result['name'] = p['name']
+    else:
+        result = career_hitter(mlbam)
+        if not result: skipped += 1; continue
+        result['name'] = p['name']
+
     output[str(mlbam)] = result
 
 print(f'Qualifying hitters:  {sum(1 for v in output.values() if v["type"]=="hitter")}')

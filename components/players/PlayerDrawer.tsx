@@ -45,8 +45,13 @@ export function PlayerDrawer({ player, onClose, globalOwnership, minorsIds, mlbT
   const [showMinors, setShowMinors] = useState(true)
   const [activeTab, setActiveTab] = useState<'stats'|'statcast'>('stats')
   const [expandedYears, setExpandedYears] = useState<Set<string>>(new Set())
+  const [twoWaySide, setTwoWaySide] = useState<'hit'|'pitch'>('pitch')
 
-  const pitch = isPitcher(player.positions)
+  const posList = (player.positions || '').split(',').map((p: string) => p.trim())
+  const hasArm = posList.some((p: string) => ['SP','RP','P'].includes(p))
+  const hasBat = posList.some((p: string) => !['SP','RP','P'].includes(p))
+  const isTwoWayPlayer = hasArm && hasBat
+  const pitch = isTwoWayPlayer ? twoWaySide === 'pitch' : isPitcher(player.positions)
   const mlbamId = player.mlbam_id
   const pOwnership = globalOwnership[player.id] || {}
   const isMinors = minorsIds.has(player.id)
@@ -64,6 +69,12 @@ export function PlayerDrawer({ player, onClose, globalOwnership, minorsIds, mlbT
     const model = player.model_scores
     const withOvr = (t: any) => {
       if (t.overall != null) return t
+      if (t.type === 'two-way') {
+        const pitch_overall = t.stuff!=null && t.control!=null ? Math.round(t.stuff*0.70+t.control*0.30) : null
+        const hit_overall   = t.hit!=null && t.power!=null && t.speed!=null ? Math.round(t.hit*0.42+t.power*0.47+t.speed*0.11) : null
+        const overall = pitch_overall!=null && hit_overall!=null ? Math.round((pitch_overall+hit_overall)/2) : pitch_overall ?? hit_overall ?? null
+        return { ...t, pitch_overall, hit_overall, overall }
+      }
       const isPit = t.type === 'pitcher'
       let overall = null
       if (isPit && t.stuff!=null && t.control!=null) overall=Math.round(t.stuff*0.70+t.control*0.30)
@@ -71,16 +82,39 @@ export function PlayerDrawer({ player, onClose, globalOwnership, minorsIds, mlbT
       else if (!isPit && t.hit!=null && t.power!=null) overall=Math.round((t.hit*0.42+t.power*0.47)/0.89)
       return { ...t, overall }
     }
-    if (!mlbEntry) return model ?? null
+    if (!mlbEntry) {
+      if (!model) return null
+      const pos = (player.positions || '').split(',').map((p: string) => p.trim())
+      const hasArm = pos.some((p: string) => ['SP','RP','P'].includes(p))
+      const hasBat = pos.some((p: string) => !['SP','RP','P'].includes(p))
+      if (hasArm && hasBat && model.pitch_overall != null) return { ...model, type: 'two-way' }
+      return model
+    }
     if (!model) return withOvr(mlbEntry)
-    const mlbSample = mlbEntry._pa ?? mlbEntry._bf ?? 0
     const milbSample = model._sample ?? 0
+    const entryType = mlbEntry.type
+    if (entryType === 'two-way') {
+      const pitchSample = mlbEntry._ip ?? 0
+      const hitSample   = mlbEntry._pa ?? 0
+      const bvP = (a: any, b: any) => { if(a==null&&b==null) return null; if(b==null||milbSample===0) return a; const t=pitchSample+milbSample; return Math.round(a*(pitchSample/t)+b*(milbSample/t)) }
+      const bvH = (a: any, b: any) => { if(a==null&&b==null) return null; if(b==null||milbSample===0) return a; const t=hitSample+milbSample; return Math.round(a*(hitSample/t)+b*(milbSample/t)) }
+      const stuff   = bvP(mlbEntry.stuff,   model.stuff)
+      const control = bvP(mlbEntry.control, model.control)
+      const hit     = bvH(mlbEntry.hit,     model.hit)
+      const power   = bvH(mlbEntry.power,   model.power)
+      const speed   = bvH(mlbEntry.speed,   model.speed)
+      const pitch_overall = stuff!=null && control!=null ? Math.round(stuff*0.70+control*0.30) : null
+      const hit_overall   = hit!=null && power!=null && speed!=null ? Math.round(hit*0.42+power*0.47+speed*0.11) : null
+      const overall = pitch_overall!=null && hit_overall!=null ? Math.round((pitch_overall+hit_overall)/2) : pitch_overall ?? hit_overall ?? null
+      return { stuff, control, hit, power, speed, pitch_overall, hit_overall, overall, type: 'two-way', _raw: model._raw, _confidence: model._confidence, _sample: milbSample, _mlbSample: milbSample }
+    }
+    const mlbSample = mlbEntry._pa ?? mlbEntry._bf ?? 0
     const total = mlbSample + milbSample
     if (total === 0) return withOvr(mlbEntry)
     const mlbW = mlbSample / total
     const milbW = milbSample / total
     const bv = (a: any, b: any) => a == null && b == null ? null : a == null ? b : b == null ? a : Math.round(a*mlbW + b*milbW)
-    const isPit = mlbEntry.type === 'pitcher'
+    const isPit = entryType === 'pitcher'
     if (isPit) {
       const stuff = bv(mlbEntry.stuff, model.stuff)
       const control = bv(mlbEntry.control, model.control)
@@ -101,6 +135,19 @@ export function PlayerDrawer({ player, onClose, globalOwnership, minorsIds, mlbT
     const isBlended = toolGrades._mlbSample != null
     const raw = (key: string) => isBlended ? null : (toolGrades._raw?.[key] ?? null)
     const conf = (key: string) => isBlended ? null : (toolGrades._confidence?.[key] ?? null)
+    if (toolGrades.type === 'two-way') {
+      if (pitch) return [
+        toolGrades.stuff!=null?{label:'STF+',val:toolGrades.stuff,color:toolColor(toolGrades.stuff),raw:raw('stuff'),conf:conf('stuff')}:null,
+        toolGrades.control!=null?{label:'CTL+',val:toolGrades.control,color:toolColor(toolGrades.control),raw:raw('control'),conf:conf('control')}:null,
+        toolGrades.pitch_overall!=null?{label:'OVR+',val:toolGrades.pitch_overall,color:toolColor(toolGrades.pitch_overall)}:null,
+      ].filter(Boolean)
+      return [
+        toolGrades.hit!=null?{label:'HIT+',val:toolGrades.hit,color:toolColor(toolGrades.hit),raw:raw('hit'),conf:conf('hit')}:null,
+        toolGrades.power!=null?{label:'PWR+',val:toolGrades.power,color:toolColor(toolGrades.power),raw:raw('power'),conf:conf('power')}:null,
+        toolGrades.speed!=null?{label:'SPD+',val:toolGrades.speed,color:toolColor(toolGrades.speed),raw:raw('speed'),conf:conf('speed')}:null,
+        toolGrades.hit_overall!=null?{label:'OVR+',val:toolGrades.hit_overall,color:toolColor(toolGrades.hit_overall)}:null,
+      ].filter(Boolean)
+    }
     if (pitch) return [
       toolGrades.stuff!=null?{label:'STF+',val:toolGrades.stuff,color:toolColor(toolGrades.stuff),raw:raw('stuff'),conf:conf('stuff')}:null,
       toolGrades.control!=null?{label:'CTL+',val:toolGrades.control,color:toolColor(toolGrades.control),raw:raw('control'),conf:conf('control')}:null,
@@ -130,6 +177,7 @@ export function PlayerDrawer({ player, onClose, globalOwnership, minorsIds, mlbT
       setBio(peopleData.people?.[0]??null)
       const splits = (histData.splits ?? [])
         .filter((s:any) => s.type === (pitch ? 'pitching' : 'hitting'))
+        // re-filter when twoWaySide changes (pitch derived from twoWaySide above)
         .map((s:any) => ({
           season: s.season,
           team: { name: s.team, abbreviation: s.team },
@@ -278,6 +326,15 @@ export function PlayerDrawer({ player, onClose, globalOwnership, minorsIds, mlbT
             <button onClick={onClose} style={{background:'none',border:'none',color:'var(--muted)',cursor:'pointer',fontSize:'1.4rem',lineHeight:1,padding:'0.25rem',flexShrink:0}}>✕</button>
           </div>
           <div style={{maxWidth:1400,margin:'0.75rem auto 0',display:'flex',gap:'0.25rem'}}>
+            {isTwoWayPlayer && (
+              <div style={{display:'flex',gap:'4px',marginRight:'0.75rem',alignSelf:'center'}}>
+                {(['hit','pitch'] as const).map(side=>(
+                  <button key={side} onClick={()=>setTwoWaySide(side)} style={{padding:'0.2rem 0.6rem',borderRadius:4,border:'1px solid',borderColor:twoWaySide===side?'var(--accent)':'var(--border)',background:twoWaySide===side?'rgba(34,197,94,0.1)':'transparent',color:twoWaySide===side?'var(--accent)':'var(--muted)',fontFamily:'var(--font-display)',fontWeight:700,fontSize:'0.65rem',letterSpacing:'0.06em',textTransform:'uppercase',cursor:'pointer'}}>
+                    {side==='hit'?'BAT':'ARM'}
+                  </button>
+                ))}
+              </div>
+            )}
             {(['stats','statcast'] as const).map(tab=>(
               <button key={tab} onClick={()=>setActiveTab(tab)} style={{padding:'0.35rem 1rem',borderRadius:'6px 6px 0 0',border:'1px solid',borderBottom:'none',borderColor:activeTab===tab?'var(--border)':'transparent',background:activeTab===tab?'rgba(255,255,255,0.04)':'transparent',color:activeTab===tab?'var(--text)':'var(--muted)',fontFamily:'var(--font-display)',fontWeight:700,fontSize:'0.72rem',letterSpacing:'0.06em',textTransform:'uppercase',cursor:'pointer'}}>
                 {tab==='stats'?'Stats':`Statcast ${statcastLoading&&mlbamId?'·':''}`}

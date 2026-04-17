@@ -40,6 +40,13 @@ const AVG_AGES = {
 };
 const MILB_LEVELS = new Set(Object.keys(AVG_AGES));
 
+function isTwoWayPositions(positions) {
+  const pos = (positions || '').split(',').map(s => s.trim());
+  const hasArm = pos.some(p => p === 'SP' || p === 'RP');
+  const hasBat = pos.some(p => p !== 'SP' && p !== 'RP' && p !== 'P');
+  return { hasArm, hasBat, isTwoWay: hasArm && hasBat };
+}
+
 const TOOL_STATS = {
   hit:     { type: 'hitter',  stats: ['k_pct','bb_pct'] },
   power:   { type: 'hitter',  stats: ['iso'] },
@@ -102,8 +109,9 @@ function scoreTool(mlbamId, player, tool, isPitcher) {
   const model = regression.models?.[tool];
   if (!model) return { score: null, wSum: 0, wTot: 0, cySum: 0, cyTot: 0, sample: 0 };
 
+  const expectedType = isPitcher ? 'pitching' : 'hitting';
   const seasons = (history[String(mlbamId)] || [])
-    .filter(s => MILB_LEVELS.has(s.level) && VALID_YEARS.has(s.year) && s.team);
+    .filter(s => MILB_LEVELS.has(s.level) && VALID_YEARS.has(s.year) && s.team && s.type === expectedType);
 
   let wSum = 0, wTot = 0, totalSample = 0, cySum = 0, cyTot = 0;
 
@@ -177,44 +185,68 @@ function run() {
     const mlbamId = player.mlbam_id;
     if (!mlbamId) continue;
 
-    const isPitcher = (player.positions || '').includes('P');
-    if (!isRookieEligible(mlbamId, isPitcher)) { notRookie++; continue; }
+    const { hasArm, hasBat, isTwoWay } = isTwoWayPositions(player.positions);
+
+    // For two-way: score both sides regardless of rookie eligibility on each side
+    // For pure players: original logic unchanged
+    const sidesEligible = [];
+    if (isTwoWay) {
+      // Score both sides; eligibility checked per side but we always attempt both
+      const pitchElig = isRookieEligible(mlbamId, true);
+      const hitElig   = isRookieEligible(mlbamId, false);
+      if (pitchElig) sidesEligible.push({ isPitcher: true,  exposed: true });
+      else           sidesEligible.push({ isPitcher: true,  exposed: true, graduated: true });
+      if (hitElig)   sidesEligible.push({ isPitcher: false, exposed: true });
+      else           sidesEligible.push({ isPitcher: false, exposed: true, graduated: true });
+    } else {
+      const isPitcher = hasArm;
+      if (!isRookieEligible(mlbamId, isPitcher)) { notRookie++; continue; }
+      sidesEligible.push({ isPitcher, exposed: true });
+    }
 
     const recentSeasons = (history[String(mlbamId)] || [])
       .filter(s => MILB_LEVELS.has(s.level) && s.year >= CURRENT_YEAR - 3 && s.team);
     if (!recentSeasons.length) { noData++; continue; }
 
-    const toolList = isPitcher ? ['stuff','control'] : ['hit','power','speed'];
     const toolScores  = {};
     const toolWeights = {};
-    let totalSample = 0, hasAny = false;
+    let pitchSample = 0, hitSample = 0, hasAny = false;
 
-    for (const tool of toolList) {
-      const { score, wSum, wTot, cySum, cyTot, sample } = scoreTool(mlbamId, player, tool, isPitcher);
-      toolScores[tool]  = score;
-      toolWeights[tool] = { wSum, wTot, cySum, cyTot };
-      totalSample = Math.max(totalSample, sample);
-      if (score != null) hasAny = true;
+    for (const { isPitcher } of sidesEligible) {
+      const toolList = isPitcher ? ['stuff','control'] : ['hit','power','speed'];
+      for (const tool of toolList) {
+        const { score, wSum, wTot, cySum, cyTot, sample } = scoreTool(mlbamId, player, tool, isPitcher);
+        toolScores[tool]  = score;
+        toolWeights[tool] = { wSum, wTot, cySum, cyTot };
+        if (isPitcher) pitchSample = Math.max(pitchSample, sample);
+        else           hitSample   = Math.max(hitSample, sample);
+        if (score != null) hasAny = true;
+      }
     }
 
     if (!hasAny) { noData++; continue; }
 
-    rawPool[id] = { toolScores, toolWeights, totalSample, isPitcher, hasCY: false, cySample: 0 };
+    const isPitcher = hasArm && !hasBat; // pure pitcher flag for pool/shrinkage
+    rawPool[id] = {
+      toolScores, toolWeights,
+      totalSample: Math.max(pitchSample, hitSample),
+      pitchSample, hitSample,
+      isPitcher, isTwoWay, hasArm, hasBat,
+      hasCY: false, cySample: 0
+    };
   }
 
   const toolVals = {};
-  for (const toolList of [['hit','power','speed'],['stuff','control']]) {
-    for (const tool of toolList) {
-      const vals = Object.values(rawPool)
-        .map(r => r.toolScores[tool]).filter(v => v != null && isFinite(v));
-      if (!vals.length) continue;
-      const mean  = vals.reduce((a,b) => a+b, 0) / vals.length;
-      const stdev = Math.sqrt(vals.reduce((a,b) => a+(b-mean)**2, 0) / vals.length) || 1;
-      toolVals[tool] = { mean, stdev };
-    }
+  for (const tool of ['hit','power','speed','stuff','control']) {
+    const vals = Object.values(rawPool)
+      .map(r => r.toolScores[tool]).filter(v => v != null && isFinite(v));
+    if (!vals.length) continue;
+    const mean  = vals.reduce((a,b) => a+b, 0) / vals.length;
+    const stdev = Math.sqrt(vals.reduce((a,b) => a+(b-mean)**2, 0) / vals.length) || 1;
+    toolVals[tool] = { mean, stdev };
   }
 
-  for (const [id, { toolScores, toolWeights, totalSample, isPitcher }] of Object.entries(rawPool)) {
+  for (const [id, { toolScores, toolWeights, totalSample, pitchSample, hitSample, isPitcher, isTwoWay, hasArm, hasBat }] of Object.entries(rawPool)) {
 
     const normedTools = {};
     for (const [tool, raw] of Object.entries(toolScores)) {
@@ -223,31 +255,50 @@ function run() {
       normedTools[tool] = POOL_CENTER + ((raw - mean) / stdev) * POOL_STDEV;
     }
 
-    const weights = isPitcher ? COMPOSITE_WEIGHTS.pitcher : COMPOSITE_WEIGHTS.hitter;
-    let wsum = 0, wtot = 0;
-    for (const [tool, w] of Object.entries(weights)) {
-      if (normedTools[tool] != null) { wsum += normedTools[tool] * w; wtot += w; }
+    // Compute per-side overall
+    function sideOverall(wts, sampleForShrink, sideIsPitcher) {
+      let wsum = 0, wtot = 0;
+      for (const [tool, w] of Object.entries(wts)) {
+        if (normedTools[tool] != null) { wsum += normedTools[tool] * w; wtot += w; }
+      }
+      const normed = wtot > 0 ? wsum / wtot : null;
+      return shrink(normed, sampleForShrink, sideIsPitcher);
     }
-    const normedOverall = wtot > 0 ? wsum / wtot : null;
-    const shrunkOverall = shrink(normedOverall, totalSample, isPitcher);
+
+    let pitchOverall = null, hitOverall = null;
+    if (hasArm) pitchOverall = sideOverall(COMPOSITE_WEIGHTS.pitcher, pitchSample || totalSample, true);
+    if (hasBat)  hitOverall  = sideOverall(COMPOSITE_WEIGHTS.hitter,  hitSample  || totalSample, false);
+
+    // Blended overall: sample-weighted across position-eligible sides
+    let blendedOverall = null;
+    if (isTwoWay) {
+      const parts = [pitchOverall, hitOverall].filter(v => v != null);
+      blendedOverall = parts.length ? parts.reduce((a,b) => a+b, 0) / parts.length : null;
+    } else {
+      blendedOverall = hasArm ? pitchOverall : hitOverall;
+    }
 
     const shrunkTools = {};
     const rawTools    = {};
     const confTools   = {};
     for (const [tool, normed] of Object.entries(normedTools)) {
       if (normed == null) { shrunkTools[tool] = null; rawTools[tool] = null; confTools[tool] = null; continue; }
+      const toolIsPitcher = ['stuff','control'].includes(tool);
+      const sampleForTool = toolIsPitcher ? (pitchSample || totalSample) : (hitSample || totalSample);
       const toolDef = TOOL_STATS[tool];
-      const statKs = toolDef ? toolDef.stats.map(s => statShrinkK(s, isPitcher)) : [isPitcher ? SHRINK_K.pitcher : SHRINK_K.hitter];
+      const statKs = toolDef ? toolDef.stats.map(s => statShrinkK(s, toolIsPitcher)) : [toolIsPitcher ? SHRINK_K.pitcher : SHRINK_K.hitter];
       const avgK = statKs.reduce((a,b) => a+b, 0) / statKs.length;
-      const conf = totalSample / (totalSample + avgK);
-      shrunkTools[tool] = Math.round(shrink(normed, totalSample, isPitcher));
+      const conf = sampleForTool / (sampleForTool + avgK);
+      shrunkTools[tool] = Math.round(shrink(normed, sampleForTool, toolIsPitcher));
       rawTools[tool]    = Math.round(normed);
       confTools[tool]   = Math.round(conf * 100);
     }
 
     updatedPlayers[id].model_scores = {
       ...shrunkTools,
-      overall: shrunkOverall != null ? Math.round(shrunkOverall) : null,
+      ...(hasArm ? { pitch_overall: pitchOverall != null ? Math.round(pitchOverall) : null } : {}),
+      ...(hasBat  ? { hit_overall:  hitOverall   != null ? Math.round(hitOverall)   : null } : {}),
+      overall: blendedOverall != null ? Math.round(blendedOverall) : null,
       _raw:        rawTools,
       _confidence: confTools,
       _sample:     Math.round(totalSample),
@@ -256,6 +307,7 @@ function run() {
 
     {
       let wsumEx = 0, wtotEx = 0, allToolsNoHistory = true, hasCY = false, cySample = 0;
+      const weights = isPitcher ? COMPOSITE_WEIGHTS.pitcher : COMPOSITE_WEIGHTS.hitter;
       for (const [tool, w] of Object.entries(weights)) {
         const tw = toolWeights[tool];
         if (!tw || !toolVals[tool]) continue;
@@ -300,7 +352,7 @@ function run() {
     const ipPerGs = cyG > 0 ? cyIP / cyG : null;
     risers.push({
       id, name: player.name, rank: player.rank, positions: player.positions,
-      isPit: pool.isPitcher, overall: ms.overall,
+      isPit: pool.hasArm, isTwoWay: pool.isTwoWay || false, overall: ms.overall,
       sample: ms._sample, confidence: ms._confidence,
       delta, prevOverall: pool.exCYOverall, ipPerGs,
     });
