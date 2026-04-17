@@ -13,7 +13,7 @@ function fmt3(n: number): string {
   return n.toFixed(3).replace(/^0\./, '.')
 }
 
-const LEVEL_ORDER = ['AAA','AA','A+','A','ROK']
+const LEVEL_ORDER = ['AAA','AA','High-A','Single-A','ROK','DSL']
 
 const SPORT_ID_TO_LEVEL: Record<number,string> = { 1: 'MLB', 11: 'AAA', 12: 'AA', 13: 'High-A', 14: 'Single-A', 15: 'ROK', 16: 'DSL', 17: 'ROK', 19: 'ROK' };
 function sportAbbrToLevel(sport: any): string {
@@ -53,11 +53,12 @@ function splitsToRow(splits: any[], group: string, isMLB: boolean): any {
   }
 
   const level = isMLB ? 'MLB' : (() => {
-    const abbrs = splits.map((s: any) => s.sport?.abbreviation ?? '')
+    const levels = splits.map((s: any) => sportAbbrToLevel(s.sport))
     for (const lv of LEVEL_ORDER) {
-      if (abbrs.some((a: string) => sportAbbrToLevel({abbreviation: a}) === lv)) return lv
+      if (levels.includes(lv)) return lv
     }
-    return 'MiLB'
+    const sid = splits[0]?.sport?.id ?? 0
+    return SPORT_ID_TO_LEVEL[sid] ?? 'MiLB'
   })()
 
   const team = splits[0]?.team?.name ?? ''
