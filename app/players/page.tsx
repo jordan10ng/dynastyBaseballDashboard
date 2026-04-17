@@ -831,7 +831,8 @@ export default function PlayersPage() {
                     <div style={{ display: 'flex', gap: '3px', flexShrink: 0 }}>
                       {LEAGUES.map((league: { id: string; label: string }) => {
                         const teamName = pOwn[league.id]
-                        const color = teamName ? (teamName === MY_TEAM ? '#22c55e' : '#eab308') : '#ef4444'
+                        const fc = league.id === D52_ID ? FRIEND_TEAMS[teamName] : (teamName === MY_TEAM ? '#22c55e' : null)
+                        const color = teamName ? (fc ?? '#eab308') : '#ef4444'
                         return <div key={league.id} style={{ width: '5px', height: '5px', borderRadius: '50%', background: color, opacity: 0.85 }} />
                       })}
                     </div>
