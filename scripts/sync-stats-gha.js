@@ -70,7 +70,8 @@ function splitsToRow(splits, group, isMLB) {
     for (const lv of LEVEL_ORDER) {
       if (levels.includes(lv)) return lv
     }
-    return 'MiLB'
+    const sid = splits[0]?.sport?.id ?? 0
+    return SPORT_ID_TO_LEVEL[sid] ?? 'MiLB'
   })()
 
   const team = splits[0]?.team?.name ?? ''
