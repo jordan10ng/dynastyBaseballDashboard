@@ -28,7 +28,7 @@ caffeinate -i & npm run dev
   ```bash
   git fetch origin
   git checkout origin/main -- data/history/2026.json data/players.json data/model/norms.json data/model/mlb-tools.json data/model/regression.json data/model/hot-sheet.json data/model/scores-snapshot.json
-  node scripts/build-norms.js && python3 scripts/build-regression.py && node scripts/build-scores.js
+  node scripts/build-norms.js && python3 scripts/build-regression.py && node scripts/build-scores.js && node scripts/build-model-rank.js && node scripts/build-blend-rank.js
   git add -A && git commit -m "..." && git push
   ```
 - ⚠️ CRITICAL: After GHA recovery, always re-run the FULL pipeline (norms → regression → scores). Pulling data files from GitHub overwrites locally-built model files. Never run build-scores.js without first rebuilding regression.json from the current scripts.
@@ -37,7 +37,7 @@ caffeinate -i & npm run dev
 
 ## Daily Sync (GitHub Actions)
 - Runs every night at 1am PT (9am UTC) via `.github/workflows/daily-sync.yml`
-- Pipeline: sync-stats-gha.js → build-norms → build-mlb-tools → build-regression → build-scores
+- Pipeline: sync-stats-gha.js → build-norms → build-mlb-tools → build-regression → build-scores → build-model-rank → build-blend-rank
 - Commits updated `data/history/2026.json`, `data/players.json`, `data/model/*.json` to GitHub
 - Vercel detects the push → auto-redeploys with fresh data
 - Can also trigger manually: https://github.com/jordan10ng/dynastyBaseballDashboard/actions → Daily Stats + Model Sync → Run workflow
@@ -318,7 +318,7 @@ export async function GET(_req: NextRequest, { params }: { params: Promise<{ id:
 - Hot sheet: G/IP added to stat line; mobile tool colors per-tool; pos/team/level on name line
 - **Model rebuild (Apr 2026):**
   - Age adjustment moved into z-space per season per level per stat (was additive post-normalization flat bonus)
-  - Pool re-normalization kept (center=100, stdev=15)
+  - Pool re-normalization: POOL_CENTER changed to 95 (was 100) to align MiLB model scores with MLB tool grade scale (avg MLB tool ~100, avg prospect ~92)
   - Shrinkage toward 88 (was toward 100)
   - Per-stat stabilization K values implemented
 - **Two-feature regression (Apr 2026):**
@@ -399,8 +399,15 @@ Both use SPORT_ID_TO_LEVEL + sportAbbrToLevel() with sportId fallback. Both fetc
 - Before asserting anything about file contents, verify with grep or cat — never assume
 - GHA conflict recovery — local is ALWAYS source of truth. Never merge. Force push after rebuilding:
   ```bash
-  node scripts/build-norms.js && python3 scripts/build-regression.py && node scripts/build-scores.js
+  node scripts/build-norms.js && python3 scripts/build-regression.py && node scripts/build-scores.js && node scripts/build-model-rank.js && node scripts/build-blend-rank.js
   git add -A && git commit -m "..." && git push --force
   ```
 - Never use `git pull --rebase` — causes detached HEAD
 - Never use `git merge` when GHA has pushed — always `git push --force` after rebuilding locally
+- **POOL_CENTER=95 (Apr 2026):** Changed from 100 to 95 so MiLB model scores are apples-to-apples with raw MLB tool grades. Average MLB tool grade ~100, average prospect now scores ~92 reflecting that most prospects won't be average MLB players.
+- **Dynasty rank pipeline (Apr 2026):**
+  - `build-model-rank.js` — computes dynasty_score per player (overall + level bonus + age bonus + position adjustment), applies positional slot normalization (bat=55.9%, SP=31.5%, RP=12.7% per consensus proportions), writes `data/model/model-rank.json` keyed by Fantrax ID
+  - `build-blend-rank.js` — blends consensus rank (from rankings.json) with model_rank weighted by consensus staleness. Effective consensus date = weighted avg of source dates. staleness = days_since / 365. Ranked players: blended_rank = cns_rank × consensusW + model_rank × modelW. Unranked players: placed after all ranked players ordered by model_rank. Final blended rank written back to `rank` field on players.json.
+  - `data/model/model-rank.json` — model rank + dynasty_score per player, keyed by Fantrax ID
+  - `data/model/blend-rank.json` — full blend metadata + per-player cns_rank, model_rank, blended_rank, final_rank
+  - Dynasty formula: `dynasty_score = overall + levelBon + ageBon + posAdj`. Level: MLB+8, AAA+3, AA-1, High-A-3, Single-A-4, ROK-6. Age: (27-age)×0.6. RP: -8. Positional slot normalization prevents RP pool inflation from distorting bat/SP ranks.
