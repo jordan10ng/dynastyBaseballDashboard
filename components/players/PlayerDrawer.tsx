@@ -216,7 +216,6 @@ export function PlayerDrawer({ player, onClose, globalOwnership, minorsIds, mlbT
             blownSaves: s.bs,
             holds: s.hld,
             oAvg: s.baa,
-            avg: s.baa,
             gamesStarted: s.gs,
             homeRuns: s.hr,
             runs: s.r,
