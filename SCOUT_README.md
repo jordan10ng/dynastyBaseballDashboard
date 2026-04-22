@@ -58,7 +58,7 @@ fantasy-baseball/
 │   ├── sync/page.tsx                     # Fantrax + stats sync (admin only)
 │   ├── trade/page.tsx
 │   ├── leagues/page.tsx                  # League list
-│   ├── leagues/[id]/page.tsx             # League detail — roster by position group, MY_TEAM highlight
+│   ├── leagues/[id]/page.tsx             # League analysis — scatter plots, sortable table, team KPI tiles, position/age/level depth charts
 │   └── api/
 │       ├── players/route.ts, all/route.ts, import/route.ts
 │       ├── rankings/route.ts             # Legacy direct import
@@ -70,6 +70,7 @@ fantasy-baseball/
 │       ├── model/tools/route.ts          # Serves mlb-tools.json to UI
 │       ├── hot-sheet/route.ts            # Serves hot-sheet.json to UI
 │       ├── leagues/route.ts, [id]/teams/route.ts, [id]/rosters/route.ts
+│       ├── leagues/[id]/analysis/route.ts  # Computes rank-based value per team (bat/arm/mlb/milb split), resolves level from history/2026.json
 │       └── fantrax/sync/route.ts, connect/route.ts
 ├── components/
 │   ├── layout/Sidebar.tsx                # Desktop sidebar + mobile bottom tab bar
@@ -257,6 +258,15 @@ Two-way = player has at least one arm position (SP/RP/P) AND at least one non-ar
 - All sections (career table, recent, splits, game log, statcast, tool tiles) respond to toggle
 - Tool tiles show only the active side's tools + that side's OVR+
 
+## League Analysis Page
+- Route: `/leagues/[id]` — replaces old roster view
+- **League view** (default): 3 SVG scatter plots (Value vs Age, Bat vs Arm, MiLB vs MLB) with quadrant labels. Click any dot to drill into team view. Sortable table below (Total · Bat · Arm · MLB · MiLB · Age).
+- **Team view**: 5 KPI tiles (Total/Prospect/MLB/Bat/Arm) colored by league rank using green→yellow→red scale. Depth charts tabbed: Position (value bars + league rank), Age (bubble), Level (bubble). Bubble = circle size = value, text = count + value.
+- **Value**: same exponential decay as trade calc — `0.9942^(rank-1)`, rank from players.json. Split bat/arm by position type.
+- **Level resolution**: analysis API joins history/2026.json via mlbam_id to get real level (A/A+/AA/AAA/MLB). Players without mlbam_id stay unresolved and are excluded from level chart.
+- **Position rollup**: specific positions roll up to groups (1B/2B/SS/3B → INF, LF/CF/RF → OF, SP/RP → P). Players appear in both specific and group buckets. Multi-position players counted in each matching bucket.
+- **Sidebar**: League nav entry points to D28 by default (`/leagues/0ehfuam0mg7wqpn7`). Active for any `/leagues/*` path.
+
 ## Trade Calculator
 - Open mode or league mode (pick teams)
 - Value: exponential decay 0.9942^(rank-1). Rank 1 = 100pts.
@@ -349,6 +359,13 @@ export async function GET(_req: NextRequest, { params }: { params: Promise<{ id:
   - PlayerRow: isPitcher() and isTwoWay() check all positions not just first
   - PlayerDrawer: BAT/ARM toggle for two-way players drives all content (career, splits, statcast, tools)
   - ARM_COLS: removed R and HR (not tracked in pitching history rows)
+- **League analysis page (Apr 2026):**
+  - Full rewrite of leagues/[id]/page.tsx — scatter plots, team drilldown, depth charts
+  - New api/leagues/[id]/analysis/route.ts — single payload with all team value metrics
+  - Rank-color scale (green→yellow→red) on KPI tiles and position bars
+  - Bubble charts for age and level depth (count on y-axis, value as bubble size)
+  - Position rollup: specific positions + INF/OF/P groups; multi-position players in all matching buckets
+  - Level resolved from history/2026.json via mlbam_id
 
 ## Friend Teams (D52 League)
 D52 = "DO MLB - D52" (id: d3prsagvmgftfdc3). Five named teams with assigned colors used for ownership dots, team buttons, and league page highlights:
