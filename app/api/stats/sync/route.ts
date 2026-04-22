@@ -76,6 +76,7 @@ function splitsToRow(splits: any[], group: string, isMLB: boolean): any {
       ip, er: t.earnedRuns, bf: t.battersFaced,
       bb: t.baseOnBalls, so: t.strikeOuts, hbp: t.hitByPitch,
       h: t.hits, ab: t.atBats, go: t.groundOuts, ao: t.airOuts,
+      hr: t.homeRuns, r: t.runs,
       era, whip, baa,
     }
     if (splits.length === 1) {
@@ -116,7 +117,7 @@ async function fetchRows(mlbamId: string, group: string): Promise<any[] | null> 
 
     const rows: any[] = []
     if (mlbSplits.length > 0) rows.push(splitsToRow(mlbSplits.map((s: any) => ({...s.stat, team: s.team, sport: s.sport})), group, true))
-    if (milbSplits.length > 0) rows.push(splitsToRow(milbSplits.map((s: any) => ({...s.stat, team: s.team, sport: s.sport})), group, false))
+    if (milbSplits.length > 0) { const bySport: Record<string,any[]> = {}; for (const s of milbSplits) { const key = String(s.sport?.id ?? "other"); if (!bySport[key]) bySport[key] = []; bySport[key].push(s); } for (const gs of Object.values(bySport)) { rows.push(splitsToRow(gs.map((s: any) => ({...s.stat, team: s.team, sport: s.sport})), group, false)); } }
     return rows.length > 0 ? rows : null
   } catch {
     return null

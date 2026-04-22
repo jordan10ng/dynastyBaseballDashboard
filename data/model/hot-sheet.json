@@ -1,38 +1,37 @@
 {
   "bats": [
     {
-      "id": "06ool",
-      "name": "Owen Ayers",
-      "rank": 1558,
-      "positions": "C",
-      "isPit": false,
-      "isTwoWay": false,
-      "overall": 101,
-      "sample": 395,
-      "confidence": {
-        "hit": 81,
-        "power": 77,
-        "speed": 87
-      },
-      "delta": 12,
-      "prevOverall": 89,
-      "ipPerGs": null
-    },
-    {
       "id": "06al9",
       "name": "Colby Shelton",
       "positions": "SS,INF",
       "isPit": false,
       "isTwoWay": false,
-      "overall": 99,
+      "overall": 98,
       "sample": 177,
       "confidence": {
         "hit": 66,
         "power": 60,
         "speed": 75
       },
-      "delta": 12,
+      "delta": 11,
       "prevOverall": 87,
+      "ipPerGs": null
+    },
+    {
+      "id": "06o8q",
+      "name": "Ronny Cruz",
+      "positions": "SS,INF",
+      "isPit": false,
+      "isTwoWay": false,
+      "overall": 112,
+      "sample": 257,
+      "confidence": {
+        "hit": 74,
+        "power": 68,
+        "speed": 81
+      },
+      "delta": 9,
+      "prevOverall": 103,
       "ipPerGs": null
     },
     {
@@ -42,7 +41,7 @@
       "isPit": false,
       "isTwoWay": false,
       "overall": 110,
-      "sample": 1602,
+      "sample": 1607,
       "confidence": {
         "hit": 95,
         "power": 93,
@@ -53,20 +52,39 @@
       "ipPerGs": null
     },
     {
-      "id": "06qhz",
-      "name": "Jon Jon Gazdar",
-      "positions": "2B,3B,SS,INF",
+      "id": "06ool",
+      "name": "Owen Ayers",
+      "rank": 1558,
+      "positions": "C",
       "isPit": false,
       "isTwoWay": false,
-      "overall": 104,
-      "sample": 599,
+      "overall": 98,
+      "sample": 399,
       "confidence": {
-        "hit": 87,
-        "power": 83,
-        "speed": 91
+        "hit": 82,
+        "power": 77,
+        "speed": 87
       },
       "delta": 9,
-      "prevOverall": 95,
+      "prevOverall": 89,
+      "ipPerGs": null
+    },
+    {
+      "id": "06pi0",
+      "name": "Eric Hartman",
+      "rank": 1843,
+      "positions": "2B,INF,LF,CF,OF",
+      "isPit": false,
+      "isTwoWay": false,
+      "overall": 115,
+      "sample": 460,
+      "confidence": {
+        "hit": 84,
+        "power": 79,
+        "speed": 88
+      },
+      "delta": 8,
+      "prevOverall": 107,
       "ipPerGs": null
     },
     {
@@ -76,15 +94,32 @@
       "positions": "CF,OF",
       "isPit": false,
       "isTwoWay": false,
-      "overall": 113,
-      "sample": 393,
+      "overall": 114,
+      "sample": 397,
       "confidence": {
-        "hit": 81,
+        "hit": 82,
         "power": 77,
         "speed": 87
       },
       "delta": 8,
-      "prevOverall": 105,
+      "prevOverall": 106,
+      "ipPerGs": null
+    },
+    {
+      "id": "06qhz",
+      "name": "Jon Jon Gazdar",
+      "positions": "2B,3B,SS,INF",
+      "isPit": false,
+      "isTwoWay": false,
+      "overall": 103,
+      "sample": 603,
+      "confidence": {
+        "hit": 87,
+        "power": 83,
+        "speed": 91
+      },
+      "delta": 8,
+      "prevOverall": 95,
       "ipPerGs": null
     },
     {
@@ -93,14 +128,14 @@
       "positions": "3B,INF",
       "isPit": false,
       "isTwoWay": false,
-      "overall": 101,
+      "overall": 100,
       "sample": 1195,
       "confidence": {
         "hit": 93,
         "power": 91,
         "speed": 95
       },
-      "delta": 8,
+      "delta": 7,
       "prevOverall": 93,
       "ipPerGs": null
     },
@@ -110,81 +145,12 @@
       "positions": "C",
       "isPit": false,
       "isTwoWay": false,
-      "overall": 99,
-      "sample": 431,
+      "overall": 97,
+      "sample": 435,
       "confidence": {
         "hit": 83,
         "power": 78,
         "speed": 88
-      },
-      "delta": 8,
-      "prevOverall": 91,
-      "ipPerGs": null
-    },
-    {
-      "id": "06mx1",
-      "name": "Kavares Tears",
-      "rank": 1877,
-      "positions": "RF,OF",
-      "isPit": false,
-      "isTwoWay": false,
-      "overall": 99,
-      "sample": 527,
-      "confidence": {
-        "hit": 85,
-        "power": 81,
-        "speed": 90
-      },
-      "delta": 7,
-      "prevOverall": 92,
-      "ipPerGs": null
-    },
-    {
-      "id": "06zlf",
-      "name": "Anthony DePino",
-      "positions": "1B,INF",
-      "isPit": false,
-      "isTwoWay": false,
-      "overall": 99,
-      "sample": 193,
-      "confidence": {
-        "hit": 68,
-        "power": 62,
-        "speed": 76
-      },
-      "delta": 7,
-      "prevOverall": 92,
-      "ipPerGs": null
-    },
-    {
-      "id": "06qtp",
-      "name": "Connor Hujsak",
-      "positions": "LF,CF,RF,OF",
-      "isPit": false,
-      "isTwoWay": false,
-      "overall": 99,
-      "sample": 567,
-      "confidence": {
-        "hit": 86,
-        "power": 83,
-        "speed": 90
-      },
-      "delta": 7,
-      "prevOverall": 92,
-      "ipPerGs": null
-    },
-    {
-      "id": "03qum",
-      "name": "James Nelson",
-      "positions": "3B,INF,LF,OF",
-      "isPit": false,
-      "isTwoWay": false,
-      "overall": 97,
-      "sample": 1887,
-      "confidence": {
-        "hit": 95,
-        "power": 94,
-        "speed": 97
       },
       "delta": 7,
       "prevOverall": 90,
@@ -198,7 +164,7 @@
       "isPit": false,
       "isTwoWay": false,
       "overall": 113,
-      "sample": 537,
+      "sample": 540,
       "confidence": {
         "hit": 86,
         "power": 82,
@@ -209,20 +175,21 @@
       "ipPerGs": null
     },
     {
-      "id": "06o8q",
-      "name": "Ronny Cruz",
+      "id": "06nue",
+      "name": "Joshua Kuroda-Grauer",
+      "rank": 1508,
       "positions": "SS,INF",
       "isPit": false,
       "isTwoWay": false,
-      "overall": 109,
-      "sample": 252,
+      "overall": 111,
+      "sample": 751,
       "confidence": {
-        "hit": 74,
-        "power": 68,
-        "speed": 81
+        "hit": 89,
+        "power": 86,
+        "speed": 93
       },
       "delta": 6,
-      "prevOverall": 103,
+      "prevOverall": 105,
       "ipPerGs": null
     },
     {
@@ -232,7 +199,7 @@
       "isPit": false,
       "isTwoWay": false,
       "overall": 105,
-      "sample": 2105,
+      "sample": 2110,
       "confidence": {
         "hit": 96,
         "power": 95,
@@ -261,6 +228,41 @@
       "ipPerGs": null
     },
     {
+      "id": "06qth",
+      "name": "Bennett Thompson",
+      "positions": "C",
+      "isPit": false,
+      "isTwoWay": false,
+      "overall": 104,
+      "sample": 475,
+      "confidence": {
+        "hit": 84,
+        "power": 80,
+        "speed": 89
+      },
+      "delta": 6,
+      "prevOverall": 98,
+      "ipPerGs": null
+    },
+    {
+      "id": "06rry",
+      "name": "Tate Southisene",
+      "rank": 1266,
+      "positions": "SS,INF",
+      "isPit": false,
+      "isTwoWay": false,
+      "overall": 99,
+      "sample": 142,
+      "confidence": {
+        "hit": 61,
+        "power": 54,
+        "speed": 70
+      },
+      "delta": 6,
+      "prevOverall": 93,
+      "ipPerGs": null
+    },
+    {
       "id": "06cmg",
       "name": "Cam Maldonado",
       "positions": "RF,OF",
@@ -278,73 +280,72 @@
       "ipPerGs": null
     },
     {
-      "id": "06rry",
-      "name": "Tate Southisene",
-      "rank": 1266,
-      "positions": "SS,INF",
+      "id": "06433",
+      "name": "Kody Huff",
+      "positions": "C",
+      "isPit": false,
+      "isTwoWay": false,
+      "overall": 99,
+      "sample": 1243,
+      "confidence": {
+        "hit": 93,
+        "power": 91,
+        "speed": 95
+      },
+      "delta": 6,
+      "prevOverall": 93,
+      "ipPerGs": null
+    },
+    {
+      "id": "06mx1",
+      "name": "Kavares Tears",
+      "rank": 1877,
+      "positions": "RF,OF",
       "isPit": false,
       "isTwoWay": false,
       "overall": 98,
-      "sample": 136,
+      "sample": 530,
       "confidence": {
-        "hit": 60,
-        "power": 53,
-        "speed": 69
+        "hit": 85,
+        "power": 82,
+        "speed": 90
       },
       "delta": 6,
       "prevOverall": 92,
       "ipPerGs": null
     },
     {
-      "id": "06k4v",
-      "name": "Mason White",
-      "positions": "SS,INF",
+      "id": "06zlf",
+      "name": "Anthony DePino",
+      "positions": "1B,INF",
       "isPit": false,
       "isTwoWay": false,
-      "overall": 97,
-      "sample": 163,
+      "overall": 98,
+      "sample": 193,
       "confidence": {
-        "hit": 64,
-        "power": 58,
-        "speed": 73
+        "hit": 68,
+        "power": 62,
+        "speed": 76
       },
       "delta": 6,
-      "prevOverall": 91,
+      "prevOverall": 92,
       "ipPerGs": null
     },
     {
-      "id": "06rl5",
-      "name": "Luis Caicuto",
-      "positions": "C",
+      "id": "06qtp",
+      "name": "Connor Hujsak",
+      "positions": "LF,CF,RF,OF",
       "isPit": false,
       "isTwoWay": false,
-      "overall": 97,
-      "sample": 524,
+      "overall": 98,
+      "sample": 571,
       "confidence": {
-        "hit": 85,
-        "power": 81,
+        "hit": 86,
+        "power": 83,
         "speed": 90
       },
       "delta": 6,
-      "prevOverall": 91,
-      "ipPerGs": null
-    },
-    {
-      "id": "06c5r",
-      "name": "Caden Bodine",
-      "rank": 983,
-      "positions": "C",
-      "isPit": false,
-      "isTwoWay": false,
-      "overall": 96,
-      "sample": 112,
-      "confidence": {
-        "hit": 55,
-        "power": 48,
-        "speed": 65
-      },
-      "delta": 6,
-      "prevOverall": 90,
+      "prevOverall": 92,
       "ipPerGs": null
     }
   ],
@@ -366,35 +367,19 @@
       "ipPerGs": 4.333333333333333
     },
     {
-      "id": "060vg",
-      "name": "Jake Brooks",
-      "positions": "SP",
-      "isPit": true,
-      "isTwoWay": false,
-      "overall": 105,
-      "sample": 252,
-      "confidence": {
-        "stuff": 93,
-        "control": 86
-      },
-      "delta": 8,
-      "prevOverall": 97,
-      "ipPerGs": 4.666666666666667
-    },
-    {
       "id": "06qp2",
       "name": "Nate Payne",
       "rank": 1541,
       "positions": "SP",
       "isPit": true,
       "isTwoWay": false,
-      "overall": 102,
+      "overall": 103,
       "sample": 68,
       "confidence": {
         "stuff": 77,
         "control": 63
       },
-      "delta": 7,
+      "delta": 8,
       "prevOverall": 95,
       "ipPerGs": 4
     },
@@ -447,20 +432,20 @@
       "ipPerGs": 4.555555555555555
     },
     {
-      "id": "06rtp",
-      "name": "Mike Paredes",
-      "positions": "RP",
+      "id": "06578",
+      "name": "Mavis Graves",
+      "positions": "SP",
       "isPit": true,
       "isTwoWay": false,
-      "overall": 102,
-      "sample": 338,
+      "overall": 108,
+      "sample": 211,
       "confidence": {
-        "stuff": 94,
-        "control": 89
+        "stuff": 91,
+        "control": 84
       },
       "delta": 6,
-      "prevOverall": 96,
-      "ipPerGs": 3.5
+      "prevOverall": 102,
+      "ipPerGs": 3.6666666666666665
     },
     {
       "id": "06qrw",
@@ -496,22 +481,6 @@
       "ipPerGs": 4.666666666666667
     },
     {
-      "id": "06578",
-      "name": "Mavis Graves",
-      "positions": "SP",
-      "isPit": true,
-      "isTwoWay": false,
-      "overall": 107,
-      "sample": 207,
-      "confidence": {
-        "stuff": 91,
-        "control": 84
-      },
-      "delta": 5,
-      "prevOverall": 102,
-      "ipPerGs": 3.5
-    },
-    {
       "id": "05xxv",
       "name": "Allen Facundo",
       "positions": "SP",
@@ -544,6 +513,23 @@
       "ipPerGs": 5.333333333333333
     },
     {
+      "id": "05y40",
+      "name": "Eduardo Rivera",
+      "rank": 1682,
+      "positions": "SP",
+      "isPit": true,
+      "isTwoWay": false,
+      "overall": 105,
+      "sample": 222,
+      "confidence": {
+        "stuff": 92,
+        "control": 85
+      },
+      "delta": 5,
+      "prevOverall": 100,
+      "ipPerGs": 5
+    },
+    {
       "id": "04yij",
       "name": "Riley Cornelio",
       "positions": "SP",
@@ -560,20 +546,52 @@
       "ipPerGs": 4.583333333333333
     },
     {
-      "id": "06uhj",
-      "name": "Daniel Guerra",
-      "positions": "SP,RP",
+      "id": "060vg",
+      "name": "Jake Brooks",
+      "positions": "SP",
       "isPit": true,
       "isTwoWay": false,
       "overall": 102,
-      "sample": 220,
+      "sample": 256,
       "confidence": {
-        "stuff": 92,
-        "control": 85
+        "stuff": 93,
+        "control": 87
       },
       "delta": 5,
       "prevOverall": 97,
-      "ipPerGs": 4.777777777777778
+      "ipPerGs": 4.5
+    },
+    {
+      "id": "06rtp",
+      "name": "Mike Paredes",
+      "positions": "RP",
+      "isPit": true,
+      "isTwoWay": false,
+      "overall": 101,
+      "sample": 341,
+      "confidence": {
+        "stuff": 94,
+        "control": 90
+      },
+      "delta": 5,
+      "prevOverall": 96,
+      "ipPerGs": 3.4666666666666663
+    },
+    {
+      "id": "06umm",
+      "name": "Jake Curtis",
+      "positions": "RP",
+      "isPit": true,
+      "isTwoWay": false,
+      "overall": 101,
+      "sample": 71,
+      "confidence": {
+        "stuff": 78,
+        "control": 64
+      },
+      "delta": 5,
+      "prevOverall": 96,
+      "ipPerGs": 3
     },
     {
       "id": "0648g",
@@ -608,21 +626,37 @@
       "ipPerGs": 4.555555555555555
     },
     {
-      "id": "061mh",
-      "name": "Robby Snelling",
-      "rank": 202,
+      "id": "06ca0",
+      "name": "Kiefer Lord",
       "positions": "SP",
       "isPit": true,
       "isTwoWay": false,
-      "overall": 112,
-      "sample": 374,
+      "overall": 99,
+      "sample": 27,
       "confidence": {
-        "stuff": 95,
-        "control": 90
+        "stuff": 57,
+        "control": 40
+      },
+      "delta": 5,
+      "prevOverall": 94,
+      "ipPerGs": 4.25
+    },
+    {
+      "id": "05tp6",
+      "name": "Thomas White",
+      "rank": 137,
+      "positions": "SP",
+      "isPit": true,
+      "isTwoWay": false,
+      "overall": 116,
+      "sample": 200,
+      "confidence": {
+        "stuff": 91,
+        "control": 83
       },
       "delta": 4,
-      "prevOverall": 108,
-      "ipPerGs": 4.75
+      "prevOverall": 112,
+      "ipPerGs": 3.3333333333333335
     },
     {
       "id": "06207",
@@ -640,41 +674,7 @@
       "delta": 4,
       "prevOverall": 105,
       "ipPerGs": 4.222222222222222
-    },
-    {
-      "id": "06mlb",
-      "name": "Juan Valera",
-      "rank": 1264,
-      "positions": "SP",
-      "isPit": true,
-      "isTwoWay": false,
-      "overall": 104,
-      "sample": 138,
-      "confidence": {
-        "stuff": 87,
-        "control": 78
-      },
-      "delta": 4,
-      "prevOverall": 100,
-      "ipPerGs": 3.111111111111111
-    },
-    {
-      "id": "06c1l",
-      "name": "Joe Whitman",
-      "rank": 1774,
-      "positions": "SP",
-      "isPit": true,
-      "isTwoWay": false,
-      "overall": 104,
-      "sample": 244,
-      "confidence": {
-        "stuff": 92,
-        "control": 86
-      },
-      "delta": 4,
-      "prevOverall": 100,
-      "ipPerGs": 4.555555555555555
     }
   ],
-  "generatedAt": "2026-04-22T00:28:36.524Z"
+  "generatedAt": "2026-04-22T13:12:42.447Z"
 }

@@ -2,8 +2,8 @@ export function sportAbbrToLevel(abbr: string, sportId?: number): string {
   if (sportId === 1 || abbr === 'MLB') return 'MLB'
   if (abbr === 'AAA') return 'AAA'
   if (abbr === 'AA') return 'AA'
-  if (abbr === 'A+' || abbr === 'HiA') return 'A+'
-  if (abbr === 'A' || abbr === 'LoA') return 'A'
+  if (abbr === 'A+' || abbr === 'HiA' || abbr === 'High-A') return 'A+'
+  if (abbr === 'A' || abbr === 'LoA' || abbr === 'Single-A') return 'A'
   if (abbr === 'A(Short)') return 'A'
   if (abbr === 'ROK' || abbr === 'Rk') return 'ROK'
   return 'Other'
@@ -11,7 +11,7 @@ export function sportAbbrToLevel(abbr: string, sportId?: number): string {
 
 export function isMlbLevel(level: string) { return level === 'MLB' }
 
-export const LEVEL_ORDER = ['ROK','A','A+','AA','AAA','MLB','Other']
+export const LEVEL_ORDER = ['ROK','A','Single-A','A+','High-A','AA','AAA','MLB','Other']
 export function levelSortVal(level: string) {
   const i = LEVEL_ORDER.indexOf(level)
   return i >= 0 ? i : 99
@@ -49,7 +49,7 @@ export function sumBatStats(rows: any[]): any {
 export function sumPitchStats(rows: any[]): any {
   const t = { gamesPlayed:0, gamesStarted:0, wins:0, losses:0, saves:0,
     earnedRuns:0, atBats:0, baseOnBalls:0, strikeOuts:0, hitByPitch:0,
-    hits:0, battersFaced:0 }
+    hits:0, battersFaced:0, homeRuns:0, runs:0 }
   let totalOuts = 0
   for (const r of rows) {
     const s = r.stat ?? r
@@ -65,6 +65,8 @@ export function sumPitchStats(rows: any[]): any {
     t.hitByPitch += s.hitByPitch ?? 0
     t.hits += s.hits ?? 0
     t.battersFaced += s.battersFaced ?? 0
+    t.homeRuns += s.homeRuns ?? 0
+    t.runs += s.runs ?? 0
     if (s.inningsPitched) {
       const parts = String(s.inningsPitched).split('.')
       totalOuts += parseInt(parts[0]) * 3 + (parseInt(parts[1] ?? '0'))
@@ -73,7 +75,8 @@ export function sumPitchStats(rows: any[]): any {
   const ip = `${Math.floor(totalOuts / 3)}.${totalOuts % 3}`
   const era = totalOuts ? (t.earnedRuns * 27 / totalOuts).toFixed(2) : null
   const whip = totalOuts ? ((t.hits + t.baseOnBalls) / (totalOuts / 3)).toFixed(2) : null
-  return { ...t, inningsPitched: ip, era, whip }
+  const oAvg = t.atBats ? (t.hits / t.atBats).toFixed(3) : null
+  return { ...t, inningsPitched: ip, era, whip, oAvg, avg: oAvg }
 }
 
 export function calcKPct(s: any, isPitch: boolean): string {

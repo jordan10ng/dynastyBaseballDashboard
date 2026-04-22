@@ -5,7 +5,7 @@ import { StatcastPanel, parseStatcastCSV } from './StatcastPanel'
 import { isPitcher, cleanPositions, toolColor, LEAGUES, MY_TEAM } from '../../lib/players-config'
 import { sportAbbrToLevel, isMlbLevel, levelSortVal, sumBatStats, sumPitchStats, calcKPct, calcBBPct, stripLeadingZero } from '../../lib/drawer-utils'
 
-const LEVEL_ORDER = ['ROK','A','A+','AA','AAA','MLB','Other']
+const LEVEL_ORDER = ['ROK','A','Single-A','A+','High-A','AA','AAA','MLB','Other']
 
 function StatCell({ val, bold }: { val: any; bold?: boolean }) {
   const display = stripLeadingZero(val)
@@ -216,6 +216,10 @@ export function PlayerDrawer({ player, onClose, globalOwnership, minorsIds, mlbT
             blownSaves: s.bs,
             holds: s.hld,
             oAvg: s.baa,
+            avg: s.baa,
+            gamesStarted: s.gs,
+            homeRuns: s.hr,
+            runs: s.r,
           },
         }))
       splits.sort((a:any,b:any)=>(a.season??'').localeCompare(b.season??''))
@@ -369,7 +373,7 @@ export function PlayerDrawer({ player, onClose, globalOwnership, minorsIds, mlbT
                 <table style={{borderCollapse:'collapse',minWidth:'max-content'}}>
                   <thead><tr style={{borderBottom:'1px solid var(--border)'}}>{headers.map(h=><th key={h} style={{padding:'0.25rem 0.45rem',textAlign:h==='Year'||h==='Team'||h==='Lev'?'left':'right',fontFamily:'var(--font-display)',fontWeight:700,fontSize:'0.62rem',letterSpacing:'0.08em',color:'var(--muted)',whiteSpace:'nowrap'}}>{h}</th>)}</tr></thead>
                   <tbody>
-                    {yearGroups.map(([year,yRows])=>{const isExpanded=expandedYears.has(year);const toggle=()=>setExpandedYears(prev=>{const next=new Set(prev);if(next.has(year))next.delete(year);else next.add(year);return next});if(yRows.length===1)return pitch?renderPitchRow(yRows[0],`row-${year}-0`):renderBatRow(yRows[0],`row-${year}-0`);return(<React.Fragment key={year}>{pitch?renderPitchSumRow(year,yRows,isExpanded,toggle):renderBatSumRow(year,yRows,isExpanded,toggle)}{isExpanded&&yRows.map((s,i)=>pitch?renderPitchRow(s,`row-${year}-${i}`,true):renderBatRow(s,`row-${year}-${i}`,true))}</React.Fragment>)})}
+                    {yearGroups.map(([year,yRows])=>{const isExpanded=expandedYears.has(year);const toggle=()=>setExpandedYears(prev=>{const next=new Set(prev);if(next.has(year))next.delete(year);else next.add(year);return next});if(yRows.length===1)return pitch?renderPitchRow(yRows[0],`row-${year}-0`):renderBatRow(yRows[0],`row-${year}-0`);return(<React.Fragment key={year}>{pitch?renderPitchSumRow(year,yRows,isExpanded,toggle):renderBatSumRow(year,yRows,isExpanded,toggle)}{isExpanded&&[...yRows].sort((a,b)=>levelSortVal(a._level)-levelSortVal(b._level)).map((s,i)=>pitch?renderPitchRow(s,`row-${year}-${i}`,true):renderBatRow(s,`row-${year}-${i}`,true))}</React.Fragment>)})}
                     {mlbTotal&&(pitch?renderPitchTotalRow('MLB Total',mlbTotal):renderBatTotalRow('MLB Total',mlbTotal))}
                     {showMinors&&minorsTotal&&(pitch?renderPitchTotalRow('Minors Total',minorsTotal):renderBatTotalRow('Minors Total',minorsTotal))}
                   </tbody>
