@@ -2,12 +2,13 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
-import { LayoutDashboard, Users, ListOrdered, ArrowLeftRight, RefreshCw, Flame } from 'lucide-react'
+import { LayoutDashboard, Users, ListOrdered, ArrowLeftRight, RefreshCw, Flame, Trophy } from 'lucide-react'
 
 const ALL_NAV = [
   { href: '/',          label: 'Home',     icon: LayoutDashboard, admin: false },
   { href: '/players',   label: 'Players',  icon: Users,           admin: false },
   { href: '/hot-sheet', label: 'Hot',      icon: Flame,           admin: false },
+  { href: '/leagues/0ehfuam0mg7wqpn7', label: 'League', icon: Trophy, admin: false },
   { href: '/rankings',  label: 'Rankings', icon: ListOrdered,     admin: true  },
   { href: '/trade',     label: 'Trade',    icon: ArrowLeftRight,  admin: false },
   { href: '/sync',      label: 'Sync',     icon: RefreshCw,       admin: true  },
@@ -35,17 +36,19 @@ export default function Sidebar() {
         paddingBottom: 'env(safe-area-inset-bottom)',
       }}>
         {nav.map(({ href, label, icon: Icon }) => {
-          const active = path === href || (href !== '/' && path.startsWith(href))
+          const active = path === href || (href !== '/' && path.startsWith('/leagues'))
+          const isLeague = href.startsWith('/leagues/')
+          const finalActive = isLeague ? path.startsWith('/leagues') : (path === href || (href !== '/' && path.startsWith(href)))
           return (
             <Link key={href} href={href} style={{
               flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center',
               justifyContent: 'center', gap: 3, textDecoration: 'none',
-              color: active ? 'var(--accent)' : 'var(--muted)',
-              background: active ? 'rgba(34,197,94,0.06)' : 'transparent',
-              borderTop: active ? '2px solid var(--accent)' : '2px solid transparent',
+              color: finalActive ? 'var(--accent)' : 'var(--muted)',
+              background: finalActive ? 'rgba(34,197,94,0.06)' : 'transparent',
+              borderTop: finalActive ? '2px solid var(--accent)' : '2px solid transparent',
               transition: 'all 0.15s',
             }}>
-              <Icon size={20} strokeWidth={active ? 2.5 : 1.8} />
+              <Icon size={20} strokeWidth={finalActive ? 2.5 : 1.8} />
               <span style={{
                 fontFamily: 'var(--font-display)', fontWeight: 700,
                 fontSize: '0.58rem', letterSpacing: '0.06em', textTransform: 'uppercase',
@@ -65,7 +68,8 @@ export default function Sidebar() {
       </div>
       <nav style={{ padding: '0.75rem', flex: 1 }}>
         {nav.map(({ href, label, icon: Icon }) => {
-          const active = path === href || (href !== '/' && path.startsWith(href))
+          const isLeague = href.startsWith('/leagues/')
+          const active = isLeague ? path.startsWith('/leagues') : (path === href || (href !== '/' && path.startsWith(href)))
           return (
             <Link key={href} href={href} style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', padding: '0.6rem 0.75rem', borderRadius: 6, marginBottom: 2, textDecoration: 'none', fontFamily: 'var(--font-display)', fontWeight: active ? 700 : 600, fontSize: '0.9rem', letterSpacing: '0.04em', textTransform: 'uppercase', color: active ? 'var(--accent)' : 'var(--muted)', background: active ? 'rgba(34,197,94,0.08)' : 'transparent', borderLeft: active ? '2px solid var(--accent)' : '2px solid transparent', transition: 'all 0.15s' }}>
               <Icon size={16} strokeWidth={active ? 2.5 : 2} />
