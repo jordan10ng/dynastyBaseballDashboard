@@ -16,7 +16,7 @@ const norms       = JSON.parse(fs.readFileSync(NORMS_PATH, 'utf8'));
 const VALID_YEARS   = new Set([2015,2016,2017,2018,2019,2021,2022,2023,2024,2025,2026]);
 const CURRENT_YEAR  = new Date().getFullYear();
 
-const POOL_CENTER   = 100;
+const POOL_CENTER   = 95;
 const POOL_STDEV    = 15;
 const SHRINK_TOWARD = 88;
 
