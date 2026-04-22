@@ -16,10 +16,14 @@ caffeinate -i & npm run dev
 ## Deployment
 - Deployed on Vercel at https://dynasty-baseball-dashboard.vercel.app/
 - GitHub: https://github.com/jordan10ng/dynastyBaseballDashboard (public repo)
-- Push to deploy: `git add -A && git commit -m "..." && git push`
+- Push to deploy — ALWAYS force push, GHA pushes nightly so remote is always ahead:
+  ```bash
+  rm -f /tmp/*.js /tmp/*.py
+  git add -A && git commit -m "..." && git push --force
+  ```
 - Rankings and Sync pages hidden on deployed version via `NEXT_PUBLIC_SHOW_ADMIN` env var
 - Set `NEXT_PUBLIC_SHOW_ADMIN=true` in `.env.local` to show them locally
-- ⚠️ GHA bot commits cause a push conflict if you push while workflow is running
+- ⚠️ GHA pushes new data EVERY NIGHT at 1am PT — always assume remote is ahead. NEVER use git push alone after working locally; always use git push --force after rebuilding the pipeline.
 - GHA only touches data files — scripts are never modified by GHA. Safe recovery:
   ```bash
   git fetch origin
@@ -371,7 +375,8 @@ Both use SPORT_ID_TO_LEVEL + sportAbbrToLevel() with sportId fallback. Both fetc
 - Scout edits files directly via terminal commands — user pastes and runs them
 - No zip files
 - User comfortable with terminal basics but not a developer
-- Temp/diagnostic scripts go in /tmp/ — Scout writes them there, user runs with `node /tmp/script.js` or `python3 /tmp/script.py`. Auto-clear on reboot. Never litter project root with throwaway scripts.
+- Never create extra files or temp scripts just to patch a file — use node -e with single quotes inline. Temp scripts in /tmp/ are fine for complex multi-step diagnostics only.
+- Clear /tmp/ of any .js/.py scripts before pushing: `rm -f /tmp/*.js /tmp/*.py`
 - Never rewrite entire files — surgical patches only
 - Never hardcode years — use `new Date().getFullYear()` dynamically
 - Before asserting anything about file contents, verify with grep or cat — never assume
