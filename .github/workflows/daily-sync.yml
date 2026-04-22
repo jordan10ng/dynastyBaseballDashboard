@@ -53,7 +53,7 @@ jobs:
       - name: Build scores + hot sheet
         env:
           DATA_BASE: ${{ github.workspace }}/data
-        run: node scripts/build-scores.js
+        run: node scripts/build-scores.js && node scripts/build-model-rank.js && node scripts/build-blend-rank.js
 
       - name: Commit updated data
         run: |

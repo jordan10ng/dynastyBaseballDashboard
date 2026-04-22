@@ -178,6 +178,8 @@ export async function POST() {
     { cmd: `python3 "${SCRIPTS}/build-mlb-tools.py"`, label: 'mlb-tools' },
     { cmd: `python3 "${SCRIPTS}/build-regression.py"`, label: 'regression' },
     { cmd: `node "${SCRIPTS}/build-scores.js"`, label: 'scores' },
+    { cmd: `node "${SCRIPTS}/build-model-rank.js"`, label: 'model-rank' },
+    { cmd: `node "${SCRIPTS}/build-blend-rank.js"`, label: 'blend-rank' },
   ]
   const modelResults: Record<string, string> = {}
   for (const step of modelSteps) {
