@@ -102,3 +102,15 @@ unranked.slice(0,10).forEach(r=>{
     'ovr='+String(r.overall).padStart(3), 'age='+String(r.age||'?').padStart(2),
     (r.level||'—').padEnd(8));
 });
+
+// Write final_rank back to players.json as rank field
+const playersOut = JSON.parse(fs.readFileSync(PLAYERS_PATH, 'utf8'));
+let updated = 0;
+for (const r of all) {
+  if (playersOut[r.fantraxId]) {
+    playersOut[r.fantraxId].rank = r.final_rank;
+    updated++;
+  }
+}
+fs.writeFileSync(PLAYERS_PATH, JSON.stringify(playersOut, null, 2));
+console.log(`players.json updated: ${updated} ranks written`);
