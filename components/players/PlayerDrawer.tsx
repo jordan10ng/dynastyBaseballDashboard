@@ -217,8 +217,6 @@ export function PlayerDrawer({ player, onClose, globalOwnership, minorsIds, mlbT
             holds: s.hld,
             oAvg: s.baa,
             gamesStarted: s.gs,
-            homeRuns: s.hr,
-            runs: s.r,
           },
         }))
       splits.sort((a:any,b:any)=>(a.season??'').localeCompare(b.season??''))
