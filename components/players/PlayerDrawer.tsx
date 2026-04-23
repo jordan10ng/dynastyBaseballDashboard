@@ -601,7 +601,7 @@ export function PlayerDrawer({ player, onClose, globalOwnership, minorsIds, mlbT
       splitRows.push({ ...row, _lvl: lvl, _year: parseInt(row.season ?? '0') })
     }
 
-    function getAge(yr:number):number {
+    const getAge = (yr:number):number => {
       if(!birthDate) return ARC_AVG_AGES['AA']
       const d=new Date(birthDate);let age=yr-d.getFullYear()
       if(d.getMonth()>6||(d.getMonth()===6&&d.getDate()>1))age--; return age
@@ -643,7 +643,7 @@ export function PlayerDrawer({ player, onClose, globalOwnership, minorsIds, mlbT
       if(!n) continue
       const ageDiff=(ARC_AVG_AGES[lvl]??22)-getAge(year)
 
-      function scoreTool(toolName:string):number|null {
+      const scoreTool = (toolName:string):number|null => {
         const toolModels=models[toolName];if(!toolModels?.[lvl!]) return null
         const tv=poolStats[toolName];if(!tv) return null
         const statKeys=toolName==='hit'?['k_pct','bb_pct']:toolName==='power'?['iso']:toolName==='speed'?['sb_rate']:toolName==='stuff'?['k_pct']:['bb_pct']
