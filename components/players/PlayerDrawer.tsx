@@ -29,12 +29,12 @@ function SectionHeader({ title, extra }: { title: string; extra?: React.ReactNod
   )
 }
 
-function ToolArcChart({ points, isPitcher }: { points: any[]; isPitcher: boolean }) {
+function ToolArcChart({ points, isPitcher, dateMode }: { points: any[]; isPitcher: boolean; dateMode?: boolean }) {
   const [tooltip, setTooltip] = React.useState<{x:number,y:number,pt:any}|null>(null)
   if (!points.length) return null
   const tools = isPitcher
     ? [{ key:'overall', label:'OVR+', color:'#f59e0b', bold:true },{ key:'stuff', label:'Stuff+', color:'#60a5fa', bold:false },{ key:'control', label:'Ctrl+', color:'#34d399', bold:false }]
-    : [{ key:'overall', label:'OVR+', color:'#f59e0b', bold:true },{ key:'hit', label:'Hit+', color:'#60a5fa', bold:false },{ key:'power', label:'Pwr+', color:'#f87171', bold:false },{ key:'speed', label:'Spd+', color:'#34d399', bold:false }]
+    : [{ key:'overall', label:'OVR+', color:'#f59e0b', bold:true },{ key:'hit', label:'Hit+', color:'#22d3ee', bold:false },{ key:'power', label:'Pwr+', color:'#fb923c', bold:false },{ key:'speed', label:'Spd+', color:'#4ade80', bold:false }]
 
   const W = 560, H = 190, PL = 36, PR = 16, PT = 16, PB = 28
   const chartW = W - PL - PR, chartH = H - PT - PB
@@ -47,7 +47,7 @@ function ToolArcChart({ points, isPitcher }: { points: any[]; isPitcher: boolean
   const tickStep = (YMAX - YMIN) <= 30 ? 5 : 10
   const yTicks = Array.from({ length: Math.floor((YMAX - YMIN) / tickStep) + 1 }, (_,i) => YMIN + i * tickStep)
 
-  const xLabels = points.map((p: any) => `${p.year} ${p.level}`)
+  const xLabels = points.map((p: any) => dateMode ? (p.date ?? `${p.year}`) : `${p.year} ${p.level}`)
   const xScale = (i: number) => PL + (i / Math.max(xLabels.length - 1, 1)) * chartW
   const yScale = (v: number) => PT + chartH - ((v - YMIN) / (YMAX - YMIN)) * chartH
 
@@ -55,13 +55,26 @@ function ToolArcChart({ points, isPitcher }: { points: any[]; isPitcher: boolean
     <div style={{overflowX:'auto',position:'relative'}}>
       <svg width={W} height={H} style={{fontFamily:'var(--font-display)',display:'block'}}
         onMouseLeave={() => setTooltip(null)}>
+        {/* score bands */}
+        {[
+          { lo: 130, hi: 999, color: 'rgba(239,68,68,0.08)' },
+          { lo: 115, hi: 130, color: 'rgba(252,165,165,0.07)' },
+          { lo: 95,  hi: 115, color: 'rgba(255,255,255,0.02)' },
+          { lo: 80,  hi: 95,  color: 'rgba(147,197,253,0.06)' },
+          { lo: 0,   hi: 80,  color: 'rgba(59,130,246,0.08)' },
+        ].map(({lo,hi,color}) => {
+          const y1 = yScale(Math.min(hi, YMAX))
+          const y2 = yScale(Math.max(lo, YMIN))
+          if (y2 <= y1) return null
+          return <rect key={lo} x={PL} y={y1} width={chartW} height={y2-y1} fill={color}/>
+        })}
         {yTicks.map(y => (
           <g key={y}>
-            <line x1={PL} x2={W-PR} y1={yScale(y)} y2={yScale(y)} stroke='rgba(255,255,255,0.05)' strokeWidth={1}/>
-            <text x={PL-4} y={yScale(y)+3} textAnchor='end' fontSize={9} fill='rgba(150,150,150,0.5)'>{y}</text>
+            <line x1={PL} x2={W-PR} y1={yScale(y)} y2={yScale(y)} stroke='rgba(255,255,255,0.04)' strokeWidth={1}/>
+            <text x={PL-4} y={yScale(y)+3} textAnchor='end' fontSize={9} fill='rgba(150,150,150,0.4)'>{y}</text>
           </g>
         ))}
-        <line x1={PL} x2={W-PR} y1={yScale(100)} y2={yScale(100)} stroke='rgba(255,255,255,0.15)' strokeWidth={1} strokeDasharray='3,3'/>
+        <line x1={PL} x2={W-PR} y1={yScale(100)} y2={yScale(100)} stroke='rgba(255,255,255,0.12)' strokeWidth={1} strokeDasharray='3,3'/>
         {tools.map(({ key, color, bold }) => {
           const validPts = points.filter((p: any) => p[key] != null)
           if (validPts.length < 1) return null
@@ -90,13 +103,24 @@ function ToolArcChart({ points, isPitcher }: { points: any[]; isPitcher: boolean
               onMouseEnter={e => {
                 setTooltip({ x: xScale(i), y: H/2, pt })
               }}/>
-            {tools.map(({ key, color, bold }) => pt[key] != null && (
-              <circle key={key} cx={xScale(i)} cy={yScale(pt[key])} r={bold?3.5:2.5} fill={color} fillOpacity={bold?1:0.8}/>
+            {tools.filter(({bold})=>bold).map(({ key, color }) => pt[key] != null && (
+              <circle key={key} cx={xScale(i)} cy={yScale(pt[key])} r={1.5} fill={color} fillOpacity={0.5}/>
             ))}
           </g>
         ))}
-        {xLabels.map((lbl, i) => (
-          <text key={i} x={xScale(i)} y={H-6} textAnchor='middle' fontSize={8.5} fill='rgba(150,150,150,0.6)'>{lbl}</text>
+        {dateMode ? (
+          points.reduce((acc:any[], pt:any, i:number) => {
+            const prev = points[i-1]
+            const newYear = !prev || pt.year !== prev.year
+            const newMonth = !prev || pt.date?.slice(0,7) !== prev.date?.slice(0,7)
+            if (newYear) acc.push({i, lbl: String(pt.year), strong: true})
+            else if (newMonth && points.length < 300) acc.push({i, lbl: pt.date?.slice(5,7), strong: false})
+            return acc
+          }, []).map(({i,lbl,strong}:{i:number,lbl:string,strong:boolean}) => (
+            <text key={i} x={xScale(i)} y={H-6} textAnchor='middle' fontSize={strong?9:7.5} fontWeight={strong?700:400} fill={strong?'rgba(200,200,200,0.6)':'rgba(120,120,120,0.4)'}>{lbl}</text>
+          ))
+        ) : xLabels.map((lbl, i) => (
+          <text key={i} x={xScale(i)} y={H-6} textAnchor='middle' fontSize={8.5} fill='rgba(150,150,150,0.6)'>{lbl as string}</text>
         ))}
       </svg>
       {tooltip && (
@@ -106,7 +130,7 @@ function ToolArcChart({ points, isPitcher }: { points: any[]; isPitcher: boolean
           padding:'0.4rem 0.6rem', fontSize:'0.7rem', fontFamily:'var(--font-display)',
           zIndex:10, minWidth:100, boxShadow:'0 4px 12px rgba(0,0,0,0.5)'
         }}>
-          <div style={{fontWeight:700,color:'var(--accent)',marginBottom:'0.25rem'}}>{tooltip.pt.year} · {tooltip.pt.level}</div>
+          <div style={{fontWeight:700,color:'var(--accent)',marginBottom:'0.25rem'}}>{dateMode ? `${tooltip.pt.date} · ${tooltip.pt.level??''}` : `${tooltip.pt.year} · ${tooltip.pt.level}`}</div>
           {tools.map(({ key, label, color }) => tooltip.pt[key] != null && (
             <div key={key} style={{display:'flex',justifyContent:'space-between',gap:'0.75rem',color}}>
               <span style={{opacity:0.8}}>{label}</span>
@@ -142,6 +166,7 @@ export function PlayerDrawer({ player, onClose, globalOwnership, minorsIds, mlbT
   const [situSplits, setSituSplits] = useState<any[]>([])
   const [gameLogs, setGameLogs] = useState<any[]>([])
   const [statcastRows, setStatcastRows] = useState<any[]>([])
+  const [allGameLogs, setAllGameLogs] = useState<Record<number,any[]>>({})
   const [drawerLoading, setDrawerLoading] = useState(true)
   const [extraLoading, setExtraLoading] = useState(true)
   const [statcastLoading, setStatcastLoading] = useState(true)
@@ -278,6 +303,20 @@ export function PlayerDrawer({ player, onClose, globalOwnership, minorsIds, mlbT
       fetch(`https://statsapi.mlb.com/api/v1/people/${mlbamId}?hydrate=currentTeam`).then(r=>r.json()),
       fetch(`/api/stats/history/${mlbamId}`).then(r=>r.json()),
     ]).then(([peopleData,histData]) => {
+      // fetch game logs for all years that have history
+      const histYears = Array.from(new Set((histData.splits??[]).map((s:any)=>parseInt(s.season??'0')).filter((y:number)=>y>=2015))).sort() as number[]
+      const currentYear = new Date().getFullYear()
+      if (!histYears.includes(currentYear)) histYears.push(currentYear)
+      Promise.all(histYears.map((yr:number) =>
+        fetch(`/api/stats/gamelogs/${mlbamId}?year=${yr}`).then(r=>r.json()).catch(()=>({hitting:[],pitching:[]}))
+      )).then(results => {
+        const logs: Record<number,any[]> = {}
+        histYears.forEach((yr:number, i:number) => {
+          const gl = results[i]
+          logs[yr] = pitch ? (gl.pitching??[]) : (gl.hitting??[])
+        })
+        setAllGameLogs(logs)
+      })
       setBio(peopleData.people?.[0]??null)
       const splits = (histData.splits ?? [])
         .filter((s:any) => s.type === (pitch ? 'pitching' : 'hitting'))
@@ -534,6 +573,121 @@ export function PlayerDrawer({ player, onClose, globalOwnership, minorsIds, mlbT
     return pts
   }, [allSplits, regression, norms, poolStats, pitch, player.birthDate])
 
+  // Full career game-by-game arc across all years
+  const gameArcPoints = useMemo(() => {
+    const hasLogs = Object.values(allGameLogs).some((rows:any) => rows?.length > 0)
+    if (!regression || !norms || !poolStats || !hasLogs) return []
+    const models = regression.models
+    const isPit = pitch
+    const toolNames = isPit ? ['stuff','control'] : ['hit','power','speed']
+    const birthDate = player.birthDate ?? null
+    const MILB = new Set(['DSL','Complex','Rookie','Single-A','High-A','AA','AAA'])
+    function normLevel(l:string):string {
+      if(l==='A') return 'Single-A'
+      if(l==='A+'||l==='High A') return 'High-A'
+      if(l==='ROK'||l==='Rookie Advanced') return 'Rookie'
+      if(l==='CPX') return 'Complex'
+      return l
+    }
+
+    // allSplits rows for prior-season context — same structure as arcPoints
+    const splitRows: any[] = []
+    for (const row of allSplits) {
+      const rowType = row.type ?? 'hitting'
+      if (isPit && rowType !== 'pitching') continue
+      if (!isPit && rowType === 'pitching') continue
+      const lvl = row._level ?? row.level
+      if (!lvl || !MILB.has(lvl)) continue
+      splitRows.push({ ...row, _lvl: lvl, _year: parseInt(row.season ?? '0') })
+    }
+
+    function getAge(yr:number):number {
+      if(!birthDate) return ARC_AVG_AGES['AA']
+      const d=new Date(birthDate);let age=yr-d.getFullYear()
+      if(d.getMonth()>6||(d.getMonth()===6&&d.getDate()>1))age--; return age
+    }
+
+    // Collect all game entries across all years, sorted by date
+    const allGames: Array<{date:string,year:number,g:any}> = []
+    for (const [yrStr, rows] of Object.entries(allGameLogs)) {
+      const yr = parseInt(yrStr)
+      if (!rows?.length) continue
+      for (const g of (rows as any[])) {
+        if (g.date) allGames.push({ date: g.date.slice(0,10), year: yr, g })
+      }
+    }
+    allGames.sort((a,b) => a.date.localeCompare(b.date))
+    if (!allGames.length) return []
+
+    const pts: any[] = []
+    // Track cumulative totals per season/level — keyed by year|level
+    // Each entry accumulated as games are played
+    const seasonCum: Record<string,{ab:number,bb:number,hbp:number,so:number,h:number,sb:number,tb:number,bf:number,ipOuts:number,year:number,lvl:string}> = {}
+
+    for (const { date, year, g } of allGames) {
+      // Accumulate this game into its season/level bucket
+      const lvl = normLevel(g.level ?? '')
+      if(!lvl||!MILB.has(lvl)) continue
+      const sKey = `${year}|${lvl}`
+      if(!seasonCum[sKey]) seasonCum[sKey]={ab:0,bb:0,hbp:0,so:0,h:0,sb:0,tb:0,bf:0,ipOuts:0,year,lvl}
+      const sc=seasonCum[sKey]
+      sc.ab+=g.atBats??0;sc.bb+=g.baseOnBalls??0;sc.hbp+=g.hitByPitch??0
+      sc.so+=g.strikeOuts??0;sc.h+=g.hits??0;sc.sb+=g.stolenBases??0
+      sc.tb+=g.totalBases??0;sc.bf+=g.battersFaced??0
+      const ipStr=String(g.inningsPitched??'0');const ipP=ipStr.split('.')
+      sc.ipOuts+=(parseInt(ipP[0]||'0')*3)+(parseInt(ipP[1]||'0'))
+
+      const normEntry=norms[`${lvl}|${year}`]??norms[`${lvl}|${year-1}`]
+      if(!normEntry) continue
+      const n=isPit?normEntry.pitchers:normEntry.hitters
+      if(!n) continue
+      const ageDiff=(ARC_AVG_AGES[lvl]??22)-getAge(year)
+
+      function scoreTool(toolName:string):number|null {
+        const toolModels=models[toolName];if(!toolModels?.[lvl!]) return null
+        const tv=poolStats[toolName];if(!tv) return null
+        const statKeys=toolName==='hit'?['k_pct','bb_pct']:toolName==='power'?['iso']:toolName==='speed'?['sb_rate']:toolName==='stuff'?['k_pct']:['bb_pct']
+        let wSum=0,wTot=0,totalSample=0
+        // Score all accumulated season/level buckets up to and including this game
+        for(const [key,st] of Object.entries(seasonCum)){
+          const rl=st.lvl;if(!toolModels[rl]) continue
+          const rNE=norms[`${rl}|${st.year}`]??norms[`${rl}|${st.year-1}`];if(!rNE) continue
+          const rN=isPit?rNE.pitchers:rNE.hitters;if(!rN) continue
+          const rIp=st.ipOuts/3,rPa=st.ab+st.bb+st.hbp
+          const rSample=isPit?rIp:rPa;if(!rSample) continue
+          totalSample+=rSample
+          const rSlg=st.ab>0?st.tb/st.ab:0,rAvg=st.ab>0?st.h/st.ab:0
+          const rAgeDiff=(ARC_AVG_AGES[rl]??22)-getAge(st.year)
+          const recency=Math.pow(0.75,year-st.year)
+          for(const sn of statKeys){
+            const lm=toolModels[rl]?.[sn];const nm=rN[sn];if(!lm||!nm||nm.stdev===0) continue
+            let val:number
+            if(sn==='iso') val=rSlg-rAvg
+            else if(sn==='sb_rate'){const tob=st.h+st.bb+st.hbp;val=tob>0?st.sb/tob:0}
+            else if(sn==='k_pct') val=isPit?(st.bf>0?st.so/st.bf:0):(rPa>0?st.so/rPa:0)
+            else val=isPit?(st.bf>0?st.bb/st.bf:0):(rPa>0?st.bb/rPa:0)
+            let z=(val-nm.mean)/nm.stdev
+            if((!isPit&&sn==='k_pct')||(isPit&&sn==='bb_pct')) z=-z
+            const pred=lm.slope_z*z+(lm.slope_age??0)*rAgeDiff+lm.intercept
+            const kk=isPit?(sn==='k_pct'?'k_pct_pit':'bb_pct_pit'):sn
+            const w=lm.corr*(rSample/(rSample+(ARC_K[kk]??ARC_K[sn]??60)))*recency
+            wSum+=pred*w;wTot+=w
+          }
+        }
+        if(wTot===0) return null
+        const normed=95+((wSum/wTot)-tv.mean)/tv.stdev*15
+        return Math.round(88+(normed-88)*(totalSample/(totalSample+(isPit?80:200))))
+      }
+
+      const pt:any={year,level:lvl,date}
+      for(const t of toolNames) pt[t]=scoreTool(t)
+      if(isPit){if(pt.stuff!=null&&pt.control!=null)pt.overall=Math.round(pt.stuff*0.70+pt.control*0.30)}
+      else{if(pt.hit!=null&&pt.power!=null&&pt.speed!=null)pt.overall=Math.round(pt.hit*0.42+pt.power*0.47+pt.speed*0.11)}
+      if(Object.values(pt).some((v:any)=>typeof v==='number'&&v!==pt.year)) pts.push(pt)
+    }
+    return pts
+  }, [allGameLogs, allSplits, regression, norms, poolStats, pitch, player.birthDate])
+
   return (
     <>
       <div onClick={onClose} style={{position:'fixed',inset:0,background:'rgba(0,0,0,0.6)',zIndex:40}}/>
@@ -607,7 +761,10 @@ export function PlayerDrawer({ player, onClose, globalOwnership, minorsIds, mlbT
                 </table>
               </div>
             )}
-            {arcPoints.length>0&&(<><SectionHeader title="Tool Arc — Career Trajectory"/><ToolArcChart points={arcPoints} isPitcher={pitch}/></>)}
+            {(gameArcPoints.length>0||arcPoints.length>0)&&(<>
+              <SectionHeader title="Tool Arc — Career Trajectory"/>
+              <ToolArcChart points={gameArcPoints.length>0?gameArcPoints:arcPoints} isPitcher={pitch} dateMode={gameArcPoints.length>0}/>
+            </>)}
             {mlbamId&&!drawerLoading&&(<><SectionHeader title="Recent — L7 / L30 / L90"/>{extraLoading?<div style={{color:'var(--muted)',fontSize:'0.85rem'}}>Loading...</div>:renderRecentTable()}<SectionHeader title={pitch?"Splits — vs LHB/RHB · Home/Away":"Splits — vs LHP/RHP · Home/Away"}/>{extraLoading?<div style={{color:'var(--muted)',fontSize:'0.85rem'}}>Loading...</div>:renderSplitTable()}<SectionHeader title="Game Log — Last 90 Days"/>{extraLoading?<div style={{color:'var(--muted)',fontSize:'0.85rem'}}>Loading...</div>:renderGameLog()}</>)}
           </>)}
 

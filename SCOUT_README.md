@@ -67,6 +67,7 @@ fantasy-baseball/
 │       ├── stats/route.ts               # Serves current season stats from history/2026.json (mlbam_id → Fantrax ID bridge). Two-way players: hitting under fantraxId, pitching under fantraxId + '_pit'
 │       ├── stats/link/route.ts, sync/route.ts
 │       ├── stats/history/[mlbamId]/route.ts  # Career history from local YYYY.json files
+│       ├── stats/gamelogs/[mlbamId]/route.ts  # Per-year game logs from gamelogs/YYYY/{mlbamId}.json. Accepts ?year= param.
 │       ├── model/tools/route.ts          # Serves mlb-tools.json to UI
 │       ├── model/regression/route.ts     # Serves regression.json to UI (used by tool arc)
 │       ├── model/norms/route.ts          # Serves norms.json to UI (used by tool arc)
@@ -99,7 +100,8 @@ fantasy-baseball/
 │   ├── build-age-elasticity.py          # Per-stat age elasticity → data/model/age-elasticity.json (reference only, not in pipeline)
 │   ├── build-regression.py              # Two-feature regression (z + age_diff) → data/model/regression.json
 │   ├── build-scores.js                  # Scores prospects → players.json model_scores + hot-sheet.json. Two-way players scored on both sides independently.
-│   └── sync-stats-gha.js               # Standalone stats sync for GHA — writes to history/2026.json. Two-way players fetch both hitting + pitching groups.
+│   ├── sync-stats-gha.js               # Standalone stats sync for GHA — writes to history/2026.json. Two-way players fetch both hitting + pitching groups.
+│   └── build-gamelogs.js               # Pulls game logs for all ranked players across all years (2015+). Both MLB + MiLB via leagueListId=milb_all. Resume-capable (skips past years with data). Run once for backfill; nightly sync appends current year.
 ├── data/
 │   ├── players.json                      # PERMANENT — never wipe. Has birthDate, mlbam_id, rank, model_scores.
 │   ├── db.json                           # LIVE — safe to re-sync
@@ -110,7 +112,8 @@ fantasy-baseball/
 │   ├── history/
 │   │   ├── progress.json                 # MLB pull resume tracker
 │   │   ├── progress-milb.json            # MiLB pull resume tracker
-│   │   └── YYYY.json                     # All player stat lines for that year (MLB + MiLB). 2026.json = source of truth for current season.
+│   │   ├── YYYY.json                     # All player stat lines for that year (MLB + MiLB). 2026.json = source of truth for current season.
+│   │   └── gamelogs/YYYY/{mlbamId}.json  # Per-player per-year game logs. { hitting: [...], pitching: [...] }. Fetches both MLB + MiLB via leagueListId=milb_all. Level field on each row (e.g. "A", "A+", "AA").
 │   └── model/
 │       ├── norms.json                    # Level/league/year stat norms. Current year blended with prior year (blend = min(n/400, 1.0)).
 │       ├── mlb-scores.json               # Per-season MLB fantasy point rates (pts/PA, pts/IP)
@@ -143,6 +146,7 @@ fantasy-baseball/
 - **model/hot-sheet.json** — top 20 bats + 20 arms (IP/GS >= 3.0, excludes relievers) by current season model delta. Written by build-scores.js every run.
 - **model/scores-snapshot.json** — snapshot of model scores keyed by Fantrax ID. Written as comparison baseline.
 - **model/pool-stats.json** — per-tool mean/stdev of raw regression output across all scored prospects. Written by build-scores.js. Used by tool arc chart to normalize arc scores onto the same 95-center scale as model tiles.
+- **history/gamelogs/YYYY/{mlbamId}.json** — per-player per-year game logs for all ranked players. Fetched via MLB Stats API with leagueListId=milb_all to get both MLB + MiLB games. One file per player per year. Used by game-by-game tool arc in drawer. Updated nightly by GHA (current year only, appends new games).
 
 ## Fantrax Integration
 - League IDs: `0ehfuam0mg7wqpn7` (D28), `ew7b8seomg7u7uzi` (D34), `d3prsagvmgftfdc3` (D52)
@@ -375,15 +379,14 @@ export async function GET(_req: NextRequest, { params }: { params: Promise<{ id:
   - Position rollup: specific positions + INF/OF/P groups; multi-position players in all matching buckets
   - Level resolved from history/2026.json via mlbam_id
 
-- **Tool Arc — Career Trajectory (Apr 2026):**
-  - SVG line chart in player drawer between career table and Recent section
-  - Cumulative scoring: at each year, blends all seasons up to that point with recency decay matching build-scores.js (0.75^years_ago × corr × statConf weight)
-  - Pool norm then shrinkage order matches build-scores.js exactly — final year values match model tile scores
-  - Uses pa (not ab+bb+hbp) for hitter sample, tob for sb_rate denominator, slg-avg for iso — all matching build-scores.js
-  - pool-stats.json added to pipeline (written by build-scores.js) to enable accurate pool normalization in arc
-  - New API routes: /api/model/regression, /api/model/norms, /api/model/pool-stats
-  - useDrawerData.ts fetches all three; page.tsx passes regression/norms/poolStats to PlayerDrawer
-  - Hover tooltip shows per-tool values; dynamic Y axis fits data range
+- **Tool Arc + Game-by-Game Arc (Apr 2026):**
+  - Yearly arc: cumulative scoring per year, blends all seasons up to each year end with recency decay, verified against Briceno (power 127 ✓, ovr 114 ✓)
+  - Game-by-game arc: full career game logs fetched per year via /api/stats/gamelogs/[mlbamId]?year=YYYY, scored game by game using same model math. Cumulative stats tracked per season/level bucket (no resets across year boundaries — recency decay handles weighting). MiLB level names normalized (A→Single-A, A+→High-A etc). Score band background.
+  - Game arc shown when gamelogs exist, yearly arc as fallback — no toggle
+  - build-gamelogs.js: one-off backfill script, fetches 2015+ for all ranked players. Both MLB + MiLB via leagueListId=milb_all + base endpoint, deduped by date+opponent.
+  - pool-stats.json added to pipeline; new API routes: /api/model/regression, /api/model/norms, /api/model/pool-stats, /api/stats/gamelogs/[mlbamId]
+  - ⚠️ TODO: nightly sync (GHA + local) needs to append current year game logs to gamelogs/YYYY/{mlbamId}.json
+  - ⚠️ TODO: hot sheet 15/30/90/season filters using game log data
 
 ## Friend Teams (D52 League)
 D52 = "DO MLB - D52" (id: d3prsagvmgftfdc3). Five named teams with assigned colors used for ownership dots, team buttons, and league page highlights:

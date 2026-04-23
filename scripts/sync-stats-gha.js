@@ -133,6 +133,54 @@ async function fetchRows(mlbamId, group) {
   } catch { return null }
 }
 
+
+async function syncGameLogs(players) {
+  const YEAR = CURRENT_SEASON;
+  const glDir = path.join(BASE, `history/gamelogs/${YEAR}`);
+  if (!fs.existsSync(glDir)) fs.mkdirSync(glDir, { recursive: true });
+  const ranked = Object.values(players).filter(p => p.mlbam_id && p.rank != null);
+  console.log(`Syncing game logs for ${ranked.length} ranked players...`);
+  let done = 0, errors = 0;
+  for (const p of ranked) {
+    try {
+      const pos = (p.positions || '').split(',').map(s => s.trim());
+      const hasArm = pos.some(x => ['SP','RP','P'].includes(x));
+      const hasBat = pos.some(x => !['SP','RP','P'].includes(x));
+      const outPath = path.join(glDir, `${p.mlbam_id}.json`);
+      let existing = { hitting: [], pitching: [] };
+      try { existing = JSON.parse(fs.readFileSync(outPath, 'utf8')); } catch {}
+
+      async function fetchGL(group) {
+        const base = `https://statsapi.mlb.com/api/v1/people/${p.mlbam_id}/stats?stats=gameLog&season=${YEAR}&group=${group}&gameType=R`;
+        const [r1, r2] = await Promise.all([get(base), get(base + '&leagueListId=milb_all')]);
+        const s1 = r1?.stats?.[0]?.splits ?? [];
+        const s2 = r2?.stats?.[0]?.splits ?? [];
+        const all = [...s1, ...s2];
+        const seen = new Set();
+        return all.filter(s => {
+          const k = (s.date ?? '') + '|' + (s.opponent?.abbreviation ?? s.opponent?.name ?? '');
+          if (seen.has(k)) return false; seen.add(k); return true;
+        }).map(s => ({ date: s.date, opponent: s.opponent?.abbreviation ?? s.opponent?.name ?? '?', isHome: s.isHome, level: s.sport?.abbreviation ?? null, group, ...s.stat }));
+      }
+
+      if (hasBat || (!hasArm && !hasBat)) {
+        const rows = await fetchGL('hitting');
+        const existingDates = new Set((existing.hitting ?? []).map(r => r.date + '|' + (r.opponent ?? '')));
+        const newRows = rows.filter(r => !existingDates.has(r.date + '|' + (r.opponent ?? '')));
+        existing.hitting = [...(existing.hitting ?? []), ...newRows];
+      }
+      if (hasArm) {
+        const rows = await fetchGL('pitching');
+        const existingDates = new Set((existing.pitching ?? []).map(r => r.date + '|' + (r.opponent ?? '')));
+        const newRows = rows.filter(r => !existingDates.has(r.date + '|' + (r.opponent ?? '')));
+        existing.pitching = [...(existing.pitching ?? []), ...newRows];
+      }
+      fs.writeFileSync(outPath, JSON.stringify(existing));
+      done++;
+    } catch (e) { errors++; }
+  }
+  console.log(`Game logs done: ${done} updated, ${errors} errors`);
+}
 async function main() {
   const players = JSON.parse(fs.readFileSync(PLAYERS_PATH, 'utf8'))
   const linked = Object.entries(players).filter(([, p]) => p.mlbam_id)
@@ -180,6 +228,7 @@ async function main() {
   }
 
   fs.writeFileSync(HISTORY_PATH, JSON.stringify(history))
+  await syncGameLogs(players)
   console.log(`\nDone. synced:${synced} noStats:${noStats} errors:${errors}`)
 }
 
