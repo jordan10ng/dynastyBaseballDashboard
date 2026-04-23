@@ -245,6 +245,8 @@ function run() {
     const stdev = Math.sqrt(vals.reduce((a,b) => a+(b-mean)**2, 0) / vals.length) || 1;
     toolVals[tool] = { mean, stdev };
   }
+  fs.writeFileSync(path.join(BASE, 'model/pool-stats.json'), JSON.stringify(toolVals, null, 2));
+  console.log('Pool stats written:', Object.keys(toolVals).map(t => `${t}:${toolVals[t].mean.toFixed(2)}±${toolVals[t].stdev.toFixed(2)}`).join(', '));
 
   for (const [id, { toolScores, toolWeights, totalSample, pitchSample, hitSample, isPitcher, isTwoWay, hasArm, hasBat }] of Object.entries(rawPool)) {
 

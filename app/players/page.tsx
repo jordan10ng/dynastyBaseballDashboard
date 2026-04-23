@@ -296,6 +296,9 @@ export default function PlayersPage() {
   const [allRosters, setAllRosters] = useState<any[]>([])
   const [statsMap, setStatsMap] = useState<Record<string, any>>({})
   const [mlbToolsMap, setMlbToolsMap] = useState<Record<string, any>>({})
+  const [regression, setRegression] = useState<any>(null)
+  const [norms, setNorms] = useState<any>(null)
+  const [poolStats, setPoolStats] = useState<any>(null)
   const [dataView, setDataView] = useState<DataView>('stats')
   const [mounted, setMounted] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
@@ -339,14 +342,20 @@ export default function PlayersPage() {
       fetch('/api/players/all').then(r => r.json()),
       fetch('/api/stats').then(r => r.json()),
       fetch('/api/model/tools').then(r => r.json()),
+      fetch('/api/model/regression').then(r => r.json()),
+      fetch('/api/model/norms').then(r => r.json()),
+      fetch('/api/model/pool-stats').then(r => r.json()),
       ...LEAGUES.map(l => fetch(`/api/leagues/${l.id}/teams`).then(r => r.json())),
       ...LEAGUES.map(l => fetch(`/api/leagues/${l.id}/rosters`).then(r => r.json())),
-    ]).then(([pd, sd, td, ...rest]) => {
+    ]).then(([pd, sd, td, reg, nor, ps, ...rest]) => {
       const teamResults = rest.slice(0, LEAGUES.length)
       const rosterResults = rest.slice(LEAGUES.length)
       setAllPlayers(pd.players ?? [])
       setStatsMap(sd.stats ?? {})
       setMlbToolsMap(td.tools ?? {})
+      setRegression(reg)
+      setNorms(nor)
+      setPoolStats(ps)
       setAllTeams(teamResults.flatMap((d: any) => d.teams ?? []))
       setAllRosters(rosterResults.flatMap((d: any) => d.rosters ?? []))
       setLoading(false)
@@ -1018,6 +1027,9 @@ export default function PlayersPage() {
           mlbToolsMap={mlbToolsMap}
           statsMap={statsMap}
           allPlayers={allPlayers}
+          regression={regression}
+          norms={norms}
+          poolStats={poolStats}
         />
       )}
     </div>
