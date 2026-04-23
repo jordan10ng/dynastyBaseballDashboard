@@ -86,7 +86,7 @@ export default function HotSheetPage() {
   const [selectedPlayer, setSelectedPlayer] = useState<any>(null)
   const [isMobile, setIsMobile] = useState(false)
 
-  const { statsMap, mlbToolsMap } = useDrawerData()
+  const { statsMap, mlbToolsMap, regression, norms, poolStats } = useDrawerData()
 
   useEffect(() => {
     const check = () => setIsMobile(window.innerWidth <= 768)
@@ -343,6 +343,9 @@ export default function HotSheetPage() {
           minorsIds={minorsIds}
           mlbToolsMap={mlbToolsMap}
           statsMap={statsMap}
+          regression={regression}
+          norms={norms}
+          poolStats={poolStats}
           allPlayers={allPlayers}
         />
       )}

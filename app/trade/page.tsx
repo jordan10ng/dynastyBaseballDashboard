@@ -41,7 +41,7 @@ export default function TradePage() {
   const [addingTo, setAddingTo] = useState<'A' | 'B' | null>(null)
   const [selectedPlayer, setSelectedPlayer] = useState<any>(null)
 
-  const { statsMap, mlbToolsMap } = useDrawerData()
+  const { statsMap, mlbToolsMap, regression, norms, poolStats } = useDrawerData()
   const [isMobile, setIsMobile] = useState(false)
   useEffect(() => {
     const check = () => setIsMobile(window.innerWidth <= 768)
@@ -263,6 +263,9 @@ export default function TradePage() {
           minorsIds={minorsIds}
           mlbToolsMap={mlbToolsMap}
           statsMap={statsMap}
+          regression={regression}
+          norms={norms}
+          poolStats={poolStats}
           allPlayers={allPlayers}
         />
       )}

@@ -141,7 +141,7 @@ async function syncGameLogs(players: Record<string,any>) {
       let existing: any = { hitting: [], pitching: [] };
       try { existing = JSON.parse(fs.readFileSync(outPath, 'utf-8')); } catch {}
 
-      async function fetchGL(group: string) {
+      const fetchGL = async (group: string) => {
         const base = `https://statsapi.mlb.com/api/v1/people/${p.mlbam_id}/stats?stats=gameLog&season=${YEAR}&group=${group}&gameType=R`;
         const [r1, r2] = await Promise.all([fetch(base), fetch(base + '&leagueListId=milb_all')]);
         const d1 = r1.ok ? await r1.json() : {};
