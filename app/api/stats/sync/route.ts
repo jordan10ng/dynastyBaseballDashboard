@@ -1,5 +1,4 @@
 import { NextResponse } from 'next/server'
-import { put, head } from '@vercel/blob'
 import { execSync } from 'child_process'
 import { loadPlayers } from '@/lib/db'
 import fs from 'fs'
@@ -128,7 +127,6 @@ async function fetchRows(mlbamId: string, group: string): Promise<any[] | null> 
 
 async function syncGameLogs(players: Record<string,any>) {
   const YEAR = CURRENT_SEASON;
-  // Only sync gamelogs for players that have 2026 stats
   let history2026: Record<string,any> = {};
   try { history2026 = JSON.parse(fs.readFileSync(HISTORY_PATH, 'utf-8')); } catch {}
   const ranked = Object.values(players).filter((p: any) => p.mlbam_id && p.rank != null && history2026[p.mlbam_id]?.length > 0);
@@ -151,51 +149,35 @@ async function syncGameLogs(players: Record<string,any>) {
   const GL_CHUNK = 20;
   for (let gi = 0; gi < ranked.length; gi += GL_CHUNK) {
     await Promise.all((ranked as any[]).slice(gi, gi + GL_CHUNK).map(async (p: any) => {
-    try {
-      const pos = (p.positions || '').split(',').map((s: string) => s.trim());
-      const hasArm = pos.some((x: string) => ['SP','RP','P'].includes(x));
-      const hasBat = pos.some((x: string) => !['SP','RP','P'].includes(x));
-      const blobKey = `gamelogs/${YEAR}/${p.mlbam_id}.json`;
-
-      // Load existing from external local path (dev) or Blob (prod)
-      let existing: any = { hitting: [], pitching: [] };
       try {
-        const localPath = path.join(process.env.HOME ?? '', `Desktop/fantasy-baseball-gamelogs/${YEAR}/${p.mlbam_id}.json`);
-        if (fs.existsSync(localPath)) {
-          existing = JSON.parse(fs.readFileSync(localPath, 'utf-8'));
-        } else {
-          const blobMeta = await head(blobKey).catch(() => null);
-          if (blobMeta) {
-            const res = await fetch(blobMeta.url);
-            if (res.ok) existing = await res.json();
-          }
-        }
-      } catch {}
-
-      if (hasBat || (!hasArm && !hasBat)) {
-        const rows = await fetchGL(p.mlbam_id, 'hitting');
-        const existingDates = new Set((existing.hitting ?? []).map((r: any) => r.date + '|' + (r.opponent ?? '')));
-        const newRows = rows.filter((r: any) => !existingDates.has(r.date + '|' + (r.opponent ?? '')));
-        existing.hitting = [...(existing.hitting ?? []), ...newRows];
-      }
-      if (hasArm) {
-        const rows = await fetchGL(p.mlbam_id, 'pitching');
-        const existingDates = new Set((existing.pitching ?? []).map((r: any) => r.date + '|' + (r.opponent ?? '')));
-        const newRows = rows.filter((r: any) => !existingDates.has(r.date + '|' + (r.opponent ?? '')));
-        existing.pitching = [...(existing.pitching ?? []), ...newRows];
-      }
-
-      // Write back to external local path
-      try {
+        const pos = (p.positions || '').split(',').map((s: string) => s.trim());
+        const hasArm = pos.some((x: string) => ['SP','RP','P'].includes(x));
+        const hasBat = pos.some((x: string) => !['SP','RP','P'].includes(x));
         const writePath = path.join(process.env.HOME ?? '', `Desktop/fantasy-baseball-gamelogs/${YEAR}/${p.mlbam_id}.json`);
+
+        let existing: any = { hitting: [], pitching: [] };
+        if (fs.existsSync(writePath)) {
+          try { existing = JSON.parse(fs.readFileSync(writePath, 'utf-8')); } catch {}
+        }
+
+        if (hasBat || (!hasArm && !hasBat)) {
+          const rows = await fetchGL(p.mlbam_id, 'hitting');
+          const existingDates = new Set((existing.hitting ?? []).map((r: any) => r.date + '|' + (r.opponent ?? '')));
+          const newRows = rows.filter((r: any) => !existingDates.has(r.date + '|' + (r.opponent ?? '')));
+          existing.hitting = [...(existing.hitting ?? []), ...newRows];
+        }
+        if (hasArm) {
+          const rows = await fetchGL(p.mlbam_id, 'pitching');
+          const existingDates = new Set((existing.pitching ?? []).map((r: any) => r.date + '|' + (r.opponent ?? '')));
+          const newRows = rows.filter((r: any) => !existingDates.has(r.date + '|' + (r.opponent ?? '')));
+          existing.pitching = [...(existing.pitching ?? []), ...newRows];
+        }
+
         fs.mkdirSync(path.dirname(writePath), { recursive: true });
         fs.writeFileSync(writePath, JSON.stringify(existing));
-      } catch {}
-      await put(blobKey, JSON.stringify(existing), { access: 'public', allowOverwrite: true });
-      done++;
-    } catch (e) { errors++; }
+        done++;
+      } catch (e) { errors++; }
     }));
-    if (gi % 2000 === 0) console.log(`  Game logs: ${gi}/${ranked.length} done, ${done} updated`);
   }
   console.log(`Game logs done: ${done} updated, ${errors} errors`);
 }

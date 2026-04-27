@@ -1,5 +1,4 @@
 import { NextResponse } from 'next/server'
-import { head } from '@vercel/blob'
 import fs from 'fs'
 import path from 'path'
 
@@ -18,13 +17,5 @@ export async function GET(req: Request, { params }: { params: Promise<{ mlbamId:
     } catch {}
   }
 
-  try {
-    const meta = await head(`gamelogs/${year}/${mlbamId}.json`)
-    const res = await fetch(meta.url)
-    if (!res.ok) throw new Error('blob fetch failed')
-    const data = await res.json()
-    return NextResponse.json(data)
-  } catch {
-    return NextResponse.json({ hitting: [], pitching: [] })
-  }
+  return NextResponse.json({ hitting: [], pitching: [] })
 }
