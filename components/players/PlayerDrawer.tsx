@@ -559,16 +559,108 @@ export function PlayerDrawer({ player, onClose, globalOwnership, minorsIds, mlbT
       return Math.round(shrunk)
     }
 
+    const LVL_RANK: Record<string,number> = {'DSL':0,'Complex':1,'Rookie':2,'Single-A':3,'High-A':4,'AA':5,'AAA':6}
+
+    function scoreToolAtPoint(upToYear: number, upToLevel: string, toolName: string): number | null {
+      const toolModels = models[toolName]
+      if (!toolModels) return null
+      const tv = poolStats[toolName]
+      if (!tv) return null
+      const upToRank = LVL_RANK[upToLevel] ?? 99
+
+      let wSum = 0, wTot = 0
+      for (const row of allRows) {
+        if (row._year > upToYear) continue
+        if (row._year === upToYear && (LVL_RANK[row._lvl] ?? 99) > upToRank) continue
+        const lvl = row._lvl
+        if (!toolModels[lvl]) continue
+        const s = row.stat ?? row
+        const ip = parseFloat(s.inningsPitched ?? s.ip ?? '0') || 0
+        const bf = s.battersFaced ?? s.bf ?? 0
+        const ab = s.atBats ?? s.ab ?? 0
+        const bb = s.baseOnBalls ?? s.bb ?? 0
+        const hbp = s.hitByPitch ?? s.hbp ?? 0
+        const so = s.strikeOuts ?? s.so ?? 0
+        const h = s.hits ?? s.h ?? 0
+        const sb = s.stolenBases ?? s.sb ?? 0
+        const slg = parseFloat(s.slg ?? '0') || 0
+        const avg = parseFloat(s.avg ?? '0') || 0
+        const pa = s.plateAppearances ?? s.pa ?? (ab + bb + hbp)
+        const sample = isPit ? ip : pa
+        if (!sample) continue
+
+        const normEntry = norms[`${lvl}|${row._year}`] ?? norms[`${lvl}|${row._year-1}`]
+        if (!normEntry) continue
+        const n = isPit ? normEntry.pitchers : normEntry.hitters
+        if (!n) continue
+
+        const age = getAge(row._year)
+        const ageDiff = (ARC_AVG_AGES[lvl] ?? 22) - age
+        const recency = Math.pow(0.75, upToYear - row._year)
+
+        const statKeys = toolName === 'hit' ? ['k_pct','bb_pct'] :
+                         toolName === 'power' ? ['iso'] :
+                         toolName === 'speed' ? ['sb_rate'] :
+                         toolName === 'stuff' ? ['k_pct'] : ['bb_pct']
+
+        for (const statName of statKeys) {
+          const levelModel = toolModels[lvl]?.[statName]
+          if (!levelModel) continue
+          const sn = n[statName]
+          if (!sn || sn.stdev === 0) continue
+
+          let val: number
+          if (statName === 'iso') val = slg - avg
+          else if (statName === 'sb_rate') { const tob = h+bb+hbp; val = tob>0 ? sb/tob : 0 }
+          else if (statName === 'k_pct') val = isPit ? (bf>0?so/bf:0) : (pa>0?so/pa:0)
+          else val = isPit ? (bf>0?bb/bf:0) : (pa>0?bb/pa:0)
+
+          let z = (val - sn.mean) / sn.stdev
+          if ((!isPit && statName === 'k_pct') || (isPit && statName === 'bb_pct')) z = -z
+
+          const pred = levelModel.slope_z * z + (levelModel.slope_age ?? 0) * ageDiff + levelModel.intercept
+          const kKey = isPit ? (statName==='k_pct'?'k_pct_pit':'bb_pct_pit') : statName
+          const kVal = ARC_K[kKey] ?? ARC_K[statName] ?? 60
+          const statConf = sample / (sample + kVal)
+          const w = levelModel.corr * statConf * recency
+
+          wSum += pred * w
+          wTot += w
+        }
+      }
+      if (wTot === 0) return null
+      const rawScore = wSum / wTot
+      const normed = 95 + ((rawScore - tv.mean) / tv.stdev) * 15
+      const totalSample = allRows.filter(r => {
+        if (r._year > upToYear) return false
+        if (r._year === upToYear && (LVL_RANK[r._lvl] ?? 99) > upToRank) return false
+        return true
+      }).reduce((sum,r) => {
+        const s=r.stat??r
+        const ip=parseFloat(s.inningsPitched??s.ip??'0')||0
+        const pa=s.plateAppearances??s.pa??((s.atBats??s.ab??0)+(s.baseOnBalls??s.bb??0)+(s.hitByPitch??s.hbp??0))
+        return sum+(isPit?ip:pa)
+      },0)
+      const shrinkK = isPit ? 80 : 200
+      const conf = totalSample / (totalSample + shrinkK)
+      return Math.round(88 + (normed - 88) * conf)
+    }
+
     const pts: any[] = []
     for (const year of years) {
-      const pt: any = { year, level: allRows.filter(r=>r._year===year).map(r=>r._lvl).join('+') }
-      for (const t of toolNames) pt[t] = scoreToolCumulative(year, t)
-      if (isPit) {
-        if (pt.stuff != null && pt.control != null) pt.overall = Math.round(pt.stuff*0.70+pt.control*0.30)
-      } else {
-        if (pt.hit != null && pt.power != null && pt.speed != null) pt.overall = Math.round(pt.hit*0.42+pt.power*0.47+pt.speed*0.11)
+      const yearRows = allRows.filter(r => r._year === year)
+      const levels = Array.from(new Set(yearRows.map(r => r._lvl)))
+        .sort((a: any, b: any) => (LVL_RANK[a]??99) - (LVL_RANK[b]??99))
+      for (const lvl of levels) {
+        const pt: any = { year, level: lvl }
+        for (const t of toolNames) pt[t] = scoreToolAtPoint(year, lvl, t)
+        if (isPit) {
+          if (pt.stuff != null && pt.control != null) pt.overall = Math.round(pt.stuff*0.70+pt.control*0.30)
+        } else {
+          if (pt.hit != null && pt.power != null && pt.speed != null) pt.overall = Math.round(pt.hit*0.42+pt.power*0.47+pt.speed*0.11)
+        }
+        if (Object.values(pt).some((v:any) => typeof v === 'number' && v !== pt.year)) pts.push(pt)
       }
-      if (Object.values(pt).some((v:any) => typeof v === 'number' && v !== pt.year)) pts.push(pt)
     }
     return pts
   }, [allSplits, regression, norms, poolStats, pitch, player.birthDate])
