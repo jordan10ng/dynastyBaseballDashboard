@@ -134,48 +134,80 @@ async function fetchRows(mlbamId, group) {
 }
 
 
+async function putBlob(key, data) {
+  const token = process.env.BLOB_READ_WRITE_TOKEN;
+  const res = await fetch(`https://blob.vercel-storage.com/${key}`, {
+    method: 'PUT',
+    headers: { 'authorization': `Bearer ${token}`, 'x-content-type': 'application/json', 'x-allow-overwrite': '1' },
+    body: JSON.stringify(data),
+  });
+  return res.ok;
+}
+
+async function getBlob(key) {
+  const token = process.env.BLOB_READ_WRITE_TOKEN;
+  // HEAD to get URL
+  const headRes = await fetch(`https://blob.vercel-storage.com/${key}`, {
+    method: 'HEAD',
+    headers: { 'authorization': `Bearer ${token}` },
+  });
+  if (!headRes.ok) return null;
+  const blobUrl = headRes.headers.get('location') || headRes.url;
+  const res = await fetch(blobUrl);
+  return res.ok ? res.json() : null;
+}
+
 async function syncGameLogs(players) {
   const YEAR = CURRENT_SEASON;
-  const glDir = path.join(BASE, `history/gamelogs/${YEAR}`);
-  if (!fs.existsSync(glDir)) fs.mkdirSync(glDir, { recursive: true });
   const ranked = Object.values(players).filter(p => p.mlbam_id && p.rank != null);
   console.log(`Syncing game logs for ${ranked.length} ranked players...`);
   let done = 0, errors = 0;
+
+  const fetchGL = async (mlbamId, group) => {
+    const base = `https://statsapi.mlb.com/api/v1/people/${mlbamId}/stats?stats=gameLog&season=${YEAR}&group=${group}&gameType=R`;
+    const [r1, r2] = await Promise.all([get(base), get(base + '&leagueListId=milb_all')]);
+    const s1 = r1?.stats?.[0]?.splits ?? [];
+    const s2 = r2?.stats?.[0]?.splits ?? [];
+    const all = [...s1, ...s2];
+    const seen = new Set();
+    return all.filter(s => {
+      const k = (s.date ?? '') + '|' + (s.opponent?.abbreviation ?? s.opponent?.name ?? '');
+      if (seen.has(k)) return false; seen.add(k); return true;
+    }).map(s => ({ date: s.date, opponent: s.opponent?.abbreviation ?? s.opponent?.name ?? '?', isHome: s.isHome, level: s.sport?.abbreviation ?? null, group, ...s.stat }));
+  };
+
   for (const p of ranked) {
     try {
       const pos = (p.positions || '').split(',').map(s => s.trim());
       const hasArm = pos.some(x => ['SP','RP','P'].includes(x));
       const hasBat = pos.some(x => !['SP','RP','P'].includes(x));
-      const outPath = path.join(glDir, `${p.mlbam_id}.json`);
-      let existing = { hitting: [], pitching: [] };
-      try { existing = JSON.parse(fs.readFileSync(outPath, 'utf8')); } catch {}
+      const blobKey = `gamelogs/${YEAR}/${p.mlbam_id}.json`;
 
-      async function fetchGL(group) {
-        const base = `https://statsapi.mlb.com/api/v1/people/${p.mlbam_id}/stats?stats=gameLog&season=${YEAR}&group=${group}&gameType=R`;
-        const [r1, r2] = await Promise.all([get(base), get(base + '&leagueListId=milb_all')]);
-        const s1 = r1?.stats?.[0]?.splits ?? [];
-        const s2 = r2?.stats?.[0]?.splits ?? [];
-        const all = [...s1, ...s2];
-        const seen = new Set();
-        return all.filter(s => {
-          const k = (s.date ?? '') + '|' + (s.opponent?.abbreviation ?? s.opponent?.name ?? '');
-          if (seen.has(k)) return false; seen.add(k); return true;
-        }).map(s => ({ date: s.date, opponent: s.opponent?.abbreviation ?? s.opponent?.name ?? '?', isHome: s.isHome, level: s.sport?.abbreviation ?? null, group, ...s.stat }));
+      // Try local file first, then Blob
+      let existing = { hitting: [], pitching: [] };
+      const localPath = path.join(os.homedir(), `Desktop/fantasy-baseball-gamelogs/${YEAR}/${p.mlbam_id}.json`);
+      if (fs.existsSync(localPath)) {
+        try { existing = JSON.parse(fs.readFileSync(localPath, 'utf8')); } catch {}
+      } else {
+        try { const d = await getBlob(blobKey); if (d) existing = d; } catch {}
       }
 
       if (hasBat || (!hasArm && !hasBat)) {
-        const rows = await fetchGL('hitting');
+        const rows = await fetchGL(p.mlbam_id, 'hitting');
         const existingDates = new Set((existing.hitting ?? []).map(r => r.date + '|' + (r.opponent ?? '')));
         const newRows = rows.filter(r => !existingDates.has(r.date + '|' + (r.opponent ?? '')));
         existing.hitting = [...(existing.hitting ?? []), ...newRows];
       }
       if (hasArm) {
-        const rows = await fetchGL('pitching');
+        const rows = await fetchGL(p.mlbam_id, 'pitching');
         const existingDates = new Set((existing.pitching ?? []).map(r => r.date + '|' + (r.opponent ?? '')));
         const newRows = rows.filter(r => !existingDates.has(r.date + '|' + (r.opponent ?? '')));
         existing.pitching = [...(existing.pitching ?? []), ...newRows];
       }
-      fs.writeFileSync(outPath, JSON.stringify(existing));
+
+      // Write local + upload to Blob
+      try { fs.mkdirSync(path.dirname(localPath), {recursive:true}); fs.writeFileSync(localPath, JSON.stringify(existing)); } catch {}
+      await putBlob(blobKey, existing);
       done++;
     } catch (e) { errors++; }
   }

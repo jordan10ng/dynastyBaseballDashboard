@@ -29,9 +29,10 @@ jobs:
       - name: Install Python deps
         run: pip install numpy
 
-      - name: Sync current season stats (MLB API)
+      - name: Sync current season stats + game logs (MLB API)
         env:
           DATA_BASE: ${{ github.workspace }}/data
+          BLOB_READ_WRITE_TOKEN: ${{ secrets.BLOB_READ_WRITE_TOKEN }}
         run: |
           node scripts/sync-stats-gha.js
 

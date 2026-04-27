@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server'
+import { put, head } from '@vercel/blob'
 import { execSync } from 'child_process'
 import { loadPlayers } from '@/lib/db'
 import fs from 'fs'
@@ -127,48 +128,74 @@ async function fetchRows(mlbamId: string, group: string): Promise<any[] | null> 
 
 async function syncGameLogs(players: Record<string,any>) {
   const YEAR = CURRENT_SEASON;
-  const glDir = path.join(BASE, `history/gamelogs/${YEAR}`);
-  if (!fs.existsSync(glDir)) fs.mkdirSync(glDir, { recursive: true });
-  const ranked = Object.values(players).filter((p: any) => p.mlbam_id && p.rank != null);
+  // Only sync gamelogs for players that have 2026 stats
+  let history2026: Record<string,any> = {};
+  try { history2026 = JSON.parse(fs.readFileSync(HISTORY_PATH, 'utf-8')); } catch {}
+  const ranked = Object.values(players).filter((p: any) => p.mlbam_id && p.rank != null && history2026[p.mlbam_id]?.length > 0);
   console.log(`Syncing game logs for ${ranked.length} ranked players...`);
   let done = 0, errors = 0;
-  for (const p of ranked as any[]) {
+
+  const fetchGL = async (mlbamId: string, group: string) => {
+    const base = `https://statsapi.mlb.com/api/v1/people/${mlbamId}/stats?stats=gameLog&season=${YEAR}&group=${group}&gameType=R`;
+    const [r1, r2] = await Promise.all([fetch(base), fetch(base + '&leagueListId=milb_all')]);
+    const d1 = r1.ok ? await r1.json() : {};
+    const d2 = r2.ok ? await r2.json() : {};
+    const all = [...(d1?.stats?.[0]?.splits ?? []), ...(d2?.stats?.[0]?.splits ?? [])];
+    const seen = new Set<string>();
+    return all.filter((s: any) => {
+      const k = (s.date ?? '') + '|' + (s.opponent?.abbreviation ?? s.opponent?.name ?? '');
+      if (seen.has(k)) return false; seen.add(k); return true;
+    }).map((s: any) => ({ date: s.date, opponent: s.opponent?.abbreviation ?? s.opponent?.name ?? '?', isHome: s.isHome, level: s.sport?.abbreviation ?? null, group, ...s.stat }));
+  }
+
+  const GL_CHUNK = 20;
+  for (let gi = 0; gi < ranked.length; gi += GL_CHUNK) {
+    await Promise.all((ranked as any[]).slice(gi, gi + GL_CHUNK).map(async (p: any) => {
     try {
       const pos = (p.positions || '').split(',').map((s: string) => s.trim());
       const hasArm = pos.some((x: string) => ['SP','RP','P'].includes(x));
       const hasBat = pos.some((x: string) => !['SP','RP','P'].includes(x));
-      const outPath = path.join(glDir, `${p.mlbam_id}.json`);
-      let existing: any = { hitting: [], pitching: [] };
-      try { existing = JSON.parse(fs.readFileSync(outPath, 'utf-8')); } catch {}
+      const blobKey = `gamelogs/${YEAR}/${p.mlbam_id}.json`;
 
-      const fetchGL = async (group: string) => {
-        const base = `https://statsapi.mlb.com/api/v1/people/${p.mlbam_id}/stats?stats=gameLog&season=${YEAR}&group=${group}&gameType=R`;
-        const [r1, r2] = await Promise.all([fetch(base), fetch(base + '&leagueListId=milb_all')]);
-        const d1 = r1.ok ? await r1.json() : {};
-        const d2 = r2.ok ? await r2.json() : {};
-        const all = [...(d1?.stats?.[0]?.splits ?? []), ...(d2?.stats?.[0]?.splits ?? [])];
-        const seen = new Set<string>();
-        return all.filter((s: any) => {
-          const k = (s.date ?? '') + '|' + (s.opponent?.abbreviation ?? s.opponent?.name ?? '');
-          if (seen.has(k)) return false; seen.add(k); return true;
-        }).map((s: any) => ({ date: s.date, opponent: s.opponent?.abbreviation ?? s.opponent?.name ?? '?', isHome: s.isHome, level: s.sport?.abbreviation ?? null, group, ...s.stat }));
-      }
+      // Load existing from external local path (dev) or Blob (prod)
+      let existing: any = { hitting: [], pitching: [] };
+      try {
+        const localPath = path.join(process.env.HOME ?? '', `Desktop/fantasy-baseball-gamelogs/${YEAR}/${p.mlbam_id}.json`);
+        if (fs.existsSync(localPath)) {
+          existing = JSON.parse(fs.readFileSync(localPath, 'utf-8'));
+        } else {
+          const blobMeta = await head(blobKey).catch(() => null);
+          if (blobMeta) {
+            const res = await fetch(blobMeta.url);
+            if (res.ok) existing = await res.json();
+          }
+        }
+      } catch {}
 
       if (hasBat || (!hasArm && !hasBat)) {
-        const rows = await fetchGL('hitting');
+        const rows = await fetchGL(p.mlbam_id, 'hitting');
         const existingDates = new Set((existing.hitting ?? []).map((r: any) => r.date + '|' + (r.opponent ?? '')));
         const newRows = rows.filter((r: any) => !existingDates.has(r.date + '|' + (r.opponent ?? '')));
         existing.hitting = [...(existing.hitting ?? []), ...newRows];
       }
       if (hasArm) {
-        const rows = await fetchGL('pitching');
+        const rows = await fetchGL(p.mlbam_id, 'pitching');
         const existingDates = new Set((existing.pitching ?? []).map((r: any) => r.date + '|' + (r.opponent ?? '')));
         const newRows = rows.filter((r: any) => !existingDates.has(r.date + '|' + (r.opponent ?? '')));
         existing.pitching = [...(existing.pitching ?? []), ...newRows];
       }
-      fs.writeFileSync(outPath, JSON.stringify(existing));
+
+      // Write back to external local path
+      try {
+        const writePath = path.join(process.env.HOME ?? '', `Desktop/fantasy-baseball-gamelogs/${YEAR}/${p.mlbam_id}.json`);
+        fs.mkdirSync(path.dirname(writePath), { recursive: true });
+        fs.writeFileSync(writePath, JSON.stringify(existing));
+      } catch {}
+      await put(blobKey, JSON.stringify(existing), { access: 'public', allowOverwrite: true });
       done++;
     } catch (e) { errors++; }
+    }));
+    if (gi % 2000 === 0) console.log(`  Game logs: ${gi}/${ranked.length} done, ${done} updated`);
   }
   console.log(`Game logs done: ${done} updated, ${errors} errors`);
 }
