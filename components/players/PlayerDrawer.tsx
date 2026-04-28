@@ -166,7 +166,7 @@ export function PlayerDrawer({ player, onClose, globalOwnership, minorsIds, mlbT
   const [situSplits, setSituSplits] = useState<any[]>([])
   const [gameLogs, setGameLogs] = useState<any[]>([])
   const [statcastRows, setStatcastRows] = useState<any[]>([])
-  const [allGameLogs, setAllGameLogs] = useState<Record<number,any[]>>({})
+  const [allGameLogs, setAllGameLogs] = useState<Record<number,{hitting:any[],pitching:any[]}>>({})
   const [drawerLoading, setDrawerLoading] = useState(true)
   const [extraLoading, setExtraLoading] = useState(true)
   const [statcastLoading, setStatcastLoading] = useState(true)
@@ -303,18 +303,43 @@ export function PlayerDrawer({ player, onClose, globalOwnership, minorsIds, mlbT
       fetch(`https://statsapi.mlb.com/api/v1/people/${mlbamId}?hydrate=currentTeam`).then(r=>r.json()),
       fetch(`/api/stats/history/${mlbamId}`).then(r=>r.json()),
     ]).then(([peopleData,histData]) => {
-      // fetch game logs for all years that have history
+      // fetch game logs for all years directly from MLB API (both MLB + MiLB, both groups for two-way)
       const histYears = Array.from(new Set((histData.splits??[]).map((s:any)=>parseInt(s.season??'0')).filter((y:number)=>y>=2015))).sort() as number[]
       const currentYear = new Date().getFullYear()
       if (!histYears.includes(currentYear)) histYears.push(currentYear)
-      Promise.all(histYears.map((yr:number) =>
-        fetch(`/api/stats/gamelogs/${mlbamId}?year=${yr}`).then(r=>r.json()).catch(()=>({hitting:[],pitching:[]}))
-      )).then(results => {
-        const logs: Record<number,any[]> = {}
-        histYears.forEach((yr:number, i:number) => {
-          const gl = results[i]
-          logs[yr] = pitch ? (gl.pitching??[]) : (gl.hitting??[])
+      const dedup = (splits: any[]) => {
+        const seen = new Set<string>()
+        return splits.filter(s => {
+          const key = (s.date??'')+'|'+(s.opponent?.abbreviation??s.opponent?.name??s.opponent?.id??'')
+          if (seen.has(key)) return false
+          seen.add(key); return true
         })
+      }
+      const flattenLog = (data: any) => data?.stats?.[0]?.splits ?? []
+      const fetchGroupYear = async (group: string, yr: number): Promise<any[]> => {
+        const base = `https://statsapi.mlb.com/api/v1/people/${mlbamId}/stats?stats=gameLog&season=${yr}&group=${group}&gameType=R`
+        const [mlbRes, milbRes] = await Promise.all([
+          fetch(base).then(r=>r.ok?r.json():{}).catch(()=>({})),
+          fetch(base+'&leagueListId=milb_all').then(r=>r.ok?r.json():{}).catch(()=>({})),
+        ])
+        return dedup([...flattenLog(mlbRes), ...flattenLog(milbRes)]).map(s => ({
+          date: s.date,
+          opponent: s.opponent,
+          isHome: s.isHome,
+          level: s.sport?.abbreviation ?? s.team?.sport?.abbreviation ?? null,
+          ...s.stat,
+        }))
+      }
+      // fetch all years in parallel; always fetch both groups so BAT/ARM toggle works without refetch
+      Promise.all(histYears.map(async (yr: number) => {
+        const [hitting, pitching] = await Promise.all([
+          fetchGroupYear('hitting', yr),
+          fetchGroupYear('pitching', yr),
+        ])
+        return { yr, hitting, pitching }
+      })).then(results => {
+        const logs: Record<number,{hitting:any[],pitching:any[]}> = {}
+        for (const { yr, hitting, pitching } of results) logs[yr] = { hitting, pitching }
         setAllGameLogs(logs)
       })
       setBio(peopleData.people?.[0]??null)
@@ -667,7 +692,7 @@ export function PlayerDrawer({ player, onClose, globalOwnership, minorsIds, mlbT
 
   // Full career game-by-game arc across all years
   const gameArcPoints = useMemo(() => {
-    const hasLogs = Object.values(allGameLogs).some((rows:any) => rows?.length > 0)
+    const hasLogs = Object.values(allGameLogs).some((g:any) => g?.hitting?.length > 0 || g?.pitching?.length > 0)
     if (!regression || !norms || !poolStats || !hasLogs) return []
     const models = regression.models
     const isPit = pitch
@@ -701,8 +726,9 @@ export function PlayerDrawer({ player, onClose, globalOwnership, minorsIds, mlbT
 
     // Collect all game entries across all years, sorted by date
     const allGames: Array<{date:string,year:number,g:any}> = []
-    for (const [yrStr, rows] of Object.entries(allGameLogs)) {
+    for (const [yrStr, groups] of Object.entries(allGameLogs)) {
       const yr = parseInt(yrStr)
+      const rows = isPit ? (groups as any).pitching : (groups as any).hitting
       if (!rows?.length) continue
       for (const g of (rows as any[])) {
         if (g.date) allGames.push({ date: g.date.slice(0,10), year: yr, g })

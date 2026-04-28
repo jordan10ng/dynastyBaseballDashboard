@@ -67,7 +67,7 @@ fantasy-baseball/
 │       ├── stats/route.ts               # Serves current season stats from history/2026.json (mlbam_id → Fantrax ID bridge). Two-way players: hitting under fantraxId, pitching under fantraxId + '_pit'
 │       ├── stats/link/route.ts, sync/route.ts
 │       ├── stats/history/[mlbamId]/route.ts  # Career history from local YYYY.json files
-│       ├── stats/gamelogs/[mlbamId]/route.ts  # Per-year game logs from gamelogs/YYYY/{mlbamId}.json. Accepts ?year= param.
+│       ├── stats/gamelogs/[mlbamId]/route.ts  # Per-player game logs. Reads from ~/Desktop/fantasy-baseball-gamelogs/YYYY/{mlbamId}.json (local only). Returns empty on Vercel — yearly arc fallback used.
 │       ├── model/tools/route.ts          # Serves mlb-tools.json to UI
 │       ├── model/regression/route.ts     # Serves regression.json to UI (used by tool arc)
 │       ├── model/norms/route.ts          # Serves norms.json to UI (used by tool arc)
@@ -101,7 +101,7 @@ fantasy-baseball/
 │   ├── build-regression.py              # Two-feature regression (z + age_diff) → data/model/regression.json
 │   ├── build-scores.js                  # Scores prospects → players.json model_scores + hot-sheet.json. Two-way players scored on both sides independently.
 │   ├── sync-stats-gha.js               # Standalone stats sync for GHA — writes to history/2026.json. Two-way players fetch both hitting + pitching groups.
-│   └── build-gamelogs.js               # Pulls game logs for all ranked players across all years (2015+). Both MLB + MiLB via leagueListId=milb_all. Resume-capable (skips past years with data). Run once for backfill; nightly sync appends current year.
+│   └── build-gamelogs.js               # Pulls game logs for all ranked players across all years (2015+). Both MLB + MiLB via leagueListId=milb_all. Resume-capable. Run once for backfill. Writes to ~/Desktop/fantasy-baseball-gamelogs/YYYY/{mlbamId}.json (outside project).
 ├── data/
 │   ├── players.json                      # PERMANENT — never wipe. Has birthDate, mlbam_id, rank, model_scores.
 │   ├── db.json                           # LIVE — safe to re-sync
@@ -113,7 +113,7 @@ fantasy-baseball/
 │   │   ├── progress.json                 # MLB pull resume tracker
 │   │   ├── progress-milb.json            # MiLB pull resume tracker
 │   │   ├── YYYY.json                     # All player stat lines for that year (MLB + MiLB). 2026.json = source of truth for current season.
-│   │   └── gamelogs/YYYY/{mlbamId}.json  # Per-player per-year game logs. { hitting: [...], pitching: [...] }. Fetches both MLB + MiLB via leagueListId=milb_all. Level field on each row (e.g. "A", "A+", "AA").
+# gamelogs live OUTSIDE the project at ~/Desktop/fantasy-baseball-gamelogs/YYYY/{mlbamId}.json (105k files, not committed). Local sync writes here; GHA does not sync gamelogs. Vercel returns empty → yearly arc fallback.
 │   └── model/
 │       ├── norms.json                    # Level/league/year stat norms. Current year blended with prior year (blend = min(n/400, 1.0)).
 │       ├── mlb-scores.json               # Per-season MLB fantasy point rates (pts/PA, pts/IP)
@@ -146,7 +146,7 @@ fantasy-baseball/
 - **model/hot-sheet.json** — top 20 bats + 20 arms (IP/GS >= 3.0, excludes relievers) by current season model delta. Written by build-scores.js every run.
 - **model/scores-snapshot.json** — snapshot of model scores keyed by Fantrax ID. Written as comparison baseline.
 - **model/pool-stats.json** — per-tool mean/stdev of raw regression output across all scored prospects. Written by build-scores.js. Used by tool arc chart to normalize arc scores onto the same 95-center scale as model tiles.
-- **history/gamelogs/YYYY/{mlbamId}.json** — per-player per-year game logs for all ranked players. Fetched via MLB Stats API with leagueListId=milb_all to get both MLB + MiLB games. One file per player per year. Used by game-by-game tool arc in drawer. Updated nightly by GHA (current year only, appends new games).
+- **~/Desktop/fantasy-baseball-gamelogs/YYYY/{mlbamId}.json** — game logs outside the project directory (not committed, not on Vercel). Local sync (Sync page) writes here. GHA does NOT sync gamelogs. Vercel gamelog route returns empty → drawer falls back to yearly arc.
 
 ## Fantrax Integration
 - League IDs: `0ehfuam0mg7wqpn7` (D28), `ew7b8seomg7u7uzi` (D34), `d3prsagvmgftfdc3` (D52)
@@ -294,6 +294,9 @@ export async function GET(_req: NextRequest, { params }: { params: Promise<{ id:
 ## Next Priorities (in order)
 1. **Statcast pitcher chart** — unified release point + movement plot
 2. **Tool arc game-by-game** — rolling in-season window (current season only, not full career pull)
+2b. **Game-log arc on Vercel** — fetch all career gamelogs in parallel from client at drawer-open (one MLB API call per year, render arc progressively as years resolve); eliminates need to store gamelogs at all
+3. **Career arc MLB points** — add MLB season(s) as arc points for graduated players, blended using same computeTools() logic as tool tiles (mlb-tools.json actuals weighted by _pa/_ip vs MiLB model score weighted by _sample)
+4. **Washout negative examples** — add ~450 clean non-graduators as negative training rows in build-regression.py to address survivorship bias. Proxy: gap>=3yr AND age>=26 AND highest level != MLB (472 candidates identified). Assign fixed outcome floor of 40 (20-80 scale) = ~98 in raw regression space (below ~101 intercept). Two approaches to evaluate: (a) add as training rows with outcome=40-equivalent, (b) separate regularization term. Raw regression intercepts ~101-102; pool norm centers at 100 stdev 15; shrinkage prior already at 88. Need to reconcile scale before implementing.
 3. **Model as consensus source** — add model scores as source type M in ranking engine
 4. **Roster moves** — add/drop via Fantrax API, needs session auth
 5. **Trade calculator** — connect to model scores instead of placeholder exponential decay
@@ -380,12 +383,12 @@ export async function GET(_req: NextRequest, { params }: { params: Promise<{ id:
   - Level resolved from history/2026.json via mlbam_id
 
 - **Tool Arc + Game-by-Game Arc (Apr 2026):**
-  - Yearly arc: cumulative scoring per year, blends all seasons up to each year end with recency decay, verified against Briceno (power 127 ✓, ovr 114 ✓)
+  - Yearly arc: one point per year+level combination. scoreToolAtPoint(year, level) scores cumulatively using all rows up to that year+level (prior years fully, current year up to that level rank). Points sorted low→high level within each year.
   - Game-by-game arc: full career game logs fetched per year via /api/stats/gamelogs/[mlbamId]?year=YYYY, scored game by game using same model math. Cumulative stats tracked per season/level bucket (no resets across year boundaries — recency decay handles weighting). MiLB level names normalized (A→Single-A, A+→High-A etc). Score band background.
   - Game arc shown when gamelogs exist, yearly arc as fallback — no toggle
   - build-gamelogs.js: one-off backfill script, fetches 2015+ for all ranked players. Both MLB + MiLB via leagueListId=milb_all + base endpoint, deduped by date+opponent.
   - pool-stats.json added to pipeline; new API routes: /api/model/regression, /api/model/norms, /api/model/pool-stats, /api/stats/gamelogs/[mlbamId]
-  - ⚠️ TODO: nightly sync (GHA + local) needs to append current year game logs to gamelogs/YYYY/{mlbamId}.json
+  - GHA does NOT sync gamelogs — local sync (Sync page) only. Vercel shows yearly arc always.
   - ⚠️ TODO: hot sheet 15/30/90/season filters using game log data
 
 ## Friend Teams (D52 League)
