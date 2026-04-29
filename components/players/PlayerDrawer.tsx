@@ -343,9 +343,11 @@ export function PlayerDrawer({ player, onClose, globalOwnership, minorsIds, mlbT
       }
       const rl = calc(vl), rr = calc(vr)
       const hit = toolGrades.hit, pwr = toolGrades.power
+      const shrink = (base: number, raw: number, pa: number, k: number) => Math.round(base + (raw - base) * (pa / (pa + k)))
+      const paVL = vl.plateAppearances ?? 0, paVR = vr.plateAppearances ?? 0
       return {
-        hit: { L: hit!=null ? Math.round(hit * rl.hitRatio) : null, R: hit!=null ? Math.round(hit * rr.hitRatio) : null },
-        power: { L: pwr!=null ? Math.round(pwr * rl.pwrRatio) : null, R: pwr!=null ? Math.round(pwr * rr.pwrRatio) : null },
+        hit: { L: hit!=null ? shrink(hit, Math.round(hit*rl.hitRatio), paVL, 60) : null, R: hit!=null ? shrink(hit, Math.round(hit*rr.hitRatio), paVR, 60) : null },
+        power: { L: pwr!=null ? shrink(pwr, Math.round(pwr*rl.pwrRatio), paVL, 120) : null, R: pwr!=null ? shrink(pwr, Math.round(pwr*rr.pwrRatio), paVR, 120) : null },
       }
     } else {
       // pitchers: Stuff+ uses k% (higher=better), Ctrl+ uses bb% (lower=better, inverted)
@@ -362,9 +364,12 @@ export function PlayerDrawer({ player, onClose, globalOwnership, minorsIds, mlbT
       }
       const rl = calc(vl), rr = calc(vr)
       const stuff = toolGrades.stuff, ctrl = toolGrades.control
+      const shrink = (base: number, raw: number, bf: number, k: number) => Math.round(base + (raw - base) * (bf / (bf + k)))
+      const bfVL = vl.battersFaced || ((vl.atBats??0)+(vl.baseOnBalls??0)+(vl.hitByPitch??0)) || 0
+      const bfVR = vr.battersFaced || ((vr.atBats??0)+(vr.baseOnBalls??0)+(vr.hitByPitch??0)) || 0
       return {
-        stuff: { L: stuff!=null ? Math.round(stuff * rl.stuffRatio) : null, R: stuff!=null ? Math.round(stuff * rr.stuffRatio) : null },
-        control: { L: ctrl!=null ? Math.round(ctrl * rl.ctrlRatio) : null, R: ctrl!=null ? Math.round(ctrl * rr.ctrlRatio) : null },
+        stuff: { L: stuff!=null ? shrink(stuff, Math.round(stuff*rl.stuffRatio), bfVL, 20) : null, R: stuff!=null ? shrink(stuff, Math.round(stuff*rr.stuffRatio), bfVR, 20) : null },
+        control: { L: ctrl!=null ? shrink(ctrl, Math.round(ctrl*rl.ctrlRatio), bfVL, 40) : null, R: ctrl!=null ? shrink(ctrl, Math.round(ctrl*rr.ctrlRatio), bfVR, 40) : null },
       }
     }
   }, [toolGrades, careerSituSplits, allSplits, pitch])
@@ -1003,9 +1008,9 @@ export function PlayerDrawer({ player, onClose, globalOwnership, minorsIds, mlbT
         </div>
 
         <div style={{padding:'1.5rem 1rem',maxWidth:1400,margin:'0 auto',width:'100%',boxSizing:'border-box'}}>
-          <div style={{display:'flex',gap:'1rem',alignItems:'flex-start',flexWrap:'wrap',marginBottom:'1.5rem'}}>
+          <div style={{display:'flex',flexDirection:'column',gap:'1rem',marginBottom:'1.5rem'}}>
             {bio&&(<div style={{display:'flex',gap:'1.5rem',flexWrap:'wrap'}}>{[{label:'B/T',val:`${bio.batSide?.code??'?'}/${bio.pitchHand?.code??'?'}`},{label:'HT/WT',val:bio.height&&bio.weight?`${bio.height} · ${bio.weight} lbs`:null},{label:'Born',val:bio.birthDate?`${bio.birthDate}${bio.birthCity?` · ${bio.birthCity}${bio.birthStateProvince?`, ${bio.birthStateProvince}`:''}`:''} `:null},{label:'Debut',val:bio.mlbDebutDate??null},{label:'Draft',val:bio.draftYear?`${bio.draftYear}`:null}].filter(x=>x.val).map(({label,val})=>(<div key={label}><div style={{fontSize:'0.62rem',fontFamily:'var(--font-display)',fontWeight:700,letterSpacing:'0.08em',color:'var(--muted)',textTransform:'uppercase',marginBottom:'2px'}}>{label}</div><div style={{fontSize:'0.78rem',color:'var(--text)'}}>{val}</div></div>))}</div>)}
-            {tiles&&(tiles as any[]).length>0&&(<div style={{display:'flex',gap:'0.75rem',width:'100%'}}>{(tiles as any[]).map((tile:any)=>(<div key={tile.label} style={{background:'rgba(255,255,255,0.04)',border:'1px solid var(--border)',borderRadius:8,padding:'0.4rem 0.6rem',flex:1,textAlign:'center'}}>
+            {tiles&&(tiles as any[]).length>0&&(<div style={{display:'flex',gap:'0.75rem',width:'100%',maxWidth:480}}>{(tiles as any[]).map((tile:any)=>(<div key={tile.label} style={{background:'rgba(255,255,255,0.04)',border:'1px solid var(--border)',borderRadius:8,padding:'0.4rem 0.6rem',flex:1,textAlign:'center'}}>
   <div style={{fontSize:'0.6rem',fontFamily:'var(--font-display)',fontWeight:700,letterSpacing:'0.1em',textTransform:'uppercase',color:'var(--muted)',marginBottom:'0.25rem'}}>{tile.label}</div>
   <div style={{fontSize:'1.1rem',fontWeight:700,color:tile.color??'var(--accent)',fontFamily:'var(--font-display)'}}>{tile.val}</div>
   {(tile.raw!=null||tile.conf!=null)&&(
