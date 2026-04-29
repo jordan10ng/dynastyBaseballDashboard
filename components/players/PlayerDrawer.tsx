@@ -349,7 +349,7 @@ export function PlayerDrawer({ player, onClose, globalOwnership, minorsIds, mlbT
       }
     } else {
       // pitchers: Stuff+ uses k% (higher=better), Ctrl+ uses bb% (lower=better, inverted)
-      const careerBF = career.battersFaced ?? ((career.atBats??0)+(career.baseOnBalls??0)+(career.hitByPitch??0)) ?? 1
+      const careerBF = career.battersFaced || ((career.atBats??0)+(career.baseOnBalls??0)+(career.hitByPitch??0)) || 1
       const careerKPct = (career.strikeOuts ?? 0) / careerBF
       const careerBBPct = (career.baseOnBalls ?? 0) / careerBF
       const calc = (st: any) => {
