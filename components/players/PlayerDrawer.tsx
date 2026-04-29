@@ -183,6 +183,7 @@ export function PlayerDrawer({ player, onClose, globalOwnership, minorsIds, mlbT
   const [bio, setBio] = useState<any>(null)
   const [allSplits, setAllSplits] = useState<any[]>([])
   const [situSplits, setSituSplits] = useState<any[]>([])
+  const [careerSituSplits, setCareerSituSplits] = useState<any[]>([])
   const [gameLogs, setGameLogs] = useState<any[]>([])
   const [statcastRows, setStatcastRows] = useState<any[]>([])
   const [allGameLogs, setAllGameLogs] = useState<Record<number,{hitting:any[],pitching:any[]}>>({})
@@ -309,6 +310,65 @@ export function PlayerDrawer({ player, onClose, globalOwnership, minorsIds, mlbT
     ].filter(Boolean)
   }, [toolGrades, pitch])
 
+  const handednessSplits = useMemo(() => {
+    if (!toolGrades || careerSituSplits.length === 0) return null
+    const vl = careerSituSplits.find((s:any) => s.split?.code === 'vl')?.stat
+    const vr = careerSituSplits.find((s:any) => s.split?.code === 'vr')?.stat
+    if (!vl || !vr) return null
+    // career totals as denominator
+    const allRows = allSplits.map(s => ({ stat: s.stat }))
+    const career = pitch ? sumPitchStats(allRows) : sumBatStats(allRows)
+    if (!career) return null
+    const safeRatio = (splitVal: number, careerVal: number) =>
+      careerVal > 0 ? splitVal / careerVal : 1
+    if (!pitch) {
+      // hitters: Hit+ uses k% (inverted) + bb%, Pwr+ uses iso
+      const careerPA = career.plateAppearances ?? 1
+      const careerAB = career.atBats ?? 1
+      const careerKPct = (career.strikeOuts ?? 0) / careerPA
+      const careerBBPct = (career.baseOnBalls ?? 0) / careerPA
+      const careerISO = ((career.slg ? parseFloat('0'+career.slg) : 0) - (career.avg ? parseFloat('0'+career.avg) : 0))
+      const calc = (st: any) => {
+        const pa = st.plateAppearances ?? 1
+        const ab = st.atBats ?? 1
+        const kPct = (st.strikeOuts ?? 0) / pa
+        const bbPct = (st.baseOnBalls ?? 0) / pa
+        const iso = (parseFloat('0'+(st.slg??'0')) - parseFloat('0'+(st.avg??'0')))
+        // hit: lower k% is better (invert ratio), higher bb% is better
+        const kRatio = careerKPct > 0 ? careerKPct / kPct : 1  // inverted
+        const bbRatio = safeRatio(bbPct, careerBBPct)
+        const hitRatio = (kRatio + bbRatio) / 2
+        const pwrRatio = safeRatio(iso, careerISO)
+        return { hitRatio, pwrRatio }
+      }
+      const rl = calc(vl), rr = calc(vr)
+      const hit = toolGrades.hit, pwr = toolGrades.power
+      return {
+        hit: { L: hit!=null ? Math.round(hit * rl.hitRatio) : null, R: hit!=null ? Math.round(hit * rr.hitRatio) : null },
+        power: { L: pwr!=null ? Math.round(pwr * rl.pwrRatio) : null, R: pwr!=null ? Math.round(pwr * rr.pwrRatio) : null },
+      }
+    } else {
+      // pitchers: Stuff+ uses k% (higher=better), Ctrl+ uses bb% (lower=better, inverted)
+      const careerBF = career.battersFaced ?? ((career.atBats??0)+(career.baseOnBalls??0)+(career.hitByPitch??0)) ?? 1
+      const careerKPct = (career.strikeOuts ?? 0) / careerBF
+      const careerBBPct = (career.baseOnBalls ?? 0) / careerBF
+      const calc = (st: any) => {
+        const bf = st.battersFaced ?? ((st.atBats??0)+(st.baseOnBalls??0)+(st.hitByPitch??0)) ?? 1
+        const kPct = (st.strikeOuts ?? 0) / bf
+        const bbPct = (st.baseOnBalls ?? 0) / bf
+        const stuffRatio = safeRatio(kPct, careerKPct)
+        const ctrlRatio = careerBBPct > 0 ? careerBBPct / bbPct : 1  // inverted
+        return { stuffRatio, ctrlRatio }
+      }
+      const rl = calc(vl), rr = calc(vr)
+      const stuff = toolGrades.stuff, ctrl = toolGrades.control
+      return {
+        stuff: { L: stuff!=null ? Math.round(stuff * rl.stuffRatio) : null, R: stuff!=null ? Math.round(stuff * rr.stuffRatio) : null },
+        control: { L: ctrl!=null ? Math.round(ctrl * rl.ctrlRatio) : null, R: ctrl!=null ? Math.round(ctrl * rr.ctrlRatio) : null },
+      }
+    }
+  }, [toolGrades, careerSituSplits, allSplits, pitch])
+
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => { if (e.key==='Escape') onClose() }
     window.addEventListener('keydown', handleKey)
@@ -426,11 +486,46 @@ export function PlayerDrawer({ player, onClose, globalOwnership, minorsIds, mlbT
       fetch(`https://statsapi.mlb.com/api/v1/people/${mlbamId}/stats?stats=statSplits&group=${group}&season=${season}&sitCodes=vl,vr,h,a&gameType=R&leagueListId=milb_all`).then(r=>r.json()),
       fetch(`https://statsapi.mlb.com/api/v1/people/${mlbamId}/stats?stats=gameLog&group=${group}&season=${season}&gameType=R`).then(r=>r.json()),
       fetch(`https://statsapi.mlb.com/api/v1/people/${mlbamId}/stats?stats=gameLog&group=${group}&season=${season}&gameType=R&leagueListId=milb_all`).then(r=>r.json()),
-    ]).then(([situData,milbSituData,gameLogData,milbGameLogData])=>{
+      fetch(`https://statsapi.mlb.com/api/v1/people/${mlbamId}/stats?stats=careerStatSplits&group=${group}&sitCodes=vl,vr&gameType=R`).then(r=>r.json()).catch(()=>({})),
+      fetch(`https://statsapi.mlb.com/api/v1/people/${mlbamId}/stats?stats=careerStatSplits&group=${group}&sitCodes=vl,vr&gameType=R&leagueListId=milb_all`).then(r=>r.json()).catch(()=>({})),
+    ]).then(([situData,milbSituData,gameLogData,milbGameLogData,careerSituData,careerMilbSituData])=>{
       const mlbSitu=situData.stats?.[0]?.splits??[]
       const milbSitu=milbSituData.stats?.[0]?.splits??[]
       const mergedSitu=mlbSitu.length>0?mlbSitu:milbSitu
       setSituSplits(mergedSitu)
+      const mlbCareerSitu=careerSituData?.stats?.[0]?.splits??[]
+      const milbCareerSitu=careerMilbSituData?.stats?.[0]?.splits??[]
+      // merge by adding counting stats from both, prefer MLB for rate stats
+      const mergeSitu=(mlb:any[],milb:any[])=>{
+        const codes=['vl','vr']
+        return codes.map(code=>{
+          const m=mlb.find((s:any)=>s.split?.code===code)
+          const n=milb.find((s:any)=>s.split?.code===code)
+          if(!m&&!n)return null
+          if(!m)return n
+          if(!n)return m
+          const ms=m.stat, ns=n.stat
+          const totPA=(ms.plateAppearances??0)+(ns.plateAppearances??0)
+          const totAB=(ms.atBats??0)+(ns.atBats??0)
+          const totH=(ms.hits??0)+(ns.hits??0)
+          const totBB=(ms.baseOnBalls??0)+(ns.baseOnBalls??0)
+          const totSO=(ms.strikeOuts??0)+(ns.strikeOuts??0)
+          const totHR=(ms.homeRuns??0)+(ns.homeRuns??0)
+          const tot2B=(ms.doubles??0)+(ns.doubles??0)
+          const tot3B=(ms.triples??0)+(ns.triples??0)
+          const totTB=(ms.totalBases??0)+(ns.totalBases??0)
+          const totG=(ms.gamesPlayed??0)+(ns.gamesPlayed??0)
+          const totBF=(ms.battersFaced??0)+(ns.battersFaced??0)
+          const totIP=((parseFloat(ms.inningsPitched??'0')||0)+(parseFloat(ns.inningsPitched??'0')||0)).toFixed(1)
+          const totER=(ms.earnedRuns??0)+(ns.earnedRuns??0)
+          const avg=totAB>0?(totH/totAB).toFixed(3).replace(/^0/,''):null
+          const obp=totPA>0?((totH+totBB+(ms.hitByPitch??0)+(ns.hitByPitch??0))/totPA).toFixed(3).replace(/^0/,''):null
+          const slg=totAB>0?(totTB/totAB).toFixed(3).replace(/^0/,''):null
+          const ops=(obp&&slg)?(parseFloat('0'+obp)+parseFloat('0'+slg)).toFixed(3).replace(/^0/,''):null
+          return {...m,stat:{...ms,gamesPlayed:totG,plateAppearances:totPA,atBats:totAB,hits:totH,baseOnBalls:totBB,strikeOuts:totSO,homeRuns:totHR,doubles:tot2B,triples:tot3B,totalBases:totTB,battersFaced:totBF,inningsPitched:totIP,earnedRuns:totER,avg,obp,slg,ops}}
+        }).filter(Boolean)
+      }
+      setCareerSituSplits(mergeSitu(mlbCareerSitu,milbCareerSitu))
       const mlbLogs=gameLogData.stats?.[0]?.splits??[]
       const milbLogs=milbGameLogData.stats?.[0]?.splits??[]
       const logs=[...mlbLogs,...milbLogs]
@@ -487,7 +582,22 @@ export function PlayerDrawer({ player, onClose, globalOwnership, minorsIds, mlbT
 
   function renderRecentTable(){if(!lWindows)return<div style={{color:'var(--muted)',fontSize:'0.85rem'}}>No recent games.</div>;const rows=[['L7',lWindows.l7],['L30',lWindows.l30],['L90',lWindows.l90]].filter(([,st])=>st);if(!rows.length)return null;const hdrs=pitch?['Period','G','W-L','IP','ERA','WHIP','BB','SO','K%','BB%','K-BB%']:['Period','G','BA','OBP','SLG','OPS','PA','HR','RBI','R','SB','K%','BB%'];return(<div style={{overflowX:'auto'}}><table style={{borderCollapse:'collapse',minWidth:'max-content'}}><thead><tr style={{borderBottom:'1px solid var(--border)'}}>{hdrs.map(h=><th key={h} style={{padding:'0.25rem 0.45rem',textAlign:h==='Period'?'left':'right',fontFamily:'var(--font-display)',fontWeight:700,fontSize:'0.62rem',letterSpacing:'0.08em',color:'var(--muted)',whiteSpace:'nowrap'}}>{h}</th>)}</tr></thead><tbody>{rows.map(([lbl,st]:any)=>pitch?(<tr key={lbl} style={{borderBottom:'1px solid rgba(48,54,61,0.3)'}}><LabelCell label={lbl} bold/><StatCell val={st?.gamesPlayed}/><StatCell val={fmtWL(st)}/><StatCell val={st?.inningsPitched}/><StatCell val={st?.era}/><StatCell val={st?.whip}/><StatCell val={st?.baseOnBalls}/><StatCell val={st?.strikeOuts}/><StatCell val={calcKPct(st,true)}/><StatCell val={calcBBPct(st,true)}/><StatCell val={calcKBBPct(st)}/></tr>):(<tr key={lbl} style={{borderBottom:'1px solid rgba(48,54,61,0.3)'}}><LabelCell label={lbl} bold/><StatCell val={st?.gamesPlayed}/><StatCell val={st?.avg}/><StatCell val={st?.obp}/><StatCell val={st?.slg}/><StatCell val={st?.ops}/><StatCell val={st?.plateAppearances}/><StatCell val={st?.homeRuns}/><StatCell val={st?.rbi}/><StatCell val={st?.runs}/><StatCell val={st?.stolenBases}/><StatCell val={calcKPct(st,false)}/><StatCell val={calcBBPct(st,false)}/></tr>))}</tbody></table></div>)}
 
-  function renderSplitTable(){const relevant=['vl','vr','h','a'].map(code=>situSplits.find((s:any)=>s.split?.code===code)).filter(Boolean);if(!relevant.length)return<div style={{color:'var(--muted)',fontSize:'0.85rem'}}>No splits available for current season.</div>;const hdrs=pitch?['Split','G','W-L','IP','BAA','ERA','WHIP','BB','SO','K%','BB%','K-BB%']:['Split','G','BA','OBP','SLG','OPS','PA','HR','RBI','R','SB','K%','BB%'];return(<div style={{overflowX:'auto'}}><table style={{borderCollapse:'collapse',minWidth:'max-content'}}><thead><tr style={{borderBottom:'1px solid var(--border)'}}>{hdrs.map(h=><th key={h} style={{padding:'0.25rem 0.45rem',textAlign:h==='Split'?'left':'right',fontFamily:'var(--font-display)',fontWeight:700,fontSize:'0.62rem',letterSpacing:'0.08em',color:'var(--muted)',whiteSpace:'nowrap'}}>{h}</th>)}</tr></thead><tbody>{relevant.map((s:any,i)=>{const st=s.stat;const lbl=splitLabels[s.split?.code]??s.split?.description??s.split?.code;return pitch?(<tr key={i} style={{borderBottom:'1px solid rgba(48,54,61,0.3)'}}><LabelCell label={lbl}/><StatCell val={st?.gamesPlayed}/><StatCell val={fmtWL(st)}/><StatCell val={st?.inningsPitched}/><StatCell val={st?.avg}/><StatCell val={st?.era}/><StatCell val={st?.whip}/><StatCell val={st?.baseOnBalls}/><StatCell val={st?.strikeOuts}/><StatCell val={calcKPct(st,true)}/><StatCell val={calcBBPct(st,true)}/><StatCell val={calcKBBPct(st)}/></tr>):(<tr key={i} style={{borderBottom:'1px solid rgba(48,54,61,0.3)'}}><LabelCell label={lbl}/><StatCell val={st?.gamesPlayed}/><StatCell val={st?.avg}/><StatCell val={st?.obp}/><StatCell val={st?.slg}/><StatCell val={st?.ops}/><StatCell val={st?.plateAppearances}/><StatCell val={st?.homeRuns}/><StatCell val={st?.rbi}/><StatCell val={st?.runs}/><StatCell val={st?.stolenBases}/><StatCell val={calcKPct(st,false)}/><StatCell val={calcBBPct(st,false)}/></tr>)})}</tbody></table></div>)}
+  function renderSplitTable(){
+    const relevant=['vl','vr','h','a'].map(code=>situSplits.find((s:any)=>s.split?.code===code)).filter(Boolean)
+    const careerVL=careerSituSplits.find((s:any)=>s.split?.code==='vl')
+    const careerVR=careerSituSplits.find((s:any)=>s.split?.code==='vr')
+    const hasCareer=careerVL||careerVR
+    if(!relevant.length&&!hasCareer)return<div style={{color:'var(--muted)',fontSize:'0.85rem'}}>No splits available.</div>
+    const hdrs=pitch?['Split','G','W-L','IP','BAA','ERA','WHIP','BB','SO','K%','BB%','K-BB%']:['Split','G','BA','OBP','SLG','OPS','PA','HR','RBI','R','SB','K%','BB%']
+    const careerRowStyle={borderBottom:'1px solid rgba(48,54,61,0.3)',background:'rgba(255,255,255,0.02)'}
+    const sepStyle={borderBottom:'1px solid var(--border)'}
+    const renderBat=(st:any,lbl:string,style:any,rowKey?:string)=>(<tr key={rowKey} style={style}><LabelCell label={lbl} muted/><StatCell val={st?.gamesPlayed}/><StatCell val={st?.avg}/><StatCell val={st?.obp}/><StatCell val={st?.slg}/><StatCell val={st?.ops}/><StatCell val={st?.plateAppearances}/><StatCell val={st?.homeRuns}/><StatCell val={st?.rbi}/><StatCell val={st?.runs}/><StatCell val={st?.stolenBases}/><StatCell val={calcKPct(st,false)}/><StatCell val={calcBBPct(st,false)}/></tr>)
+    const renderPit=(st:any,lbl:string,style:any,rowKey?:string)=>(<tr key={rowKey} style={style}><LabelCell label={lbl} muted/><StatCell val={st?.gamesPlayed}/><StatCell val={fmtWL(st)}/><StatCell val={st?.inningsPitched}/><StatCell val={st?.avg}/><StatCell val={st?.era}/><StatCell val={st?.whip}/><StatCell val={st?.baseOnBalls}/><StatCell val={st?.strikeOuts}/><StatCell val={calcKPct(st,true)}/><StatCell val={calcBBPct(st,true)}/><StatCell val={calcKBBPct(st)}/></tr>)
+    return(<div style={{overflowX:'auto'}}><table style={{borderCollapse:'collapse',minWidth:'max-content'}}><thead><tr style={{borderBottom:'1px solid var(--border)'}}>{hdrs.map(h=><th key={h} style={{padding:'0.25rem 0.45rem',textAlign:h==='Split'?'left':'right',fontFamily:'var(--font-display)',fontWeight:700,fontSize:'0.62rem',letterSpacing:'0.08em',color:'var(--muted)',whiteSpace:'nowrap'}}>{h}</th>)}</tr></thead><tbody>
+      {hasCareer&&<>{careerVL&&<React.Fragment key="cvl">{pitch?renderPit(careerVL.stat,'Career vs L',careerRowStyle):renderBat(careerVL.stat,'Career vs L',careerRowStyle)}</React.Fragment>}{careerVR&&<React.Fragment key="cvr">{pitch?renderPit(careerVR.stat,'Career vs R',careerRowStyle):renderBat(careerVR.stat,'Career vs R',careerRowStyle)}</React.Fragment>}{relevant.length>0&&<tr key="sep" style={sepStyle}><td colSpan={hdrs.length} style={{padding:'0.15rem 0.45rem',fontSize:'0.58rem',fontFamily:'var(--font-display)',color:'var(--muted)',letterSpacing:'0.08em',textTransform:'uppercase'}}>Current Season</td></tr>}</>}
+      {relevant.map((s:any,i)=>{const st=s.stat;const lbl=splitLabels[s.split?.code]??s.split?.description??s.split?.code;return <React.Fragment key={`cur-${i}`}>{pitch?renderPit(st,lbl,{borderBottom:'1px solid rgba(48,54,61,0.3)'}):renderBat(st,lbl,{borderBottom:'1px solid rgba(48,54,61,0.3)'})}</React.Fragment>})}
+    </tbody></table></div>)
+  }
 
   function renderGameLog(){if(!gameLogs.length)return<div style={{color:'var(--muted)',fontSize:'0.85rem'}}>No games in last 90 days.</div>;const hdrs=pitch?['Date','Opp','Dec','IP','H','R','ER','BB','SO','ERA','WHIP']:['Date','Opp','AB','R','H','2B','3B','HR','RBI','SB','BB','SO','BA'];return(<div style={{overflowX:'auto'}}><table style={{borderCollapse:'collapse',minWidth:'max-content'}}><thead><tr style={{borderBottom:'1px solid var(--border)'}}>{hdrs.map(h=><th key={h} style={{padding:'0.25rem 0.45rem',textAlign:h==='Date'||h==='Opp'||h==='Dec'?'left':'right',fontFamily:'var(--font-display)',fontWeight:700,fontSize:'0.62rem',letterSpacing:'0.08em',color:'var(--muted)',whiteSpace:'nowrap'}}>{h}</th>)}</tr></thead><tbody>{gameLogs.map((g:any,i)=>{const st=g.stat;const opp=g.opponent?.abbreviation??g.opponent?.name??'—';const oppStr=g.isHome?opp:`@${opp}`;return pitch?(<tr key={i} style={{borderBottom:'1px solid rgba(48,54,61,0.3)'}}><LabelCell label={g.date?.slice(0,10)??'—'} muted/><LabelCell label={oppStr} muted/><LabelCell label={st?.note??'—'} muted/><StatCell val={st?.inningsPitched}/><StatCell val={st?.hits}/><StatCell val={st?.runs}/><StatCell val={st?.earnedRuns}/><StatCell val={st?.baseOnBalls}/><StatCell val={st?.strikeOuts}/><StatCell val={st?.era}/><StatCell val={st?.whip}/></tr>):(<tr key={i} style={{borderBottom:'1px solid rgba(48,54,61,0.3)'}}><LabelCell label={g.date?.slice(0,10)??'—'} muted/><LabelCell label={oppStr} muted/><StatCell val={st?.atBats}/><StatCell val={st?.runs}/><StatCell val={st?.hits}/><StatCell val={st?.doubles}/><StatCell val={st?.triples}/><StatCell val={st?.homeRuns}/><StatCell val={st?.rbi}/><StatCell val={st?.stolenBases}/><StatCell val={st?.baseOnBalls}/><StatCell val={st?.strikeOuts}/><StatCell val={st?.avg}/></tr>)})}</tbody></table></div>)}
 
@@ -904,6 +1014,22 @@ export function PlayerDrawer({ player, onClose, globalOwnership, minorsIds, mlbT
       {tile.conf!=null&&<div style={{fontSize:'0.6rem',fontFamily:'var(--font-display)',color:'rgba(150,150,150,0.7)'}} title="Confidence">{tile.conf}%</div>}
     </div>
   )}
+  {(()=>{
+    const key = tile.label==='HIT+'?'hit':tile.label==='PWR+'?'power':tile.label==='STF+'||tile.label==='Stuff+'?'stuff':tile.label==='CTL+'||tile.label==='Ctrl+'?'control':null
+    const hs = key && handednessSplits ? (handednessSplits as any)[key] : null
+    if (!hs) return null
+    const lLabel = pitch ? 'L' : 'L'
+    const rLabel = pitch ? 'R' : 'R'
+    return (
+      <div style={{display:'flex',justifyContent:'center',gap:'0.4rem',marginTop:'0.3rem',fontSize:'0.6rem',fontFamily:'var(--font-display)'}}>
+        <span style={{color:'rgba(150,150,150,0.5)'}}>{lLabel}</span>
+        <span style={{fontWeight:700,color:hs.L!=null?toolColor(hs.L):'var(--muted)'}}>{hs.L??'—'}</span>
+        <span style={{color:'rgba(150,150,150,0.3)'}}>·</span>
+        <span style={{color:'rgba(150,150,150,0.5)'}}>{rLabel}</span>
+        <span style={{fontWeight:700,color:hs.R!=null?toolColor(hs.R):'var(--muted)'}}>{hs.R??'—'}</span>
+      </div>
+    )
+  })()}
 </div>))}</div>)}
           </div>
 
