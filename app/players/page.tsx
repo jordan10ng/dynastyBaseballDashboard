@@ -157,12 +157,12 @@ function statLineCompact(s: any): string {
     const kPct = bf && s.strikeOuts != null ? (s.strikeOuts/bf*100).toFixed(1)+'%' : null
     const bbPct = bf && s.baseOnBalls != null ? (s.baseOnBalls/bf*100).toFixed(1)+'%' : null
     const wl = s.wins!=null && s.losses!=null ? `${s.wins}-${s.losses}` : null
-    return [wl, s.inningsPitched ? `${s.inningsPitched} IP` : null, s.era ? `${s.era} ERA` : null, kPct ? `${kPct} K%` : null, bbPct ? `${bbPct} BB%` : null].filter(Boolean).join(' · ')
+    return [s.gamesPlayed!=null ? `${s.gamesPlayed} G` : null, wl, s.inningsPitched ? `${s.inningsPitched} IP` : null, s.era ? `${s.era} ERA` : null, kPct ? `${kPct} K%` : null, bbPct ? `${bbPct} BB%` : null].filter(Boolean).join(' · ')
   } else {
     const pa = s.plateAppearances ?? 0
     const kPct = pa && s.strikeOuts != null ? (s.strikeOuts/pa*100).toFixed(1)+'%' : null
     const bbPct = pa && s.baseOnBalls != null ? (s.baseOnBalls/pa*100).toFixed(1)+'%' : null
-    return [s.ops ? `${s.ops} OPS` : null, kPct ? `${kPct} K%` : null, bbPct ? `${bbPct} BB%` : null, s.homeRuns!=null ? `${s.homeRuns} HR` : null, s.stolenBases!=null ? `${s.stolenBases} SB` : null].filter(Boolean).join(' · ')
+    return [s.gamesPlayed!=null ? `${s.gamesPlayed} G` : null, s.ops ? `${s.ops} OPS` : null, kPct ? `${kPct} K%` : null, bbPct ? `${bbPct} BB%` : null, s.homeRuns!=null ? `${s.homeRuns} HR` : null, s.stolenBases!=null ? `${s.stolenBases} SB` : null].filter(Boolean).join(' · ')
   }
 }
 
@@ -855,59 +855,142 @@ export default function PlayersPage() {
       {/* Mobile list */}
       {isMobile ? (
         <div style={{ display: 'flex', flexDirection: 'column' }}>
-          {/* Mobile header */}
-          <div style={{ display: 'grid', gridTemplateColumns: '36px 1fr 44px', gap: '0.4rem', padding: '0.2rem 0rem', marginBottom: '0.25rem', borderBottom: '1px solid var(--border)' }}>
-            <div onClick={() => { setToolSortKey(''); setSortMode('rank') }} style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.58rem', letterSpacing: '0.08em', color: sortMode === 'rank' ? 'var(--accent)' : 'var(--muted)', cursor: 'pointer', userSelect: 'none', display: 'flex', alignItems: 'center', gap: '2px' }}>
-              RK{sortMode === 'rank' && <span style={{ fontSize: '0.5rem' }}>▲</span>}
-            </div>
-            <div style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.58rem', letterSpacing: '0.08em', color: 'var(--muted)' }}>PLAYER</div>
-            <div onClick={() => { if (toolSortKey === 'overall') { setToolSortKey(''); setSortMode('rank') } else { setToolSortKey('overall'); setSortMode('tool') } }} style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.58rem', letterSpacing: '0.08em', color: toolSortKey === 'overall' ? 'var(--accent)' : 'var(--muted)', cursor: 'pointer', userSelect: 'none', textAlign: 'right', display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: '2px' }}>
-              {toolSortKey === 'overall' && <span style={{ fontSize: '0.5rem' }}>▼</span>}OVR+
-            </div>
-          </div>
-          {loading ? <div style={{ color: 'var(--muted)', padding: '1rem 0' }}>Loading...</div> : filtered.slice(0, mobileLimit).map((p, i) => {
-            const pOwn = globalOwnership[p.id] || {}
-            const myTeamOwned = Object.values(pOwn).includes(MY_TEAM)
-            const tools = playerToolsMap[p.id]
-            const ovr = tools?.overall ?? null
-            const s = statsMap[p.id]
-            const level = s?._level ?? p.level ?? '—'
-            return (
-              <div key={p.id} onClick={() => setSelectedPlayer(p)} style={{
-                display: 'grid', gridTemplateColumns: '36px 1fr 44px', gap: '0.4rem',
-                padding: '0.5rem 0rem', borderBottom: '1px solid rgba(48,54,61,0.4)',
-                alignItems: 'center', cursor: 'pointer',
-                borderLeft: myTeamOwned ? '2px solid #f59e0b' : '2px solid transparent',
-                marginLeft: myTeamOwned ? '-2px' : '0',
-                background: myTeamOwned ? 'rgba(245,158,11,0.04)' : 'transparent',
-              }}>
-                <div style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.65rem', color: 'rgba(100,100,100,0.5)' }}>{p.rank ?? '—'}</div>
-                <div style={{ minWidth: 0 }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', flexWrap: 'nowrap', overflow: 'hidden' }}>
-                    <span style={{ fontWeight: 600, fontSize: '0.82rem', color: myTeamOwned ? '#f59e0b' : 'var(--text)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', minWidth: 0 }}>{p.name}</span>
-                    {minorsIds.has(p.id) && <span style={{ color: '#4ade80', fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: '0.62rem', flexShrink: 0 }}>M</span>}
-                    <span style={{ fontSize: '0.65rem', color: 'var(--muted)', fontFamily: 'var(--font-display)', fontWeight: 600, whiteSpace: 'nowrap', flexShrink: 0 }}>
-                      {[p.positions?.split(',')[0]?.trim(), p.team, level].filter(Boolean).join(' · ')}
-                    </span>
-                    <div style={{ display: 'flex', gap: '3px', flexShrink: 0 }}>
-                      {LEAGUES.map((league: { id: string; label: string }) => {
-                        const teamName = pOwn[league.id]
-                        const fc = league.id === D52_ID ? FRIEND_TEAMS[teamName] : (teamName === MY_TEAM ? '#22c55e' : null)
-                        const color = teamName ? (fc ?? '#eab308') : '#ef4444'
-                        return <div key={league.id} style={{ width: '5px', height: '5px', borderRadius: '50%', background: color, opacity: 0.85 }} />
+          {batArmsFilter === 'all' ? (
+            <>
+              <div style={{ display: 'grid', gridTemplateColumns: '36px 1fr 44px', gap: '0.4rem', padding: '0.2rem 0rem', marginBottom: '0.25rem', borderBottom: '1px solid var(--border)' }}>
+                <div onClick={() => { setToolSortKey(''); setSortMode('rank') }} style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.58rem', letterSpacing: '0.08em', color: sortMode === 'rank' ? 'var(--accent)' : 'var(--muted)', cursor: 'pointer', userSelect: 'none', display: 'flex', alignItems: 'center', gap: '2px' }}>
+                  RK{sortMode === 'rank' && <span style={{ fontSize: '0.5rem' }}>▲</span>}
+                </div>
+                <div style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.58rem', letterSpacing: '0.08em', color: 'var(--muted)' }}>PLAYER</div>
+                <div onClick={() => { if (toolSortKey === 'overall') { setToolSortKey(''); setSortMode('rank') } else { setToolSortKey('overall'); setSortMode('tool') } }} style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.58rem', letterSpacing: '0.08em', color: toolSortKey === 'overall' ? 'var(--accent)' : 'var(--muted)', cursor: 'pointer', userSelect: 'none', textAlign: 'right', display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: '2px' }}>
+                  {toolSortKey === 'overall' && <span style={{ fontSize: '0.5rem' }}>▼</span>}OVR+
+                </div>
+              </div>
+              {loading ? <div style={{ color: 'var(--muted)', padding: '1rem 0' }}>Loading...</div> : filtered.slice(0, mobileLimit).map((p) => {
+                const pOwn = globalOwnership[p.id] || {}
+                const tools = playerToolsMap[p.id]
+                const ovr = tools?.overall ?? null
+                const s = statsMap[p.id]
+                const level = s?._level ?? p.level ?? '—'
+                return (
+                  <div key={p.id} onClick={() => setSelectedPlayer(p)} style={{ display: 'grid', gridTemplateColumns: '36px 1fr 44px', gap: '0.4rem', padding: '0.5rem 0rem', borderBottom: '1px solid rgba(48,54,61,0.4)', alignItems: 'center', cursor: 'pointer', background: 'transparent' }}>
+                    <div style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.65rem', color: 'rgba(100,100,100,0.5)' }}>{p.rank ?? '—'}</div>
+                    <div style={{ minWidth: 0 }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', flexWrap: 'nowrap', overflow: 'hidden' }}>
+                        <span style={{ fontWeight: 600, fontSize: '0.82rem', color: 'var(--text)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', minWidth: 0 }}>{p.name}</span>
+                        {minorsIds.has(p.id) && <span style={{ color: '#4ade80', fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: '0.62rem', flexShrink: 0 }}>M</span>}
+                        <span style={{ fontSize: '0.65rem', color: 'var(--muted)', fontFamily: 'var(--font-display)', fontWeight: 600, whiteSpace: 'nowrap', flexShrink: 0 }}>
+                          {[p.positions?.split(',')[0]?.trim(), p.team, level].filter(Boolean).join(' · ')}
+                        </span>
+                        <div style={{ display: 'flex', gap: '3px', flexShrink: 0 }}>
+                          {LEAGUES.map((league: { id: string; label: string }) => {
+                            const teamName = pOwn[league.id]
+                            const fc = league.id === D52_ID ? FRIEND_TEAMS[teamName] : (teamName === MY_TEAM ? '#22c55e' : null)
+                            const color = teamName ? (fc ?? '#eab308') : '#ef4444'
+                            return <div key={league.id} style={{ width: '5px', height: '5px', borderRadius: '50%', background: color, opacity: 0.85 }} />
+                          })}
+                        </div>
+                      </div>
+                      <div style={{ fontSize: '0.62rem', color: 'var(--muted)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                        {statLineMap[p.id] || '—'}
+                      </div>
+                    </div>
+                    <div style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: '0.82rem', color: ovr == null ? 'rgba(100,100,100,0.35)' : ovr >= 130 ? '#ef4444' : ovr >= 115 ? '#fca5a5' : ovr >= 95 ? 'var(--text)' : ovr >= 80 ? '#93c5fd' : '#3b82f6', textAlign: 'right' }}>{ovr ?? '—'}</div>
+                  </div>
+                )
+              })}
+            </>
+          ) : (
+            <>
+              {(() => {
+                const mCols = showToolCols ? activeToolKeys : showRawCols ? activeRawKeys : activeCols
+                const COL_W = 52
+                const NAME_W = 155
+                const ROW_H = 52
+                const HDR_H = 32
+                return (
+                  <div style={{ display: 'flex' }}>
+                    <div style={{ width: NAME_W, flexShrink: 0 }}>
+                      <div style={{ height: HDR_H, display: 'flex', alignItems: 'center', borderBottom: '1px solid var(--border)', paddingRight: 6 }}>
+                        <div onClick={() => { setToolSortKey(''); setSortMode('rank') }} style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.58rem', letterSpacing: '0.08em', color: sortMode === 'rank' ? 'var(--accent)' : 'var(--muted)', cursor: 'pointer', userSelect: 'none', display: 'flex', alignItems: 'center', gap: '2px', marginRight: 6 }}>
+                          RK{sortMode === 'rank' && <span style={{ fontSize: '0.5rem' }}>▲</span>}
+                        </div>
+                        <span style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.58rem', letterSpacing: '0.08em', color: 'var(--muted)' }}>PLAYER</span>
+                      </div>
+                      {loading ? null : filtered.slice(0, mobileLimit).map((p) => {
+                        const pOwn = globalOwnership[p.id] || {}
+                        const s = effectiveStats(p)
+                        const level = s?._level ?? p.level ?? '—'
+                        return (
+                          <div key={p.id} onClick={() => setSelectedPlayer(p)} style={{ height: ROW_H, display: 'flex', flexDirection: 'column', justifyContent: 'center', borderBottom: '1px solid rgba(48,54,61,0.4)', cursor: 'pointer', paddingRight: 6 }}>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.2rem', overflow: 'hidden' }}>
+                              <span style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.58rem', color: 'rgba(100,100,100,0.45)', flexShrink: 0 }}>{p.rank ?? '—'}</span>
+                              <span style={{ fontWeight: 600, fontSize: '0.78rem', color: 'var(--text)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{p.name}</span>
+                              {minorsIds.has(p.id) && <span style={{ color: '#4ade80', fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: '0.55rem', flexShrink: 0 }}>M</span>}
+                            </div>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.2rem', marginTop: 2 }}>
+                              <span style={{ fontSize: '0.58rem', color: 'var(--muted)', fontFamily: 'var(--font-display)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                                {[p.positions?.split(',')[0]?.trim(), p.team, level].filter(Boolean).join(' · ')}
+                              </span>
+                              <div style={{ display: 'flex', gap: '2px', flexShrink: 0 }}>
+                                {LEAGUES.map((league: { id: string; label: string }) => {
+                                  const teamName = pOwn[league.id]
+                                  const fc = league.id === D52_ID ? FRIEND_TEAMS[teamName] : (teamName === MY_TEAM ? '#22c55e' : null)
+                                  const color = teamName ? (fc ?? '#eab308') : '#ef4444'
+                                  return <div key={league.id} style={{ width: '4px', height: '4px', borderRadius: '50%', background: color, opacity: 0.85 }} />
+                                })}
+                              </div>
+                            </div>
+                          </div>
+                        )
                       })}
                     </div>
+                    <div style={{ flex: 1, overflowX: 'auto' }}>
+                      <div style={{ minWidth: mCols.length * COL_W }}>
+                        <div style={{ display: 'flex', height: HDR_H, alignItems: 'center', borderBottom: '1px solid var(--border)' }}>
+                          {mCols.map((col: any) => {
+                            const key = showToolCols ? col : showRawCols ? col : col.key
+                            const label = showToolCols ? (TOOL_LABELS[col] ?? col) : showRawCols ? ((TOOL_LABELS[col] ?? col).replace('+','RAW')) : col.label
+                            const isActive = showToolCols ? toolSortKey === key : showRawCols ? toolSortKey === ('raw_'+key) : statSortKey === key
+                            const lowerBetter = showToolCols || showRawCols ? false : col.lowerBetter
+                            return (
+                              <div key={key} onClick={() => {
+                                if (showToolCols) { if (toolSortKey === key) { setToolSortKey(''); setSortMode('rank') } else { setToolSortKey(key); setSortMode('tool') } }
+                                else if (showRawCols) { const rk = 'raw_'+key; if (toolSortKey === rk) { setToolSortKey(''); setSortMode('rank') } else { setToolSortKey(rk); setSortMode('tool') } }
+                                else { handleStatColClick(key) }
+                              }} style={{ width: COL_W, flexShrink: 0, fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.58rem', letterSpacing: '0.06em', color: isActive ? 'var(--accent)' : 'var(--muted)', cursor: 'pointer', userSelect: 'none', textAlign: 'right', paddingRight: 6, display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: '2px' }}>
+                                {label}{isActive && <span style={{ fontSize: '0.48rem' }}>{lowerBetter ? '▲' : '▼'}</span>}
+                              </div>
+                            )
+                          })}
+                        </div>
+                        {loading ? <div style={{ color: 'var(--muted)', padding: '1rem' }}>Loading...</div> : filtered.slice(0, mobileLimit).map((p) => {
+                          const tools = playerToolsMap[p.id]
+                          const s = effectiveStats(p)
+                          return (
+                            <div key={p.id} onClick={() => setSelectedPlayer(p)} style={{ display: 'flex', height: ROW_H, alignItems: 'center', borderBottom: '1px solid rgba(48,54,61,0.4)', cursor: 'pointer' }}>
+                              {mCols.map((col: any) => {
+                                const key = showToolCols ? col : showRawCols ? col : col.key
+                                const val = showToolCols ? (tools?.[col] ?? null) : showRawCols ? (tools?._raw?.[col] ?? null) : col.getValue(s)
+                                const display = showToolCols ? (val ?? '—') : showRawCols ? (val ?? '—') : col.fmt(s)
+                                const color = showToolCols ? toolColor(val) : showRawCols ? toolColor(val) : 'var(--text)'
+                                const isActive = showToolCols ? toolSortKey === key : showRawCols ? toolSortKey === ('raw_'+key) : statSortKey === key
+                                return (
+                                  <div key={key} style={{ width: COL_W, flexShrink: 0, fontFamily: 'var(--font-display)', fontWeight: 500, fontSize: '0.75rem', color, textAlign: 'right', paddingRight: 6 }}>
+                                    {String(display)}
+                                  </div>
+                                )
+                              })}
+                            </div>
+                          )
+                        })}
+                      </div>
+                    </div>
                   </div>
-                  <div style={{ fontSize: '0.62rem', color: 'var(--muted)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                    {statLineMap[p.id] || '—'}
-                  </div>
-                </div>
-                <div style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: '0.82rem', color: ovr == null ? 'rgba(100,100,100,0.35)' :
-                  ovr >= 130 ? '#ef4444' : ovr >= 115 ? '#fca5a5' : ovr >= 95 ? 'var(--text)' : ovr >= 80 ? '#93c5fd' : '#3b82f6',
-                  textAlign: 'right' }}>{ovr ?? '—'}</div>
-              </div>
-            )
-          })}
+                )
+              })()}
+            </>
+          )}
           {!loading && filtered.length > mobileLimit && (
             <button onClick={() => setMobileLimit(n => n + 75)} style={{ width: '100%', padding: '0.75rem', marginTop: '0.5rem', background: 'transparent', border: '1px solid var(--border)', borderRadius: 6, color: 'var(--muted)', fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.72rem', letterSpacing: '0.06em', cursor: 'pointer' }}>
               LOAD MORE ({filtered.length - mobileLimit} remaining)

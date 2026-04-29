@@ -196,8 +196,8 @@ export const PlayerRow = memo(function PlayerRow({
         return (
           <div key={col.key} style={{
             fontSize: '0.75rem', fontFamily: 'var(--font-display)',
-            color: isSorted ? 'var(--accent)' : val === '—' ? 'rgba(100,100,100,0.35)' : 'var(--muted)',
-            fontWeight: isSorted ? 700 : 500, textAlign: 'right',
+            color: val === '—' ? 'rgba(100,100,100,0.35)' : 'var(--muted)',
+            fontWeight: 500, textAlign: 'right',
           }}>
             {val}
           </div>
@@ -211,7 +211,7 @@ export const PlayerRow = memo(function PlayerRow({
         return (
           <div style={{
             fontSize: '0.75rem', fontFamily: 'var(--font-display)', fontWeight: 700,
-            color: isSorted ? 'var(--accent)' : toolColor(val), textAlign: 'right' as const,
+            color: toolColor(val), textAlign: 'right' as const,
           }}>
             {val ?? '—'}
           </div>
@@ -233,7 +233,6 @@ export const PlayerRow = memo(function PlayerRow({
           <div key={key} style={{
             fontSize: '0.75rem', fontFamily: 'var(--font-display)', fontWeight: 700,
             color: toolColor(val), textAlign: 'right' as const,
-            opacity: isSorted ? 1 : 0.85,
           }}>
             {val ?? '—'}
           </div>

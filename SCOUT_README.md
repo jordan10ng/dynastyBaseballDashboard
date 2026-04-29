@@ -67,7 +67,6 @@ fantasy-baseball/
 │       ├── stats/route.ts               # Serves current season stats from history/2026.json (mlbam_id → Fantrax ID bridge). Two-way players: hitting under fantraxId, pitching under fantraxId + '_pit'
 │       ├── stats/link/route.ts, sync/route.ts
 │       ├── stats/history/[mlbamId]/route.ts  # Career history from local YYYY.json files
-│       ├── stats/gamelogs/[mlbamId]/route.ts  # Per-player game logs. Reads from ~/Desktop/fantasy-baseball-gamelogs/YYYY/{mlbamId}.json (local only). Returns empty on Vercel — yearly arc fallback used.
 │       ├── model/tools/route.ts          # Serves mlb-tools.json to UI
 │       ├── model/regression/route.ts     # Serves regression.json to UI (used by tool arc)
 │       ├── model/norms/route.ts          # Serves norms.json to UI (used by tool arc)
@@ -146,7 +145,7 @@ fantasy-baseball/
 - **model/hot-sheet.json** — top 20 bats + 20 arms (IP/GS >= 3.0, excludes relievers) by current season model delta. Written by build-scores.js every run.
 - **model/scores-snapshot.json** — snapshot of model scores keyed by Fantrax ID. Written as comparison baseline.
 - **model/pool-stats.json** — per-tool mean/stdev of raw regression output across all scored prospects. Written by build-scores.js. Used by tool arc chart to normalize arc scores onto the same 95-center scale as model tiles.
-- **~/Desktop/fantasy-baseball-gamelogs/YYYY/{mlbamId}.json** — game logs outside the project directory (not committed, not on Vercel). Local sync (Sync page) writes here. GHA does NOT sync gamelogs. Vercel gamelog route returns empty → drawer falls back to yearly arc.
+- **Gamelogs** — no longer stored locally. Game-by-game arc fetches directly from MLB Stats API on drawer open (parallel calls per year, both MLB + MiLB endpoints, deduped by date+opponent). Local and Vercel behave identically. `build-gamelogs.js` and local gamelog files are retired.
 
 ## Fantrax Integration
 - League IDs: `0ehfuam0mg7wqpn7` (D28), `ew7b8seomg7u7uzi` (D34), `d3prsagvmgftfdc3` (D52)
@@ -293,9 +292,8 @@ export async function GET(_req: NextRequest, { params }: { params: Promise<{ id:
 
 ## Next Priorities (in order)
 1. **Statcast pitcher chart** — unified release point + movement plot
-2. **Tool arc game-by-game** — rolling in-season window (current season only, not full career pull)
-2b. **Game-log arc on Vercel** — fetch all career gamelogs in parallel from client at drawer-open (one MLB API call per year, render arc progressively as years resolve); eliminates need to store gamelogs at all
-3. **Career arc MLB points** — add MLB season(s) as arc points for graduated players, blended using same computeTools() logic as tool tiles (mlb-tools.json actuals weighted by _pa/_ip vs MiLB model score weighted by _sample)
+2. ~~**Tool arc game-by-game**~~ — **DONE** (see Fixed below)
+3. **Career arc MLB points** — add MLB season(s) as arc points for graduated players, blended using same computeTools() logic as tool tiles. Requires per-season MLB tool grades, not just career totals. TODO: reconcile scoring scale between MiLB regression model and MLB z-score approach.
 4. **Washout negative examples** — add ~450 clean non-graduators as negative training rows in build-regression.py to address survivorship bias. Proxy: gap>=3yr AND age>=26 AND highest level != MLB (472 candidates identified). Assign fixed outcome floor of 40 (20-80 scale) = ~98 in raw regression space (below ~101 intercept). Two approaches to evaluate: (a) add as training rows with outcome=40-equivalent, (b) separate regularization term. Raw regression intercepts ~101-102; pool norm centers at 100 stdev 15; shrinkage prior already at 88. Need to reconcile scale before implementing.
 3. **Model as consensus source** — add model scores as source type M in ranking engine
 4. **Roster moves** — add/drop via Fantrax API, needs session auth
@@ -384,12 +382,15 @@ export async function GET(_req: NextRequest, { params }: { params: Promise<{ id:
 
 - **Tool Arc + Game-by-Game Arc (Apr 2026):**
   - Yearly arc: one point per year+level combination. scoreToolAtPoint(year, level) scores cumulatively using all rows up to that year+level (prior years fully, current year up to that level rank). Points sorted low→high level within each year.
-  - Game-by-game arc: full career game logs fetched per year via /api/stats/gamelogs/[mlbamId]?year=YYYY, scored game by game using same model math. Cumulative stats tracked per season/level bucket (no resets across year boundaries — recency decay handles weighting). MiLB level names normalized (A→Single-A, A+→High-A etc). Score band background.
-  - Game arc shown when gamelogs exist, yearly arc as fallback — no toggle
-  - build-gamelogs.js: one-off backfill script, fetches 2015+ for all ranked players. Both MLB + MiLB via leagueListId=milb_all + base endpoint, deduped by date+opponent.
-  - pool-stats.json added to pipeline; new API routes: /api/model/regression, /api/model/norms, /api/model/pool-stats, /api/stats/gamelogs/[mlbamId]
-  - GHA does NOT sync gamelogs — local sync (Sync page) only. Vercel shows yearly arc always.
+  - Game-by-game arc: fetched directly from MLB Stats API on drawer open — parallel calls per year (both MLB base endpoint + leagueListId=milb_all), deduped by date+opponent. No local storage. Works identically on Vercel and locally.
+  - Both hitting and pitching fetched always so BAT/ARM toggle works without refetch for two-way players.
+  - Yearly arc pre-pended for years before first gamelog year (e.g. DSL seasons with no gamelogs). seasonCum pre-seeded from allSplits for those years so game arc starts with correct prior context.
+  - Level/year change markers on game arc: year labels on x-axis, month abbreviations (Apr not 4), purple dashed vertical lines at level changes with level label in graph.
+  - Post-2021 ROK-labeled games (DSL/Complex mislabeled by MLB API) mapped to Complex norms since Rookie norms only exist through 2019. Display label shown as DSL/CPX.
+  - pool-stats.json added to pipeline; API routes: /api/model/regression, /api/model/norms, /api/model/pool-stats
+  - /api/stats/gamelogs/[mlbamId] route deleted — no longer needed.
   - ⚠️ TODO: hot sheet 15/30/90/season filters using game log data
+  - ⚠️ TODO: Career arc MLB points (game-by-game blended with MiLB model)
 
 ## Friend Teams (D52 League)
 D52 = "DO MLB - D52" (id: d3prsagvmgftfdc3). Five named teams with assigned colors used for ownership dots, team buttons, and league page highlights:
