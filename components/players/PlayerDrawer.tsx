@@ -108,18 +108,37 @@ function ToolArcChart({ points, isPitcher, dateMode }: { points: any[]; isPitche
             ))}
           </g>
         ))}
-        {dateMode ? (
-          points.reduce((acc:any[], pt:any, i:number) => {
+        {dateMode ? (() => {
+          const MONTH_ABBR = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
+          const markers: any[] = []
+          const levelChanges: any[] = []
+          points.forEach((pt:any, i:number) => {
             const prev = points[i-1]
             const newYear = !prev || pt.year !== prev.year
+            const newLevel = !prev || pt.level !== prev.level
             const newMonth = !prev || pt.date?.slice(0,7) !== prev.date?.slice(0,7)
-            if (newYear) acc.push({i, lbl: String(pt.year), strong: true})
-            else if (newMonth && points.length < 300) acc.push({i, lbl: pt.date?.slice(5,7), strong: false})
-            return acc
-          }, []).map(({i,lbl,strong}:{i:number,lbl:string,strong:boolean}) => (
-            <text key={i} x={xScale(i)} y={H-6} textAnchor='middle' fontSize={strong?9:7.5} fontWeight={strong?700:400} fill={strong?'rgba(200,200,200,0.6)':'rgba(120,120,120,0.4)'}>{lbl}</text>
-          ))
-        ) : xLabels.map((lbl, i) => (
+            if (newYear) markers.push({i, lbl: String(pt.year), strong: true, divider: i>0})
+            else if (newMonth && points.length < 300) {
+              const mo = pt.date ? parseInt(pt.date.slice(5,7),10)-1 : -1
+              markers.push({i, lbl: mo>=0?MONTH_ABBR[mo]:'', strong: false, divider: false})
+            }
+            if (newLevel && i>0) levelChanges.push({i, lbl: pt.level})
+          })
+          return <>
+            {markers.map(({i,lbl,strong,divider}:{i:number,lbl:string,strong:boolean,divider:boolean}) => (
+              <g key={'m'+i}>
+                {divider && <line x1={xScale(i)} x2={xScale(i)} y1={PT} y2={H-PB} stroke='rgba(255,255,255,0.08)' strokeWidth={1} strokeDasharray='3,3'/>}
+                <text x={xScale(i)} y={H-6} textAnchor='middle' fontSize={strong?9:7.5} fontWeight={strong?700:400} fill={strong?'rgba(200,200,200,0.6)':'rgba(120,120,120,0.4)'}>{lbl}</text>
+              </g>
+            ))}
+            {levelChanges.map(({i,lbl}:{i:number,lbl:string}) => (
+              <g key={'l'+i}>
+                <line x1={xScale(i)} x2={xScale(i)} y1={PT} y2={H-PB} stroke='rgba(168,85,247,0.35)' strokeWidth={1} strokeDasharray='2,4'/>
+                <text x={xScale(i)+3} y={PT+10} textAnchor='start' fontSize={7.5} fill='rgba(168,85,247,0.7)'>{lbl}</text>
+              </g>
+            ))}
+          </>
+        })() : xLabels.map((lbl, i) => (
           <text key={i} x={xScale(i)} y={H-6} textAnchor='middle' fontSize={8.5} fill='rgba(150,150,150,0.6)'>{lbl as string}</text>
         ))}
       </svg>
@@ -687,6 +706,7 @@ export function PlayerDrawer({ player, onClose, globalOwnership, minorsIds, mlbT
         if (Object.values(pt).some((v:any) => typeof v === 'number' && v !== pt.year)) pts.push(pt)
       }
     }
+
     return pts
   }, [allSplits, regression, norms, poolStats, pitch, player.birthDate])
 
@@ -746,6 +766,102 @@ export function PlayerDrawer({ player, onClose, globalOwnership, minorsIds, mlbT
       // Accumulate this game into its season/level bucket
       const lvl = normLevel(g.level ?? '')
       if(!lvl||!MILB.has(lvl)) continue
+
+      // Handle MLB games separately — z-score vs MLB norms
+      if (lvl === 'MLB') {
+        const normEntry = norms[['MLB',year].join('|')]
+        if (normEntry) {
+          if (isPit) {
+            const bf = g.battersFaced ?? 0
+            const so = g.strikeOuts ?? 0
+            const bb = g.baseOnBalls ?? 0
+            const ip = parseFloat(String(g.inningsPitched ?? '0')) || 0
+            if (ip && bf) {
+              const k_pct = so/bf, bb_pct = bb/bf
+              const n = normEntry.pitchers
+              if (n) {
+                const zK  = n.k_pct?.stdev  ? (k_pct - n.k_pct.mean) / n.k_pct.stdev : null
+                const zBB = n.bb_pct?.stdev ? -(bb_pct - n.bb_pct.mean) / n.bb_pct.stdev : null
+                if (zK  != null) mlbZSums['k_pct']  = (mlbZSums['k_pct']  ?? 0) + zK  * ip
+                if (zBB != null) mlbZSums['bb_pct'] = (mlbZSums['bb_pct'] ?? 0) + zBB * ip
+                mlbTotalSample += ip
+              }
+            }
+          } else {
+            const pa  = g.plateAppearances ?? 0
+            const ab  = g.atBats ?? 0
+            const h   = g.hits ?? 0
+            const bb  = g.baseOnBalls ?? 0
+            const so  = g.strikeOuts ?? 0
+            const hbp = g.hitByPitch ?? 0
+            const tb  = g.totalBases ?? 0
+            const sb  = g.stolenBases ?? 0
+            if (pa) {
+              const avg = ab>0?h/ab:0
+              const slg = ab>0?tb/ab:0
+              const iso = slg-avg
+              const k_pct = so/pa, bb_pct = bb/pa
+              const tob = h+bb+hbp, sb_rate = tob>0?sb/tob:0
+              const n = normEntry.hitters
+              if (n) {
+                const zAvg = n.avg?.stdev     ?  (avg    -n.avg.mean)    /n.avg.stdev    : null
+                const zK   = n.k_pct?.stdev   ? -(k_pct  -n.k_pct.mean)  /n.k_pct.stdev  : null
+                const zBB  = n.bb_pct?.stdev  ?  (bb_pct -n.bb_pct.mean) /n.bb_pct.stdev : null
+                const zIso = n.iso?.stdev     ?  (iso    -n.iso.mean)    /n.iso.stdev    : null
+                const zSb  = n.sb_rate?.stdev ?  (sb_rate-n.sb_rate.mean)/n.sb_rate.stdev: null
+                if (zAvg != null) mlbZSums['avg']    = (mlbZSums['avg']    ??0) + zAvg*pa
+                if (zK   != null) mlbZSums['k_pct']  = (mlbZSums['k_pct']  ??0) + zK  *pa
+                if (zBB  != null) mlbZSums['bb_pct'] = (mlbZSums['bb_pct'] ??0) + zBB *pa
+                if (zIso != null) mlbZSums['iso']    = (mlbZSums['iso']    ??0) + zIso*pa
+                if (zSb  != null) mlbZSums['sb_rate']= (mlbZSums['sb_rate']??0) + zSb *pa
+                mlbTotalSample += pa
+              }
+            }
+          }
+        }
+        // compute blended point and push
+        if (mlbTotalSample === 0) continue
+        const toPlus = (z: number) => Math.round(100 + z * 15)
+        const cz: Record<string,number> = {}
+        for (const k of Object.keys(mlbZSums)) cz[k] = mlbZSums[k] / mlbTotalSample
+        // MiLB cumulative sample for blending
+        const milbSample = Object.values(seasonCum).reduce((sum,st) => {
+          return sum + (isPit ? st.ipOuts/3 : st.ab+st.bb+st.hbp)
+        }, 0)
+        // compute raw MLB tool scores
+        let mlbPt: any = {}
+        if (isPit) {
+          mlbPt.stuff   = cz['k_pct']  != null ? toPlus(cz['k_pct'])  : null
+          mlbPt.control = cz['bb_pct'] != null ? toPlus(cz['bb_pct']) : null
+        } else {
+          mlbPt.hit   = (cz['avg']!=null&&cz['k_pct']!=null&&cz['bb_pct']!=null)
+            ? Math.round((toPlus(cz['avg'])+toPlus(cz['k_pct'])+toPlus(cz['bb_pct']))/3) : null
+          mlbPt.power = cz['iso']     != null ? toPlus(cz['iso'])     : null
+          mlbPt.speed = cz['sb_rate'] != null ? toPlus(cz['sb_rate']) : null
+        }
+        // blend with last MiLB model score if available
+        const lastMiLB = pts.length > 0 ? pts[pts.length-1] : null
+        const blend = (mlbVal: number|null, milbVal: number|null) => {
+          if (mlbVal == null) return milbVal
+          if (milbVal == null || milbSample === 0) return mlbVal
+          const total = mlbTotalSample + milbSample
+          return Math.round(mlbVal*(mlbTotalSample/total) + milbVal*(milbSample/total))
+        }
+        const pt: any = { year, level: 'MLB', date }
+        if (isPit) {
+          pt.stuff   = blend(mlbPt.stuff,   lastMiLB?.stuff)
+          pt.control = blend(mlbPt.control, lastMiLB?.control)
+          if (pt.stuff!=null&&pt.control!=null) pt.overall = Math.round(pt.stuff*0.70+pt.control*0.30)
+        } else {
+          pt.hit   = blend(mlbPt.hit,   lastMiLB?.hit)
+          pt.power = blend(mlbPt.power, lastMiLB?.power)
+          pt.speed = blend(mlbPt.speed, lastMiLB?.speed)
+          if (pt.hit!=null&&pt.power!=null&&pt.speed!=null)
+            pt.overall = Math.round(pt.hit*0.42+pt.power*0.47+pt.speed*0.11)
+        }
+        if (Object.values(pt).some((v:any)=>typeof v==='number'&&v!==pt.year)) pts.push(pt)
+        continue
+      }
       const sKey = `${year}|${lvl}`
       if(!seasonCum[sKey]) seasonCum[sKey]={ab:0,bb:0,hbp:0,so:0,h:0,sb:0,tb:0,bf:0,ipOuts:0,year,lvl}
       const sc=seasonCum[sKey]
