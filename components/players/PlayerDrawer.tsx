@@ -353,7 +353,7 @@ export function PlayerDrawer({ player, onClose, globalOwnership, minorsIds, mlbT
       const careerKPct = (career.strikeOuts ?? 0) / careerBF
       const careerBBPct = (career.baseOnBalls ?? 0) / careerBF
       const calc = (st: any) => {
-        const bf = st.battersFaced ?? ((st.atBats??0)+(st.baseOnBalls??0)+(st.hitByPitch??0)) ?? 1
+        const bf = st.battersFaced || ((st.atBats??0)+(st.baseOnBalls??0)+(st.hitByPitch??0)) || 1
         const kPct = (st.strikeOuts ?? 0) / bf
         const bbPct = (st.baseOnBalls ?? 0) / bf
         const stuffRatio = safeRatio(kPct, careerKPct)
