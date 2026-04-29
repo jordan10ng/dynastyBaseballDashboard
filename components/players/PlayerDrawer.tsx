@@ -1002,10 +1002,10 @@ export function PlayerDrawer({ player, onClose, globalOwnership, minorsIds, mlbT
           </div>
         </div>
 
-        <div style={{padding:'1.5rem 2rem',maxWidth:1400,margin:'0 auto',width:'100%',boxSizing:'border-box'}}>
-          <div style={{display:'flex',gap:'2rem',alignItems:'flex-start',flexWrap:'wrap',marginBottom:'1.5rem'}}>
+        <div style={{padding:'1.5rem 1rem',maxWidth:1400,margin:'0 auto',width:'100%',boxSizing:'border-box'}}>
+          <div style={{display:'flex',gap:'1rem',alignItems:'flex-start',flexWrap:'wrap',marginBottom:'1.5rem'}}>
             {bio&&(<div style={{display:'flex',gap:'1.5rem',flexWrap:'wrap'}}>{[{label:'B/T',val:`${bio.batSide?.code??'?'}/${bio.pitchHand?.code??'?'}`},{label:'HT/WT',val:bio.height&&bio.weight?`${bio.height} · ${bio.weight} lbs`:null},{label:'Born',val:bio.birthDate?`${bio.birthDate}${bio.birthCity?` · ${bio.birthCity}${bio.birthStateProvince?`, ${bio.birthStateProvince}`:''}`:''} `:null},{label:'Debut',val:bio.mlbDebutDate??null},{label:'Draft',val:bio.draftYear?`${bio.draftYear}`:null}].filter(x=>x.val).map(({label,val})=>(<div key={label}><div style={{fontSize:'0.62rem',fontFamily:'var(--font-display)',fontWeight:700,letterSpacing:'0.08em',color:'var(--muted)',textTransform:'uppercase',marginBottom:'2px'}}>{label}</div><div style={{fontSize:'0.78rem',color:'var(--text)'}}>{val}</div></div>))}</div>)}
-            {tiles&&(tiles as any[]).length>0&&(<div style={{display:'flex',gap:'0.75rem',marginLeft:'auto'}}>{(tiles as any[]).map((tile:any)=>(<div key={tile.label} style={{background:'rgba(255,255,255,0.04)',border:'1px solid var(--border)',borderRadius:8,padding:'0.6rem 1rem',minWidth:80,textAlign:'center'}}>
+            {tiles&&(tiles as any[]).length>0&&(<div style={{display:'flex',gap:'0.75rem',width:'100%'}}>{(tiles as any[]).map((tile:any)=>(<div key={tile.label} style={{background:'rgba(255,255,255,0.04)',border:'1px solid var(--border)',borderRadius:8,padding:'0.4rem 0.6rem',flex:1,textAlign:'center'}}>
   <div style={{fontSize:'0.6rem',fontFamily:'var(--font-display)',fontWeight:700,letterSpacing:'0.1em',textTransform:'uppercase',color:'var(--muted)',marginBottom:'0.25rem'}}>{tile.label}</div>
   <div style={{fontSize:'1.1rem',fontWeight:700,color:tile.color??'var(--accent)',fontFamily:'var(--font-display)'}}>{tile.val}</div>
   {(tile.raw!=null||tile.conf!=null)&&(
