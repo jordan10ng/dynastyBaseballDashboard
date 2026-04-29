@@ -436,3 +436,15 @@ Both use SPORT_ID_TO_LEVEL + sportAbbrToLevel() with sportId fallback. Both fetc
   - `data/model/model-rank.json` — model rank + dynasty_score per player, keyed by Fantrax ID
   - `data/model/blend-rank.json` — full blend metadata + per-player cns_rank, model_rank, blended_rank, final_rank
   - Dynasty formula: `dynasty_score = overall + levelBon + ageBon + posAdj`. Level: MLB+8, AAA+3, AA-1, High-A-3, Single-A-4, ROK-6. Age: (27-age)×0.6. RP: -8. Positional slot normalization prevents RP pool inflation from distorting bat/SP ranks.
+
+## Test Subjects
+Reference players for testing drawer features, splits, game logs, statcast, and tool arcs.
+
+| Role | Name | mlbam_id |
+|------|------|----------|
+| MLB Bat (large sample, career splits) | Aaron Judge | 592450 |
+| MLB Arm | Tarik Skubal | 669373 |
+| MiLB Bat only | Jesus Made | 815908 |
+| MiLB Arm only | Quinn Matthews | 687273 |
+| Two-way (MLB) | Shohei Ohtani | 660271 |
+| Two-way (MiLB) | Josh Owens | 831384 |
