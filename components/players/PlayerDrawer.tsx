@@ -719,10 +719,10 @@ export function PlayerDrawer({ player, onClose, globalOwnership, minorsIds, mlbT
     const toolNames = isPit ? ['stuff','control'] : ['hit','power','speed']
     const birthDate = player.birthDate ?? null
     const MILB = new Set(['DSL','Complex','Rookie','Single-A','High-A','AA','AAA'])
-    function normLevel(l:string):string {
+    function normLevel(l:string, year?: number):string {
       if(l==='A') return 'Single-A'
       if(l==='A+'||l==='High A') return 'High-A'
-      if(l==='ROK'||l==='Rookie Advanced') return 'Rookie'
+      if(l==='ROK'||l==='Rookie Advanced') return (year && year >= 2021) ? 'Complex' : 'Rookie'
       if(l==='CPX') return 'Complex'
       return l
     }
@@ -759,12 +759,37 @@ export function PlayerDrawer({ player, onClose, globalOwnership, minorsIds, mlbT
 
     const pts: any[] = []
     // Track cumulative totals per season/level — keyed by year|level
-    // Each entry accumulated as games are played
     const seasonCum: Record<string,{ab:number,bb:number,hbp:number,so:number,h:number,sb:number,tb:number,bf:number,ipOuts:number,year:number,lvl:string}> = {}
+
+    // pre-seed seasonCum with allSplits rows for years before first gamelog year
+    const firstGameYear = allGames.length > 0 ? allGames[0].year : 9999
+    for (const row of allSplits) {
+      const rowType = row.type ?? 'hitting'
+      if (isPit && rowType !== 'pitching') continue
+      if (!isPit && rowType === 'pitching') continue
+      const lvl = normLevel(row._level ?? row.level ?? '', parseInt(row.season ?? '0'))
+      if (!lvl || !MILB.has(lvl)) continue
+      const yr = parseInt(row.season ?? '0')
+      if (yr >= firstGameYear) continue
+      const s = row.stat ?? row
+      const sKey = yr + '|' + lvl
+      if (!seasonCum[sKey]) seasonCum[sKey] = {ab:0,bb:0,hbp:0,so:0,h:0,sb:0,tb:0,bf:0,ipOuts:0,year:yr,lvl}
+      const sc = seasonCum[sKey]
+      sc.ab += s.atBats ?? s.ab ?? 0
+      sc.bb += s.baseOnBalls ?? s.bb ?? 0
+      sc.hbp += s.hitByPitch ?? s.hbp ?? 0
+      sc.so += s.strikeOuts ?? s.so ?? 0
+      sc.h += s.hits ?? s.h ?? 0
+      sc.sb += s.stolenBases ?? s.sb ?? 0
+      sc.tb += s.totalBases ?? s.tb ?? 0
+      sc.bf += s.battersFaced ?? s.bf ?? 0
+      const ipVal = parseFloat(s.inningsPitched ?? s.ip ?? '0') || 0
+      sc.ipOuts += Math.round(ipVal * 3)
+    }
 
     for (const { date, year, g } of allGames) {
       // Accumulate this game into its season/level bucket
-      const lvl = normLevel(g.level ?? '')
+      const lvl = normLevel(g.level ?? '', year)
       if(!lvl||!MILB.has(lvl)) continue
       const sKey = `${year}|${lvl}`
       if(!seasonCum[sKey]) seasonCum[sKey]={ab:0,bb:0,hbp:0,so:0,h:0,sb:0,tb:0,bf:0,ipOuts:0,year,lvl}
@@ -899,10 +924,16 @@ export function PlayerDrawer({ player, onClose, globalOwnership, minorsIds, mlbT
                 </table>
               </div>
             )}
-            {(gameArcPoints.length>0||arcPoints.length>0)&&(<>
-              <SectionHeader title="Tool Arc — Career Trajectory"/>
-              <ToolArcChart points={gameArcPoints.length>0?gameArcPoints:arcPoints} isPitcher={pitch} dateMode={gameArcPoints.length>0}/>
-            </>)}
+            {(gameArcPoints.length>0||arcPoints.length>0)&&(()=>{
+              // prepend yearly arc points for years not covered by game arc
+              const gameYears = new Set(gameArcPoints.map((p:any)=>p.year))
+              const prefix = arcPoints.filter((p:any)=>!gameYears.has(p.year))
+              const combined = gameArcPoints.length>0 ? [...prefix, ...gameArcPoints] : arcPoints
+              return <>
+                <SectionHeader title="Tool Arc — Career Trajectory"/>
+                <ToolArcChart points={combined} isPitcher={pitch} dateMode={gameArcPoints.length>0}/>
+              </>
+            })()}
             {mlbamId&&!drawerLoading&&(<><SectionHeader title="Recent — L7 / L30 / L90"/>{extraLoading?<div style={{color:'var(--muted)',fontSize:'0.85rem'}}>Loading...</div>:renderRecentTable()}<SectionHeader title={pitch?"Splits — vs LHB/RHB · Home/Away":"Splits — vs LHP/RHP · Home/Away"}/>{extraLoading?<div style={{color:'var(--muted)',fontSize:'0.85rem'}}>Loading...</div>:renderSplitTable()}<SectionHeader title="Game Log — Last 90 Days"/>{extraLoading?<div style={{color:'var(--muted)',fontSize:'0.85rem'}}>Loading...</div>:renderGameLog()}</>)}
           </>)}
 
