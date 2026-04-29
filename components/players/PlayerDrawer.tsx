@@ -122,7 +122,7 @@ function ToolArcChart({ points, isPitcher, dateMode }: { points: any[]; isPitche
               const mo = pt.date ? parseInt(pt.date.slice(5,7),10)-1 : -1
               markers.push({i, lbl: mo>=0?MONTH_ABBR[mo]:'', strong: false, divider: false})
             }
-            if (newLevel && i>0) levelChanges.push({i, lbl: pt.level})
+            if (newLevel) levelChanges.push({i, lbl: pt.level})
           })
           return <>
             {markers.map(({i,lbl,strong,divider}:{i:number,lbl:string,strong:boolean,divider:boolean}) => (
@@ -790,6 +790,7 @@ export function PlayerDrawer({ player, onClose, globalOwnership, minorsIds, mlbT
     for (const { date, year, g } of allGames) {
       // Accumulate this game into its season/level bucket
       const lvl = normLevel(g.level ?? '', year)
+      const displayLvl = (g.level === 'ROK' && year >= 2021) ? 'DSL/CPX' : (g.level ?? lvl)
       if(!lvl||!MILB.has(lvl)) continue
       const sKey = `${year}|${lvl}`
       if(!seasonCum[sKey]) seasonCum[sKey]={ab:0,bb:0,hbp:0,so:0,h:0,sb:0,tb:0,bf:0,ipOuts:0,year,lvl}
@@ -842,7 +843,7 @@ export function PlayerDrawer({ player, onClose, globalOwnership, minorsIds, mlbT
         return Math.round(88+(normed-88)*(totalSample/(totalSample+(isPit?80:200))))
       }
 
-      const pt:any={year,level:lvl,date}
+      const pt:any={year,level:displayLvl,date}
       for(const t of toolNames) pt[t]=scoreTool(t)
       if(isPit){if(pt.stuff!=null&&pt.control!=null)pt.overall=Math.round(pt.stuff*0.70+pt.control*0.30)}
       else{if(pt.hit!=null&&pt.power!=null&&pt.speed!=null)pt.overall=Math.round(pt.hit*0.42+pt.power*0.47+pt.speed*0.11)}
