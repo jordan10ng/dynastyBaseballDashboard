@@ -171,24 +171,74 @@ export default function TradePage() {
           onOpenDrawer={setSelectedPlayer}
         />
 
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.75rem', paddingTop: '3.5rem' }}>
-          <div style={{
-            width: 48, height: 48, borderRadius: '50%',
-            background: fair ? 'rgba(34,197,94,0.1)' : diff > 0 ? 'rgba(59,130,246,0.1)' : 'rgba(168,85,247,0.1)',
-            border: `2px solid ${fair ? 'var(--accent)' : diff > 0 ? '#3b82f6' : '#a855f7'}`,
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-          }}>
-            {fair ? <Minus size={20} color="var(--accent)" /> : diff > 0 ? <TrendingUp size={20} color="#3b82f6" /> : <TrendingDown size={20} color="#a855f7" />}
-          </div>
-          <div style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: '0.75rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: fair ? 'var(--accent)' : diff > 0 ? '#60a5fa' : '#c084fc', textAlign: 'center' }}>
-            {fair ? 'Fair' : diff > 0 ? 'A Wins' : 'B Wins'}
-          </div>
-          {!fair && (
-            <div style={{ fontFamily: 'var(--font-display)', fontSize: '0.75rem', color: 'var(--muted)', textAlign: 'center' }}>
-              {Math.abs(diff).toFixed(1)} pts
+        {isMobile ? (
+          <div className="card" style={{ padding: '1rem', border: `1px solid ${fair ? 'var(--accent)' : diff > 0 ? '#3b82f6' : '#a855f7'}` }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.6rem', marginBottom: '0.75rem' }}>
+              <div style={{
+                width: 32, height: 32, borderRadius: '50%',
+                background: fair ? 'rgba(34,197,94,0.1)' : diff > 0 ? 'rgba(59,130,246,0.1)' : 'rgba(168,85,247,0.1)',
+                border: `2px solid ${fair ? 'var(--accent)' : diff > 0 ? '#3b82f6' : '#a855f7'}`,
+                display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
+              }}>
+                {fair ? <Minus size={16} color="var(--accent)" /> : diff > 0 ? <TrendingUp size={16} color="#3b82f6" /> : <TrendingDown size={16} color="#a855f7" />}
+              </div>
+              <div style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: '0.85rem', letterSpacing: '0.08em', textTransform: 'uppercase', color: fair ? 'var(--accent)' : diff > 0 ? '#60a5fa' : '#c084fc' }}>
+                {fair ? 'Fair Trade' : diff > 0 ? `Team A +${Math.abs(diff).toFixed(1)} pts` : `Team B +${Math.abs(diff).toFixed(1)} pts`}
+              </div>
             </div>
-          )}
-        </div>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem' }}>
+              <div>
+                <div style={{ marginBottom: '0.4rem', borderBottom: '1px solid rgba(59,130,246,0.3)', paddingBottom: '0.25rem' }}>
+                  <div style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: '0.65rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: '#3b82f6' }}>{teamA_id ? (leagueTeams.find((t:any)=>t.id===teamA_id)?.name ?? 'Team A') : 'Team A'}</div>
+                  <div style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: '0.95rem', color: 'var(--text)' }}>{valA.toFixed(1)}<span style={{ fontSize: '0.65rem', color: 'var(--muted)', marginLeft: 3 }}>pts</span></div>
+                </div>
+                {teamA.length === 0
+                  ? <div style={{ color: 'var(--muted)', fontSize: '0.72rem', fontStyle: 'italic' }}>No assets</div>
+                  : teamA.map((p:any, i:number) => (
+                    <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', padding: '0.22rem 0', borderBottom: '1px solid rgba(48,54,61,0.3)' }}>
+                      <div style={{ fontWeight: 600, fontSize: '0.78rem', color: p.customValue ? '#f59e0b' : 'var(--text)', flex: 1, marginRight: 4, lineHeight: 1.2 }}>{p.name}</div>
+                      <div style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.72rem', color: '#3b82f6', flexShrink: 0 }}>{getPlayerValue(p).toFixed(1)}</div>
+                    </div>
+                  ))
+                }
+              </div>
+              <div>
+                <div style={{ marginBottom: '0.4rem', borderBottom: '1px solid rgba(168,85,247,0.3)', paddingBottom: '0.25rem' }}>
+                  <div style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: '0.65rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: '#a855f7' }}>{teamB_id ? (leagueTeams.find((t:any)=>t.id===teamB_id)?.name ?? 'Team B') : 'Team B'}</div>
+                  <div style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: '0.95rem', color: 'var(--text)' }}>{valB.toFixed(1)}<span style={{ fontSize: '0.65rem', color: 'var(--muted)', marginLeft: 3 }}>pts</span></div>
+                </div>
+                {teamB.length === 0
+                  ? <div style={{ color: 'var(--muted)', fontSize: '0.72rem', fontStyle: 'italic' }}>No assets</div>
+                  : teamB.map((p:any, i:number) => (
+                    <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', padding: '0.22rem 0', borderBottom: '1px solid rgba(48,54,61,0.3)' }}>
+                      <div style={{ fontWeight: 600, fontSize: '0.78rem', color: p.customValue ? '#f59e0b' : 'var(--text)', flex: 1, marginRight: 4, lineHeight: 1.2 }}>{p.name}</div>
+                      <div style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.72rem', color: '#a855f7', flexShrink: 0 }}>{getPlayerValue(p).toFixed(1)}</div>
+                    </div>
+                  ))
+                }
+              </div>
+            </div>
+          </div>
+        ) : (
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.75rem', paddingTop: '3.5rem' }}>
+            <div style={{
+              width: 48, height: 48, borderRadius: '50%',
+              background: fair ? 'rgba(34,197,94,0.1)' : diff > 0 ? 'rgba(59,130,246,0.1)' : 'rgba(168,85,247,0.1)',
+              border: `2px solid ${fair ? 'var(--accent)' : diff > 0 ? '#3b82f6' : '#a855f7'}`,
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+            }}>
+              {fair ? <Minus size={20} color="var(--accent)" /> : diff > 0 ? <TrendingUp size={20} color="#3b82f6" /> : <TrendingDown size={20} color="#a855f7" />}
+            </div>
+            <div style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: '0.75rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: fair ? 'var(--accent)' : diff > 0 ? '#60a5fa' : '#c084fc', textAlign: 'center' }}>
+              {fair ? 'Fair' : diff > 0 ? 'A Wins' : 'B Wins'}
+            </div>
+            {!fair && (
+              <div style={{ fontFamily: 'var(--font-display)', fontSize: '0.75rem', color: 'var(--muted)', textAlign: 'center' }}>
+                {Math.abs(diff).toFixed(1)} pts
+              </div>
+            )}
+          </div>
+        )}
 
         <TradeSide
           label="Team B" color="#a855f7"
