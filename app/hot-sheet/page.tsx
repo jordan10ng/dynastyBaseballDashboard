@@ -78,9 +78,10 @@ function fmtToolLine(ms: any, tab: 'bats' | 'arms'): string {
 }
 
 export default function HotSheetPage() {
-  const [data, setData] = useState<{ bats: any[]; arms: any[]; generatedAt: string | null }>({ bats: [], arms: [], generatedAt: null })
+  const [data, setData] = useState<Record<string, any>>({})
   const [loading, setLoading] = useState(true)
   const [tab, setTab] = useState<'bats' | 'arms'>('bats')
+  const [window_, setWindow_] = useState<'season'|'d90'|'d60'|'d30'|'d15'|'d7'>('season')
   const [allRosters, setAllRosters] = useState<any[]>([])
   const [allPlayers, setAllPlayers] = useState<any[]>([])
   const [selectedPlayer, setSelectedPlayer] = useState<any>(null)
@@ -128,7 +129,8 @@ export default function HotSheetPage() {
     return map
   }, [allPlayers])
 
-  const rows = tab === 'bats' ? data.bats : data.arms
+  const activeWindow = data[window_] ?? data['season'] ?? { bats: [], arms: [] }
+  const rows = tab === 'bats' ? activeWindow.bats : activeWindow.arms
 
   const generatedAt = data.generatedAt
     ? new Date(data.generatedAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })
@@ -155,12 +157,40 @@ export default function HotSheetPage() {
             🔥 Hot Sheet
           </div>
           <div style={{ fontSize: '0.75rem', color: 'var(--muted)', marginTop: '0.2rem' }}>
-            Biggest model score gainers this season{generatedAt ? ` · Updated ${generatedAt}` : ''}
+            {window_ === 'season' ? 'Biggest model score gainers this season' : `Biggest model score gainers — L${window_.slice(1)} days`}{generatedAt ? ` · Updated ${generatedAt}` : ''}
           </div>
         </div>
-        <div style={{ display: 'flex', gap: 4 }}>
-          <button onClick={() => setTab('bats')} style={btn(tab === 'bats')}>Bats</button>
-          <button onClick={() => setTab('arms')} style={btn(tab === 'arms')}>Arms</button>
+        <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'center' }}>
+          {isMobile ? (
+            <select value={window_} onChange={e => setWindow_(e.target.value as any)} style={{
+              background: 'rgba(245,158,11,0.1)', border: '1px solid #f59e0b',
+              color: '#f59e0b', borderRadius: 6, padding: '0.35rem 0.5rem',
+              fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.75rem',
+              letterSpacing: '0.04em', cursor: 'pointer',
+            }}>
+              <option value="season">Season</option>
+              <option value="d90">L90</option>
+              <option value="d60">L60</option>
+              <option value="d30">L30</option>
+              <option value="d15">L15</option>
+              <option value="d7">L7</option>
+            </select>
+          ) : (
+            <div style={{ display: 'flex', gap: 4 }}>
+              {(['season','d90','d60','d30','d15','d7'] as const).map(w => (
+                <button key={w} onClick={() => setWindow_(w)} style={{
+                  ...btn(window_ === w),
+                  borderColor: window_ === w ? '#f59e0b' : 'var(--border)',
+                  background: window_ === w ? 'rgba(245,158,11,0.1)' : 'transparent',
+                  color: window_ === w ? '#f59e0b' : 'var(--muted)',
+                }}>{w === 'season' ? 'Season' : 'L' + w.slice(1)}</button>
+              ))}
+            </div>
+          )}
+          <div style={{ display: 'flex', gap: 4 }}>
+            <button onClick={() => setTab('bats')} style={btn(tab === 'bats')}>Bats</button>
+            <button onClick={() => setTab('arms')} style={btn(tab === 'arms')}>Arms</button>
+          </div>
         </div>
       </div>
 

@@ -9,6 +9,6 @@ export async function GET() {
     const data = JSON.parse(fs.readFileSync(HOTSHEET_PATH, 'utf8'))
     return NextResponse.json(data)
   } catch {
-    return NextResponse.json({ bats: [], arms: [], generatedAt: null })
+    return NextResponse.json({ season: { bats: [], arms: [] }, generatedAt: null })
   }
 }

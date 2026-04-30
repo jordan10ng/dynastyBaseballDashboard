@@ -172,7 +172,7 @@ function scoreTool(mlbamId, player, tool, isPitcher) {
   return { score: wSum / wTot, wSum, wTot, cySum, cyTot, sample: totalSample };
 }
 
-function run() {
+async function run() {
   console.log('Scoring prospects...');
   const updatedPlayers = { ...players };
   let scored = 0, notRookie = 0, noData = 0;
@@ -361,11 +361,228 @@ function run() {
   }
 
   risers.sort((a, b) => b.delta - a.delta || b.overall - a.overall);
-  const hotBats = risers.filter(r => !r.isPit).slice(0, 20);
-  const hotArms = risers.filter(r => r.isPit && (r.ipPerGs ?? 0) >= 3.0).slice(0, 20);
+  // Keep full riser pool — windowed slicing happens after delta fetch
+  const allBatRisers = risers.filter(r => !r.isPit);
+  const allArmRisers = risers.filter(r => r.isPit && (r.ipPerGs ?? 0) >= 3.0);
 
-  fs.writeFileSync(HOTSHEET_PATH, JSON.stringify({ bats: hotBats, arms: hotArms, generatedAt: new Date().toISOString() }, null, 2));
-  console.log(`Hot sheet written: ${hotBats.length} bats, ${hotArms.length} arms`);
+
+  // ── Windowed deltas via CY game logs ──────────────────────────────────────
+  const regression2  = JSON.parse(fs.readFileSync(REGR_PATH, 'utf8'));
+  const poolStats2   = JSON.parse(fs.readFileSync(path.join(BASE, 'model/pool-stats.json'), 'utf8'));
+
+  const WINDOWS = [7, 15, 30, 60, 90]; // days back from today
+  const TODAY = new Date();
+  TODAY.setHours(23,59,59,999);
+
+  function normLevelBS(l, year) {
+    if (l === 'A') return 'Single-A';
+    if (l === 'A+' || l === 'High A') return 'High-A';
+    if (l === 'ROK' || l === 'Rookie Advanced') return (year && year >= 2021) ? 'Complex' : 'Rookie';
+    if (l === 'CPX') return 'Complex';
+    return l;
+  }
+
+  function ipOutsFromStr(ipStr) {
+    const parts = String(ipStr || '0').split('.');
+    return (parseInt(parts[0] || '0') * 3) + parseInt(parts[1] || '0');
+  }
+
+  function scoreWindowedOverall(preCumBuckets, windowGames, isPit, birthDate, regressionData, normsData, poolStatsData) {
+    const models = regressionData.models;
+    const toolNames = isPit ? ['stuff','control'] : ['hit','power','speed'];
+    const COMPOSITE = isPit ? { stuff:0.70, control:0.30 } : { hit:0.42, power:0.47, speed:0.11 };
+    const SHRINK_K2 = isPit ? 80 : 200;
+    const POOL_CENTER2 = 95, POOL_STDEV2 = 15, SHRINK_TOWARD2 = 88;
+    const ARC_K2 = { k_pct:60, bb_pct:120, iso:120, sb_rate:60, k_pct_pit:20, bb_pct_pit:40 };
+
+    function getAge2(year) {
+      if (!birthDate) return AVG_AGES['AA'];
+      try {
+        const d = new Date(birthDate);
+        let age = year - d.getFullYear();
+        if (d.getMonth() > 6 || (d.getMonth() === 6 && d.getDate() > 1)) age--;
+        return age;
+      } catch { return AVG_AGES['AA']; }
+    }
+
+    // Build working cumulative state: clone preCum + add window games
+    const cum = {};
+    for (const [k, v] of Object.entries(preCumBuckets)) cum[k] = { ...v };
+
+    for (const g of windowGames) {
+      const lvl = normLevelBS(g.level || '', g.year);
+      if (!MILB_LEVELS.has(lvl)) continue;
+      const sKey = `${g.year}|${lvl}`;
+      if (!cum[sKey]) cum[sKey] = { ab:0, bb:0, hbp:0, so:0, h:0, sb:0, tb:0, bf:0, ipOuts:0, year:g.year, lvl };
+      const sc = cum[sKey];
+      sc.ab  += g.atBats      || 0;
+      sc.bb  += g.baseOnBalls || 0;
+      sc.hbp += g.hitByPitch  || 0;
+      sc.so  += g.strikeOuts  || 0;
+      sc.h   += g.hits        || 0;
+      sc.sb  += g.stolenBases || 0;
+      sc.tb  += g.totalBases  || 0;
+      sc.bf  += g.battersFaced|| 0;
+      sc.ipOuts += ipOutsFromStr(g.inningsPitched);
+    }
+
+    const scoreTool2 = (toolName) => {
+      const toolModels = models[toolName];
+      if (!toolModels) return null;
+      const tv = poolStatsData[toolName];
+      if (!tv) return null;
+      const statKeys = toolName==='hit'?['k_pct','bb_pct']:toolName==='power'?['iso']:toolName==='speed'?['sb_rate']:toolName==='stuff'?['k_pct']:['bb_pct'];
+      let wSum=0, wTot=0, totalSample=0;
+      const currentYear = new Date().getFullYear();
+
+      for (const [, st] of Object.entries(cum)) {
+        const rl = st.lvl;
+        if (!toolModels[rl]) continue;
+        const normEntry = normsData[`${rl}|${st.year}`] ?? normsData[`${rl}|${st.year-1}`];
+        if (!normEntry) continue;
+        const n = isPit ? normEntry.pitchers : normEntry.hitters;
+        if (!n) continue;
+        const rIp = st.ipOuts / 3, rPa = st.ab + st.bb + st.hbp;
+        const rSample = isPit ? rIp : rPa;
+        if (!rSample) continue;
+        totalSample += rSample;
+        const rSlg = st.ab > 0 ? st.tb / st.ab : 0;
+        const rAvg = st.ab > 0 ? st.h / st.ab : 0;
+        const rAgeDiff = (AVG_AGES[rl] ?? 22) - getAge2(st.year);
+        const recency = Math.pow(0.75, currentYear - st.year);
+        for (const sn of statKeys) {
+          const lm = toolModels[rl]?.[sn];
+          const nm = n[sn];
+          if (!lm || !nm || nm.stdev === 0) continue;
+          let val;
+          if (sn==='iso') val = rSlg - rAvg;
+          else if (sn==='sb_rate') { const tob=st.h+st.bb+st.hbp; val=tob>0?st.sb/tob:0; }
+          else if (sn==='k_pct') val = isPit?(st.bf>0?st.so/st.bf:0):(rPa>0?st.so/rPa:0);
+          else val = isPit?(st.bf>0?st.bb/st.bf:0):(rPa>0?st.bb/rPa:0);
+          let z = (val - nm.mean) / nm.stdev;
+          if ((!isPit && sn==='k_pct') || (isPit && sn==='bb_pct')) z = -z;
+          const pred = lm.slope_z*z + (lm.slope_age??0)*rAgeDiff + lm.intercept;
+          const kk = isPit?(sn==='k_pct'?'k_pct_pit':'bb_pct_pit'):sn;
+          const w = lm.corr * (rSample/(rSample+(ARC_K2[kk]??ARC_K2[sn]??60))) * recency;
+          wSum+=pred*w; wTot+=w;
+        }
+      }
+      if (wTot===0) return null;
+      const normed = POOL_CENTER2 + ((wSum/wTot) - tv.mean) / tv.stdev * POOL_STDEV2;
+      return Math.round(SHRINK_TOWARD2 + (normed-SHRINK_TOWARD2)*(totalSample/(totalSample+SHRINK_K2)));
+    };
+
+    const toolScores = {};
+    for (const t of toolNames) toolScores[t] = scoreTool2(t);
+    let overall = null;
+    if (isPit && toolScores.stuff!=null && toolScores.control!=null)
+      overall = Math.round(toolScores.stuff*0.70 + toolScores.control*0.30);
+    else if (!isPit && toolScores.hit!=null && toolScores.power!=null && toolScores.speed!=null)
+      overall = Math.round(toolScores.hit*0.42 + toolScores.power*0.47 + toolScores.speed*0.11);
+    return overall;
+  }
+
+  async function fetchCYGameLogs(mlbamId, isPit) {
+    const group = isPit ? 'pitching' : 'hitting';
+    const year = new Date().getFullYear();
+    const base = `https://statsapi.mlb.com/api/v1/people/${mlbamId}/stats?stats=gameLog&season=${year}&group=${group}&gameType=R`;
+    const dedup = (splits) => {
+      const seen = new Set();
+      return splits.filter(s => {
+        const key = (s.date||'')+'|'+(s.opponent?.abbreviation||s.opponent?.id||'');
+        if (seen.has(key)) return false;
+        seen.add(key); return true;
+      });
+    };
+    const flattenLog = (data) => data?.stats?.[0]?.splits ?? [];
+    try {
+      const [mlbRes, milbRes] = await Promise.all([
+        fetch(base).then(r=>r.ok?r.json():{}).catch(()=>({})),
+        fetch(base+'&leagueListId=milb_all').then(r=>r.ok?r.json():{}).catch(()=>({})),
+      ]);
+      return dedup([...flattenLog(mlbRes), ...flattenLog(milbRes)]).map(s => ({
+        date: s.date?.slice(0,10),
+        year,
+        level: s.sport?.abbreviation ?? s.team?.sport?.abbreviation ?? null,
+        ...s.stat,
+      })).filter(g => g.date).sort((a,b)=>a.date.localeCompare(b.date));
+    } catch { return []; }
+  }
+
+  async function attachWindowedDeltas(risers) {
+    console.log(`Fetching CY game logs for ${risers.length} hot sheet players...`);
+    await Promise.all(risers.map(async (riser) => {
+      const player = updatedPlayers[riser.id];
+      const mlbamId = player?.mlbam_id;
+      if (!mlbamId) { riser.deltas = { season: riser.delta }; return; }
+      const isPit = riser.isPit && !riser.isTwoWay ? true : riser.isPit;
+
+      // Build pre-CY seasonCum from history (all years < CURRENT_YEAR)
+      const preCum = {};
+      const playerHistory = (history[String(mlbamId)] || [])
+        .filter(s => MILB_LEVELS.has(s.level) && s.year < CURRENT_YEAR && s.team)
+        .filter(s => s.type === (isPit ? 'pitching' : 'hitting'));
+
+      for (const s of playerHistory) {
+        const sKey = `${s.year}|${s.level}`;
+        if (!preCum[sKey]) preCum[sKey] = { ab:0, bb:0, hbp:0, so:0, h:0, sb:0, tb:0, bf:0, ipOuts:0, year:s.year, lvl:s.level };
+        const sc = preCum[sKey];
+        sc.ab  += s.ab  || 0;
+        sc.bb  += s.bb  || 0;
+        sc.hbp += s.hbp || 0;
+        sc.so  += s.so  || 0;
+        sc.h   += s.h   || 0;
+        sc.sb  += s.sb  || 0;
+        sc.tb  += (s.tb || ((parseFloat(s.slg||'0')||0) * (s.ab||0))) || 0;
+        sc.bf  += s.bf  || 0;
+        sc.ipOuts += ipOutsFromStr(s.ip);
+      }
+
+      const allCYGames = await fetchCYGameLogs(mlbamId, isPit);
+      if (!allCYGames.length) { riser.deltas = { season: riser.delta }; return; }
+
+      const cutoff = (days) => {
+        const d = new Date(TODAY);
+        d.setDate(d.getDate() - days);
+        d.setHours(0,0,0,0);
+        return d;
+      };
+
+      const deltas = { season: riser.delta };
+      for (const days of WINDOWS) {
+        const since = cutoff(days);
+        const windowGames = allCYGames.filter(g => new Date(g.date) >= since);
+        if (!windowGames.length) { deltas[`d${days}`] = null; continue; }
+        const windowOverall = scoreWindowedOverall(preCum, windowGames, isPit, player.birthDate, regression2, norms, poolStats2);
+        deltas[`d${days}`] = windowOverall != null ? windowOverall - riser.prevOverall : null;
+      }
+      riser.deltas = deltas;
+    }));
+  }
+
+  const allRisers = [...allBatRisers, ...allArmRisers];
+  await attachWindowedDeltas(allRisers);
+  // ── End windowed deltas ────────────────────────────────────────────────────
+
+  // Build 6 independent top-20 lists — one per window
+  const WINDOW_KEYS = ['season', 'd90', 'd60', 'd30', 'd15', 'd7'];
+  function top20(pool, winKey) {
+    return pool
+      .filter(r => r.deltas?.[winKey] != null && r.deltas[winKey] >= 1)
+      .sort((a, b) => (b.deltas[winKey] - a.deltas[winKey]) || b.overall - a.overall)
+      .slice(0, 20)
+      .map(r => ({ ...r, delta: r.deltas[winKey] }));
+  }
+  const hotSheet = { generatedAt: new Date().toISOString() };
+  for (const wk of WINDOW_KEYS) {
+    hotSheet[wk] = {
+      bats: top20(allBatRisers, wk),
+      arms: top20(allArmRisers, wk),
+    };
+  }
+  fs.writeFileSync(HOTSHEET_PATH, JSON.stringify(hotSheet, null, 2));
+  const s = hotSheet.season;
+  console.log(`Hot sheet written: ${s.bats.length} bats, ${s.arms.length} arms (season); pool: ${allBatRisers.length} bats, ${allArmRisers.length} arms`);
 
   fs.writeFileSync(PLAYERS_PATH, JSON.stringify(updatedPlayers, null, 2));
 
