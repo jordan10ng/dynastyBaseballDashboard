@@ -17,7 +17,7 @@ for (const s of sources) { dateSum+=new Date(s.date).getTime()*s.weight; weightS
 const effectiveDate = new Date(dateSum/weightSum);
 const daysSince = (Date.now()-effectiveDate.getTime())/(1000*60*60*24);
 const staleness = Math.min(daysSince/365,1.0);
-const consensusW = 1-staleness, modelW = staleness;
+const consensusW = 1.0, modelW = 0.0; // model blend disabled — re-enable when model is stable
 
 console.log(`Effective date: ${effectiveDate.toISOString().slice(0,10)}, staleness: ${(staleness*100).toFixed(1)}%`);
 console.log(`Weights — consensus: ${(consensusW*100).toFixed(1)}%, model: ${(modelW*100).toFixed(1)}%`);
