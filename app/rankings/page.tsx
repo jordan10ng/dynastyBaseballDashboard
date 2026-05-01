@@ -120,8 +120,8 @@ export default function RankingsPage() {
       team: detect(['team']),
     })
     const tierCol = detect(['arrival', 'tier'])
-    if (tierCol) { setTierColumn(tierCol); setTierMode(true) }
-    else { setTierColumn(''); setTierMode(false) }
+    setTierColumn(tierCol)
+    setTierMode(false)
     setOrderColumn(detect(['rank', 'ranking']))
     e.target.value = ''
   }
@@ -318,13 +318,15 @@ export default function RankingsPage() {
 
             {parsedCols.length > 0 && (
               <>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '0.75rem' }}>
-                  <input type="checkbox" id="tierMode" checked={tierMode} onChange={e => setTierMode(e.target.checked)}
-                    style={{ accentColor: 'var(--accent)', width: 14, height: 14, cursor: 'pointer' }} />
-                  <label htmlFor="tierMode" style={{ fontSize: '0.8rem', color: 'var(--muted)', cursor: 'pointer' }}>
-                    Tier format — rank column contains "Top 10", "Top 30" style values
-                  </label>
-                </div>
+                {rankType === 'open' && (
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '0.75rem' }}>
+                    <input type="checkbox" id="tierMode" checked={tierMode} onChange={e => setTierMode(e.target.checked)}
+                      style={{ accentColor: 'var(--accent)', width: 14, height: 14, cursor: 'pointer' }} />
+                    <label htmlFor="tierMode" style={{ fontSize: '0.8rem', color: 'var(--muted)', cursor: 'pointer' }}>
+                      Tier format — rank column contains "Top 10", "Top 30" style values
+                    </label>
+                  </div>
+                )}
 
                 <div style={{ fontSize: '0.75rem', color: 'var(--muted)', marginBottom: '0.5rem', fontFamily: 'var(--font-display)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Map Columns</div>
 
