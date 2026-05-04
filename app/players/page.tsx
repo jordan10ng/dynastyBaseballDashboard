@@ -859,14 +859,14 @@ export default function PlayersPage() {
             <>
               <div style={{ display: 'grid', gridTemplateColumns: '36px 1fr 44px', gap: '0.4rem', padding: '0.2rem 0rem', marginBottom: '0.25rem', borderBottom: '1px solid var(--border)' }}>
                 <div onClick={() => { setToolSortKey(''); setSortMode('rank') }} style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.58rem', letterSpacing: '0.08em', color: sortMode === 'rank' ? 'var(--accent)' : 'var(--muted)', cursor: 'pointer', userSelect: 'none', display: 'flex', alignItems: 'center', gap: '2px' }}>
-                  RK{sortMode === 'rank' && <span style={{ fontSize: '0.5rem' }}>▲</span>}
+                  {sortMode === 'rank' ? <>{`RK`}<span style={{ fontSize: '0.5rem' }}>▲</span></> : `#`}
                 </div>
                 <div style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.58rem', letterSpacing: '0.08em', color: 'var(--muted)' }}>PLAYER</div>
                 <div onClick={() => { if (toolSortKey === 'overall') { setToolSortKey(''); setSortMode('rank') } else { setToolSortKey('overall'); setSortMode('tool') } }} style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.58rem', letterSpacing: '0.08em', color: toolSortKey === 'overall' ? 'var(--accent)' : 'var(--muted)', cursor: 'pointer', userSelect: 'none', textAlign: 'right', display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: '2px' }}>
                   {toolSortKey === 'overall' && <span style={{ fontSize: '0.5rem' }}>▼</span>}OVR+
                 </div>
               </div>
-              {loading ? <div style={{ color: 'var(--muted)', padding: '1rem 0' }}>Loading...</div> : filtered.slice(0, mobileLimit).map((p) => {
+              {loading ? <div style={{ color: 'var(--muted)', padding: '1rem 0' }}>Loading...</div> : filtered.slice(0, mobileLimit).map((p, mIdx) => {
                 const pOwn = globalOwnership[p.id] || {}
                 const tools = playerToolsMap[p.id]
                 const ovr = tools?.overall ?? null
@@ -874,7 +874,7 @@ export default function PlayersPage() {
                 const level = s?._level ?? p.level ?? '—'
                 return (
                   <div key={p.id} onClick={() => setSelectedPlayer(p)} style={{ display: 'grid', gridTemplateColumns: '36px 1fr 44px', gap: '0.4rem', padding: '0.5rem 0rem', borderBottom: '1px solid rgba(48,54,61,0.4)', alignItems: 'center', cursor: 'pointer', background: 'transparent' }}>
-                    <div style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.65rem', color: 'rgba(100,100,100,0.5)' }}>{p.rank ?? '—'}</div>
+                    <div style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.65rem', color: 'rgba(100,100,100,0.5)' }}>{mIdx + 1}</div>
                     <div style={{ minWidth: 0 }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', flexWrap: 'nowrap', overflow: 'hidden' }}>
                         <span style={{ fontWeight: 600, fontSize: '0.82rem', color: 'var(--text)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', minWidth: 0 }}>{p.name}</span>
@@ -913,18 +913,18 @@ export default function PlayersPage() {
                     <div style={{ width: NAME_W, flexShrink: 0 }}>
                       <div style={{ height: HDR_H, display: 'flex', alignItems: 'center', borderBottom: '1px solid var(--border)', paddingRight: 6 }}>
                         <div onClick={() => { setToolSortKey(''); setSortMode('rank') }} style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.58rem', letterSpacing: '0.08em', color: sortMode === 'rank' ? 'var(--accent)' : 'var(--muted)', cursor: 'pointer', userSelect: 'none', display: 'flex', alignItems: 'center', gap: '2px', marginRight: 6 }}>
-                          RK{sortMode === 'rank' && <span style={{ fontSize: '0.5rem' }}>▲</span>}
+                          {sortMode === 'rank' ? <>{`RK`}<span style={{ fontSize: '0.5rem' }}>▲</span></> : `#`}
                         </div>
                         <span style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.58rem', letterSpacing: '0.08em', color: 'var(--muted)' }}>PLAYER</span>
                       </div>
-                      {loading ? null : filtered.slice(0, mobileLimit).map((p) => {
+                      {loading ? null : filtered.slice(0, mobileLimit).map((p, mIdx) => {
                         const pOwn = globalOwnership[p.id] || {}
                         const s = effectiveStats(p)
                         const level = s?._level ?? p.level ?? '—'
                         return (
                           <div key={p.id} onClick={() => setSelectedPlayer(p)} style={{ height: ROW_H, display: 'flex', flexDirection: 'column', justifyContent: 'center', borderBottom: '1px solid rgba(48,54,61,0.4)', cursor: 'pointer', paddingRight: 6 }}>
                             <div style={{ display: 'flex', alignItems: 'center', gap: '0.2rem', overflow: 'hidden' }}>
-                              <span style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.58rem', color: 'rgba(100,100,100,0.45)', flexShrink: 0 }}>{p.rank ?? '—'}</span>
+                              <span style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.58rem', color: 'rgba(100,100,100,0.45)', flexShrink: 0 }}>{mIdx + 1}</span>
                               <span style={{ fontWeight: 600, fontSize: '0.78rem', color: 'var(--text)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{p.name}</span>
                               {minorsIds.has(p.id) && <span style={{ color: '#4ade80', fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: '0.55rem', flexShrink: 0 }}>M</span>}
                             </div>
