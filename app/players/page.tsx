@@ -551,7 +551,7 @@ export default function PlayersPage() {
           if (!selectedPosFilters.some(sp => playerPos.includes(sp))) return false
         }
         if (selectedLevelFilters.length > 0) {
-          if (!selectedLevelFilters.includes(statsMap[p.id]?._level ?? '')) return false
+          if (!selectedLevelFilters.includes(statsMap[p.id]?._level ?? p.level ?? '')) return false
         }
         if (batArmsFilter !== 'all' && statFilters.length > 0) {
           const playerStats = statsMap[p.id]
