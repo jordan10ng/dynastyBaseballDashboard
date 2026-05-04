@@ -31,6 +31,13 @@ const BAT_POSITIONS = ['C','1B','2B','SS','3B','INF','LF','CF','RF','OF','UT']
 const ARM_POSITIONS = ['SP','RP','P']
 const ALL_POSITIONS = [...BAT_POSITIONS, ...ARM_POSITIONS]
 const LEVEL_OPTIONS = ['MLB','AAA','AA','A+','A','ROK']
+const normalizeLevel = (l: string | undefined) => {
+  if (!l) return ''
+  if (l === 'High-A') return 'A+'
+  if (l === 'Single-A') return 'A'
+  if (l === 'Rookie' || l === 'ROK' || l === 'Complex' || l === 'DSL') return 'ROK'
+  return l
+}
 
 const POS_GROUPS = [
   { label: 'Catcher (C)', positions: ['C'] },
@@ -551,7 +558,7 @@ export default function PlayersPage() {
           if (!selectedPosFilters.some(sp => playerPos.includes(sp))) return false
         }
         if (selectedLevelFilters.length > 0) {
-          if (!selectedLevelFilters.includes(statsMap[p.id]?._level ?? p.level ?? '')) return false
+          if (!selectedLevelFilters.includes(normalizeLevel(statsMap[p.id]?._level ?? p.level))) return false
         }
         if (batArmsFilter !== 'all' && statFilters.length > 0) {
           const playerStats = statsMap[p.id]
@@ -871,7 +878,7 @@ export default function PlayersPage() {
                 const tools = playerToolsMap[p.id]
                 const ovr = tools?.overall ?? null
                 const s = statsMap[p.id]
-                const level = s?._level ?? p.level ?? '—'
+                const level = normalizeLevel(s?._level ?? p.level) || '—'
                 return (
                   <div key={p.id} onClick={() => setSelectedPlayer(p)} style={{ display: 'grid', gridTemplateColumns: '36px 1fr 44px', gap: '0.4rem', padding: '0.5rem 0rem', borderBottom: '1px solid rgba(48,54,61,0.4)', alignItems: 'center', cursor: 'pointer', background: 'transparent' }}>
                     <div style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.65rem', color: 'rgba(100,100,100,0.5)' }}>{mIdx + 1}</div>
@@ -920,7 +927,7 @@ export default function PlayersPage() {
                       {loading ? null : filtered.slice(0, mobileLimit).map((p, mIdx) => {
                         const pOwn = globalOwnership[p.id] || {}
                         const s = effectiveStats(p)
-                        const level = s?._level ?? p.level ?? '—'
+                        const level = normalizeLevel(s?._level ?? p.level) || '—'
                         return (
                           <div key={p.id} onClick={() => setSelectedPlayer(p)} style={{ height: ROW_H, display: 'flex', flexDirection: 'column', justifyContent: 'center', borderBottom: '1px solid rgba(48,54,61,0.4)', cursor: 'pointer', paddingRight: 6 }}>
                             <div style={{ display: 'flex', alignItems: 'center', gap: '0.2rem', overflow: 'hidden' }}>
