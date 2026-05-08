@@ -200,11 +200,13 @@ async function run() {
       else           sidesEligible.push({ isPitcher: false, exposed: true, graduated: true });
     } else {
       const isPitcher = hasArm;
+      if (!isRookieEligible(mlbamId, isPitcher)) { notRookie++; continue; }
       sidesEligible.push({ isPitcher, exposed: true });
     }
 
     const recentSeasons = (history[String(mlbamId)] || [])
       .filter(s => MILB_LEVELS.has(s.level) && s.year >= CURRENT_YEAR - 3 && s.team);
+    if (!recentSeasons.length) { noData++; continue; }
 
     const toolScores  = {};
     const toolWeights = {};
@@ -341,7 +343,10 @@ async function run() {
   for (const [id, pool] of Object.entries(rawPool)) {
     const player = updatedPlayers[id];
     const ms = player.model_scores;
+    if (!ms?.overall || ms.overall < MIN_OVERALL) continue;
+    if (!pool.hasCY || pool.exCYOverall == null) continue;
     const delta = ms.overall - pool.exCYOverall;
+    if (delta < MIN_RISER_DELTA) continue;
     // compute IP/GS from current year MiLB starts
     const cyRows = (history[String(player.mlbam_id)] || [])
       .filter(s => s.year === CURRENT_YEAR && MILB_LEVELS.has(s.level) && s.type === 'pitching');
@@ -566,7 +571,7 @@ async function run() {
     return pool
       .filter(r => r.deltas?.[winKey] != null && r.deltas[winKey] >= 1)
       .sort((a, b) => (b.deltas[winKey] - a.deltas[winKey]) || b.overall - a.overall)
-      .slice(0, 20)
+      .slice(0, 50)
       .map(r => ({ ...r, delta: r.deltas[winKey] }));
   }
   const hotSheet = { generatedAt: new Date().toISOString() };

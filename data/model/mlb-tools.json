@@ -278,12 +278,12 @@
   "676617": {
     "type": "pitcher",
     "stuff": 105,
-    "control": 92,
+    "control": 93,
     "_seasons": 5,
-    "_ip": 75,
+    "_ip": 76,
     "_z": {
-      "k_pct": 0.334,
-      "bb_pct": -0.503
+      "k_pct": 0.357,
+      "bb_pct": -0.463
     },
     "name": "Riley O'Brien"
   },
@@ -2419,12 +2419,12 @@
     "power": 116,
     "speed": 101,
     "_seasons": 13,
-    "_pa": 7531,
+    "_pa": 7532,
     "_z": {
       "avg": 0.746,
       "k_pct": 0.664,
       "bb_pct": 0.247,
-      "iso": 1.074,
+      "iso": 1.073,
       "sb_rate": 0.044
     },
     "name": "Manny Machado"
@@ -6098,10 +6098,10 @@
     "stuff": 115,
     "control": 100,
     "_seasons": 10,
-    "_ip": 405,
+    "_ip": 406,
     "_z": {
-      "k_pct": 1.02,
-      "bb_pct": -0.006
+      "k_pct": 1.013,
+      "bb_pct": -0.003
     },
     "name": "Jason Adam"
   },
@@ -21190,13 +21190,13 @@
     "power": 112,
     "speed": 99,
     "_seasons": 3,
-    "_pa": 1229,
+    "_pa": 1230,
     "_z": {
-      "avg": 0.634,
-      "k_pct": 0.464,
+      "avg": 0.631,
+      "k_pct": 0.466,
       "bb_pct": -0.337,
-      "iso": 0.816,
-      "sb_rate": -0.054
+      "iso": 0.814,
+      "sb_rate": -0.053
     },
     "name": "Jackson Merrill"
   },
