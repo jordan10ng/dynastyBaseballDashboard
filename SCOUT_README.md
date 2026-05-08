@@ -52,7 +52,7 @@ fantasy-baseball/
 │       └── daily-sync.yml                # GHA cron — 1am PT daily stats + model rebuild
 ├── app/
 │   ├── page.tsx                          # Home/command center
-│   ├── players/page.tsx                  # Main hub — computeTools() blends MiLB+MLB for grads
+│   ├── players/page.tsx                  # Main hub — computeTools() blends MiLB+MLB for grads 
 │   ├── hot-sheet/page.tsx                # Hot sheet — windowed model gainers (Season/L90/L60/L30/L15/L7). Desktop: button toggle. Mobile: select dropdown.
 │   ├── rankings/page.tsx                 # Multi-source ranking system (admin only)
 │   ├── sync/page.tsx                     # Fantrax + stats sync (admin only)
@@ -102,7 +102,7 @@ fantasy-baseball/
 │   ├── sync-stats-gha.js               # Standalone stats sync for GHA — writes to history/2026.json. Two-way players fetch both hitting + pitching groups.
 │   └── build-gamelogs.js               # RETIRED — game logs now fetched live from MLB Stats API. File kept for reference only.
 ├── data/
-│   ├── players.json                      # PERMANENT — never wipe. Has birthDate, mlbam_id, rank, model_scores.
+│   ├── players.json                      # PERMANENT — never wipe. Has birthDate, mlbam_id, rank, model_scores (object not array)
 │   ├── db.json                           # LIVE — safe to re-sync
 │   ├── razzball.csv                      # ID bridge, update periodically
 │   ├── rankings/

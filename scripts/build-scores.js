@@ -200,13 +200,11 @@ async function run() {
       else           sidesEligible.push({ isPitcher: false, exposed: true, graduated: true });
     } else {
       const isPitcher = hasArm;
-      if (!isRookieEligible(mlbamId, isPitcher)) { notRookie++; continue; }
       sidesEligible.push({ isPitcher, exposed: true });
     }
 
     const recentSeasons = (history[String(mlbamId)] || [])
       .filter(s => MILB_LEVELS.has(s.level) && s.year >= CURRENT_YEAR - 3 && s.team);
-    if (!recentSeasons.length) { noData++; continue; }
 
     const toolScores  = {};
     const toolWeights = {};
@@ -224,7 +222,6 @@ async function run() {
       }
     }
 
-    if (!hasAny) { noData++; continue; }
 
     const isPitcher = hasArm && !hasBat; // pure pitcher flag for pool/shrinkage
     rawPool[id] = {
@@ -328,7 +325,9 @@ async function run() {
         }
       }
       const exCYOverallRaw = (wtotEx > 0 && !allToolsNoHistory) ? wsumEx / wtotEx : null;
-      const exCYOverall    = exCYOverallRaw != null ? Math.round(shrink(exCYOverallRaw, totalSample, isPitcher)) : null;
+      const exCYOverall    = exCYOverallRaw != null
+        ? Math.round(shrink(exCYOverallRaw, totalSample, isPitcher))
+        : (hasCY ? SHRINK_TOWARD : null);
       rawPool[id].hasCY             = hasCY;
       rawPool[id].cySample          = cySample;
       rawPool[id].exCYOverall       = exCYOverall;
@@ -342,10 +341,7 @@ async function run() {
   for (const [id, pool] of Object.entries(rawPool)) {
     const player = updatedPlayers[id];
     const ms = player.model_scores;
-    if (!ms?.overall || ms.overall < MIN_OVERALL) continue;
-    if (!pool.hasCY || pool.allToolsNoHistory || pool.exCYOverall == null) continue;
     const delta = ms.overall - pool.exCYOverall;
-    if (delta < MIN_RISER_DELTA) continue;
     // compute IP/GS from current year MiLB starts
     const cyRows = (history[String(player.mlbam_id)] || [])
       .filter(s => s.year === CURRENT_YEAR && MILB_LEVELS.has(s.level) && s.type === 'pitching');
