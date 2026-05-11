@@ -470,7 +470,7 @@ export default function PlayersPage() {
   )
 
   useEffect(() => { if (dataView === 'raw' && minorsFilter !== 'minors') setDataView('tools') }, [minorsFilter])
-  useEffect(() => { setSelectedTeam('') }, [selectedLeague])
+  useEffect(() => { setSelectedTeam(''); setShowFA(false) }, [selectedLeague])
   useEffect(() => {
     if (!selectedTeam && sortMode === 'position') setSortMode('rank')
   }, [selectedTeam, sortMode])
@@ -508,6 +508,7 @@ export default function PlayersPage() {
     }))
   }, [activeCols, availableToolKeys])
   const toggleTeam = useCallback((id: string) => setSelectedTeam(prev => prev === id ? '' : id), [])
+  const [showFA, setShowFA] = useState(false)
   const togglePosFilter = useCallback((pos: string) => {
     setSelectedPosFilters(prev => prev.includes(pos) ? prev.filter(x => x !== pos) : [...prev, pos])
   }, [])
@@ -542,9 +543,11 @@ export default function PlayersPage() {
         if (ownFilter === 'fa-any' && Object.keys(pOwn).length >= 3) return false
       }
 
-      if (selectedTeam) {
+      if (selectedTeam || showFA) {
         const owner = ownershipMap[p.id]
-        if (!(owner && selectedTeam === owner.teamId) && !(selectedTeam === 'FA' && !owner)) return false
+        const isOnTeam = selectedTeam && owner && owner.teamId === selectedTeam
+        const isFA = showFA && !owner
+        if (!isOnTeam && !isFA) return false
       }
 
       if (!selectedLeague) {
@@ -708,7 +711,7 @@ export default function PlayersPage() {
       {selectedLeague && leagueTeams.length > 0 && (
         <div style={{ display: 'flex', gap: '0.4rem', marginBottom: '1.25rem', borderBottom: '1px solid var(--border)', paddingBottom: '1.25rem', alignItems: 'center', flexWrap: 'wrap' }}>
           <span style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.68rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--muted)', marginRight: 4 }}>Team</span>
-          <button onClick={() => toggleTeam('FA')} style={btn(selectedTeam === 'FA')}>Free Agents</button>
+          <button onClick={() => setShowFA(p => !p)} style={btn(showFA)}>Free Agents</button>
           {leagueTeams.map(t => {
             const fc = selectedLeague === D52_ID ? FRIEND_TEAMS[t.name] : null
             const isActive = selectedTeam === t.id
