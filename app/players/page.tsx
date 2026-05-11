@@ -931,7 +931,7 @@ export default function PlayersPage() {
                         return (
                           <div key={p.id} onClick={() => setSelectedPlayer(p)} style={{ height: ROW_H, display: 'flex', flexDirection: 'column', justifyContent: 'center', borderBottom: '1px solid rgba(48,54,61,0.4)', cursor: 'pointer', paddingRight: 6 }}>
                             <div style={{ display: 'flex', alignItems: 'center', gap: '0.2rem', overflow: 'hidden' }}>
-                              <span style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.58rem', color: 'rgba(100,100,100,0.45)', flexShrink: 0 }}>{mIdx + 1}</span>
+                              <span style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.58rem', color: 'rgba(100,100,100,0.45)', flexShrink: 0 }}>{sortMode === 'rank' ? (p.rank ?? '—') : mIdx + 1}</span>
                               <span style={{ fontWeight: 600, fontSize: '0.78rem', color: 'var(--text)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{p.name}</span>
                               {minorsIds.has(p.id) && <span style={{ color: '#4ade80', fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: '0.55rem', flexShrink: 0 }}>M</span>}
                             </div>
