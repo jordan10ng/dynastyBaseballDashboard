@@ -685,6 +685,7 @@ export default function PlayersPage() {
           activeRawKeys={activeRawKeys}
           statSortKey={statSortKey}
           toolSortKey={toolSortKey}
+          sortMode={sortMode}
           TOOL_LABELS={TOOL_LABELS}
           onClick={() => setSelectedPlayer(player)}
         />
@@ -692,7 +693,7 @@ export default function PlayersPage() {
     )
   }, [filtered, statsMap, statLineMap, playerToolsMap, minorsIds, ownershipMap, globalOwnership,
       cols, showExtraCol, showOwnership, showStatCols, showToolCols, showRawCols, activeCols, activeToolKeys, activeRawKeys,
-      statSortKey, toolSortKey])
+      statSortKey, toolSortKey, sortMode])
 
   return (
     <div style={{ padding: '2rem' }}>
