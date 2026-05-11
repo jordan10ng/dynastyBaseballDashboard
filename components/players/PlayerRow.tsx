@@ -78,6 +78,7 @@ type PlayerRowProps = {
   statSortKey: string
   toolSortKey: string
   batArmsFilter: string
+  sortMode: string
   TOOL_LABELS: Record<string, string>
   onClick: () => void
 }
@@ -103,10 +104,12 @@ export const PlayerRow = memo(function PlayerRow({
   statSortKey,
   toolSortKey,
   batArmsFilter,
+  sortMode,
   TOOL_LABELS,
   onClick,
 }: PlayerRowProps) {
   const pitch = isPitcher(player.positions)
+  const rankDisplay = sortMode === 'rank' ? (player.rank ?? '—') : displayRank
 
   return (
     <div onClick={onClick} style={{
@@ -119,7 +122,7 @@ export const PlayerRow = memo(function PlayerRow({
     }}>
       {/* Display rank # */}
       <div style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.65rem', color: 'rgba(100,100,100,0.5)', position: 'sticky', left: 0, background: 'var(--bg)', zIndex: 2 }}>
-        {displayRank}
+        {rankDisplay}
       </div>
 
       {/* Consensus rank */}
@@ -223,7 +226,6 @@ export const PlayerRow = memo(function PlayerRow({
         const tw = isTwoWay(player.positions)
         if (!tw && pitch && ['hit','power','speed'].includes(key)) return <div key={key} style={{ fontSize: '0.75rem', color: 'rgba(100,100,100,0.35)', textAlign: 'right' as const }}>—</div>
         if (!tw && !pitch && ['stuff','control'].includes(key)) return <div key={key} style={{ fontSize: '0.75rem', color: 'rgba(100,100,100,0.35)', textAlign: 'right' as const }}>—</div>
-        // Two-way: show side-specific overall in bats/arms mode
         const resolvedKey = (tw && key === 'overall')
           ? (batArmsFilter === 'bats' ? 'hit_overall' : batArmsFilter === 'arms' ? 'pitch_overall' : 'overall')
           : key
@@ -260,10 +262,10 @@ export const PlayerRow = memo(function PlayerRow({
     </div>
   )
 }, (prev, next) => {
-  // Only re-render if data that affects this specific row changed
   return (
     prev.displayRank === next.displayRank &&
     prev.batArmsFilter === next.batArmsFilter &&
+    prev.sortMode === next.sortMode &&
     prev.player === next.player &&
     prev.stats === next.stats &&
     prev.tools === next.tools &&

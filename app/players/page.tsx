@@ -1084,6 +1084,7 @@ export default function PlayersPage() {
                     activeRawKeys={activeRawKeys}
                     statSortKey={statSortKey}
                     toolSortKey={toolSortKey}
+                    sortMode={sortMode}
                     TOOL_LABELS={TOOL_LABELS}
                     onClick={() => setSelectedPlayer(p)}
                   />
