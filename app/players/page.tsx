@@ -653,18 +653,18 @@ export default function PlayersPage() {
 
   const playerColWidth = batArmsFilter === 'all' ? '1fr' : '200px'
   const baseColDef = batArmsFilter === 'all'
-    ? (showOwnership ? '28px 44px 1fr 1fr' : '28px 44px 1fr')
+    ? (showOwnership ? '44px 1fr 1fr' : '44px 1fr')
     : (showExtraCol
-        ? (showOwnership ? `28px 44px 90px ${playerColWidth} 52px 36px 40px 1fr` : `28px 44px 90px ${playerColWidth} 52px 36px 40px`)
-        : (showOwnership ? '28px 44px 90px 1fr 52px 36px 1fr' : '28px 44px 90px 1fr 52px 36px'))
+        ? (showOwnership ? `44px 90px ${playerColWidth} 52px 36px 40px 1fr` : `44px 90px ${playerColWidth} 52px 36px 40px`)
+        : (showOwnership ? '44px 90px 1fr 52px 36px 1fr' : '44px 90px 1fr 52px 36px'))
   const statColDef = showStatCols ? activeCols.map(() => '64px').join(' ') + (batArmsFilter === 'all' ? ' 56px' : '') : showToolCols ? activeToolKeys.map(() => '56px').join(' ') : showRawCols ? activeRawKeys.map(() => '56px').join(' ') : batArmsFilter === 'all' ? '56px' : ''
   const cols = [baseColDef, statColDef].filter(Boolean).join(' ')
 
   const baseHeaders = batArmsFilter === 'all'
-    ? (showOwnership ? ['#','RK','PLAYER','OWNED BY'] : ['#','RK','PLAYER'])
+    ? (showOwnership ? ['RK','PLAYER','OWNED BY'] : ['RK','PLAYER'])
     : (showExtraCol
-        ? (showOwnership ? ['#','RK','POS','PLAYER','TEAM','AGE','LEV','OWNED BY'] : ['#','RK','POS','PLAYER','TEAM','AGE','LEV'])
-        : (showOwnership ? ['#','RK','POS','PLAYER','TEAM','AGE','OWNED BY'] : ['#','RK','POS','PLAYER','TEAM','AGE']))
+        ? (showOwnership ? ['RK','POS','PLAYER','TEAM','AGE','LEV','OWNED BY'] : ['RK','POS','PLAYER','TEAM','AGE','LEV'])
+        : (showOwnership ? ['RK','POS','PLAYER','TEAM','AGE','OWNED BY'] : ['RK','POS','PLAYER','TEAM','AGE']))
 
   const sortOptions: { val: SortMode; label: string }[] = [{ val: 'rank', label: 'Rank' }]
   if (selectedTeam) sortOptions.push({ val: 'position', label: 'Position' })
@@ -697,7 +697,7 @@ export default function PlayersPage() {
           statSortKey={statSortKey}
           toolSortKey={toolSortKey}
           sortMode={sortMode}
-          minorsRankMap={minorsRankMap}
+          minorsRankMap={minorsFilter === 'minors' ? minorsRankMap : undefined}
           TOOL_LABELS={TOOL_LABELS}
           onClick={() => setSelectedPlayer(player)}
         />
@@ -705,7 +705,7 @@ export default function PlayersPage() {
     )
   }, [filtered, statsMap, statLineMap, playerToolsMap, minorsIds, ownershipMap, globalOwnership,
       cols, showExtraCol, showOwnership, showStatCols, showToolCols, showRawCols, activeCols, activeToolKeys, activeRawKeys,
-      statSortKey, toolSortKey, sortMode, minorsRankMap])
+      statSortKey, toolSortKey, sortMode, minorsRankMap, minorsFilter])
 
   return (
     <div style={{ padding: '2rem' }}>
@@ -894,7 +894,7 @@ export default function PlayersPage() {
                 const level = normalizeLevel(s?._level ?? p.level) || '—'
                 return (
                   <div key={p.id} onClick={() => setSelectedPlayer(p)} style={{ display: 'grid', gridTemplateColumns: '36px 1fr 44px', gap: '0.4rem', padding: '0.5rem 0rem', borderBottom: '1px solid rgba(48,54,61,0.4)', alignItems: 'center', cursor: 'pointer', background: 'transparent' }}>
-                    <div style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.65rem', color: 'rgba(100,100,100,0.5)' }}>{sortMode === 'rank' ? (minorsIds.has(p.id) ? (minorsRankMap[p.id] ?? '—') : (p.rank ?? '—')) : mIdx + 1}</div>
+                    <div style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.65rem', color: 'rgba(100,100,100,0.5)' }}>{sortMode === 'rank' ? (minorsFilter === 'minors' && minorsIds.has(p.id) ? (minorsRankMap[p.id] ?? '—') : (p.rank ?? '—')) : mIdx + 1}</div>
                     <div style={{ minWidth: 0 }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', flexWrap: 'nowrap', overflow: 'hidden' }}>
                         <span style={{ fontWeight: 600, fontSize: '0.82rem', color: 'var(--text)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', minWidth: 0 }}>{p.name}</span>
@@ -944,7 +944,7 @@ export default function PlayersPage() {
                         return (
                           <div key={p.id} onClick={() => setSelectedPlayer(p)} style={{ height: ROW_H, display: 'flex', flexDirection: 'column', justifyContent: 'center', borderBottom: '1px solid rgba(48,54,61,0.4)', cursor: 'pointer', paddingRight: 6 }}>
                             <div style={{ display: 'flex', alignItems: 'center', gap: '0.2rem', overflow: 'hidden' }}>
-                              <span style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.58rem', color: 'rgba(100,100,100,0.45)', flexShrink: 0 }}>{sortMode === 'rank' ? (minorsIds.has(p.id) ? (minorsRankMap[p.id] ?? '—') : (p.rank ?? '—')) : mIdx + 1}</span>
+                              <span style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.58rem', color: 'rgba(100,100,100,0.45)', flexShrink: 0 }}>{sortMode === 'rank' ? (minorsFilter === 'minors' && minorsIds.has(p.id) ? (minorsRankMap[p.id] ?? '—') : (p.rank ?? '—')) : mIdx + 1}</span>
                               <span style={{ fontWeight: 600, fontSize: '0.78rem', color: 'var(--text)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{p.name}</span>
                               {minorsIds.has(p.id) && <span style={{ color: '#4ade80', fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: '0.55rem', flexShrink: 0 }}>M</span>}
                             </div>
@@ -1024,7 +1024,7 @@ export default function PlayersPage() {
         {!mounted ? null : (
         <div style={{ display: 'grid', gridTemplateColumns: cols, gap: '0.5rem', padding: '0.2rem 0.5rem', marginBottom: '0.25rem', marginLeft: '-0.5rem', minWidth: showExtraCol ? 'max-content' : undefined }}>
           {baseHeaders.map((h, i) => {
-            const stickyLeft = i === 0 ? 0 : i === 1 ? 28 : i === 2 ? 72 : i === 3 ? 162 : undefined
+            const stickyLeft = i === 0 ? 0 : i === 1 && batArmsFilter !== 'all' ? 44 : i === 2 && batArmsFilter !== 'all' ? 134 : i === 1 && batArmsFilter === 'all' ? 44 : undefined
             const isSticky = stickyLeft !== undefined
             const isRankCol = h === '#' || h === 'RK'
             const rankActive = isRankCol && sortMode === 'rank' && !statSortKey && !toolSortKey

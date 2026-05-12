@@ -124,25 +124,20 @@ export const PlayerRow = memo(function PlayerRow({
       minWidth: showExtraCol ? 'max-content' : undefined,
       cursor: 'pointer',
     }}>
-      {/* Display rank # */}
-      <div style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.65rem', color: 'rgba(100,100,100,0.5)', position: 'sticky', left: 0, background: 'var(--bg)', zIndex: 2 }}>
+      {/* Display rank */}
+      <div style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.72rem', color: 'var(--muted)', position: 'sticky', left: 0, background: 'var(--bg)', zIndex: 2 }}>
         {rankDisplay}
-      </div>
-
-      {/* Consensus rank */}
-      <div style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.72rem', color: 'var(--muted)', position: 'sticky', left: '28px', background: 'var(--bg)', zIndex: 2 }}>
-        {player.rank ?? '—'}
       </div>
 
       {/* Position — hidden in All mode (shown inline with name) */}
       {batArmsFilter !== 'all' && (
-        <div style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.72rem', color: 'var(--muted)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', position: 'sticky', left: '72px', background: 'var(--bg)', zIndex: 2 }}>
+        <div style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.72rem', color: 'var(--muted)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', position: 'sticky', left: '44px', background: 'var(--bg)', zIndex: 2 }}>
           {cleanPositions(player.positions)}
         </div>
       )}
 
       {/* Player name + badges */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', minWidth: 0, position: 'sticky', left: batArmsFilter === 'all' ? '72px' : '162px', background: 'var(--bg)', zIndex: 2 }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', minWidth: 0, position: 'sticky', left: batArmsFilter === 'all' ? '44px' : '134px', background: 'var(--bg)', zIndex: 2 }}>
         <div style={{ minWidth: 0, overflow: 'hidden' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', flexWrap: 'nowrap' }}>
             <span style={{ fontWeight: 500, fontSize: '0.875rem', color: 'var(--text)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{player.name}</span>
