@@ -33,10 +33,11 @@ function daysOld(dateStr: string): number {
   return Math.floor((Date.now() - new Date(dateStr).getTime()) / (1000 * 60 * 60 * 24))
 }
 
+const HALF_LIFE_DAYS = 30
 function stalenessWeight(dateStr: string): number {
   const d = daysOld(dateStr)
   if (d >= 365) return 0
-  return Math.max(0, 1 - d / 365)
+  return Math.pow(0.5, d / HALF_LIFE_DAYS)
 }
 
 function parseTier(val: string | undefined): number | null {

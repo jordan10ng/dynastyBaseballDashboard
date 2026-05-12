@@ -1154,8 +1154,8 @@ export function PlayerDrawer({ player, onClose, globalOwnership, minorsIds, mlbT
     if (!toolGrades) return []
     const src = lastArcPt ?? toolGrades
     const isBlended = toolGrades._mlbSample != null
-    const raw = (key: string) => isBlended || lastArcPt ? null : (toolGrades._raw?.[key] ?? null)
-    const conf = (key: string) => isBlended || lastArcPt ? null : (toolGrades._confidence?.[key] ?? null)
+    const raw = (key: string) => isBlended ? null : (toolGrades._raw?.[key] ?? null)
+    const conf = (key: string) => isBlended ? null : (toolGrades._confidence?.[key] ?? null)
     if (toolGrades.type === 'two-way') {
       if (pitch) return [
         src.stuff!=null?{label:'STF+',val:src.stuff,color:toolColor(src.stuff),raw:raw('stuff'),conf:conf('stuff')}:null,
