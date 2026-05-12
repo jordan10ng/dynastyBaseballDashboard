@@ -5,7 +5,10 @@ import path from 'path'
 const RANKINGS_DIR = path.join(process.cwd(), 'data', 'rankings', 'sources')
 
 function normalize(s: string) {
-  return s.toLowerCase().replace(/[^a-z0-9]/g, '')
+  return s
+    .toLowerCase().trim()
+    .replace(/\s+(jr\.?|sr\.?|ii|iii|iv|vi{0,3}|ix|v)$/i, '')
+    .replace(/[^a-z0-9]/g, '')
 }
 
 export async function GET(req: NextRequest) {

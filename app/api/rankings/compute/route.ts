@@ -8,7 +8,11 @@ const RANKINGS_OUT = path.join(BASE, 'rankings', 'rankings.json')
 const PLAYERS_PATH = path.join(BASE, 'players.json')
 
 function normalize(s: string): string {
-  return s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim()
+  return s
+    .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase().trim()
+    .replace(/\s+(jr\.?|sr\.?|ii|iii|iv|vi{0,3}|ix|v)$/i, '')
+    .trim()
 }
 
 function daysOld(dateStr: string): number {
