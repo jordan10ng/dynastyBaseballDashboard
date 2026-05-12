@@ -79,6 +79,7 @@ type PlayerRowProps = {
   toolSortKey: string
   batArmsFilter: string
   sortMode: string
+  minorsFilter?: string
   TOOL_LABELS: Record<string, string>
   onClick: () => void
 }
@@ -105,11 +106,14 @@ export const PlayerRow = memo(function PlayerRow({
   toolSortKey,
   batArmsFilter,
   sortMode,
+  minorsFilter,
   TOOL_LABELS,
   onClick,
 }: PlayerRowProps) {
   const pitch = isPitcher(player.positions)
-  const rankDisplay = sortMode === 'rank' ? (player.rank ?? '—') : displayRank
+  const rankDisplay = sortMode === 'rank' && minorsFilter !== 'minors'
+    ? (player.rank ?? '—')
+    : displayRank
 
   return (
     <div onClick={onClick} style={{
@@ -266,6 +270,7 @@ export const PlayerRow = memo(function PlayerRow({
     prev.displayRank === next.displayRank &&
     prev.batArmsFilter === next.batArmsFilter &&
     prev.sortMode === next.sortMode &&
+    prev.minorsFilter === next.minorsFilter &&
     prev.player === next.player &&
     prev.stats === next.stats &&
     prev.tools === next.tools &&

@@ -689,6 +689,7 @@ export default function PlayersPage() {
           statSortKey={statSortKey}
           toolSortKey={toolSortKey}
           sortMode={sortMode}
+          minorsFilter={minorsFilter}
           TOOL_LABELS={TOOL_LABELS}
           onClick={() => setSelectedPlayer(player)}
         />
@@ -696,7 +697,7 @@ export default function PlayersPage() {
     )
   }, [filtered, statsMap, statLineMap, playerToolsMap, minorsIds, ownershipMap, globalOwnership,
       cols, showExtraCol, showOwnership, showStatCols, showToolCols, showRawCols, activeCols, activeToolKeys, activeRawKeys,
-      statSortKey, toolSortKey, sortMode])
+      statSortKey, toolSortKey, sortMode, minorsFilter])
 
   return (
     <div style={{ padding: '2rem' }}>
@@ -885,7 +886,7 @@ export default function PlayersPage() {
                 const level = normalizeLevel(s?._level ?? p.level) || '—'
                 return (
                   <div key={p.id} onClick={() => setSelectedPlayer(p)} style={{ display: 'grid', gridTemplateColumns: '36px 1fr 44px', gap: '0.4rem', padding: '0.5rem 0rem', borderBottom: '1px solid rgba(48,54,61,0.4)', alignItems: 'center', cursor: 'pointer', background: 'transparent' }}>
-                    <div style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.65rem', color: 'rgba(100,100,100,0.5)' }}>{sortMode === 'rank' ? (p.rank ?? '—') : mIdx + 1}</div>
+                    <div style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.65rem', color: 'rgba(100,100,100,0.5)' }}>{sortMode === 'rank' && minorsFilter !== 'minors' ? (p.rank ?? '—') : mIdx + 1}</div>
                     <div style={{ minWidth: 0 }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', flexWrap: 'nowrap', overflow: 'hidden' }}>
                         <span style={{ fontWeight: 600, fontSize: '0.82rem', color: 'var(--text)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', minWidth: 0 }}>{p.name}</span>
@@ -935,7 +936,7 @@ export default function PlayersPage() {
                         return (
                           <div key={p.id} onClick={() => setSelectedPlayer(p)} style={{ height: ROW_H, display: 'flex', flexDirection: 'column', justifyContent: 'center', borderBottom: '1px solid rgba(48,54,61,0.4)', cursor: 'pointer', paddingRight: 6 }}>
                             <div style={{ display: 'flex', alignItems: 'center', gap: '0.2rem', overflow: 'hidden' }}>
-                              <span style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.58rem', color: 'rgba(100,100,100,0.45)', flexShrink: 0 }}>{sortMode === 'rank' ? (p.rank ?? '—') : mIdx + 1}</span>
+                              <span style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.58rem', color: 'rgba(100,100,100,0.45)', flexShrink: 0 }}>{sortMode === 'rank' && minorsFilter !== 'minors' ? (p.rank ?? '—') : mIdx + 1}</span>
                               <span style={{ fontWeight: 600, fontSize: '0.78rem', color: 'var(--text)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{p.name}</span>
                               {minorsIds.has(p.id) && <span style={{ color: '#4ade80', fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: '0.55rem', flexShrink: 0 }}>M</span>}
                             </div>

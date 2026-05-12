@@ -6,6 +6,7 @@ const RANKINGS_DIR = path.join(process.cwd(), 'data', 'rankings', 'sources')
 
 function normalize(s: string) {
   return s
+    .normalize('NFD').replace(/[̀-ͯ]/g, '')
     .toLowerCase().trim()
     .replace(/\s+(jr\.?|sr\.?|ii|iii|iv|vi{0,3}|ix|v)$/i, '')
     .replace(/[^a-z0-9]/g, '')

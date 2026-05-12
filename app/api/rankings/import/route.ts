@@ -46,8 +46,10 @@ function parseTier(val: string | undefined): number | null {
 }
 
 function parseRank(val: string | undefined): number | null {
-  if (!val || val.trim() === '' || val.trim().toUpperCase() === 'NR') return null
-  const n = parseFloat(val)
+  if (!val) return null
+  const cleaned = val.trim().replace(/^[~≈\s]+/, '')
+  if (!cleaned || cleaned.toUpperCase() === 'NR') return null
+  const n = parseFloat(cleaned)
   return isNaN(n) ? null : Math.round(n)
 }
 

@@ -242,6 +242,20 @@ export function PlayerDrawer({ player, onClose, globalOwnership, minorsIds, mlbT
     return idx>=0 ? idx+1 : null
   }, [allPlayers, player.id, player.rank, primaryPos])
 
+  const minorsRank = useMemo(() => {
+    if (!isMinors || !player.rank) return null
+    const ranked = allPlayers.filter(p => minorsIds.has(p.id) && p.rank!=null).sort((a,b)=>a.rank-b.rank)
+    const idx = ranked.findIndex(p => p.id===player.id)
+    return idx>=0 ? idx+1 : null
+  }, [allPlayers, player.id, player.rank, isMinors, minorsIds])
+
+  const minorsPosRank = useMemo(() => {
+    if (!isMinors || !player.rank || !primaryPos) return null
+    const ranked = allPlayers.filter(p => minorsIds.has(p.id) && p.rank!=null && p.positions?.split(',')[0]?.trim()===primaryPos).sort((a,b)=>a.rank-b.rank)
+    const idx = ranked.findIndex(p => p.id===player.id)
+    return idx>=0 ? idx+1 : null
+  }, [allPlayers, player.id, player.rank, isMinors, minorsIds, primaryPos])
+
   const toolGrades = useMemo(() => {
     const mlbEntry = mlbamId ? mlbToolsMap[String(mlbamId)] : null
     const model = player.model_scores
@@ -1232,7 +1246,7 @@ export function PlayerDrawer({ player, onClose, globalOwnership, minorsIds, mlbT
               <div style={{display:'flex',alignItems:'center',gap:'0.5rem',flexWrap:'wrap'}}>
                 <span style={{fontSize:'1.4rem',fontWeight:700,color:'var(--text)'}}>{player.name}</span>
                 {isMinors&&<span style={{color:'#4ade80',fontFamily:'var(--font-display)',fontWeight:800,fontSize:'0.7rem'}}>M</span>}
-                {player.rank&&<span style={{fontFamily:'var(--font-display)',fontWeight:700,fontSize:'0.7rem',color:'var(--muted)',background:'rgba(255,255,255,0.05)',padding:'2px 6px',borderRadius:4}}>#{player.rank}{posRank?` · ${primaryPos} #${posRank}`:''}</span>}
+                {player.rank&&<span style={{fontFamily:'var(--font-display)',fontWeight:700,fontSize:'0.7rem',color:'var(--muted)',background:'rgba(255,255,255,0.05)',padding:'2px 6px',borderRadius:4}}>#{player.rank}{minorsRank?` (${minorsRank})`:''}{posRank?` · ${primaryPos} #${posRank}${minorsPosRank?` (${minorsPosRank})`:''}`:''}</span>}
               </div>
               <div style={{display:'flex',gap:'0.5rem',alignItems:'center',marginTop:'0.25rem',flexWrap:'wrap'}}>
                 <span style={{fontFamily:'var(--font-display)',fontWeight:700,fontSize:'0.72rem',color:'var(--accent)'}}>{cleanPositions(player.positions)}</span>

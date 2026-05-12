@@ -252,12 +252,17 @@ export async function POST() {
     fs.writeFileSync(RANKINGS_OUT, JSON.stringify(output, null, 2), 'utf-8')
 
     // --- Patch players.json ---
-    for (const p of Object.values(players) as any[]) delete p.rank
+    for (const p of Object.values(players) as any[]) { delete p.rank; delete p.minors_rank }
     for (const entry of finalOX) {
       if (entry.id && players[entry.id]) players[entry.id].rank = entry.rank
     }
     for (const entry of prospectResult) {
       if (entry.id && players[entry.id]) players[entry.id].rank = entry.rank
+    }
+    // minors_rank = position in the full prospect list (all sources, overall + prospect)
+    for (let i = 0; i < fullProspectRanked.length; i++) {
+      const { id } = fullProspectRanked[i]
+      if (id && players[id]) players[id].minors_rank = i + 1
     }
     fs.writeFileSync(PLAYERS_PATH, JSON.stringify(players, null, 2), 'utf-8')
 
