@@ -119,7 +119,7 @@ export async function POST() {
           overallData[pid].weightSum += source.weight
         }
       }
-      for (const pid of allOverallPids) {
+      for (const pid of Array.from(allOverallPids)) {
         if (!sourcePidSets[si].has(pid)) {
           if (!overallData[pid]) overallData[pid] = { weightedSum: 0, weightSum: 0, name: players[pid]?.name ?? '', position: players[pid]?.positions ?? '', team: players[pid]?.team ?? '' }
           overallData[pid].weightedSum += penalty * source.weight
