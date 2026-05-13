@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import fs from 'fs'
 import path from 'path'
+import { execSync } from 'child_process'
 
 const BASE = path.join(process.cwd(), 'data')
 const SOURCES_DIR = path.join(BASE, 'rankings', 'sources')
@@ -19,7 +20,7 @@ function daysOld(dateStr: string): number {
   return Math.floor((Date.now() - new Date(dateStr).getTime()) / (1000 * 60 * 60 * 24))
 }
 
-const HALF_LIFE_DAYS = 30
+const HALF_LIFE_DAYS = 45
 function stalenessWeight(dateStr: string): number {
   const d = daysOld(dateStr)
   if (d >= 365) return 0
@@ -92,15 +93,36 @@ export async function POST() {
     }
 
     // --- OVERALL ---
-    const overallData: Record<string, { weightedSum: number; weightSum: number; name: string; position: string; team: string }> = {}
+    // Pre-scan: per-source PID sets and per-source penalties for absence
+    const sourcePidSets: Set<string>[] = []
+    const sourcePenalties: number[] = []
     for (const source of overallSources) {
       const maxRank = Math.max(...source.players.map((p: any) => p.rank ?? 0))
-      const penalty = maxRank + 1
+      sourcePenalties.push(maxRank + 1)
+      const pids = new Set<string>()
+      for (const row of source.players) {
+        for (const pid of resolveIds(row, nameMap, players)) pids.add(pid)
+      }
+      sourcePidSets.push(pids)
+    }
+    const allOverallPids = new Set<string>(sourcePidSets.flatMap(s => [...s]))
+
+    const overallData: Record<string, { weightedSum: number; weightSum: number; name: string; position: string; team: string }> = {}
+    for (let si = 0; si < overallSources.length; si++) {
+      const source = overallSources[si]
+      const penalty = sourcePenalties[si]
       for (const row of source.players) {
         const rank = row.rank ?? penalty
         for (const pid of resolveIds(row, nameMap, players)) {
           if (!overallData[pid]) overallData[pid] = { weightedSum: 0, weightSum: 0, name: players[pid]?.name ?? row.name, position: row.position, team: row.team }
           overallData[pid].weightedSum += rank * source.weight
+          overallData[pid].weightSum += source.weight
+        }
+      }
+      for (const pid of allOverallPids) {
+        if (!sourcePidSets[si].has(pid)) {
+          if (!overallData[pid]) overallData[pid] = { weightedSum: 0, weightSum: 0, name: players[pid]?.name ?? '', position: players[pid]?.positions ?? '', team: players[pid]?.team ?? '' }
+          overallData[pid].weightedSum += penalty * source.weight
           overallData[pid].weightSum += source.weight
         }
       }
@@ -156,90 +178,28 @@ export async function POST() {
     prospectOnlyRanked.sort((a, b) => a.avgRank - b.avgRank)
     const prospectOnlyIds = new Set(prospectOnlyRanked.map(p => p.id))
 
-    // --- OPEN UNIVERSE ---
-    type XPlayer = { id: string | null; name: string; position: string; team: string; targetPPosition: number }
-    const xPlayers: XPlayer[] = []
-
+    // --- OPEN UNIVERSE CANDIDATES ---
+    // Collect X players for insertion in build-blend-rank.js using minors_rank anchoring
+    const xCandidates: Array<{ id: string | null; name: string; position: string; team: string; targetPPosition: number }> = []
     for (const source of openSources) {
       for (const row of source.players) {
         if (!row.rank) continue
         const ids = resolveIds(row, nameMap, players)
         const id = ids.length >= 1 ? ids[0] : null
         if (id && (overallIds.has(id) || prospectOnlyIds.has(id))) continue
-        xPlayers.push({ id, name: row.name, position: row.position ?? '', team: row.team ?? '', targetPPosition: row.rank })
+        xCandidates.push({ id, name: row.name, position: row.position ?? '', team: row.team ?? '', targetPPosition: row.rank })
       }
     }
 
-    type XSlot = XPlayer & { oRankAnchor: number | null; pOnlyPosition: number | null }
-    const xWithAnchor: XSlot[] = xPlayers.map(xp => {
-      const pIndex = xp.targetPPosition - 1
-      const anchorProspect = fullProspectRanked[pIndex]
-      if (!anchorProspect) return { ...xp, oRankAnchor: null, pOnlyPosition: null }
-      const oRank = overallRankById[anchorProspect.id]
-      if (oRank != null) {
-        return { ...xp, oRankAnchor: oRank, pOnlyPosition: null }
-      } else {
-        const pOnlyPos = prospectOnlyRanked.findIndex(p => p.id === anchorProspect.id)
-        return { ...xp, oRankAnchor: null, pOnlyPosition: pOnlyPos >= 0 ? pOnlyPos + 1 : null }
-      }
-    })
+    // Assign ranks to overall and prospect results
+    const overallFinal: Array<{ id: string; name: string; rank: number }> = overallResult.map(p => ({ id: p.id, name: p.name, rank: p.rank }))
+    const lastOverallRank = overallFinal.length > 0 ? overallFinal[overallFinal.length - 1].rank : 0
 
-    const xAnchored = xWithAnchor.filter(x => x.oRankAnchor !== null).sort((a, b) => a.oRankAnchor! - b.oRankAnchor!)
-    const xFallback = xWithAnchor.filter(x => x.oRankAnchor === null)
-
-    // --- BUILD O + anchored X list ---
-    type EEntry = { id: string | null; name: string; sortKey: number; source: 'O' | 'X' }
-    const eEntries: EEntry[] = []
-
-    for (const p of overallResult) {
-      eEntries.push({ id: p.id, name: p.name, sortKey: p.rank, source: 'O' })
-    }
-
-    const anchorOffsets: Record<number, number> = {}
-    for (const xp of xAnchored) {
-      const anchor = xp.oRankAnchor!
-      if (anchorOffsets[anchor] === undefined) anchorOffsets[anchor] = 0
-      const sortKey = anchor + 0.5 + anchorOffsets[anchor] * 0.05
-      anchorOffsets[anchor]++
-      eEntries.push({ id: xp.id, name: xp.name, sortKey, source: 'X' })
-    }
-
-    eEntries.sort((a, b) => a.sortKey - b.sortKey)
-
-    const finalOX: Array<{ id: string | null; name: string; source: string; rank: number }> = []
-    for (let i = 0; i < eEntries.length; i++) {
-      const prev = finalOX[i - 1]
-      const tied = prev && Math.abs(eEntries[i].sortKey - eEntries[i-1].sortKey) < 0.0001
-      finalOX.push({ id: eEntries[i].id, name: eEntries[i].name, source: eEntries[i].source, rank: tied ? prev.rank : i + 1 })
-    }
-
-    const lastErank = finalOX.length > 0 ? Math.max(...finalOX.map(p => p.rank)) : 0
-
-    // --- P-only + fallback X ---
-    type PXEntry = { id: string; name: string; sortKey: number; source: 'P' | 'X' }
-    const pxEntries: PXEntry[] = []
-
+    const prospectResult: Array<{ id: string; name: string; rank: number }> = []
     for (let i = 0; i < prospectOnlyRanked.length; i++) {
-      pxEntries.push({ id: prospectOnlyRanked[i].id, name: prospectOnlyRanked[i].name, sortKey: i + 1, source: 'P' })
-    }
-
-    for (const xp of xFallback) {
-      const sortKey = xp.pOnlyPosition != null ? xp.pOnlyPosition + 0.5 : 99999
-      pxEntries.push({ id: xp.id ?? '', name: xp.name, sortKey, source: 'X' })
-    }
-
-    pxEntries.sort((a, b) => a.sortKey - b.sortKey)
-
-    const prospectResult: Array<{ id: string; name: string; source: string; rank: number }> = []
-    for (let i = 0; i < pxEntries.length; i++) {
       const prev = prospectResult[i - 1]
-      const tied = prev && Math.abs(pxEntries[i].sortKey - pxEntries[i-1].sortKey) < 0.0001
-      prospectResult.push({
-        id: pxEntries[i].id,
-        name: pxEntries[i].name,
-        source: pxEntries[i].source,
-        rank: tied ? prev.rank : i + 1
-      })
+      const tied = prev && Math.abs(prospectOnlyRanked[i].avgRank - prospectOnlyRanked[i-1].avgRank) < 0.0001
+      prospectResult.push({ id: prospectOnlyRanked[i].id, name: prospectOnlyRanked[i].name, rank: tied ? prev.rank : lastOverallRank + i + 1 })
     }
 
     // --- Write output ---
@@ -247,14 +207,15 @@ export async function POST() {
     const output = {
       computedAt: new Date().toISOString(),
       sourcesUsed: allSources.map(s => ({ filename: s.filename, sourceName: s.sourceName, date: s.date, rankType: s.rankType, weight: s.weight })),
-      overall: finalOX,
+      overall: overallFinal,
       prospects: prospectResult,
+      xCandidates,
     }
     fs.writeFileSync(RANKINGS_OUT, JSON.stringify(output, null, 2), 'utf-8')
 
     // --- Patch players.json ---
     for (const p of Object.values(players) as any[]) { delete p.rank; delete p.minors_rank }
-    for (const entry of finalOX) {
+    for (const entry of overallFinal) {
       if (entry.id && players[entry.id]) players[entry.id].rank = entry.rank
     }
     for (const entry of prospectResult) {
@@ -267,14 +228,24 @@ export async function POST() {
     }
     fs.writeFileSync(PLAYERS_PATH, JSON.stringify(players, null, 2), 'utf-8')
 
+    // --- Run blend ---
+    let blendMsg = ''
+    try {
+      const blendScript = path.join(process.cwd(), 'scripts', 'build-blend-rank.js')
+      execSync(`node "${blendScript}"`, { cwd: process.cwd(), timeout: 30000 })
+      blendMsg = 'blend ok'
+    } catch (blendErr: any) {
+      blendMsg = `blend failed: ${blendErr.message ?? blendErr}`
+    }
+
     return NextResponse.json({
       success: true,
-      overallRanked: finalOX.filter(p => p.source === 'O').length,
-      openInO: xAnchored.length,
-      prospectsSlotted: prospectResult.filter(p => p.source === 'P').length,
-      openInP: xFallback.length,
-      totalRanked: finalOX.length + prospectResult.length,
+      overallRanked: overallFinal.length,
+      prospectsSlotted: prospectResult.length,
+      xCandidates: xCandidates.length,
+      totalRanked: overallFinal.length + prospectResult.length,
       sourcesUsed: allSources.length,
+      blendMsg,
     })
   } catch (err: any) {
     console.error('Compute error:', err)

@@ -58,7 +58,35 @@ unranked.sort((a,b)=>a.model_rank-b.model_rank);
 ranked.forEach((r,i)=>r.final_rank=i+1);
 unranked.forEach((r,i)=>r.final_rank=ranked.length+i+1);
 
-const all=[...ranked,...unranked];
+// --- Insert X candidates ---
+// nonGradRanked: consensus-ranked players with minors_rank (non-graduated prospects), sorted by final_rank
+const xCandidates = rankings.xCandidates ?? [];
+const nonGradRanked = ranked.filter(r => players[r.fantraxId]?.minors_rank !== undefined);
+// nonGradRanked is already sorted by final_rank since ranked is sorted
+
+const xEntries = [];
+for (const xc of xCandidates) {
+  const anchor = nonGradRanked[xc.targetPPosition - 1];
+  if (!anchor) continue;
+  xEntries.push({ fantraxId: xc.id ?? '', name: xc.name, position: xc.position ?? '', team: xc.team ?? '',
+    sortKey: anchor.final_rank + 0.5, cns_rank: null, model_rank: null, blended_rank: null,
+    overall: null, dynasty_score: null, level: null, pos_type: null, mlbam_id: null, age: null });
+}
+
+// Merge ranked + X entries, re-sort, reassign final ranks
+const allRankedAndX = [
+  ...ranked.map(r => ({ ...r, sortKey: r.final_rank })),
+  ...xEntries,
+];
+allRankedAndX.sort((a,b) => a.sortKey - b.sortKey);
+allRankedAndX.forEach((r,i) => r.final_rank = i+1);
+
+// Append unranked after (offset by allRankedAndX length)
+unranked.forEach((r,i) => r.final_rank = allRankedAndX.length + i + 1);
+
+const all=[...allRankedAndX,...unranked];
+
+console.log(`X candidates inserted: ${xEntries.length} of ${xCandidates.length}`);
 
 // Write output
 const output = {
@@ -71,13 +99,14 @@ const output = {
   players: {},
 };
 for (const r of all) {
+  if (!r.fantraxId) continue;
   output.players[r.fantraxId] = {
     mlbam_id:     r.mlbam_id,
     name:         r.name,
     final_rank:   r.final_rank,
     cns_rank:     r.cns_rank,
     model_rank:   r.model_rank,
-    blended_rank: +r.blended_rank.toFixed(1),
+    blended_rank: r.blended_rank != null ? +r.blended_rank.toFixed(1) : null,
     overall:      r.overall,
     dynasty_score:r.dynasty_score,
     level:        r.level,

@@ -82,7 +82,12 @@ export default function TradePage() {
   }, [allRosters])
 
   const minorsIds = useMemo(
-    () => new Set(allPlayers.filter(p => !p.mlbam_id || !mlbToolsMap[p.mlbam_id]).map(p => p.id)),
+    () => new Set(allPlayers.filter(p => {
+      if (!p.mlbam_id) return true
+      const t = mlbToolsMap[String(p.mlbam_id)]
+      if (!t) return true
+      return (t._pa ?? 0) < 130 && (t._ip ?? 0) < 50
+    }).map(p => p.id)),
     [allPlayers, mlbToolsMap]
   )
 

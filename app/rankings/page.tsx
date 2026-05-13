@@ -77,7 +77,7 @@ export default function RankingsPage() {
       const d = await res.json()
       if (res.ok) {
         setComputeStatus('success')
-        setComputeMsg(`Done — ${d.overallRanked} overall · ${d.openInO} open slotted into O · ${d.prospectsSlotted} prospects · ${d.openInP} open slotted into P · ${d.totalRanked} total`)
+        setComputeMsg(`Done — ${d.overallRanked} overall · ${d.prospectsSlotted} prospects · ${d.xCandidates} open · ${d.totalRanked} total · ${d.blendMsg}`)
         loadStats(); loadCompute()
       } else { setComputeStatus('error'); setComputeMsg(d.error ?? 'Compute failed') }
     } catch { setComputeStatus('error'); setComputeMsg('Network error') }
