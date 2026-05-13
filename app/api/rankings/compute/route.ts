@@ -105,7 +105,7 @@ export async function POST() {
       }
       sourcePidSets.push(pids)
     }
-    const allOverallPids = new Set<string>(sourcePidSets.flatMap(s => [...s]))
+    const allOverallPids = new Set<string>(sourcePidSets.flatMap(s => Array.from(s)))
 
     const overallData: Record<string, { weightedSum: number; weightSum: number; name: string; position: string; team: string }> = {}
     for (let si = 0; si < overallSources.length; si++) {
