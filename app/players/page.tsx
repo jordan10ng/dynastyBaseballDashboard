@@ -589,8 +589,10 @@ export default function PlayersPage() {
               const col = activeCols.find(c => c.key === sf.key)
               if (!col) continue
               const val = col.getValue(playerStats)
-              if (sf.min !== '' && (val == null || val < Number(sf.min))) return false
-              if (sf.max !== '' && (val == null || val > Number(sf.max))) return false
+              const isPct = col.label.endsWith('%')
+              const scale = isPct ? 100 : 1
+              if (sf.min !== '' && (val == null || val * scale < Number(sf.min))) return false
+              if (sf.max !== '' && (val == null || val * scale > Number(sf.max))) return false
             }
           }
         }
