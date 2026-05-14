@@ -71,8 +71,12 @@ def career_hitter(pid):
         iso  = slg - avg
         k_pct  = so / pa
         bb_pct = bb / pa
-        tob    = h + bb + hbp
-        sb_rate = sb / tob if tob > 0 else 0
+        doubles = s.get('doubles') or 0
+        triples = s.get('triples') or 0
+        hr      = s.get('hr') or 0
+        singles = h - doubles - triples - hr
+        steal_opps = singles + bb + hbp
+        sb_rate = sb / steal_opps if steal_opps > 0 else 0
 
         n = norms.get(f"MLB|{s['year']}", {}).get('hitters')
 
