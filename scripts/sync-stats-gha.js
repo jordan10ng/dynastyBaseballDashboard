@@ -25,9 +25,9 @@ function fmt3(n) {
   return n.toFixed(3).replace(/^0\./, '.')
 }
 
-const LEVEL_ORDER = ['AAA','AA','High-A','Single-A','ROK','DSL']
+const LEVEL_ORDER = ['AAA','AA','High-A','Single-A','ROK','ACL','FCL','DSL']
 
-const SPORT_ID_TO_LEVEL = { 1: 'MLB', 11: 'AAA', 12: 'AA', 13: 'High-A', 14: 'Single-A', 15: 'ROK', 16: 'DSL', 17: 'ROK', 19: 'ROK' };
+const SPORT_ID_TO_LEVEL = { 1: 'MLB', 11: 'AAA', 12: 'AA', 13: 'High-A', 14: 'Single-A', 15: 'ROK', 16: 'ROK', 17: 'DSL', 19: 'ROK' };
 function sportAbbrToLevel(sport) {
   if (!sport) return 'Other';
   if (sport.id && SPORT_ID_TO_LEVEL[sport.id]) return SPORT_ID_TO_LEVEL[sport.id];
@@ -65,16 +65,19 @@ function splitsToRow(splits, group, isMLB) {
     }
   }
 
+  const team = splits[0]?.team?.name ?? ''
   const level = isMLB ? 'MLB' : (() => {
     const levels = splits.map(s => sportAbbrToLevel(s.sport))
     for (const lv of LEVEL_ORDER) {
       if (levels.includes(lv)) return lv
     }
     const sid = splits[0]?.sport?.id ?? 0
+    if (sid === 16) {
+      if (team.includes('ACL')) return 'ACL'
+      if (team.includes('FCL')) return 'FCL'
+    }
     return SPORT_ID_TO_LEVEL[sid] ?? 'MiLB'
   })()
-
-  const team = splits[0]?.team?.name ?? ''
   const sportId = isMLB ? 1 : (splits[0]?.sport?.id ?? 0)
 
   if (group === 'pitching') {

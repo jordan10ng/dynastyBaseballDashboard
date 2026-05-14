@@ -11,7 +11,7 @@ export function sportAbbrToLevel(abbr: string, sportId?: number): string {
 
 export function isMlbLevel(level: string) { return level === 'MLB' }
 
-export const LEVEL_ORDER = ['ROK','A','Single-A','A+','High-A','AA','AAA','MLB','Other']
+export const LEVEL_ORDER = ['ACL','FCL','DSL','ROK','A','Single-A','A+','High-A','AA','AAA','MLB','Other']
 export function levelSortVal(level: string) {
   const i = LEVEL_ORDER.indexOf(level)
   return i >= 0 ? i : 99

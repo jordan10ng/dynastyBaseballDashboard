@@ -198,7 +198,7 @@ function ToolArcChart({ points, isPitcher, dateMode }: { points: any[]; isPitche
 }
 
 const ARC_AVG_AGES: Record<string,number> = {
-  'DSL':17.9,'Complex':19.9,'Rookie':20.4,'Single-A':21.3,'High-A':22.6,'AA':24.0,'AAA':26.4
+  'ACL':17.9,'FCL':17.9,'DSL':17.9,'Complex':19.9,'Rookie':20.4,'Single-A':21.3,'High-A':22.6,'AA':24.0,'AAA':26.4
 }
 const ARC_K: Record<string,number> = { k_pct:60, bb_pct:120, iso:120, sb_rate:60, k_pct_pit:20, bb_pct_pit:40 }
 
@@ -563,7 +563,7 @@ export function PlayerDrawer({ player, onClose, globalOwnership, minorsIds, mlbT
     const birthDate = player.birthDate ?? null
     const isPit = pitch
     const toolNames = isPit ? ['stuff','control'] : ['hit','power','speed']
-    const MILB = new Set(['DSL','Complex','Rookie','Single-A','High-A','AA','AAA'])
+    const MILB = new Set(['ACL','FCL','DSL','Complex','Rookie','Single-A','High-A','AA','AAA'])
 
     // collect all milb rows with year, filtering by type
     const allRows: any[] = []
@@ -669,7 +669,7 @@ export function PlayerDrawer({ player, onClose, globalOwnership, minorsIds, mlbT
       return Math.round(shrunk)
     }
 
-    const LVL_RANK: Record<string,number> = {'DSL':0,'Complex':1,'Rookie':2,'Single-A':3,'High-A':4,'AA':5,'AAA':6}
+    const LVL_RANK: Record<string,number> = {'ACL':0,'FCL':0,'DSL':0,'Complex':1,'Rookie':2,'Single-A':3,'High-A':4,'AA':5,'AAA':6}
 
     function scoreToolAtPoint(upToYear: number, upToLevel: string, toolName: string): number | null {
       const toolModels = models[toolName]
@@ -784,12 +784,13 @@ export function PlayerDrawer({ player, onClose, globalOwnership, minorsIds, mlbT
     const isPit = pitch
     const toolNames = isPit ? ['stuff','control'] : ['hit','power','speed']
     const birthDate = player.birthDate ?? null
-    const MILB = new Set(['DSL','Complex','Rookie','Single-A','High-A','AA','AAA'])
+    const MILB = new Set(['ACL','FCL','DSL','Complex','Rookie','Single-A','High-A','AA','AAA'])
     function normLevel(l:string, year?: number):string {
       if(l==='A') return 'Single-A'
       if(l==='A+'||l==='High A') return 'High-A'
       if(l==='ROK'||l==='Rookie Advanced') return (year && year >= 2021) ? 'Complex' : 'Rookie'
       if(l==='CPX') return 'Complex'
+      if(l==='ACL'||l==='FCL') return 'Complex'
       return l
     }
 
@@ -861,7 +862,7 @@ export function PlayerDrawer({ player, onClose, globalOwnership, minorsIds, mlbT
     for (const { date, year, g } of allGames) {
       // Accumulate this game into its season/level bucket
       const lvl = normLevel(g.level ?? '', year)
-      const displayLvl = (g.level === 'ROK' && year >= 2021) ? 'DSL/CPX' : (g.level ?? lvl)
+      const displayLvl = (g.level === 'ROK' && year >= 2021) ? 'CPX' : (g.level ?? lvl)
 
       // MLB games: accumulate into mlbGameCum but don't emit a point here
       if (g.level === 'MLB') {
@@ -970,7 +971,7 @@ export function PlayerDrawer({ player, onClose, globalOwnership, minorsIds, mlbT
     if (!norms || !hasLogs) return []
     const isPit = pitch
     const toolNames = isPit ? ['stuff','control'] : ['hit','power','speed']
-    const MILB = new Set(['DSL','Complex','Rookie','Single-A','High-A','AA','AAA'])
+    const MILB = new Set(['ACL','FCL','DSL','Complex','Rookie','Single-A','High-A','AA','AAA'])
     // Per-tool sample confidence K (PA for hitters, IP for pitchers)
     const MLB_K: Record<string,number> = { hit:150, power:120, speed:60, stuff:20, control:40 }
 
