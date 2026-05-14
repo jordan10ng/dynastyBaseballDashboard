@@ -30,7 +30,7 @@ const D52_ID = 'd3prsagvmgftfdc3'
 const BAT_POSITIONS = ['C','1B','2B','SS','3B','INF','LF','CF','RF','OF','UT']
 const ARM_POSITIONS = ['SP','RP','P']
 const ALL_POSITIONS = [...BAT_POSITIONS, ...ARM_POSITIONS]
-const LEVEL_OPTIONS = ['MLB','AAA','AA','A+','A','ROK','CPX','DSL']
+const LEVEL_OPTIONS = ['MLB','AAA','AA','A+','A','CPX','DSL']
 const normalizeLevel = (l: string | undefined) => {
   if (!l) return ''
   if (l === 'High-A') return 'A+'
