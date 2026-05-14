@@ -860,11 +860,18 @@ export default function PlayersPage() {
                       : availableToolKeys.map(k => <option key={k} value={k}>{TOOL_LABELS[k] ?? k}</option>)
                     }
                   </select>
-                  {(() => { const col = activeCols.find(c => c.key === sf.key); const isPct = sf.kind === 'stat' && col?.label.endsWith('%'); return (<>
-                  <input type="number" placeholder="Min" value={sf.min} onChange={e => updateStatFilter(sf.id, 'min', e.target.value)} style={advInputStyle} />{isPct && <span style={{ color: 'var(--muted)', fontSize: '0.75rem', fontFamily: 'var(--font-display)' }}>%</span>}
-                  <span style={{ color: 'var(--muted)', fontSize: '0.8rem' }}>–</span>
-                  <input type="number" placeholder="Max" value={sf.max} onChange={e => updateStatFilter(sf.id, 'max', e.target.value)} style={advInputStyle} />{isPct && <span style={{ color: 'var(--muted)', fontSize: '0.75rem', fontFamily: 'var(--font-display)' }}>%</span>}
-                  </>)})()}
+                  {(() => { const col = activeCols.find(c => c.key === sf.key); const isPct = sf.kind === 'stat' && col?.label.endsWith('%'); const isDot = sf.kind === 'stat' && DOT_STAT_KEYS.has(col?.key ?? '');
+                  const adornStyle: React.CSSProperties = { position: 'relative', display: 'inline-flex', alignItems: 'center' };
+                  const symStyle: React.CSSProperties = { position: 'absolute', fontSize: '0.72rem', fontFamily: 'var(--font-display)', color: 'var(--muted)', pointerEvents: 'none' };
+                  const mkInput = (val: string, ph: string, field: 'min'|'max') => (
+                    <div style={adornStyle}>
+                      {isDot && <span style={{ ...symStyle, left: '0.4rem' }}>.</span>}
+                      <input type="number" placeholder={ph} value={val} onChange={e => updateStatFilter(sf.id, field, e.target.value)}
+                        style={{ ...advInputStyle, paddingLeft: isDot ? '0.9rem' : advInputStyle.padding, paddingRight: isPct ? '1.1rem' : advInputStyle.padding }} />
+                      {isPct && <span style={{ ...symStyle, right: '0.4rem' }}>%</span>}
+                    </div>
+                  );
+                  return (<>{mkInput(sf.min,'Min','min')}<span style={{ color: 'var(--muted)', fontSize: '0.8rem' }}>–</span>{mkInput(sf.max,'Max','max')}</>); })()}
                   <button onClick={() => removeStatFilter(sf.id)} style={{ background: 'none', border: 'none', color: '#ef4444', cursor: 'pointer', fontSize: '0.75rem', fontFamily: 'var(--font-display)', fontWeight: 700 }}>✕</button>
                 </div>
               ))}
