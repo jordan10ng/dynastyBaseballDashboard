@@ -270,7 +270,7 @@ function withOverall(t: any): any {
   return { ...t, overall }
 }
 
-type StatFilter = { id: number; kind: 'stat' | 'tool'; key: string; min: string; max: string }
+type StatFilter = { id: number; kind: 'stat' | 'tool' | 'raw'; key: string; min: string; max: string }
 type SortMode = 'rank' | 'position' | 'stat' | 'tool'
 type MinorsFilter = 'all' | 'mlb' | 'minors'
 type OwnFilter = 'all' | 'jordan' | 'matt' | 'colin' | 'pat' | 'soo' | 'fa-all' | 'fa-any'
@@ -517,8 +517,8 @@ export default function PlayersPage() {
     setStatFilters(prev => prev.map(f => {
       if (f.id !== id) return f
       if (field === 'kind') {
-        const newKey = value === 'stat' ? (activeCols[0]?.key ?? '') : (availableToolKeys[0] ?? '')
-        return { ...f, kind: value as 'stat'|'tool', key: newKey, min: '', max: '' }
+        const newKey = value === 'stat' ? (activeCols[0]?.key ?? '') : value === 'raw' ? (activeRawKeys[0] ?? '') : (availableToolKeys[0] ?? '')
+        return { ...f, kind: value as 'stat'|'tool'|'raw', key: newKey, min: '', max: '' }
       }
       return { ...f, [field]: value }
     }))
@@ -585,6 +585,10 @@ export default function PlayersPage() {
           for (const sf of statFilters) {
             if (sf.kind === 'tool') {
               const val = playerTools?.[sf.key] ?? null
+              if (sf.min !== '' && (val == null || val < Number(sf.min))) return false
+              if (sf.max !== '' && (val == null || val > Number(sf.max))) return false
+            } else if (sf.kind === 'raw') {
+              const val = playerTools?._raw?.[sf.key] ?? null
               if (sf.min !== '' && (val == null || val < Number(sf.min))) return false
               if (sf.max !== '' && (val == null || val > Number(sf.max))) return false
             } else {
