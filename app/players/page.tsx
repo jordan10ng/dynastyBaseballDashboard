@@ -115,6 +115,8 @@ const ARM_COLS: StatCol[] = [
     fmt: s => { const bf = s?.battersFaced||((s?.atBats??0)+(s?.baseOnBalls??0)+(s?.hitByPitch??0)); return bf ? ((s.strikeOuts-s.baseOnBalls)/bf*100).toFixed(1)+'%' : '—' } },
 ]
 
+const DOT_STAT_KEYS = new Set(['avg','obp','slg','ops','iso','baa'])
+
 function posOrder(pos: string) {
   const order = ['C','1B','2B','SS','3B','INF','LF','CF','RF','OF','UT','SP','RP','P']
   const i = order.indexOf(pos)
@@ -589,8 +591,7 @@ export default function PlayersPage() {
               const col = activeCols.find(c => c.key === sf.key)
               if (!col) continue
               const val = col.getValue(playerStats)
-              const isPct = col.label.endsWith('%')
-              const scale = isPct ? 100 : 1
+              const scale = col.label.endsWith('%') ? 100 : DOT_STAT_KEYS.has(col.key) ? 1000 : 1
               if (sf.min !== '' && (val == null || val * scale < Number(sf.min))) return false
               if (sf.max !== '' && (val == null || val * scale > Number(sf.max))) return false
             }
@@ -859,9 +860,11 @@ export default function PlayersPage() {
                       : availableToolKeys.map(k => <option key={k} value={k}>{TOOL_LABELS[k] ?? k}</option>)
                     }
                   </select>
-                  <input type="number" placeholder="Min" value={sf.min} onChange={e => updateStatFilter(sf.id, 'min', e.target.value)} style={advInputStyle} />
+                  {(() => { const col = activeCols.find(c => c.key === sf.key); const isPct = sf.kind === 'stat' && col?.label.endsWith('%'); return (<>
+                  <input type="number" placeholder="Min" value={sf.min} onChange={e => updateStatFilter(sf.id, 'min', e.target.value)} style={advInputStyle} />{isPct && <span style={{ color: 'var(--muted)', fontSize: '0.75rem', fontFamily: 'var(--font-display)' }}>%</span>}
                   <span style={{ color: 'var(--muted)', fontSize: '0.8rem' }}>–</span>
-                  <input type="number" placeholder="Max" value={sf.max} onChange={e => updateStatFilter(sf.id, 'max', e.target.value)} style={advInputStyle} />
+                  <input type="number" placeholder="Max" value={sf.max} onChange={e => updateStatFilter(sf.id, 'max', e.target.value)} style={advInputStyle} />{isPct && <span style={{ color: 'var(--muted)', fontSize: '0.75rem', fontFamily: 'var(--font-display)' }}>%</span>}
+                  </>)})()}
                   <button onClick={() => removeStatFilter(sf.id)} style={{ background: 'none', border: 'none', color: '#ef4444', cursor: 'pointer', fontSize: '0.75rem', fontFamily: 'var(--font-display)', fontWeight: 700 }}>✕</button>
                 </div>
               ))}
