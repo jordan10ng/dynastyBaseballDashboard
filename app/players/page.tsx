@@ -30,13 +30,12 @@ const D52_ID = 'd3prsagvmgftfdc3'
 const BAT_POSITIONS = ['C','1B','2B','SS','3B','INF','LF','CF','RF','OF','UT']
 const ARM_POSITIONS = ['SP','RP','P']
 const ALL_POSITIONS = [...BAT_POSITIONS, ...ARM_POSITIONS]
-const LEVEL_OPTIONS = ['MLB','AAA','AA','A+','A','CPX','DSL']
+const LEVEL_OPTIONS = ['MLB','AAA','AA','A+','A','ROK']
 const normalizeLevel = (l: string | undefined) => {
   if (!l) return ''
   if (l === 'High-A') return 'A+'
   if (l === 'Single-A') return 'A'
-  if (l === 'Rookie' || l === 'ROK' || l === 'Complex') return 'ROK'
-  if (l === 'ACL' || l === 'FCL') return 'CPX'
+  if (l === 'Rookie' || l === 'ROK' || l === 'Complex' || l === 'DSL') return 'ROK'
   return l
 }
 
@@ -114,8 +113,6 @@ const ARM_COLS: StatCol[] = [
     getValue: s => { const bf = s?.battersFaced||((s?.atBats??0)+(s?.baseOnBalls??0)+(s?.hitByPitch??0)); return bf ? (s.strikeOuts-s.baseOnBalls)/bf : null },
     fmt: s => { const bf = s?.battersFaced||((s?.atBats??0)+(s?.baseOnBalls??0)+(s?.hitByPitch??0)); return bf ? ((s.strikeOuts-s.baseOnBalls)/bf*100).toFixed(1)+'%' : '—' } },
 ]
-
-const DOT_STAT_KEYS = new Set(['avg','obp','slg','ops','iso','baa'])
 
 function posOrder(pos: string) {
   const order = ['C','1B','2B','SS','3B','INF','LF','CF','RF','OF','UT','SP','RP','P']
@@ -270,7 +267,7 @@ function withOverall(t: any): any {
   return { ...t, overall }
 }
 
-type StatFilter = { id: number; kind: 'stat' | 'tool' | 'raw'; key: string; min: string; max: string }
+type StatFilter = { id: number; kind: 'stat' | 'tool'; key: string; min: string; max: string }
 type SortMode = 'rank' | 'position' | 'stat' | 'tool'
 type MinorsFilter = 'all' | 'mlb' | 'minors'
 type OwnFilter = 'all' | 'jordan' | 'matt' | 'colin' | 'pat' | 'soo' | 'fa-all' | 'fa-any'
@@ -296,7 +293,6 @@ const advInputStyle = {
   outline: 'none', width: '65px', fontFamily: 'var(--font-display)'
 }
 
-let statFilterIdSeq = 0
 
 const ROW_HEIGHT = 58
 
@@ -341,6 +337,7 @@ export default function PlayersPage() {
   const [selectedLevelFilters, setSelectedLevelFilters] = useState<string[]>([])
   const [levelDropdownOpen, setLevelDropdownOpen] = useState(false)
   const [statFilters, setStatFilters] = useState<StatFilter[]>([])
+  const statFilterIdSeq = useRef(0)
   const listRef = useRef<any>(null)
   const hdrRef = useRef<HTMLDivElement>(null)
   const bodyRef = useRef<HTMLDivElement>(null)
@@ -388,12 +385,7 @@ export default function PlayersPage() {
   }, [allPlayers])
 
   const minorsIds = useMemo(
-    () => new Set(allPlayers.filter(p => {
-      if (!p.mlbam_id) return true
-      const t = mlbToolsMap[String(p.mlbam_id)]
-      if (!t) return true
-      return (t._pa ?? 0) < 130 && (t._ip ?? 0) < 50
-    }).map(p => p.id)),
+    () => new Set(allPlayers.filter(p => !p.mlbam_id || !mlbToolsMap[p.mlbam_id]).map(p => p.id)),
     [allPlayers, mlbToolsMap]
   )
 
@@ -508,8 +500,8 @@ export default function PlayersPage() {
     if (activeCols.length === 0 && availableToolKeys.length === 0) return
     const defaultKind: 'stat' | 'tool' = activeCols.length > 0 ? 'stat' : 'tool'
     const defaultKey = defaultKind === 'stat' ? activeCols[0].key : availableToolKeys[0]
-    setStatFilters(prev => [...prev, { id: ++statFilterIdSeq, kind: defaultKind, key: defaultKey, min: '', max: '' }])
-  }, [activeCols, availableToolKeys])
+    setStatFilters(prev => [...prev, { id: ++statFilterIdSeq.current, kind: defaultKind, key: defaultKey, min: '', max: '' }])
+  }, [activeCols, availableToolKeys, activeRawKeys])
   const removeStatFilter = useCallback((id: number) => {
     setStatFilters(prev => prev.filter(f => f.id !== id))
   }, [])
@@ -583,21 +575,20 @@ export default function PlayersPage() {
           const playerStats = statsMap[p.id]
           const playerTools = playerToolsMap[p.id]
           for (const sf of statFilters) {
-            if (sf.kind === 'tool') {
-              const val = playerTools?.[sf.key] ?? null
+            if (sf.kind === 'raw') {
+              const val = playerTools?._raw?.[sf.key] ?? null
               if (sf.min !== '' && (val == null || val < Number(sf.min))) return false
               if (sf.max !== '' && (val == null || val > Number(sf.max))) return false
-            } else if (sf.kind === 'raw') {
-              const val = playerTools?._raw?.[sf.key] ?? null
+            } else if (sf.kind === 'tool') {
+              const val = playerTools?.[sf.key] ?? null
               if (sf.min !== '' && (val == null || val < Number(sf.min))) return false
               if (sf.max !== '' && (val == null || val > Number(sf.max))) return false
             } else {
               const col = activeCols.find(c => c.key === sf.key)
               if (!col) continue
               const val = col.getValue(playerStats)
-              const scale = col.label.endsWith('%') ? 100 : DOT_STAT_KEYS.has(col.key) ? 1000 : 1
-              if (sf.min !== '' && (val == null || val * scale < Number(sf.min))) return false
-              if (sf.max !== '' && (val == null || val * scale > Number(sf.max))) return false
+              if (sf.min !== '' && (val == null || val < Number(sf.min))) return false
+              if (sf.max !== '' && (val == null || val > Number(sf.max))) return false
             }
           }
         }
@@ -857,25 +848,19 @@ export default function PlayersPage() {
                   <select value={sf.kind} onChange={e => updateStatFilter(sf.id, 'kind', e.target.value)} style={{ ...advInputStyle, width: 'auto' }}>
                     {activeCols.length > 0 && <option value="stat">Stat</option>}
                     {availableToolKeys.length > 0 && <option value="tool">Tool</option>}
+                    {activeRawKeys.length > 0 && <option value="raw">Raw</option>}
                   </select>
                   <select value={sf.key} onChange={e => updateStatFilter(sf.id, 'key', e.target.value)} style={{ ...advInputStyle, width: 'auto' }}>
                     {sf.kind === 'stat'
                       ? activeCols.map(c => <option key={c.key} value={c.key}>{c.label}</option>)
-                      : availableToolKeys.map(k => <option key={k} value={k}>{TOOL_LABELS[k] ?? k}</option>)
+                      : sf.kind === 'raw'
+                        ? activeRawKeys.map(k => <option key={k} value={k}>{(TOOL_LABELS[k] ?? k).replace('+','')}</option>)
+                        : availableToolKeys.map(k => <option key={k} value={k}>{TOOL_LABELS[k] ?? k}</option>)
                     }
                   </select>
-                  {(() => { const col = activeCols.find(c => c.key === sf.key); const isPct = sf.kind === 'stat' && col?.label.endsWith('%'); const isDot = sf.kind === 'stat' && DOT_STAT_KEYS.has(col?.key ?? '');
-                  const adornStyle: React.CSSProperties = { position: 'relative', display: 'inline-flex', alignItems: 'center' };
-                  const symStyle: React.CSSProperties = { position: 'absolute', fontSize: '0.72rem', fontFamily: 'var(--font-display)', color: 'var(--muted)', pointerEvents: 'none' };
-                  const mkInput = (val: string, ph: string, field: 'min'|'max') => (
-                    <div style={adornStyle}>
-                      {isDot && <span style={{ ...symStyle, left: '0.4rem' }}>.</span>}
-                      <input type="number" placeholder={ph} value={val} onChange={e => updateStatFilter(sf.id, field, e.target.value)}
-                        style={{ ...advInputStyle, paddingLeft: isDot ? '0.9rem' : advInputStyle.padding, paddingRight: isPct ? '1.1rem' : advInputStyle.padding }} />
-                      {isPct && <span style={{ ...symStyle, right: '0.4rem' }}>%</span>}
-                    </div>
-                  );
-                  return (<>{mkInput(sf.min,'Min','min')}<span style={{ color: 'var(--muted)', fontSize: '0.8rem' }}>–</span>{mkInput(sf.max,'Max','max')}</>); })()}
+                  <input type="number" placeholder="Min" value={sf.min} onChange={e => updateStatFilter(sf.id, 'min', e.target.value)} style={advInputStyle} />
+                  <span style={{ color: 'var(--muted)', fontSize: '0.8rem' }}>–</span>
+                  <input type="number" placeholder="Max" value={sf.max} onChange={e => updateStatFilter(sf.id, 'max', e.target.value)} style={advInputStyle} />
                   <button onClick={() => removeStatFilter(sf.id)} style={{ background: 'none', border: 'none', color: '#ef4444', cursor: 'pointer', fontSize: '0.75rem', fontFamily: 'var(--font-display)', fontWeight: 700 }}>✕</button>
                 </div>
               ))}
