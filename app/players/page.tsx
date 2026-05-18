@@ -267,7 +267,7 @@ function withOverall(t: any): any {
   return { ...t, overall }
 }
 
-type StatFilter = { id: number; kind: 'stat' | 'tool'; key: string; min: string; max: string }
+type StatFilter = { id: number; kind: 'stat' | 'tool' | 'raw'; key: string; min: string; max: string }
 type SortMode = 'rank' | 'position' | 'stat' | 'tool'
 type MinorsFilter = 'all' | 'mlb' | 'minors'
 type OwnFilter = 'all' | 'jordan' | 'matt' | 'colin' | 'pat' | 'soo' | 'fa-all' | 'fa-any'
