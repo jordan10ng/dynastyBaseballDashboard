@@ -893,7 +893,12 @@ export function PlayerDrawer({ player, onClose, globalOwnership, minorsIds, mlbT
                 const prev = sorted[1] ?? null
                 const delta = (latest.rank != null && prev?.rank != null) ? prev.rank - latest.rank : null
                 return { ...latest, delta }
-              }).sort((a,b) => (a.rank??9999) - (b.rank??9999))
+              }).sort((a,b) => {
+                const dateDiff = new Date(b.date).getTime() - new Date(a.date).getTime()
+                if (dateDiff !== 0) return dateDiff
+                const typeOrder: Record<string,number> = { overall: 0, prospect: 1 }
+                return (typeOrder[a.rankType??'overall']??2) - (typeOrder[b.rankType??'overall']??2)
+              })
               return (
                 <div style={{display:'flex',gap:'0.75rem',flexWrap:'wrap',marginBottom:'1rem'}}>
                   {rows.map((a,i)=>{
