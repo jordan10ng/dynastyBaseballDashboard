@@ -436,8 +436,10 @@ async function run() {
     }
 
     // Canonical scoreTool2 — delegates to shared lib.
+    // Buckets in `cum` use `lvl` (local convention); the shared lib reads `level`.
     const scoreTool2 = (toolName) => {
-      const { score } = scoreMilbTool(Object.values(cum), toolName, {
+      const buckets = Object.values(cum).map(b => ({ ...b, level: b.lvl }));
+      const { score } = scoreMilbTool(buckets, toolName, {
         models, norms: normsData, poolStats: poolStatsData,
         isPit, referenceYear: new Date().getFullYear(),
         getAge: getAge2,
