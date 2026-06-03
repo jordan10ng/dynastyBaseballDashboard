@@ -37,7 +37,6 @@ export default function RankingsPage() {
   const [parsedCols, setParsedCols] = useState<string[]>([])
   const [parsedFile, setParsedFile] = useState<File | null>(null)
   const [sourceName, setSourceName] = useState('')
-  const [sourceDate, setSourceDate] = useState(new Date().toISOString().slice(0, 10))
   const [rankType, setRankType] = useState<'overall' | 'prospect' | 'open'>('overall')
   const [colMapping, setColMapping] = useState<ColMapping>({ rank: '', player: '', position: '', team: '' })
   const [tierMode, setTierMode] = useState(false)
@@ -142,15 +141,17 @@ export default function RankingsPage() {
   }
 
   async function handleImportSubmit() {
-    if (!parsedFile || !sourceName) { setImportStatus('error'); setImportMessage('Need file and source name'); return }
+    if (!parsedFile || !sourceName) { setImportStatus('error'); setImportMessage('Need file and ranker name'); return }
     if (tierMode && !tierColumn) { setImportStatus('error'); setImportMessage('Select a tier column'); return }
     if (!tierMode && !colMapping.rank) { setImportStatus('error'); setImportMessage('Select a rank column'); return }
     if (!colMapping.player) { setImportStatus('error'); setImportMessage('Select a player column'); return }
+    const fullSourceName = `${sourceName.trim()} ${typeLabels[rankType]}`
+    const today = new Date().toISOString().slice(0, 10)
     setImportStatus('loading'); setImportMessage('Saving source...')
     const form = new FormData()
     form.append('file', parsedFile)
-    form.append('sourceName', sourceName)
-    form.append('date', sourceDate)
+    form.append('sourceName', fullSourceName)
+    form.append('date', today)
     form.append('rankType', rankType)
     form.append('colMapping', JSON.stringify(colMapping))
     form.append('tierColumn', tierMode ? tierColumn : '')
@@ -160,11 +161,10 @@ export default function RankingsPage() {
       const d = await res.json()
       if (res.ok) {
         setImportStatus('success')
-        setImportMessage(`Saved — ${d.rowCount} players from ${sourceName}`)
+        setImportMessage(`Saved — ${d.rowCount} players from ${fullSourceName}`)
         setImportMode(false); setParsedFile(null); setParsedCols([])
         setSourceName(''); setRankType('overall'); setTierMode(false)
         setTierColumn(''); setOrderColumn('')
-        setSourceDate(new Date().toISOString().slice(0, 10))
         loadSources()
       } else { setImportStatus('error'); setImportMessage(d.error ?? 'Import failed') }
     } catch { setImportStatus('error'); setImportMessage('Import error') }
@@ -207,20 +207,35 @@ export default function RankingsPage() {
   const prospectSources = sources.filter(s => s.rankType === 'prospect')
   const openSources = sources.filter(s => s.rankType === 'open')
 
+  // Per normalized name+type, find the most recent date — others are superseded
+  const latestByKey: Record<string, string> = {}
+  for (const s of sources) {
+    const key = `${s.sourceName.toLowerCase().trim()}|${s.rankType}`
+    if (!latestByKey[key] || s.date > latestByKey[key]) latestByKey[key] = s.date
+  }
+  function isSuperseded(s: RankingSource) {
+    const key = `${s.sourceName.toLowerCase().trim()}|${s.rankType}`
+    return latestByKey[key] !== s.date
+  }
+
   function SourceRow({ s }: { s: RankingSource }) {
-    const badge = typeBadgeColor(s.rankType)
+    const superseded = isSuperseded(s)
     return (
-      <div style={{ padding: '0.875rem 1.25rem', borderBottom: '1px solid var(--border)', display: 'flex', alignItems: 'center', gap: '1rem' }}>
+      <div style={{ padding: '0.875rem 1.25rem', borderBottom: '1px solid var(--border)', display: 'flex', alignItems: 'center', gap: '1rem', opacity: superseded ? 0.45 : 1 }}>
         <FileText size={14} color="var(--muted)" style={{ flexShrink: 0 }} />
         <div style={{ flex: 1, minWidth: 0 }}>
           <div style={{ fontWeight: 600, fontSize: '0.9rem', marginBottom: 2 }}>{s.sourceName}</div>
           <div style={{ fontSize: '0.75rem', color: 'var(--muted)' }}>{s.date} · {s.rowCount.toLocaleString()} players</div>
         </div>
         <div style={{ textAlign: 'right', flexShrink: 0 }}>
-          <div style={{ fontSize: '0.75rem', color: weightColor(s.weight), fontFamily: 'var(--font-display)', fontWeight: 700 }}>
-            {s.daysOld === 0 ? 'Today' : `${s.daysOld}d old`} · {Math.round(s.weight * 100)}% weight
-          </div>
-          {s.daysOld >= 365 && <div style={{ fontSize: '0.7rem', color: 'var(--danger)' }}>EXPIRED</div>}
+          {superseded ? (
+            <div style={{ fontSize: '0.7rem', color: 'var(--danger)', fontFamily: 'var(--font-display)', fontWeight: 700, letterSpacing: '0.05em' }}>SUPERSEDED</div>
+          ) : (
+            <div style={{ fontSize: '0.75rem', color: weightColor(s.weight), fontFamily: 'var(--font-display)', fontWeight: 700 }}>
+              {s.daysOld === 0 ? 'Today' : `${s.daysOld}d old`} · {Math.round(s.weight * 100)}% weight
+            </div>
+          )}
+          {s.daysOld >= 365 && !superseded && <div style={{ fontSize: '0.7rem', color: 'var(--danger)' }}>EXPIRED</div>}
         </div>
         <button onClick={() => handleDeleteSource(s.filename)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--muted)', padding: 4, flexShrink: 0 }}>
           <X size={14} />
@@ -288,14 +303,10 @@ export default function RankingsPage() {
 
         {importMode && (
           <div style={{ padding: '1.25rem', borderBottom: '1px solid var(--border)', background: 'rgba(255,255,255,0.02)' }}>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 160px auto', gap: '0.75rem', marginBottom: '1rem' }}>
+            <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-end', marginBottom: '1rem', flexWrap: 'wrap' }}>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-                <label style={{ fontSize: '0.75rem', color: 'var(--muted)', fontFamily: 'var(--font-display)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Source Name <span style={{ color: 'var(--danger)' }}>*</span></label>
-                <input value={sourceName} onChange={e => setSourceName(e.target.value)} placeholder="e.g. PLive Open Universe" style={inputStyle} />
-              </div>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-                <label style={{ fontSize: '0.75rem', color: 'var(--muted)', fontFamily: 'var(--font-display)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Date <span style={{ color: 'var(--danger)' }}>*</span></label>
-                <input type="date" value={sourceDate} onChange={e => setSourceDate(e.target.value)} style={inputStyle} />
+                <label style={{ fontSize: '0.75rem', color: 'var(--muted)', fontFamily: 'var(--font-display)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Ranker <span style={{ color: 'var(--danger)' }}>*</span></label>
+                <input value={sourceName} onChange={e => setSourceName(e.target.value)} placeholder="e.g. Clegg" style={{ ...inputStyle, width: 160 }} />
               </div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
                 <label style={{ fontSize: '0.75rem', color: 'var(--muted)', fontFamily: 'var(--font-display)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Type <span style={{ color: 'var(--danger)' }}>*</span></label>
@@ -308,6 +319,11 @@ export default function RankingsPage() {
                   ))}
                 </div>
               </div>
+              {sourceName && (
+                <div style={{ fontSize: '0.8rem', color: 'var(--muted)', paddingBottom: '0.45rem' }}>
+                  → <span style={{ color: 'var(--text)' }}>{sourceName.trim()} {typeLabels[rankType]}</span> · today
+                </div>
+              )}
             </div>
 
             <input ref={importFileRef} type="file" accept=".csv" style={{ display: 'none' }} onChange={handleImportFileSelect} />

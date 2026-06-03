@@ -879,7 +879,41 @@ export function PlayerDrawer({ player, onClose, globalOwnership, minorsIds, mlbT
 
         <div style={{padding:'1.5rem 1rem',maxWidth:1400,margin:'0 auto',width:'100%',boxSizing:'border-box'}}>
           <div style={{display:'flex',flexDirection:'column',gap:'1rem',marginBottom:'1.5rem'}}>
-            {rankAppearances.length > 0 && (<div style={{display:'flex',gap:'0.75rem',flexWrap:'wrap',marginBottom:'1rem'}}>{rankAppearances.map((a,i)=>{const d=new Date(a.date);const mon=d.toLocaleString('en-US',{month:'short'});const yr=String(d.getFullYear()).slice(2);return(<div key={i} style={{fontSize:'0.72rem',fontFamily:'var(--font-display)',whiteSpace:'nowrap'}}><span style={{color:'var(--text)',fontWeight:600}}>{a.sourceName}</span> <span style={{color:'var(--muted)'}}>{mon}'{yr}</span>{a.rank!=null&&<span style={{color:'var(--accent)',fontWeight:700}}> #{a.rank}</span>}</div>)})}</div>)}
+            {rankAppearances.length > 0 && (()=>{
+              // Group by normalized sourceName, keep most recent + find prev for delta
+              const bySource: Record<string, typeof rankAppearances> = {}
+              for (const a of rankAppearances) {
+                const key = a.sourceName.toLowerCase().trim()
+                if (!bySource[key]) bySource[key] = []
+                bySource[key].push(a)
+              }
+              const rows = Object.values(bySource).map(group => {
+                const sorted = [...group].sort((a,b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+                const latest = sorted[0]
+                const prev = sorted[1] ?? null
+                const delta = (latest.rank != null && prev?.rank != null) ? prev.rank - latest.rank : null
+                return { ...latest, delta }
+              }).sort((a,b) => (a.rank??9999) - (b.rank??9999))
+              return (
+                <div style={{display:'flex',gap:'0.75rem',flexWrap:'wrap',marginBottom:'1rem'}}>
+                  {rows.map((a,i)=>{
+                    const d=new Date(a.date);const mon=d.toLocaleString('en-US',{month:'short'});const yr=String(d.getFullYear()).slice(2)
+                    return (
+                      <div key={i} style={{fontSize:'0.72rem',fontFamily:'var(--font-display)',whiteSpace:'nowrap'}}>
+                        <span style={{color:'var(--text)',fontWeight:600}}>{a.sourceName}</span>
+                        {' '}<span style={{color:'var(--muted)'}}>{mon}'{yr}</span>
+                        {a.rank!=null&&<span style={{color:'#7dd3fc',fontWeight:700}}> #{a.rank}</span>}
+                        {a.delta!=null&&a.delta!==0&&(
+                          <span style={{color:a.delta>0?'#4ade80':'#f87171',fontWeight:600}}>
+                            {' '}({a.delta>0?'↑':'↓'}{Math.abs(a.delta)})
+                          </span>
+                        )}
+                      </div>
+                    )
+                  })}
+                </div>
+              )
+            })()}
             {bio&&(<div style={{display:'flex',gap:'1.5rem',flexWrap:'wrap'}}>{[{label:'B/T',val:`${bio.batSide?.code??'?'}/${bio.pitchHand?.code??'?'}`},{label:'HT/WT',val:bio.height&&bio.weight?`${bio.height} · ${bio.weight} lbs`:null},{label:'Born',val:bio.birthDate?`${bio.birthDate}${bio.birthCity?` · ${bio.birthCity}${bio.birthStateProvince?`, ${bio.birthStateProvince}`:''}`:''} `:null},{label:'Debut',val:bio.mlbDebutDate??null},{label:'Draft',val:bio.draftYear?`${bio.draftYear}`:null}].filter(x=>x.val).map(({label,val})=>(<div key={label}><div style={{fontSize:'0.62rem',fontFamily:'var(--font-display)',fontWeight:700,letterSpacing:'0.08em',color:'var(--muted)',textTransform:'uppercase',marginBottom:'2px'}}>{label}</div><div style={{fontSize:'0.78rem',color:'var(--text)'}}>{val}</div></div>))}</div>)}
             {tiles&&(tiles as any[]).length>0&&(<div style={{display:'flex',gap:'0.75rem',width:'100%',maxWidth:480}}>{(tiles as any[]).map((tile:any)=>(<div key={tile.label} style={{background:'rgba(255,255,255,0.04)',border:'1px solid var(--border)',borderRadius:8,padding:'0.4rem 0.6rem',flex:1,textAlign:'center'}}>
   <div style={{fontSize:'0.6rem',fontFamily:'var(--font-display)',fontWeight:700,letterSpacing:'0.1em',textTransform:'uppercase',color:'var(--muted)',marginBottom:'0.25rem'}}>{tile.label}</div>

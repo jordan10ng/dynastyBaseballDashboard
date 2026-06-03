@@ -78,17 +78,26 @@ export async function POST() {
     const sourceFiles = fs.readdirSync(SOURCES_DIR).filter(f => f.endsWith('.json'))
     if (sourceFiles.length === 0) return NextResponse.json({ error: 'No sources found' }, { status: 400 })
 
-    const overallSources: any[] = []
-    const prospectSources: any[] = []
-    const openSources: any[] = []
-
+    // Load all sources, deduplicate by normalized sourceName keeping only most recent per name+type
+    const sourceMap: Map<string, any> = new Map()
     for (const filename of sourceFiles) {
       const raw = JSON.parse(fs.readFileSync(path.join(SOURCES_DIR, filename), 'utf-8'))
       const weight = stalenessWeight(raw.date)
       if (weight === 0) continue
       const source = { ...raw, weight, filename }
-      if (raw.rankType === 'open') openSources.push(source)
-      else if (raw.rankType === 'prospect') prospectSources.push(source)
+      const key = `${(raw.sourceName ?? '').toLowerCase().trim()}|${raw.rankType ?? 'overall'}`
+      const existing = sourceMap.get(key)
+      if (!existing || raw.date > existing.date) sourceMap.set(key, source)
+    }
+    const dedupedSources = Array.from(sourceMap.values())
+
+    const overallSources: any[] = []
+    const prospectSources: any[] = []
+    const openSources: any[] = []
+
+    for (const source of dedupedSources) {
+      if (source.rankType === 'open') openSources.push(source)
+      else if (source.rankType === 'prospect') prospectSources.push(source)
       else overallSources.push(source)
     }
 
