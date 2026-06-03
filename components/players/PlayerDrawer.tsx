@@ -4,6 +4,8 @@ import React, { useState, useEffect, useMemo } from 'react'
 import { StatcastPanel, parseStatcastCSV } from './StatcastPanel'
 import { isPitcher, cleanPositions, toolColor, LEAGUES, MY_TEAM } from '../../lib/players-config'
 import { sportAbbrToLevel, isMlbLevel, levelSortVal, sumBatStats, sumPitchStats, calcKPct, calcBBPct, stripLeadingZero } from '../../lib/drawer-utils'
+// @ts-ignore -- CommonJS shared module (see lib/score-tools.js)
+import { scoreMilbTool, scoreMlbTool, blendCareer } from '../../lib/score-tools'
 
 const LEVEL_ORDER = ['ROK','A','Single-A','A+','High-A','AA','AAA','MLB','Other']
 
@@ -256,70 +258,14 @@ export function PlayerDrawer({ player, onClose, globalOwnership, minorsIds, mlbT
     return idx>=0 ? idx+1 : null
   }, [allPlayers, player.id, player.rank, isMinors, minorsIds, primaryPos])
 
+  // Career grade — single source of truth from build-scores.js#career_blend.
+  // Fallback to live blendCareer for any player the pipeline hasn't blended yet.
   const toolGrades = useMemo(() => {
+    if (player.career_blend) return player.career_blend
     const mlbEntry = mlbamId ? mlbToolsMap[String(mlbamId)] : null
     const model = player.model_scores
-    const withOvr = (t: any) => {
-      if (t.overall != null) return t
-      if (t.type === 'two-way') {
-        const pitch_overall = t.stuff!=null && t.control!=null ? Math.round(t.stuff*0.70+t.control*0.30) : null
-        const hit_overall   = t.hit!=null && t.power!=null && t.speed!=null ? Math.round(t.hit*0.42+t.power*0.47+t.speed*0.11) : null
-        const overall = pitch_overall!=null && hit_overall!=null ? Math.round((pitch_overall+hit_overall)/2) : pitch_overall ?? hit_overall ?? null
-        return { ...t, pitch_overall, hit_overall, overall }
-      }
-      const isPit = t.type === 'pitcher'
-      let overall = null
-      if (isPit && t.stuff!=null && t.control!=null) overall=Math.round(t.stuff*0.70+t.control*0.30)
-      else if (!isPit && t.hit!=null && t.power!=null && t.speed!=null) overall=Math.round(t.hit*0.42+t.power*0.47+t.speed*0.11)
-      else if (!isPit && t.hit!=null && t.power!=null) overall=Math.round((t.hit*0.42+t.power*0.47)/0.89)
-      return { ...t, overall }
-    }
-    if (!mlbEntry) {
-      if (!model) return null
-      const pos = (player.positions || '').split(',').map((p: string) => p.trim())
-      const hasArm = pos.some((p: string) => ['SP','RP','P'].includes(p))
-      const hasBat = pos.some((p: string) => !['SP','RP','P'].includes(p))
-      if (hasArm && hasBat && model.pitch_overall != null) return { ...model, type: 'two-way' }
-      return model
-    }
-    if (!model) return withOvr(mlbEntry)
-    const milbSample = model._sample ?? 0
-    const entryType = mlbEntry.type
-    if (entryType === 'two-way') {
-      const pitchSample = mlbEntry._ip ?? 0
-      const hitSample   = mlbEntry._pa ?? 0
-      const bvP = (a: any, b: any) => { if(a==null&&b==null) return null; if(b==null||milbSample===0) return a; const t=pitchSample+milbSample; return Math.round(a*(pitchSample/t)+b*(milbSample/t)) }
-      const bvH = (a: any, b: any) => { if(a==null&&b==null) return null; if(b==null||milbSample===0) return a; const t=hitSample+milbSample; return Math.round(a*(hitSample/t)+b*(milbSample/t)) }
-      const stuff   = bvP(mlbEntry.stuff,   model.stuff)
-      const control = bvP(mlbEntry.control, model.control)
-      const hit     = bvH(mlbEntry.hit,     model.hit)
-      const power   = bvH(mlbEntry.power,   model.power)
-      const speed   = bvH(mlbEntry.speed,   model.speed)
-      const pitch_overall = stuff!=null && control!=null ? Math.round(stuff*0.70+control*0.30) : null
-      const hit_overall   = hit!=null && power!=null && speed!=null ? Math.round(hit*0.42+power*0.47+speed*0.11) : null
-      const overall = pitch_overall!=null && hit_overall!=null ? Math.round((pitch_overall+hit_overall)/2) : pitch_overall ?? hit_overall ?? null
-      return { stuff, control, hit, power, speed, pitch_overall, hit_overall, overall, type: 'two-way', _raw: model._raw, _confidence: model._confidence, _sample: milbSample, _mlbSample: milbSample }
-    }
-    const mlbSample = mlbEntry._pa ?? mlbEntry._bf ?? 0
-    const total = mlbSample + milbSample
-    if (total === 0) return withOvr(mlbEntry)
-    const mlbW = mlbSample / total
-    const milbW = milbSample / total
-    const bv = (a: any, b: any) => a == null && b == null ? null : a == null ? b : b == null ? a : Math.round(a*mlbW + b*milbW)
-    const isPit = entryType === 'pitcher'
-    if (isPit) {
-      const stuff = bv(mlbEntry.stuff, model.stuff)
-      const control = bv(mlbEntry.control, model.control)
-      const overall = stuff != null && control != null ? Math.round(stuff*0.70+control*0.30) : null
-      return { stuff, control, overall, type: 'pitcher', _raw: model._raw, _confidence: model._confidence, _sample: milbSample, _mlbSample: mlbSample }
-    } else {
-      const hit   = bv(mlbEntry.hit,   model.hit)
-      const power = bv(mlbEntry.power, model.power)
-      const speed = bv(mlbEntry.speed, model.speed)
-      const overall = hit != null && power != null && speed != null ? Math.round(hit*0.42+power*0.47+speed*0.11) : null
-      return { hit, power, speed, overall, type: 'hitter', _raw: model._raw, _confidence: model._confidence, _sample: milbSample, _mlbSample: mlbSample }
-    }
-  }, [mlbamId, mlbToolsMap, player.model_scores])
+    return blendCareer(model ?? null, mlbEntry ?? null)
+  }, [player.career_blend, mlbamId, mlbToolsMap, player.model_scores])
 
 
 
@@ -587,173 +533,43 @@ export function PlayerDrawer({ player, onClose, globalOwnership, minorsIds, mlbT
       return age
     }
 
-    function scoreToolCumulative(upToYear: number, toolName: string): number | null {
-      const toolModels = models[toolName]
-      if (!toolModels) return null
-      const tv = poolStats[toolName]
-      if (!tv) return null
-
-      let wSum = 0, wTot = 0
-      for (const row of allRows) {
-        if (row._year > upToYear) continue
-        const lvl = row._lvl
-        if (!toolModels[lvl]) continue
-        const s = row.stat ?? row
-        const ip = parseFloat(s.inningsPitched ?? s.ip ?? '0') || 0
-        const bf = s.battersFaced ?? s.bf ?? 0
-        const ab = s.atBats ?? s.ab ?? 0
-        const bb = s.baseOnBalls ?? s.bb ?? 0
-        const hbp = s.hitByPitch ?? s.hbp ?? 0
-        const so = s.strikeOuts ?? s.so ?? 0
-        const h = s.hits ?? s.h ?? 0
-        const sb = s.stolenBases ?? s.sb ?? 0
-        const slg = parseFloat(s.slg ?? '0') || 0
-        const avg = parseFloat(s.avg ?? '0') || 0
-        const pa = s.plateAppearances ?? s.pa ?? (ab + bb + hbp)
-        const sample = isPit ? ip : pa
-        if (!sample) continue
-
-        const normEntry = norms[`${lvl}|${row._year}`] ?? norms[`${lvl}|${row._year-1}`]
-        if (!normEntry) continue
-        const n = isPit ? normEntry.pitchers : normEntry.hitters
-        if (!n) continue
-
-        const age = getAge(row._year)
-        const ageDiff = (ARC_AVG_AGES[lvl] ?? 22) - age
-        const recency = Math.pow(0.75, upToYear - row._year)
-
-        const statKeys = toolName === 'hit' ? ['k_pct','bb_pct'] :
-                         toolName === 'power' ? ['iso'] :
-                         toolName === 'speed' ? ['sb_rate'] :
-                         toolName === 'stuff' ? ['k_pct'] : ['bb_pct']
-
-        for (const statName of statKeys) {
-          const levelModel = toolModels[lvl]?.[statName]
-          if (!levelModel) continue
-          const sn = n[statName]
-          if (!sn || sn.stdev === 0) continue
-
-          let val: number
-          if (statName === 'iso') val = slg - avg
-          else if (statName === 'sb_rate') { const tob = h+bb+hbp; val = tob>0 ? sb/tob : 0 }
-          else if (statName === 'k_pct') val = isPit ? (bf>0?so/bf:0) : (pa>0?so/pa:0)
-          else val = isPit ? (bf>0?bb/bf:0) : (pa>0?bb/pa:0)
-
-          let z = (val - sn.mean) / sn.stdev
-          if ((!isPit && statName === 'k_pct') || (isPit && statName === 'bb_pct')) z = -z
-
-          const pred = levelModel.slope_z * z + (levelModel.slope_age ?? 0) * ageDiff + levelModel.intercept
-          const kKey = isPit ? (statName==='k_pct'?'k_pct_pit':'bb_pct_pit') : statName
-          const kVal = ARC_K[kKey] ?? ARC_K[statName] ?? 60
-          const statConf = sample / (sample + kVal)
-          const w = levelModel.corr * statConf * recency
-
-          wSum += pred * w
-          wTot += w
-        }
-      }
-      if (wTot === 0) return null
-      const rawScore = wSum / wTot
-      // pool norm first (matching build-scores order)
-      const normed = 95 + ((rawScore - tv.mean) / tv.stdev) * 15
-      // then shrink normed value toward 88
-      const totalSample = allRows.filter(r=>r._year<=upToYear).reduce((sum,r)=>{
-        const s=r.stat??r
-        const ip=parseFloat(s.inningsPitched??s.ip??'0')||0
-        const pa=s.plateAppearances??s.pa??((s.atBats??s.ab??0)+(s.baseOnBalls??s.bb??0)+(s.hitByPitch??s.hbp??0))
-        return sum+(isPit?ip:pa)
-      },0)
-      const shrinkK = isPit ? 80 : 200
-      const conf = totalSample / (totalSample + shrinkK)
-      const shrunk = 88 + (normed - 88) * conf
-      return Math.round(shrunk)
-    }
 
     const LVL_RANK: Record<string,number> = {'ACL':0,'FCL':0,'DSL':0,'Complex':1,'Rookie':2,'Single-A':3,'High-A':4,'AA':5,'AAA':6}
 
-    function scoreToolAtPoint(upToYear: number, upToLevel: string, toolName: string): number | null {
-      const toolModels = models[toolName]
-      if (!toolModels) return null
-      const tv = poolStats[toolName]
-      if (!tv) return null
-      const upToRank = LVL_RANK[upToLevel] ?? 99
-
-      let wSum = 0, wTot = 0
-      for (const row of allRows) {
-        if (row._year > upToYear) continue
-        if (row._year === upToYear && (LVL_RANK[row._lvl] ?? 99) > upToRank) continue
-        const lvl = row._lvl
-        if (!toolModels[lvl]) continue
-        const s = row.stat ?? row
-        const ip = parseFloat(s.inningsPitched ?? s.ip ?? '0') || 0
-        const bf = s.battersFaced ?? s.bf ?? 0
-        const ab = s.atBats ?? s.ab ?? 0
-        const bb = s.baseOnBalls ?? s.bb ?? 0
-        const hbp = s.hitByPitch ?? s.hbp ?? 0
-        const so = s.strikeOuts ?? s.so ?? 0
-        const h = s.hits ?? s.h ?? 0
-        const sb = s.stolenBases ?? s.sb ?? 0
-        const slg = parseFloat(s.slg ?? '0') || 0
-        const avg = parseFloat(s.avg ?? '0') || 0
-        const pa = s.plateAppearances ?? s.pa ?? (ab + bb + hbp)
-        const sample = isPit ? ip : pa
-        if (!sample) continue
-
-        const normEntry = norms[`${lvl}|${row._year}`] ?? norms[`${lvl}|${row._year-1}`]
-        if (!normEntry) continue
-        const n = isPit ? normEntry.pitchers : normEntry.hitters
-        if (!n) continue
-
-        const age = getAge(row._year)
-        const ageDiff = (ARC_AVG_AGES[lvl] ?? 22) - age
-        const recency = Math.pow(0.75, upToYear - row._year)
-
-        const statKeys = toolName === 'hit' ? ['k_pct','bb_pct'] :
-                         toolName === 'power' ? ['iso'] :
-                         toolName === 'speed' ? ['sb_rate'] :
-                         toolName === 'stuff' ? ['k_pct'] : ['bb_pct']
-
-        for (const statName of statKeys) {
-          const levelModel = toolModels[lvl]?.[statName]
-          if (!levelModel) continue
-          const sn = n[statName]
-          if (!sn || sn.stdev === 0) continue
-
-          let val: number
-          if (statName === 'iso') val = slg - avg
-          else if (statName === 'sb_rate') { const tob = h+bb+hbp; val = tob>0 ? sb/tob : 0 }
-          else if (statName === 'k_pct') val = isPit ? (bf>0?so/bf:0) : (pa>0?so/pa:0)
-          else val = isPit ? (bf>0?bb/bf:0) : (pa>0?bb/pa:0)
-
-          let z = (val - sn.mean) / sn.stdev
-          if ((!isPit && statName === 'k_pct') || (isPit && statName === 'bb_pct')) z = -z
-
-          const pred = levelModel.slope_z * z + (levelModel.slope_age ?? 0) * ageDiff + levelModel.intercept
-          const kKey = isPit ? (statName==='k_pct'?'k_pct_pit':'bb_pct_pit') : statName
-          const kVal = ARC_K[kKey] ?? ARC_K[statName] ?? 60
-          const statConf = sample / (sample + kVal)
-          const w = levelModel.corr * statConf * recency
-
-          wSum += pred * w
-          wTot += w
-        }
+    // Canonical bucket shape for lib/score-tools.js. Pulls fields from row.stat (or row directly).
+    function rowToBucket(row: any) {
+      const s = row.stat ?? row
+      const ipParts = String(s.inningsPitched ?? s.ip ?? '0').split('.')
+      const ab  = s.atBats ?? s.ab ?? 0
+      const slg = parseFloat(s.slg ?? '0') || 0
+      return {
+        year: row._year, level: row._lvl,
+        ab,
+        bb:  s.baseOnBalls ?? s.bb ?? 0,
+        hbp: s.hitByPitch  ?? s.hbp ?? 0,
+        so:  s.strikeOuts  ?? s.so ?? 0,
+        h:   s.hits        ?? s.h  ?? 0,
+        xbh: (s.doubles ?? 0) + (s.triples ?? 0) + (s.homeRuns ?? s.hr ?? 0),
+        sb:  s.stolenBases ?? s.sb ?? 0,
+        tb:  s.totalBases  ?? s.tb ?? Math.round(slg * ab),
+        bf:  s.battersFaced ?? s.bf ?? 0,
+        ipOuts: (parseInt(ipParts[0] || '0') * 3) + parseInt(ipParts[1] || '0'),
       }
-      if (wTot === 0) return null
-      const rawScore = wSum / wTot
-      const normed = 95 + ((rawScore - tv.mean) / tv.stdev) * 15
-      const totalSample = allRows.filter(r => {
+    }
+
+    // Canonical scoreToolAtPoint — delegates to shared lib.
+    function scoreToolAtPoint(upToYear: number, upToLevel: string, toolName: string): number | null {
+      const upToRank = LVL_RANK[upToLevel] ?? 99
+      const buckets = allRows.filter(r => {
         if (r._year > upToYear) return false
         if (r._year === upToYear && (LVL_RANK[r._lvl] ?? 99) > upToRank) return false
         return true
-      }).reduce((sum,r) => {
-        const s=r.stat??r
-        const ip=parseFloat(s.inningsPitched??s.ip??'0')||0
-        const pa=s.plateAppearances??s.pa??((s.atBats??s.ab??0)+(s.baseOnBalls??s.bb??0)+(s.hitByPitch??s.hbp??0))
-        return sum+(isPit?ip:pa)
-      },0)
-      const shrinkK = isPit ? 80 : 200
-      const conf = totalSample / (totalSample + shrinkK)
-      return Math.round(88 + (normed - 88) * conf)
+      }).map(rowToBucket)
+      const { score } = scoreMilbTool(buckets, toolName, {
+        models, norms, poolStats,
+        isPit, referenceYear: upToYear, getAge,
+      })
+      return score
     }
 
     const pts: any[] = []
@@ -826,7 +642,7 @@ export function PlayerDrawer({ player, onClose, globalOwnership, minorsIds, mlbT
 
     const pts: any[] = []
     // Track cumulative totals per season/level — keyed by year|level
-    const seasonCum: Record<string,{ab:number,bb:number,hbp:number,so:number,h:number,sb:number,tb:number,bf:number,ipOuts:number,year:number,lvl:string}> = {}
+    const seasonCum: Record<string,{ab:number,bb:number,hbp:number,so:number,h:number,xbh:number,sb:number,tb:number,bf:number,ipOuts:number,g:number,year:number,lvl:string}> = {}
 
     // pre-seed seasonCum with allSplits rows for years before first gamelog year
     const firstGameYear = allGames.length > 0 ? allGames[0].year : 9999
@@ -840,321 +656,105 @@ export function PlayerDrawer({ player, onClose, globalOwnership, minorsIds, mlbT
       if (yr >= firstGameYear) continue
       const s = row.stat ?? row
       const sKey = yr + '|' + lvl
-      if (!seasonCum[sKey]) seasonCum[sKey] = {ab:0,bb:0,hbp:0,so:0,h:0,sb:0,tb:0,bf:0,ipOuts:0,year:yr,lvl}
+      if (!seasonCum[sKey]) seasonCum[sKey] = {ab:0,bb:0,hbp:0,so:0,h:0,xbh:0,sb:0,tb:0,bf:0,ipOuts:0,g:0,year:yr,lvl}
       const sc = seasonCum[sKey]
       sc.ab += s.atBats ?? s.ab ?? 0
       sc.bb += s.baseOnBalls ?? s.bb ?? 0
       sc.hbp += s.hitByPitch ?? s.hbp ?? 0
       sc.so += s.strikeOuts ?? s.so ?? 0
       sc.h += s.hits ?? s.h ?? 0
+      sc.xbh += (s.doubles ?? 0) + (s.triples ?? 0) + (s.homeRuns ?? s.hr ?? 0)
       sc.sb += s.stolenBases ?? s.sb ?? 0
       sc.tb += s.totalBases ?? s.tb ?? 0
       sc.bf += s.battersFaced ?? s.bf ?? 0
       const ipVal = parseFloat(s.inningsPitched ?? s.ip ?? '0') || 0
       sc.ipOuts += Math.round(ipVal * 3)
+      sc.g += s.gamesPlayed ?? s.g ?? 0
     }
 
     // MLB sample K values (same as mlbArcPoints)
     const MLB_K: Record<string,number> = { hit:150, power:120, speed:60, stuff:20, control:40 }
     // Running MLB cumulative — keyed by year, accumulates as we walk allGames in date order
-    const mlbGameCum: Record<number,{ab:number,bb:number,hbp:number,so:number,h:number,sb:number,tb:number,bf:number,ipOuts:number}> = {}
+    const mlbGameCum: Record<number,{ab:number,bb:number,hbp:number,so:number,h:number,xbh:number,sb:number,tb:number,bf:number,ipOuts:number,g:number}> = {}
 
     for (const { date, year, g } of allGames) {
-      // Accumulate this game into its season/level bucket
+      const isMlbGame = g.level === 'MLB'
       const lvl = normLevel(g.level ?? '', year)
       const displayLvl = (g.level === 'ROK' && year >= 2021) ? 'CPX' : (g.level ?? lvl)
 
-      // MLB games: accumulate into mlbGameCum but don't emit a point here
-      if (g.level === 'MLB') {
-        if (!mlbGameCum[year]) mlbGameCum[year]={ab:0,bb:0,hbp:0,so:0,h:0,sb:0,tb:0,bf:0,ipOuts:0}
+      // Accumulate into the correct bucket
+      if (isMlbGame) {
+        if (!mlbGameCum[year]) mlbGameCum[year]={ab:0,bb:0,hbp:0,so:0,h:0,xbh:0,sb:0,tb:0,bf:0,ipOuts:0,g:0}
         const ms=mlbGameCum[year]
         ms.ab+=g.atBats??0;ms.bb+=g.baseOnBalls??0;ms.hbp+=g.hitByPitch??0
         ms.so+=g.strikeOuts??0;ms.h+=g.hits??0;ms.sb+=g.stolenBases??0
+        ms.xbh+=(g.doubles??0)+(g.triples??0)+(g.homeRuns??0)
         ms.tb+=g.totalBases??0;ms.bf+=g.battersFaced??0
-        const ipStr2=String(g.inningsPitched??'0');const ipP2=ipStr2.split('.')
-        ms.ipOuts+=(parseInt(ipP2[0]||'0')*3)+(parseInt(ipP2[1]||'0'))
-        continue
+        const ipStr=String(g.inningsPitched??'0');const ipP=ipStr.split('.')
+        ms.ipOuts+=(parseInt(ipP[0]||'0')*3)+(parseInt(ipP[1]||'0'))
+        ms.g += 1
+      } else {
+        if(!lvl||!MILB.has(lvl)) continue
+        const sKey = `${year}|${lvl}`
+        if(!seasonCum[sKey]) seasonCum[sKey]={ab:0,bb:0,hbp:0,so:0,h:0,xbh:0,sb:0,tb:0,bf:0,ipOuts:0,g:0,year,lvl}
+        const sc=seasonCum[sKey]
+        sc.ab+=g.atBats??0;sc.bb+=g.baseOnBalls??0;sc.hbp+=g.hitByPitch??0
+        sc.so+=g.strikeOuts??0;sc.h+=g.hits??0;sc.sb+=g.stolenBases??0
+        sc.xbh+=(g.doubles??0)+(g.triples??0)+(g.homeRuns??0)
+        sc.tb+=g.totalBases??0;sc.bf+=g.battersFaced??0
+        const ipStr=String(g.inningsPitched??'0');const ipP=ipStr.split('.')
+        sc.ipOuts+=(parseInt(ipP[0]||'0')*3)+(parseInt(ipP[1]||'0'))
+        sc.g += 1
       }
 
-      if(!lvl||!MILB.has(lvl)) continue
-      const sKey = `${year}|${lvl}`
-      if(!seasonCum[sKey]) seasonCum[sKey]={ab:0,bb:0,hbp:0,so:0,h:0,sb:0,tb:0,bf:0,ipOuts:0,year,lvl}
-      const sc=seasonCum[sKey]
-      sc.ab+=g.atBats??0;sc.bb+=g.baseOnBalls??0;sc.hbp+=g.hitByPitch??0
-      sc.so+=g.strikeOuts??0;sc.h+=g.hits??0;sc.sb+=g.stolenBases??0
-      sc.tb+=g.totalBases??0;sc.bf+=g.battersFaced??0
-      const ipStr=String(g.inningsPitched??'0');const ipP=ipStr.split('.')
-      sc.ipOuts+=(parseInt(ipP[0]||'0')*3)+(parseInt(ipP[1]||'0'))
-
-      const normEntry=norms[`${lvl}|${year}`]??norms[`${lvl}|${year-1}`]
-      if(!normEntry) continue
-      const n=isPit?normEntry.pitchers:normEntry.hitters
-      if(!n) continue
-      const ageDiff=(ARC_AVG_AGES[lvl]??22)-getAge(year)
-
-      const scoreTool = (toolName:string):number|null => {
-        const toolModels=models[toolName];if(!toolModels?.[lvl!]) return null
-        const tv=poolStats[toolName];if(!tv) return null
-        const statKeys=toolName==='hit'?['k_pct','bb_pct']:toolName==='power'?['iso']:toolName==='speed'?['sb_rate']:toolName==='stuff'?['k_pct']:['bb_pct']
-        let wSum=0,wTot=0,totalSample=0
-        // Score all accumulated MiLB season/level buckets up to and including this game
-        for(const [key,st] of Object.entries(seasonCum)){
-          const rl=st.lvl;if(!toolModels[rl]) continue
-          const rNE=norms[`${rl}|${st.year}`]??norms[`${rl}|${st.year-1}`];if(!rNE) continue
-          const rN=isPit?rNE.pitchers:rNE.hitters;if(!rN) continue
-          const rIp=st.ipOuts/3,rPa=st.ab+st.bb+st.hbp
-          const rSample=isPit?rIp:rPa;if(!rSample) continue
-          totalSample+=rSample
-          const rSlg=st.ab>0?st.tb/st.ab:0,rAvg=st.ab>0?st.h/st.ab:0
-          const rAgeDiff=(ARC_AVG_AGES[rl]??22)-getAge(st.year)
-          const recency=Math.pow(0.75,year-st.year)
-          for(const sn of statKeys){
-            const lm=toolModels[rl]?.[sn];const nm=rN[sn];if(!lm||!nm||nm.stdev===0) continue
-            let val:number
-            if(sn==='iso') val=rSlg-rAvg
-            else if(sn==='sb_rate'){const tob=st.h+st.bb+st.hbp;val=tob>0?st.sb/tob:0}
-            else if(sn==='k_pct') val=isPit?(st.bf>0?st.so/st.bf:0):(rPa>0?st.so/rPa:0)
-            else val=isPit?(st.bf>0?st.bb/st.bf:0):(rPa>0?st.bb/rPa:0)
-            let z=(val-nm.mean)/nm.stdev
-            if((!isPit&&sn==='k_pct')||(isPit&&sn==='bb_pct')) z=-z
-            const pred=lm.slope_z*z+(lm.slope_age??0)*rAgeDiff+lm.intercept
-            const kk=isPit?(sn==='k_pct'?'k_pct_pit':'bb_pct_pit'):sn
-            const w=lm.corr*(rSample/(rSample+(ARC_K[kk]??ARC_K[sn]??60)))*recency
-            wSum+=pred*w;wTot+=w
-          }
-        }
-        if(wTot===0) return null
-        // MiLB regression score — still shrinks toward 88 with small sample
-        const normed=95+((wSum/wTot)-tv.mean)/tv.stdev*15
-        const milbScore=Math.round(88+(normed-88)*(totalSample/(totalSample+(isPit?80:200))))
-
-        // Blend in accumulated MLB data — doesn't reset on demotion
-        let mlbWSum=0,mlbWTot=0,totMlbSample=0
-        for(const [yrStr,ms] of Object.entries(mlbGameCum)){
-          const yr2=parseInt(yrStr)
-          const ne=norms[`MLB|${yr2}`]??norms[`MLB|${yr2-1}`];if(!ne) continue
-          const mn=isPit?ne.pitchers:ne.hitters;if(!mn) continue
-          const ip=ms.ipOuts/3,pa=ms.ab+ms.bb+ms.hbp
-          const sample=isPit?ip:pa;if(!sample) continue
-          totMlbSample+=sample
-          const recency=Math.pow(0.75,year-yr2)
-          const conf=sample/(sample+(MLB_K[toolName]??100))
-          const mw=conf*recency
-          let mz=0
-          if(toolName==='hit'){const avg=ms.ab>0?ms.h/ms.ab:0;const kp=pa>0?ms.so/pa:0;const bp=pa>0?ms.bb/pa:0;mz=((mn.avg?(avg-mn.avg.mean)/mn.avg.stdev:0)+(mn.k_pct?-((kp-mn.k_pct.mean)/mn.k_pct.stdev):0)+(mn.bb_pct?(bp-mn.bb_pct.mean)/mn.bb_pct.stdev:0))/3}
-          else if(toolName==='power'){const iso=ms.ab>0?(ms.tb-ms.h)/ms.ab:0;mz=mn.iso?(iso-mn.iso.mean)/mn.iso.stdev:0}
-          else if(toolName==='speed'){const tob=ms.h+ms.bb+ms.hbp;const sbr=tob>0?ms.sb/tob:0;mz=mn.sb_rate?(sbr-mn.sb_rate.mean)/mn.sb_rate.stdev:0}
-          else if(toolName==='stuff'){const kp=ms.bf>0?ms.so/ms.bf:0;mz=mn.k_pct?(kp-mn.k_pct.mean)/mn.k_pct.stdev:0}
-          else{const bp=ms.bf>0?ms.bb/ms.bf:0;mz=mn.bb_pct?-((bp-mn.bb_pct.mean)/mn.bb_pct.stdev):0}
-          mlbWSum+=mz*mw;mlbWTot+=mw
-        }
-        if(!totMlbSample) return milbScore
-        const mlbGConf=totMlbSample/(totMlbSample+(MLB_K[toolName]??100))
-        const mlbScore=Math.round(100+(mlbWTot>0?mlbWSum/mlbWTot:0)*15*mlbGConf)
-        // Weight by sample size: MLB data persists and grows, MiLB is the base
-        const mlbW=totMlbSample/(totalSample+totMlbSample)
-        return Math.round(milbScore*(1-mlbW)+mlbScore*mlbW)
+      // Canonical scoring — score pure MiLB + pure MLB tools, then blendCareer.
+      // Same path used by row, drawer tile, model-rank. Last point = career_blend.
+      const milbBuckets = Object.values(seasonCum).map(st => ({ ...st, level: st.lvl }))
+      const mlbBuckets = Object.entries(mlbGameCum).map(([yrStr, ms]) => ({
+        ...ms, year: parseInt(yrStr), level: 'MLB',
+      }))
+      const milbTools: any = { type: isPit ? 'pitcher' : 'hitter', _sample: 0 }
+      const mlbTools: any  = { type: isPit ? 'pitcher' : 'hitter' }
+      for (const t of toolNames) {
+        const milbR = scoreMilbTool(milbBuckets, t, { models, norms, poolStats, isPit, referenceYear: year, getAge })
+        milbTools[t] = milbR.score
+        if (milbR.totalSample > milbTools._sample) milbTools._sample = milbR.totalSample
+        const mlbR = scoreMlbTool(mlbBuckets, t, { norms, isPit, referenceYear: year })
+        mlbTools[t] = mlbR.score
+        const sampleKey = isPit ? '_ip' : '_pa'
+        if ((mlbR.totalSample ?? 0) > (mlbTools[sampleKey] ?? 0)) mlbTools[sampleKey] = mlbR.totalSample
       }
-
-      const pt:any={year,level:displayLvl,date}
-      for(const t of toolNames) pt[t]=scoreTool(t)
-      if(isPit){if(pt.stuff!=null&&pt.control!=null)pt.overall=Math.round(pt.stuff*0.70+pt.control*0.30)}
-      else{if(pt.hit!=null&&pt.power!=null&&pt.speed!=null)pt.overall=Math.round(pt.hit*0.42+pt.power*0.47+pt.speed*0.11)}
-      if(Object.values(pt).some((v:any)=>typeof v==='number'&&v!==pt.year)) pts.push(pt)
+      const hasMilb = milbTools._sample > 0
+      const hasMlb = (isPit ? mlbTools._ip : mlbTools._pa) > 0
+      // Career IP/G across MiLB + MLB buckets to-date (for starter factor on overall only)
+      let careerIPG: number | null = null
+      if (isPit) {
+        let totIpOuts = 0, totG = 0
+        for (const b of Object.values(seasonCum)) { totIpOuts += b.ipOuts; totG += b.g }
+        for (const b of Object.values(mlbGameCum)) { totIpOuts += b.ipOuts; totG += b.g }
+        if (totG > 0) careerIPG = (totIpOuts / 3) / totG
+      }
+      const blended = blendCareer(hasMilb ? milbTools : null, hasMlb ? mlbTools : null, { ipg: careerIPG }) ?? {}
+      const pt: any = { year, level: isMlbGame ? 'MLB' : displayLvl, date, isMlb: isMlbGame, ...blended }
+      if (Object.values(pt).some((v: any) => typeof v === 'number' && v !== pt.year)) pts.push(pt)
     }
     return pts
   }, [allGameLogs, allSplits, regression, norms, poolStats, pitch, player.birthDate])
 
-  // Game-by-game MLB arc — recency-weighted per-season scoring, blended with last MiLB score
-  const mlbArcPoints = useMemo(() => {
-    const hasLogs = Object.values(allGameLogs).some((g:any) => g?.hitting?.length > 0 || g?.pitching?.length > 0)
-    if (!norms || !hasLogs) return []
-    const isPit = pitch
-    const toolNames = isPit ? ['stuff','control'] : ['hit','power','speed']
-    const MILB = new Set(['ACL','FCL','DSL','Complex','Rookie','Single-A','High-A','AA','AAA'])
-    // Per-tool sample confidence K (PA for hitters, IP for pitchers)
-    const MLB_K: Record<string,number> = { hit:150, power:120, speed:60, stuff:20, control:40 }
 
-    // MiLB arc sorted with proxy dates for yearly points (no date field)
-    const milbBase = (gameArcPoints.length > 0 ? gameArcPoints : arcPoints)
-      .map((p:any) => ({ ...p, _d: p.date ?? `${p.year}-07-01` }))
-      .sort((a:any,b:any) => a._d.localeCompare(b._d))
-
-    // Cumulative MiLB sample timeline — precompute sorted list of {date, sample}
-    // Seed from allSplits for years before first game log year
-    const allLogYears = Object.keys(allGameLogs).map(Number)
-    const firstLogYear = allLogYears.length > 0 ? Math.min(...allLogYears) : 9999
-    let preMilbSample = 0
-    for (const row of allSplits) {
-      const rt = row.type ?? 'hitting'
-      if (isPit && rt !== 'pitching') continue
-      if (!isPit && rt === 'pitching') continue
-      const lvl = row._level ?? row.level
-      if (!lvl || !MILB.has(lvl)) continue
-      if (parseInt(row.season ?? '0') >= firstLogYear) continue
-      const s = row.stat ?? row
-      const ip = parseFloat(s.inningsPitched ?? s.ip ?? '0') || 0
-      const ab = s.atBats ?? s.ab ?? 0; const bb = s.baseOnBalls ?? s.bb ?? 0; const hbp = s.hitByPitch ?? s.hbp ?? 0
-      preMilbSample += isPit ? ip : (s.plateAppearances ?? s.pa ?? (ab+bb+hbp))
-    }
-    // Then add MiLB game-by-game entries sorted by date
-    const milbGameTimeline: Array<{date:string, sample:number}> = []
-    for (const [yrStr, groups] of Object.entries(allGameLogs)) {
-      const rows = isPit ? (groups as any).pitching : (groups as any).hitting
-      if (!rows?.length) continue
-      for (const g of (rows as any[])) {
-        if (g.level === 'MLB') continue
-        if (!g.date) continue
-        const ip = (() => { const s=String(g.inningsPitched??'0'); const p=s.split('.'); return (parseInt(p[0]||'0')*3+parseInt(p[1]||'0'))/3 })()
-        const pa = (g.atBats??0)+(g.baseOnBalls??0)+(g.hitByPitch??0)
-        milbGameTimeline.push({ date: g.date.slice(0,10), sample: isPit ? ip : pa })
-      }
-    }
-    milbGameTimeline.sort((a,b) => a.date.localeCompare(b.date))
-    // Build running cumulative
-    let _cum = preMilbSample
-    const milbCumTimeline: Array<{date:string, cum:number}> = []
-    for (const {date, sample} of milbGameTimeline) { _cum += sample; milbCumTimeline.push({date, cum:_cum}) }
-
-    // Helpers: milbScore and milbSample at a given date
-    const getMilbScore = (date: string): Record<string,number> => {
-      let best: any = null
-      for (const p of milbBase) { if (p._d <= date) best = p; else break }
-      if (!best) return {}
-      const out: Record<string,number> = {}
-      for (const t of [...toolNames, 'overall']) { if (best[t] != null) out[t] = best[t] }
-      return out
-    }
-    const getMilbSample = (date: string): number => {
-      let result = preMilbSample
-      for (const {date:d, cum} of milbCumTimeline) { if (d <= date) result = cum; else break }
-      return result
-    }
-
-    // Collect MLB game logs sorted by date
-    const mlbGames: Array<{date:string,year:number,g:any}> = []
-    for (const [yrStr, groups] of Object.entries(allGameLogs)) {
-      const yr = parseInt(yrStr)
-      const rows = isPit ? (groups as any).pitching : (groups as any).hitting
-      if (!rows?.length) continue
-      for (const g of (rows as any[])) {
-        if (g.level !== 'MLB') continue
-        if (g.date) mlbGames.push({ date: g.date.slice(0,10), year: yr, g })
-      }
-    }
-    mlbGames.sort((a,b) => a.date.localeCompare(b.date))
-    if (!mlbGames.length) return []
-
-    // Per-season cumulative stats, built up game by game
-    const mlbCum: Record<number,{ab:number,bb:number,hbp:number,so:number,h:number,sb:number,tb:number,bf:number,ipOuts:number}> = {}
-    const pts: any[] = []
-
-    for (const {date, year, g} of mlbGames) {
-      if (!mlbCum[year]) mlbCum[year] = {ab:0,bb:0,hbp:0,so:0,h:0,sb:0,tb:0,bf:0,ipOuts:0}
-      const sc = mlbCum[year]
-      sc.ab+=g.atBats??0; sc.bb+=g.baseOnBalls??0; sc.hbp+=g.hitByPitch??0
-      sc.so+=g.strikeOuts??0; sc.h+=g.hits??0; sc.sb+=g.stolenBases??0
-      sc.tb+=g.totalBases??0; sc.bf+=g.battersFaced??0
-      const ipStr=String(g.inningsPitched??'0'); const ipP=ipStr.split('.')
-      sc.ipOuts+=(parseInt(ipP[0]||'0')*3)+(parseInt(ipP[1]||'0'))
-
-      // Score each tool: recency-weight per-season z-scores (each season vs its own norms)
-      // Identical philosophy to gameArcPoints MiLB scoring — no year-boundary jumps
-      const scoreTool = (toolName: string): number | null => {
-        let wSum = 0, wTot = 0, totSample = 0
-        for (const [yrStr2, s] of Object.entries(mlbCum)) {
-          const yr2 = parseInt(yrStr2)
-          const ne = norms[`MLB|${yr2}`] ?? norms[`MLB|${yr2-1}`]
-          if (!ne) continue
-          const n = isPit ? ne.pitchers : ne.hitters
-          if (!n) continue
-          const ip = s.ipOuts/3, pa = s.ab+s.bb+s.hbp
-          const sample = isPit ? ip : pa
-          if (!sample) continue
-          totSample += sample
-          const recency = Math.pow(0.75, year - yr2)
-          const conf = sample / (sample + (MLB_K[toolName] ?? 100))
-          const w = conf * recency
-
-          let z = 0
-          if (toolName === 'hit') {
-            const avg = s.ab>0 ? s.h/s.ab : 0
-            const kPct = pa>0 ? s.so/pa : 0
-            const bbPct = pa>0 ? s.bb/pa : 0
-            const zA = n.avg ? (avg-n.avg.mean)/n.avg.stdev : 0
-            const zK = n.k_pct ? -((kPct-n.k_pct.mean)/n.k_pct.stdev) : 0
-            const zB = n.bb_pct ? (bbPct-n.bb_pct.mean)/n.bb_pct.stdev : 0
-            z = (zA+zK+zB)/3
-          } else if (toolName === 'power') {
-            const iso = s.ab>0 ? (s.tb-s.h)/s.ab : 0
-            z = n.iso ? (iso-n.iso.mean)/n.iso.stdev : 0
-          } else if (toolName === 'speed') {
-            const tob = s.h+s.bb+s.hbp; const sbRate = tob>0 ? s.sb/tob : 0
-            z = n.sb_rate ? (sbRate-n.sb_rate.mean)/n.sb_rate.stdev : 0
-          } else if (toolName === 'stuff') {
-            const kPct = s.bf>0 ? s.so/s.bf : 0
-            z = n.k_pct ? (kPct-n.k_pct.mean)/n.k_pct.stdev : 0
-          } else { // control
-            const bbPct = s.bf>0 ? s.bb/s.bf : 0
-            z = n.bb_pct ? -((bbPct-n.bb_pct.mean)/n.bb_pct.stdev) : 0
-          }
-          wSum += z * w; wTot += w
-        }
-        if (!wTot) return null
-        // global confidence from total sample (shrink toward 100 when small)
-        const globalConf = totSample / (totSample + (MLB_K[toolName] ?? 100))
-        return Math.round(100 + (wSum/wTot) * 15 * globalConf)
-      }
-
-      // Total MLB sample so far (for blend weight)
-      let totMlbSample = 0
-      for (const s of Object.values(mlbCum)) totMlbSample += isPit ? s.ipOuts/3 : s.ab+s.bb+s.hbp
-      if (!totMlbSample) continue
-
-      const mlbG: Record<string,number|null> = {}
-      for (const t of toolNames) mlbG[t] = scoreTool(t)
-      if (isPit) {
-        if (mlbG.stuff!=null&&mlbG.control!=null) mlbG.overall=Math.round(mlbG.stuff*0.70+mlbG.control*0.30)
-      } else {
-        if (mlbG.hit!=null&&mlbG.power!=null&&mlbG.speed!=null) mlbG.overall=Math.round((mlbG.hit as number)*0.42+(mlbG.power as number)*0.47+(mlbG.speed as number)*0.11)
-      }
-
-      // Blend: use MiLB score and sample as of this date, MLB sample to this date
-      const milbScoreNow = getMilbScore(date)
-      const milbSampleNow = getMilbSample(date)
-      const total = milbSampleNow + totMlbSample
-      const mlbW = total > 0 ? totMlbSample/total : 0
-      const milbW = 1 - mlbW
-
-      const pt: any = { year, level: 'MLB', date }
-      let hasValue = false
-      for (const t of [...toolNames, 'overall']) {
-        const mlbVal = mlbG[t]
-        if (mlbVal != null) {
-          pt[t] = milbScoreNow[t] != null ? Math.round(milbScoreNow[t]*milbW + mlbVal*mlbW) : mlbVal
-          hasValue = true
-        }
-      }
-      if (hasValue) pts.push(pt)
-    }
-    return pts
-  }, [allGameLogs, allSplits, norms, pitch, gameArcPoints, arcPoints])
-
-  // Last point of the combined arc — single source of truth for tile scores
+  // Last point of the unified arc — single source of truth for tile scores.
+  // gameArcPoints emits a point for every game (MiLB and MLB), so the latest
+  // by date IS the current career-blended grade. Equals toolGrades / player.career_blend
+  // at today's date (since cum stats through today = full career).
   const lastArcPt = useMemo(() => {
-    const gameYears = new Set(gameArcPoints.map((p:any) => p.year))
-    const prefix = arcPoints.filter((p:any) => !gameYears.has(p.year))
-    const milbPts = gameArcPoints.length > 0 ? [...prefix, ...gameArcPoints] : arcPoints
-    const allPts = mlbArcPoints.length > 0
-      ? [...milbPts, ...mlbArcPoints].sort((a:any,b:any) => (a.date??`${a.year}-07-01`).localeCompare(b.date??`${b.year}-07-01`))
-      : milbPts
-    return allPts.length > 0 ? allPts[allPts.length - 1] : null
-  }, [arcPoints, gameArcPoints, mlbArcPoints])
+    if (gameArcPoints.length > 0) return gameArcPoints[gameArcPoints.length - 1]
+    return arcPoints.length > 0 ? arcPoints[arcPoints.length - 1] : null
+  }, [arcPoints, gameArcPoints])
 
   const tiles = useMemo(() => {
     if (!toolGrades) return []
     const src = lastArcPt ?? toolGrades
-    const isBlended = toolGrades._mlbSample != null
+    const isBlended = (toolGrades._mlbSample ?? 0) > 0
     const raw = (key: string) => isBlended ? null : (toolGrades._raw?.[key] ?? null)
     const conf = (key: string) => isBlended ? null : (toolGrades._confidence?.[key] ?? null)
     if (toolGrades.type === 'two-way') {
@@ -1328,21 +928,20 @@ export function PlayerDrawer({ player, onClose, globalOwnership, minorsIds, mlbT
               </div>
             )}
             {(gameArcPoints.length>0||arcPoints.length>0)&&(()=>{
-              // prepend yearly arc points for years not covered by game arc
+              // Prepend yearly arc points for years not covered by per-game arc
               const gameYears = new Set(gameArcPoints.map((p:any)=>p.year))
               const prefix = arcPoints.filter((p:any)=>!gameYears.has(p.year))
-              const milbPts = gameArcPoints.length>0 ? [...prefix, ...gameArcPoints] : arcPoints
-              const hasMlb = mlbArcPoints.length > 0
+              const unifiedPts = gameArcPoints.length>0 ? [...prefix, ...gameArcPoints] : arcPoints
+              const hasMlb = gameArcPoints.some((p:any) => p.isMlb)
               const visiblePts = (() => {
-                if (!hasMlb || arcMode==='milb') return milbPts
-                if (arcMode==='mlb') return milbPts.length>0 ? [milbPts[milbPts.length-1], ...mlbArcPoints] : mlbArcPoints
-                return [...milbPts, ...mlbArcPoints].sort((a:any,b:any)=>{
-                  const ad = a.date ?? `${a.year}-07-01`
-                  const bd = b.date ?? `${b.year}-07-01`
-                  return ad.localeCompare(bd)
-                })
+                if (!hasMlb || arcMode==='full') return unifiedPts
+                if (arcMode==='milb') return unifiedPts.filter((p:any) => !p.isMlb)
+                // mlb mode: MLB points only, with last MiLB as anchor for continuity
+                const mlbOnly = unifiedPts.filter((p:any) => p.isMlb)
+                const lastMilb = [...unifiedPts].reverse().find((p:any) => !p.isMlb)
+                return lastMilb ? [lastMilb, ...mlbOnly] : mlbOnly
               })()
-              const inDateMode = gameArcPoints.length>0 || (hasMlb && arcMode!=='milb')
+              const inDateMode = gameArcPoints.length>0
               const toggleExtra = hasMlb ? (
                 <div style={{display:'flex',gap:'0.25rem'}}>
                   {(['milb','mlb','full'] as const).map(m=>(

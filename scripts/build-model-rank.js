@@ -1,6 +1,7 @@
 const fs   = require('fs');
 const path = require('path');
 const os   = require('os');
+const { blendCareer } = require('../lib/score-tools');
 
 const BASE         = process.env.DATA_BASE || path.join(os.homedir(), 'Desktop/fantasy-baseball/data');
 const PLAYERS_PATH = path.join(BASE, 'players.json');
@@ -23,30 +24,12 @@ function resolveLevel(mlbam_id) {
 }
 
 function computeOverall(player) {
+  // Pipeline writes player.career_blend (see build-scores.js). Single source of truth.
+  // Fallback to live blendCareer for any player the pipeline hasn't blended yet.
+  if (player.career_blend) return player.career_blend.overall ?? null;
   const mlbEntry = player.mlbam_id ? mlbTools[String(player.mlbam_id)] : null;
-  const model = player.model_scores;
-  if (!mlbEntry && !model) return null;
-  if (!mlbEntry) return model.overall ?? null;
-  if (!model) {
-    const t = mlbEntry;
-    if (t.overall) return t.overall;
-    if (t.type === 'pitcher' && t.stuff != null && t.control != null)
-      return Math.round(t.stuff * 0.70 + t.control * 0.30);
-    if (t.hit != null && t.power != null && t.speed != null)
-      return Math.round(t.hit * 0.42 + t.power * 0.47 + t.speed * 0.11);
-    return null;
-  }
-  const ms = mlbEntry._pa ?? mlbEntry._bf ?? 0;
-  const mi = model._sample ?? 0;
-  const tot = ms + mi;
-  if (tot === 0) return model.overall ?? null;
-  const bv = (a, b) => a == null && b == null ? null : a == null ? b : b == null ? a : Math.round(a * (ms/tot) + b * (mi/tot));
-  if (mlbEntry.type === 'pitcher') {
-    const s = bv(mlbEntry.stuff, model.stuff), c = bv(mlbEntry.control, model.control);
-    return s != null && c != null ? Math.round(s * 0.70 + c * 0.30) : null;
-  }
-  const h = bv(mlbEntry.hit, model.hit), p = bv(mlbEntry.power, model.power), sp = bv(mlbEntry.speed, model.speed);
-  return h != null && p != null && sp != null ? Math.round(h * 0.42 + p * 0.47 + sp * 0.11) : null;
+  const blended = blendCareer(player.model_scores ?? null, mlbEntry ?? null);
+  return blended?.overall ?? null;
 }
 
 function isRP(pos) { return (pos||'').split(',').map(s=>s.trim()).every(p=>['RP','P'].includes(p)); }

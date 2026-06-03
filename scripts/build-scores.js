@@ -1,6 +1,7 @@
 const fs   = require('fs');
 const path = require('path');
 const os   = require('os');
+const { scoreMilbToolRaw, scoreMilbTool, blendCareer } = require('../lib/score-tools');
 
 const BASE          = process.env.DATA_BASE || path.join(os.homedir(), 'Desktop/fantasy-baseball/data');
 const PLAYERS_PATH  = path.join(BASE, 'players.json');
@@ -12,6 +13,8 @@ const HISTORY_DIR   = path.join(BASE, 'history');
 const regression  = JSON.parse(fs.readFileSync(REGR_PATH, 'utf8'));
 const players     = JSON.parse(fs.readFileSync(PLAYERS_PATH, 'utf8'));
 const norms       = JSON.parse(fs.readFileSync(NORMS_PATH, 'utf8'));
+const MLB_TOOLS_PATH = path.join(BASE, 'model/mlb-tools.json');
+const mlbTools    = fs.existsSync(MLB_TOOLS_PATH) ? JSON.parse(fs.readFileSync(MLB_TOOLS_PATH, 'utf8')) : {};
 
 const VALID_YEARS   = new Set([2015,2016,2017,2018,2019,2021,2022,2023,2024,2025,2026]);
 const CURRENT_YEAR  = new Date().getFullYear();
@@ -104,72 +107,36 @@ function shrink(score, sample, isPitcher) {
   return SHRINK_TOWARD + (score - SHRINK_TOWARD) * conf;
 }
 
-function scoreTool(mlbamId, player, tool, isPitcher) {
-  const { stats: statKeys } = TOOL_STATS[tool];
-  const model = regression.models?.[tool];
-  if (!model) return { score: null, wSum: 0, wTot: 0, cySum: 0, cyTot: 0, sample: 0 };
 
+// Canonical scoreTool — delegates to shared lib. Same signature and return shape as legacy.
+// `score` is the raw weighted prediction (pre-norm); pool-norming happens later in run().
+function scoreTool(mlbamId, player, tool, isPitcher) {
+  if (!regression.models?.[tool]) return { score: null, wSum: 0, wTot: 0, cySum: 0, cyTot: 0, sample: 0 };
   const expectedType = isPitcher ? 'pitching' : 'hitting';
   const seasons = (history[String(mlbamId)] || [])
     .filter(s => MILB_LEVELS.has(s.level) && VALID_YEARS.has(s.year) && s.team && s.type === expectedType);
-
-  let wSum = 0, wTot = 0, totalSample = 0, cySum = 0, cyTot = 0;
-
-  for (const s of seasons) {
-    const { year, level } = s;
-    const sample = isPitcher ? ipToFloat(s.ip) : (s.pa || 0);
-    if (!sample) continue;
-
-    const normEntry = getNorm(level, year);
-    if (!normEntry) continue;
-    const n = isPitcher ? normEntry.pitchers : normEntry.hitters;
-    if (!n) continue;
-
-    const age     = getAge(player.birthDate, year) ?? AVG_AGES[level];
-    const ageDiff = AVG_AGES[level] - age;
-
-    const raw = {};
-    if (!isPitcher) {
-      raw.k_pct   = (s.so || 0) / sample;
-      raw.bb_pct  = (s.bb || 0) / sample;
-      raw.iso     = (parseFloat(s.slg) || 0) - (parseFloat(s.avg) || 0);
-      const tob   = (s.h || 0) + (s.bb || 0) + (s.hbp || 0);
-      raw.sb_rate = tob > 0 ? (s.sb || 0) / tob : 0;
-    } else {
-      const bf  = s.bf || 0;
-      raw.k_pct  = bf > 0 ? (s.so || 0) / bf : null;
-      raw.bb_pct = bf > 0 ? (s.bb || 0) / bf : null;
-    }
-
-    const isCurrentYear = year === CURRENT_YEAR;
-
-    for (const stat of statKeys) {
-      const levelModel = model?.[level]?.[stat];
-      if (!levelModel) continue;
-      const v = raw[stat];
-      if (v == null) continue;
-      const sn = n[stat];
-      if (!sn || sn.stdev === 0) continue;
-
-      let z = (v - sn.mean) / sn.stdev;
-      if ((!isPitcher && stat === 'k_pct') || (isPitcher && stat === 'bb_pct')) z = -z;
-
-      const slopeAge = levelModel.slope_age ?? 0;
-      const pred     = levelModel.slope_z * z + slopeAge * ageDiff + levelModel.intercept;
-
-      const recencyDecay = Math.pow(0.75, CURRENT_YEAR - year);
-      const statConf     = sample / (sample + statShrinkK(stat, isPitcher));
-      const weight       = levelModel.corr * statConf * recencyDecay;
-
-      wSum += pred * weight;
-      wTot += weight;
-      if (isCurrentYear) { cySum += pred * weight; cyTot += weight; }
-    }
-    totalSample += sample;
-  }
-
-  if (wTot === 0) return { score: null, wSum: 0, wTot: 0, cySum: 0, cyTot: 0, sample: totalSample };
-  return { score: wSum / wTot, wSum, wTot, cySum, cyTot, sample: totalSample };
+  const buckets = seasons.map(s => {
+    const ipParts = String(s.ip || '0').split('.');
+    const ipOuts  = (parseInt(ipParts[0] || '0') * 3) + parseInt(ipParts[1] || '0');
+    return {
+      year: s.year, level: s.level,
+      ab:  s.ab  || 0, bb: s.bb || 0, hbp: s.hbp || 0,
+      so:  s.so  || 0, h:  s.h  || 0,
+      xbh: (s.doubles || 0) + (s.triples || 0) + (s.hr || 0),
+      sb:  s.sb  || 0,
+      tb:  s.tb  || Math.round((parseFloat(s.slg || '0') || 0) * (s.ab || 0)),
+      bf:  s.bf  || 0,
+      ipOuts,
+    };
+  });
+  const r = scoreMilbToolRaw(buckets, tool, {
+    models: regression.models, norms,
+    isPit: isPitcher,
+    referenceYear: CURRENT_YEAR,
+    getAge: (yr) => getAge(player.birthDate, yr),
+    currentYearForExclusion: CURRENT_YEAR,
+  });
+  return { score: r.rawWeighted, wSum: r.wSum, wTot: r.wTot, cySum: r.cySum, cyTot: r.cyTot, sample: r.totalSample };
 }
 
 async function run() {
@@ -181,6 +148,7 @@ async function run() {
 
   for (const [id, player] of Object.entries(updatedPlayers)) {
     delete updatedPlayers[id].model_scores;
+    delete updatedPlayers[id].career_blend;
 
     const mlbamId = player.mlbam_id;
     if (!mlbamId) continue;
@@ -200,8 +168,10 @@ async function run() {
       else           sidesEligible.push({ isPitcher: false, exposed: true, graduated: true });
     } else {
       const isPitcher = hasArm;
-      if (!isRookieEligible(mlbamId, isPitcher)) { notRookie++; continue; }
-      sidesEligible.push({ isPitcher, exposed: true });
+      const elig = isRookieEligible(mlbamId, isPitcher);
+      if (!elig) notRookie++;
+      // Score everyone — rookie eligibility only gates pool membership + riser hot sheet.
+      sidesEligible.push({ isPitcher, exposed: true, graduated: !elig });
     }
 
     const recentSeasons = (history[String(mlbamId)] || [])
@@ -226,11 +196,14 @@ async function run() {
 
 
     const isPitcher = hasArm && !hasBat; // pure pitcher flag for pool/shrinkage
+    // graduated = no side is rookie-eligible (used to exclude from prospect pool + risers)
+    const graduated = sidesEligible.length > 0 && sidesEligible.every(s => s.graduated);
     rawPool[id] = {
       toolScores, toolWeights,
       totalSample: Math.max(pitchSample, hitSample),
       pitchSample, hitSample,
       isPitcher, isTwoWay, hasArm, hasBat,
+      graduated,
       hasCY: false, cySample: 0
     };
   }
@@ -238,6 +211,7 @@ async function run() {
   const toolVals = {};
   for (const tool of ['hit','power','speed','stuff','control']) {
     const vals = Object.values(rawPool)
+      .filter(r => !r.graduated)
       .map(r => r.toolScores[tool]).filter(v => v != null && isFinite(v));
     if (!vals.length) continue;
     const mean  = vals.reduce((a,b) => a+b, 0) / vals.length;
@@ -304,6 +278,22 @@ async function run() {
       _confidence: confTools,
       _sample:     Math.round(totalSample),
     };
+    // Career IP/G across all pitching seasons (used for starter-vs-RP workhorse factor).
+    // null for pure hitters — blendCareer ignores it for non-pitchers.
+    let careerIPG = null;
+    if (hasArm) {
+      const allPit = (history[String(updatedPlayers[id].mlbam_id)] || [])
+        .filter(s => s.type === 'pitching');
+      let totalIP = 0, totalG = 0;
+      for (const s of allPit) { totalIP += ipToFloat(s.ip); totalG += s.g || 0; }
+      if (totalG > 0) careerIPG = totalIP / totalG;
+    }
+    // Canonical career-grade blend — single source of truth for row + drawer tile + model-rank.
+    updatedPlayers[id].career_blend = blendCareer(
+      updatedPlayers[id].model_scores,
+      mlbTools[String(updatedPlayers[id].mlbam_id)] ?? null,
+      { ipg: careerIPG }
+    );
     scored++;
 
     {
@@ -337,10 +327,27 @@ async function run() {
     }
   }
 
+  // Post-pass: backfill career_blend for any player without model_scores who still has
+  // an MLB tools entry (typical MLB veteran with no recent MiLB to score).
+  for (const [id, player] of Object.entries(updatedPlayers)) {
+    if (player.career_blend != null) continue;
+    const mlbEntry = player.mlbam_id ? mlbTools[String(player.mlbam_id)] : null;
+    if (!mlbEntry) continue;
+    let careerIPG = null;
+    if (mlbEntry.type === 'pitcher' || mlbEntry.type === 'two-way') {
+      const allPit = (history[String(player.mlbam_id)] || []).filter(s => s.type === 'pitching');
+      let totalIP = 0, totalG = 0;
+      for (const s of allPit) { totalIP += ipToFloat(s.ip); totalG += s.g || 0; }
+      if (totalG > 0) careerIPG = totalIP / totalG;
+    }
+    updatedPlayers[id].career_blend = blendCareer(null, mlbEntry, { ipg: careerIPG });
+  }
+
   const MIN_OVERALL = 95, MIN_RISER_DELTA = 1;
   const risers = [];
 
   for (const [id, pool] of Object.entries(rawPool)) {
+    if (pool.graduated) continue;
     const player = updatedPlayers[id];
     const ms = player.model_scores;
     if (!ms?.overall || ms.overall < MIN_OVERALL) continue;
@@ -414,63 +421,28 @@ async function run() {
       const lvl = normLevelBS(g.level || '', g.year);
       if (!MILB_LEVELS.has(lvl)) continue;
       const sKey = `${g.year}|${lvl}`;
-      if (!cum[sKey]) cum[sKey] = { ab:0, bb:0, hbp:0, so:0, h:0, sb:0, tb:0, bf:0, ipOuts:0, year:g.year, lvl };
+      if (!cum[sKey]) cum[sKey] = { ab:0, bb:0, hbp:0, so:0, h:0, xbh:0, sb:0, tb:0, bf:0, ipOuts:0, year:g.year, lvl };
       const sc = cum[sKey];
       sc.ab  += g.atBats      || 0;
       sc.bb  += g.baseOnBalls || 0;
       sc.hbp += g.hitByPitch  || 0;
       sc.so  += g.strikeOuts  || 0;
       sc.h   += g.hits        || 0;
+      sc.xbh += (g.doubles || 0) + (g.triples || 0) + (g.homeRuns || 0);
       sc.sb  += g.stolenBases || 0;
       sc.tb  += g.totalBases  || 0;
       sc.bf  += g.battersFaced|| 0;
       sc.ipOuts += ipOutsFromStr(g.inningsPitched);
     }
 
+    // Canonical scoreTool2 — delegates to shared lib.
     const scoreTool2 = (toolName) => {
-      const toolModels = models[toolName];
-      if (!toolModels) return null;
-      const tv = poolStatsData[toolName];
-      if (!tv) return null;
-      const statKeys = toolName==='hit'?['k_pct','bb_pct']:toolName==='power'?['iso']:toolName==='speed'?['sb_rate']:toolName==='stuff'?['k_pct']:['bb_pct'];
-      let wSum=0, wTot=0, totalSample=0;
-      const currentYear = new Date().getFullYear();
-
-      for (const [, st] of Object.entries(cum)) {
-        const rl = st.lvl;
-        if (!toolModels[rl]) continue;
-        const normEntry = normsData[`${rl}|${st.year}`] ?? normsData[`${rl}|${st.year-1}`];
-        if (!normEntry) continue;
-        const n = isPit ? normEntry.pitchers : normEntry.hitters;
-        if (!n) continue;
-        const rIp = st.ipOuts / 3, rPa = st.ab + st.bb + st.hbp;
-        const rSample = isPit ? rIp : rPa;
-        if (!rSample) continue;
-        totalSample += rSample;
-        const rSlg = st.ab > 0 ? st.tb / st.ab : 0;
-        const rAvg = st.ab > 0 ? st.h / st.ab : 0;
-        const rAgeDiff = (AVG_AGES[rl] ?? 22) - getAge2(st.year);
-        const recency = Math.pow(0.75, currentYear - st.year);
-        for (const sn of statKeys) {
-          const lm = toolModels[rl]?.[sn];
-          const nm = n[sn];
-          if (!lm || !nm || nm.stdev === 0) continue;
-          let val;
-          if (sn==='iso') val = rSlg - rAvg;
-          else if (sn==='sb_rate') { const tob=st.h+st.bb+st.hbp; val=tob>0?st.sb/tob:0; }
-          else if (sn==='k_pct') val = isPit?(st.bf>0?st.so/st.bf:0):(rPa>0?st.so/rPa:0);
-          else val = isPit?(st.bf>0?st.bb/st.bf:0):(rPa>0?st.bb/rPa:0);
-          let z = (val - nm.mean) / nm.stdev;
-          if ((!isPit && sn==='k_pct') || (isPit && sn==='bb_pct')) z = -z;
-          const pred = lm.slope_z*z + (lm.slope_age??0)*rAgeDiff + lm.intercept;
-          const kk = isPit?(sn==='k_pct'?'k_pct_pit':'bb_pct_pit'):sn;
-          const w = lm.corr * (rSample/(rSample+(ARC_K2[kk]??ARC_K2[sn]??60))) * recency;
-          wSum+=pred*w; wTot+=w;
-        }
-      }
-      if (wTot===0) return null;
-      const normed = POOL_CENTER2 + ((wSum/wTot) - tv.mean) / tv.stdev * POOL_STDEV2;
-      return Math.round(SHRINK_TOWARD2 + (normed-SHRINK_TOWARD2)*(totalSample/(totalSample+SHRINK_K2)));
+      const { score } = scoreMilbTool(Object.values(cum), toolName, {
+        models, norms: normsData, poolStats: poolStatsData,
+        isPit, referenceYear: new Date().getFullYear(),
+        getAge: getAge2,
+      });
+      return score;
     };
 
     const toolScores = {};
@@ -526,13 +498,14 @@ async function run() {
 
       for (const s of playerHistory) {
         const sKey = `${s.year}|${s.level}`;
-        if (!preCum[sKey]) preCum[sKey] = { ab:0, bb:0, hbp:0, so:0, h:0, sb:0, tb:0, bf:0, ipOuts:0, year:s.year, lvl:s.level };
+        if (!preCum[sKey]) preCum[sKey] = { ab:0, bb:0, hbp:0, so:0, h:0, xbh:0, sb:0, tb:0, bf:0, ipOuts:0, year:s.year, lvl:s.level };
         const sc = preCum[sKey];
         sc.ab  += s.ab  || 0;
         sc.bb  += s.bb  || 0;
         sc.hbp += s.hbp || 0;
         sc.so  += s.so  || 0;
         sc.h   += s.h   || 0;
+        sc.xbh += (s.doubles || 0) + (s.triples || 0) + (s.hr || 0);
         sc.sb  += s.sb  || 0;
         sc.tb  += (s.tb || ((parseFloat(s.slg||'0')||0) * (s.ab||0))) || 0;
         sc.bf  += s.bf  || 0;

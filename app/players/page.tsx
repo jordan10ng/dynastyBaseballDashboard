@@ -418,10 +418,12 @@ export default function PlayersPage() {
     [allTeams, selectedLeague]
   )
 
-  // Pre-compute tools map once — avoids recomputing inside every row render
+  // Pre-compute tools map once — avoids recomputing inside every row render.
+  // career_blend is written by build-scores.js (single source of truth).
+  // computeTools fallback only for players the pipeline hasn't blended yet.
   const playerToolsMap = useMemo(() => {
     const map: Record<string, any> = {}
-    for (const p of allPlayers) map[p.id] = computeTools(p, mlbToolsMap)
+    for (const p of allPlayers) map[p.id] = p.career_blend ?? computeTools(p, mlbToolsMap)
     return map
   }, [allPlayers, mlbToolsMap])
 
