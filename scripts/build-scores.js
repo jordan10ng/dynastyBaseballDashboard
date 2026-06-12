@@ -464,7 +464,9 @@ async function run() {
     const dedup = (splits) => {
       const seen = new Set();
       return splits.filter(s => {
-        const key = (s.date||'')+'|'+(s.opponent?.abbreviation||s.opponent?.id||'');
+        // Dedup on gamePk (unique per game) so doubleheaders stay distinct while the same
+        // game from the MLB + MiLB fetches collapses. date|opponent wrongly merged twin bills.
+        const key = String(s.game?.gamePk ?? ((s.date||'')+'|'+(s.opponent?.abbreviation||s.opponent?.id||'')));
         if (seen.has(key)) return false;
         seen.add(key); return true;
       });
@@ -478,7 +480,11 @@ async function run() {
       return dedup([...flattenLog(mlbRes), ...flattenLog(milbRes)]).map(s => ({
         date: s.date?.slice(0,10),
         year,
-        level: s.sport?.abbreviation ?? s.team?.sport?.abbreviation ?? null,
+        // DSL returns the generic "ROK" abbreviation; pin via league name so normLevelBS
+        // doesn't map it to Complex (wrong norms/slopes).
+        level: /Dominican Summer/i.test(s.league?.name ?? '')
+          ? 'DSL'
+          : (s.sport?.abbreviation ?? s.team?.sport?.abbreviation ?? null),
         ...s.stat,
       })).filter(g => g.date).sort((a,b)=>a.date.localeCompare(b.date));
     } catch { return []; }

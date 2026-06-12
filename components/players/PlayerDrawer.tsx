@@ -291,7 +291,10 @@ export function PlayerDrawer({ player, onClose, globalOwnership, minorsIds, mlbT
       const dedup = (splits: any[]) => {
         const seen = new Set<string>()
         return splits.filter(s => {
-          const key = (s.date??'')+'|'+(s.opponent?.abbreviation??s.opponent?.name??s.opponent?.id??'')
+          // Dedup on gamePk (unique per game): keeps doubleheaders distinct, while the same
+          // game returned by BOTH the MLB and MiLB fetches still collapses. The old date|opponent
+          // key wrongly merged two-games-one-day, undercounting AB/SO/etc.
+          const key = String(s.game?.gamePk ?? ((s.date??'')+'|'+(s.opponent?.abbreviation??s.opponent?.name??s.opponent?.id??'')))
           if (seen.has(key)) return false
           seen.add(key); return true
         })
@@ -307,7 +310,11 @@ export function PlayerDrawer({ player, onClose, globalOwnership, minorsIds, mlbT
           date: s.date,
           opponent: s.opponent,
           isHome: s.isHome,
-          level: s.sport?.abbreviation ?? s.team?.sport?.abbreviation ?? null,
+          // DSL returns the generic "ROK" sport abbreviation; pin it via league name so it
+          // scores against DSL norms/slopes — normLevel would otherwise map ROK → Complex.
+          level: /Dominican Summer/i.test(s.league?.name ?? '')
+            ? 'DSL'
+            : (s.sport?.abbreviation ?? s.team?.sport?.abbreviation ?? null),
           ...s.stat,
         }))
       }
@@ -742,18 +749,12 @@ export function PlayerDrawer({ player, onClose, globalOwnership, minorsIds, mlbT
   }, [allGameLogs, allSplits, regression, norms, poolStats, pitch, player.birthDate])
 
 
-  // Last point of the unified arc — single source of truth for tile scores.
-  // gameArcPoints emits a point for every game (MiLB and MLB), so the latest
-  // by date IS the current career-blended grade. Equals toolGrades / player.career_blend
-  // at today's date (since cum stats through today = full career).
-  const lastArcPt = useMemo(() => {
-    if (gameArcPoints.length > 0) return gameArcPoints[gameArcPoints.length - 1]
-    return arcPoints.length > 0 ? arcPoints[arcPoints.length - 1] : null
-  }, [arcPoints, gameArcPoints])
-
+  // Tiles render the canonical pipeline grade (toolGrades = player.career_blend),
+  // i.e. the same value shown on the players-page row. The arc may diverge from this
+  // (separate issue) — tiles must NOT follow the arc.
   const tiles = useMemo(() => {
     if (!toolGrades) return []
-    const src = lastArcPt ?? toolGrades
+    const src = toolGrades
     const isBlended = (toolGrades._mlbSample ?? 0) > 0
     const raw = (key: string) => isBlended ? null : (toolGrades._raw?.[key] ?? null)
     const conf = (key: string) => isBlended ? null : (toolGrades._confidence?.[key] ?? null)
@@ -781,7 +782,7 @@ export function PlayerDrawer({ player, onClose, globalOwnership, minorsIds, mlbT
       src.speed!=null?{label:'SPD+',val:src.speed,color:toolColor(src.speed),raw:raw('speed'),conf:conf('speed')}:null,
       src.overall!=null?{label:'OVR+',val:src.overall,color:toolColor(src.overall)}:null,
     ].filter(Boolean)
-  }, [toolGrades, lastArcPt, pitch])
+  }, [toolGrades, pitch])
 
   const handednessSplits = useMemo(() => {
     if (!toolGrades || careerSituSplits.length === 0) return null
@@ -791,7 +792,7 @@ export function PlayerDrawer({ player, onClose, globalOwnership, minorsIds, mlbT
     const allRows = allSplits.map(s => ({ stat: s.stat }))
     const career = pitch ? sumPitchStats(allRows) : sumBatStats(allRows)
     if (!career) return null
-    const src = lastArcPt ?? toolGrades
+    const src = toolGrades
     const safeRatio = (splitVal: number, careerVal: number) => careerVal > 0 ? splitVal / careerVal : 1
     if (!pitch) {
       const careerPA = career.plateAppearances ?? 1
@@ -835,7 +836,7 @@ export function PlayerDrawer({ player, onClose, globalOwnership, minorsIds, mlbT
         control: { L: ctrl!=null ? shrink(ctrl, Math.round(ctrl*rl.ctrlRatio), bfVL, 40) : null, R: ctrl!=null ? shrink(ctrl, Math.round(ctrl*rr.ctrlRatio), bfVR, 40) : null },
       }
     }
-  }, [toolGrades, lastArcPt, careerSituSplits, allSplits, pitch])
+  }, [toolGrades, careerSituSplits, allSplits, pitch])
 
   return (
     <>

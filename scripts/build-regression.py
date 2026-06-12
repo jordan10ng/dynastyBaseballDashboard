@@ -73,6 +73,11 @@ for mlbam, tools in mlb_tools.items():
             and s['year'] in VALID_YEARS and s.get('team')]
     if not milb: continue
 
+    # Aggregate a player's seasons WITHIN each level before fitting. Single-season z is
+    # noisy, and noisy predictors attenuate regression slopes (errors-in-variables). Fitting
+    # on sample-weighted per-level z de-attenuates the slopes — the OOS R² gain lives here.
+    # acc[level][stat] = [sum(z*sample), sum(sample), sum(age_diff*sample)]
+    acc = defaultdict(lambda: defaultdict(lambda: [0.0, 0.0, 0.0]))
     for s in milb:
         year   = s['year']
         level  = s['level']
@@ -98,22 +103,32 @@ for mlbam, tools in mlb_tools.items():
             raw['k_pct']  = (s.get('so') or 0) / bf if bf > 0 else None
             raw['bb_pct'] = (s.get('bb') or 0) / bf if bf > 0 else None
 
-        for tool, (ptype, stats) in TOOL_STATS.items():
-            if (is_p and ptype != 'pitcher') or (not is_p and ptype != 'hitter'): continue
-            outcome = tools.get(tool)
-            if outcome is None: continue
+        for stat in ('k_pct', 'bb_pct', 'iso', 'sb_rate'):
+            v = raw.get(stat)
+            if v is None: continue
+            sn = n.get(stat)
+            if not sn or sn['stdev'] == 0: continue
 
-            for stat in stats:
-                v = raw.get(stat)
-                if v is None: continue
-                sn = n.get(stat)
-                if not sn or sn['stdev'] == 0: continue
+            z = (v - sn['mean']) / sn['stdev']
+            if (not is_p and stat == 'k_pct') or (is_p and stat == 'bb_pct'):
+                z = -z
 
-                z = (v - sn['mean']) / sn['stdev']
-                if (not is_p and stat == 'k_pct') or (is_p and stat == 'bb_pct'):
-                    z = -z
+            a = acc[level][stat]
+            a[0] += z * sample
+            a[1] += sample
+            a[2] += age_diff * sample
 
-                obs[tool][level][stat].append((z, age_diff, outcome, sample))
+    # Emit one aggregated observation per (level, stat) into its tool bucket.
+    for level, stats_acc in acc.items():
+        for stat, (zsum, wsum, agesum) in stats_acc.items():
+            if wsum <= 0: continue
+            z_agg, age_agg = zsum / wsum, agesum / wsum
+            for tool, (ptype, tstats) in TOOL_STATS.items():
+                if (is_p and ptype != 'pitcher') or (not is_p and ptype != 'hitter'): continue
+                if stat not in tstats: continue
+                outcome = tools.get(tool)
+                if outcome is None: continue
+                obs[tool][level][stat].append((z_agg, age_agg, outcome, wsum))
 
 MIN_N = 20
 level_models = {}
@@ -174,9 +189,8 @@ def score_player_tool(mlbam, is_p, tool, player):
             and s['year'] in VALID_YEARS and s.get('team')]
     if not milb: return None
 
-    weighted_sum = 0.0
-    total_weight = 0.0
-
+    # Aggregate within level (mirror the training fit above).
+    acc = defaultdict(lambda: defaultdict(lambda: [0.0, 0.0, 0.0]))
     for s in milb:
         year   = s['year']
         level  = s['level']
@@ -203,21 +217,29 @@ def score_player_tool(mlbam, is_p, tool, player):
             raw['bb_pct'] = (s.get('bb') or 0) / bf if bf > 0 else None
 
         for stat in stats_for_tool:
-            model = level_models[tool].get(level, {}).get(stat)
-            if not model: continue
             v = raw.get(stat)
             if v is None: continue
             sn = n.get(stat)
             if not sn or sn['stdev'] == 0: continue
-
             z = (v - sn['mean']) / sn['stdev']
             if (not is_p and stat == 'k_pct') or (is_p and stat == 'bb_pct'):
                 z = -z
+            a = acc[level][stat]
+            a[0] += z * sample
+            a[1] += sample
+            a[2] += age_diff * sample
 
+    weighted_sum = 0.0
+    total_weight = 0.0
+    for level, stats_acc in acc.items():
+        for stat, (zsum, wsum, agesum) in stats_acc.items():
+            if wsum <= 0: continue
+            model = level_models[tool].get(level, {}).get(stat)
+            if not model: continue
+            z_agg, age_agg = zsum / wsum, agesum / wsum
             slope_age = model.get('slope_age', 0.0)
-            predicted = model['slope_z'] * z + slope_age * age_diff + model['intercept']
-            weight    = model['corr'] * sample
-
+            predicted = model['slope_z'] * z_agg + slope_age * age_agg + model['intercept']
+            weight    = model['corr'] * wsum
             weighted_sum += predicted * weight
             total_weight += weight
 
