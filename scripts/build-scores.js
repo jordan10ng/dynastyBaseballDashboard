@@ -43,6 +43,16 @@ const AVG_AGES = {
 };
 const MILB_LEVELS = new Set(Object.keys(AVG_AGES));
 
+// Canonicalize raw history level labels to the labels the regression/norms use.
+// History emits 'ROK' for complex/rookie ball; the model is trained on 'Complex'/'Rookie'.
+function canonLevel(l, year) {
+  if (l === 'A') return 'Single-A';
+  if (l === 'A+' || l === 'High A') return 'High-A';
+  if (l === 'ROK' || l === 'Rookie Advanced') return (year && year >= 2021) ? 'Complex' : 'Rookie';
+  if (l === 'CPX') return 'Complex';
+  return l;
+}
+
 function isTwoWayPositions(positions) {
   const pos = (positions || '').split(',').map(s => s.trim());
   const hasArm = pos.some(p => p === 'SP' || p === 'RP');
@@ -114,12 +124,12 @@ function scoreTool(mlbamId, player, tool, isPitcher) {
   if (!regression.models?.[tool]) return { score: null, wSum: 0, wTot: 0, cySum: 0, cyTot: 0, sample: 0 };
   const expectedType = isPitcher ? 'pitching' : 'hitting';
   const seasons = (history[String(mlbamId)] || [])
-    .filter(s => MILB_LEVELS.has(s.level) && VALID_YEARS.has(s.year) && s.team && s.type === expectedType);
+    .filter(s => MILB_LEVELS.has(canonLevel(s.level, s.year)) && VALID_YEARS.has(s.year) && s.team && s.type === expectedType);
   const buckets = seasons.map(s => {
     const ipParts = String(s.ip || '0').split('.');
     const ipOuts  = (parseInt(ipParts[0] || '0') * 3) + parseInt(ipParts[1] || '0');
     return {
-      year: s.year, level: s.level,
+      year: s.year, level: canonLevel(s.level, s.year),
       ab:  s.ab  || 0, bb: s.bb || 0, hbp: s.hbp || 0,
       so:  s.so  || 0, h:  s.h  || 0,
       xbh: (s.doubles || 0) + (s.triples || 0) + (s.hr || 0),
@@ -175,7 +185,7 @@ async function run() {
     }
 
     const recentSeasons = (history[String(mlbamId)] || [])
-      .filter(s => MILB_LEVELS.has(s.level) && s.year >= CURRENT_YEAR - 3 && s.team);
+      .filter(s => MILB_LEVELS.has(canonLevel(s.level, s.year)) && s.year >= CURRENT_YEAR - 3 && s.team);
     if (!recentSeasons.length) { noData++; continue; }
 
     const toolScores  = {};
@@ -382,13 +392,7 @@ async function run() {
   const TODAY = new Date();
   TODAY.setHours(23,59,59,999);
 
-  function normLevelBS(l, year) {
-    if (l === 'A') return 'Single-A';
-    if (l === 'A+' || l === 'High A') return 'High-A';
-    if (l === 'ROK' || l === 'Rookie Advanced') return (year && year >= 2021) ? 'Complex' : 'Rookie';
-    if (l === 'CPX') return 'Complex';
-    return l;
-  }
+  const normLevelBS = canonLevel;
 
   function ipOutsFromStr(ipStr) {
     const parts = String(ipStr || '0').split('.');

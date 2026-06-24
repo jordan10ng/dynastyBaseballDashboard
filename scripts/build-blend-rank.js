@@ -32,16 +32,18 @@ const modelMap = modelRank.players ?? {};
 const ranked=[], unranked=[];
 for (const [fantraxId, player] of Object.entries(players)) {
   const modelEntry = modelMap[fantraxId];
-  if (!modelEntry) continue;
   const cnsRank = consensusMap[fantraxId] ?? null;
-  const mRank   = modelEntry.model_rank;
+  // Keep any player with a rank source: consensus and/or model.
+  // Consensus-ranked players without a model entry must still be ranked.
+  if (!modelEntry && !cnsRank) continue;
+  const mRank   = modelEntry ? modelEntry.model_rank : null;
 
   if (cnsRank) {
-    // ranked: blend consensus + model
-    const blended = cnsRank*consensusW + mRank*modelW;
+    // ranked: blend consensus + model (mRank may be null when no model entry)
+    const blended = mRank != null ? cnsRank*consensusW + mRank*modelW : cnsRank;
     ranked.push({ fantraxId, name:player.name, age:player.age, cns_rank:cnsRank, model_rank:mRank,
-      blended_rank:blended, overall:modelEntry.overall, dynasty_score:modelEntry.dynasty_score,
-      level:modelEntry.level, pos_type:modelEntry.pos_type, mlbam_id:modelEntry.mlbam_id });
+      blended_rank:blended, overall:modelEntry?.overall ?? null, dynasty_score:modelEntry?.dynasty_score ?? null,
+      level:modelEntry?.level ?? null, pos_type:modelEntry?.pos_type ?? null, mlbam_id:modelEntry?.mlbam_id ?? player.mlbam_id ?? null });
   } else {
     // unranked: model rank only, will be offset below ranked players
     unranked.push({ fantraxId, name:player.name, age:player.age, cns_rank:null, model_rank:mRank,
@@ -134,6 +136,8 @@ unranked.slice(0,10).forEach(r=>{
 
 // Write final_rank back to players.json as rank field
 const playersOut = JSON.parse(fs.readFileSync(PLAYERS_PATH, 'utf8'));
+// Clear stale ranks so players dropped from this run don't keep old values
+for (const p of Object.values(playersOut)) { if (p.rank !== undefined) delete p.rank; }
 let updated = 0;
 for (const r of all) {
   if (playersOut[r.fantraxId]) {
