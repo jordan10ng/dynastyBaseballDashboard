@@ -54,7 +54,7 @@ jobs:
       - name: Build scores + hot sheet
         env:
           DATA_BASE: ${{ github.workspace }}/data
-        run: node scripts/build-scores.js && node scripts/build-model-rank.js && node scripts/build-blend-rank.js
+        run: node scripts/build-scores.js && node scripts/build-model-rank.js && node scripts/build-blend-rank.js && node scripts/build-callups.js
 
       - name: Sync Fantrax rosters
         continue-on-error: true   # cookie expiry shouldn't block the stats commit
@@ -67,6 +67,6 @@ jobs:
         run: |
           git config user.name "DIAMOND Bot"
           git config user.email "jordanwlong@gmail.com"
-          git add data/history/2026.json data/model/norms.json data/model/mlb-tools.json data/model/regression.json data/model/hot-sheet.json data/model/pool-stats.json data/model/blend-rank.json data/model/model-rank.json data/players.json data/db.json
+          git add data/history/2026.json data/model/norms.json data/model/mlb-tools.json data/model/regression.json data/model/hot-sheet.json data/model/pool-stats.json data/model/blend-rank.json data/model/model-rank.json data/model/call-ups.json data/players.json data/db.json
           git diff --cached --quiet || git commit -m "chore: daily sync $(date -u '+%Y-%m-%d')"
           git push --force
