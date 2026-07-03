@@ -7,7 +7,7 @@
     "_ip": 653,
     "_z": {
       "k_pct": 0.298,
-      "bb_pct": 1.01
+      "bb_pct": 1.011
     },
     "name": "Cristopher Sanchez"
   },
@@ -31,7 +31,7 @@
     "_ip": 800,
     "_z": {
       "k_pct": 1.236,
-      "bb_pct": 1.136
+      "bb_pct": 1.137
     },
     "name": "Tarik Skubal"
   },
@@ -42,7 +42,7 @@
     "_seasons": 4,
     "_ip": 424,
     "_z": {
-      "k_pct": 0.08,
+      "k_pct": 0.081,
       "bb_pct": -0.67
     },
     "name": "Jose Soriano"
@@ -55,7 +55,7 @@
     "_ip": 1085,
     "_z": {
       "k_pct": 0.115,
-      "bb_pct": 0.681
+      "bb_pct": 0.682
     },
     "name": "Max Fried"
   },
@@ -73,13 +73,13 @@
   },
   "694819": {
     "type": "pitcher",
-    "stuff": 139,
-    "control": 100,
+    "stuff": 140,
+    "control": 101,
     "_seasons": 2,
-    "_ip": 165,
+    "_ip": 170,
     "_z": {
-      "k_pct": 2.589,
-      "bb_pct": -0.019
+      "k_pct": 2.656,
+      "bb_pct": 0.069
     },
     "name": "Jacob Misiorowski"
   },
@@ -89,13 +89,13 @@
     "power": 118,
     "speed": 100,
     "_seasons": 8,
-    "_pa": 3126,
+    "_pa": 3131,
     "_z": {
-      "avg": 0.359,
-      "k_pct": 0.042,
-      "bb_pct": 0.215,
-      "iso": 1.18,
-      "sb_rate": -0.019
+      "avg": 0.363,
+      "k_pct": 0.041,
+      "bb_pct": 0.218,
+      "iso": 1.176,
+      "sb_rate": -0.005
     },
     "name": "Brandon Lowe"
   },
@@ -106,7 +106,7 @@
     "_seasons": 4,
     "_ip": 509,
     "_z": {
-      "k_pct": -0.27,
+      "k_pct": -0.269,
       "bb_pct": 0.089
     },
     "name": "Andrew Abbott"
@@ -117,13 +117,13 @@
     "power": 100,
     "speed": 105,
     "_seasons": 1,
-    "_pa": 373,
+    "_pa": 378,
     "_z": {
-      "avg": 0.704,
-      "k_pct": 0.974,
-      "bb_pct": 0.905,
-      "iso": 0.029,
-      "sb_rate": 0.35
+      "avg": 0.735,
+      "k_pct": 0.99,
+      "bb_pct": 0.917,
+      "iso": 0.011,
+      "sb_rate": 0.329
     },
     "name": "Kevin McGonigle"
   },
@@ -145,12 +145,12 @@
     "power": 106,
     "speed": 97,
     "_seasons": 4,
-    "_pa": 1841,
+    "_pa": 1846,
     "_z": {
-      "avg": 0.616,
-      "k_pct": 1.025,
-      "bb_pct": -0.197,
-      "iso": 0.369,
+      "avg": 0.612,
+      "k_pct": 1.023,
+      "bb_pct": -0.2,
+      "iso": 0.383,
       "sb_rate": -0.18
     },
     "name": "Alec Burleson"
@@ -179,10 +179,10 @@
     "_seasons": 3,
     "_pa": 1545,
     "_z": {
-      "avg": 0.349,
-      "k_pct": -0.006,
-      "bb_pct": 0.625,
-      "iso": 1.03,
+      "avg": 0.348,
+      "k_pct": -0.007,
+      "bb_pct": 0.626,
+      "iso": 1.029,
       "sb_rate": -0.298
     },
     "name": "Michael Busch"
@@ -195,8 +195,8 @@
     "_seasons": 11,
     "_pa": 5102,
     "_z": {
-      "avg": 0.755,
-      "k_pct": 0.253,
+      "avg": 0.754,
+      "k_pct": 0.252,
       "bb_pct": 1.29,
       "iso": 1.772,
       "sb_rate": 0.612
@@ -211,8 +211,8 @@
     "_seasons": 3,
     "_pa": 802,
     "_z": {
-      "avg": -0.195,
-      "k_pct": 0.051,
+      "avg": -0.196,
+      "k_pct": 0.05,
       "bb_pct": 0.039,
       "iso": -0.551,
       "sb_rate": 1.329
@@ -251,11 +251,11 @@
     "_seasons": 1,
     "_pa": 343,
     "_z": {
-      "avg": 0.422,
-      "k_pct": 0.207,
+      "avg": 0.418,
+      "k_pct": 0.202,
       "bb_pct": -0.282,
-      "iso": 0.031,
-      "sb_rate": 0.688
+      "iso": 0.029,
+      "sb_rate": 0.689
     },
     "name": "Carson Benge"
   },
@@ -265,13 +265,13 @@
     "power": 94,
     "speed": 104,
     "_seasons": 4,
-    "_pa": 1619,
+    "_pa": 1622,
     "_z": {
-      "avg": 0.558,
-      "k_pct": 1.036,
-      "bb_pct": 0.117,
-      "iso": -0.369,
-      "sb_rate": 0.258
+      "avg": 0.552,
+      "k_pct": 1.038,
+      "bb_pct": 0.114,
+      "iso": -0.371,
+      "sb_rate": 0.257
     },
     "name": "Sal Frelick"
   },
@@ -282,8 +282,8 @@
     "_seasons": 5,
     "_ip": 94,
     "_z": {
-      "k_pct": 0.029,
-      "bb_pct": -0.61
+      "k_pct": 0.03,
+      "bb_pct": -0.609
     },
     "name": "Riley O'Brien"
   },
@@ -295,8 +295,8 @@
     "_seasons": 4,
     "_pa": 1246,
     "_z": {
-      "avg": 0.115,
-      "k_pct": -0.075,
+      "avg": 0.114,
+      "k_pct": -0.076,
       "bb_pct": 0.103,
       "iso": 0.749,
       "sb_rate": -0.357
@@ -309,12 +309,12 @@
     "power": 101,
     "speed": 97,
     "_seasons": 6,
-    "_pa": 3099,
+    "_pa": 3103,
     "_z": {
       "avg": 0.649,
-      "k_pct": 0.791,
-      "bb_pct": -0.29,
-      "iso": 0.099,
+      "k_pct": 0.789,
+      "bb_pct": -0.292,
+      "iso": 0.1,
       "sb_rate": -0.22
     },
     "name": "Alec Bohm"
@@ -342,8 +342,8 @@
     "_seasons": 3,
     "_ip": 361,
     "_z": {
-      "k_pct": 1.012,
-      "bb_pct": 0.534
+      "k_pct": 1.013,
+      "bb_pct": 0.535
     },
     "name": "Yoshinobu Yamamoto"
   },
@@ -378,7 +378,7 @@
     "_seasons": 3,
     "_ip": 231,
     "_z": {
-      "k_pct": -0.433,
+      "k_pct": -0.432,
       "bb_pct": 0.691
     },
     "name": "Tobias Myers"
@@ -389,12 +389,12 @@
     "power": 117,
     "speed": 95,
     "_seasons": 7,
-    "_pa": 2558,
+    "_pa": 2563,
     "_z": {
-      "avg": 0.337,
+      "avg": 0.33,
       "k_pct": -0.135,
-      "bb_pct": -0.442,
-      "iso": 1.119,
+      "bb_pct": -0.444,
+      "iso": 1.113,
       "sb_rate": -0.32
     },
     "name": "Jake Burger"
@@ -405,13 +405,13 @@
     "power": 106,
     "speed": 104,
     "_seasons": 9,
-    "_pa": 2574,
+    "_pa": 2578,
     "_z": {
-      "avg": 0.172,
-      "k_pct": 0.0,
-      "bb_pct": 0.605,
-      "iso": 0.391,
-      "sb_rate": 0.294
+      "avg": 0.166,
+      "k_pct": -0.001,
+      "bb_pct": 0.602,
+      "iso": 0.387,
+      "sb_rate": 0.293
     },
     "name": "Jake Bauers"
   },
@@ -421,13 +421,13 @@
     "power": 110,
     "speed": 101,
     "_seasons": 3,
-    "_pa": 1439,
+    "_pa": 1444,
     "_z": {
-      "avg": 0.533,
-      "k_pct": 0.275,
-      "bb_pct": -0.401,
+      "avg": 0.531,
+      "k_pct": 0.281,
+      "bb_pct": -0.394,
       "iso": 0.655,
-      "sb_rate": 0.095
+      "sb_rate": 0.093
     },
     "name": "Andy Pages"
   },
@@ -437,13 +437,13 @@
     "power": 110,
     "speed": 109,
     "_seasons": 1,
-    "_pa": 369,
+    "_pa": 374,
     "_z": {
-      "avg": 0.39,
-      "k_pct": 0.252,
-      "bb_pct": 0.432,
-      "iso": 0.633,
-      "sb_rate": 0.619
+      "avg": 0.385,
+      "k_pct": 0.223,
+      "bb_pct": 0.451,
+      "iso": 0.699,
+      "sb_rate": 0.608
     },
     "name": "Sal Stewart"
   },
@@ -453,12 +453,12 @@
     "power": 107,
     "speed": 93,
     "_seasons": 4,
-    "_pa": 1026,
+    "_pa": 1031,
     "_z": {
-      "avg": 0.823,
-      "k_pct": 0.077,
-      "bb_pct": 0.543,
-      "iso": 0.498,
+      "avg": 0.815,
+      "k_pct": 0.087,
+      "bb_pct": 0.534,
+      "iso": 0.485,
       "sb_rate": -0.466
     },
     "name": "Jonathan Aranda"
@@ -469,12 +469,12 @@
     "power": 110,
     "speed": 93,
     "_seasons": 2,
-    "_pa": 803,
+    "_pa": 808,
     "_z": {
-      "avg": 0.65,
-      "k_pct": 0.226,
-      "bb_pct": -0.438,
-      "iso": 0.671,
+      "avg": 0.659,
+      "k_pct": 0.213,
+      "bb_pct": -0.443,
+      "iso": 0.67,
       "sb_rate": -0.494
     },
     "name": "Dillon Dingler"
@@ -487,27 +487,27 @@
     "_seasons": 1,
     "_pa": 246,
     "_z": {
-      "avg": 0.174,
-      "k_pct": -0.823,
-      "bb_pct": 1.425,
-      "iso": 1.688,
-      "sb_rate": -0.417
+      "avg": 0.17,
+      "k_pct": -0.832,
+      "bb_pct": 1.428,
+      "iso": 1.689,
+      "sb_rate": -0.416
     },
     "name": "Munetaka Murakami"
   },
   "666152": {
     "type": "hitter",
-    "hit": 100,
+    "hit": 101,
     "power": 100,
     "speed": 136,
     "_seasons": 3,
-    "_pa": 738,
+    "_pa": 740,
     "_z": {
-      "avg": 0.097,
-      "k_pct": 0.084,
-      "bb_pct": -0.086,
-      "iso": -0.006,
-      "sb_rate": 2.374
+      "avg": 0.107,
+      "k_pct": 0.075,
+      "bb_pct": -0.089,
+      "iso": -0.01,
+      "sb_rate": 2.412
     },
     "name": "David Hamilton"
   },
@@ -517,11 +517,11 @@
     "power": 108,
     "speed": 95,
     "_seasons": 10,
-    "_pa": 3184,
+    "_pa": 3189,
     "_z": {
-      "avg": 0.62,
-      "k_pct": 0.464,
-      "bb_pct": 0.217,
+      "avg": 0.618,
+      "k_pct": 0.46,
+      "bb_pct": 0.215,
       "iso": 0.523,
       "sb_rate": -0.34
     },
@@ -531,15 +531,15 @@
     "type": "hitter",
     "hit": 106,
     "power": 92,
-    "speed": 100,
+    "speed": 99,
     "_seasons": 2,
-    "_pa": 856,
+    "_pa": 860,
     "_z": {
-      "avg": 0.502,
-      "k_pct": 0.538,
-      "bb_pct": 0.207,
-      "iso": -0.566,
-      "sb_rate": -0.033
+      "avg": 0.499,
+      "k_pct": 0.544,
+      "bb_pct": 0.2,
+      "iso": -0.534,
+      "sb_rate": -0.034
     },
     "name": "Chase Meidroth"
   },
@@ -574,7 +574,7 @@
     "_seasons": 2,
     "_ip": 187,
     "_z": {
-      "k_pct": -0.417,
+      "k_pct": -0.416,
       "bb_pct": 0.256
     },
     "name": "Brad Lord"
@@ -586,7 +586,7 @@
     "_seasons": 3,
     "_ip": 108,
     "_z": {
-      "k_pct": 0.266,
+      "k_pct": 0.267,
       "bb_pct": 1.069
     },
     "name": "Justin Slaten"
@@ -609,29 +609,29 @@
     "power": 107,
     "speed": 96,
     "_seasons": 6,
-    "_pa": 2855,
+    "_pa": 2859,
     "_z": {
-      "avg": 0.721,
-      "k_pct": 0.47,
-      "bb_pct": 0.557,
-      "iso": 0.482,
+      "avg": 0.715,
+      "k_pct": 0.469,
+      "bb_pct": 0.554,
+      "iso": 0.48,
       "sb_rate": -0.242
     },
     "name": "William Contreras"
   },
   "802139": {
     "type": "hitter",
-    "hit": 107,
+    "hit": 108,
     "power": 100,
     "speed": 104,
     "_seasons": 1,
-    "_pa": 359,
+    "_pa": 364,
     "_z": {
-      "avg": 0.415,
-      "k_pct": 0.787,
-      "bb_pct": 0.268,
-      "iso": 0.027,
-      "sb_rate": 0.253
+      "avg": 0.44,
+      "k_pct": 0.805,
+      "bb_pct": 0.247,
+      "iso": 0.004,
+      "sb_rate": 0.24
     },
     "name": "JJ Wetherholt"
   },
@@ -651,14 +651,14 @@
     "type": "hitter",
     "hit": 106,
     "power": 126,
-    "speed": 97,
+    "speed": 96,
     "_seasons": 12,
-    "_pa": 5997,
+    "_pa": 6001,
     "_z": {
-      "avg": 0.283,
-      "k_pct": -0.056,
-      "bb_pct": 1.015,
-      "iso": 1.72,
+      "avg": 0.281,
+      "k_pct": -0.058,
+      "bb_pct": 1.016,
+      "iso": 1.718,
       "sb_rate": -0.233
     },
     "name": "Kyle Schwarber"
@@ -683,8 +683,8 @@
     "_seasons": 5,
     "_pa": 2107,
     "_z": {
-      "avg": 0.78,
-      "k_pct": 1.035,
+      "avg": 0.779,
+      "k_pct": 1.034,
       "bb_pct": 0.21,
       "iso": -0.007,
       "sb_rate": -0.225
@@ -697,29 +697,29 @@
     "power": 101,
     "speed": 97,
     "_seasons": 1,
-    "_pa": 288,
+    "_pa": 293,
     "_z": {
-      "avg": 0.622,
-      "k_pct": 1.046,
-      "bb_pct": 0.179,
-      "iso": 0.071,
-      "sb_rate": -0.174
+      "avg": 0.6,
+      "k_pct": 1.066,
+      "bb_pct": 0.154,
+      "iso": 0.045,
+      "sb_rate": -0.178
     },
     "name": "Chase DeLauter"
   },
   "686527": {
     "type": "hitter",
-    "hit": 103,
+    "hit": 102,
     "power": 112,
     "speed": 97,
     "_seasons": 5,
-    "_pa": 999,
+    "_pa": 1003,
     "_z": {
-      "avg": 0.31,
-      "k_pct": 0.335,
-      "bb_pct": -0.156,
-      "iso": 0.788,
-      "sb_rate": -0.219
+      "avg": 0.299,
+      "k_pct": 0.342,
+      "bb_pct": -0.145,
+      "iso": 0.78,
+      "sb_rate": -0.22
     },
     "name": "Dominic Canzone"
   },
@@ -729,12 +729,12 @@
     "power": 105,
     "speed": 104,
     "_seasons": 8,
-    "_pa": 2879,
+    "_pa": 2883,
     "_z": {
-      "avg": 0.591,
+      "avg": 0.585,
       "k_pct": -0.409,
-      "bb_pct": 0.078,
-      "iso": 0.357,
+      "bb_pct": 0.076,
+      "iso": 0.354,
       "sb_rate": 0.237
     },
     "name": "Brandon Marsh"
@@ -759,10 +759,10 @@
     "_seasons": 4,
     "_pa": 1283,
     "_z": {
-      "avg": 0.252,
-      "k_pct": 0.552,
+      "avg": 0.251,
+      "k_pct": 0.551,
       "bb_pct": -0.277,
-      "iso": -0.559,
+      "iso": -0.56,
       "sb_rate": 0.856
     },
     "name": "Jacob Young"
@@ -775,10 +775,10 @@
     "_seasons": 2,
     "_pa": 451,
     "_z": {
-      "avg": 0.132,
-      "k_pct": -0.307,
+      "avg": 0.131,
+      "k_pct": -0.31,
       "bb_pct": -0.667,
-      "iso": -0.16,
+      "iso": -0.161,
       "sb_rate": -0.011
     },
     "name": "Brady House"
@@ -820,7 +820,7 @@
     "_pa": 3230,
     "_z": {
       "avg": 0.372,
-      "k_pct": -0.065,
+      "k_pct": -0.066,
       "bb_pct": 0.162,
       "iso": 0.869,
       "sb_rate": 1.41
@@ -835,7 +835,7 @@
     "_ip": 613,
     "_z": {
       "k_pct": 0.119,
-      "bb_pct": 0.861
+      "bb_pct": 0.862
     },
     "name": "Drew Rasmussen"
   },
@@ -847,11 +847,11 @@
     "_seasons": 1,
     "_pa": 284,
     "_z": {
-      "avg": 0.081,
-      "k_pct": 0.006,
-      "bb_pct": 0.361,
-      "iso": -0.802,
-      "sb_rate": 3.289
+      "avg": 0.077,
+      "k_pct": 0.001,
+      "bb_pct": 0.362,
+      "iso": -0.805,
+      "sb_rate": 3.293
     },
     "name": "Nasim Nunez"
   },
@@ -863,23 +863,23 @@
     "_ip": 131,
     "_z": {
       "k_pct": 0.399,
-      "bb_pct": -0.837
+      "bb_pct": -0.838
     },
     "name": "Chase Silseth"
   },
   "701675": {
     "type": "hitter",
     "hit": 100,
-    "power": 101,
+    "power": 102,
     "speed": 107,
     "_seasons": 1,
-    "_pa": 215,
+    "_pa": 220,
     "_z": {
-      "avg": 0.365,
-      "k_pct": 0.253,
-      "bb_pct": -0.524,
-      "iso": 0.054,
-      "sb_rate": 0.456
+      "avg": 0.344,
+      "k_pct": 0.295,
+      "bb_pct": -0.543,
+      "iso": 0.158,
+      "sb_rate": 0.458
     },
     "name": "Nathan Church"
   },
@@ -891,8 +891,8 @@
     "_seasons": 6,
     "_pa": 2467,
     "_z": {
-      "avg": 0.475,
-      "k_pct": 0.04,
+      "avg": 0.474,
+      "k_pct": 0.039,
       "bb_pct": -0.099,
       "iso": 0.635,
       "sb_rate": 0.764
@@ -905,13 +905,13 @@
     "power": 111,
     "speed": 111,
     "_seasons": 11,
-    "_pa": 6071,
+    "_pa": 6075,
     "_z": {
-      "avg": 0.795,
-      "k_pct": 0.386,
-      "bb_pct": 0.653,
-      "iso": 0.712,
-      "sb_rate": 0.757
+      "avg": 0.793,
+      "k_pct": 0.385,
+      "bb_pct": 0.654,
+      "iso": 0.711,
+      "sb_rate": 0.763
     },
     "name": "Christian Yelich"
   },
@@ -921,13 +921,13 @@
     "power": 97,
     "speed": 104,
     "_seasons": 3,
-    "_pa": 1220,
+    "_pa": 1221,
     "_z": {
-      "avg": 0.102,
-      "k_pct": 0.663,
-      "bb_pct": 0.068,
-      "iso": -0.175,
-      "sb_rate": 0.252
+      "avg": 0.098,
+      "k_pct": 0.664,
+      "bb_pct": 0.067,
+      "iso": -0.177,
+      "sb_rate": 0.253
     },
     "name": "Joey Ortiz"
   },
@@ -939,10 +939,10 @@
     "_seasons": 5,
     "_pa": 2453,
     "_z": {
-      "avg": 0.388,
+      "avg": 0.387,
       "k_pct": 0.891,
       "bb_pct": 0.745,
-      "iso": -0.124,
+      "iso": -0.125,
       "sb_rate": 0.25
     },
     "name": "Geraldo Perdomo"
@@ -970,7 +970,7 @@
     "_seasons": 4,
     "_ip": 600,
     "_z": {
-      "k_pct": 0.102,
+      "k_pct": 0.103,
       "bb_pct": 0.58
     },
     "name": "Tanner Bibee"
@@ -981,25 +981,25 @@
     "power": 97,
     "speed": 96,
     "_seasons": 4,
-    "_pa": 1589,
+    "_pa": 1593,
     "_z": {
-      "avg": 0.478,
-      "k_pct": 0.92,
-      "bb_pct": 0.525,
-      "iso": -0.185,
-      "sb_rate": -0.252
+      "avg": 0.485,
+      "k_pct": 0.923,
+      "bb_pct": 0.521,
+      "iso": -0.19,
+      "sb_rate": -0.253
     },
     "name": "Nolan Schanuel"
   },
   "700712": {
     "type": "pitcher",
-    "stuff": 98,
-    "control": 88,
+    "stuff": 99,
+    "control": 86,
     "_seasons": 1,
-    "_ip": 72,
+    "_ip": 77,
     "_z": {
-      "k_pct": -0.104,
-      "bb_pct": -0.804
+      "k_pct": -0.06,
+      "bb_pct": -0.909
     },
     "name": "Walbert Urena"
   },
@@ -1009,13 +1009,13 @@
     "power": 89,
     "speed": 103,
     "_seasons": 2,
-    "_pa": 493,
+    "_pa": 494,
     "_z": {
-      "avg": 0.32,
-      "k_pct": 0.381,
-      "bb_pct": -0.254,
-      "iso": -0.707,
-      "sb_rate": 0.167
+      "avg": 0.311,
+      "k_pct": 0.384,
+      "bb_pct": -0.256,
+      "iso": -0.71,
+      "sb_rate": 0.168
     },
     "name": "Ben Williamson"
   },
@@ -1025,13 +1025,13 @@
     "power": 100,
     "speed": 110,
     "_seasons": 5,
-    "_pa": 2548,
+    "_pa": 2552,
     "_z": {
-      "avg": 0.439,
-      "k_pct": 0.762,
-      "bb_pct": 0.025,
-      "iso": -0.024,
-      "sb_rate": 0.69
+      "avg": 0.438,
+      "k_pct": 0.756,
+      "bb_pct": 0.023,
+      "iso": -0.026,
+      "sb_rate": 0.688
     },
     "name": "Bryson Stott"
   },
@@ -1041,13 +1041,13 @@
     "power": 96,
     "speed": 96,
     "_seasons": 4,
-    "_pa": 1251,
+    "_pa": 1256,
     "_z": {
-      "avg": 0.57,
-      "k_pct": 0.496,
-      "bb_pct": -0.493,
-      "iso": -0.263,
-      "sb_rate": -0.262
+      "avg": 0.587,
+      "k_pct": 0.502,
+      "bb_pct": -0.497,
+      "iso": -0.243,
+      "sb_rate": -0.263
     },
     "name": "Nick Gonzales"
   },
@@ -1057,13 +1057,13 @@
     "power": 105,
     "speed": 95,
     "_seasons": 9,
-    "_pa": 3968,
+    "_pa": 3973,
     "_z": {
-      "avg": 0.966,
-      "k_pct": 0.922,
-      "bb_pct": 0.421,
-      "iso": 0.36,
-      "sb_rate": -0.314
+      "avg": 0.962,
+      "k_pct": 0.923,
+      "bb_pct": 0.427,
+      "iso": 0.358,
+      "sb_rate": -0.315
     },
     "name": "Yandy Diaz"
   },
@@ -1075,11 +1075,11 @@
     "_seasons": 2,
     "_pa": 364,
     "_z": {
-      "avg": 0.001,
-      "k_pct": 0.143,
-      "bb_pct": -0.283,
-      "iso": -0.018,
-      "sb_rate": -0.158
+      "avg": -0.001,
+      "k_pct": 0.14,
+      "bb_pct": -0.284,
+      "iso": -0.019,
+      "sb_rate": -0.157
     },
     "name": "Marcelo Mayer"
   },
@@ -1091,10 +1091,10 @@
     "_seasons": 4,
     "_pa": 1278,
     "_z": {
-      "avg": 0.067,
-      "k_pct": -0.118,
+      "avg": 0.066,
+      "k_pct": -0.12,
       "bb_pct": 0.038,
-      "iso": -0.019,
+      "iso": -0.02,
       "sb_rate": -0.132
     },
     "name": "Brett Baty"
@@ -1107,7 +1107,7 @@
     "_seasons": 7,
     "_pa": 1586,
     "_z": {
-      "avg": 0.067,
+      "avg": 0.066,
       "k_pct": 0.773,
       "bb_pct": -0.527,
       "iso": -0.245,
@@ -1137,13 +1137,13 @@
     "power": 117,
     "speed": 108,
     "_seasons": 6,
-    "_pa": 3130,
+    "_pa": 3135,
     "_z": {
-      "avg": 0.669,
-      "k_pct": 0.832,
-      "bb_pct": 0.752,
+      "avg": 0.683,
+      "k_pct": 0.834,
+      "bb_pct": 0.753,
       "iso": 1.159,
-      "sb_rate": 0.534
+      "sb_rate": 0.531
     },
     "name": "Kyle Tucker"
   },
@@ -1169,12 +1169,12 @@
     "power": 112,
     "speed": 101,
     "_seasons": 5,
-    "_pa": 1811,
+    "_pa": 1814,
     "_z": {
-      "avg": 0.133,
-      "k_pct": -0.152,
-      "bb_pct": -0.422,
-      "iso": 0.825,
+      "avg": 0.127,
+      "k_pct": -0.154,
+      "bb_pct": -0.423,
+      "iso": 0.822,
       "sb_rate": 0.067
     },
     "name": "Jo Adell"
@@ -1187,11 +1187,11 @@
     "_seasons": 3,
     "_pa": 695,
     "_z": {
-      "avg": 0.412,
-      "k_pct": 0.639,
+      "avg": 0.411,
+      "k_pct": 0.638,
       "bb_pct": 0.439,
-      "iso": -0.487,
-      "sb_rate": 0.453
+      "iso": -0.488,
+      "sb_rate": 0.454
     },
     "name": "Austin Martin"
   },
@@ -1203,10 +1203,10 @@
     "_seasons": 2,
     "_pa": 433,
     "_z": {
-      "avg": 0.649,
-      "k_pct": -0.165,
+      "avg": 0.648,
+      "k_pct": -0.167,
       "bb_pct": 1.118,
-      "iso": 0.322,
+      "iso": 0.321,
       "sb_rate": -0.131
     },
     "name": "Roman Anthony"
@@ -1220,7 +1220,7 @@
     "_pa": 2843,
     "_z": {
       "avg": -0.014,
-      "k_pct": 0.142,
+      "k_pct": 0.141,
       "bb_pct": 0.749,
       "iso": 0.637,
       "sb_rate": 0.183
@@ -1233,11 +1233,11 @@
     "power": 106,
     "speed": 105,
     "_seasons": 11,
-    "_pa": 6521,
+    "_pa": 6525,
     "_z": {
-      "avg": 0.819,
-      "k_pct": 0.697,
-      "bb_pct": 0.221,
+      "avg": 0.818,
+      "k_pct": 0.696,
+      "bb_pct": 0.22,
       "iso": 0.433,
       "sb_rate": 0.309
     },
@@ -1265,13 +1265,13 @@
     "power": 109,
     "speed": 135,
     "_seasons": 12,
-    "_pa": 6325,
+    "_pa": 6329,
     "_z": {
-      "avg": 0.891,
-      "k_pct": 0.614,
-      "bb_pct": -0.106,
-      "iso": 0.631,
-      "sb_rate": 2.308
+      "avg": 0.89,
+      "k_pct": 0.612,
+      "bb_pct": -0.107,
+      "iso": 0.63,
+      "sb_rate": 2.306
     },
     "name": "Trea Turner"
   },
@@ -1283,10 +1283,10 @@
     "_seasons": 3,
     "_pa": 1056,
     "_z": {
-      "avg": -0.124,
-      "k_pct": 0.061,
-      "bb_pct": 0.255,
-      "iso": 0.6,
+      "avg": -0.125,
+      "k_pct": 0.06,
+      "bb_pct": 0.256,
+      "iso": 0.599,
       "sb_rate": -0.19
     },
     "name": "Austin Wells"
@@ -1299,11 +1299,11 @@
     "_seasons": 2,
     "_pa": 516,
     "_z": {
-      "avg": 0.097,
-      "k_pct": 0.393,
-      "bb_pct": -0.301,
+      "avg": 0.096,
+      "k_pct": 0.392,
+      "bb_pct": -0.302,
       "iso": -0.032,
-      "sb_rate": 0.938
+      "sb_rate": 0.939
     },
     "name": "Jonny DeLuca"
   },
@@ -1329,19 +1329,19 @@
     "hit": 109,
     "power": 131,
     "speed": 111,
-    "_pa": 4523,
+    "_pa": 4528,
     "_z_hit": {
-      "avg": 0.86,
+      "avg": 0.859,
       "k_pct": 0.197,
-      "bb_pct": 0.808,
-      "iso": 2.053,
-      "sb_rate": 0.762
+      "bb_pct": 0.809,
+      "iso": 2.049,
+      "sb_rate": 0.76
     },
     "stuff": 122,
     "control": 104,
     "_ip": 607,
     "_z_pitch": {
-      "k_pct": 1.481,
+      "k_pct": 1.482,
       "bb_pct": 0.256
     }
   },
@@ -1354,7 +1354,7 @@
     "_pa": 5323,
     "_z": {
       "avg": 0.421,
-      "k_pct": 0.24,
+      "k_pct": 0.239,
       "bb_pct": 0.211,
       "iso": 0.497,
       "sb_rate": 0.365
@@ -1369,11 +1369,11 @@
     "_seasons": 2,
     "_pa": 528,
     "_z": {
-      "avg": -0.213,
-      "k_pct": -0.539,
+      "avg": -0.215,
+      "k_pct": -0.543,
       "bb_pct": 0.119,
       "iso": 0.545,
-      "sb_rate": -0.221
+      "sb_rate": -0.22
     },
     "name": "Coby Mayo"
   },
@@ -1386,7 +1386,7 @@
     "_pa": 6829,
     "_z": {
       "avg": 0.491,
-      "k_pct": 0.691,
+      "k_pct": 0.69,
       "bb_pct": 0.243,
       "iso": 0.673,
       "sb_rate": 0.503
@@ -1395,17 +1395,17 @@
   },
   "669003": {
     "type": "hitter",
-    "hit": 101,
+    "hit": 102,
     "power": 110,
     "speed": 106,
     "_seasons": 2,
-    "_pa": 487,
+    "_pa": 491,
     "_z": {
-      "avg": 0.441,
-      "k_pct": -0.77,
-      "bb_pct": 0.572,
-      "iso": 0.634,
-      "sb_rate": 0.425
+      "avg": 0.446,
+      "k_pct": -0.75,
+      "bb_pct": 0.588,
+      "iso": 0.682,
+      "sb_rate": 0.418
     },
     "name": "Garrett Mitchell"
   },
@@ -1417,19 +1417,19 @@
     "_ip": 285,
     "_z": {
       "k_pct": 1.05,
-      "bb_pct": -0.318
+      "bb_pct": -0.319
     },
     "name": "Aaron Ashby"
   },
   "642397": {
     "type": "pitcher",
-    "stuff": 105,
+    "stuff": 106,
     "control": 90,
     "_seasons": 11,
-    "_ip": 504,
+    "_ip": 505,
     "_z": {
-      "k_pct": 0.366,
-      "bb_pct": -0.668
+      "k_pct": 0.369,
+      "bb_pct": -0.663
     },
     "name": "Gregory Soto"
   },
@@ -1441,7 +1441,7 @@
     "_ip": 368,
     "_z": {
       "k_pct": -0.24,
-      "bb_pct": 0.091
+      "bb_pct": 0.09
     },
     "name": "JT Brubaker"
   },
@@ -1452,7 +1452,7 @@
     "_seasons": 8,
     "_ip": 264,
     "_z": {
-      "k_pct": -0.478,
+      "k_pct": -0.477,
       "bb_pct": -0.884
     },
     "name": "Cionel Perez"
@@ -1465,8 +1465,8 @@
     "_seasons": 10,
     "_pa": 3517,
     "_z": {
-      "avg": 0.424,
-      "k_pct": -0.042,
+      "avg": 0.423,
+      "k_pct": -0.043,
       "bb_pct": -0.005,
       "iso": 1.412,
       "sb_rate": 1.687
@@ -1498,9 +1498,9 @@
     "_pa": 748,
     "_z": {
       "avg": 0.107,
-      "k_pct": -0.709,
+      "k_pct": -0.71,
       "bb_pct": -0.389,
-      "iso": 0.094,
+      "iso": 0.093,
       "sb_rate": -0.042
     },
     "name": "Joey Loperfido"
@@ -1529,11 +1529,11 @@
     "_seasons": 3,
     "_pa": 1482,
     "_z": {
-      "avg": 0.424,
-      "k_pct": 0.243,
+      "avg": 0.423,
+      "k_pct": 0.242,
       "bb_pct": -0.713,
       "iso": 0.312,
-      "sb_rate": 0.577
+      "sb_rate": 0.578
     },
     "name": "Ceddanne Rafaela"
   },
@@ -1555,17 +1555,17 @@
   },
   "702222": {
     "type": "hitter",
-    "hit": 102,
+    "hit": 101,
     "power": 93,
     "speed": 114,
     "_seasons": 1,
-    "_pa": 265,
+    "_pa": 268,
     "_z": {
-      "avg": 0.379,
-      "k_pct": 0.315,
-      "bb_pct": -0.384,
-      "iso": -0.46,
-      "sb_rate": 0.94
+      "avg": 0.336,
+      "k_pct": 0.333,
+      "bb_pct": -0.394,
+      "iso": -0.481,
+      "sb_rate": 0.942
     },
     "name": "Justin Crawford"
   },
@@ -1575,13 +1575,13 @@
     "power": 104,
     "speed": 103,
     "_seasons": 4,
-    "_pa": 1384,
+    "_pa": 1389,
     "_z": {
-      "avg": 0.413,
-      "k_pct": -0.139,
-      "bb_pct": -0.134,
-      "iso": 0.235,
-      "sb_rate": 0.211
+      "avg": 0.422,
+      "k_pct": -0.132,
+      "bb_pct": -0.127,
+      "iso": 0.254,
+      "sb_rate": 0.205
     },
     "name": "Jordan Walker"
   },
@@ -1593,8 +1593,8 @@
     "_seasons": 4,
     "_pa": 827,
     "_z": {
-      "avg": -0.591,
-      "k_pct": -0.188,
+      "avg": -0.592,
+      "k_pct": -0.189,
       "bb_pct": 0.066,
       "iso": -0.101,
       "sb_rate": -0.124
@@ -1607,13 +1607,13 @@
     "power": 117,
     "speed": 114,
     "_seasons": 11,
-    "_pa": 6700,
+    "_pa": 6705,
     "_z": {
-      "avg": 0.831,
-      "k_pct": 0.954,
-      "bb_pct": 0.495,
+      "avg": 0.832,
+      "k_pct": 0.955,
+      "bb_pct": 0.494,
       "iso": 1.123,
-      "sb_rate": 0.908
+      "sb_rate": 0.907
     },
     "name": "Mookie Betts"
   },
@@ -1625,10 +1625,10 @@
     "_seasons": 5,
     "_pa": 1810,
     "_z": {
-      "avg": -0.072,
-      "k_pct": -0.741,
+      "avg": -0.073,
+      "k_pct": -0.742,
       "bb_pct": 0.431,
-      "iso": 0.748,
+      "iso": 0.747,
       "sb_rate": -0.196
     },
     "name": "Nolan Gorman"
@@ -1639,12 +1639,12 @@
     "power": 110,
     "speed": 95,
     "_seasons": 5,
-    "_pa": 2453,
+    "_pa": 2457,
     "_z": {
       "avg": 0.049,
-      "k_pct": -0.118,
-      "bb_pct": 0.388,
-      "iso": 0.688,
+      "k_pct": -0.119,
+      "bb_pct": 0.385,
+      "iso": 0.683,
       "sb_rate": -0.347
     },
     "name": "Spencer Torkelson"
@@ -1652,16 +1652,16 @@
   "802415": {
     "type": "hitter",
     "hit": 108,
-    "power": 87,
+    "power": 86,
     "speed": 127,
     "_seasons": 2,
-    "_pa": 761,
+    "_pa": 765,
     "_z": {
-      "avg": 0.788,
-      "k_pct": 1.335,
-      "bb_pct": -0.561,
-      "iso": -0.898,
-      "sb_rate": 1.777
+      "avg": 0.82,
+      "k_pct": 1.34,
+      "bb_pct": -0.566,
+      "iso": -0.901,
+      "sb_rate": 1.793
     },
     "name": "Chandler Simpson"
   },
@@ -1671,13 +1671,13 @@
     "power": 121,
     "speed": 96,
     "_seasons": 10,
-    "_pa": 4035,
+    "_pa": 4040,
     "_z": {
-      "avg": 0.265,
+      "avg": 0.268,
       "k_pct": 0.256,
-      "bb_pct": 1.115,
+      "bb_pct": 1.112,
       "iso": 1.374,
-      "sb_rate": -0.277
+      "sb_rate": -0.278
     },
     "name": "Max Muncy"
   },
@@ -1689,11 +1689,11 @@
     "_seasons": 2,
     "_pa": 343,
     "_z": {
-      "avg": 0.074,
-      "k_pct": 0.555,
+      "avg": 0.072,
+      "k_pct": 0.554,
       "bb_pct": -0.366,
-      "iso": -1.046,
-      "sb_rate": 2.428
+      "iso": -1.047,
+      "sb_rate": 2.43
     },
     "name": "Luisangel Acuna"
   },
@@ -1709,7 +1709,7 @@
       "k_pct": -0.193,
       "bb_pct": 0.504,
       "iso": 0.58,
-      "sb_rate": -0.121
+      "sb_rate": -0.12
     },
     "name": "Ryan McMahon"
   },
@@ -1721,11 +1721,11 @@
     "_seasons": 2,
     "_pa": 821,
     "_z": {
-      "avg": 0.124,
-      "k_pct": -0.161,
+      "avg": 0.122,
+      "k_pct": -0.163,
       "bb_pct": 0.132,
-      "iso": 0.09,
-      "sb_rate": 0.258
+      "iso": 0.089,
+      "sb_rate": 0.259
     },
     "name": "Cam Smith"
   },
@@ -1748,7 +1748,7 @@
     "_seasons": 3,
     "_ip": 230,
     "_z": {
-      "k_pct": 0.684,
+      "k_pct": 0.685,
       "bb_pct": 0.462
     },
     "name": "Ben Brown"
@@ -1760,8 +1760,8 @@
     "_seasons": 8,
     "_ip": 275,
     "_z": {
-      "k_pct": -0.555,
-      "bb_pct": 0.782
+      "k_pct": -0.554,
+      "bb_pct": 0.783
     },
     "name": "Ryan Thompson"
   },
@@ -1772,8 +1772,8 @@
     "_seasons": 4,
     "_ip": 63,
     "_z": {
-      "k_pct": -0.018,
-      "bb_pct": -1.236
+      "k_pct": -0.017,
+      "bb_pct": -1.237
     },
     "name": "Caleb Kilian"
   },
@@ -1784,20 +1784,20 @@
     "_seasons": 4,
     "_ip": 138,
     "_z": {
-      "k_pct": -0.401,
+      "k_pct": -0.4,
       "bb_pct": 0.629
     },
     "name": "Keaton Winn"
   },
   "694361": {
     "type": "pitcher",
-    "stuff": 107,
-    "control": 85,
+    "stuff": 109,
+    "control": 87,
     "_seasons": 5,
-    "_ip": 62,
+    "_ip": 64,
     "_z": {
-      "k_pct": 0.492,
-      "bb_pct": -0.993
+      "k_pct": 0.58,
+      "bb_pct": -0.893
     },
     "name": "Will Klein"
   },
@@ -1815,13 +1815,13 @@
   },
   "681982": {
     "type": "pitcher",
-    "stuff": 99,
-    "control": 95,
+    "stuff": 100,
+    "control": 96,
     "_seasons": 4,
-    "_ip": 166,
+    "_ip": 168,
     "_z": {
-      "k_pct": -0.038,
-      "bb_pct": -0.321
+      "k_pct": -0.019,
+      "bb_pct": -0.294
     },
     "name": "Grant Anderson"
   },
@@ -1845,19 +1845,19 @@
     "_ip": 350,
     "_z": {
       "k_pct": -0.009,
-      "bb_pct": -0.498
+      "bb_pct": -0.499
     },
     "name": "Yohan Ramirez"
   },
   "594580": {
     "type": "pitcher",
     "stuff": 105,
-    "control": 88,
+    "control": 89,
     "_seasons": 9,
-    "_ip": 276,
+    "_ip": 277,
     "_z": {
-      "k_pct": 0.349,
-      "bb_pct": -0.774
+      "k_pct": 0.346,
+      "bb_pct": -0.761
     },
     "name": "Sam Moll"
   },
@@ -1882,8 +1882,8 @@
     "_pa": 3265,
     "_z": {
       "avg": 0.47,
-      "k_pct": 0.064,
-      "bb_pct": 0.31,
+      "k_pct": 0.063,
+      "bb_pct": 0.311,
       "iso": 0.598,
       "sb_rate": 0.105
     },
@@ -1897,10 +1897,10 @@
     "_seasons": 9,
     "_pa": 4442,
     "_z": {
-      "avg": 1.201,
-      "k_pct": 1.674,
+      "avg": 1.2,
+      "k_pct": 1.675,
       "bb_pct": -0.356,
-      "iso": -0.341,
+      "iso": -0.342,
       "sb_rate": -0.166
     },
     "name": "Luis Arraez"
@@ -1930,10 +1930,10 @@
     "_pa": 4874,
     "_z": {
       "avg": 0.754,
-      "k_pct": 0.634,
+      "k_pct": 0.633,
       "bb_pct": 0.415,
       "iso": 1.059,
-      "sb_rate": -0.259
+      "sb_rate": -0.258
     },
     "name": "Corey Seager"
   },
@@ -1943,13 +1943,13 @@
     "power": 96,
     "speed": 104,
     "_seasons": 4,
-    "_pa": 1210,
+    "_pa": 1215,
     "_z": {
-      "avg": 0.219,
-      "k_pct": 0.014,
-      "bb_pct": 0.364,
-      "iso": -0.291,
-      "sb_rate": 0.241
+      "avg": 0.207,
+      "k_pct": 0.015,
+      "bb_pct": 0.37,
+      "iso": -0.294,
+      "sb_rate": 0.239
     },
     "name": "Jared Triolo"
   },
@@ -1961,8 +1961,8 @@
     "_seasons": 3,
     "_pa": 1435,
     "_z": {
-      "avg": 0.419,
-      "k_pct": 0.052,
+      "avg": 0.418,
+      "k_pct": 0.05,
       "bb_pct": -0.362,
       "iso": 0.972,
       "sb_rate": 1.404
@@ -1977,8 +1977,8 @@
     "_seasons": 7,
     "_pa": 3929,
     "_z": {
-      "avg": 0.389,
-      "k_pct": 0.309,
+      "avg": 0.388,
+      "k_pct": 0.308,
       "bb_pct": 0.204,
       "iso": 0.977,
       "sb_rate": -0.193
@@ -2003,29 +2003,29 @@
     "power": 98,
     "speed": 101,
     "_seasons": 4,
-    "_pa": 1625,
+    "_pa": 1630,
     "_z": {
-      "avg": 0.329,
-      "k_pct": 0.614,
-      "bb_pct": -0.208,
-      "iso": -0.144,
-      "sb_rate": 0.052
+      "avg": 0.346,
+      "k_pct": 0.619,
+      "bb_pct": -0.202,
+      "iso": -0.148,
+      "sb_rate": 0.046
     },
     "name": "Masyn Winn"
   },
   "690993": {
     "type": "hitter",
     "hit": 104,
-    "power": 101,
+    "power": 102,
     "speed": 97,
     "_seasons": 3,
-    "_pa": 1273,
+    "_pa": 1275,
     "_z": {
-      "avg": 0.428,
-      "k_pct": 0.435,
-      "bb_pct": -0.018,
-      "iso": 0.085,
-      "sb_rate": -0.172
+      "avg": 0.432,
+      "k_pct": 0.429,
+      "bb_pct": -0.02,
+      "iso": 0.106,
+      "sb_rate": -0.171
     },
     "name": "Colt Keith"
   },
@@ -2035,13 +2035,13 @@
     "power": 118,
     "speed": 97,
     "_seasons": 8,
-    "_pa": 3780,
+    "_pa": 3782,
     "_z": {
-      "avg": 0.302,
-      "k_pct": 0.173,
-      "bb_pct": 0.772,
-      "iso": 1.187,
-      "sb_rate": -0.205
+      "avg": 0.3,
+      "k_pct": 0.171,
+      "bb_pct": 0.775,
+      "iso": 1.186,
+      "sb_rate": -0.206
     },
     "name": "Rhys Hoskins"
   },
@@ -2051,13 +2051,13 @@
     "power": 114,
     "speed": 118,
     "_seasons": 6,
-    "_pa": 3049,
+    "_pa": 3054,
     "_z": {
-      "avg": 0.685,
+      "avg": 0.684,
       "k_pct": 0.377,
-      "bb_pct": 0.321,
+      "bb_pct": 0.323,
       "iso": 0.953,
-      "sb_rate": 1.182
+      "sb_rate": 1.192
     },
     "name": "Fernando Tatis Jr."
   },
@@ -2070,7 +2070,7 @@
     "_pa": 2440,
     "_z": {
       "avg": 0.502,
-      "k_pct": 0.368,
+      "k_pct": 0.367,
       "bb_pct": 0.371,
       "iso": 1.256,
       "sb_rate": 0.887
@@ -2085,11 +2085,11 @@
     "_seasons": 2,
     "_pa": 528,
     "_z": {
-      "avg": 0.562,
-      "k_pct": 0.875,
+      "avg": 0.56,
+      "k_pct": 0.873,
       "bb_pct": 0.256,
-      "iso": -0.216,
-      "sb_rate": 0.864
+      "iso": -0.217,
+      "sb_rate": 0.865
     },
     "name": "Luke Keaschall"
   },
@@ -2099,13 +2099,13 @@
     "power": 115,
     "speed": 102,
     "_seasons": 9,
-    "_pa": 4319,
+    "_pa": 4324,
     "_z": {
-      "avg": 0.566,
+      "avg": 0.562,
       "k_pct": -0.049,
-      "bb_pct": -0.096,
-      "iso": 1.019,
-      "sb_rate": 0.122
+      "bb_pct": -0.093,
+      "iso": 1.016,
+      "sb_rate": 0.121
     },
     "name": "Teoscar Hernandez"
   },
@@ -2133,11 +2133,11 @@
     "_seasons": 9,
     "_pa": 2499,
     "_z": {
-      "avg": 0.291,
+      "avg": 0.29,
       "k_pct": 0.579,
       "bb_pct": 0.339,
-      "iso": 0.316,
-      "sb_rate": -0.386
+      "iso": 0.315,
+      "sb_rate": -0.385
     },
     "name": "Carson Kelly"
   },
@@ -2166,7 +2166,7 @@
     "_pa": 2278,
     "_z": {
       "avg": 0.372,
-      "k_pct": 0.555,
+      "k_pct": 0.554,
       "bb_pct": 0.119,
       "iso": 0.112,
       "sb_rate": -0.347
@@ -2184,7 +2184,7 @@
       "avg": 0.029,
       "k_pct": 0.382,
       "bb_pct": 0.481,
-      "iso": 0.765,
+      "iso": 0.764,
       "sb_rate": -0.402
     },
     "name": "Danny Jansen"
@@ -2195,29 +2195,29 @@
     "power": 101,
     "speed": 96,
     "_seasons": 3,
-    "_pa": 753,
+    "_pa": 755,
     "_z": {
-      "avg": 0.123,
-      "k_pct": -0.112,
-      "bb_pct": -0.523,
-      "iso": 0.094,
-      "sb_rate": -0.246
+      "avg": 0.132,
+      "k_pct": -0.107,
+      "bb_pct": -0.525,
+      "iso": 0.09,
+      "sb_rate": -0.25
     },
     "name": "Pedro Pages"
   },
   "543309": {
     "type": "hitter",
-    "hit": 100,
+    "hit": 99,
     "power": 110,
     "speed": 95,
     "_seasons": 6,
-    "_pa": 1468,
+    "_pa": 1473,
     "_z": {
-      "avg": 0.108,
+      "avg": 0.097,
       "k_pct": 0.07,
-      "bb_pct": -0.27,
-      "iso": 0.666,
-      "sb_rate": -0.31
+      "bb_pct": -0.273,
+      "iso": 0.659,
+      "sb_rate": -0.311
     },
     "name": "Kyle Higashioka"
   },
@@ -2241,11 +2241,11 @@
     "_seasons": 2,
     "_pa": 584,
     "_z": {
-      "avg": 0.157,
-      "k_pct": 0.392,
+      "avg": 0.156,
+      "k_pct": 0.391,
       "bb_pct": 0.147,
       "iso": 0.52,
-      "sb_rate": 0.723
+      "sb_rate": 0.724
     },
     "name": "Matt Shaw"
   },
@@ -2268,8 +2268,8 @@
     "_seasons": 3,
     "_ip": 114,
     "_z": {
-      "k_pct": 0.618,
-      "bb_pct": -0.91
+      "k_pct": 0.619,
+      "bb_pct": -0.911
     },
     "name": "Jordan Leasure"
   },
@@ -2292,8 +2292,8 @@
     "_seasons": 5,
     "_ip": 146,
     "_z": {
-      "k_pct": 0.086,
-      "bb_pct": -0.958
+      "k_pct": 0.087,
+      "bb_pct": -0.96
     },
     "name": "DL Hall"
   },
@@ -2330,10 +2330,10 @@
     "stuff": 89,
     "control": 114,
     "_seasons": 9,
-    "_ip": 643,
+    "_ip": 644,
     "_z": {
-      "k_pct": -0.748,
-      "bb_pct": 0.95
+      "k_pct": -0.746,
+      "bb_pct": 0.942
     },
     "name": "Tyler Alexander"
   },
@@ -2346,9 +2346,9 @@
     "_pa": 1676,
     "_z": {
       "avg": 0.115,
-      "k_pct": -0.061,
+      "k_pct": -0.062,
       "bb_pct": 0.255,
-      "iso": -0.236,
+      "iso": -0.237,
       "sb_rate": 2.104
     },
     "name": "Jose Caballero"
@@ -2361,11 +2361,11 @@
     "_seasons": 3,
     "_pa": 666,
     "_z": {
-      "avg": 0.477,
-      "k_pct": -0.212,
+      "avg": 0.476,
+      "k_pct": -0.214,
       "bb_pct": -0.035,
-      "iso": 0.021,
-      "sb_rate": 0.211
+      "iso": 0.02,
+      "sb_rate": 0.212
     },
     "name": "Blaze Alexander"
   },
@@ -2375,13 +2375,13 @@
     "power": 123,
     "speed": 96,
     "_seasons": 3,
-    "_pa": 1193,
+    "_pa": 1198,
     "_z": {
-      "avg": 0.621,
-      "k_pct": 0.527,
-      "bb_pct": 0.007,
-      "iso": 1.532,
-      "sb_rate": -0.234
+      "avg": 0.603,
+      "k_pct": 0.533,
+      "bb_pct": 0.001,
+      "iso": 1.518,
+      "sb_rate": -0.235
     },
     "name": "Junior Caminero"
   },
@@ -2425,7 +2425,7 @@
     "_seasons": 11,
     "_pa": 3998,
     "_z": {
-      "avg": 0.574,
+      "avg": 0.573,
       "k_pct": 1.042,
       "bb_pct": -0.135,
       "iso": -0.147,
@@ -2441,11 +2441,11 @@
     "_seasons": 3,
     "_pa": 1055,
     "_z": {
-      "avg": 0.31,
-      "k_pct": 0.262,
+      "avg": 0.309,
+      "k_pct": 0.26,
       "bb_pct": 0.467,
       "iso": 1.381,
-      "sb_rate": -0.308
+      "sb_rate": -0.307
     },
     "name": "Ben Rice"
   },
@@ -2455,13 +2455,13 @@
     "power": 116,
     "speed": 103,
     "_seasons": 13,
-    "_pa": 7732,
+    "_pa": 7737,
     "_z": {
-      "avg": 0.713,
+      "avg": 0.712,
       "k_pct": 0.651,
-      "bb_pct": 0.24,
-      "iso": 1.072,
-      "sb_rate": 0.226
+      "bb_pct": 0.243,
+      "iso": 1.075,
+      "sb_rate": 0.225
     },
     "name": "Manny Machado"
   },
@@ -2474,9 +2474,9 @@
     "_pa": 4377,
     "_z": {
       "avg": 0.553,
-      "k_pct": 0.053,
+      "k_pct": 0.052,
       "bb_pct": 0.056,
-      "iso": 1.037,
+      "iso": 1.036,
       "sb_rate": 1.317
     },
     "name": "Trevor Story"
@@ -2521,10 +2521,10 @@
     "_seasons": 2,
     "_pa": 385,
     "_z": {
-      "avg": 0.076,
-      "k_pct": -0.094,
+      "avg": 0.073,
+      "k_pct": -0.098,
       "bb_pct": -0.156,
-      "iso": 0.527,
+      "iso": 0.526,
       "sb_rate": -0.524
     },
     "name": "Samuel Basallo"
@@ -2537,11 +2537,11 @@
     "_seasons": 2,
     "_pa": 719,
     "_z": {
-      "avg": 0.642,
-      "k_pct": 0.747,
+      "avg": 0.64,
+      "k_pct": 0.745,
       "bb_pct": -0.327,
-      "iso": 0.532,
-      "sb_rate": 0.223
+      "iso": 0.531,
+      "sb_rate": 0.224
     },
     "name": "Daylen Lile"
   },
@@ -2599,13 +2599,13 @@
     "power": 116,
     "speed": 100,
     "_seasons": 11,
-    "_pa": 6852,
+    "_pa": 6857,
     "_z": {
       "avg": 1.014,
       "k_pct": 0.682,
-      "bb_pct": 0.623,
-      "iso": 1.063,
-      "sb_rate": 0.029
+      "bb_pct": 0.624,
+      "iso": 1.062,
+      "sb_rate": 0.028
     },
     "name": "Freddie Freeman"
   },
@@ -2633,8 +2633,8 @@
     "_seasons": 4,
     "_pa": 1185,
     "_z": {
-      "avg": 0.334,
-      "k_pct": 0.208,
+      "avg": 0.333,
+      "k_pct": 0.207,
       "bb_pct": -0.039,
       "iso": 0.701,
       "sb_rate": 0.225
@@ -2649,9 +2649,9 @@
     "_seasons": 4,
     "_pa": 1064,
     "_z": {
-      "avg": 0.249,
-      "k_pct": 0.262,
-      "bb_pct": -0.535,
+      "avg": 0.248,
+      "k_pct": 0.26,
+      "bb_pct": -0.536,
       "iso": 0.426,
       "sb_rate": -0.087
     },
@@ -2667,7 +2667,7 @@
     "_z": {
       "avg": 0.989,
       "k_pct": 0.641,
-      "bb_pct": 0.762,
+      "bb_pct": 0.763,
       "iso": 1.683,
       "sb_rate": -0.357
     },
@@ -2679,13 +2679,13 @@
     "power": 105,
     "speed": 99,
     "_seasons": 3,
-    "_pa": 1085,
+    "_pa": 1090,
     "_z": {
-      "avg": 0.674,
-      "k_pct": 0.624,
-      "bb_pct": 0.464,
-      "iso": 0.356,
-      "sb_rate": -0.091
+      "avg": 0.671,
+      "k_pct": 0.622,
+      "bb_pct": 0.456,
+      "iso": 0.348,
+      "sb_rate": -0.093
     },
     "name": "Ivan Herrera"
   },
@@ -2696,8 +2696,8 @@
     "_seasons": 3,
     "_ip": 143,
     "_z": {
-      "k_pct": 0.111,
-      "bb_pct": 0.549
+      "k_pct": 0.113,
+      "bb_pct": 0.55
     },
     "name": "Cade Cavalli"
   },
@@ -2709,7 +2709,7 @@
     "_seasons": 6,
     "_pa": 2441,
     "_z": {
-      "avg": 0.613,
+      "avg": 0.612,
       "k_pct": 0.804,
       "bb_pct": -0.538,
       "iso": 0.333,
@@ -2725,10 +2725,10 @@
     "_seasons": 4,
     "_pa": 1042,
     "_z": {
-      "avg": 0.036,
-      "k_pct": -0.683,
+      "avg": 0.035,
+      "k_pct": -0.684,
       "bb_pct": 0.479,
-      "iso": 1.425,
+      "iso": 1.424,
       "sb_rate": -0.208
     },
     "name": "Matt Wallner"
@@ -2740,8 +2740,8 @@
     "_seasons": 5,
     "_ip": 80,
     "_z": {
-      "k_pct": 1.529,
-      "bb_pct": -2.524
+      "k_pct": 1.53,
+      "bb_pct": -2.526
     },
     "name": "Clayton Beeter"
   },
@@ -2767,13 +2767,13 @@
     "power": 106,
     "speed": 97,
     "_seasons": 9,
-    "_pa": 2231,
+    "_pa": 2232,
     "_z": {
-      "avg": 0.867,
+      "avg": 0.87,
       "k_pct": 0.839,
       "bb_pct": -0.512,
-      "iso": 0.372,
-      "sb_rate": -0.226
+      "iso": 0.371,
+      "sb_rate": -0.227
     },
     "name": "Miguel Andujar"
   },
@@ -2796,8 +2796,8 @@
     "_seasons": 2,
     "_ip": 69,
     "_z": {
-      "k_pct": 0.587,
-      "bb_pct": -1.062
+      "k_pct": 0.588,
+      "bb_pct": -1.063
     },
     "name": "David Morgan"
   },
@@ -2806,22 +2806,22 @@
     "stuff": 88,
     "control": 95,
     "_seasons": 14,
-    "_ip": 563,
+    "_ip": 564,
     "_z": {
-      "k_pct": -0.796,
-      "bb_pct": -0.349
+      "k_pct": -0.792,
+      "bb_pct": -0.337
     },
     "name": "Wandy Peralta"
   },
   "680742": {
     "type": "pitcher",
-    "stuff": 110,
+    "stuff": 111,
     "control": 103,
     "_seasons": 4,
-    "_ip": 75,
+    "_ip": 76,
     "_z": {
-      "k_pct": 0.688,
-      "bb_pct": 0.193
+      "k_pct": 0.729,
+      "bb_pct": 0.232
     },
     "name": "Jonathan Bowlan"
   },
@@ -2832,7 +2832,7 @@
     "_seasons": 4,
     "_ip": 93,
     "_z": {
-      "k_pct": 0.951,
+      "k_pct": 0.952,
       "bb_pct": 0.014
     },
     "name": "Brent Headrick"
@@ -2856,7 +2856,7 @@
     "_seasons": 5,
     "_ip": 167,
     "_z": {
-      "k_pct": 0.589,
+      "k_pct": 0.59,
       "bb_pct": -0.941
     },
     "name": "Ron Marinaccio"
@@ -2879,12 +2879,12 @@
     "power": 105,
     "speed": 108,
     "_seasons": 3,
-    "_pa": 1280,
+    "_pa": 1281,
     "_z": {
-      "avg": 0.234,
+      "avg": 0.23,
       "k_pct": -0.271,
-      "bb_pct": 0.259,
-      "iso": 0.304,
+      "bb_pct": 0.258,
+      "iso": 0.302,
       "sb_rate": 0.536
     },
     "name": "Matt McLain"
@@ -2895,12 +2895,12 @@
     "power": 107,
     "speed": 95,
     "_seasons": 4,
-    "_pa": 1377,
+    "_pa": 1380,
     "_z": {
-      "avg": 0.12,
-      "k_pct": -0.283,
-      "bb_pct": -0.328,
-      "iso": 0.484,
+      "avg": 0.112,
+      "k_pct": -0.286,
+      "bb_pct": -0.33,
+      "iso": 0.478,
       "sb_rate": -0.338
     },
     "name": "Logan O'Hoppe"
@@ -2929,10 +2929,10 @@
     "_seasons": 2,
     "_pa": 604,
     "_z": {
-      "avg": 0.107,
-      "k_pct": -0.167,
+      "avg": 0.106,
+      "k_pct": -0.169,
       "bb_pct": 0.07,
-      "iso": 0.422,
+      "iso": 0.421,
       "sb_rate": -0.347
     },
     "name": "Carlos Narvaez"
@@ -2956,16 +2956,16 @@
   "672724": {
     "type": "hitter",
     "hit": 95,
-    "power": 95,
+    "power": 94,
     "speed": 109,
     "_seasons": 4,
-    "_pa": 881,
+    "_pa": 884,
     "_z": {
-      "avg": -0.341,
-      "k_pct": -0.262,
-      "bb_pct": -0.4,
-      "iso": -0.366,
-      "sb_rate": 0.612
+      "avg": -0.352,
+      "k_pct": -0.277,
+      "bb_pct": -0.403,
+      "iso": -0.37,
+      "sb_rate": 0.613
     },
     "name": "Oswald Peraza"
   },
@@ -3009,8 +3009,8 @@
     "_seasons": 3,
     "_pa": 1222,
     "_z": {
-      "avg": 0.41,
-      "k_pct": 0.067,
+      "avg": 0.409,
+      "k_pct": 0.066,
       "bb_pct": 0.241,
       "iso": 0.84,
       "sb_rate": 0.036
@@ -3039,13 +3039,13 @@
     "power": 123,
     "speed": 97,
     "_seasons": 6,
-    "_pa": 2704,
+    "_pa": 2707,
     "_z": {
-      "avg": 0.029,
-      "k_pct": -0.224,
-      "bb_pct": 0.588,
-      "iso": 1.532,
-      "sb_rate": -0.168
+      "avg": 0.026,
+      "k_pct": -0.229,
+      "bb_pct": 0.592,
+      "iso": 1.529,
+      "sb_rate": -0.169
     },
     "name": "Cal Raleigh"
   },
@@ -3060,7 +3060,7 @@
       "avg": 0.229,
       "k_pct": 0.742,
       "bb_pct": 0.578,
-      "iso": 0.704,
+      "iso": 0.703,
       "sb_rate": -0.364
     },
     "name": "Isaac Paredes"
@@ -3087,12 +3087,12 @@
     "power": 96,
     "speed": 95,
     "_seasons": 6,
-    "_pa": 1457,
+    "_pa": 1459,
     "_z": {
-      "avg": 0.37,
-      "k_pct": 0.544,
-      "bb_pct": -0.327,
-      "iso": -0.277,
+      "avg": 0.375,
+      "k_pct": 0.546,
+      "bb_pct": -0.328,
+      "iso": -0.271,
       "sb_rate": -0.364
     },
     "name": "Freddy Fermin"
@@ -3105,11 +3105,11 @@
     "_seasons": 2,
     "_pa": 231,
     "_z": {
-      "avg": -0.464,
-      "k_pct": -0.142,
+      "avg": -0.466,
+      "k_pct": -0.146,
       "bb_pct": 1.345,
-      "iso": -0.698,
-      "sb_rate": 0.347
+      "iso": -0.7,
+      "sb_rate": 0.348
     },
     "name": "Leo Rivas"
   },
@@ -3155,13 +3155,13 @@
     "power": 115,
     "speed": 116,
     "_seasons": 5,
-    "_pa": 3080,
+    "_pa": 3084,
     "_z": {
-      "avg": 0.878,
-      "k_pct": 0.676,
-      "bb_pct": -0.192,
-      "iso": 0.971,
-      "sb_rate": 1.037
+      "avg": 0.873,
+      "k_pct": 0.674,
+      "bb_pct": -0.194,
+      "iso": 0.968,
+      "sb_rate": 1.05
     },
     "name": "Bobby Witt Jr."
   },
@@ -3173,11 +3173,11 @@
     "_seasons": 7,
     "_pa": 4325,
     "_z": {
-      "avg": 0.837,
+      "avg": 0.836,
       "k_pct": 0.92,
       "bb_pct": 0.393,
-      "iso": 0.821,
-      "sb_rate": -0.239
+      "iso": 0.82,
+      "sb_rate": -0.238
     },
     "name": "Vladimir Guerrero Jr."
   },
@@ -3189,9 +3189,9 @@
     "_seasons": 2,
     "_pa": 878,
     "_z": {
-      "avg": 0.795,
-      "k_pct": -0.528,
-      "bb_pct": 1.329,
+      "avg": 0.793,
+      "k_pct": -0.532,
+      "bb_pct": 1.33,
       "iso": 1.944,
       "sb_rate": -0.202
     },
@@ -3219,28 +3219,28 @@
     "power": 112,
     "speed": 108,
     "_seasons": 3,
-    "_pa": 1396,
+    "_pa": 1400,
     "_z": {
-      "avg": 0.676,
-      "k_pct": 0.338,
-      "bb_pct": -0.308,
-      "iso": 0.831,
-      "sb_rate": 0.539
+      "avg": 0.674,
+      "k_pct": 0.336,
+      "bb_pct": -0.311,
+      "iso": 0.823,
+      "sb_rate": 0.536
     },
     "name": "Jackson Chourio"
   },
   "621566": {
     "type": "hitter",
     "hit": 107,
-    "power": 122,
+    "power": 121,
     "speed": 95,
     "_seasons": 9,
-    "_pa": 5290,
+    "_pa": 5294,
     "_z": {
-      "avg": 0.583,
-      "k_pct": 0.279,
-      "bb_pct": 0.613,
-      "iso": 1.433,
+      "avg": 0.581,
+      "k_pct": 0.28,
+      "bb_pct": 0.615,
+      "iso": 1.431,
       "sb_rate": -0.35
     },
     "name": "Matt Olson"
@@ -3254,7 +3254,7 @@
     "_pa": 2085,
     "_z": {
       "avg": 0.494,
-      "k_pct": 0.978,
+      "k_pct": 0.977,
       "bb_pct": 0.113,
       "iso": 0.661,
       "sb_rate": -0.315
@@ -3267,12 +3267,12 @@
     "power": 110,
     "speed": 96,
     "_seasons": 5,
-    "_pa": 2435,
+    "_pa": 2440,
     "_z": {
-      "avg": 0.598,
-      "k_pct": -0.248,
-      "bb_pct": 0.211,
-      "iso": 0.669,
+      "avg": 0.595,
+      "k_pct": -0.256,
+      "bb_pct": 0.208,
+      "iso": 0.668,
       "sb_rate": -0.251
     },
     "name": "Riley Greene"
@@ -3285,11 +3285,11 @@
     "_seasons": 5,
     "_pa": 2255,
     "_z": {
-      "avg": 0.465,
-      "k_pct": -0.208,
+      "avg": 0.464,
+      "k_pct": -0.209,
       "bb_pct": 0.249,
       "iso": 1.245,
-      "sb_rate": -0.181
+      "sb_rate": -0.18
     },
     "name": "Brent Rooker"
   },
@@ -3300,8 +3300,8 @@
     "_seasons": 4,
     "_ip": 495,
     "_z": {
-      "k_pct": 0.409,
-      "bb_pct": 1.235
+      "k_pct": 0.41,
+      "bb_pct": 1.236
     },
     "name": "Bryan Woo"
   },
@@ -3324,7 +3324,7 @@
     "_seasons": 7,
     "_ip": 1040,
     "_z": {
-      "k_pct": 1.322,
+      "k_pct": 1.321,
       "bb_pct": -0.345
     },
     "name": "Dylan Cease"
@@ -3337,8 +3337,8 @@
     "_seasons": 5,
     "_pa": 2061,
     "_z": {
-      "avg": 0.208,
-      "k_pct": 0.016,
+      "avg": 0.207,
+      "k_pct": 0.015,
       "bb_pct": -0.148,
       "iso": 1.18,
       "sb_rate": -0.172
@@ -3348,15 +3348,15 @@
   "663586": {
     "type": "hitter",
     "hit": 103,
-    "power": 116,
+    "power": 115,
     "speed": 95,
     "_seasons": 7,
-    "_pa": 3623,
+    "_pa": 3627,
     "_z": {
-      "avg": 0.603,
-      "k_pct": 0.058,
-      "bb_pct": -0.032,
-      "iso": 1.036,
+      "avg": 0.602,
+      "k_pct": 0.057,
+      "bb_pct": -0.034,
+      "iso": 1.033,
       "sb_rate": -0.332
     },
     "name": "Austin Riley"
@@ -3381,7 +3381,7 @@
     "_seasons": 4,
     "_pa": 2101,
     "_z": {
-      "avg": 0.529,
+      "avg": 0.528,
       "k_pct": 0.767,
       "bb_pct": 0.006,
       "iso": -0.132,
@@ -3409,9 +3409,9 @@
     "_seasons": 4,
     "_pa": 1310,
     "_z": {
-      "avg": 0.316,
-      "k_pct": 0.229,
-      "bb_pct": 0.323,
+      "avg": 0.315,
+      "k_pct": 0.228,
+      "bb_pct": 0.324,
       "iso": 0.711,
       "sb_rate": -0.259
     },
@@ -3424,8 +3424,8 @@
     "_seasons": 5,
     "_ip": 742,
     "_z": {
-      "k_pct": 0.139,
-      "bb_pct": 1.581
+      "k_pct": 0.14,
+      "bb_pct": 1.582
     },
     "name": "George Kirby"
   },
@@ -3434,10 +3434,10 @@
     "stuff": 100,
     "control": 100,
     "_seasons": 8,
-    "_ip": 1106,
+    "_ip": 1111,
     "_z": {
-      "k_pct": -0.009,
-      "bb_pct": 0.027
+      "k_pct": -0.027,
+      "bb_pct": 0.029
     },
     "name": "Framber Valdez"
   },
@@ -3473,8 +3473,8 @@
     "_seasons": 3,
     "_pa": 1143,
     "_z": {
-      "avg": 0.361,
-      "k_pct": -0.34,
+      "avg": 0.36,
+      "k_pct": -0.343,
       "bb_pct": -0.407,
       "iso": 1.491,
       "sb_rate": -0.176
@@ -3487,13 +3487,13 @@
     "power": 109,
     "speed": 104,
     "_seasons": 9,
-    "_pa": 3710,
+    "_pa": 3714,
     "_z": {
-      "avg": 0.695,
-      "k_pct": 0.895,
-      "bb_pct": 0.02,
-      "iso": 0.576,
-      "sb_rate": 0.292
+      "avg": 0.691,
+      "k_pct": 0.894,
+      "bb_pct": 0.018,
+      "iso": 0.574,
+      "sb_rate": 0.293
     },
     "name": "Josh Naylor"
   },
@@ -3532,7 +3532,7 @@
       "avg": 0.606,
       "k_pct": 0.56,
       "bb_pct": 0.493,
-      "iso": 0.911,
+      "iso": 0.91,
       "sb_rate": 0.254
     },
     "name": "George Springer"
@@ -3544,20 +3544,20 @@
     "_seasons": 2,
     "_ip": 143,
     "_z": {
-      "k_pct": 1.256,
+      "k_pct": 1.257,
       "bb_pct": 0.028
     },
     "name": "Nolan McLean"
   },
   "695505": {
     "type": "pitcher",
-    "stuff": 128,
+    "stuff": 126,
     "control": 104,
     "_seasons": 2,
-    "_ip": 135,
+    "_ip": 141,
     "_z": {
-      "k_pct": 1.85,
-      "bb_pct": 0.264
+      "k_pct": 1.734,
+      "bb_pct": 0.259
     },
     "name": "Chase Burns"
   },
@@ -3592,7 +3592,7 @@
     "_seasons": 3,
     "_ip": 259,
     "_z": {
-      "k_pct": 0.954,
+      "k_pct": 0.955,
       "bb_pct": -0.003
     },
     "name": "Eury Perez"
@@ -3603,13 +3603,13 @@
     "power": 110,
     "speed": 109,
     "_seasons": 9,
-    "_pa": 4707,
+    "_pa": 4712,
     "_z": {
-      "avg": 0.622,
+      "avg": 0.618,
       "k_pct": 0.842,
-      "bb_pct": -0.066,
-      "iso": 0.696,
-      "sb_rate": 0.628
+      "bb_pct": -0.064,
+      "iso": 0.695,
+      "sb_rate": 0.627
     },
     "name": "Ozzie Albies"
   },
@@ -3632,7 +3632,7 @@
     "_seasons": 6,
     "_ip": 494,
     "_z": {
-      "k_pct": 1.923,
+      "k_pct": 1.924,
       "bb_pct": 0.0
     },
     "name": "Spencer Strider"
@@ -3640,12 +3640,12 @@
   "662253": {
     "type": "pitcher",
     "stuff": 132,
-    "control": 95,
+    "control": 94,
     "_seasons": 7,
-    "_ip": 290,
+    "_ip": 291,
     "_z": {
-      "k_pct": 2.146,
-      "bb_pct": -0.36
+      "k_pct": 2.121,
+      "bb_pct": -0.372
     },
     "name": "Andres Munoz"
   },
@@ -3656,40 +3656,40 @@
     "_seasons": 5,
     "_ip": 451,
     "_z": {
-      "k_pct": 0.522,
+      "k_pct": 0.523,
       "bb_pct": 0.077
     },
     "name": "Kyle Bradish"
   },
   "671739": {
     "type": "hitter",
-    "hit": 103,
+    "hit": 102,
     "power": 109,
     "speed": 106,
     "_seasons": 5,
-    "_pa": 2392,
+    "_pa": 2396,
     "_z": {
-      "avg": 0.726,
-      "k_pct": 0.434,
-      "bb_pct": -0.699,
-      "iso": 0.589,
-      "sb_rate": 0.419
+      "avg": 0.725,
+      "k_pct": 0.433,
+      "bb_pct": -0.7,
+      "iso": 0.585,
+      "sb_rate": 0.418
     },
     "name": "Michael Harris II"
   },
   "686948": {
     "type": "hitter",
-    "hit": 107,
+    "hit": 106,
     "power": 112,
     "speed": 93,
     "_seasons": 2,
-    "_pa": 716,
+    "_pa": 721,
     "_z": {
-      "avg": 0.573,
-      "k_pct": 0.521,
-      "bb_pct": 0.174,
-      "iso": 0.821,
-      "sb_rate": -0.438
+      "avg": 0.57,
+      "k_pct": 0.518,
+      "bb_pct": 0.164,
+      "iso": 0.808,
+      "sb_rate": -0.439
     },
     "name": "Drake Baldwin"
   },
@@ -3701,7 +3701,7 @@
     "_ip": 427,
     "_z": {
       "k_pct": 0.47,
-      "bb_pct": -0.53
+      "bb_pct": -0.529
     },
     "name": "Gavin Williams"
   },
@@ -3725,7 +3725,7 @@
     "_ip": 336,
     "_z": {
       "k_pct": 2.461,
-      "bb_pct": 0.825
+      "bb_pct": 0.826
     },
     "name": "Cade Smith"
   },
@@ -3737,7 +3737,7 @@
     "_ip": 1452,
     "_z": {
       "k_pct": 0.725,
-      "bb_pct": 0.815
+      "bb_pct": 0.816
     },
     "name": "Zack Wheeler"
   },
@@ -3749,7 +3749,7 @@
     "_seasons": 5,
     "_pa": 2570,
     "_z": {
-      "avg": 0.629,
+      "avg": 0.628,
       "k_pct": 0.031,
       "bb_pct": 0.45,
       "iso": 0.874,
@@ -3764,7 +3764,7 @@
     "_seasons": 8,
     "_ip": 1149,
     "_z": {
-      "k_pct": -0.469,
+      "k_pct": -0.468,
       "bb_pct": 0.525
     },
     "name": "Sandy Alcantara"
@@ -3800,8 +3800,8 @@
     "_seasons": 2,
     "_ip": 177,
     "_z": {
-      "k_pct": 1.211,
-      "bb_pct": 0.494
+      "k_pct": 1.212,
+      "bb_pct": 0.496
     },
     "name": "Cam Schlittler"
   },
@@ -3813,8 +3813,8 @@
     "_seasons": 2,
     "_pa": 714,
     "_z": {
-      "avg": 0.155,
-      "k_pct": 0.469,
+      "avg": 0.154,
+      "k_pct": 0.468,
       "bb_pct": -0.212,
       "iso": 0.612,
       "sb_rate": 0.463
@@ -3828,7 +3828,7 @@
     "_seasons": 8,
     "_ip": 847,
     "_z": {
-      "k_pct": -0.06,
+      "k_pct": -0.059,
       "bb_pct": 0.446
     },
     "name": "Ranger Suarez"
@@ -3842,7 +3842,7 @@
     "_pa": 4414,
     "_z": {
       "avg": 0.556,
-      "k_pct": 0.387,
+      "k_pct": 0.386,
       "bb_pct": 0.56,
       "iso": 0.595,
       "sb_rate": -0.02
@@ -3856,7 +3856,7 @@
     "_seasons": 3,
     "_ip": 416,
     "_z": {
-      "k_pct": 0.098,
+      "k_pct": 0.099,
       "bb_pct": 1.322
     },
     "name": "Shota Imanaga"
@@ -3908,8 +3908,8 @@
     "_seasons": 2,
     "_ip": 117,
     "_z": {
-      "k_pct": -0.112,
-      "bb_pct": -0.277
+      "k_pct": -0.109,
+      "bb_pct": -0.279
     },
     "name": "Bubba Chandler"
   },
@@ -3920,8 +3920,8 @@
     "_seasons": 3,
     "_ip": 206,
     "_z": {
-      "k_pct": 0.95,
-      "bb_pct": 0.203
+      "k_pct": 0.951,
+      "bb_pct": 0.204
     },
     "name": "Emmet Sheehan"
   },
@@ -3933,7 +3933,7 @@
     "_seasons": 7,
     "_pa": 3083,
     "_z": {
-      "avg": 0.384,
+      "avg": 0.383,
       "k_pct": 0.225,
       "bb_pct": 0.505,
       "iso": 0.725,
@@ -3960,7 +3960,7 @@
     "_seasons": 5,
     "_ip": 461,
     "_z": {
-      "k_pct": 0.493,
+      "k_pct": 0.494,
       "bb_pct": 0.554
     },
     "name": "Nick Lodolo"
@@ -3968,16 +3968,16 @@
   "805300": {
     "type": "hitter",
     "hit": 104,
-    "power": 102,
+    "power": 101,
     "speed": 119,
     "_seasons": 2,
-    "_pa": 585,
+    "_pa": 589,
     "_z": {
-      "avg": 0.081,
-      "k_pct": 0.207,
-      "bb_pct": 0.51,
-      "iso": 0.109,
-      "sb_rate": 1.298
+      "avg": 0.061,
+      "k_pct": 0.218,
+      "bb_pct": 0.524,
+      "iso": 0.098,
+      "sb_rate": 1.287
     },
     "name": "Jakob Marsee"
   },
@@ -3989,11 +3989,11 @@
     "_seasons": 4,
     "_pa": 1450,
     "_z": {
-      "avg": 0.159,
-      "k_pct": -0.125,
+      "avg": 0.158,
+      "k_pct": -0.126,
       "bb_pct": 0.128,
-      "iso": 0.559,
-      "sb_rate": 0.465
+      "iso": 0.558,
+      "sb_rate": 0.466
     },
     "name": "Lawrence Butler"
   },
@@ -4004,7 +4004,7 @@
     "_seasons": 2,
     "_ip": 125,
     "_z": {
-      "k_pct": -0.469,
+      "k_pct": -0.468,
       "bb_pct": 0.581
     },
     "name": "Cade Horton"
@@ -4015,13 +4015,13 @@
     "power": 107,
     "speed": 97,
     "_seasons": 2,
-    "_pa": 537,
+    "_pa": 541,
     "_z": {
-      "avg": -0.031,
-      "k_pct": -0.206,
-      "bb_pct": -0.021,
-      "iso": 0.466,
-      "sb_rate": -0.216
+      "avg": -0.03,
+      "k_pct": -0.21,
+      "bb_pct": -0.03,
+      "iso": 0.447,
+      "sb_rate": -0.218
     },
     "name": "Jac Caglianone"
   },
@@ -4045,7 +4045,7 @@
     "_seasons": 5,
     "_pa": 2587,
     "_z": {
-      "avg": 0.66,
+      "avg": 0.659,
       "k_pct": 0.532,
       "bb_pct": -0.451,
       "iso": 0.195,
@@ -4061,7 +4061,7 @@
     "_ip": 1456,
     "_z": {
       "k_pct": 0.974,
-      "bb_pct": -0.318
+      "bb_pct": -0.319
     },
     "name": "Robbie Ray"
   },
@@ -4072,8 +4072,8 @@
     "_seasons": 2,
     "_ip": 81,
     "_z": {
-      "k_pct": 0.06,
-      "bb_pct": -0.604
+      "k_pct": 0.063,
+      "bb_pct": -0.605
     },
     "name": "Trey Yesavage"
   },
@@ -4097,10 +4097,10 @@
     "_seasons": 1,
     "_pa": 344,
     "_z": {
-      "avg": 0.176,
-      "k_pct": -0.77,
+      "avg": 0.172,
+      "k_pct": -0.779,
       "bb_pct": 0.159,
-      "iso": 0.791,
+      "iso": 0.79,
       "sb_rate": -0.558
     },
     "name": "Kazuma Okamoto"
@@ -4123,13 +4123,13 @@
     "power": 112,
     "speed": 96,
     "_seasons": 4,
-    "_pa": 1105,
+    "_pa": 1110,
     "_z": {
       "avg": 0.273,
-      "k_pct": -0.551,
-      "bb_pct": 0.213,
-      "iso": 0.818,
-      "sb_rate": -0.282
+      "k_pct": -0.549,
+      "bb_pct": 0.22,
+      "iso": 0.809,
+      "sb_rate": -0.284
     },
     "name": "Kyle Stowers"
   },
@@ -4153,7 +4153,7 @@
     "_seasons": 3,
     "_pa": 840,
     "_z": {
-      "avg": 0.914,
+      "avg": 0.913,
       "k_pct": 1.418,
       "bb_pct": -0.473,
       "iso": -0.076,
@@ -4252,7 +4252,7 @@
     "_seasons": 5,
     "_ip": 387,
     "_z": {
-      "k_pct": 0.143,
+      "k_pct": 0.145,
       "bb_pct": 0.013
     },
     "name": "Shane Baz"
@@ -4303,13 +4303,13 @@
     "power": 93,
     "speed": 110,
     "_seasons": 3,
-    "_pa": 1285,
+    "_pa": 1289,
     "_z": {
-      "avg": 0.964,
-      "k_pct": 0.957,
-      "bb_pct": 0.286,
-      "iso": -0.466,
-      "sb_rate": 0.653
+      "avg": 0.956,
+      "k_pct": 0.96,
+      "bb_pct": 0.293,
+      "iso": -0.469,
+      "sb_rate": 0.65
     },
     "name": "Xavier Edwards"
   },
@@ -4321,11 +4321,11 @@
     "_seasons": 1,
     "_pa": 232,
     "_z": {
-      "avg": 0.542,
-      "k_pct": -0.262,
-      "bb_pct": -0.384,
-      "iso": -0.019,
-      "sb_rate": 2.128
+      "avg": 0.538,
+      "k_pct": -0.269,
+      "bb_pct": -0.385,
+      "iso": -0.021,
+      "sb_rate": 2.131
     },
     "name": "Konnor Griffin"
   },
@@ -4353,11 +4353,11 @@
     "_seasons": 3,
     "_pa": 975,
     "_z": {
-      "avg": 0.08,
+      "avg": 0.079,
       "k_pct": 0.019,
       "bb_pct": 0.173,
       "iso": 0.121,
-      "sb_rate": 0.249
+      "sb_rate": 0.25
     },
     "name": "Jackson Holliday"
   },
@@ -4380,7 +4380,7 @@
     "_seasons": 9,
     "_ip": 285,
     "_z": {
-      "k_pct": 1.233,
+      "k_pct": 1.234,
       "bb_pct": -0.05
     },
     "name": "Pete Fairbanks"
@@ -4404,7 +4404,7 @@
     "_seasons": 3,
     "_ip": 267,
     "_z": {
-      "k_pct": -0.033,
+      "k_pct": -0.032,
       "bb_pct": -0.454
     },
     "name": "Jack Leiter"
@@ -4416,20 +4416,20 @@
     "_seasons": 4,
     "_ip": 318,
     "_z": {
-      "k_pct": 0.718,
+      "k_pct": 0.719,
       "bb_pct": -0.85
     },
     "name": "Kodai Senga"
   },
   "445276": {
     "type": "pitcher",
-    "stuff": 127,
+    "stuff": 126,
     "control": 108,
     "_seasons": 11,
     "_ip": 636,
     "_z": {
-      "k_pct": 1.767,
-      "bb_pct": 0.514
+      "k_pct": 1.763,
+      "bb_pct": 0.505
     },
     "name": "Kenley Jansen"
   },
@@ -4440,8 +4440,8 @@
     "_seasons": 2,
     "_ip": 111,
     "_z": {
-      "k_pct": 0.681,
-      "bb_pct": 0.312
+      "k_pct": 0.684,
+      "bb_pct": 0.313
     },
     "name": "Connelly Early"
   },
@@ -4453,11 +4453,11 @@
     "_seasons": 6,
     "_pa": 2547,
     "_z": {
-      "avg": 0.154,
-      "k_pct": 0.129,
+      "avg": 0.153,
+      "k_pct": 0.128,
       "bb_pct": 0.026,
       "iso": 0.865,
-      "sb_rate": 0.297
+      "sb_rate": 0.298
     },
     "name": "Daulton Varsho"
   },
@@ -4468,7 +4468,7 @@
     "_seasons": 7,
     "_ip": 355,
     "_z": {
-      "k_pct": 1.867,
+      "k_pct": 1.868,
       "bb_pct": -0.744
     },
     "name": "Bryan Abreu"
@@ -4478,10 +4478,10 @@
     "stuff": 96,
     "control": 90,
     "_seasons": 2,
-    "_ip": 108,
+    "_ip": 111,
     "_z": {
-      "k_pct": -0.263,
-      "bb_pct": -0.674
+      "k_pct": -0.296,
+      "bb_pct": -0.676
     },
     "name": "Roki Sasaki"
   },
@@ -4504,8 +4504,8 @@
     "_seasons": 1,
     "_ip": 65,
     "_z": {
-      "k_pct": -0.927,
-      "bb_pct": 0.325
+      "k_pct": -0.921,
+      "bb_pct": 0.326
     },
     "name": "Andrew Painter"
   },
@@ -4516,8 +4516,8 @@
     "_seasons": 2,
     "_ip": 222,
     "_z": {
-      "k_pct": -0.408,
-      "bb_pct": 0.463
+      "k_pct": -0.407,
+      "bb_pct": 0.464
     },
     "name": "Noah Cameron"
   },
@@ -4528,7 +4528,7 @@
     "_seasons": 5,
     "_ip": 242,
     "_z": {
-      "k_pct": 0.606,
+      "k_pct": 0.607,
       "bb_pct": 0.459
     },
     "name": "Robert Suarez"
@@ -4540,7 +4540,7 @@
     "_seasons": 4,
     "_ip": 153,
     "_z": {
-      "k_pct": 1.076,
+      "k_pct": 1.077,
       "bb_pct": -0.753
     },
     "name": "Abner Uribe"
@@ -4552,7 +4552,7 @@
     "_seasons": 4,
     "_ip": 224,
     "_z": {
-      "k_pct": 0.912,
+      "k_pct": 0.913,
       "bb_pct": 0.393
     },
     "name": "Ryan Walker"
@@ -4564,7 +4564,7 @@
     "_seasons": 9,
     "_ip": 1243,
     "_z": {
-      "k_pct": -0.298,
+      "k_pct": -0.297,
       "bb_pct": 0.482
     },
     "name": "Merrill Kelly"
@@ -4589,10 +4589,10 @@
     "_seasons": 3,
     "_pa": 1135,
     "_z": {
-      "avg": 0.043,
-      "k_pct": -0.593,
+      "avg": 0.042,
+      "k_pct": -0.594,
       "bb_pct": 0.208,
-      "iso": 0.72,
+      "iso": 0.719,
       "sb_rate": 0.307
     },
     "name": "Colton Cowser"
@@ -4604,8 +4604,8 @@
     "_seasons": 5,
     "_ip": 550,
     "_z": {
-      "k_pct": -0.726,
-      "bb_pct": 0.728
+      "k_pct": -0.725,
+      "bb_pct": 0.729
     },
     "name": "Ryne Nelson"
   },
@@ -4627,29 +4627,29 @@
     "power": 106,
     "speed": 100,
     "_seasons": 4,
-    "_pa": 2005,
+    "_pa": 2006,
     "_z": {
-      "avg": 0.364,
+      "avg": 0.362,
       "k_pct": -0.194,
       "bb_pct": -0.672,
-      "iso": 0.369,
-      "sb_rate": 0.029
+      "iso": 0.368,
+      "sb_rate": 0.03
     },
     "name": "Ezequiel Tovar"
   },
   "694497": {
     "type": "hitter",
     "hit": 102,
-    "power": 103,
+    "power": 104,
     "speed": 113,
     "_seasons": 3,
-    "_pa": 621,
+    "_pa": 623,
     "_z": {
-      "avg": -0.21,
-      "k_pct": 0.17,
-      "bb_pct": 0.35,
-      "iso": 0.233,
-      "sb_rate": 0.875
+      "avg": -0.173,
+      "k_pct": 0.175,
+      "bb_pct": 0.345,
+      "iso": 0.278,
+      "sb_rate": 0.864
     },
     "name": "Evan Carter"
   },
@@ -4673,7 +4673,7 @@
     "_seasons": 6,
     "_pa": 1848,
     "_z": {
-      "avg": 0.487,
+      "avg": 0.486,
       "k_pct": 1.234,
       "bb_pct": -0.632,
       "iso": -0.214,
@@ -4705,7 +4705,7 @@
     "_ip": 477,
     "_z": {
       "k_pct": -0.462,
-      "bb_pct": 0.878
+      "bb_pct": 0.879
     },
     "name": "Casey Mize"
   },
@@ -4716,7 +4716,7 @@
     "_seasons": 5,
     "_ip": 604,
     "_z": {
-      "k_pct": -0.64,
+      "k_pct": -0.639,
       "bb_pct": 0.119
     },
     "name": "Brayan Bello"
@@ -4724,12 +4724,12 @@
   "677952": {
     "type": "pitcher",
     "stuff": 111,
-    "control": 110,
+    "control": 111,
     "_seasons": 2,
     "_ip": 172,
     "_z": {
-      "k_pct": 0.718,
-      "bb_pct": 0.699
+      "k_pct": 0.719,
+      "bb_pct": 0.701
     },
     "name": "Braxton Ashcraft"
   },
@@ -4740,24 +4740,24 @@
     "_seasons": 10,
     "_ip": 624,
     "_z": {
-      "k_pct": -0.017,
+      "k_pct": -0.016,
       "bb_pct": -0.271
     },
     "name": "Clay Holmes"
   },
   "672640": {
     "type": "hitter",
-    "hit": 106,
+    "hit": 107,
     "power": 99,
     "speed": 108,
     "_seasons": 3,
-    "_pa": 1390,
+    "_pa": 1395,
     "_z": {
-      "avg": 0.686,
-      "k_pct": 0.905,
-      "bb_pct": -0.3,
-      "iso": -0.06,
-      "sb_rate": 0.526
+      "avg": 0.701,
+      "k_pct": 0.91,
+      "bb_pct": -0.304,
+      "iso": -0.045,
+      "sb_rate": 0.524
     },
     "name": "Otto Lopez"
   },
@@ -4769,11 +4769,11 @@
     "_seasons": 3,
     "_pa": 609,
     "_z": {
-      "avg": -0.034,
-      "k_pct": 0.282,
+      "avg": -0.035,
+      "k_pct": 0.281,
       "bb_pct": -0.184,
-      "iso": 0.157,
-      "sb_rate": 1.166
+      "iso": 0.156,
+      "sb_rate": 1.167
     },
     "name": "Dylan Crews"
   },
@@ -4785,10 +4785,10 @@
     "_seasons": 3,
     "_pa": 1089,
     "_z": {
-      "avg": 0.748,
+      "avg": 0.747,
       "k_pct": 1.301,
-      "bb_pct": -0.236,
-      "iso": 0.026,
+      "bb_pct": -0.237,
+      "iso": 0.025,
       "sb_rate": 0.018
     },
     "name": "Jung Hoo Lee"
@@ -4812,7 +4812,7 @@
     "_seasons": 3,
     "_ip": 264,
     "_z": {
-      "k_pct": 0.442,
+      "k_pct": 0.443,
       "bb_pct": 0.194
     },
     "name": "Grayson Rodriguez"
@@ -4824,24 +4824,24 @@
     "_seasons": 3,
     "_ip": 190,
     "_z": {
-      "k_pct": -0.275,
-      "bb_pct": 0.207
+      "k_pct": -0.272,
+      "bb_pct": 0.208
     },
     "name": "Mike Burrows"
   },
   "695600": {
     "type": "hitter",
     "hit": 100,
-    "power": 107,
+    "power": 109,
     "speed": 94,
     "_seasons": 1,
-    "_pa": 308,
+    "_pa": 312,
     "_z": {
-      "avg": 0.267,
-      "k_pct": -0.284,
-      "bb_pct": 0.033,
-      "iso": 0.5,
-      "sb_rate": -0.413
+      "avg": 0.309,
+      "k_pct": -0.289,
+      "bb_pct": 0.016,
+      "iso": 0.577,
+      "sb_rate": -0.414
     },
     "name": "Carter Jensen"
   },
@@ -4871,13 +4871,13 @@
   },
   "682243": {
     "type": "pitcher",
-    "stuff": 102,
+    "stuff": 103,
     "control": 113,
     "_seasons": 4,
-    "_ip": 448,
+    "_ip": 455,
     "_z": {
-      "k_pct": 0.138,
-      "bb_pct": 0.845
+      "k_pct": 0.168,
+      "bb_pct": 0.874
     },
     "name": "Bryce Miller"
   },
@@ -4888,8 +4888,8 @@
     "_seasons": 8,
     "_ip": 427,
     "_z": {
-      "k_pct": -0.463,
-      "bb_pct": 0.212
+      "k_pct": -0.462,
+      "bb_pct": 0.213
     },
     "name": "Ryan Weathers"
   },
@@ -4900,7 +4900,7 @@
     "_seasons": 6,
     "_ip": 684,
     "_z": {
-      "k_pct": 0.088,
+      "k_pct": 0.089,
       "bb_pct": 1.093
     },
     "name": "Bailey Ober"
@@ -4925,11 +4925,11 @@
     "_seasons": 2,
     "_pa": 529,
     "_z": {
-      "avg": 0.369,
-      "k_pct": -0.046,
+      "avg": 0.368,
+      "k_pct": -0.047,
       "bb_pct": 0.189,
       "iso": 0.143,
-      "sb_rate": 1.119
+      "sb_rate": 1.12
     },
     "name": "Jasson Dominguez"
   },
@@ -4941,7 +4941,7 @@
     "_ip": 261,
     "_z": {
       "k_pct": 0.191,
-      "bb_pct": -1.331
+      "bb_pct": -1.332
     },
     "name": "Luis Gil"
   },
@@ -4953,9 +4953,9 @@
     "_seasons": 4,
     "_pa": 1694,
     "_z": {
-      "avg": 0.126,
-      "k_pct": -0.285,
-      "bb_pct": -0.284,
+      "avg": 0.125,
+      "k_pct": -0.286,
+      "bb_pct": -0.283,
       "iso": 0.259,
       "sb_rate": 0.907
     },
@@ -4968,7 +4968,7 @@
     "_seasons": 10,
     "_ip": 1053,
     "_z": {
-      "k_pct": -0.063,
+      "k_pct": -0.062,
       "bb_pct": 0.628
     },
     "name": "Seth Lugo"
@@ -4980,8 +4980,8 @@
     "_seasons": 3,
     "_ip": 225,
     "_z": {
-      "k_pct": 0.563,
-      "bb_pct": -0.587
+      "k_pct": 0.564,
+      "bb_pct": -0.588
     },
     "name": "Joey Cantillo"
   },
@@ -4992,8 +4992,8 @@
     "_seasons": 3,
     "_ip": 274,
     "_z": {
-      "k_pct": 0.29,
-      "bb_pct": 0.049
+      "k_pct": 0.291,
+      "bb_pct": 0.05
     },
     "name": "Will Warren"
   },
@@ -5004,8 +5004,8 @@
     "_seasons": 2,
     "_ip": 141,
     "_z": {
-      "k_pct": 0.565,
-      "bb_pct": 0.882
+      "k_pct": 0.566,
+      "bb_pct": 0.884
     },
     "name": "Parker Messick"
   },
@@ -5016,7 +5016,7 @@
     "_seasons": 6,
     "_ip": 196,
     "_z": {
-      "k_pct": 0.759,
+      "k_pct": 0.76,
       "bb_pct": 0.09
     },
     "name": "Robert Garcia"
@@ -5028,7 +5028,7 @@
     "_seasons": 6,
     "_ip": 647,
     "_z": {
-      "k_pct": -0.016,
+      "k_pct": -0.015,
       "bb_pct": -0.255
     },
     "name": "David Peterson"
@@ -5079,13 +5079,13 @@
   },
   "683003": {
     "type": "pitcher",
-    "stuff": 109,
-    "control": 104,
+    "stuff": 110,
+    "control": 103,
     "_seasons": 3,
-    "_ip": 268,
+    "_ip": 272,
     "_z": {
-      "k_pct": 0.625,
-      "bb_pct": 0.241
+      "k_pct": 0.655,
+      "bb_pct": 0.225
     },
     "name": "Jared Jones"
   },
@@ -5096,7 +5096,7 @@
     "_seasons": 4,
     "_ip": 498,
     "_z": {
-      "k_pct": -0.226,
+      "k_pct": -0.225,
       "bb_pct": 0.98
     },
     "name": "Brandon Pfaadt"
@@ -5108,7 +5108,7 @@
     "_seasons": 10,
     "_ip": 1242,
     "_z": {
-      "k_pct": -0.198,
+      "k_pct": -0.197,
       "bb_pct": 0.367
     },
     "name": "Chris Bassitt"
@@ -5132,7 +5132,7 @@
     "_seasons": 2,
     "_ip": 185,
     "_z": {
-      "k_pct": 0.199,
+      "k_pct": 0.201,
       "bb_pct": 0.065
     },
     "name": "Chad Patrick"
@@ -5144,8 +5144,8 @@
     "_seasons": 12,
     "_ip": 457,
     "_z": {
-      "k_pct": 1.007,
-      "bb_pct": -0.676
+      "k_pct": 1.008,
+      "bb_pct": -0.677
     },
     "name": "Seranthony Dominguez"
   },
@@ -5167,13 +5167,13 @@
     "power": 109,
     "speed": 104,
     "_seasons": 1,
-    "_pa": 234,
+    "_pa": 236,
     "_z": {
-      "avg": 0.179,
-      "k_pct": -1.439,
-      "bb_pct": -0.196,
-      "iso": 0.583,
-      "sb_rate": 0.253
+      "avg": 0.161,
+      "k_pct": -1.418,
+      "bb_pct": -0.206,
+      "iso": 0.574,
+      "sb_rate": 0.255
     },
     "name": "Owen Caissie"
   },
@@ -5184,7 +5184,7 @@
     "_seasons": 4,
     "_ip": 98,
     "_z": {
-      "k_pct": 0.06,
+      "k_pct": 0.061,
       "bb_pct": -0.236
     },
     "name": "Mick Abel"
@@ -5219,17 +5219,17 @@
   },
   "683953": {
     "type": "hitter",
-    "hit": 105,
+    "hit": 106,
     "power": 104,
-    "speed": 121,
+    "speed": 119,
     "_seasons": 1,
-    "_pa": 235,
+    "_pa": 240,
     "_z": {
-      "avg": 0.239,
-      "k_pct": 0.347,
-      "bb_pct": 0.449,
-      "iso": 0.259,
-      "sb_rate": 1.389
+      "avg": 0.313,
+      "k_pct": 0.343,
+      "bb_pct": 0.54,
+      "iso": 0.275,
+      "sb_rate": 1.299
     },
     "name": "Travis Bazzana"
   },
@@ -5241,10 +5241,10 @@
     "_seasons": 1,
     "_pa": 176,
     "_z": {
-      "avg": 0.613,
-      "k_pct": 0.069,
-      "bb_pct": 0.603,
-      "iso": 0.47,
+      "avg": 0.61,
+      "k_pct": 0.064,
+      "bb_pct": 0.604,
+      "iso": 0.469,
       "sb_rate": -0.558
     },
     "name": "Bryce Eldridge"
@@ -5257,10 +5257,10 @@
     "_seasons": 2,
     "_pa": 267,
     "_z": {
-      "avg": 0.092,
-      "k_pct": -0.095,
+      "avg": 0.091,
+      "k_pct": -0.098,
       "bb_pct": 1.426,
-      "iso": 0.275,
+      "iso": 0.274,
       "sb_rate": 0.124
     },
     "name": "Dylan Beavers"
@@ -5272,8 +5272,8 @@
     "_seasons": 4,
     "_ip": 231,
     "_z": {
-      "k_pct": 0.192,
-      "bb_pct": 0.318
+      "k_pct": 0.193,
+      "bb_pct": 0.319
     },
     "name": "Max Meyer"
   },
@@ -5284,8 +5284,8 @@
     "_seasons": 2,
     "_ip": 93,
     "_z": {
-      "k_pct": -0.729,
-      "bb_pct": -0.549
+      "k_pct": -0.726,
+      "bb_pct": -0.55
     },
     "name": "Rhett Lowder"
   },
@@ -5295,13 +5295,13 @@
     "power": 116,
     "speed": 101,
     "_seasons": 5,
-    "_pa": 1506,
+    "_pa": 1511,
     "_z": {
-      "avg": 0.387,
-      "k_pct": -0.273,
-      "bb_pct": -0.637,
-      "iso": 1.039,
-      "sb_rate": 0.093
+      "avg": 0.402,
+      "k_pct": -0.272,
+      "bb_pct": -0.639,
+      "iso": 1.058,
+      "sb_rate": 0.091
     },
     "name": "Mickey Moniak"
   },
@@ -5312,7 +5312,7 @@
     "_seasons": 5,
     "_ip": 171,
     "_z": {
-      "k_pct": 2.292,
+      "k_pct": 2.293,
       "bb_pct": -0.507
     },
     "name": "Jeremiah Estrada"
@@ -5324,8 +5324,8 @@
     "_seasons": 2,
     "_ip": 96,
     "_z": {
-      "k_pct": 0.312,
-      "bb_pct": -0.358
+      "k_pct": 0.314,
+      "bb_pct": -0.359
     },
     "name": "Brandon Sproat"
   },
@@ -5335,29 +5335,29 @@
     "power": 102,
     "speed": 106,
     "_seasons": 9,
-    "_pa": 3193,
+    "_pa": 3197,
     "_z": {
-      "avg": 0.305,
-      "k_pct": 0.178,
-      "bb_pct": -0.034,
-      "iso": 0.12,
-      "sb_rate": 0.378
+      "avg": 0.306,
+      "k_pct": 0.18,
+      "bb_pct": -0.036,
+      "iso": 0.119,
+      "sb_rate": 0.376
     },
     "name": "Willi Castro"
   },
   "806068": {
     "type": "hitter",
-    "hit": 96,
+    "hit": 94,
     "power": 113,
     "speed": 103,
     "_seasons": 1,
-    "_pa": 132,
+    "_pa": 135,
     "_z": {
-      "avg": -0.099,
-      "k_pct": -0.828,
-      "bb_pct": -0.033,
-      "iso": 0.899,
-      "sb_rate": 0.191
+      "avg": -0.172,
+      "k_pct": -0.839,
+      "bb_pct": -0.061,
+      "iso": 0.846,
+      "sb_rate": 0.192
     },
     "name": "Colt Emerson"
   },
@@ -5369,10 +5369,10 @@
     "_seasons": 1,
     "_pa": 175,
     "_z": {
-      "avg": 0.057,
-      "k_pct": 0.333,
+      "avg": 0.053,
+      "k_pct": 0.328,
       "bb_pct": 0.178,
-      "iso": 0.14,
+      "iso": 0.139,
       "sb_rate": -0.32
     },
     "name": "Moises Ballesteros"
@@ -5380,12 +5380,12 @@
   "691799": {
     "type": "pitcher",
     "stuff": 135,
-    "control": 104,
+    "control": 102,
     "_seasons": 2,
-    "_ip": 80,
+    "_ip": 81,
     "_z": {
-      "k_pct": 2.349,
-      "bb_pct": 0.239
+      "k_pct": 2.323,
+      "bb_pct": 0.112
     },
     "name": "Grant Taylor"
   },
@@ -5408,8 +5408,8 @@
     "_seasons": 2,
     "_ip": 91,
     "_z": {
-      "k_pct": 0.373,
-      "bb_pct": 0.254
+      "k_pct": 0.376,
+      "bb_pct": 0.255
     },
     "name": "Payton Tolle"
   },
@@ -5420,7 +5420,7 @@
     "_seasons": 11,
     "_ip": 875,
     "_z": {
-      "k_pct": 0.11,
+      "k_pct": 0.111,
       "bb_pct": 0.124
     },
     "name": "Tyler Mahle"
@@ -5430,10 +5430,10 @@
     "stuff": 98,
     "control": 101,
     "_seasons": 8,
-    "_ip": 484,
+    "_ip": 485,
     "_z": {
-      "k_pct": -0.14,
-      "bb_pct": 0.084
+      "k_pct": -0.149,
+      "bb_pct": 0.064
     },
     "name": "Dustin May"
   },
@@ -5444,7 +5444,7 @@
     "_seasons": 6,
     "_ip": 549,
     "_z": {
-      "k_pct": 0.62,
+      "k_pct": 0.621,
       "bb_pct": -0.066
     },
     "name": "Reid Detmers"
@@ -5472,8 +5472,8 @@
     "_seasons": 3,
     "_ip": 261,
     "_z": {
-      "k_pct": 0.217,
-      "bb_pct": -0.248
+      "k_pct": 0.218,
+      "bb_pct": -0.249
     },
     "name": "Grant Holmes"
   },
@@ -5484,7 +5484,7 @@
     "_seasons": 6,
     "_ip": 617,
     "_z": {
-      "k_pct": 0.315,
+      "k_pct": 0.316,
       "bb_pct": -0.081
     },
     "name": "Taj Bradley"
@@ -5497,11 +5497,11 @@
     "_seasons": 4,
     "_pa": 2026,
     "_z": {
-      "avg": 0.016,
-      "k_pct": 0.042,
-      "bb_pct": -0.062,
+      "avg": 0.015,
+      "k_pct": 0.041,
+      "bb_pct": -0.061,
       "iso": 0.276,
-      "sb_rate": 0.634
+      "sb_rate": 0.635
     },
     "name": "Anthony Volpe"
   },
@@ -5513,11 +5513,11 @@
     "_seasons": 6,
     "_pa": 2674,
     "_z": {
-      "avg": 0.42,
+      "avg": 0.419,
       "k_pct": 0.63,
-      "bb_pct": -0.467,
+      "bb_pct": -0.468,
       "iso": -0.004,
-      "sb_rate": 0.795
+      "sb_rate": 0.796
     },
     "name": "Andres Gimenez"
   },
@@ -5528,7 +5528,7 @@
     "_seasons": 11,
     "_ip": 1135,
     "_z": {
-      "k_pct": 0.216,
+      "k_pct": 0.217,
       "bb_pct": 0.396
     },
     "name": "Luis Severino"
@@ -5540,20 +5540,20 @@
     "_seasons": 4,
     "_ip": 166,
     "_z": {
-      "k_pct": 0.051,
-      "bb_pct": -0.533
+      "k_pct": 0.053,
+      "bb_pct": -0.534
     },
     "name": "Jacob Lopez"
   },
   "677944": {
     "type": "pitcher",
-    "stuff": 90,
+    "stuff": 89,
     "control": 114,
     "_seasons": 4,
-    "_ip": 326,
+    "_ip": 331,
     "_z": {
-      "k_pct": -0.686,
-      "bb_pct": 0.927
+      "k_pct": -0.707,
+      "bb_pct": 0.939
     },
     "name": "Slade Cecconi"
   },
@@ -5564,8 +5564,8 @@
     "_seasons": 3,
     "_ip": 173,
     "_z": {
-      "k_pct": 0.125,
-      "bb_pct": 0.83
+      "k_pct": 0.127,
+      "bb_pct": 0.831
     },
     "name": "Zebby Matthews"
   },
@@ -5593,7 +5593,7 @@
     "_ip": 307,
     "_z": {
       "k_pct": 0.466,
-      "bb_pct": 0.326
+      "bb_pct": 0.327
     },
     "name": "Kyle Harrison"
   },
@@ -5603,13 +5603,13 @@
     "power": 109,
     "speed": 116,
     "_seasons": 9,
-    "_pa": 3769,
+    "_pa": 3773,
     "_z": {
-      "avg": 0.296,
-      "k_pct": 0.425,
-      "bb_pct": 0.175,
-      "iso": 0.572,
-      "sb_rate": 1.069
+      "avg": 0.3,
+      "k_pct": 0.427,
+      "bb_pct": 0.173,
+      "iso": 0.577,
+      "sb_rate": 1.067
     },
     "name": "Cedric Mullins"
   },
@@ -5621,11 +5621,11 @@
     "_seasons": 1,
     "_pa": 122,
     "_z": {
-      "avg": 0.415,
-      "k_pct": -0.849,
-      "bb_pct": -0.304,
-      "iso": -0.384,
-      "sb_rate": 1.181
+      "avg": 0.411,
+      "k_pct": -0.858,
+      "bb_pct": -0.305,
+      "iso": -0.387,
+      "sb_rate": 1.183
     },
     "name": "Ryan Waldschmidt"
   },
@@ -5664,20 +5664,20 @@
     "_seasons": 10,
     "_ip": 1305,
     "_z": {
-      "k_pct": -0.396,
+      "k_pct": -0.395,
       "bb_pct": 0.954
     },
     "name": "Jameson Taillon"
   },
   "694462": {
     "type": "pitcher",
-    "stuff": 100,
-    "control": 85,
+    "stuff": 99,
+    "control": 87,
     "_seasons": 3,
-    "_ip": 65,
+    "_ip": 71,
     "_z": {
-      "k_pct": -0.03,
-      "bb_pct": -0.98
+      "k_pct": -0.079,
+      "bb_pct": -0.876
     },
     "name": "Hurston Waldrep"
   },
@@ -5687,13 +5687,13 @@
     "power": 103,
     "speed": 106,
     "_seasons": 7,
-    "_pa": 2095,
+    "_pa": 2099,
     "_z": {
-      "avg": 0.081,
-      "k_pct": 0.283,
-      "bb_pct": 0.092,
-      "iso": 0.2,
-      "sb_rate": 0.393
+      "avg": 0.088,
+      "k_pct": 0.282,
+      "bb_pct": 0.089,
+      "iso": 0.202,
+      "sb_rate": 0.391
     },
     "name": "Zach McKinstry"
   },
@@ -5704,7 +5704,7 @@
     "_seasons": 8,
     "_ip": 558,
     "_z": {
-      "k_pct": 0.15,
+      "k_pct": 0.151,
       "bb_pct": 0.343
     },
     "name": "Jeffrey Springs"
@@ -5717,9 +5717,9 @@
     "_seasons": 4,
     "_pa": 1395,
     "_z": {
-      "avg": 0.167,
-      "k_pct": -0.183,
-      "bb_pct": -0.337,
+      "avg": 0.166,
+      "k_pct": -0.184,
+      "bb_pct": -0.338,
       "iso": 0.781,
       "sb_rate": -0.379
     },
@@ -5745,7 +5745,7 @@
     "_ip": 236,
     "_z": {
       "k_pct": 0.38,
-      "bb_pct": 0.684
+      "bb_pct": 0.685
     },
     "name": "Adrian Morejon"
   },
@@ -5778,10 +5778,10 @@
     "stuff": 120,
     "control": 88,
     "_seasons": 11,
-    "_ip": 511,
+    "_ip": 512,
     "_z": {
-      "k_pct": 1.318,
-      "bb_pct": -0.789
+      "k_pct": 1.311,
+      "bb_pct": -0.786
     },
     "name": "Tanner Scott"
   },
@@ -5791,12 +5791,12 @@
     "power": 100,
     "speed": 98,
     "_seasons": 8,
-    "_pa": 3859,
+    "_pa": 3863,
     "_z": {
       "avg": 0.391,
-      "k_pct": 0.614,
-      "bb_pct": 0.624,
-      "iso": 0.001,
+      "k_pct": 0.616,
+      "bb_pct": 0.622,
+      "iso": 0.002,
       "sb_rate": -0.161
     },
     "name": "J.P. Crawford"
@@ -5888,7 +5888,7 @@
     "_seasons": 15,
     "_ip": 866,
     "_z": {
-      "k_pct": 0.076,
+      "k_pct": 0.077,
       "bb_pct": 0.471
     },
     "name": "Luke Weaver"
@@ -5900,8 +5900,8 @@
     "_seasons": 2,
     "_ip": 58,
     "_z": {
-      "k_pct": -0.447,
-      "bb_pct": -0.715
+      "k_pct": -0.446,
+      "bb_pct": -0.717
     },
     "name": "Luis Morales"
   },
@@ -5941,10 +5941,10 @@
     "_seasons": 2,
     "_pa": 387,
     "_z": {
-      "avg": 0.03,
-      "k_pct": -0.625,
+      "avg": 0.028,
+      "k_pct": -0.629,
       "bb_pct": -0.495,
-      "iso": 0.467,
+      "iso": 0.466,
       "sb_rate": -0.053
     },
     "name": "Max Muncy"
@@ -5973,7 +5973,7 @@
     "_ip": 894,
     "_z": {
       "k_pct": -0.957,
-      "bb_pct": 0.64
+      "bb_pct": 0.641
     },
     "name": "Nick Martinez"
   },
@@ -5982,10 +5982,10 @@
     "stuff": 129,
     "control": 89,
     "_seasons": 6,
-    "_ip": 298,
+    "_ip": 299,
     "_z": {
-      "k_pct": 1.96,
-      "bb_pct": -0.718
+      "k_pct": 1.955,
+      "bb_pct": -0.731
     },
     "name": "Alex Vesia"
   },
@@ -6020,8 +6020,8 @@
     "_seasons": 6,
     "_ip": 201,
     "_z": {
-      "k_pct": 0.721,
-      "bb_pct": -0.469
+      "k_pct": 0.722,
+      "bb_pct": -0.47
     },
     "name": "Tony Santillan"
   },
@@ -6044,7 +6044,7 @@
     "_seasons": 3,
     "_ip": 156,
     "_z": {
-      "k_pct": -0.418,
+      "k_pct": -0.416,
       "bb_pct": 0.048
     },
     "name": "Kumar Rocker"
@@ -6052,24 +6052,24 @@
   "640448": {
     "type": "pitcher",
     "stuff": 101,
-    "control": 97,
+    "control": 98,
     "_seasons": 8,
-    "_ip": 419,
+    "_ip": 420,
     "_z": {
-      "k_pct": 0.04,
-      "bb_pct": -0.169
+      "k_pct": 0.037,
+      "bb_pct": -0.159
     },
     "name": "Kyle Finnegan"
   },
   "700241": {
     "type": "pitcher",
-    "stuff": 80,
+    "stuff": 81,
     "control": 118,
     "_seasons": 3,
     "_ip": 214,
     "_z": {
-      "k_pct": -1.301,
-      "bb_pct": 1.21
+      "k_pct": -1.298,
+      "bb_pct": 1.212
     },
     "name": "Michael McGreevy"
   },
@@ -6093,8 +6093,8 @@
     "_seasons": 4,
     "_pa": 926,
     "_z": {
-      "avg": 0.169,
-      "k_pct": -0.426,
+      "avg": 0.168,
+      "k_pct": -0.428,
       "bb_pct": -0.065,
       "iso": 0.342,
       "sb_rate": 0.218
@@ -6103,13 +6103,13 @@
   },
   "681293": {
     "type": "pitcher",
-    "stuff": 107,
+    "stuff": 108,
     "control": 88,
     "_seasons": 3,
     "_ip": 252,
     "_z": {
-      "k_pct": 0.499,
-      "bb_pct": -0.775
+      "k_pct": 0.5,
+      "bb_pct": -0.776
     },
     "name": "Spencer Arrighetti"
   },
@@ -6120,7 +6120,7 @@
     "_seasons": 4,
     "_ip": 131,
     "_z": {
-      "k_pct": 0.476,
+      "k_pct": 0.477,
       "bb_pct": -1.578
     },
     "name": "Joe Boyle"
@@ -6172,7 +6172,7 @@
     "_seasons": 5,
     "_ip": 215,
     "_z": {
-      "k_pct": -0.181,
+      "k_pct": -0.18,
       "bb_pct": 0.62
     },
     "name": "Hunter Gaddis"
@@ -6185,8 +6185,8 @@
     "_seasons": 8,
     "_pa": 3484,
     "_z": {
-      "avg": 0.648,
-      "k_pct": 0.697,
+      "avg": 0.647,
+      "k_pct": 0.696,
       "bb_pct": -0.329,
       "iso": 0.536,
       "sb_rate": -0.059
@@ -6195,13 +6195,13 @@
   },
   "675512": {
     "type": "pitcher",
-    "stuff": 91,
+    "stuff": 92,
     "control": 108,
     "_seasons": 2,
     "_ip": 90,
     "_z": {
-      "k_pct": -0.568,
-      "bb_pct": 0.516
+      "k_pct": -0.566,
+      "bb_pct": 0.517
     },
     "name": "Troy Melton"
   },
@@ -6213,7 +6213,7 @@
     "_ip": 272,
     "_z": {
       "k_pct": 0.402,
-      "bb_pct": -0.071
+      "bb_pct": -0.072
     },
     "name": "Lucas Erceg"
   },
@@ -6224,8 +6224,8 @@
     "_seasons": 3,
     "_ip": 246,
     "_z": {
-      "k_pct": 0.103,
-      "bb_pct": -0.501
+      "k_pct": 0.104,
+      "bb_pct": -0.502
     },
     "name": "Landen Roupp"
   },
@@ -6255,17 +6255,17 @@
   },
   "687221": {
     "type": "hitter",
-    "hit": 97,
-    "power": 106,
+    "hit": 98,
+    "power": 107,
     "speed": 92,
     "_seasons": 2,
-    "_pa": 331,
+    "_pa": 336,
     "_z": {
-      "avg": 0.05,
-      "k_pct": -0.601,
-      "bb_pct": -0.072,
-      "iso": 0.375,
-      "sb_rate": -0.506
+      "avg": 0.18,
+      "k_pct": -0.561,
+      "bb_pct": -0.091,
+      "iso": 0.476,
+      "sb_rate": -0.507
     },
     "name": "Dalton Rushing"
   },
@@ -6287,13 +6287,13 @@
     "power": 107,
     "speed": 96,
     "_seasons": 6,
-    "_pa": 2255,
+    "_pa": 2259,
     "_z": {
-      "avg": 0.194,
-      "k_pct": 0.422,
-      "bb_pct": 0.056,
-      "iso": 0.455,
-      "sb_rate": -0.271
+      "avg": 0.195,
+      "k_pct": 0.421,
+      "bb_pct": 0.06,
+      "iso": 0.457,
+      "sb_rate": -0.272
     },
     "name": "Gavin Sheets"
   },
@@ -6333,11 +6333,11 @@
     "_seasons": 2,
     "_pa": 301,
     "_z": {
-      "avg": 0.61,
-      "k_pct": -0.222,
+      "avg": 0.608,
+      "k_pct": -0.224,
       "bb_pct": -0.372,
-      "iso": -0.414,
-      "sb_rate": 1.211
+      "iso": -0.415,
+      "sb_rate": 1.212
     },
     "name": "Hyeseong Kim"
   },
@@ -6348,7 +6348,7 @@
     "_seasons": 5,
     "_ip": 312,
     "_z": {
-      "k_pct": -0.574,
+      "k_pct": -0.573,
       "bb_pct": -0.317
     },
     "name": "Simeon Woods-Richardson"
@@ -6359,13 +6359,13 @@
     "power": 101,
     "speed": 103,
     "_seasons": 2,
-    "_pa": 723,
+    "_pa": 726,
     "_z": {
-      "avg": 0.371,
-      "k_pct": 0.265,
-      "bb_pct": 0.875,
-      "iso": 0.05,
-      "sb_rate": 0.215
+      "avg": 0.375,
+      "k_pct": 0.258,
+      "bb_pct": 0.866,
+      "iso": 0.086,
+      "sb_rate": 0.214
     },
     "name": "Isaac Collins"
   },
@@ -6376,7 +6376,7 @@
     "_seasons": 2,
     "_ip": 142,
     "_z": {
-      "k_pct": -0.391,
+      "k_pct": -0.39,
       "bb_pct": -0.61
     },
     "name": "Chase Dollander"
@@ -6423,13 +6423,13 @@
     "power": 112,
     "speed": 98,
     "_seasons": 9,
-    "_pa": 3703,
+    "_pa": 3707,
     "_z": {
       "avg": 0.206,
-      "k_pct": 0.265,
-      "bb_pct": 0.535,
-      "iso": 0.787,
-      "sb_rate": -0.141
+      "k_pct": 0.267,
+      "bb_pct": 0.533,
+      "iso": 0.785,
+      "sb_rate": -0.142
     },
     "name": "Mike Yastrzemski"
   },
@@ -6441,7 +6441,7 @@
     "_seasons": 8,
     "_pa": 2761,
     "_z": {
-      "avg": 0.318,
+      "avg": 0.317,
       "k_pct": 0.102,
       "bb_pct": 0.028,
       "iso": 0.584,
@@ -6509,26 +6509,26 @@
     "_seasons": 1,
     "_pa": 181,
     "_z": {
-      "avg": 0.524,
-      "k_pct": -0.082,
+      "avg": 0.521,
+      "k_pct": -0.089,
       "bb_pct": 0.382,
-      "iso": -0.053,
-      "sb_rate": 0.969
+      "iso": -0.055,
+      "sb_rate": 0.971
     },
     "name": "A.J. Ewing"
   },
   "691788": {
     "type": "hitter",
-    "hit": 101,
-    "power": 105,
+    "hit": 100,
+    "power": 104,
     "speed": 92,
     "_seasons": 1,
-    "_pa": 146,
+    "_pa": 150,
     "_z": {
-      "avg": 0.373,
-      "k_pct": 0.004,
-      "bb_pct": -0.26,
-      "iso": 0.319,
+      "avg": 0.298,
+      "k_pct": -0.005,
+      "bb_pct": -0.186,
+      "iso": 0.277,
       "sb_rate": -0.558
     },
     "name": "Joe Mack"
@@ -6576,8 +6576,8 @@
     "_seasons": 2,
     "_ip": 92,
     "_z": {
-      "k_pct": 0.124,
-      "bb_pct": 0.168
+      "k_pct": 0.125,
+      "bb_pct": 0.167
     },
     "name": "Christian Scott"
   },
@@ -6612,8 +6612,8 @@
     "_seasons": 3,
     "_ip": 246,
     "_z": {
-      "k_pct": 0.217,
-      "bb_pct": -0.306
+      "k_pct": 0.218,
+      "bb_pct": -0.305
     },
     "name": "Sean Burke"
   },
@@ -6625,11 +6625,11 @@
     "_seasons": 1,
     "_pa": 211,
     "_z": {
-      "avg": -0.453,
-      "k_pct": -0.795,
-      "bb_pct": -0.292,
-      "iso": -0.093,
-      "sb_rate": -0.059
+      "avg": -0.456,
+      "k_pct": -0.804,
+      "bb_pct": -0.293,
+      "iso": -0.095,
+      "sb_rate": -0.058
     },
     "name": "Brice Matthews"
   },
@@ -6653,10 +6653,10 @@
     "_seasons": 1,
     "_pa": 108,
     "_z": {
-      "avg": 0.107,
-      "k_pct": 0.173,
+      "avg": 0.103,
+      "k_pct": 0.168,
       "bb_pct": 0.108,
-      "iso": 0.038,
+      "iso": 0.037,
       "sb_rate": -0.558
     },
     "name": "Tommy Troy"
@@ -6668,7 +6668,7 @@
     "_seasons": 4,
     "_ip": 178,
     "_z": {
-      "k_pct": -0.49,
+      "k_pct": -0.489,
       "bb_pct": 0.958
     },
     "name": "Jose Ferrer"
@@ -6681,10 +6681,10 @@
     "_seasons": 1,
     "_pa": 205,
     "_z": {
-      "avg": -0.004,
-      "k_pct": -0.461,
-      "bb_pct": 0.333,
-      "iso": -0.459,
+      "avg": -0.008,
+      "k_pct": -0.469,
+      "bb_pct": 0.334,
+      "iso": -0.462,
       "sb_rate": -0.374
     },
     "name": "Alex Freeland"
@@ -6696,8 +6696,8 @@
     "_seasons": 4,
     "_ip": 111,
     "_z": {
-      "k_pct": 0.116,
-      "bb_pct": 0.497
+      "k_pct": 0.119,
+      "bb_pct": 0.499
     },
     "name": "Foster Griffin"
   },
@@ -6736,7 +6736,7 @@
     "_seasons": 4,
     "_ip": 160,
     "_z": {
-      "k_pct": 0.815,
+      "k_pct": 0.816,
       "bb_pct": -0.138
     },
     "name": "Orion Kerkering"
@@ -6780,7 +6780,7 @@
     "_seasons": 7,
     "_ip": 159,
     "_z": {
-      "k_pct": -0.675,
+      "k_pct": -0.672,
       "bb_pct": -0.288
     },
     "name": "Anthony Kay"
@@ -6792,8 +6792,8 @@
     "_seasons": 8,
     "_ip": 574,
     "_z": {
-      "k_pct": -0.052,
-      "bb_pct": 0.415
+      "k_pct": -0.051,
+      "bb_pct": 0.416
     },
     "name": "Michael Soroka"
   },
@@ -6802,10 +6802,10 @@
     "stuff": 94,
     "control": 84,
     "_seasons": 4,
-    "_ip": 157,
+    "_ip": 159,
     "_z": {
-      "k_pct": -0.384,
-      "bb_pct": -1.076
+      "k_pct": -0.408,
+      "bb_pct": -1.058
     },
     "name": "Victor Vodnik"
   },
@@ -6824,16 +6824,16 @@
   "663968": {
     "type": "hitter",
     "hit": 106,
-    "power": 89,
+    "power": 90,
     "speed": 118,
     "_seasons": 2,
-    "_pa": 639,
+    "_pa": 644,
     "_z": {
-      "avg": 0.965,
-      "k_pct": 0.786,
-      "bb_pct": -0.59,
-      "iso": -0.712,
-      "sb_rate": 1.229
+      "avg": 0.996,
+      "k_pct": 0.781,
+      "bb_pct": -0.595,
+      "iso": -0.7,
+      "sb_rate": 1.211
     },
     "name": "Jake Mangum"
   },
@@ -6843,12 +6843,12 @@
     "power": 108,
     "speed": 92,
     "_seasons": 1,
-    "_pa": 341,
+    "_pa": 346,
     "_z": {
-      "avg": 0.81,
-      "k_pct": 0.932,
-      "bb_pct": 0.172,
-      "iso": 0.502,
+      "avg": 0.842,
+      "k_pct": 0.95,
+      "bb_pct": 0.151,
+      "iso": 0.513,
       "sb_rate": -0.558
     },
     "name": "T.J. Rumfield"
@@ -6889,7 +6889,7 @@
     "_ip": 111,
     "_z": {
       "k_pct": 0.608,
-      "bb_pct": 0.435
+      "bb_pct": 0.436
     },
     "name": "Jack Dreyer"
   },
@@ -6900,7 +6900,7 @@
     "_seasons": 3,
     "_ip": 69,
     "_z": {
-      "k_pct": -0.69,
+      "k_pct": -0.688,
       "bb_pct": 0.969
     },
     "name": "Robert Gasser"
@@ -6928,7 +6928,7 @@
       "avg": 0.439,
       "k_pct": 0.729,
       "bb_pct": -0.186,
-      "iso": 0.049,
+      "iso": 0.048,
       "sb_rate": 0.058
     },
     "name": "Luis Rengifo"
@@ -6957,17 +6957,17 @@
     "_seasons": 6,
     "_pa": 1703,
     "_z": {
-      "avg": 0.252,
+      "avg": 0.251,
       "k_pct": 0.203,
       "bb_pct": -0.138,
-      "iso": -0.055,
+      "iso": -0.056,
       "sb_rate": 0.182
     },
     "name": "Jake Meyers"
   },
   "693821": {
     "type": "pitcher",
-    "stuff": 89,
+    "stuff": 90,
     "control": 103,
     "_seasons": 5,
     "_ip": 533,
@@ -6984,8 +6984,8 @@
     "_seasons": 3,
     "_ip": 196,
     "_z": {
-      "k_pct": -0.385,
-      "bb_pct": 0.787
+      "k_pct": -0.382,
+      "bb_pct": 0.788
     },
     "name": "Justin Wrobleski"
   },
@@ -6996,7 +6996,7 @@
     "_seasons": 13,
     "_ip": 1103,
     "_z": {
-      "k_pct": -0.313,
+      "k_pct": -0.312,
       "bb_pct": 0.721
     },
     "name": "Steven Matz"
@@ -7052,7 +7052,7 @@
     "_seasons": 4,
     "_ip": 220,
     "_z": {
-      "k_pct": -0.557,
+      "k_pct": -0.555,
       "bb_pct": 0.357
     },
     "name": "Kyle Leahy"
@@ -7064,20 +7064,20 @@
     "_seasons": 7,
     "_ip": 335,
     "_z": {
-      "k_pct": 0.569,
-      "bb_pct": 0.605
+      "k_pct": 0.568,
+      "bb_pct": 0.606
     },
     "name": "Louis Varland"
   },
   "657649": {
     "type": "pitcher",
     "stuff": 98,
-    "control": 102,
+    "control": 101,
     "_seasons": 4,
     "_ip": 172,
     "_z": {
-      "k_pct": -0.135,
-      "bb_pct": 0.127
+      "k_pct": -0.156,
+      "bb_pct": 0.072
     },
     "name": "Jared Koenig"
   },
@@ -7090,22 +7090,22 @@
     "_pa": 1176,
     "_z": {
       "avg": 0.19,
-      "k_pct": -0.562,
+      "k_pct": -0.563,
       "bb_pct": -0.135,
       "iso": 0.524,
-      "sb_rate": 0.677
+      "sb_rate": 0.678
     },
     "name": "Zack Gelof"
   },
   "681190": {
     "type": "pitcher",
-    "stuff": 79,
+    "stuff": 78,
     "control": 102,
     "_seasons": 4,
-    "_ip": 350,
+    "_ip": 353,
     "_z": {
-      "k_pct": -1.422,
-      "bb_pct": 0.156
+      "k_pct": -1.45,
+      "bb_pct": 0.163
     },
     "name": "Randy Vasquez"
   },
@@ -7124,16 +7124,16 @@
   "664983": {
     "type": "hitter",
     "hit": 105,
-    "power": 99,
+    "power": 100,
     "speed": 113,
     "_seasons": 5,
-    "_pa": 1642,
+    "_pa": 1647,
     "_z": {
-      "avg": 0.576,
-      "k_pct": 0.617,
-      "bb_pct": -0.297,
-      "iso": -0.046,
-      "sb_rate": 0.877
+      "avg": 0.583,
+      "k_pct": 0.616,
+      "bb_pct": -0.291,
+      "iso": -0.031,
+      "sb_rate": 0.868
     },
     "name": "Jake McCarthy"
   },
@@ -7143,13 +7143,13 @@
     "power": 107,
     "speed": 108,
     "_seasons": 9,
-    "_pa": 3125,
+    "_pa": 3129,
     "_z": {
       "avg": 0.294,
-      "k_pct": 0.071,
-      "bb_pct": 0.059,
+      "k_pct": 0.07,
+      "bb_pct": 0.057,
       "iso": 0.483,
-      "sb_rate": 0.505
+      "sb_rate": 0.504
     },
     "name": "Lane Thomas"
   },
@@ -7159,13 +7159,13 @@
     "power": 99,
     "speed": 110,
     "_seasons": 1,
-    "_pa": 267,
+    "_pa": 271,
     "_z": {
-      "avg": 0.876,
-      "k_pct": 0.909,
-      "bb_pct": -0.162,
-      "iso": -0.069,
-      "sb_rate": 0.688
+      "avg": 0.917,
+      "k_pct": 0.892,
+      "bb_pct": -0.179,
+      "iso": -0.048,
+      "sb_rate": 0.675
     },
     "name": "Sam Antonacci"
   },
@@ -7175,13 +7175,13 @@
     "power": 96,
     "speed": 95,
     "_seasons": 2,
-    "_pa": 430,
+    "_pa": 435,
     "_z": {
-      "avg": 0.305,
+      "avg": 0.278,
       "k_pct": 0.131,
-      "bb_pct": 0.523,
-      "iso": -0.271,
-      "sb_rate": -0.35
+      "bb_pct": 0.538,
+      "iso": -0.278,
+      "sb_rate": -0.354
     },
     "name": "Kyle Karros"
   },
@@ -7205,8 +7205,8 @@
     "_seasons": 6,
     "_pa": 1452,
     "_z": {
-      "avg": -0.052,
-      "k_pct": 0.098,
+      "avg": -0.053,
+      "k_pct": 0.097,
       "bb_pct": -0.214,
       "iso": 1.016,
       "sb_rate": 0.035
@@ -7237,11 +7237,11 @@
     "_seasons": 1,
     "_pa": 170,
     "_z": {
-      "avg": 0.842,
-      "k_pct": -0.409,
+      "avg": 0.839,
+      "k_pct": -0.416,
       "bb_pct": -0.048,
-      "iso": -0.539,
-      "sb_rate": 1.389
+      "iso": -0.542,
+      "sb_rate": 1.392
     },
     "name": "Henry Bolte"
   },
@@ -7264,8 +7264,8 @@
     "_seasons": 5,
     "_ip": 549,
     "_z": {
-      "k_pct": -1.176,
-      "bb_pct": -0.021
+      "k_pct": -1.175,
+      "bb_pct": -0.02
     },
     "name": "Andre Pallante"
   },
@@ -7274,10 +7274,10 @@
     "stuff": 118,
     "control": 87,
     "_seasons": 9,
-    "_ip": 389,
+    "_ip": 390,
     "_z": {
-      "k_pct": 1.206,
-      "bb_pct": -0.879
+      "k_pct": 1.209,
+      "bb_pct": -0.869
     },
     "name": "Jose Alvarado"
   },
@@ -7288,20 +7288,20 @@
     "_seasons": 3,
     "_ip": 54,
     "_z": {
-      "k_pct": -0.579,
-      "bb_pct": 0.457
+      "k_pct": -0.576,
+      "bb_pct": 0.458
     },
     "name": "Ryan Johnson"
   },
   "663436": {
     "type": "pitcher",
-    "stuff": 92,
-    "control": 105,
+    "stuff": 91,
+    "control": 103,
     "_seasons": 4,
-    "_ip": 349,
+    "_ip": 352,
     "_z": {
-      "k_pct": -0.554,
-      "bb_pct": 0.306
+      "k_pct": -0.605,
+      "bb_pct": 0.233
     },
     "name": "Davis Martin"
   },
@@ -7312,8 +7312,8 @@
     "_seasons": 2,
     "_ip": 90,
     "_z": {
-      "k_pct": 0.54,
-      "bb_pct": -0.087
+      "k_pct": 0.541,
+      "bb_pct": -0.086
     },
     "name": "Jack Perkins"
   },
@@ -7393,9 +7393,9 @@
     "_seasons": 3,
     "_pa": 983,
     "_z": {
-      "avg": 0.127,
-      "k_pct": 0.369,
-      "bb_pct": -0.001,
+      "avg": 0.126,
+      "k_pct": 0.368,
+      "bb_pct": -0.002,
       "iso": 0.434,
       "sb_rate": 0.174
     },
@@ -7403,37 +7403,37 @@
   },
   "669276": {
     "type": "pitcher",
-    "stuff": 121,
+    "stuff": 120,
     "control": 115,
     "_seasons": 6,
-    "_ip": 242,
+    "_ip": 243,
     "_z": {
-      "k_pct": 1.383,
-      "bb_pct": 0.989
+      "k_pct": 1.355,
+      "bb_pct": 0.996
     },
     "name": "Dylan Lee"
   },
   "669387": {
     "type": "pitcher",
-    "stuff": 95,
+    "stuff": 94,
     "control": 103,
     "_seasons": 4,
-    "_ip": 258,
+    "_ip": 261,
     "_z": {
-      "k_pct": -0.334,
-      "bb_pct": 0.198
+      "k_pct": -0.372,
+      "bb_pct": 0.222
     },
     "name": "Carmen Mlodzinski"
   },
   "542888": {
     "type": "pitcher",
-    "stuff": 104,
+    "stuff": 103,
     "control": 103,
     "_seasons": 20,
-    "_ip": 653,
+    "_ip": 655,
     "_z": {
-      "k_pct": 0.234,
-      "bb_pct": 0.203
+      "k_pct": 0.227,
+      "bb_pct": 0.206
     },
     "name": "Shawn Armstrong"
   },
@@ -7455,13 +7455,13 @@
     "power": 98,
     "speed": 100,
     "_seasons": 9,
-    "_pa": 2529,
+    "_pa": 2533,
     "_z": {
-      "avg": 0.439,
-      "k_pct": 1.036,
-      "bb_pct": -0.487,
-      "iso": -0.123,
-      "sb_rate": 0.017
+      "avg": 0.446,
+      "k_pct": 1.034,
+      "bb_pct": -0.482,
+      "iso": -0.124,
+      "sb_rate": 0.015
     },
     "name": "Mauricio Dubon"
   },
@@ -7572,8 +7572,8 @@
     "_seasons": 3,
     "_ip": 108,
     "_z": {
-      "k_pct": 0.626,
-      "bb_pct": 0.564
+      "k_pct": 0.627,
+      "bb_pct": 0.565
     },
     "name": "Justin Sterner"
   },
@@ -7617,10 +7617,10 @@
     "_seasons": 2,
     "_pa": 301,
     "_z": {
-      "avg": -0.104,
-      "k_pct": 0.607,
+      "avg": -0.106,
+      "k_pct": 0.605,
       "bb_pct": -0.012,
-      "iso": 0.099,
+      "iso": 0.098,
       "sb_rate": -0.384
     },
     "name": "Drew Gilbert"
@@ -7647,24 +7647,24 @@
     "power": 108,
     "speed": 100,
     "_seasons": 2,
-    "_pa": 486,
+    "_pa": 488,
     "_z": {
-      "avg": 0.334,
-      "k_pct": -0.009,
-      "bb_pct": 0.412,
-      "iso": 0.554,
-      "sb_rate": 0.007
+      "avg": 0.318,
+      "k_pct": -0.002,
+      "bb_pct": 0.405,
+      "iso": 0.548,
+      "sb_rate": 0.01
     },
     "name": "Heriberto Hernandez"
   },
   "687570": {
     "type": "pitcher",
-    "stuff": 103,
+    "stuff": 104,
     "control": 103,
     "_seasons": 1,
     "_ip": 62,
     "_z": {
-      "k_pct": 0.232,
+      "k_pct": 0.236,
       "bb_pct": 0.207
     },
     "name": "Connor Prielipp"
@@ -7700,7 +7700,7 @@
     "_seasons": 6,
     "_ip": 575,
     "_z": {
-      "k_pct": -0.233,
+      "k_pct": -0.232,
       "bb_pct": -0.049
     },
     "name": "Griffin Canning"
@@ -7716,7 +7716,7 @@
       "avg": 0.732,
       "k_pct": 1.115,
       "bb_pct": -0.318,
-      "iso": 0.044,
+      "iso": 0.043,
       "sb_rate": -0.145
     },
     "name": "Masataka Yoshida"
@@ -7724,12 +7724,12 @@
   "547179": {
     "type": "pitcher",
     "stuff": 89,
-    "control": 99,
+    "control": 98,
     "_seasons": 15,
-    "_ip": 1327,
+    "_ip": 1332,
     "_z": {
-      "k_pct": -0.723,
-      "bb_pct": -0.097
+      "k_pct": -0.733,
+      "bb_pct": -0.115
     },
     "name": "Michael Lorenzen"
   },
@@ -7792,8 +7792,8 @@
     "_seasons": 4,
     "_ip": 253,
     "_z": {
-      "k_pct": -0.772,
-      "bb_pct": 0.542
+      "k_pct": -0.771,
+      "bb_pct": 0.543
     },
     "name": "Emerson Hancock"
   },
@@ -7825,7 +7825,7 @@
       "k_pct": 1.025,
       "bb_pct": -0.187,
       "iso": -0.388,
-      "sb_rate": 0.311
+      "sb_rate": 0.312
     },
     "name": "Tyler Freeman"
   },
@@ -7847,12 +7847,12 @@
     "power": 106,
     "speed": 96,
     "_seasons": 9,
-    "_pa": 4170,
+    "_pa": 4174,
     "_z": {
       "avg": 0.521,
-      "k_pct": 0.179,
-      "bb_pct": 0.501,
-      "iso": 0.417,
+      "k_pct": 0.176,
+      "bb_pct": 0.499,
+      "iso": 0.415,
       "sb_rate": -0.279
     },
     "name": "Nathaniel Lowe"
@@ -7864,7 +7864,7 @@
     "_seasons": 9,
     "_ip": 784,
     "_z": {
-      "k_pct": -0.698,
+      "k_pct": -0.697,
       "bb_pct": 0.305
     },
     "name": "Colin Rea"
@@ -7876,7 +7876,7 @@
     "_seasons": 17,
     "_ip": 2013,
     "_z": {
-      "k_pct": -0.257,
+      "k_pct": -0.256,
       "bb_pct": 0.35
     },
     "name": "Jose Quintana"
@@ -7913,9 +7913,9 @@
     "_seasons": 3,
     "_pa": 896,
     "_z": {
-      "avg": 0.118,
-      "k_pct": 0.286,
-      "bb_pct": -0.523,
+      "avg": 0.117,
+      "k_pct": 0.285,
+      "bb_pct": -0.524,
       "iso": 0.197,
       "sb_rate": 0.467
     },
@@ -7957,10 +7957,10 @@
     "_seasons": 2,
     "_pa": 621,
     "_z": {
-      "avg": 0.606,
-      "k_pct": 0.932,
+      "avg": 0.604,
+      "k_pct": 0.931,
       "bb_pct": -0.014,
-      "iso": 0.222,
+      "iso": 0.221,
       "sb_rate": -0.392
     },
     "name": "Nathan Lukes"
@@ -7970,10 +7970,10 @@
     "stuff": 83,
     "control": 112,
     "_seasons": 5,
-    "_ip": 324,
+    "_ip": 326,
     "_z": {
-      "k_pct": -1.107,
-      "bb_pct": 0.79
+      "k_pct": -1.131,
+      "bb_pct": 0.784
     },
     "name": "Stephen Kolek"
   },
@@ -8032,8 +8032,8 @@
     "_seasons": 8,
     "_ip": 218,
     "_z": {
-      "k_pct": -1.02,
-      "bb_pct": 1.545
+      "k_pct": -1.018,
+      "bb_pct": 1.546
     },
     "name": "Janson Junk"
   },
@@ -8060,8 +8060,8 @@
     "_seasons": 5,
     "_ip": 196,
     "_z": {
-      "k_pct": 0.17,
-      "bb_pct": -0.747
+      "k_pct": 0.168,
+      "bb_pct": -0.757
     },
     "name": "Calvin Faucher"
   },
@@ -8072,8 +8072,8 @@
     "_seasons": 3,
     "_ip": 159,
     "_z": {
-      "k_pct": -0.733,
-      "bb_pct": -0.101
+      "k_pct": -0.732,
+      "bb_pct": -0.102
     },
     "name": "Brandon Williamson"
   },
@@ -8094,10 +8094,10 @@
     "stuff": 106,
     "control": 104,
     "_seasons": 8,
-    "_ip": 195,
+    "_ip": 196,
     "_z": {
-      "k_pct": 0.387,
-      "bb_pct": 0.234
+      "k_pct": 0.416,
+      "bb_pct": 0.244
     },
     "name": "Eduard Bazardo"
   },
@@ -8144,7 +8144,7 @@
     "_seasons": 3,
     "_ip": 139,
     "_z": {
-      "k_pct": -0.759,
+      "k_pct": -0.758,
       "bb_pct": 0.587
     },
     "name": "Hunter Dobbins"
@@ -8157,11 +8157,11 @@
     "_seasons": 4,
     "_pa": 766,
     "_z": {
-      "avg": 0.131,
-      "k_pct": 0.416,
+      "avg": 0.13,
+      "k_pct": 0.415,
       "bb_pct": -0.155,
-      "iso": 0.136,
-      "sb_rate": -0.407
+      "iso": 0.135,
+      "sb_rate": -0.406
     },
     "name": "Miguel Amaya"
   },
@@ -8172,7 +8172,7 @@
     "_seasons": 2,
     "_ip": 241,
     "_z": {
-      "k_pct": -1.473,
+      "k_pct": -1.471,
       "bb_pct": 1.019
     },
     "name": "Tomoyuki Sugano"
@@ -8195,13 +8195,13 @@
     "power": 101,
     "speed": 98,
     "_seasons": 4,
-    "_pa": 1141,
+    "_pa": 1146,
     "_z": {
-      "avg": 0.145,
-      "k_pct": -0.497,
-      "bb_pct": 0.893,
-      "iso": 0.064,
-      "sb_rate": -0.157
+      "avg": 0.148,
+      "k_pct": -0.486,
+      "bb_pct": 0.91,
+      "iso": 0.059,
+      "sb_rate": -0.161
     },
     "name": "Edouard Julien"
   },
@@ -8247,17 +8247,17 @@
   },
   "701678": {
     "type": "hitter",
-    "hit": 98,
-    "power": 98,
+    "hit": 97,
+    "power": 101,
     "speed": 96,
     "_seasons": 1,
-    "_pa": 141,
+    "_pa": 145,
     "_z": {
-      "avg": 0.373,
-      "k_pct": -0.216,
-      "bb_pct": -0.547,
-      "iso": -0.111,
-      "sb_rate": -0.244
+      "avg": 0.367,
+      "k_pct": -0.353,
+      "bb_pct": -0.569,
+      "iso": 0.057,
+      "sb_rate": -0.243
     },
     "name": "Hao-Yu Lee"
   },
@@ -8268,7 +8268,7 @@
     "_seasons": 8,
     "_ip": 1245,
     "_z": {
-      "k_pct": -1.131,
+      "k_pct": -1.13,
       "bb_pct": 1.369
     },
     "name": "Miles Mikolas"
@@ -8291,13 +8291,13 @@
     "power": 110,
     "speed": 97,
     "_seasons": 5,
-    "_pa": 1768,
+    "_pa": 1773,
     "_z": {
-      "avg": -0.069,
-      "k_pct": 0.237,
-      "bb_pct": 0.666,
-      "iso": 0.662,
-      "sb_rate": -0.171
+      "avg": -0.068,
+      "k_pct": 0.232,
+      "bb_pct": 0.669,
+      "iso": 0.657,
+      "sb_rate": -0.173
     },
     "name": "JJ Bleday"
   },
@@ -8308,7 +8308,7 @@
     "_seasons": 5,
     "_ip": 218,
     "_z": {
-      "k_pct": 0.512,
+      "k_pct": 0.513,
       "bb_pct": -0.003
     },
     "name": "Anthony Bender"
@@ -8352,7 +8352,7 @@
     "_seasons": 7,
     "_ip": 254,
     "_z": {
-      "k_pct": 0.099,
+      "k_pct": 0.1,
       "bb_pct": -0.04
     },
     "name": "Yennier Cano"
@@ -8389,7 +8389,7 @@
     "_ip": 288,
     "_z": {
       "k_pct": 1.024,
-      "bb_pct": 0.333
+      "bb_pct": 0.332
     },
     "name": "Caleb Thielbar"
   },
@@ -8400,8 +8400,8 @@
     "_seasons": 3,
     "_ip": 75,
     "_z": {
-      "k_pct": -0.418,
-      "bb_pct": 0.673
+      "k_pct": -0.414,
+      "bb_pct": 0.674
     },
     "name": "Trevor McDonald"
   },
@@ -8413,11 +8413,11 @@
     "_seasons": 2,
     "_pa": 598,
     "_z": {
-      "avg": 0.394,
-      "k_pct": 0.315,
+      "avg": 0.393,
+      "k_pct": 0.314,
       "bb_pct": -0.608,
       "iso": -0.355,
-      "sb_rate": 3.257
+      "sb_rate": 3.258
     },
     "name": "Esteury Ruiz"
   },
@@ -8426,10 +8426,10 @@
     "stuff": 116,
     "control": 103,
     "_seasons": 8,
-    "_ip": 309,
+    "_ip": 310,
     "_z": {
-      "k_pct": 1.077,
-      "bb_pct": 0.202
+      "k_pct": 1.079,
+      "bb_pct": 0.208
     },
     "name": "Bryan Baker"
   },
@@ -8468,7 +8468,7 @@
     "_seasons": 13,
     "_ip": 1120,
     "_z": {
-      "k_pct": -0.993,
+      "k_pct": -0.992,
       "bb_pct": -0.108
     },
     "name": "Erick Fedde"
@@ -8481,11 +8481,11 @@
     "_seasons": 2,
     "_pa": 292,
     "_z": {
-      "avg": -0.17,
-      "k_pct": -0.662,
+      "avg": -0.172,
+      "k_pct": -0.666,
       "bb_pct": -0.236,
-      "iso": 0.009,
-      "sb_rate": -0.509
+      "iso": 0.007,
+      "sb_rate": -0.508
     },
     "name": "Adrian Del Castillo"
   },
@@ -8496,8 +8496,8 @@
     "_seasons": 3,
     "_ip": 66,
     "_z": {
-      "k_pct": 3.28,
-      "bb_pct": -1.953
+      "k_pct": 3.278,
+      "bb_pct": -1.954
     },
     "name": "Erik Sabrowski"
   },
@@ -8521,10 +8521,10 @@
     "_seasons": 3,
     "_pa": 454,
     "_z": {
-      "avg": 0.255,
-      "k_pct": 0.67,
+      "avg": 0.254,
+      "k_pct": 0.669,
       "bb_pct": -0.12,
-      "iso": -0.205,
+      "iso": -0.206,
       "sb_rate": -0.15
     },
     "name": "Vaughn Grissom"
@@ -8536,7 +8536,7 @@
     "_seasons": 3,
     "_ip": 219,
     "_z": {
-      "k_pct": 0.012,
+      "k_pct": 0.014,
       "bb_pct": 0.046
     },
     "name": "J.T. Ginn"
@@ -8544,15 +8544,15 @@
   "663837": {
     "type": "hitter",
     "hit": 103,
-    "power": 100,
+    "power": 99,
     "speed": 99,
     "_seasons": 5,
-    "_pa": 1790,
+    "_pa": 1793,
     "_z": {
-      "avg": 0.333,
-      "k_pct": 0.442,
-      "bb_pct": -0.114,
-      "iso": -0.033,
+      "avg": 0.327,
+      "k_pct": 0.445,
+      "bb_pct": -0.116,
+      "iso": -0.036,
       "sb_rate": -0.054
     },
     "name": "Matt Vierling"
@@ -8560,11 +8560,11 @@
   "665871": {
     "type": "pitcher",
     "stuff": 88,
-    "control": 97,
+    "control": 98,
     "_seasons": 5,
     "_ip": 383,
     "_z": {
-      "k_pct": -0.782,
+      "k_pct": -0.781,
       "bb_pct": -0.167
     },
     "name": "Javier Assad"
@@ -8576,20 +8576,20 @@
     "_seasons": 3,
     "_ip": 71,
     "_z": {
-      "k_pct": -0.243,
-      "bb_pct": -0.942
+      "k_pct": -0.241,
+      "bb_pct": -0.944
     },
     "name": "Seth Halvorsen"
   },
   "683618": {
     "type": "pitcher",
     "stuff": 109,
-    "control": 103,
+    "control": 104,
     "_seasons": 3,
-    "_ip": 55,
+    "_ip": 56,
     "_z": {
-      "k_pct": 0.578,
-      "bb_pct": 0.23
+      "k_pct": 0.6,
+      "bb_pct": 0.265
     },
     "name": "Edgardo Henriquez"
   },
@@ -8600,7 +8600,7 @@
     "_seasons": 6,
     "_ip": 221,
     "_z": {
-      "k_pct": 0.91,
+      "k_pct": 0.911,
       "bb_pct": 0.144
     },
     "name": "Brooks Raley"
@@ -8613,7 +8613,7 @@
     "_seasons": 13,
     "_pa": 5184,
     "_z": {
-      "avg": 0.386,
+      "avg": 0.385,
       "k_pct": 0.359,
       "bb_pct": 0.569,
       "iso": 1.096,
@@ -8624,12 +8624,12 @@
   "608566": {
     "type": "pitcher",
     "stuff": 96,
-    "control": 108,
+    "control": 107,
     "_seasons": 10,
-    "_ip": 1094,
+    "_ip": 1097,
     "_z": {
-      "k_pct": -0.288,
-      "bb_pct": 0.503
+      "k_pct": -0.295,
+      "bb_pct": 0.49
     },
     "name": "German Marquez"
   },
@@ -8655,13 +8655,13 @@
     "power": 100,
     "speed": 94,
     "_seasons": 2,
-    "_pa": 688,
+    "_pa": 692,
     "_z": {
-      "avg": 0.523,
-      "k_pct": 1.143,
-      "bb_pct": 0.474,
-      "iso": 0.009,
-      "sb_rate": -0.38
+      "avg": 0.52,
+      "k_pct": 1.15,
+      "bb_pct": 0.464,
+      "iso": 0.001,
+      "sb_rate": -0.381
     },
     "name": "Liam Hicks"
   },
@@ -8671,13 +8671,13 @@
     "hit": 106,
     "power": 104,
     "speed": 104,
-    "_pa": 552,
+    "_pa": 556,
     "_z_hit": {
-      "avg": 0.444,
-      "k_pct": 1.218,
-      "bb_pct": -0.406,
-      "iso": 0.25,
-      "sb_rate": 0.276
+      "avg": 0.466,
+      "k_pct": 1.226,
+      "bb_pct": -0.412,
+      "iso": 0.238,
+      "sb_rate": 0.262
     }
   },
   "670102": {
@@ -8709,10 +8709,10 @@
     "stuff": 105,
     "control": 101,
     "_seasons": 7,
-    "_ip": 276,
+    "_ip": 277,
     "_z": {
-      "k_pct": 0.339,
-      "bb_pct": 0.04
+      "k_pct": 0.327,
+      "bb_pct": 0.047
     },
     "name": "John Schreiber"
   },
@@ -8748,9 +8748,9 @@
     "_seasons": 5,
     "_pa": 922,
     "_z": {
-      "avg": 0.147,
-      "k_pct": 0.263,
-      "bb_pct": -0.208,
+      "avg": 0.146,
+      "k_pct": 0.262,
+      "bb_pct": -0.207,
       "iso": -0.132,
       "sb_rate": 0.047
     },
@@ -8786,17 +8786,17 @@
   },
   "682848": {
     "type": "hitter",
-    "hit": 103,
-    "power": 99,
+    "hit": 104,
+    "power": 100,
     "speed": 96,
     "_seasons": 2,
-    "_pa": 313,
+    "_pa": 318,
     "_z": {
-      "avg": 0.148,
-      "k_pct": 0.082,
-      "bb_pct": 0.488,
-      "iso": -0.069,
-      "sb_rate": -0.241
+      "avg": 0.149,
+      "k_pct": 0.055,
+      "bb_pct": 0.508,
+      "iso": 0.021,
+      "sb_rate": -0.242
     },
     "name": "Endy Rodriguez"
   },
@@ -8808,11 +8808,11 @@
     "_seasons": 7,
     "_pa": 1627,
     "_z": {
-      "avg": 0.38,
+      "avg": 0.379,
       "k_pct": 0.215,
       "bb_pct": -0.694,
       "iso": 0.321,
-      "sb_rate": 0.085
+      "sb_rate": 0.086
     },
     "name": "Edmundo Sosa"
   },
@@ -8824,8 +8824,8 @@
     "_seasons": 4,
     "_pa": 940,
     "_z": {
-      "avg": -0.13,
-      "k_pct": -0.468,
+      "avg": -0.131,
+      "k_pct": -0.469,
       "bb_pct": 0.935,
       "iso": 0.727,
       "sb_rate": -0.121
@@ -8879,8 +8879,8 @@
     "_seasons": 1,
     "_ip": 58,
     "_z": {
-      "k_pct": 0.36,
-      "bb_pct": 0.491
+      "k_pct": 0.363,
+      "bb_pct": 0.493
     },
     "name": "Shane Drohan"
   },
@@ -8919,8 +8919,8 @@
     "_seasons": 2,
     "_ip": 95,
     "_z": {
-      "k_pct": 0.96,
-      "bb_pct": -0.491
+      "k_pct": 0.962,
+      "bb_pct": -0.492
     },
     "name": "Braydon Fisher"
   },
@@ -8956,7 +8956,7 @@
     "_seasons": 6,
     "_pa": 2309,
     "_z": {
-      "avg": 0.153,
+      "avg": 0.152,
       "k_pct": 0.562,
       "bb_pct": -0.096,
       "iso": 0.308,
@@ -8972,10 +8972,10 @@
     "_seasons": 2,
     "_pa": 389,
     "_z": {
-      "avg": 0.51,
-      "k_pct": 0.167,
-      "bb_pct": -0.694,
-      "iso": 0.334,
+      "avg": 0.508,
+      "k_pct": 0.165,
+      "bb_pct": -0.695,
+      "iso": 0.333,
       "sb_rate": -0.248
     },
     "name": "Jeremiah Jackson"
@@ -9015,7 +9015,7 @@
     "_seasons": 5,
     "_ip": 194,
     "_z": {
-      "k_pct": -0.138,
+      "k_pct": -0.137,
       "bb_pct": 0.239
     },
     "name": "Greg Weissert"
@@ -9039,8 +9039,8 @@
     "_seasons": 6,
     "_ip": 92,
     "_z": {
-      "k_pct": 0.64,
-      "bb_pct": 0.1
+      "k_pct": 0.641,
+      "bb_pct": 0.099
     },
     "name": "Bennett Sousa"
   },
@@ -9051,7 +9051,7 @@
     "_seasons": 3,
     "_ip": 355,
     "_z": {
-      "k_pct": -0.998,
+      "k_pct": -0.997,
       "bb_pct": 0.418
     },
     "name": "Mitchell Parker"
@@ -9119,8 +9119,8 @@
     "_seasons": 3,
     "_ip": 240,
     "_z": {
-      "k_pct": -1.807,
-      "bb_pct": -0.238
+      "k_pct": -1.806,
+      "bb_pct": -0.239
     },
     "name": "Jack Kochanowicz"
   },
@@ -9228,10 +9228,10 @@
     "_seasons": 3,
     "_pa": 466,
     "_z": {
-      "avg": 0.011,
+      "avg": 0.01,
       "k_pct": 0.804,
       "bb_pct": 0.153,
-      "iso": -0.776,
+      "iso": -0.777,
       "sb_rate": -0.014
     },
     "name": "Darell Hernaiz"
@@ -9239,16 +9239,16 @@
   "687859": {
     "type": "hitter",
     "hit": 108,
-    "power": 99,
+    "power": 100,
     "speed": 99,
     "_seasons": 2,
-    "_pa": 408,
+    "_pa": 413,
     "_z": {
-      "avg": 0.988,
-      "k_pct": 0.573,
-      "bb_pct": -0.084,
-      "iso": -0.035,
-      "sb_rate": -0.076
+      "avg": 1.013,
+      "k_pct": 0.592,
+      "bb_pct": -0.062,
+      "iso": -0.03,
+      "sb_rate": -0.083
     },
     "name": "Troy Johnston"
   },
@@ -9286,13 +9286,13 @@
     "power": 101,
     "speed": 94,
     "_seasons": 11,
-    "_pa": 4374,
+    "_pa": 4379,
     "_z": {
-      "avg": 0.477,
+      "avg": 0.476,
       "k_pct": 0.615,
-      "bb_pct": -0.309,
-      "iso": 0.097,
-      "sb_rate": -0.376
+      "bb_pct": -0.31,
+      "iso": 0.096,
+      "sb_rate": -0.377
     },
     "name": "Ty France"
   },
@@ -9320,11 +9320,11 @@
     "_seasons": 1,
     "_pa": 115,
     "_z": {
-      "avg": 0.456,
-      "k_pct": 0.051,
-      "bb_pct": -0.509,
-      "iso": -0.666,
-      "sb_rate": -0.222
+      "avg": 0.452,
+      "k_pct": 0.046,
+      "bb_pct": -0.51,
+      "iso": -0.669,
+      "sb_rate": -0.221
     },
     "name": "Daniel Susac"
   },
@@ -9335,7 +9335,7 @@
     "_seasons": 2,
     "_ip": 65,
     "_z": {
-      "k_pct": 0.462,
+      "k_pct": 0.463,
       "bb_pct": -0.203
     },
     "name": "Andrew Alvarez"
@@ -9346,29 +9346,29 @@
     "power": 107,
     "speed": 104,
     "_seasons": 5,
-    "_pa": 1089,
+    "_pa": 1091,
     "_z": {
-      "avg": -0.242,
-      "k_pct": -0.955,
-      "bb_pct": 0.431,
-      "iso": 0.493,
-      "sb_rate": 0.254
+      "avg": -0.248,
+      "k_pct": -0.968,
+      "bb_pct": 0.428,
+      "iso": 0.49,
+      "sb_rate": 0.258
     },
     "name": "James Outman"
   },
   "696030": {
     "type": "hitter",
     "hit": 107,
-    "power": 87,
+    "power": 86,
     "speed": 103,
     "_seasons": 2,
-    "_pa": 344,
+    "_pa": 349,
     "_z": {
-      "avg": 0.1,
-      "k_pct": 0.727,
-      "bb_pct": 0.437,
-      "iso": -0.899,
-      "sb_rate": 0.204
+      "avg": 0.174,
+      "k_pct": 0.749,
+      "bb_pct": 0.412,
+      "iso": -0.906,
+      "sb_rate": 0.185
     },
     "name": "Alejandro Osuna"
   },
@@ -9397,8 +9397,8 @@
     "_pa": 1609,
     "_z": {
       "avg": 0.193,
-      "k_pct": 0.394,
-      "bb_pct": -0.39,
+      "k_pct": 0.393,
+      "bb_pct": -0.391,
       "iso": -0.094,
       "sb_rate": 0.201
     },
@@ -9412,7 +9412,7 @@
     "_ip": 120,
     "_z": {
       "k_pct": 0.863,
-      "bb_pct": -2.055
+      "bb_pct": -2.057
     },
     "name": "Erik Miller"
   },
@@ -9451,8 +9451,8 @@
     "_seasons": 3,
     "_ip": 134,
     "_z": {
-      "k_pct": -0.047,
-      "bb_pct": 0.233
+      "k_pct": -0.046,
+      "bb_pct": 0.232
     },
     "name": "Brant Hurter"
   },
@@ -9463,7 +9463,7 @@
     "_seasons": 6,
     "_ip": 190,
     "_z": {
-      "k_pct": -0.648,
+      "k_pct": -0.647,
       "bb_pct": 0.485
     },
     "name": "Angel Zerpa"
@@ -9474,12 +9474,12 @@
     "power": 102,
     "speed": 98,
     "_seasons": 9,
-    "_pa": 2790,
+    "_pa": 2794,
     "_z": {
-      "avg": 0.277,
-      "k_pct": 0.588,
-      "bb_pct": -0.644,
-      "iso": 0.111,
+      "avg": 0.272,
+      "k_pct": 0.587,
+      "bb_pct": -0.645,
+      "iso": 0.109,
       "sb_rate": -0.135
     },
     "name": "Michael Massey"
@@ -9519,16 +9519,16 @@
   "681807": {
     "type": "hitter",
     "hit": 102,
-    "power": 109,
+    "power": 110,
     "speed": 97,
     "_seasons": 4,
-    "_pa": 799,
+    "_pa": 800,
     "_z": {
-      "avg": 0.13,
-      "k_pct": -0.124,
-      "bb_pct": 0.305,
-      "iso": 0.596,
-      "sb_rate": -0.211
+      "avg": 0.143,
+      "k_pct": -0.122,
+      "bb_pct": 0.303,
+      "iso": 0.635,
+      "sb_rate": -0.212
     },
     "name": "David Fry"
   },
@@ -9567,7 +9567,7 @@
     "_seasons": 13,
     "_ip": 1568,
     "_z": {
-      "k_pct": -1.143,
+      "k_pct": -1.142,
       "bb_pct": 0.095
     },
     "name": "Martin Perez"
@@ -9575,27 +9575,27 @@
   "668390": {
     "type": "pitcher",
     "stuff": 96,
-    "control": 101,
+    "control": 102,
     "_seasons": 3,
-    "_ip": 86,
+    "_ip": 87,
     "_z": {
-      "k_pct": -0.251,
-      "bb_pct": 0.084
+      "k_pct": -0.253,
+      "bb_pct": 0.118
     },
     "name": "Cole Winn"
   },
   "679822": {
     "type": "hitter",
     "hit": 103,
-    "power": 113,
+    "power": 112,
     "speed": 92,
     "_seasons": 1,
-    "_pa": 102,
+    "_pa": 105,
     "_z": {
-      "avg": 0.616,
-      "k_pct": 0.046,
-      "bb_pct": -0.108,
-      "iso": 0.85,
+      "avg": 0.537,
+      "k_pct": 0.014,
+      "bb_pct": 0.003,
+      "iso": 0.812,
       "sb_rate": -0.558
     },
     "name": "Justin Foscue"
@@ -9620,11 +9620,11 @@
     "_seasons": 3,
     "_pa": 578,
     "_z": {
-      "avg": 0.31,
-      "k_pct": -0.049,
+      "avg": 0.309,
+      "k_pct": -0.05,
       "bb_pct": 0.037,
       "iso": -0.16,
-      "sb_rate": 0.813
+      "sb_rate": 0.814
     },
     "name": "Dane Myers"
   },
@@ -9662,13 +9662,13 @@
     "power": 106,
     "speed": 138,
     "_seasons": 13,
-    "_pa": 5399,
+    "_pa": 5402,
     "_z": {
-      "avg": 0.816,
-      "k_pct": 0.577,
-      "bb_pct": -0.158,
-      "iso": 0.397,
-      "sb_rate": 2.542
+      "avg": 0.813,
+      "k_pct": 0.574,
+      "bb_pct": -0.159,
+      "iso": 0.396,
+      "sb_rate": 2.541
     },
     "name": "Starling Marte"
   },
@@ -9680,10 +9680,10 @@
     "_seasons": 1,
     "_pa": 151,
     "_z": {
-      "avg": 0.526,
-      "k_pct": 0.144,
-      "bb_pct": -0.395,
-      "iso": 0.151,
+      "avg": 0.522,
+      "k_pct": 0.139,
+      "bb_pct": -0.396,
+      "iso": 0.15,
       "sb_rate": -0.558
     },
     "name": "Yohendrick Pinango"
@@ -9711,19 +9711,19 @@
     "_seasons": 3,
     "_ip": 279,
     "_z": {
-      "k_pct": -0.894,
-      "bb_pct": 0.547
+      "k_pct": -0.893,
+      "bb_pct": 0.548
     },
     "name": "Keider Montero"
   },
   "663372": {
     "type": "pitcher",
-    "stuff": 89,
+    "stuff": 90,
     "control": 99,
     "_seasons": 6,
     "_ip": 393,
     "_z": {
-      "k_pct": -0.701,
+      "k_pct": -0.7,
       "bb_pct": -0.054
     },
     "name": "Ryan Feltner"
@@ -9775,8 +9775,8 @@
     "_seasons": 3,
     "_ip": 56,
     "_z": {
-      "k_pct": -1.395,
-      "bb_pct": -1.008
+      "k_pct": -1.391,
+      "bb_pct": -1.009
     },
     "name": "Samuel Aldegheri"
   },
@@ -9805,7 +9805,7 @@
     "_pa": 1490,
     "_z": {
       "avg": 0.454,
-      "k_pct": 0.217,
+      "k_pct": 0.216,
       "bb_pct": 0.517,
       "iso": 0.185,
       "sb_rate": -0.134
@@ -9831,8 +9831,8 @@
     "_seasons": 3,
     "_ip": 58,
     "_z": {
-      "k_pct": -0.729,
-      "bb_pct": -0.272
+      "k_pct": -0.728,
+      "bb_pct": -0.273
     },
     "name": "Mason Black"
   },
@@ -9842,13 +9842,13 @@
     "power": 95,
     "speed": 112,
     "_seasons": 6,
-    "_pa": 1793,
+    "_pa": 1797,
     "_z": {
-      "avg": -0.247,
-      "k_pct": 0.059,
-      "bb_pct": 0.541,
-      "iso": -0.334,
-      "sb_rate": 0.773
+      "avg": -0.244,
+      "k_pct": 0.058,
+      "bb_pct": 0.546,
+      "iso": -0.331,
+      "sb_rate": 0.77
     },
     "name": "Taylor Walls"
   },
@@ -9900,7 +9900,7 @@
     "_ip": 113,
     "_z": {
       "k_pct": 1.299,
-      "bb_pct": -1.731
+      "bb_pct": -1.733
     },
     "name": "Ryan Zeferjahn"
   },
@@ -9928,7 +9928,7 @@
     "_ip": 527,
     "_z": {
       "k_pct": 0.669,
-      "bb_pct": -0.709
+      "bb_pct": -0.71
     },
     "name": "Scott Barlow"
   },
@@ -9955,7 +9955,7 @@
     "_seasons": 2,
     "_ip": 65,
     "_z": {
-      "k_pct": 1.108,
+      "k_pct": 1.109,
       "bb_pct": -0.598
     },
     "name": "Elvis Alvarado"
@@ -9967,7 +9967,7 @@
     "_seasons": 4,
     "_ip": 105,
     "_z": {
-      "k_pct": -0.87,
+      "k_pct": -0.869,
       "bb_pct": 0.498
     },
     "name": "Jordan Wicks"
@@ -10008,8 +10008,8 @@
     "_seasons": 4,
     "_pa": 1192,
     "_z": {
-      "avg": 0.355,
-      "k_pct": -0.099,
+      "avg": 0.354,
+      "k_pct": -0.1,
       "bb_pct": -0.271,
       "iso": -0.073,
       "sb_rate": 0.013
@@ -10039,7 +10039,7 @@
     "_seasons": 10,
     "_ip": 470,
     "_z": {
-      "k_pct": -1.513,
+      "k_pct": -1.512,
       "bb_pct": 0.61
     },
     "name": "Tim Hill"
@@ -10051,8 +10051,8 @@
     "_seasons": 2,
     "_ip": 61,
     "_z": {
-      "k_pct": 0.023,
-      "bb_pct": -1.407
+      "k_pct": 0.026,
+      "bb_pct": -1.41
     },
     "name": "Luinder Avila"
   },
@@ -10063,8 +10063,8 @@
     "_seasons": 2,
     "_ip": 59,
     "_z": {
-      "k_pct": 0.038,
-      "bb_pct": -0.757
+      "k_pct": 0.04,
+      "bb_pct": -0.759
     },
     "name": "Mitch Farris"
   },
@@ -10087,8 +10087,8 @@
     "_seasons": 5,
     "_ip": 69,
     "_z": {
-      "k_pct": 0.57,
-      "bb_pct": -0.313
+      "k_pct": 0.572,
+      "bb_pct": -0.315
     },
     "name": "Hunter Bigge"
   },
@@ -10099,8 +10099,8 @@
     "_seasons": 11,
     "_ip": 371,
     "_z": {
-      "k_pct": -0.276,
-      "bb_pct": 0.739
+      "k_pct": -0.275,
+      "bb_pct": 0.74
     },
     "name": "Hoby Milner"
   },
@@ -10111,7 +10111,7 @@
     "_seasons": 4,
     "_ip": 79,
     "_z": {
-      "k_pct": -0.365,
+      "k_pct": -0.364,
       "bb_pct": -0.4
     },
     "name": "Drey Jameson"
@@ -10121,10 +10121,10 @@
     "stuff": 108,
     "control": 86,
     "_seasons": 3,
-    "_ip": 155,
+    "_ip": 156,
     "_z": {
-      "k_pct": 0.526,
-      "bb_pct": -0.912
+      "k_pct": 0.501,
+      "bb_pct": -0.966
     },
     "name": "Yuki Matsui"
   },
@@ -10147,20 +10147,20 @@
     "_seasons": 3,
     "_ip": 105,
     "_z": {
-      "k_pct": 0.093,
+      "k_pct": 0.095,
       "bb_pct": -0.714
     },
     "name": "Kai-Wei Teng"
   },
   "687473": {
     "type": "pitcher",
-    "stuff": 97,
+    "stuff": 96,
     "control": 104,
     "_seasons": 4,
-    "_ip": 225,
+    "_ip": 228,
     "_z": {
-      "k_pct": -0.226,
-      "bb_pct": 0.257
+      "k_pct": -0.25,
+      "bb_pct": 0.238
     },
     "name": "Ryan Gusto"
   },
@@ -10208,11 +10208,11 @@
     "_seasons": 1,
     "_pa": 111,
     "_z": {
-      "avg": -1.191,
-      "k_pct": -0.118,
+      "avg": -1.195,
+      "k_pct": -0.124,
       "bb_pct": 0.07,
-      "iso": 0.515,
-      "sb_rate": 0.091
+      "iso": 0.514,
+      "sb_rate": 0.092
     },
     "name": "Drew Romo"
   },
@@ -10230,13 +10230,13 @@
   },
   "700669": {
     "type": "pitcher",
-    "stuff": 83,
+    "stuff": 82,
     "control": 100,
     "_seasons": 3,
-    "_ip": 90,
+    "_ip": 91,
     "_z": {
-      "k_pct": -1.152,
-      "bb_pct": -0.007
+      "k_pct": -1.177,
+      "bb_pct": 0.012
     },
     "name": "Gordon Graceffo"
   },
@@ -10260,7 +10260,7 @@
     "_ip": 188,
     "_z": {
       "k_pct": -0.195,
-      "bb_pct": -0.819
+      "bb_pct": -0.82
     },
     "name": "Luis Medina"
   },
@@ -10269,10 +10269,10 @@
     "stuff": 97,
     "control": 85,
     "_seasons": 3,
-    "_ip": 75,
+    "_ip": 76,
     "_z": {
-      "k_pct": -0.217,
-      "bb_pct": -1.026
+      "k_pct": -0.207,
+      "bb_pct": -0.979
     },
     "name": "Sam Bachman"
   },
@@ -10301,7 +10301,7 @@
     "_pa": 1535,
     "_z": {
       "avg": 0.163,
-      "k_pct": 0.083,
+      "k_pct": 0.082,
       "bb_pct": -0.393,
       "iso": 0.222,
       "sb_rate": 1.894
@@ -10310,16 +10310,16 @@
   },
   "678391": {
     "type": "hitter",
-    "hit": 107,
-    "power": 95,
+    "hit": 106,
+    "power": 94,
     "speed": 92,
     "_seasons": 1,
     "_pa": 184,
     "_z": {
-      "avg": 0.302,
-      "k_pct": 1.061,
+      "avg": 0.298,
+      "k_pct": 1.059,
       "bb_pct": -0.061,
-      "iso": -0.366,
+      "iso": -0.369,
       "sb_rate": -0.558
     },
     "name": "Jorbit Vivas"
@@ -10391,7 +10391,7 @@
     "_seasons": 11,
     "_ip": 1741,
     "_z": {
-      "k_pct": -0.335,
+      "k_pct": -0.334,
       "bb_pct": 0.435
     },
     "name": "Patrick Corbin"
@@ -10417,10 +10417,10 @@
     "stuff": 102,
     "control": 91,
     "_seasons": 12,
-    "_ip": 421,
+    "_ip": 422,
     "_z": {
-      "k_pct": 0.147,
-      "bb_pct": -0.591
+      "k_pct": 0.136,
+      "bb_pct": -0.601
     },
     "name": "Tyler Kinley"
   },
@@ -10431,7 +10431,7 @@
     "_seasons": 14,
     "_ip": 321,
     "_z": {
-      "k_pct": -0.216,
+      "k_pct": -0.215,
       "bb_pct": -0.217
     },
     "name": "Anthony Banda"
@@ -10443,7 +10443,7 @@
     "_seasons": 4,
     "_ip": 216,
     "_z": {
-      "k_pct": -0.47,
+      "k_pct": -0.469,
       "bb_pct": 0.56
     },
     "name": "Matt Waldron"
@@ -10468,7 +10468,7 @@
     "_seasons": 7,
     "_pa": 1483,
     "_z": {
-      "avg": 0.337,
+      "avg": 0.336,
       "k_pct": 0.68,
       "bb_pct": 0.636,
       "iso": -0.044,
@@ -10485,7 +10485,7 @@
     "_pa": 1714,
     "_z": {
       "avg": 0.212,
-      "k_pct": 0.278,
+      "k_pct": 0.277,
       "bb_pct": -0.483,
       "iso": 0.514,
       "sb_rate": 0.431
@@ -10512,8 +10512,8 @@
     "_seasons": 4,
     "_pa": 733,
     "_z": {
-      "avg": 0.281,
-      "k_pct": 0.151,
+      "avg": 0.28,
+      "k_pct": 0.15,
       "bb_pct": -0.007,
       "iso": -0.298,
       "sb_rate": 0.068
@@ -10597,10 +10597,10 @@
     "_pa": 723,
     "_z": {
       "avg": 0.031,
-      "k_pct": -0.014,
+      "k_pct": -0.015,
       "bb_pct": -0.295,
       "iso": 0.283,
-      "sb_rate": 1.039
+      "sb_rate": 1.04
     },
     "name": "Eli White"
   },
@@ -10613,7 +10613,7 @@
     "_pa": 1731,
     "_z": {
       "avg": -0.041,
-      "k_pct": -0.129,
+      "k_pct": -0.13,
       "bb_pct": 0.394,
       "iso": 0.493,
       "sb_rate": -0.193
@@ -10643,8 +10643,8 @@
     "_seasons": 2,
     "_ip": 100,
     "_z": {
-      "k_pct": 0.46,
-      "bb_pct": -0.498
+      "k_pct": 0.461,
+      "bb_pct": -0.499
     },
     "name": "Juan Mejia"
   },
@@ -10656,11 +10656,11 @@
     "_seasons": 1,
     "_pa": 177,
     "_z": {
-      "avg": 0.359,
-      "k_pct": 0.136,
-      "bb_pct": -0.702,
-      "iso": -0.39,
-      "sb_rate": 1.146
+      "avg": 0.356,
+      "k_pct": 0.131,
+      "bb_pct": -0.703,
+      "iso": -0.392,
+      "sb_rate": 1.148
     },
     "name": "Jose Fernandez"
   },
@@ -10681,10 +10681,10 @@
     "stuff": 88,
     "control": 101,
     "_seasons": 6,
-    "_ip": 397,
+    "_ip": 398,
     "_z": {
-      "k_pct": -0.797,
-      "bb_pct": 0.051
+      "k_pct": -0.791,
+      "bb_pct": 0.057
     },
     "name": "Daniel Lynch"
   },
@@ -10711,7 +10711,7 @@
     "_seasons": 13,
     "_ip": 621,
     "_z": {
-      "k_pct": -0.905,
+      "k_pct": -0.904,
       "bb_pct": 0.55
     },
     "name": "Paul Blackburn"
@@ -10739,7 +10739,7 @@
     "_seasons": 5,
     "_ip": 97,
     "_z": {
-      "k_pct": -0.789,
+      "k_pct": -0.788,
       "bb_pct": -0.642
     },
     "name": "Michael Kelly"
@@ -10763,7 +10763,7 @@
     "_seasons": 2,
     "_ip": 72,
     "_z": {
-      "k_pct": -0.32,
+      "k_pct": -0.318,
       "bb_pct": 0.263
     },
     "name": "Kyle Hart"
@@ -10820,7 +10820,7 @@
     "_seasons": 11,
     "_pa": 3555,
     "_z": {
-      "avg": 0.203,
+      "avg": 0.202,
       "k_pct": 0.199,
       "bb_pct": 0.322,
       "iso": 1.213,
@@ -10830,13 +10830,13 @@
   },
   "688642": {
     "type": "pitcher",
-    "stuff": 76,
-    "control": 91,
+    "stuff": 77,
+    "control": 92,
     "_seasons": 2,
-    "_ip": 83,
+    "_ip": 85,
     "_z": {
-      "k_pct": -1.578,
-      "bb_pct": -0.571
+      "k_pct": -1.525,
+      "bb_pct": -0.51
     },
     "name": "Zach Agnos"
   },
@@ -10847,8 +10847,8 @@
     "_seasons": 3,
     "_ip": 180,
     "_z": {
-      "k_pct": -1.026,
-      "bb_pct": 0.244
+      "k_pct": -1.024,
+      "bb_pct": 0.243
     },
     "name": "Tyler Phillips"
   },
@@ -10859,8 +10859,8 @@
     "_seasons": 9,
     "_ip": 231,
     "_z": {
-      "k_pct": 0.406,
-      "bb_pct": 0.068
+      "k_pct": 0.407,
+      "bb_pct": 0.069
     },
     "name": "Matt Festa"
   },
@@ -10872,11 +10872,11 @@
     "_seasons": 2,
     "_pa": 253,
     "_z": {
-      "avg": 0.056,
-      "k_pct": -0.144,
+      "avg": 0.055,
+      "k_pct": -0.148,
       "bb_pct": 0.606,
-      "iso": 0.917,
-      "sb_rate": -0.291
+      "iso": 0.915,
+      "sb_rate": -0.29
     },
     "name": "Jahmai Jones"
   },
@@ -10895,12 +10895,12 @@
   "682120": {
     "type": "pitcher",
     "stuff": 105,
-    "control": 83,
+    "control": 84,
     "_seasons": 4,
-    "_ip": 165,
+    "_ip": 166,
     "_z": {
-      "k_pct": 0.301,
-      "bb_pct": -1.109
+      "k_pct": 0.307,
+      "bb_pct": -1.096
     },
     "name": "Tim Herrin"
   },
@@ -10923,7 +10923,7 @@
     "_seasons": 2,
     "_ip": 130,
     "_z": {
-      "k_pct": -0.81,
+      "k_pct": -0.807,
       "bb_pct": 0.084
     },
     "name": "Brandon Young"
@@ -10963,16 +10963,16 @@
   "665877": {
     "type": "hitter",
     "hit": 107,
-    "power": 98,
+    "power": 97,
     "speed": 105,
     "_seasons": 1,
-    "_pa": 134,
+    "_pa": 136,
     "_z": {
-      "avg": 0.458,
-      "k_pct": 1.023,
-      "bb_pct": -0.166,
-      "iso": -0.154,
-      "sb_rate": 0.327
+      "avg": 0.503,
+      "k_pct": 1.04,
+      "bb_pct": -0.183,
+      "iso": -0.173,
+      "sb_rate": 0.302
     },
     "name": "Jose Fermin"
   },
@@ -10982,12 +10982,12 @@
     "power": 102,
     "speed": 95,
     "_seasons": 10,
-    "_pa": 2773,
+    "_pa": 2777,
     "_z": {
-      "avg": 0.396,
-      "k_pct": 0.501,
-      "bb_pct": 0.001,
-      "iso": 0.161,
+      "avg": 0.395,
+      "k_pct": 0.503,
+      "bb_pct": -0.001,
+      "iso": 0.163,
       "sb_rate": -0.332
     },
     "name": "Dominic Smith"
@@ -11013,10 +11013,10 @@
     "stuff": 102,
     "control": 97,
     "_seasons": 12,
-    "_ip": 255,
+    "_ip": 256,
     "_z": {
-      "k_pct": 0.13,
-      "bb_pct": -0.206
+      "k_pct": 0.117,
+      "bb_pct": -0.198
     },
     "name": "Brock Stewart"
   },
@@ -11068,11 +11068,11 @@
     "_seasons": 4,
     "_pa": 665,
     "_z": {
-      "avg": 0.367,
-      "k_pct": -0.074,
+      "avg": 0.366,
+      "k_pct": -0.076,
       "bb_pct": -0.302,
       "iso": -0.265,
-      "sb_rate": 0.175
+      "sb_rate": 0.176
     },
     "name": "Jose Tena"
   },
@@ -11117,7 +11117,7 @@
     "_pa": 2336,
     "_z": {
       "avg": 0.224,
-      "k_pct": 0.068,
+      "k_pct": 0.067,
       "bb_pct": 0.623,
       "iso": 0.892,
       "sb_rate": -0.37
@@ -11200,8 +11200,8 @@
     "_seasons": 4,
     "_pa": 873,
     "_z": {
-      "avg": 0.008,
-      "k_pct": -0.019,
+      "avg": 0.007,
+      "k_pct": -0.02,
       "bb_pct": 0.423,
       "iso": -0.281,
       "sb_rate": 0.578
@@ -11227,7 +11227,7 @@
     "_seasons": 8,
     "_ip": 258,
     "_z": {
-      "k_pct": -0.41,
+      "k_pct": -0.409,
       "bb_pct": 0.466
     },
     "name": "Jonathan Loaisiga"
@@ -11239,7 +11239,7 @@
     "_seasons": 3,
     "_ip": 125,
     "_z": {
-      "k_pct": 0.654,
+      "k_pct": 0.655,
       "bb_pct": -0.349
     },
     "name": "Lake Bachar"
@@ -11250,12 +11250,12 @@
     "power": 115,
     "speed": 99,
     "_seasons": 15,
-    "_pa": 5374,
+    "_pa": 5375,
     "_z": {
-      "avg": 0.498,
+      "avg": 0.497,
       "k_pct": 0.343,
       "bb_pct": -0.216,
-      "iso": 0.982,
+      "iso": 0.981,
       "sb_rate": -0.065
     },
     "name": "Randal Grichuk"
@@ -11295,8 +11295,8 @@
     "_seasons": 6,
     "_ip": 185,
     "_z": {
-      "k_pct": -1.075,
-      "bb_pct": 0.525
+      "k_pct": -1.074,
+      "bb_pct": 0.526
     },
     "name": "Cooper Criswell"
   },
@@ -11351,8 +11351,8 @@
     "_seasons": 3,
     "_ip": 67,
     "_z": {
-      "k_pct": -0.202,
-      "bb_pct": -0.625
+      "k_pct": -0.2,
+      "bb_pct": -0.627
     },
     "name": "Jaden Hill"
   },
@@ -11363,7 +11363,7 @@
     "_seasons": 4,
     "_ip": 212,
     "_z": {
-      "k_pct": -0.454,
+      "k_pct": -0.453,
       "bb_pct": -0.359
     },
     "name": "Osvaldo Bido"
@@ -11395,7 +11395,7 @@
       "avg": 0.294,
       "k_pct": 0.201,
       "bb_pct": -0.219,
-      "iso": -0.067,
+      "iso": -0.068,
       "sb_rate": 0.974
     },
     "name": "Leody Taveras"
@@ -11420,27 +11420,27 @@
     "_seasons": 1,
     "_pa": 209,
     "_z": {
-      "avg": 0.578,
-      "k_pct": 1.165,
+      "avg": 0.574,
+      "k_pct": 1.164,
       "bb_pct": 0.229,
-      "iso": 0.169,
-      "sb_rate": -0.39
+      "iso": 0.167,
+      "sb_rate": -0.389
     },
     "name": "Carlos Cortes"
   },
   "679845": {
     "type": "hitter",
-    "hit": 106,
+    "hit": 105,
     "power": 98,
     "speed": 96,
     "_seasons": 3,
-    "_pa": 529,
+    "_pa": 533,
     "_z": {
-      "avg": -0.149,
-      "k_pct": 1.007,
-      "bb_pct": 0.274,
-      "iso": -0.125,
-      "sb_rate": -0.272
+      "avg": -0.169,
+      "k_pct": 1.016,
+      "bb_pct": 0.291,
+      "iso": -0.133,
+      "sb_rate": -0.274
     },
     "name": "Nick Loftin"
   },
@@ -11452,10 +11452,10 @@
     "_seasons": 1,
     "_pa": 124,
     "_z": {
-      "avg": -0.545,
-      "k_pct": -0.408,
+      "avg": -0.549,
+      "k_pct": -0.415,
       "bb_pct": -0.074,
-      "iso": 0.246,
+      "iso": 0.244,
       "sb_rate": -0.558
     },
     "name": "Jorge Barrosa"
@@ -11478,17 +11478,17 @@
   },
   "685133": {
     "type": "hitter",
-    "hit": 107,
-    "power": 98,
+    "hit": 106,
+    "power": 97,
     "speed": 100,
     "_seasons": 1,
-    "_pa": 119,
+    "_pa": 123,
     "_z": {
-      "avg": 0.842,
-      "k_pct": 0.209,
-      "bb_pct": 0.362,
-      "iso": -0.155,
-      "sb_rate": -0.002
+      "avg": 0.703,
+      "k_pct": 0.194,
+      "bb_pct": 0.309,
+      "iso": -0.198,
+      "sb_rate": -0.001
     },
     "name": "Wade Meckler"
   },
@@ -11611,7 +11611,7 @@
     "_seasons": 5,
     "_ip": 245,
     "_z": {
-      "k_pct": -0.923,
+      "k_pct": -0.922,
       "bb_pct": 0.191
     },
     "name": "Jason Alexander"
@@ -11623,8 +11623,8 @@
     "_seasons": 3,
     "_ip": 150,
     "_z": {
-      "k_pct": -0.749,
-      "bb_pct": 1.352
+      "k_pct": -0.748,
+      "bb_pct": 1.353
     },
     "name": "Tanner Gordon"
   },
@@ -11729,10 +11729,10 @@
     "stuff": 100,
     "control": 91,
     "_seasons": 7,
-    "_ip": 154,
+    "_ip": 155,
     "_z": {
-      "k_pct": 0.007,
-      "bb_pct": -0.585
+      "k_pct": -0.017,
+      "bb_pct": -0.61
     },
     "name": "Steven Cruz"
   },
@@ -11759,8 +11759,8 @@
     "_seasons": 2,
     "_ip": 59,
     "_z": {
-      "k_pct": -0.619,
-      "bb_pct": -1.186
+      "k_pct": -0.615,
+      "bb_pct": -1.188
     },
     "name": "PJ Poulin"
   },
@@ -11787,7 +11787,7 @@
     "_seasons": 6,
     "_ip": 91,
     "_z": {
-      "k_pct": -0.696,
+      "k_pct": -0.695,
       "bb_pct": 0.268
     },
     "name": "Gregory Santos"
@@ -11815,7 +11815,7 @@
     "_seasons": 3,
     "_ip": 161,
     "_z": {
-      "k_pct": -1.414,
+      "k_pct": -1.413,
       "bb_pct": 0.435
     },
     "name": "Valente Bellozo"
@@ -11872,7 +11872,7 @@
     "_ip": 221,
     "_z": {
       "k_pct": 0.674,
-      "bb_pct": -1.434
+      "bb_pct": -1.435
     },
     "name": "Alex Lange"
   },
@@ -11939,7 +11939,7 @@
     "_seasons": 3,
     "_ip": 82,
     "_z": {
-      "k_pct": -0.31,
+      "k_pct": -0.307,
       "bb_pct": -0.558
     },
     "name": "Eric Orze"
@@ -12022,12 +12022,12 @@
     "power": 95,
     "speed": 96,
     "_seasons": 2,
-    "_pa": 314,
+    "_pa": 315,
     "_z": {
-      "avg": -0.01,
-      "k_pct": -0.097,
-      "bb_pct": -0.294,
-      "iso": -0.301,
+      "avg": -0.022,
+      "k_pct": -0.091,
+      "bb_pct": -0.297,
+      "iso": -0.306,
       "sb_rate": -0.299
     },
     "name": "Leo Jimenez"
@@ -12039,7 +12039,7 @@
     "_seasons": 4,
     "_ip": 93,
     "_z": {
-      "k_pct": -0.679,
+      "k_pct": -0.678,
       "bb_pct": 0.784
     },
     "name": "Dylan Dodd"
@@ -12093,10 +12093,10 @@
     "stuff": 108,
     "control": 90,
     "_seasons": 6,
-    "_ip": 149,
+    "_ip": 151,
     "_z": {
-      "k_pct": 0.554,
-      "bb_pct": -0.69
+      "k_pct": 0.502,
+      "bb_pct": -0.654
     },
     "name": "Ian Hamilton"
   },
@@ -12223,7 +12223,7 @@
     "_seasons": 6,
     "_ip": 220,
     "_z": {
-      "k_pct": 0.736,
+      "k_pct": 0.737,
       "bb_pct": -0.866
     },
     "name": "Nick Sandlin"
@@ -12248,11 +12248,11 @@
     "_seasons": 1,
     "_pa": 144,
     "_z": {
-      "avg": 0.655,
-      "k_pct": 0.374,
+      "avg": 0.651,
+      "k_pct": 0.37,
       "bb_pct": 0.073,
-      "iso": 0.626,
-      "sb_rate": 0.253
+      "iso": 0.625,
+      "sb_rate": 0.255
     },
     "name": "Ryan Vilade"
   },
@@ -12291,7 +12291,7 @@
     "_seasons": 4,
     "_ip": 108,
     "_z": {
-      "k_pct": -1.345,
+      "k_pct": -1.344,
       "bb_pct": 1.151
     },
     "name": "Brenan Hanifee"
@@ -12303,7 +12303,7 @@
     "_seasons": 6,
     "_ip": 139,
     "_z": {
-      "k_pct": 0.344,
+      "k_pct": 0.345,
       "bb_pct": -0.512
     },
     "name": "Bryan Hudson"
@@ -12315,20 +12315,20 @@
     "_seasons": 2,
     "_ip": 55,
     "_z": {
-      "k_pct": 0.162,
-      "bb_pct": 0.447
+      "k_pct": 0.164,
+      "bb_pct": 0.448
     },
     "name": "Paxton Schultz"
   },
   "806188": {
     "type": "pitcher",
-    "stuff": 91,
-    "control": 98,
+    "stuff": 90,
+    "control": 99,
     "_seasons": 2,
-    "_ip": 71,
+    "_ip": 73,
     "_z": {
-      "k_pct": -0.58,
-      "bb_pct": -0.127
+      "k_pct": -0.689,
+      "bb_pct": -0.045
     },
     "name": "Cade Gibson"
   },
@@ -12436,7 +12436,7 @@
     "_ip": 517,
     "_z": {
       "k_pct": 0.215,
-      "bb_pct": -0.033
+      "bb_pct": -0.032
     },
     "name": "Enyel De Los Santos"
   },
@@ -12447,8 +12447,8 @@
     "_seasons": 4,
     "_ip": 147,
     "_z": {
-      "k_pct": -0.746,
-      "bb_pct": 0.888
+      "k_pct": -0.745,
+      "bb_pct": 0.889
     },
     "name": "Mason Englert"
   },
@@ -12475,7 +12475,7 @@
     "_seasons": 4,
     "_ip": 217,
     "_z": {
-      "k_pct": -0.321,
+      "k_pct": -0.32,
       "bb_pct": 1.361
     },
     "name": "Kevin Kelly"
@@ -12483,12 +12483,12 @@
   "669684": {
     "type": "pitcher",
     "stuff": 97,
-    "control": 90,
+    "control": 91,
     "_seasons": 3,
-    "_ip": 99,
+    "_ip": 100,
     "_z": {
-      "k_pct": -0.18,
-      "bb_pct": -0.65
+      "k_pct": -0.226,
+      "bb_pct": -0.615
     },
     "name": "Chris Murphy"
   },
@@ -12539,7 +12539,7 @@
     "_seasons": 5,
     "_ip": 222,
     "_z": {
-      "k_pct": 0.432,
+      "k_pct": 0.433,
       "bb_pct": -0.062
     },
     "name": "Sam Hentges"
@@ -12576,7 +12576,7 @@
     "_ip": 135,
     "_z": {
       "k_pct": 0.253,
-      "bb_pct": 0.206
+      "bb_pct": 0.205
     },
     "name": "Dietrich Enns"
   },
@@ -12601,10 +12601,10 @@
     "stuff": 105,
     "control": 103,
     "_seasons": 3,
-    "_ip": 99,
+    "_ip": 100,
     "_z": {
-      "k_pct": 0.341,
-      "bb_pct": 0.171
+      "k_pct": 0.343,
+      "bb_pct": 0.195
     },
     "name": "Brandon Eisert"
   },
@@ -12612,15 +12612,15 @@
     "type": "hitter",
     "hit": 103,
     "power": 95,
-    "speed": 112,
+    "speed": 113,
     "_seasons": 1,
     "_pa": 155,
     "_z": {
-      "avg": 0.705,
-      "k_pct": 0.263,
-      "bb_pct": -0.32,
-      "iso": -0.316,
-      "sb_rate": 0.833
+      "avg": 0.701,
+      "k_pct": 0.258,
+      "bb_pct": -0.321,
+      "iso": -0.319,
+      "sb_rate": 0.835
     },
     "name": "Blake Dunn"
   },
@@ -12647,7 +12647,7 @@
     "_seasons": 4,
     "_ip": 168,
     "_z": {
-      "k_pct": -0.863,
+      "k_pct": -0.862,
       "bb_pct": 0.863
     },
     "name": "Tristan Beck"
@@ -12699,7 +12699,7 @@
     "_seasons": 4,
     "_ip": 149,
     "_z": {
-      "k_pct": -1.492,
+      "k_pct": -1.491,
       "bb_pct": -0.471
     },
     "name": "Jared Shuster"
@@ -12785,10 +12785,10 @@
     "stuff": 91,
     "control": 97,
     "_seasons": 5,
-    "_ip": 211,
+    "_ip": 212,
     "_z": {
-      "k_pct": -0.62,
-      "bb_pct": -0.198
+      "k_pct": -0.623,
+      "bb_pct": -0.184
     },
     "name": "Beau Brieske"
   },
@@ -12872,11 +12872,11 @@
     "_seasons": 1,
     "_pa": 169,
     "_z": {
-      "avg": 0.076,
-      "k_pct": -0.654,
-      "bb_pct": -0.492,
-      "iso": -0.275,
-      "sb_rate": -0.032
+      "avg": 0.072,
+      "k_pct": -0.662,
+      "bb_pct": -0.493,
+      "iso": -0.277,
+      "sb_rate": -0.031
     },
     "name": "Tristan Gray"
   },
@@ -12971,7 +12971,7 @@
     "_seasons": 6,
     "_ip": 108,
     "_z": {
-      "k_pct": -0.414,
+      "k_pct": -0.413,
       "bb_pct": -0.472
     },
     "name": "Matt Gage"
@@ -13006,13 +13006,13 @@
   },
   "675916": {
     "type": "pitcher",
-    "stuff": 129,
+    "stuff": 128,
     "control": 77,
     "_seasons": 5,
-    "_ip": 146,
+    "_ip": 147,
     "_z": {
-      "k_pct": 1.941,
-      "bb_pct": -1.512
+      "k_pct": 1.88,
+      "bb_pct": -1.524
     },
     "name": "James Karinchak"
   },
@@ -13040,8 +13040,8 @@
     "_seasons": 4,
     "_pa": 539,
     "_z": {
-      "avg": -0.05,
-      "k_pct": -0.387,
+      "avg": -0.051,
+      "k_pct": -0.389,
       "bb_pct": 0.428,
       "iso": 0.618,
       "sb_rate": 0.22
@@ -13056,7 +13056,7 @@
     "_ip": 98,
     "_z": {
       "k_pct": -0.577,
-      "bb_pct": -1.255
+      "bb_pct": -1.256
     },
     "name": "Roddery Munoz"
   },
@@ -13067,20 +13067,20 @@
     "_seasons": 4,
     "_ip": 105,
     "_z": {
-      "k_pct": -0.197,
-      "bb_pct": -1.549
+      "k_pct": -0.196,
+      "bb_pct": -1.55
     },
     "name": "Kyle Nicolas"
   },
   "657514": {
     "type": "pitcher",
-    "stuff": 99,
-    "control": 96,
+    "stuff": 98,
+    "control": 97,
     "_seasons": 5,
-    "_ip": 189,
+    "_ip": 191,
     "_z": {
-      "k_pct": -0.085,
-      "bb_pct": -0.242
+      "k_pct": -0.11,
+      "bb_pct": -0.222
     },
     "name": "Brennan Bernardino"
   },
@@ -13178,13 +13178,13 @@
   },
   "681676": {
     "type": "pitcher",
-    "stuff": 110,
-    "control": 85,
+    "stuff": 109,
+    "control": 86,
     "_seasons": 3,
-    "_ip": 107,
+    "_ip": 109,
     "_z": {
-      "k_pct": 0.658,
-      "bb_pct": -0.996
+      "k_pct": 0.617,
+      "bb_pct": -0.961
     },
     "name": "Ryan Fernandez"
   },
@@ -13239,7 +13239,7 @@
     "_seasons": 5,
     "_ip": 157,
     "_z": {
-      "k_pct": 0.488,
+      "k_pct": 0.489,
       "bb_pct": -0.105
     },
     "name": "Tommy Nance"
@@ -13316,7 +13316,7 @@
     "_ip": 142,
     "_z": {
       "k_pct": 0.222,
-      "bb_pct": 0.21
+      "bb_pct": 0.211
     },
     "name": "Rico Garcia"
   },
@@ -13356,7 +13356,7 @@
     "_ip": 55,
     "_z": {
       "k_pct": 0.204,
-      "bb_pct": -0.691
+      "bb_pct": -0.692
     },
     "name": "Travis Adams"
   },
@@ -13436,10 +13436,10 @@
     "_seasons": 1,
     "_pa": 127,
     "_z": {
-      "avg": 0.023,
-      "k_pct": 0.114,
+      "avg": 0.019,
+      "k_pct": 0.108,
       "bb_pct": -0.103,
-      "iso": 0.502,
+      "iso": 0.501,
       "sb_rate": -0.558
     },
     "name": "Jared Young"
@@ -13475,7 +13475,7 @@
     "_seasons": 2,
     "_ip": 74,
     "_z": {
-      "k_pct": -0.83,
+      "k_pct": -0.828,
       "bb_pct": -0.525
     },
     "name": "Ryan Rolison"
@@ -13515,7 +13515,7 @@
     "_seasons": 4,
     "_ip": 72,
     "_z": {
-      "k_pct": 1.376,
+      "k_pct": 1.377,
       "bb_pct": -0.537
     },
     "name": "Evan Sisk"
@@ -13560,10 +13560,10 @@
     "_seasons": 1,
     "_pa": 140,
     "_z": {
-      "avg": -0.461,
-      "k_pct": 0.111,
+      "avg": -0.465,
+      "k_pct": 0.106,
       "bb_pct": 0.003,
-      "iso": -0.526,
+      "iso": -0.528,
       "sb_rate": -0.558
     },
     "name": "Drew Millas"
@@ -13635,8 +13635,8 @@
     "_seasons": 2,
     "_ip": 52,
     "_z": {
-      "k_pct": 0.43,
-      "bb_pct": 0.463
+      "k_pct": 0.431,
+      "bb_pct": 0.465
     },
     "name": "Grant Wolfram"
   },
@@ -13678,15 +13678,15 @@
   },
   "545121": {
     "type": "hitter",
-    "hit": 107,
+    "hit": 106,
     "power": 97,
     "speed": 98,
     "_seasons": 7,
     "_pa": 1608,
     "_z": {
-      "avg": 0.501,
+      "avg": 0.5,
       "k_pct": 1.329,
-      "bb_pct": -0.522,
+      "bb_pct": -0.523,
       "iso": -0.175,
       "sb_rate": -0.135
     },
@@ -13757,10 +13757,10 @@
     "stuff": 99,
     "control": 107,
     "_seasons": 13,
-    "_ip": 416,
+    "_ip": 417,
     "_z": {
-      "k_pct": -0.08,
-      "bb_pct": 0.474
+      "k_pct": -0.081,
+      "bb_pct": 0.481
     },
     "name": "Tim Mayza"
   },
@@ -13815,8 +13815,8 @@
     "_seasons": 1,
     "_ip": 54,
     "_z": {
-      "k_pct": 0.525,
-      "bb_pct": 0.383
+      "k_pct": 0.528,
+      "bb_pct": 0.384
     },
     "name": "Spencer Miles"
   },
@@ -13837,10 +13837,10 @@
     "stuff": 96,
     "control": 93,
     "_seasons": 4,
-    "_ip": 154,
+    "_ip": 155,
     "_z": {
-      "k_pct": -0.238,
-      "bb_pct": -0.457
+      "k_pct": -0.262,
+      "bb_pct": -0.484
     },
     "name": "George Soriano"
   },
@@ -13940,7 +13940,7 @@
     "_ip": 152,
     "_z": {
       "k_pct": 0.142,
-      "bb_pct": 0.618
+      "bb_pct": 0.619
     },
     "name": "Michael Grove"
   },
@@ -14028,7 +14028,7 @@
     "_ip": 130,
     "_z": {
       "k_pct": 1.158,
-      "bb_pct": -1.321
+      "bb_pct": -1.322
     },
     "name": "Jovani Moran"
   },
@@ -14123,7 +14123,7 @@
     "_seasons": 13,
     "_ip": 1307,
     "_z": {
-      "k_pct": 0.362,
+      "k_pct": 0.363,
       "bb_pct": 0.753
     },
     "name": "Carlos Carrasco"
@@ -14136,11 +14136,11 @@
     "_seasons": 2,
     "_pa": 229,
     "_z": {
-      "avg": -0.226,
-      "k_pct": 0.616,
+      "avg": -0.228,
+      "k_pct": 0.615,
       "bb_pct": 0.065,
-      "iso": -0.673,
-      "sb_rate": -0.25
+      "iso": -0.675,
+      "sb_rate": -0.249
     },
     "name": "Mickey Gasper"
   },
@@ -14191,7 +14191,7 @@
     "_seasons": 9,
     "_ip": 452,
     "_z": {
-      "k_pct": -0.344,
+      "k_pct": -0.343,
       "bb_pct": 0.348
     },
     "name": "Trent Thornton"
@@ -14203,7 +14203,7 @@
     "_seasons": 12,
     "_ip": 324,
     "_z": {
-      "k_pct": -0.719,
+      "k_pct": -0.718,
       "bb_pct": 0.046
     },
     "name": "Ryan Borucki"
@@ -14287,8 +14287,8 @@
     "_seasons": 3,
     "_ip": 59,
     "_z": {
-      "k_pct": -1.205,
-      "bb_pct": 0.93
+      "k_pct": -1.204,
+      "bb_pct": 0.931
     },
     "name": "Max Lazar"
   },
@@ -14312,10 +14312,10 @@
     "_seasons": 1,
     "_pa": 172,
     "_z": {
-      "avg": 0.174,
-      "k_pct": -0.096,
-      "bb_pct": 0.47,
-      "iso": 0.381,
+      "avg": 0.17,
+      "k_pct": -0.102,
+      "bb_pct": 0.471,
+      "iso": 0.38,
       "sb_rate": -0.331
     },
     "name": "Brandon Valenzuela"
@@ -14343,8 +14343,8 @@
     "_seasons": 4,
     "_ip": 106,
     "_z": {
-      "k_pct": -0.373,
-      "bb_pct": -0.127
+      "k_pct": -0.371,
+      "bb_pct": -0.126
     },
     "name": "Casey Legumina"
   },
@@ -14411,7 +14411,7 @@
     "_seasons": 8,
     "_ip": 199,
     "_z": {
-      "k_pct": -0.024,
+      "k_pct": -0.023,
       "bb_pct": 0.138
     },
     "name": "Connor Brogdon"
@@ -14492,10 +14492,10 @@
     "_seasons": 1,
     "_pa": 116,
     "_z": {
-      "avg": 0.669,
-      "k_pct": 0.571,
-      "bb_pct": 0.142,
-      "iso": 0.672,
+      "avg": 0.665,
+      "k_pct": 0.568,
+      "bb_pct": 0.143,
+      "iso": 0.671,
       "sb_rate": -0.558
     },
     "name": "Ryan Kreidler"
@@ -14535,7 +14535,7 @@
     "_seasons": 3,
     "_ip": 83,
     "_z": {
-      "k_pct": -0.272,
+      "k_pct": -0.271,
       "bb_pct": -0.096
     },
     "name": "Chase Shugart"
@@ -14621,10 +14621,10 @@
     "stuff": 79,
     "control": 113,
     "_seasons": 8,
-    "_ip": 317,
+    "_ip": 319,
     "_z": {
       "k_pct": -1.42,
-      "bb_pct": 0.856
+      "bb_pct": 0.843
     },
     "name": "John King"
   },
@@ -14635,7 +14635,7 @@
     "_seasons": 7,
     "_ip": 125,
     "_z": {
-      "k_pct": -0.214,
+      "k_pct": -0.213,
       "bb_pct": -0.533
     },
     "name": "Gus Varland"
@@ -14778,13 +14778,13 @@
   },
   "622088": {
     "type": "pitcher",
-    "stuff": 113,
-    "control": 97,
+    "stuff": 114,
+    "control": 98,
     "_seasons": 4,
     "_ip": 66,
     "_z": {
-      "k_pct": 0.88,
-      "bb_pct": -0.185
+      "k_pct": 0.91,
+      "bb_pct": -0.161
     },
     "name": "Tejay Antone"
   },
@@ -14807,7 +14807,7 @@
     "_seasons": 3,
     "_ip": 131,
     "_z": {
-      "k_pct": -1.065,
+      "k_pct": -1.063,
       "bb_pct": 0.432
     },
     "name": "Jesse Scholtens"
@@ -15152,19 +15152,19 @@
     "_ip": 57,
     "_z": {
       "k_pct": -0.284,
-      "bb_pct": -1.423
+      "bb_pct": -1.424
     },
     "name": "Gavin Hollowell"
   },
   "592155": {
     "type": "pitcher",
     "stuff": 105,
-    "control": 90,
+    "control": 91,
     "_seasons": 3,
-    "_ip": 84,
+    "_ip": 85,
     "_z": {
-      "k_pct": 0.339,
-      "bb_pct": -0.659
+      "k_pct": 0.341,
+      "bb_pct": -0.618
     },
     "name": "Cam Booser"
   },
@@ -15239,8 +15239,8 @@
     "_seasons": 4,
     "_ip": 69,
     "_z": {
-      "k_pct": -0.715,
-      "bb_pct": -0.508
+      "k_pct": -0.713,
+      "bb_pct": -0.509
     },
     "name": "Ethan Roberts"
   },
@@ -15295,8 +15295,8 @@
     "_seasons": 4,
     "_ip": 62,
     "_z": {
-      "k_pct": -0.337,
-      "bb_pct": -1.238
+      "k_pct": -0.336,
+      "bb_pct": -1.24
     },
     "name": "Cody Bolton"
   },
@@ -15379,8 +15379,8 @@
     "_seasons": 10,
     "_ip": 186,
     "_z": {
-      "k_pct": -0.532,
-      "bb_pct": -0.168
+      "k_pct": -0.531,
+      "bb_pct": -0.169
     },
     "name": "Richard Lovelady"
   },
@@ -15401,10 +15401,10 @@
     "stuff": 99,
     "control": 94,
     "_seasons": 11,
-    "_ip": 414,
+    "_ip": 415,
     "_z": {
-      "k_pct": -0.039,
-      "bb_pct": -0.379
+      "k_pct": -0.035,
+      "bb_pct": -0.394
     },
     "name": "Lou Trivino"
   },
@@ -15558,16 +15558,16 @@
   },
   "664954": {
     "type": "hitter",
-    "hit": 98,
-    "power": 104,
+    "hit": 99,
+    "power": 103,
     "speed": 92,
     "_seasons": 1,
-    "_pa": 118,
+    "_pa": 123,
     "_z": {
-      "avg": -0.195,
-      "k_pct": 0.437,
-      "bb_pct": -0.658,
-      "iso": 0.241,
+      "avg": -0.093,
+      "k_pct": 0.51,
+      "bb_pct": -0.686,
+      "iso": 0.171,
       "sb_rate": -0.558
     },
     "name": "Brett Sullivan"
@@ -15679,8 +15679,8 @@
     "_seasons": 6,
     "_ip": 91,
     "_z": {
-      "k_pct": -0.12,
-      "bb_pct": -0.141
+      "k_pct": -0.119,
+      "bb_pct": -0.142
     },
     "name": "Austin Warren"
   },
@@ -15704,7 +15704,7 @@
     "_ip": 99,
     "_z": {
       "k_pct": -1.476,
-      "bb_pct": 0.674
+      "bb_pct": 0.675
     },
     "name": "Anthony Molina"
   },
@@ -15715,7 +15715,7 @@
     "_seasons": 7,
     "_ip": 153,
     "_z": {
-      "k_pct": -1.082,
+      "k_pct": -1.081,
       "bb_pct": 0.161
     },
     "name": "Connor Seabold"
@@ -15748,11 +15748,11 @@
     "type": "pitcher",
     "stuff": 73,
     "control": 114,
-    "_seasons": 4,
-    "_ip": 94,
+    "_seasons": 5,
+    "_ip": 98,
     "_z": {
-      "k_pct": -1.804,
-      "bb_pct": 0.951
+      "k_pct": -1.819,
+      "bb_pct": 0.955
     },
     "name": "Randy Dobnak"
   },
@@ -15762,13 +15762,13 @@
     "power": 90,
     "speed": 105,
     "_seasons": 7,
-    "_pa": 2444,
+    "_pa": 2449,
     "_z": {
-      "avg": 0.401,
-      "k_pct": 0.934,
-      "bb_pct": -0.014,
-      "iso": -0.651,
-      "sb_rate": 0.321
+      "avg": 0.41,
+      "k_pct": 0.936,
+      "bb_pct": -0.017,
+      "iso": -0.653,
+      "sb_rate": 0.33
     },
     "name": "Nicky Lopez"
   },
@@ -15847,8 +15847,8 @@
     "_seasons": 3,
     "_ip": 52,
     "_z": {
-      "k_pct": -0.665,
-      "bb_pct": -1.016
+      "k_pct": -0.663,
+      "bb_pct": -1.017
     },
     "name": "Orlando Ribalta"
   },
@@ -16414,12 +16414,12 @@
   },
   "642546": {
     "type": "pitcher",
-    "stuff": 94,
+    "stuff": 95,
     "control": 76,
     "_seasons": 7,
     "_ip": 183,
     "_z": {
-      "k_pct": -0.367,
+      "k_pct": -0.366,
       "bb_pct": -1.615
     },
     "name": "Jonathan Hernandez"
@@ -16472,7 +16472,7 @@
     "_ip": 130,
     "_z": {
       "k_pct": -0.516,
-      "bb_pct": -0.439
+      "bb_pct": -0.438
     },
     "name": "Tayler Saucedo"
   },
@@ -16627,7 +16627,7 @@
     "_seasons": 5,
     "_ip": 318,
     "_z": {
-      "k_pct": -0.987,
+      "k_pct": -0.986,
       "bb_pct": 0.003
     },
     "name": "Peter Lambert"
@@ -17606,13 +17606,13 @@
   },
   "669270": {
     "type": "pitcher",
-    "stuff": 81,
+    "stuff": 80,
     "control": 112,
     "_seasons": 9,
-    "_ip": 148,
+    "_ip": 149,
     "_z": {
-      "k_pct": -1.286,
-      "bb_pct": 0.812
+      "k_pct": -1.312,
+      "bb_pct": 0.831
     },
     "name": "Joel Kuhnel"
   },
@@ -17924,7 +17924,7 @@
     "_ip": 203,
     "_z": {
       "k_pct": -0.031,
-      "bb_pct": -1.075
+      "bb_pct": -1.074
     },
     "name": "Jose Cuas"
   },
@@ -18391,7 +18391,7 @@
     "_seasons": 11,
     "_ip": 204,
     "_z": {
-      "k_pct": -1.488,
+      "k_pct": -1.487,
       "bb_pct": 0.41
     },
     "name": "Shaun Anderson"
@@ -18679,7 +18679,7 @@
     "_seasons": 10,
     "_ip": 81,
     "_z": {
-      "k_pct": -0.94,
+      "k_pct": -0.939,
       "bb_pct": -1.593
     },
     "name": "Geoff Hartlieb"
@@ -18743,8 +18743,8 @@
     "_seasons": 5,
     "_ip": 76,
     "_z": {
-      "k_pct": -0.632,
-      "bb_pct": -0.836
+      "k_pct": -0.631,
+      "bb_pct": -0.837
     },
     "name": "Wyatt Mills"
   },
@@ -18823,7 +18823,7 @@
     "_seasons": 3,
     "_ip": 98,
     "_z": {
-      "k_pct": -0.842,
+      "k_pct": -0.841,
       "bb_pct": -0.174
     },
     "name": "Jacob Waguespack"
@@ -19011,7 +19011,7 @@
     "_seasons": 8,
     "_ip": 68,
     "_z": {
-      "k_pct": -0.491,
+      "k_pct": -0.49,
       "bb_pct": -1.858
     },
     "name": "Brooks Kriske"
@@ -19135,8 +19135,8 @@
     "_seasons": 2,
     "_ip": 50,
     "_z": {
-      "k_pct": -2.504,
-      "bb_pct": -0.036
+      "k_pct": -2.502,
+      "bb_pct": -0.037
     },
     "name": "Charlie Barnes"
   },
@@ -19663,7 +19663,7 @@
     "_seasons": 4,
     "_ip": 131,
     "_z": {
-      "k_pct": 0.035,
+      "k_pct": 0.034,
       "bb_pct": -0.232
     },
     "name": "Michael Rucker"
@@ -19864,7 +19864,7 @@
     "_ip": 121,
     "_z": {
       "k_pct": 0.094,
-      "bb_pct": -0.896
+      "bb_pct": -0.895
     },
     "name": "Tayron Guerrero"
   },
@@ -19991,7 +19991,7 @@
     "_seasons": 10,
     "_ip": 550,
     "_z": {
-      "k_pct": -1.844,
+      "k_pct": -1.843,
       "bb_pct": 0.554
     },
     "name": "Ty Blach"
@@ -20124,7 +20124,7 @@
     "_ip": 370,
     "_z": {
       "k_pct": -1.308,
-      "bb_pct": 0.607
+      "bb_pct": 0.606
     },
     "name": "Aaron Brooks"
   },
@@ -20786,13 +20786,13 @@
     "power": 99,
     "speed": 111,
     "_seasons": 4,
-    "_pa": 2090,
+    "_pa": 2094,
     "_z": {
-      "avg": 0.433,
-      "k_pct": 0.348,
-      "bb_pct": 0.317,
-      "iso": -0.089,
-      "sb_rate": 0.759
+      "avg": 0.432,
+      "k_pct": 0.342,
+      "bb_pct": 0.314,
+      "iso": -0.088,
+      "sb_rate": 0.76
     },
     "name": "Brice Turang"
   },
@@ -20802,13 +20802,13 @@
     "power": 111,
     "speed": 119,
     "_seasons": 4,
-    "_pa": 2115,
+    "_pa": 2120,
     "_z": {
-      "avg": 0.446,
+      "avg": 0.444,
       "k_pct": -0.402,
-      "bb_pct": 0.262,
-      "iso": 0.733,
-      "sb_rate": 1.245
+      "bb_pct": 0.258,
+      "iso": 0.728,
+      "sb_rate": 1.242
     },
     "name": "Elly De La Cruz"
   },
@@ -20821,7 +20821,7 @@
     "_pa": 5538,
     "_z": {
       "avg": 0.638,
-      "k_pct": 0.965,
+      "k_pct": 0.964,
       "bb_pct": 0.626,
       "iso": 0.844,
       "sb_rate": 0.026
@@ -20855,7 +20855,7 @@
       "avg": 0.736,
       "k_pct": 0.784,
       "bb_pct": 0.338,
-      "iso": 0.872,
+      "iso": 0.871,
       "sb_rate": 0.149
     },
     "name": "Ketel Marte"
@@ -20866,13 +20866,13 @@
     "power": 112,
     "speed": 110,
     "_seasons": 4,
-    "_pa": 1864,
+    "_pa": 1868,
     "_z": {
-      "avg": 0.25,
-      "k_pct": -0.099,
-      "bb_pct": -0.186,
-      "iso": 0.803,
-      "sb_rate": 0.65
+      "avg": 0.243,
+      "k_pct": -0.096,
+      "bb_pct": -0.18,
+      "iso": 0.799,
+      "sb_rate": 0.647
     },
     "name": "Zach Neto"
   },
@@ -20885,9 +20885,9 @@
     "_pa": 1787,
     "_z": {
       "avg": 0.199,
-      "k_pct": -0.608,
-      "bb_pct": 0.342,
-      "iso": 0.799,
+      "k_pct": -0.61,
+      "bb_pct": 0.343,
+      "iso": 0.798,
       "sb_rate": 1.034
     },
     "name": "Oneil Cruz"
@@ -20898,12 +20898,12 @@
     "power": 110,
     "speed": 98,
     "_seasons": 7,
-    "_pa": 4169,
+    "_pa": 4174,
     "_z": {
       "avg": 0.669,
-      "k_pct": 0.321,
-      "bb_pct": 0.256,
-      "iso": 0.696,
+      "k_pct": 0.318,
+      "bb_pct": 0.258,
+      "iso": 0.693,
       "sb_rate": -0.13
     },
     "name": "Bryan Reynolds"
@@ -20916,8 +20916,8 @@
     "_seasons": 3,
     "_pa": 1404,
     "_z": {
-      "avg": 0.521,
-      "k_pct": 0.083,
+      "avg": 0.52,
+      "k_pct": 0.082,
       "bb_pct": -0.12,
       "iso": 0.498,
       "sb_rate": -0.233
@@ -20946,12 +20946,12 @@
     "power": 115,
     "speed": 95,
     "_seasons": 15,
-    "_pa": 5539,
+    "_pa": 5543,
     "_z": {
       "avg": 0.326,
-      "k_pct": 0.148,
-      "bb_pct": 0.489,
-      "iso": 0.988,
+      "k_pct": 0.144,
+      "bb_pct": 0.488,
+      "iso": 0.986,
       "sb_rate": -0.354
     },
     "name": "Jorge Soler"
@@ -20962,12 +20962,12 @@
     "power": 104,
     "speed": 97,
     "_seasons": 6,
-    "_pa": 3143,
+    "_pa": 3148,
     "_z": {
-      "avg": 0.283,
+      "avg": 0.282,
       "k_pct": 0.621,
-      "bb_pct": 0.391,
-      "iso": 0.291,
+      "bb_pct": 0.388,
+      "iso": 0.299,
       "sb_rate": -0.194
     },
     "name": "Jake Cronenworth"
@@ -20981,7 +20981,7 @@
     "_pa": 4457,
     "_z": {
       "avg": 0.438,
-      "k_pct": 0.32,
+      "k_pct": 0.319,
       "bb_pct": 0.329,
       "iso": 1.505,
       "sb_rate": -0.295
@@ -20996,11 +20996,11 @@
     "_seasons": 2,
     "_pa": 784,
     "_z": {
-      "avg": 0.325,
+      "avg": 0.323,
       "k_pct": 1.163,
       "bb_pct": -0.362,
-      "iso": 0.132,
-      "sb_rate": 0.673
+      "iso": 0.131,
+      "sb_rate": 0.674
     },
     "name": "Caleb Durbin"
   },
@@ -21014,7 +21014,7 @@
     "_z": {
       "avg": 0.709,
       "k_pct": 0.528,
-      "bb_pct": 0.422,
+      "bb_pct": 0.423,
       "iso": 0.688,
       "sb_rate": -0.102
     },
@@ -21026,13 +21026,13 @@
     "power": 106,
     "speed": 96,
     "_seasons": 5,
-    "_pa": 1666,
+    "_pa": 1671,
     "_z": {
-      "avg": 0.542,
-      "k_pct": -0.041,
-      "bb_pct": -0.421,
-      "iso": 0.419,
-      "sb_rate": -0.237
+      "avg": 0.551,
+      "k_pct": -0.035,
+      "bb_pct": -0.405,
+      "iso": 0.421,
+      "sb_rate": -0.238
     },
     "name": "Josh Jung"
   },
@@ -21063,7 +21063,7 @@
       "avg": 0.576,
       "k_pct": 0.82,
       "bb_pct": -0.426,
-      "iso": -0.412,
+      "iso": -0.413,
       "sb_rate": 0.516
     },
     "name": "Isiah Kiner-Falefa"
@@ -21090,13 +21090,13 @@
     "power": 111,
     "speed": 109,
     "_seasons": 5,
-    "_pa": 2974,
+    "_pa": 2975,
     "_z": {
       "avg": 0.663,
       "k_pct": 0.143,
-      "bb_pct": -0.249,
+      "bb_pct": -0.244,
       "iso": 0.758,
-      "sb_rate": 0.626
+      "sb_rate": 0.625
     },
     "name": "Julio Rodriguez"
   },
@@ -21120,15 +21120,15 @@
     "type": "hitter",
     "hit": 104,
     "power": 109,
-    "speed": 110,
+    "speed": 109,
     "_seasons": 8,
-    "_pa": 4243,
+    "_pa": 4247,
     "_z": {
-      "avg": 0.35,
-      "k_pct": 0.066,
-      "bb_pct": 0.354,
-      "iso": 0.575,
-      "sb_rate": 0.636
+      "avg": 0.351,
+      "k_pct": 0.067,
+      "bb_pct": 0.356,
+      "iso": 0.574,
+      "sb_rate": 0.632
     },
     "name": "Randy Arozarena"
   },
@@ -21138,13 +21138,13 @@
     "power": 95,
     "speed": 102,
     "_seasons": 5,
-    "_pa": 2909,
+    "_pa": 2913,
     "_z": {
-      "avg": 0.683,
-      "k_pct": 1.375,
-      "bb_pct": 0.278,
-      "iso": -0.347,
-      "sb_rate": 0.117
+      "avg": 0.685,
+      "k_pct": 1.376,
+      "bb_pct": 0.286,
+      "iso": -0.349,
+      "sb_rate": 0.116
     },
     "name": "Steven Kwan"
   },
@@ -21156,7 +21156,7 @@
     "_seasons": 4,
     "_pa": 1713,
     "_z": {
-      "avg": 0.692,
+      "avg": 0.691,
       "k_pct": 0.678,
       "bb_pct": -0.813,
       "iso": 0.509,
@@ -21170,28 +21170,28 @@
     "power": 104,
     "speed": 104,
     "_seasons": 5,
-    "_pa": 2026,
+    "_pa": 2030,
     "_z": {
-      "avg": 0.379,
-      "k_pct": 0.741,
-      "bb_pct": 0.279,
-      "iso": 0.239,
-      "sb_rate": 0.262
+      "avg": 0.387,
+      "k_pct": 0.739,
+      "bb_pct": 0.276,
+      "iso": 0.252,
+      "sb_rate": 0.26
     },
     "name": "TJ Friedl"
   },
   "700932": {
     "type": "hitter",
     "hit": 101,
-    "power": 114,
+    "power": 113,
     "speed": 94,
     "_seasons": 3,
-    "_pa": 959,
+    "_pa": 962,
     "_z": {
-      "avg": 0.161,
-      "k_pct": -0.213,
-      "bb_pct": 0.175,
-      "iso": 0.902,
+      "avg": 0.156,
+      "k_pct": -0.208,
+      "bb_pct": 0.203,
+      "iso": 0.896,
       "sb_rate": -0.4
     },
     "name": "Kyle Manzardo"
@@ -21202,12 +21202,12 @@
     "power": 113,
     "speed": 96,
     "_seasons": 11,
-    "_pa": 5778,
+    "_pa": 5783,
     "_z": {
       "avg": 0.575,
-      "k_pct": 0.344,
-      "bb_pct": 0.369,
-      "iso": 0.871,
+      "k_pct": 0.342,
+      "bb_pct": 0.373,
+      "iso": 0.869,
       "sb_rate": -0.24
     },
     "name": "Marcell Ozuna"
@@ -21218,9 +21218,9 @@
     "power": 108,
     "speed": 101,
     "_seasons": 5,
-    "_pa": 2317,
+    "_pa": 2318,
     "_z": {
-      "avg": 0.282,
+      "avg": 0.279,
       "k_pct": 0.305,
       "bb_pct": 0.364,
       "iso": 0.546,
@@ -21236,26 +21236,26 @@
     "_seasons": 4,
     "_pa": 1272,
     "_z": {
-      "avg": 0.739,
+      "avg": 0.738,
       "k_pct": 0.727,
       "bb_pct": 0.333,
-      "iso": -0.014,
+      "iso": -0.015,
       "sb_rate": -0.148
     },
     "name": "Gabriel Moreno"
   },
   "669701": {
     "type": "hitter",
-    "hit": 104,
+    "hit": 105,
     "power": 97,
     "speed": 100,
     "_seasons": 9,
-    "_pa": 3399,
+    "_pa": 3401,
     "_z": {
-      "avg": 0.162,
-      "k_pct": 0.487,
-      "bb_pct": 0.299,
-      "iso": -0.191,
+      "avg": 0.169,
+      "k_pct": 0.488,
+      "bb_pct": 0.298,
+      "iso": -0.182,
       "sb_rate": -0.027
     },
     "name": "Josh Smith"
@@ -21266,12 +21266,12 @@
     "power": 97,
     "speed": 95,
     "_seasons": 2,
-    "_pa": 605,
+    "_pa": 608,
     "_z": {
-      "avg": 0.228,
-      "k_pct": 0.635,
-      "bb_pct": 0.115,
-      "iso": -0.207,
+      "avg": 0.208,
+      "k_pct": 0.61,
+      "bb_pct": 0.108,
+      "iso": -0.216,
       "sb_rate": -0.343
     },
     "name": "Cole Young"
@@ -21285,7 +21285,7 @@
     "_pa": 1203,
     "_z": {
       "avg": 0.288,
-      "k_pct": 0.264,
+      "k_pct": 0.263,
       "bb_pct": -0.906,
       "iso": 0.16,
       "sb_rate": -0.316
@@ -21300,10 +21300,10 @@
     "_seasons": 6,
     "_pa": 1921,
     "_z": {
-      "avg": 0.381,
+      "avg": 0.38,
       "k_pct": 0.126,
-      "bb_pct": 0.408,
-      "iso": 0.415,
+      "bb_pct": 0.409,
+      "iso": 0.414,
       "sb_rate": -0.262
     },
     "name": "Trevor Larnach"
@@ -21331,7 +21331,7 @@
     "_seasons": 3,
     "_ip": 131,
     "_z": {
-      "k_pct": 0.288,
+      "k_pct": 0.29,
       "bb_pct": 0.778
     },
     "name": "Bryan King"
@@ -21344,7 +21344,7 @@
     "_seasons": 3,
     "_pa": 1087,
     "_z": {
-      "avg": 0.621,
+      "avg": 0.62,
       "k_pct": 0.743,
       "bb_pct": 0.647,
       "iso": 0.441,
@@ -21359,8 +21359,8 @@
     "_seasons": 5,
     "_ip": 307,
     "_z": {
-      "k_pct": -0.286,
-      "bb_pct": 1.11
+      "k_pct": -0.285,
+      "bb_pct": 1.111
     },
     "name": "Tyler Holton"
   },
@@ -21370,13 +21370,13 @@
     "power": 95,
     "speed": 96,
     "_seasons": 4,
-    "_pa": 1425,
+    "_pa": 1429,
     "_z": {
-      "avg": 0.015,
-      "k_pct": -0.1,
-      "bb_pct": -0.145,
-      "iso": -0.304,
-      "sb_rate": -0.25
+      "avg": 0.025,
+      "k_pct": -0.101,
+      "bb_pct": -0.148,
+      "iso": -0.301,
+      "sb_rate": -0.251
     },
     "name": "Patrick Bailey"
   },
@@ -21400,31 +21400,31 @@
     "type": "hitter",
     "hit": 104,
     "power": 97,
-    "speed": 106,
+    "speed": 105,
     "_seasons": 3,
-    "_pa": 1144,
+    "_pa": 1149,
     "_z": {
-      "avg": 0.146,
-      "k_pct": 0.613,
-      "bb_pct": -0.016,
-      "iso": -0.226,
-      "sb_rate": 0.368
+      "avg": 0.145,
+      "k_pct": 0.612,
+      "bb_pct": -0.008,
+      "iso": -0.203,
+      "sb_rate": 0.366
     },
     "name": "Brayan Rocchio"
   },
   "670042": {
     "type": "hitter",
-    "hit": 98,
+    "hit": 97,
     "power": 113,
     "speed": 101,
     "_seasons": 4,
-    "_pa": 1307,
+    "_pa": 1310,
     "_z": {
-      "avg": 0.193,
-      "k_pct": -0.494,
-      "bb_pct": -0.228,
-      "iso": 0.889,
-      "sb_rate": 0.09
+      "avg": 0.185,
+      "k_pct": -0.504,
+      "bb_pct": -0.231,
+      "iso": 0.884,
+      "sb_rate": 0.089
     },
     "name": "Luke Raley"
   },
@@ -21436,10 +21436,10 @@
     "_seasons": 3,
     "_pa": 883,
     "_z": {
-      "avg": -0.11,
-      "k_pct": -0.36,
+      "avg": -0.111,
+      "k_pct": -0.362,
       "bb_pct": 0.315,
-      "iso": 0.195,
+      "iso": 0.194,
       "sb_rate": 0.19
     },
     "name": "Daniel Schneemann"
@@ -21469,7 +21469,7 @@
     "_pa": 1084,
     "_z": {
       "avg": 0.049,
-      "k_pct": -0.733,
+      "k_pct": -0.734,
       "bb_pct": 0.396,
       "iso": 0.827,
       "sb_rate": 0.418
@@ -21479,16 +21479,16 @@
   "680700": {
     "type": "hitter",
     "hit": 106,
-    "power": 96,
+    "power": 95,
     "speed": 107,
     "_seasons": 4,
-    "_pa": 741,
+    "_pa": 744,
     "_z": {
-      "avg": 0.1,
-      "k_pct": 0.606,
-      "bb_pct": 0.533,
-      "iso": -0.298,
-      "sb_rate": 0.44
+      "avg": 0.105,
+      "k_pct": 0.599,
+      "bb_pct": 0.526,
+      "iso": -0.305,
+      "sb_rate": 0.435
     },
     "name": "Richie Palacios"
   },
@@ -21497,10 +21497,10 @@
     "stuff": 101,
     "control": 90,
     "_seasons": 13,
-    "_ip": 679,
+    "_ip": 680,
     "_z": {
-      "k_pct": 0.055,
-      "bb_pct": -0.659
+      "k_pct": 0.052,
+      "bb_pct": -0.674
     },
     "name": "Sean Newcomb"
   },
@@ -21510,13 +21510,13 @@
     "power": 98,
     "speed": 103,
     "_seasons": 5,
-    "_pa": 1452,
+    "_pa": 1457,
     "_z": {
-      "avg": 0.45,
-      "k_pct": 0.045,
-      "bb_pct": -0.489,
-      "iso": -0.134,
-      "sb_rate": 0.205
+      "avg": 0.459,
+      "k_pct": 0.052,
+      "bb_pct": -0.492,
+      "iso": -0.139,
+      "sb_rate": 0.201
     },
     "name": "Ezequiel Duran"
   },
@@ -21527,8 +21527,8 @@
     "_seasons": 6,
     "_ip": 161,
     "_z": {
-      "k_pct": -0.785,
-      "bb_pct": 0.521
+      "k_pct": -0.784,
+      "bb_pct": 0.52
     },
     "name": "Justin Topa"
   },
@@ -21539,7 +21539,7 @@
     "_seasons": 7,
     "_ip": 179,
     "_z": {
-      "k_pct": -0.291,
+      "k_pct": -0.29,
       "bb_pct": -0.401
     },
     "name": "Yoendrys Gomez"
@@ -21547,16 +21547,16 @@
   "676439": {
     "type": "hitter",
     "hit": 100,
-    "power": 88,
-    "speed": 96,
+    "power": 89,
+    "speed": 95,
     "_seasons": 3,
-    "_pa": 323,
+    "_pa": 327,
     "_z": {
-      "avg": -0.553,
+      "avg": -0.454,
       "k_pct": -0.349,
-      "bb_pct": 0.895,
-      "iso": -0.795,
-      "sb_rate": -0.298
+      "bb_pct": 0.868,
+      "iso": -0.737,
+      "sb_rate": -0.301
     },
     "name": "Hunter Feduccia"
   },
@@ -21565,10 +21565,10 @@
     "stuff": 100,
     "control": 103,
     "_seasons": 8,
-    "_ip": 339,
+    "_ip": 340,
     "_z": {
-      "k_pct": -0.004,
-      "bb_pct": 0.175
+      "k_pct": -0.0,
+      "bb_pct": 0.178
     },
     "name": "Brock Burke"
   },
@@ -21579,7 +21579,7 @@
     "_seasons": 16,
     "_ip": 659,
     "_z": {
-      "k_pct": -0.284,
+      "k_pct": -0.283,
       "bb_pct": -0.121
     },
     "name": "Luis Garcia"
@@ -21593,9 +21593,9 @@
     "_pa": 851,
     "_z": {
       "avg": 0.193,
-      "k_pct": -0.53,
+      "k_pct": -0.532,
       "bb_pct": -0.479,
-      "iso": 0.236,
+      "iso": 0.235,
       "sb_rate": 1.162
     },
     "name": "Derek Hill"
@@ -21619,16 +21619,16 @@
   "671976": {
     "type": "hitter",
     "hit": 105,
-    "power": 101,
+    "power": 102,
     "speed": 104,
     "_seasons": 1,
-    "_pa": 245,
+    "_pa": 249,
     "_z": {
-      "avg": 0.764,
-      "k_pct": 0.585,
-      "bb_pct": -0.246,
-      "iso": 0.097,
-      "sb_rate": 0.253
+      "avg": 0.752,
+      "k_pct": 0.61,
+      "bb_pct": -0.263,
+      "iso": 0.121,
+      "sb_rate": 0.255
     },
     "name": "Tristan Peters"
   },
@@ -21640,8 +21640,8 @@
     "_seasons": 5,
     "_pa": 2523,
     "_z": {
-      "avg": 0.519,
-      "k_pct": 0.198,
+      "avg": 0.518,
+      "k_pct": 0.197,
       "bb_pct": 0.312,
       "iso": 0.923,
       "sb_rate": 0.245
@@ -21688,8 +21688,8 @@
     "_seasons": 7,
     "_pa": 3542,
     "_z": {
-      "avg": 0.866,
-      "k_pct": 0.585,
+      "avg": 0.865,
+      "k_pct": 0.584,
       "bb_pct": -0.321,
       "iso": 0.493,
       "sb_rate": 0.265
@@ -21702,13 +21702,13 @@
     "power": 106,
     "speed": 101,
     "_seasons": 5,
-    "_pa": 1632,
+    "_pa": 1637,
     "_z": {
-      "avg": -0.216,
-      "k_pct": 0.498,
-      "bb_pct": 0.599,
-      "iso": 0.378,
-      "sb_rate": 0.04
+      "avg": -0.217,
+      "k_pct": 0.492,
+      "bb_pct": 0.593,
+      "iso": 0.379,
+      "sb_rate": 0.042
     },
     "name": "Miguel Vargas"
   },
@@ -21720,9 +21720,9 @@
     "_seasons": 3,
     "_pa": 1046,
     "_z": {
-      "avg": 0.218,
-      "k_pct": 0.774,
-      "bb_pct": -0.324,
+      "avg": 0.217,
+      "k_pct": 0.773,
+      "bb_pct": -0.325,
       "iso": 0.161,
       "sb_rate": -0.108
     },
@@ -21736,7 +21736,7 @@
     "_seasons": 3,
     "_pa": 1303,
     "_z": {
-      "avg": 0.375,
+      "avg": 0.374,
       "k_pct": 0.189,
       "bb_pct": 0.525,
       "iso": 0.658,
@@ -21762,13 +21762,13 @@
     "power": 104,
     "speed": 109,
     "_seasons": 4,
-    "_pa": 833,
+    "_pa": 838,
     "_z": {
-      "avg": 0.352,
-      "k_pct": -0.018,
-      "bb_pct": -0.566,
-      "iso": 0.294,
-      "sb_rate": 0.61
+      "avg": 0.348,
+      "k_pct": -0.016,
+      "bb_pct": -0.57,
+      "iso": 0.283,
+      "sb_rate": 0.602
     },
     "name": "Noelvi Marte"
   },
@@ -21781,7 +21781,7 @@
     "_pa": 3354,
     "_z": {
       "avg": 0.227,
-      "k_pct": -0.121,
+      "k_pct": -0.122,
       "bb_pct": -0.141,
       "iso": 0.873,
       "sb_rate": 0.468
@@ -21794,13 +21794,13 @@
     "power": 120,
     "speed": 95,
     "_seasons": 5,
-    "_pa": 1537,
+    "_pa": 1542,
     "_z": {
-      "avg": 0.555,
+      "avg": 0.545,
       "k_pct": -0.008,
-      "bb_pct": -0.362,
-      "iso": 1.331,
-      "sb_rate": -0.305
+      "bb_pct": -0.356,
+      "iso": 1.323,
+      "sb_rate": -0.306
     },
     "name": "Kerry Carpenter"
   },
@@ -21815,8 +21815,8 @@
       "avg": 0.616,
       "k_pct": 0.438,
       "bb_pct": -0.074,
-      "iso": 0.601,
-      "sb_rate": 0.408
+      "iso": 0.6,
+      "sb_rate": 0.409
     },
     "name": "J.T. Realmuto"
   },
@@ -21826,13 +21826,13 @@
     "power": 106,
     "speed": 112,
     "_seasons": 5,
-    "_pa": 1674,
+    "_pa": 1677,
     "_z": {
-      "avg": 0.351,
-      "k_pct": -0.207,
-      "bb_pct": -0.156,
-      "iso": 0.387,
-      "sb_rate": 0.807
+      "avg": 0.345,
+      "k_pct": -0.209,
+      "bb_pct": -0.158,
+      "iso": 0.383,
+      "sb_rate": 0.806
     },
     "name": "Josh Lowe"
   },
@@ -21841,10 +21841,10 @@
     "stuff": 101,
     "control": 97,
     "_seasons": 8,
-    "_ip": 235,
+    "_ip": 236,
     "_z": {
-      "k_pct": 0.072,
-      "bb_pct": -0.196
+      "k_pct": 0.074,
+      "bb_pct": -0.184
     },
     "name": "JoJo Romero"
   },
@@ -21886,25 +21886,25 @@
     "power": 104,
     "speed": 106,
     "_seasons": 12,
-    "_pa": 5508,
+    "_pa": 5512,
     "_z": {
-      "avg": 0.664,
-      "k_pct": 0.713,
-      "bb_pct": 0.26,
-      "iso": 0.263,
-      "sb_rate": 0.376
+      "avg": 0.663,
+      "k_pct": 0.714,
+      "bb_pct": 0.258,
+      "iso": 0.261,
+      "sb_rate": 0.375
     },
     "name": "Andrew Benintendi"
   },
   "682254": {
     "type": "pitcher",
-    "stuff": 129,
+    "stuff": 131,
     "control": 83,
     "_seasons": 3,
-    "_ip": 88,
+    "_ip": 89,
     "_z": {
-      "k_pct": 1.951,
-      "bb_pct": -1.162
+      "k_pct": 2.05,
+      "bb_pct": -1.131
     },
     "name": "Mason Montgomery"
   },
@@ -21916,7 +21916,7 @@
     "_ip": 241,
     "_z": {
       "k_pct": -0.038,
-      "bb_pct": -1.197
+      "bb_pct": -1.198
     },
     "name": "Justin Lawrence"
   },
@@ -21939,16 +21939,16 @@
   "695657": {
     "type": "hitter",
     "hit": 98,
-    "power": 125,
+    "power": 124,
     "speed": 94,
     "_seasons": 2,
-    "_pa": 622,
+    "_pa": 626,
     "_z": {
-      "avg": 0.089,
-      "k_pct": -0.556,
-      "bb_pct": 0.136,
-      "iso": 1.643,
-      "sb_rate": -0.431
+      "avg": 0.088,
+      "k_pct": -0.558,
+      "bb_pct": 0.127,
+      "iso": 1.623,
+      "sb_rate": -0.432
     },
     "name": "Colson Montgomery"
   },
@@ -21963,7 +21963,7 @@
       "avg": 0.351,
       "k_pct": 0.095,
       "bb_pct": 0.33,
-      "iso": 0.856,
+      "iso": 0.855,
       "sb_rate": 0.02
     },
     "name": "Willy Adames"
@@ -21974,12 +21974,12 @@
     "power": 118,
     "speed": 97,
     "_seasons": 13,
-    "_pa": 7001,
+    "_pa": 7006,
     "_z": {
       "avg": 0.378,
-      "k_pct": -0.02,
-      "bb_pct": 0.278,
-      "iso": 1.219,
+      "k_pct": -0.021,
+      "bb_pct": 0.279,
+      "iso": 1.217,
       "sb_rate": -0.177
     },
     "name": "Eugenio Suarez"
@@ -21990,13 +21990,13 @@
     "power": 110,
     "speed": 107,
     "_seasons": 3,
-    "_pa": 1422,
+    "_pa": 1426,
     "_z": {
-      "avg": 0.497,
-      "k_pct": 0.385,
-      "bb_pct": -0.324,
-      "iso": 0.673,
-      "sb_rate": 0.436
+      "avg": 0.496,
+      "k_pct": 0.376,
+      "bb_pct": -0.327,
+      "iso": 0.688,
+      "sb_rate": 0.441
     },
     "name": "Jackson Merrill"
   },
@@ -22007,7 +22007,7 @@
     "_seasons": 5,
     "_ip": 96,
     "_z": {
-      "k_pct": -0.121,
+      "k_pct": -0.12,
       "bb_pct": 0.276
     },
     "name": "Drew Anderson"
@@ -22036,7 +22036,7 @@
     "_ip": 155,
     "_z": {
       "k_pct": -0.84,
-      "bb_pct": -0.014
+      "bb_pct": -0.015
     },
     "name": "Tyler Gilbert"
   },
@@ -22048,10 +22048,10 @@
     "_seasons": 2,
     "_pa": 575,
     "_z": {
-      "avg": 0.291,
-      "k_pct": 0.471,
+      "avg": 0.29,
+      "k_pct": 0.469,
       "bb_pct": -0.03,
-      "iso": -0.59,
+      "iso": -0.592,
       "sb_rate": -0.408
     },
     "name": "Edgar Quero"
@@ -22065,7 +22065,7 @@
     "_pa": 5054,
     "_z": {
       "avg": 0.933,
-      "k_pct": 0.102,
+      "k_pct": 0.101,
       "bb_pct": 1.445,
       "iso": 2.285,
       "sb_rate": 0.004
@@ -22080,11 +22080,11 @@
     "_seasons": 3,
     "_pa": 1436,
     "_z": {
-      "avg": 0.49,
-      "k_pct": -0.509,
-      "bb_pct": 0.951,
+      "avg": 0.489,
+      "k_pct": -0.511,
+      "bb_pct": 0.952,
       "iso": 1.022,
-      "sb_rate": 0.29
+      "sb_rate": 0.291
     },
     "name": "James Wood"
   },
@@ -22094,11 +22094,11 @@
     "power": 121,
     "speed": 105,
     "_seasons": 11,
-    "_pa": 6297,
+    "_pa": 6301,
     "_z": {
-      "avg": 0.782,
-      "k_pct": 0.453,
-      "bb_pct": 1.071,
+      "avg": 0.781,
+      "k_pct": 0.452,
+      "bb_pct": 1.07,
       "iso": 1.405,
       "sb_rate": 0.32
     },
@@ -22111,8 +22111,8 @@
     "_seasons": 3,
     "_ip": 73,
     "_z": {
-      "k_pct": 0.779,
-      "bb_pct": -2.168
+      "k_pct": 0.781,
+      "bb_pct": -2.172
     },
     "name": "Connor Phillips"
   },
@@ -22124,19 +22124,19 @@
     "_ip": 60,
     "_z": {
       "k_pct": -0.873,
-      "bb_pct": -1.143
+      "bb_pct": -1.144
     },
     "name": "Chris Roycroft"
   },
   "677865": {
     "type": "pitcher",
     "stuff": 84,
-    "control": 102,
+    "control": 103,
     "_seasons": 8,
-    "_ip": 155,
+    "_ip": 158,
     "_z": {
-      "k_pct": -1.065,
-      "bb_pct": 0.134
+      "k_pct": -1.056,
+      "bb_pct": 0.17
     },
     "name": "Justin Bruihl"
   },
@@ -22147,8 +22147,8 @@
     "_seasons": 2,
     "_ip": 88,
     "_z": {
-      "k_pct": 0.39,
-      "bb_pct": -0.626
+      "k_pct": 0.392,
+      "bb_pct": -0.628
     },
     "name": "A.J. Blubaugh"
   },
@@ -22159,32 +22159,32 @@
     "_seasons": 4,
     "_ip": 83,
     "_z": {
-      "k_pct": -0.179,
-      "bb_pct": -0.832
+      "k_pct": -0.177,
+      "bb_pct": -0.833
     },
     "name": "Isaac Mattson"
   },
   "694335": {
     "type": "pitcher",
-    "stuff": 110,
-    "control": 96,
+    "stuff": 111,
+    "control": 97,
     "_seasons": 2,
-    "_ip": 95,
+    "_ip": 96,
     "_z": {
-      "k_pct": 0.682,
-      "bb_pct": -0.243
+      "k_pct": 0.732,
+      "bb_pct": -0.226
     },
     "name": "Matt Svanson"
   },
   "664076": {
     "type": "pitcher",
-    "stuff": 124,
+    "stuff": 123,
     "control": 95,
     "_seasons": 8,
-    "_ip": 220,
+    "_ip": 221,
     "_z": {
-      "k_pct": 1.574,
-      "bb_pct": -0.344
+      "k_pct": 1.549,
+      "bb_pct": -0.331
     },
     "name": "Garrett Cleavinger"
   },
@@ -22195,7 +22195,7 @@
     "_seasons": 8,
     "_ip": 483,
     "_z": {
-      "k_pct": 0.999,
+      "k_pct": 1.0,
       "bb_pct": 0.532
     },
     "name": "Griffin Jax"
@@ -22207,7 +22207,7 @@
     "_seasons": 6,
     "_ip": 329,
     "_z": {
-      "k_pct": -0.499,
+      "k_pct": -0.498,
       "bb_pct": 0.733
     },
     "name": "Taylor Clarke"
@@ -22229,22 +22229,22 @@
     "stuff": 100,
     "control": 113,
     "_seasons": 12,
-    "_ip": 1405,
+    "_ip": 1410,
     "_z": {
-      "k_pct": -0.021,
-      "bb_pct": 0.849
+      "k_pct": -0.008,
+      "bb_pct": 0.851
     },
     "name": "Nathan Eovaldi"
   },
   "693855": {
     "type": "pitcher",
-    "stuff": 110,
-    "control": 101,
+    "stuff": 111,
+    "control": 102,
     "_seasons": 2,
-    "_ip": 107,
+    "_ip": 113,
     "_z": {
-      "k_pct": 0.637,
-      "bb_pct": 0.073
+      "k_pct": 0.721,
+      "bb_pct": 0.139
     },
     "name": "Ian Seymour"
   },
@@ -22256,7 +22256,7 @@
     "_ip": 1098,
     "_z": {
       "k_pct": 0.004,
-      "bb_pct": 1.048
+      "bb_pct": 1.049
     },
     "name": "Logan Webb"
   },
@@ -22291,8 +22291,8 @@
     "_seasons": 4,
     "_ip": 108,
     "_z": {
-      "k_pct": -0.25,
-      "bb_pct": -0.803
+      "k_pct": -0.248,
+      "bb_pct": -0.805
     },
     "name": "Kody Funderburk"
   },
@@ -22303,8 +22303,8 @@
     "_seasons": 2,
     "_ip": 155,
     "_z": {
-      "k_pct": 0.192,
-      "bb_pct": -0.388
+      "k_pct": 0.193,
+      "bb_pct": -0.389
     },
     "name": "Shane Smith"
   },
@@ -22327,8 +22327,8 @@
     "_seasons": 3,
     "_ip": 418,
     "_z": {
-      "k_pct": 1.593,
-      "bb_pct": 0.929
+      "k_pct": 1.594,
+      "bb_pct": 0.93
     },
     "name": "Paul Skenes"
   },
