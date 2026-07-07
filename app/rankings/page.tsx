@@ -37,6 +37,7 @@ export default function RankingsPage() {
   const [parsedCols, setParsedCols] = useState<string[]>([])
   const [parsedFile, setParsedFile] = useState<File | null>(null)
   const [sourceName, setSourceName] = useState('')
+  const [sourceDate, setSourceDate] = useState(() => new Date().toISOString().slice(0, 10))
   const [rankType, setRankType] = useState<'overall' | 'prospect' | 'open'>('overall')
   const [colMapping, setColMapping] = useState<ColMapping>({ rank: '', player: '', position: '', team: '' })
   const [tierMode, setTierMode] = useState(false)
@@ -145,13 +146,13 @@ export default function RankingsPage() {
     if (tierMode && !tierColumn) { setImportStatus('error'); setImportMessage('Select a tier column'); return }
     if (!tierMode && !colMapping.rank) { setImportStatus('error'); setImportMessage('Select a rank column'); return }
     if (!colMapping.player) { setImportStatus('error'); setImportMessage('Select a player column'); return }
+    if (!sourceDate) { setImportStatus('error'); setImportMessage('Select a date'); return }
     const fullSourceName = `${sourceName.trim()} ${typeLabels[rankType]}`
-    const today = new Date().toISOString().slice(0, 10)
     setImportStatus('loading'); setImportMessage('Saving source...')
     const form = new FormData()
     form.append('file', parsedFile)
     form.append('sourceName', fullSourceName)
-    form.append('date', today)
+    form.append('date', sourceDate)
     form.append('rankType', rankType)
     form.append('colMapping', JSON.stringify(colMapping))
     form.append('tierColumn', tierMode ? tierColumn : '')
@@ -163,7 +164,7 @@ export default function RankingsPage() {
         setImportStatus('success')
         setImportMessage(`Saved — ${d.rowCount} players from ${fullSourceName}`)
         setImportMode(false); setParsedFile(null); setParsedCols([])
-        setSourceName(''); setRankType('overall'); setTierMode(false)
+        setSourceName(''); setSourceDate(new Date().toISOString().slice(0, 10)); setRankType('overall'); setTierMode(false)
         setTierColumn(''); setOrderColumn('')
         loadSources()
       } else { setImportStatus('error'); setImportMessage(d.error ?? 'Import failed') }
@@ -327,9 +328,13 @@ export default function RankingsPage() {
                   ))}
                 </div>
               </div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+                <label style={{ fontSize: '0.75rem', color: 'var(--muted)', fontFamily: 'var(--font-display)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Date <span style={{ color: 'var(--danger)' }}>*</span></label>
+                <input type="date" value={sourceDate} onChange={e => setSourceDate(e.target.value)} style={{ ...inputStyle, width: 150 }} />
+              </div>
               {sourceName && (
                 <div style={{ fontSize: '0.8rem', color: 'var(--muted)', paddingBottom: '0.45rem' }}>
-                  → <span style={{ color: 'var(--text)' }}>{sourceName.trim()} {typeLabels[rankType]}</span> · today
+                  → <span style={{ color: 'var(--text)' }}>{sourceName.trim()} {typeLabels[rankType]}</span> · {sourceDate}
                 </div>
               )}
             </div>
