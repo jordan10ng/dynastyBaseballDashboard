@@ -7,6 +7,7 @@ const BASE = path.join(process.cwd(), 'data')
 const SOURCES_DIR = path.join(BASE, 'rankings', 'sources')
 const RANKINGS_OUT = path.join(BASE, 'rankings', 'rankings.json')
 const PLAYERS_PATH = path.join(BASE, 'players.json')
+const ALIASES_PATH = path.join(BASE, 'rankings', 'aliases.json')
 
 function normalize(s: string): string {
   return s
@@ -74,6 +75,18 @@ export async function POST() {
       nameMap[key].push(id)
     }
 
+    // Alt-name mapping for players ranking sources refer to inconsistently
+    // (e.g. "Leo De Vries" vs canonical "Leodalis De Vries") — points an
+    // alias key at whatever candidates the canonical name already resolves to.
+    if (fs.existsSync(ALIASES_PATH)) {
+      const aliases: Record<string, string> = JSON.parse(fs.readFileSync(ALIASES_PATH, 'utf-8'))
+      for (const [aliasName, canonicalName] of Object.entries(aliases)) {
+        const canonicalKey = normalize(canonicalName)
+        const candidates = nameMap[canonicalKey]
+        if (candidates) nameMap[normalize(aliasName)] = candidates
+      }
+    }
+
     if (!fs.existsSync(SOURCES_DIR)) return NextResponse.json({ error: 'No sources found' }, { status: 400 })
     const sourceFiles = fs.readdirSync(SOURCES_DIR).filter(f => f.endsWith('.json'))
     if (sourceFiles.length === 0) return NextResponse.json({ error: 'No sources found' }, { status: 400 })
@@ -101,6 +114,11 @@ export async function POST() {
       else overallSources.push(source)
     }
 
+    // Rows whose player name didn't resolve to anyone in players.json — these
+    // silently drop out of the consensus entirely, which is how names like
+    // "Leo De Vries" vs "Leodalis De Vries" go unnoticed until a rank looks wrong.
+    const unmatched: Array<{ source: string; rankType: string; name: string }> = []
+
     // --- OVERALL ---
     // Pre-scan: per-source PID sets and per-source penalties for absence
     const sourcePidSets: Set<string>[] = []
@@ -110,7 +128,9 @@ export async function POST() {
       sourcePenalties.push(maxRank + 1)
       const pids = new Set<string>()
       for (const row of source.players) {
-        for (const pid of resolveIds(row, nameMap, players)) pids.add(pid)
+        const ids = resolveIds(row, nameMap, players)
+        if (ids.length === 0) unmatched.push({ source: source.sourceName, rankType: source.rankType, name: row.name })
+        for (const pid of ids) pids.add(pid)
       }
       sourcePidSets.push(pids)
     }
@@ -162,7 +182,9 @@ export async function POST() {
       const penalty = maxRank + 1
       for (const row of source.players) {
         const rank = row.rank ?? penalty
-        for (const pid of resolveIds(row, nameMap, players)) {
+        const ids = resolveIds(row, nameMap, players)
+        if (ids.length === 0) unmatched.push({ source: source.sourceName, rankType: source.rankType, name: row.name })
+        for (const pid of ids) {
           if (!fullProspectData[pid]) fullProspectData[pid] = { weightedSum: 0, weightSum: 0, name: players[pid]?.name ?? row.name }
           fullProspectData[pid].weightedSum += rank * source.weight
           fullProspectData[pid].weightSum += source.weight
@@ -177,15 +199,29 @@ export async function POST() {
     }
     fullProspectRanked.sort((a, b) => a.avgRank - b.avgRank)
 
-    // --- PROSPECT-ONLY ranking ---
-    const prospectOnlyRanked: Array<{ id: string; name: string; position: string; team: string; avgRank: number }> = []
-    for (const [id, data] of Object.entries(fullProspectData)) {
-      if (data.weightSum === 0) continue
-      if (overallIds.has(id)) continue
-      prospectOnlyRanked.push({ id, name: data.name, position: players[id]?.positions ?? '', team: players[id]?.team ?? '', avgRank: data.weightedSum / data.weightSum })
+    // --- UNIFIED CONSENSUS ---
+    // Overall-list avgRank and prospect-list avgRank live on different scales
+    // (list sizes vary widely — a 60-name PLive Prospect update vs a 1700-name
+    // PLive Overall board), so compare them as percentiles within their own pool
+    // and let a player's stronger signal win. Previously, any appearance on an
+    // overall list — however deep or sparse — fully excluded a player from the
+    // prospect bucket, discarding a much stronger prospect-list consensus (e.g.
+    // a top-30 prospect buried at #1259 on one 1700-deep overall board).
+    const overallPctById: Record<string, number> = {}
+    overallRanked.forEach((p, i) => { overallPctById[p.id] = (i + 1) / overallRanked.length })
+
+    const prospectPctById: Record<string, number> = {}
+    fullProspectRanked.forEach((p, i) => { prospectPctById[p.id] = (i + 1) / fullProspectRanked.length })
+
+    const combinedIds = new Set<string>([...overallRanked.map(p => p.id), ...fullProspectRanked.map(p => p.id)])
+    const combined: Array<{ id: string; name: string; pct: number; fromProspect: boolean }> = []
+    for (const id of Array.from(combinedIds)) {
+      const oPct = overallPctById[id]
+      const pPct = prospectPctById[id]
+      const fromProspect = pPct !== undefined && (oPct === undefined || pPct < oPct)
+      combined.push({ id, name: players[id]?.name ?? overallData[id]?.name ?? fullProspectData[id]?.name ?? '', pct: fromProspect ? pPct : oPct, fromProspect })
     }
-    prospectOnlyRanked.sort((a, b) => a.avgRank - b.avgRank)
-    const prospectOnlyIds = new Set(prospectOnlyRanked.map(p => p.id))
+    combined.sort((a, b) => a.pct - b.pct)
 
     // --- OPEN UNIVERSE CANDIDATES ---
     // Collect X players for insertion in build-blend-rank.js using minors_rank anchoring
@@ -195,20 +231,22 @@ export async function POST() {
         if (!row.rank) continue
         const ids = resolveIds(row, nameMap, players)
         const id = ids.length >= 1 ? ids[0] : null
-        if (id && (overallIds.has(id) || prospectOnlyIds.has(id))) continue
+        if (id && combinedIds.has(id)) continue
         xCandidates.push({ id, name: row.name, position: row.position ?? '', team: row.team ?? '', targetPPosition: row.rank })
       }
     }
 
-    // Assign ranks to overall and prospect results
-    const overallFinal: Array<{ id: string; name: string; rank: number }> = overallResult.map(p => ({ id: p.id, name: p.name, rank: p.rank }))
-    const lastOverallRank = overallFinal.length > 0 ? overallFinal[overallFinal.length - 1].rank : 0
-
+    // Assign final consensus ranks — overallFinal is the single ranked list (feeds
+    // build-blend-rank.js's consensusMap); prospectResult is the subset of it whose
+    // final position came from the prospect signal, kept for the sources-used summary.
+    const overallFinal: Array<{ id: string; name: string; rank: number }> = []
     const prospectResult: Array<{ id: string; name: string; rank: number }> = []
-    for (let i = 0; i < prospectOnlyRanked.length; i++) {
-      const prev = prospectResult[i - 1]
-      const tied = prev && Math.abs(prospectOnlyRanked[i].avgRank - prospectOnlyRanked[i-1].avgRank) < 0.0001
-      prospectResult.push({ id: prospectOnlyRanked[i].id, name: prospectOnlyRanked[i].name, rank: tied ? prev.rank : lastOverallRank + i + 1 })
+    for (let i = 0; i < combined.length; i++) {
+      const prev = overallFinal[i - 1]
+      const tied = prev && Math.abs(combined[i].pct - combined[i - 1].pct) < 0.0001
+      const entry = { id: combined[i].id, name: combined[i].name, rank: tied ? prev.rank : i + 1 }
+      overallFinal.push(entry)
+      if (combined[i].fromProspect) prospectResult.push(entry)
     }
 
     // --- Write output ---
@@ -219,6 +257,7 @@ export async function POST() {
       overall: overallFinal,
       prospects: prospectResult,
       xCandidates,
+      unmatched,
     }
     fs.writeFileSync(RANKINGS_OUT, JSON.stringify(output, null, 2), 'utf-8')
 
@@ -249,12 +288,13 @@ export async function POST() {
 
     return NextResponse.json({
       success: true,
-      overallRanked: overallFinal.length,
+      overallRanked: overallFinal.length - prospectResult.length,
       prospectsSlotted: prospectResult.length,
       xCandidates: xCandidates.length,
-      totalRanked: overallFinal.length + prospectResult.length,
+      totalRanked: overallFinal.length,
       sourcesUsed: allSources.length,
       blendMsg,
+      unmatched,
     })
   } catch (err: any) {
     console.error('Compute error:', err)
@@ -269,8 +309,9 @@ export async function GET() {
   return NextResponse.json({
     exists: true,
     computedAt: raw.computedAt,
-    overallRanked: raw.overall?.length ?? 0,
+    overallRanked: (raw.overall?.length ?? 0) - (raw.prospects?.length ?? 0),
     prospectsSlotted: raw.prospects?.length ?? 0,
     sourcesUsed: raw.sourcesUsed?.length ?? 0,
+    unmatched: raw.unmatched ?? [],
   })
 }

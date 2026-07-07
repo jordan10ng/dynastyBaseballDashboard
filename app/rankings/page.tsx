@@ -19,12 +19,19 @@ interface ColMapping {
   team: string
 }
 
+interface UnmatchedRow {
+  source: string
+  rankType: string
+  name: string
+}
+
 interface ComputeState {
   exists: boolean
   computedAt?: string
   overallRanked?: number
   prospectsSlotted?: number
   sourcesUsed?: number
+  unmatched?: UnmatchedRow[]
 }
 
 export default function RankingsPage() {
@@ -296,6 +303,20 @@ export default function RankingsPage() {
           <div style={{ marginTop: '0.75rem', display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.85rem', color: computeStatus === 'error' ? 'var(--danger)' : 'var(--accent)' }}>
             {computeStatus === 'error' ? <AlertCircle size={14} /> : <CheckCircle size={14} />}
             {computeMsg}
+          </div>
+        )}
+        {compute.unmatched && compute.unmatched.length > 0 && (
+          <div style={{ marginTop: '0.875rem', padding: '0.75rem', borderRadius: 6, border: '1px solid rgba(245,158,11,0.3)', background: 'rgba(245,158,11,0.06)' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.8rem', color: '#f59e0b', marginBottom: '0.5rem' }}>
+              <AlertCircle size={13} /> {compute.unmatched.length} name{compute.unmatched.length === 1 ? '' : 's'} didn't match a player — dropped from this compute
+            </div>
+            <div style={{ fontSize: '0.78rem', color: 'var(--muted)', display: 'flex', flexDirection: 'column', gap: 2 }}>
+              {compute.unmatched.map((u, i) => (
+                <div key={i}>
+                  <span style={{ color: 'var(--text)' }}>{u.name}</span> — {u.source} ({u.rankType})
+                </div>
+              ))}
+            </div>
           </div>
         )}
       </div>
