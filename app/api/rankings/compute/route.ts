@@ -136,31 +136,35 @@ export async function POST() {
     }
     const allOverallPids = new Set<string>(sourcePidSets.flatMap(s => Array.from(s)))
 
-    const overallData: Record<string, { weightedSum: number; weightSum: number; name: string; position: string; team: string }> = {}
+    // realWeightSum tracks weight from sources that actually ranked the player,
+    // as opposed to weight from the absence penalty — used below to tell "genuinely
+    // ranked, just not highly" apart from "mostly unranked, filled in with penalties."
+    const overallData: Record<string, { weightedSum: number; weightSum: number; realWeightSum: number; name: string; position: string; team: string }> = {}
     for (let si = 0; si < overallSources.length; si++) {
       const source = overallSources[si]
       const penalty = sourcePenalties[si]
       for (const row of source.players) {
         const rank = row.rank ?? penalty
         for (const pid of resolveIds(row, nameMap, players)) {
-          if (!overallData[pid]) overallData[pid] = { weightedSum: 0, weightSum: 0, name: players[pid]?.name ?? row.name, position: row.position, team: row.team }
+          if (!overallData[pid]) overallData[pid] = { weightedSum: 0, weightSum: 0, realWeightSum: 0, name: players[pid]?.name ?? row.name, position: row.position, team: row.team }
           overallData[pid].weightedSum += rank * source.weight
           overallData[pid].weightSum += source.weight
+          overallData[pid].realWeightSum += source.weight
         }
       }
       for (const pid of Array.from(allOverallPids)) {
         if (!sourcePidSets[si].has(pid)) {
-          if (!overallData[pid]) overallData[pid] = { weightedSum: 0, weightSum: 0, name: players[pid]?.name ?? '', position: players[pid]?.positions ?? '', team: players[pid]?.team ?? '' }
+          if (!overallData[pid]) overallData[pid] = { weightedSum: 0, weightSum: 0, realWeightSum: 0, name: players[pid]?.name ?? '', position: players[pid]?.positions ?? '', team: players[pid]?.team ?? '' }
           overallData[pid].weightedSum += penalty * source.weight
           overallData[pid].weightSum += source.weight
         }
       }
     }
 
-    const overallRanked: Array<{ id: string; name: string; position: string; team: string; avgRank: number }> = []
+    const overallRanked: Array<{ id: string; name: string; position: string; team: string; avgRank: number; realCoverage: number }> = []
     for (const [id, data] of Object.entries(overallData)) {
       if (data.weightSum === 0) continue
-      overallRanked.push({ id, name: data.name, position: data.position, team: data.team, avgRank: data.weightedSum / data.weightSum })
+      overallRanked.push({ id, name: data.name, position: data.position, team: data.team, avgRank: data.weightedSum / data.weightSum, realCoverage: data.realWeightSum / data.weightSum })
     }
     overallRanked.sort((a, b) => a.avgRank - b.avgRank)
 
@@ -200,15 +204,21 @@ export async function POST() {
     fullProspectRanked.sort((a, b) => a.avgRank - b.avgRank)
 
     // --- UNIFIED CONSENSUS ---
-    // Overall-list avgRank and prospect-list avgRank live on different scales
-    // (list sizes vary widely — a 60-name PLive Prospect update vs a 1700-name
-    // PLive Overall board), so compare them as percentiles within their own pool
-    // and let a player's stronger signal win. Previously, any appearance on an
-    // overall list — however deep or sparse — fully excluded a player from the
-    // prospect bucket, discarding a much stronger prospect-list consensus (e.g.
-    // a top-30 prospect buried at #1259 on one 1700-deep overall board).
+    // A player's overall placement is only untrustworthy when it's mostly built
+    // from absence penalties rather than real rankings — e.g. missing from most
+    // overall boards, so the "average" is mostly synthetic worst-case filler. In
+    // that case defer to the prospect-list consensus instead. But when a player
+    // IS genuinely ranked by (most of) the overall sources — even if that real
+    // placement is deep, or disagrees with the prospect boards — that's a real
+    // signal and must not be overridden just because a narrower prospect-only
+    // pool happens to rate them higher (a top prospect will almost always have
+    // a better percentile within a prospects-only pool than within a pool that
+    // also includes every MLB regular, so "pick whichever percentile is best"
+    // was wrong — it overrode real, converged overall consensus).
+    const REAL_COVERAGE_THRESHOLD = 0.5
     const overallPctById: Record<string, number> = {}
-    overallRanked.forEach((p, i) => { overallPctById[p.id] = (i + 1) / overallRanked.length })
+    const overallCoverageById: Record<string, number> = {}
+    overallRanked.forEach((p, i) => { overallPctById[p.id] = (i + 1) / overallRanked.length; overallCoverageById[p.id] = p.realCoverage })
 
     const prospectPctById: Record<string, number> = {}
     fullProspectRanked.forEach((p, i) => { prospectPctById[p.id] = (i + 1) / fullProspectRanked.length })
@@ -218,7 +228,9 @@ export async function POST() {
     for (const id of Array.from(combinedIds)) {
       const oPct = overallPctById[id]
       const pPct = prospectPctById[id]
-      const fromProspect = pPct !== undefined && (oPct === undefined || pPct < oPct)
+      const coverage = overallCoverageById[id]
+      const overallUntrustworthy = oPct === undefined || coverage < REAL_COVERAGE_THRESHOLD
+      const fromProspect = pPct !== undefined && overallUntrustworthy
       combined.push({ id, name: players[id]?.name ?? overallData[id]?.name ?? fullProspectData[id]?.name ?? '', pct: fromProspect ? pPct : oPct, fromProspect })
     }
     combined.sort((a, b) => a.pct - b.pct)
