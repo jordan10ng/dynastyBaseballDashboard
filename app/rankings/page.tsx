@@ -1,6 +1,6 @@
 'use client'
 import { useState, useEffect, useRef } from 'react'
-import { Upload, CheckCircle, AlertCircle, Trash2, Plus, FileText, X, Play, RefreshCw } from 'lucide-react'
+import { Upload, CheckCircle, AlertCircle, Trash2, Plus, FileText, X, Play, RefreshCw, Download } from 'lucide-react'
 
 interface RankingSource {
   filename: string
@@ -278,11 +278,19 @@ export default function RankingsPage() {
             &nbsp;·&nbsp;{compute.sourcesUsed} sources
           </div>
         )}
-        <button className="btn-primary" onClick={handleCompute} disabled={computeStatus === 'loading' || sources.length === 0}
-          style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-          {computeStatus === 'loading' ? <RefreshCw size={14} /> : <Play size={14} />}
-          {computeStatus === 'loading' ? 'Computing...' : 'Compute Rankings'}
-        </button>
+        <div style={{ display: 'flex', gap: '0.5rem' }}>
+          <button className="btn-primary" onClick={handleCompute} disabled={computeStatus === 'loading' || sources.length === 0}
+            style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            {computeStatus === 'loading' ? <RefreshCw size={14} /> : <Play size={14} />}
+            {computeStatus === 'loading' ? 'Computing...' : 'Compute Rankings'}
+          </button>
+          {compute.exists && (
+            <a className="btn-ghost" href="/api/rankings/export" download
+              style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', textDecoration: 'none' }}>
+              <Download size={14} /> Download CSV
+            </a>
+          )}
+        </div>
         {computeMsg && (
           <div style={{ marginTop: '0.75rem', display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.85rem', color: computeStatus === 'error' ? 'var(--danger)' : 'var(--accent)' }}>
             {computeStatus === 'error' ? <AlertCircle size={14} /> : <CheckCircle size={14} />}
