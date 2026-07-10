@@ -1,6 +1,66 @@
 {
-  "generatedAt": "2026-07-09T11:49:33.024Z",
+  "generatedAt": "2026-07-10T11:46:37.876Z",
   "bats": [
+    {
+      "id": "06rkk",
+      "mlbam_id": "680664",
+      "name": "Eduardo Valencia",
+      "positions": "C,1B,INF",
+      "rank": 2259,
+      "isPit": false,
+      "isTwoWay": false,
+      "fromLevel": "AAA",
+      "toLevel": "MLB",
+      "toRank": 6,
+      "callupDate": "2026-07-09",
+      "daysAgo": 2,
+      "statLine": "1 G · 5.000 OPS · 0.0% K% · 0.0% BB% · 1 HR · 0 SB"
+    },
+    {
+      "id": "06v27",
+      "mlbam_id": "829788",
+      "name": "Yeferson Portolatin",
+      "positions": "2B,INF",
+      "rank": 2652,
+      "isPit": false,
+      "isTwoWay": false,
+      "fromLevel": "DSL",
+      "toLevel": "Complex",
+      "toRank": 1,
+      "callupDate": "2026-07-09",
+      "daysAgo": 2,
+      "statLine": "1 G · .000 OPS · 0.0% K% · 0.0% BB% · 0 HR · 0 SB"
+    },
+    {
+      "id": "06bs5",
+      "mlbam_id": "800503",
+      "name": "Enderson Delgado",
+      "positions": "C",
+      "rank": 4435,
+      "isPit": false,
+      "isTwoWay": false,
+      "fromLevel": "Single-A",
+      "toLevel": "High-A",
+      "toRank": 3,
+      "callupDate": "2026-07-09",
+      "daysAgo": 2,
+      "statLine": "1 G · .667 OPS · 66.7% K% · 0.0% BB% · 0 HR · 0 SB"
+    },
+    {
+      "id": "06rp3",
+      "mlbam_id": "812430",
+      "name": "Heriberto Caraballo",
+      "positions": "C",
+      "rank": 5423,
+      "isPit": false,
+      "isTwoWay": false,
+      "fromLevel": "Single-A",
+      "toLevel": "High-A",
+      "toRank": 3,
+      "callupDate": "2026-07-09",
+      "daysAgo": 2,
+      "statLine": "1 G · .000 OPS · 25.0% K% · 0.0% BB% · 0 HR · 0 SB"
+    },
     {
       "id": "06zrh",
       "mlbam_id": "823779",
@@ -13,23 +73,23 @@
       "toLevel": "High-A",
       "toRank": 3,
       "callupDate": "2026-07-08",
-      "daysAgo": 2,
-      "statLine": "1 G · .250 OPS · 25.0% K% · 25.0% BB% · 0 HR · 0 SB"
+      "daysAgo": 3,
+      "statLine": "2 G · .125 OPS · 25.0% K% · 12.5% BB% · 0 HR · 0 SB"
     },
     {
       "id": "06ic5",
       "mlbam_id": "808401",
       "name": "Angel Guzman",
       "positions": "2B,INF",
-      "rank": 2447,
+      "rank": 2453,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "Rookie",
       "toLevel": "Single-A",
       "toRank": 2,
       "callupDate": "2026-07-08",
-      "daysAgo": 2,
-      "statLine": "1 G · 1.850 OPS · 0.0% K% · 20.0% BB% · 1 HR · 0 SB"
+      "daysAgo": 3,
+      "statLine": "2 G · 1.067 OPS · 20.0% K% · 10.0% BB% · 1 HR · 0 SB"
     },
     {
       "id": "05yid",
@@ -43,8 +103,8 @@
       "toLevel": "AAA",
       "toRank": 5,
       "callupDate": "2026-07-07",
-      "daysAgo": 3,
-      "statLine": "2 G · .697 OPS · 9.1% K% · 18.2% BB% · 0 HR · 0 SB"
+      "daysAgo": 4,
+      "statLine": "3 G · 1.178 OPS · 11.1% K% · 16.7% BB% · 1 HR · 1 SB"
     },
     {
       "id": "05rfc",
@@ -58,8 +118,8 @@
       "toLevel": "AAA",
       "toRank": 5,
       "callupDate": "2026-07-07",
-      "daysAgo": 3,
-      "statLine": "2 G · .300 OPS · 40.0% K% · 30.0% BB% · 0 HR · 0 SB"
+      "daysAgo": 4,
+      "statLine": "3 G · .584 OPS · 41.2% K% · 23.5% BB% · 0 HR · 0 SB"
     },
     {
       "id": "060yn",
@@ -73,7 +133,7 @@
       "toLevel": "MLB",
       "toRank": 6,
       "callupDate": "2026-07-07",
-      "daysAgo": 3,
+      "daysAgo": 4,
       "statLine": "2 G · .583 OPS · 11.1% K% · 11.1% BB% · 0 HR · 0 SB"
     },
     {
@@ -88,22 +148,22 @@
       "toLevel": "AA",
       "toRank": 4,
       "callupDate": "2026-07-07",
-      "daysAgo": 3,
-      "statLine": "2 G · 1.000 OPS · 33.3% K% · 0.0% BB% · 1 HR · 0 SB"
+      "daysAgo": 4,
+      "statLine": "3 G · .901 OPS · 28.6% K% · 7.1% BB% · 1 HR · 0 SB"
     },
     {
       "id": "0630j",
       "mlbam_id": "687394",
       "name": "Jack Brannigan",
       "positions": "SS,INF",
-      "rank": 2354,
+      "rank": 2361,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "AAA",
       "toLevel": "MLB",
       "toRank": 6,
       "callupDate": "2026-07-07",
-      "daysAgo": 3,
+      "daysAgo": 4,
       "statLine": "1 G · .000 OPS · 100.0% K% · 0.0% BB% · 0 HR · 0 SB"
     },
     {
@@ -111,44 +171,44 @@
       "mlbam_id": "814522",
       "name": "Caden Kendle",
       "positions": "CF,RF,OF",
-      "rank": 3521,
+      "rank": 3507,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "High-A",
       "toLevel": "AA",
       "toRank": 4,
       "callupDate": "2026-07-07",
-      "daysAgo": 3,
-      "statLine": "2 G · 1.500 OPS · 0.0% K% · 11.1% BB% · 1 HR · 0 SB"
+      "daysAgo": 4,
+      "statLine": "3 G · 1.524 OPS · 0.0% K% · 14.3% BB% · 1 HR · 0 SB"
     },
     {
       "id": "04prx",
       "mlbam_id": "677319",
       "name": "Cameron Barstad",
       "positions": "C",
-      "rank": 6556,
+      "rank": 6561,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "AA",
       "toLevel": "AAA",
       "toRank": 5,
       "callupDate": "2026-07-07",
-      "daysAgo": 3,
-      "statLine": "1 G · 1.600 OPS · 40.0% K% · 0.0% BB% · 1 HR · 0 SB"
+      "daysAgo": 4,
+      "statLine": "2 G · 1.400 OPS · 20.0% K% · 0.0% BB% · 1 HR · 0 SB"
     },
     {
       "id": "06rkt",
       "mlbam_id": "829698",
       "name": "Armstrong Muhoozi",
       "positions": "CF,OF",
-      "rank": 4474,
+      "rank": 4487,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "DSL",
       "toLevel": "Complex",
       "toRank": 1,
       "callupDate": "2026-07-06",
-      "daysAgo": 4,
+      "daysAgo": 5,
       "statLine": "2 G · .667 OPS · 50.0% K% · 0.0% BB% · 0 HR · 0 SB"
     },
     {
@@ -156,14 +216,14 @@
       "mlbam_id": "672613",
       "name": "Eliezer Alfonzo",
       "positions": "2B,INF",
-      "rank": 2307,
+      "rank": 2309,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "AAA",
       "toLevel": "MLB",
       "toRank": 6,
       "callupDate": "2026-07-05",
-      "daysAgo": 5,
+      "daysAgo": 6,
       "statLine": "2 G · .000 OPS · 0.0% K% · 0.0% BB% · 0 HR · 0 SB"
     },
     {
@@ -171,14 +231,14 @@
       "mlbam_id": "821672",
       "name": "Eduardo Rojas",
       "positions": "C",
-      "rank": 2400,
+      "rank": 2412,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "Rookie",
       "toLevel": "AAA",
       "toRank": 5,
       "callupDate": "2026-07-05",
-      "daysAgo": 5,
+      "daysAgo": 6,
       "statLine": "1 G · .000 OPS · 0.0% K% · 0.0% BB% · 0 HR · 0 SB"
     },
     {
@@ -186,14 +246,14 @@
       "mlbam_id": "695048",
       "name": "Garret Guillemette",
       "positions": "C,1B,INF",
-      "rank": 3141,
+      "rank": 3137,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "AA",
       "toLevel": "AAA",
       "toRank": 5,
       "callupDate": "2026-07-05",
-      "daysAgo": 5,
+      "daysAgo": 6,
       "statLine": "2 G · .533 OPS · 0.0% K% · 16.7% BB% · 0 HR · 1 SB"
     },
     {
@@ -201,44 +261,44 @@
       "mlbam_id": "805466",
       "name": "Cruzmel Arias",
       "positions": "1B,INF",
-      "rank": 6982,
+      "rank": 6854,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "Rookie",
       "toLevel": "Single-A",
       "toRank": 2,
       "callupDate": "2026-07-05",
-      "daysAgo": 5,
-      "statLine": "1 G · .500 OPS · 0.0% K% · 0.0% BB% · 0 HR · 0 SB"
+      "daysAgo": 6,
+      "statLine": "2 G · .875 OPS · 12.5% K% · 0.0% BB% · 1 HR · 0 SB"
     },
     {
       "id": "05jq9",
       "mlbam_id": "691024",
       "name": "Cayden Wallace",
       "positions": "3B,INF",
-      "rank": 2334,
+      "rank": 2341,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "AA",
       "toLevel": "AAA",
       "toRank": 5,
       "callupDate": "2026-07-04",
-      "daysAgo": 6,
-      "statLine": "3 G · .000 OPS · 12.5% K% · 0.0% BB% · 0 HR · 0 SB"
+      "daysAgo": 7,
+      "statLine": "4 G · .333 OPS · 8.3% K% · 0.0% BB% · 0 HR · 1 SB"
     },
     {
       "id": "06mv8",
       "mlbam_id": "821694",
       "name": "Kevin Robledo",
       "positions": "C",
-      "rank": 3144,
+      "rank": 3410,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "DSL",
       "toLevel": "Complex",
       "toRank": 1,
       "callupDate": "2026-07-04",
-      "daysAgo": 6,
+      "daysAgo": 7,
       "statLine": "2 G · .333 OPS · 33.3% K% · 0.0% BB% · 0 HR · 0 SB"
     },
     {
@@ -246,45 +306,45 @@
       "mlbam_id": "829768",
       "name": "Malvin Fernandez",
       "positions": "3B,INF",
-      "rank": 3952,
+      "rank": 3953,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "Rookie",
       "toLevel": "Single-A",
       "toRank": 2,
       "callupDate": "2026-07-04",
-      "daysAgo": 6,
-      "statLine": "1 G · .000 OPS · 0 HR · 0 SB"
+      "daysAgo": 7,
+      "statLine": "2 G · .000 OPS · 50.0% K% · 0.0% BB% · 0 HR · 1 SB"
     },
     {
       "id": "060q4",
       "mlbam_id": "691281",
       "name": "Diosfran Cabeza",
       "positions": "1B,INF",
-      "rank": 6067,
+      "rank": 6068,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "Single-A",
       "toLevel": "High-A",
       "toRank": 3,
       "callupDate": "2026-07-04",
-      "daysAgo": 6,
-      "statLine": "2 G · .333 OPS · 33.3% K% · 33.3% BB% · 0 HR · 0 SB"
+      "daysAgo": 7,
+      "statLine": "3 G · .222 OPS · 20.0% K% · 20.0% BB% · 0 HR · 0 SB"
     },
     {
       "id": "06hwf",
       "mlbam_id": "814499",
       "name": "Brady Cerkownyk",
       "positions": "C",
-      "rank": 7224,
+      "rank": 7292,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "Rookie",
       "toLevel": "Single-A",
       "toRank": 2,
       "callupDate": "2026-07-04",
-      "daysAgo": 6,
-      "statLine": "3 G · .348 OPS · 25.0% K% · 8.3% BB% · 0 HR · 0 SB"
+      "daysAgo": 7,
+      "statLine": "4 G · .404 OPS · 25.0% K% · 18.8% BB% · 0 HR · 0 SB"
     },
     {
       "id": "06rj5",
@@ -298,7 +358,7 @@
       "toLevel": "AA",
       "toRank": 4,
       "callupDate": "2026-07-03",
-      "daysAgo": 7,
+      "daysAgo": 8,
       "statLine": "2 G · .500 OPS · 25.0% K% · 0.0% BB% · 0 HR · 0 SB"
     },
     {
@@ -306,74 +366,74 @@
       "mlbam_id": "695023",
       "name": "Eddie Park",
       "positions": "LF,CF,RF,OF",
-      "rank": 5330,
+      "rank": 5344,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "AA",
       "toLevel": "AAA",
       "toRank": 5,
       "callupDate": "2026-07-03",
-      "daysAgo": 7,
-      "statLine": "3 G · .571 OPS · 42.9% K% · 0.0% BB% · 0 HR · 0 SB"
-    },
-    {
-      "id": "06kxy",
-      "mlbam_id": "820991",
-      "name": "Christofer Reyes",
-      "positions": "2B,INF",
-      "rank": 3560,
-      "isPit": false,
-      "isTwoWay": false,
-      "fromLevel": "Rookie",
-      "toLevel": "Single-A",
-      "toRank": 2,
-      "callupDate": "2026-07-02",
       "daysAgo": 8,
-      "statLine": "4 G · .423 OPS · 41.2% K% · 5.9% BB% · 0 HR · 1 SB"
+      "statLine": "3 G · .571 OPS · 42.9% K% · 0.0% BB% · 0 HR · 0 SB"
     },
     {
       "id": "06r6i",
       "mlbam_id": "821787",
       "name": "Guillermo Batista",
       "positions": "3B,INF",
-      "rank": 3695,
+      "rank": 3411,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "DSL",
       "toLevel": "Complex",
       "toRank": 1,
       "callupDate": "2026-07-02",
-      "daysAgo": 8,
-      "statLine": "4 G · .972 OPS · 0.0% K% · 25.0% BB% · 0 HR · 1 SB"
+      "daysAgo": 9,
+      "statLine": "5 G · 1.262 OPS · 0.0% K% · 37.5% BB% · 0 HR · 1 SB"
     },
     {
-      "id": "05j70",
-      "mlbam_id": "691398",
-      "name": "Yerlin Confidan",
-      "positions": "LF,CF,RF,OF",
-      "rank": 4119,
-      "isPit": false,
-      "isTwoWay": false,
-      "fromLevel": "High-A",
-      "toLevel": "AA",
-      "toRank": 4,
-      "callupDate": "2026-07-02",
-      "daysAgo": 8,
-      "statLine": "6 G · 1.190 OPS · 23.8% K% · 14.3% BB% · 1 HR · 1 SB"
-    },
-    {
-      "id": "06rio",
-      "mlbam_id": "816406",
-      "name": "Ivan Cespedes",
-      "positions": "C",
-      "rank": 4240,
+      "id": "06kxy",
+      "mlbam_id": "820991",
+      "name": "Christofer Reyes",
+      "positions": "2B,INF",
+      "rank": 3547,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "Rookie",
       "toLevel": "Single-A",
       "toRank": 2,
       "callupDate": "2026-07-02",
-      "daysAgo": 8,
+      "daysAgo": 9,
+      "statLine": "4 G · .423 OPS · 41.2% K% · 5.9% BB% · 0 HR · 1 SB"
+    },
+    {
+      "id": "05j70",
+      "mlbam_id": "691398",
+      "name": "Yerlin Confidan",
+      "positions": "LF,CF,RF,OF",
+      "rank": 3786,
+      "isPit": false,
+      "isTwoWay": false,
+      "fromLevel": "High-A",
+      "toLevel": "AA",
+      "toRank": 4,
+      "callupDate": "2026-07-02",
+      "daysAgo": 9,
+      "statLine": "7 G · 1.116 OPS · 20.0% K% · 12.0% BB% · 1 HR · 1 SB"
+    },
+    {
+      "id": "06rio",
+      "mlbam_id": "816406",
+      "name": "Ivan Cespedes",
+      "positions": "C",
+      "rank": 4244,
+      "isPit": false,
+      "isTwoWay": false,
+      "fromLevel": "Rookie",
+      "toLevel": "Single-A",
+      "toRank": 2,
+      "callupDate": "2026-07-02",
+      "daysAgo": 9,
       "statLine": "4 G · .708 OPS · 30.8% K% · 23.1% BB% · 1 HR · 0 SB"
     },
     {
@@ -381,14 +441,14 @@
       "mlbam_id": "814842",
       "name": "Neurelin Montero",
       "positions": "C",
-      "rank": 4385,
+      "rank": 4397,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "DSL",
       "toLevel": "High-A",
       "toRank": 3,
       "callupDate": "2026-07-02",
-      "daysAgo": 8,
+      "daysAgo": 9,
       "statLine": "1 G · 3.000 OPS · 0.0% K% · 0.0% BB% · 0 HR · 0 SB"
     },
     {
@@ -396,14 +456,14 @@
       "mlbam_id": "834631",
       "name": "Rey Cruz",
       "positions": "C",
-      "rank": 5739,
+      "rank": 5743,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "DSL",
       "toLevel": "Complex",
       "toRank": 1,
       "callupDate": "2026-07-02",
-      "daysAgo": 8,
+      "daysAgo": 9,
       "statLine": "3 G · .733 OPS · 33.3% K% · 16.7% BB% · 0 HR · 0 SB"
     },
     {
@@ -411,44 +471,44 @@
       "mlbam_id": "690958",
       "name": "Drew Bowser",
       "positions": "3B,INF",
-      "rank": 7002,
+      "rank": 6998,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "High-A",
       "toLevel": "AA",
       "toRank": 4,
       "callupDate": "2026-07-02",
-      "daysAgo": 8,
-      "statLine": "4 G · .516 OPS · 50.0% K% · 7.1% BB% · 0 HR · 0 SB"
+      "daysAgo": 9,
+      "statLine": "5 G · .399 OPS · 55.6% K% · 5.6% BB% · 0 HR · 0 SB"
     },
     {
       "id": "06pps",
       "mlbam_id": "808864",
       "name": "Raider Tello",
       "positions": "1B,3B,INF",
-      "rank": 7532,
+      "rank": 7529,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "High-A",
       "toLevel": "AA",
       "toRank": 4,
       "callupDate": "2026-07-02",
-      "daysAgo": 8,
-      "statLine": "5 G · .900 OPS · 15.0% K% · 20.0% BB% · 1 HR · 0 SB"
+      "daysAgo": 9,
+      "statLine": "6 G · .924 OPS · 20.0% K% · 16.0% BB% · 1 HR · 0 SB"
     },
     {
       "id": "06msz",
       "mlbam_id": "822619",
       "name": "Christian Gonzalez",
       "positions": "RF,OF",
-      "rank": 2899,
+      "rank": 2889,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "Rookie",
       "toLevel": "Single-A",
       "toRank": 2,
       "callupDate": "2026-07-01",
-      "daysAgo": 9,
+      "daysAgo": 10,
       "statLine": "7 G · .886 OPS · 18.2% K% · 24.2% BB% · 1 HR · 1 SB"
     },
     {
@@ -456,59 +516,59 @@
       "mlbam_id": "701750",
       "name": "Bennett Thompson",
       "positions": "C",
-      "rank": 3536,
+      "rank": 3522,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "High-A",
       "toLevel": "AA",
       "toRank": 4,
       "callupDate": "2026-07-01",
-      "daysAgo": 9,
-      "statLine": "6 G · .801 OPS · 32.1% K% · 10.7% BB% · 2 HR · 1 SB"
+      "daysAgo": 10,
+      "statLine": "7 G · .761 OPS · 31.3% K% · 9.4% BB% · 2 HR · 1 SB"
     },
     {
       "id": "06yn1",
       "mlbam_id": "702582",
       "name": "Dallas Macias",
       "positions": "LF,OF",
-      "rank": 5832,
+      "rank": 5840,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "Single-A",
       "toLevel": "High-A",
       "toRank": 3,
       "callupDate": "2026-07-01",
-      "daysAgo": 9,
-      "statLine": "5 G · .588 OPS · 27.8% K% · 0.0% BB% · 2 HR · 0 SB"
+      "daysAgo": 10,
+      "statLine": "6 G · .476 OPS · 27.3% K% · 0.0% BB% · 2 HR · 0 SB"
     },
     {
       "id": "06rhp",
       "mlbam_id": "806921",
       "name": "Yannic Walther",
       "positions": "C",
-      "rank": 6340,
+      "rank": 6347,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "Single-A",
       "toLevel": "High-A",
       "toRank": 3,
       "callupDate": "2026-07-01",
-      "daysAgo": 9,
-      "statLine": "4 G · 1.196 OPS · 33.3% K% · 27.8% BB% · 1 HR · 0 SB"
+      "daysAgo": 10,
+      "statLine": "5 G · 1.167 OPS · 38.1% K% · 23.8% BB% · 1 HR · 0 SB"
     },
     {
       "id": "070dw",
       "mlbam_id": "701699",
       "name": "Bryan Arendt",
       "positions": "C",
-      "rank": 7094,
+      "rank": 7090,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "Single-A",
       "toLevel": "High-A",
       "toRank": 3,
       "callupDate": "2026-07-01",
-      "daysAgo": 9,
+      "daysAgo": 10,
       "statLine": "4 G · .369 OPS · 35.3% K% · 11.8% BB% · 0 HR · 0 SB"
     },
     {
@@ -523,8 +583,8 @@
       "toLevel": "AA",
       "toRank": 4,
       "callupDate": "2026-06-30",
-      "daysAgo": 10,
-      "statLine": "7 G · .931 OPS · 18.8% K% · 15.6% BB% · 2 HR · 0 SB"
+      "daysAgo": 11,
+      "statLine": "8 G · 1.022 OPS · 16.7% K% · 16.7% BB% · 3 HR · 0 SB"
     },
     {
       "id": "06yyn",
@@ -538,7 +598,7 @@
       "toLevel": "Single-A",
       "toRank": 2,
       "callupDate": "2026-06-30",
-      "daysAgo": 10,
+      "daysAgo": 11,
       "statLine": "7 G · .460 OPS · 26.7% K% · 10.0% BB% · 0 HR · 0 SB"
     },
     {
@@ -553,8 +613,8 @@
       "toLevel": "AA",
       "toRank": 4,
       "callupDate": "2026-06-30",
-      "daysAgo": 10,
-      "statLine": "7 G · .727 OPS · 9.1% K% · 15.2% BB% · 0 HR · 0 SB"
+      "daysAgo": 11,
+      "statLine": "8 G · .796 OPS · 8.1% K% · 13.5% BB% · 0 HR · 0 SB"
     },
     {
       "id": "06mnk",
@@ -568,8 +628,8 @@
       "toLevel": "High-A",
       "toRank": 3,
       "callupDate": "2026-06-30",
-      "daysAgo": 10,
-      "statLine": "7 G · .789 OPS · 40.0% K% · 6.7% BB% · 1 HR · 0 SB"
+      "daysAgo": 11,
+      "statLine": "8 G · .815 OPS · 35.3% K% · 5.9% BB% · 1 HR · 0 SB"
     },
     {
       "id": "06mhy",
@@ -583,8 +643,8 @@
       "toLevel": "AA",
       "toRank": 4,
       "callupDate": "2026-06-30",
-      "daysAgo": 10,
-      "statLine": "8 G · 1.162 OPS · 26.5% K% · 5.9% BB% · 4 HR · 1 SB"
+      "daysAgo": 11,
+      "statLine": "9 G · 1.080 OPS · 28.9% K% · 7.9% BB% · 4 HR · 1 SB"
     },
     {
       "id": "05rf5",
@@ -598,7 +658,7 @@
       "toLevel": "AAA",
       "toRank": 5,
       "callupDate": "2026-06-30",
-      "daysAgo": 10,
+      "daysAgo": 11,
       "statLine": "8 G · .425 OPS · 35.1% K% · 8.1% BB% · 0 HR · 3 SB"
     },
     {
@@ -613,8 +673,8 @@
       "toLevel": "AA",
       "toRank": 4,
       "callupDate": "2026-06-30",
-      "daysAgo": 10,
-      "statLine": "8 G · 1.078 OPS · 13.9% K% · 13.9% BB% · 3 HR · 0 SB"
+      "daysAgo": 11,
+      "statLine": "9 G · 1.086 OPS · 17.5% K% · 15.0% BB% · 3 HR · 0 SB"
     },
     {
       "id": "06zi7",
@@ -628,8 +688,8 @@
       "toLevel": "AA",
       "toRank": 4,
       "callupDate": "2026-06-30",
-      "daysAgo": 10,
-      "statLine": "7 G · 1.098 OPS · 12.9% K% · 35.5% BB% · 1 HR · 0 SB"
+      "daysAgo": 11,
+      "statLine": "8 G · 1.234 OPS · 13.5% K% · 35.1% BB% · 2 HR · 1 SB"
     },
     {
       "id": "06mpz",
@@ -643,7 +703,7 @@
       "toLevel": "High-A",
       "toRank": 3,
       "callupDate": "2026-06-30",
-      "daysAgo": 10,
+      "daysAgo": 11,
       "statLine": "8 G · 1.066 OPS · 14.3% K% · 14.3% BB% · 1 HR · 3 SB"
     },
     {
@@ -651,14 +711,14 @@
       "mlbam_id": "671155",
       "name": "Ivan Johnson",
       "positions": "LF,OF",
-      "rank": 2394,
+      "rank": 2404,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "AAA",
       "toLevel": "MLB",
       "toRank": 6,
       "callupDate": "2026-06-30",
-      "daysAgo": 10,
+      "daysAgo": 11,
       "statLine": "3 G · .200 OPS · 20.0% K% · 20.0% BB% · 0 HR · 0 SB"
     },
     {
@@ -666,59 +726,59 @@
       "mlbam_id": "800176",
       "name": "Carlos Sanchez",
       "positions": "C",
-      "rank": 2466,
+      "rank": 2480,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "High-A",
       "toLevel": "AA",
       "toRank": 4,
       "callupDate": "2026-06-30",
-      "daysAgo": 10,
-      "statLine": "7 G · .669 OPS · 20.7% K% · 3.4% BB% · 1 HR · 1 SB"
+      "daysAgo": 11,
+      "statLine": "8 G · .659 OPS · 20.6% K% · 2.9% BB% · 1 HR · 1 SB"
     },
     {
       "id": "06ri4",
       "mlbam_id": "808096",
       "name": "Reiner Herrera",
       "positions": "C",
-      "rank": 2575,
+      "rank": 2588,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "Rookie",
       "toLevel": "Single-A",
       "toRank": 2,
       "callupDate": "2026-06-30",
-      "daysAgo": 10,
-      "statLine": "5 G · .289 OPS · 27.8% K% · 16.7% BB% · 0 HR · 0 SB"
+      "daysAgo": 11,
+      "statLine": "6 G · .333 OPS · 22.7% K% · 13.6% BB% · 0 HR · 1 SB"
     },
     {
       "id": "06roq",
       "mlbam_id": "809844",
       "name": "Kien Vu",
       "positions": "LF,OF",
-      "rank": 2591,
+      "rank": 2600,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "High-A",
       "toLevel": "AA",
       "toRank": 4,
       "callupDate": "2026-06-30",
-      "daysAgo": 10,
-      "statLine": "8 G · .488 OPS · 39.4% K% · 18.2% BB% · 0 HR · 0 SB"
+      "daysAgo": 11,
+      "statLine": "9 G · .488 OPS · 39.4% K% · 18.2% BB% · 0 HR · 0 SB"
     },
     {
       "id": "06avz",
       "mlbam_id": "807983",
       "name": "Ramon Landaeta",
       "positions": "C",
-      "rank": 4015,
+      "rank": 4014,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "Rookie",
       "toLevel": "Single-A",
       "toRank": 2,
       "callupDate": "2026-06-30",
-      "daysAgo": 10,
+      "daysAgo": 11,
       "statLine": "6 G · .890 OPS · 28.0% K% · 20.0% BB% · 0 HR · 0 SB"
     },
     {
@@ -726,14 +786,14 @@
       "mlbam_id": "829758",
       "name": "Elias Reyno",
       "positions": "LF,OF",
-      "rank": 4283,
+      "rank": 4285,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "DSL",
       "toLevel": "Complex",
       "toRank": 1,
       "callupDate": "2026-06-30",
-      "daysAgo": 10,
+      "daysAgo": 11,
       "statLine": "2 G · .629 OPS · 28.6% K% · 28.6% BB% · 0 HR · 1 SB"
     },
     {
@@ -741,15 +801,15 @@
       "mlbam_id": "805880",
       "name": "Tanner Thach",
       "positions": "1B,INF",
-      "rank": 4977,
+      "rank": 4974,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "Single-A",
       "toLevel": "High-A",
       "toRank": 3,
       "callupDate": "2026-06-30",
-      "daysAgo": 10,
-      "statLine": "7 G · .724 OPS · 23.5% K% · 11.8% BB% · 1 HR · 0 SB"
+      "daysAgo": 11,
+      "statLine": "8 G · .736 OPS · 21.1% K% · 13.2% BB% · 1 HR · 0 SB"
     },
     {
       "id": "070bi",
@@ -763,7 +823,7 @@
       "toLevel": "High-A",
       "toRank": 3,
       "callupDate": "2026-06-30",
-      "daysAgo": 10,
+      "daysAgo": 11,
       "statLine": "6 G · 1.138 OPS · 14.8% K% · 22.2% BB% · 1 HR · 0 SB"
     },
     {
@@ -771,14 +831,14 @@
       "mlbam_id": "801686",
       "name": "Michael Carico",
       "positions": "C",
-      "rank": 6920,
+      "rank": 6922,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "Single-A",
       "toLevel": "High-A",
       "toRank": 3,
       "callupDate": "2026-06-30",
-      "daysAgo": 10,
+      "daysAgo": 11,
       "statLine": "5 G · .500 OPS · 40.0% K% · 50.0% BB% · 0 HR · 0 SB"
     },
     {
@@ -793,8 +853,8 @@
       "toLevel": "MLB",
       "toRank": 6,
       "callupDate": "2026-06-29",
-      "daysAgo": 11,
-      "statLine": "8 G · 1.116 OPS · 6.5% K% · 0.0% BB% · 0 HR · 0 SB"
+      "daysAgo": 12,
+      "statLine": "9 G · .987 OPS · 11.4% K% · 0.0% BB% · 0 HR · 0 SB"
     },
     {
       "id": "05uvx",
@@ -808,37 +868,37 @@
       "toLevel": "MLB",
       "toRank": 6,
       "callupDate": "2026-06-29",
-      "daysAgo": 11,
-      "statLine": "7 G · .590 OPS · 11.1% K% · 11.1% BB% · 0 HR · 0 SB"
+      "daysAgo": 12,
+      "statLine": "8 G · .602 OPS · 14.3% K% · 9.5% BB% · 0 HR · 0 SB"
     },
     {
       "id": "06k7x",
       "mlbam_id": "821775",
       "name": "Aaron Pinero",
       "positions": "3B,INF",
-      "rank": 2995,
+      "rank": 2992,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "DSL",
       "toLevel": "Complex",
       "toRank": 1,
       "callupDate": "2026-06-29",
-      "daysAgo": 11,
-      "statLine": "4 G · .667 OPS · 27.8% K% · 11.1% BB% · 0 HR · 0 SB"
+      "daysAgo": 12,
+      "statLine": "5 G · .662 OPS · 25.0% K% · 10.0% BB% · 0 HR · 0 SB"
     },
     {
       "id": "06kx2",
       "mlbam_id": "821099",
       "name": "Wuinder Torres",
       "positions": "C",
-      "rank": 4041,
+      "rank": 4045,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "DSL",
       "toLevel": "Complex",
       "toRank": 1,
       "callupDate": "2026-06-29",
-      "daysAgo": 11,
+      "daysAgo": 12,
       "statLine": "3 G · .900 OPS · 0.0% K% · 0.0% BB% · 0 HR · 0 SB"
     },
     {
@@ -846,59 +906,59 @@
       "mlbam_id": "687152",
       "name": "Darrien Miller",
       "positions": "C",
-      "rank": 3033,
+      "rank": 3036,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "AA",
       "toLevel": "AAA",
       "toRank": 5,
       "callupDate": "2026-06-28",
-      "daysAgo": 12,
-      "statLine": "7 G · .558 OPS · 13.0% K% · 8.7% BB% · 0 HR · 0 SB"
+      "daysAgo": 13,
+      "statLine": "8 G · .762 OPS · 14.8% K% · 7.4% BB% · 1 HR · 0 SB"
     },
     {
       "id": "06aot",
       "mlbam_id": "808553",
       "name": "John Estevez",
       "positions": "RF,OF",
-      "rank": 3675,
+      "rank": 3671,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "Single-A",
       "toLevel": "High-A",
       "toRank": 3,
       "callupDate": "2026-06-28",
-      "daysAgo": 12,
-      "statLine": "2 G · .500 OPS · 50.0% K% · 0.0% BB% · 0 HR · 0 SB"
+      "daysAgo": 13,
+      "statLine": "3 G · .522 OPS · 50.0% K% · 10.0% BB% · 0 HR · 0 SB"
     },
     {
       "id": "06ukd",
       "mlbam_id": "811551",
       "name": "Isael Arias",
       "positions": "CF,OF",
-      "rank": 4220,
+      "rank": 4223,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "Rookie",
       "toLevel": "Single-A",
       "toRank": 2,
       "callupDate": "2026-06-28",
-      "daysAgo": 12,
-      "statLine": "8 G · .497 OPS · 48.0% K% · 8.0% BB% · 0 HR · 4 SB"
+      "daysAgo": 13,
+      "statLine": "9 G · .516 OPS · 46.4% K% · 7.1% BB% · 0 HR · 6 SB"
     },
     {
       "id": "06aks",
       "mlbam_id": "808380",
       "name": "Yosneiker Rivas",
       "positions": "2B,INF",
-      "rank": 4939,
+      "rank": 4941,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "Rookie",
       "toLevel": "Single-A",
       "toRank": 2,
       "callupDate": "2026-06-28",
-      "daysAgo": 12,
+      "daysAgo": 13,
       "statLine": "7 G · .724 OPS · 30.0% K% · 0.0% BB% · 1 HR · 0 SB"
     },
     {
@@ -913,7 +973,7 @@
       "toLevel": "MLB",
       "toRank": 6,
       "callupDate": "2026-06-27",
-      "daysAgo": 13,
+      "daysAgo": 14,
       "statLine": "8 G · .552 OPS · 37.9% K% · 0.0% BB% · 1 HR · 0 SB"
     },
     {
@@ -921,15 +981,15 @@
       "mlbam_id": "821762",
       "name": "Oliver Tejada",
       "positions": "RF,OF",
-      "rank": 2518,
+      "rank": 2531,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "Rookie",
       "toLevel": "Single-A",
       "toRank": 2,
       "callupDate": "2026-06-27",
-      "daysAgo": 13,
-      "statLine": "6 G · .606 OPS · 38.5% K% · 7.7% BB% · 1 HR · 1 SB"
+      "daysAgo": 14,
+      "statLine": "7 G · .547 OPS · 35.5% K% · 9.7% BB% · 1 HR · 1 SB"
     },
     {
       "id": "06f0p",
@@ -943,7 +1003,7 @@
       "toLevel": "MLB",
       "toRank": 6,
       "callupDate": "2026-06-26",
-      "daysAgo": 14,
+      "daysAgo": 15,
       "statLine": "7 G · .304 OPS · 50.0% K% · 12.5% BB% · 0 HR · 0 SB"
     },
     {
@@ -951,29 +1011,29 @@
       "mlbam_id": "701852",
       "name": "Drew Cavanaugh",
       "positions": "C",
-      "rank": 2375,
+      "rank": 2344,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "AAA",
       "toLevel": "MLB",
       "toRank": 6,
       "callupDate": "2026-06-26",
-      "daysAgo": 14,
-      "statLine": "9 G · .367 OPS · 26.9% K% · 3.8% BB% · 0 HR · 0 SB"
+      "daysAgo": 15,
+      "statLine": "10 G · .498 OPS · 26.7% K% · 6.7% BB% · 0 HR · 0 SB"
     },
     {
       "id": "05r5m",
       "mlbam_id": "695467",
       "name": "Juan Montero",
       "positions": "C",
-      "rank": 5736,
+      "rank": 5739,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "AA",
       "toLevel": "AAA",
       "toRank": 5,
       "callupDate": "2026-06-26",
-      "daysAgo": 14,
+      "daysAgo": 15,
       "statLine": "2 G · .000 OPS · 50.0% K% · 0.0% BB% · 0 HR · 0 SB"
     },
     {
@@ -981,14 +1041,14 @@
       "mlbam_id": "671748",
       "name": "Casey Yamauchi",
       "positions": "2B,INF",
-      "rank": 5788,
+      "rank": 5791,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "AA",
       "toLevel": "AAA",
       "toRank": 5,
       "callupDate": "2026-06-26",
-      "daysAgo": 14,
+      "daysAgo": 15,
       "statLine": "3 G · .750 OPS · 25.0% K% · 0.0% BB% · 0 HR · 0 SB"
     },
     {
@@ -996,14 +1056,14 @@
       "mlbam_id": "686540",
       "name": "Owen Cobb",
       "positions": "2B,INF",
-      "rank": 6462,
+      "rank": 6469,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "AA",
       "toLevel": "AAA",
       "toRank": 5,
       "callupDate": "2026-06-26",
-      "daysAgo": 14,
+      "daysAgo": 15,
       "statLine": "6 G · .619 OPS · 22.7% K% · 0.0% BB% · 0 HR · 0 SB"
     },
     {
@@ -1011,14 +1071,14 @@
       "mlbam_id": "814453",
       "name": "Nathan Archer",
       "positions": "LF,OF",
-      "rank": 7047,
+      "rank": 7044,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "Single-A",
       "toLevel": "High-A",
       "toRank": 3,
       "callupDate": "2026-06-26",
-      "daysAgo": 14,
+      "daysAgo": 15,
       "statLine": "2 G · .500 OPS · 25.0% K% · 0.0% BB% · 0 HR · 0 SB"
     },
     {
@@ -1026,14 +1086,14 @@
       "mlbam_id": "806986",
       "name": "Raymond Mola",
       "positions": "1B,INF",
-      "rank": 4538,
+      "rank": 4913,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "Rookie",
       "toLevel": "Single-A",
       "toRank": 2,
       "callupDate": "2026-06-25",
-      "daysAgo": 15,
+      "daysAgo": 16,
       "statLine": "5 G · .449 OPS · 40.0% K% · 20.0% BB% · 0 HR · 1 SB"
     },
     {
@@ -1048,8 +1108,8 @@
       "toLevel": "High-A",
       "toRank": 3,
       "callupDate": "2026-06-24",
-      "daysAgo": 16,
-      "statLine": "11 G · .937 OPS · 14.8% K% · 13.0% BB% · 2 HR · 0 SB"
+      "daysAgo": 17,
+      "statLine": "12 G · .887 OPS · 16.9% K% · 11.9% BB% · 2 HR · 0 SB"
     },
     {
       "id": "06k81",
@@ -1063,7 +1123,7 @@
       "toLevel": "Single-A",
       "toRank": 2,
       "callupDate": "2026-06-24",
-      "daysAgo": 16,
+      "daysAgo": 17,
       "statLine": "6 G · .855 OPS · 16.0% K% · 12.0% BB% · 0 HR · 4 SB"
     },
     {
@@ -1078,8 +1138,8 @@
       "toLevel": "High-A",
       "toRank": 3,
       "callupDate": "2026-06-24",
-      "daysAgo": 16,
-      "statLine": "9 G · .500 OPS · 5.0% K% · 5.0% BB% · 0 HR · 1 SB"
+      "daysAgo": 17,
+      "statLine": "10 G · .463 OPS · 4.7% K% · 4.7% BB% · 0 HR · 1 SB"
     },
     {
       "id": "06ute",
@@ -1093,8 +1153,8 @@
       "toLevel": "High-A",
       "toRank": 3,
       "callupDate": "2026-06-24",
-      "daysAgo": 16,
-      "statLine": "10 G · .731 OPS · 42.1% K% · 18.4% BB% · 3 HR · 0 SB"
+      "daysAgo": 17,
+      "statLine": "11 G · .669 OPS · 40.5% K% · 16.7% BB% · 3 HR · 0 SB"
     },
     {
       "id": "05js9",
@@ -1108,8 +1168,8 @@
       "toLevel": "AAA",
       "toRank": 5,
       "callupDate": "2026-06-24",
-      "daysAgo": 16,
-      "statLine": "4 G · .800 OPS · 53.3% K% · 0.0% BB% · 0 HR · 1 SB"
+      "daysAgo": 17,
+      "statLine": "5 G · .768 OPS · 45.0% K% · 5.0% BB% · 0 HR · 1 SB"
     },
     {
       "id": "06icz",
@@ -1123,22 +1183,22 @@
       "toLevel": "High-A",
       "toRank": 3,
       "callupDate": "2026-06-24",
-      "daysAgo": 16,
-      "statLine": "11 G · 1.083 OPS · 24.5% K% · 10.2% BB% · 4 HR · 2 SB"
+      "daysAgo": 17,
+      "statLine": "12 G · 1.014 OPS · 25.9% K% · 9.3% BB% · 4 HR · 3 SB"
     },
     {
       "id": "051e0",
       "mlbam_id": "687310",
       "name": "Will Simpson",
       "positions": "1B,INF",
-      "rank": 2443,
+      "rank": 2450,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "AA",
       "toLevel": "AAA",
       "toRank": 5,
       "callupDate": "2026-06-24",
-      "daysAgo": 16,
+      "daysAgo": 17,
       "statLine": "6 G · .829 OPS · 19.0% K% · 28.6% BB% · 1 HR · 1 SB"
     },
     {
@@ -1146,14 +1206,14 @@
       "mlbam_id": "703804",
       "name": "Romeo Sanabria",
       "positions": "1B,INF",
-      "rank": 3787,
+      "rank": 3778,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "AA",
       "toLevel": "AAA",
       "toRank": 5,
       "callupDate": "2026-06-24",
-      "daysAgo": 16,
+      "daysAgo": 17,
       "statLine": "8 G · .391 OPS · 25.0% K% · 9.4% BB% · 0 HR · 0 SB"
     },
     {
@@ -1168,8 +1228,8 @@
       "toLevel": "AA",
       "toRank": 4,
       "callupDate": "2026-06-23",
-      "daysAgo": 17,
-      "statLine": "13 G · .499 OPS · 24.6% K% · 9.8% BB% · 0 HR · 3 SB"
+      "daysAgo": 18,
+      "statLine": "14 G · .518 OPS · 26.2% K% · 10.8% BB% · 0 HR · 4 SB"
     },
     {
       "id": "06rq4",
@@ -1183,7 +1243,7 @@
       "toLevel": "Single-A",
       "toRank": 2,
       "callupDate": "2026-06-23",
-      "daysAgo": 17,
+      "daysAgo": 18,
       "statLine": "13 G · .681 OPS · 17.5% K% · 7.0% BB% · 1 HR · 5 SB"
     },
     {
@@ -1198,8 +1258,8 @@
       "toLevel": "AA",
       "toRank": 4,
       "callupDate": "2026-06-23",
-      "daysAgo": 17,
-      "statLine": "10 G · .776 OPS · 21.1% K% · 0.0% BB% · 2 HR · 0 SB"
+      "daysAgo": 18,
+      "statLine": "11 G · .749 OPS · 21.4% K% · 0.0% BB% · 2 HR · 0 SB"
     },
     {
       "id": "06v5z",
@@ -1213,8 +1273,8 @@
       "toLevel": "High-A",
       "toRank": 3,
       "callupDate": "2026-06-23",
-      "daysAgo": 17,
-      "statLine": "12 G · .608 OPS · 25.9% K% · 10.3% BB% · 0 HR · 7 SB"
+      "daysAgo": 18,
+      "statLine": "13 G · .642 OPS · 25.4% K% · 9.5% BB% · 0 HR · 7 SB"
     },
     {
       "id": "061rf",
@@ -1228,8 +1288,8 @@
       "toLevel": "AA",
       "toRank": 4,
       "callupDate": "2026-06-23",
-      "daysAgo": 17,
-      "statLine": "12 G · .983 OPS · 20.4% K% · 6.1% BB% · 5 HR · 0 SB"
+      "daysAgo": 18,
+      "statLine": "13 G · 1.025 OPS · 18.2% K% · 5.5% BB% · 6 HR · 0 SB"
     },
     {
       "id": "06qjw",
@@ -1243,8 +1303,8 @@
       "toLevel": "AAA",
       "toRank": 5,
       "callupDate": "2026-06-23",
-      "daysAgo": 17,
-      "statLine": "13 G · .863 OPS · 29.4% K% · 7.8% BB% · 1 HR · 3 SB"
+      "daysAgo": 18,
+      "statLine": "14 G · .822 OPS · 30.9% K% · 7.3% BB% · 1 HR · 3 SB"
     },
     {
       "id": "06mps",
@@ -1258,8 +1318,8 @@
       "toLevel": "AA",
       "toRank": 4,
       "callupDate": "2026-06-23",
-      "daysAgo": 17,
-      "statLine": "13 G · .788 OPS · 18.3% K% · 10.0% BB% · 1 HR · 10 SB"
+      "daysAgo": 18,
+      "statLine": "14 G · .793 OPS · 18.2% K% · 9.1% BB% · 1 HR · 11 SB"
     },
     {
       "id": "060uf",
@@ -1273,7 +1333,7 @@
       "toLevel": "AAA",
       "toRank": 5,
       "callupDate": "2026-06-23",
-      "daysAgo": 17,
+      "daysAgo": 18,
       "statLine": "2 G · 1.429 OPS · 28.6% K% · 0.0% BB% · 1 HR · 0 SB"
     },
     {
@@ -1288,8 +1348,8 @@
       "toLevel": "AA",
       "toRank": 4,
       "callupDate": "2026-06-23",
-      "daysAgo": 17,
-      "statLine": "13 G · .961 OPS · 25.0% K% · 5.4% BB% · 2 HR · 0 SB"
+      "daysAgo": 18,
+      "statLine": "14 G · .913 OPS · 27.9% K% · 4.9% BB% · 2 HR · 0 SB"
     },
     {
       "id": "06rmc",
@@ -1303,8 +1363,8 @@
       "toLevel": "Complex",
       "toRank": 1,
       "callupDate": "2026-06-23",
-      "daysAgo": 17,
-      "statLine": "11 G · .689 OPS · 27.7% K% · 21.3% BB% · 0 HR · 3 SB"
+      "daysAgo": 18,
+      "statLine": "12 G · .658 OPS · 28.8% K% · 19.2% BB% · 0 HR · 3 SB"
     },
     {
       "id": "06hvg",
@@ -1318,8 +1378,8 @@
       "toLevel": "AAA",
       "toRank": 5,
       "callupDate": "2026-06-23",
-      "daysAgo": 17,
-      "statLine": "13 G · .830 OPS · 22.4% K% · 5.2% BB% · 1 HR · 5 SB"
+      "daysAgo": 18,
+      "statLine": "14 G · .818 OPS · 20.6% K% · 6.3% BB% · 1 HR · 5 SB"
     },
     {
       "id": "06qof",
@@ -1333,22 +1393,22 @@
       "toLevel": "AA",
       "toRank": 4,
       "callupDate": "2026-06-23",
-      "daysAgo": 17,
-      "statLine": "10 G · .837 OPS · 27.0% K% · 18.9% BB% · 1 HR · 4 SB"
+      "daysAgo": 18,
+      "statLine": "11 G · .934 OPS · 29.3% K% · 19.5% BB% · 2 HR · 5 SB"
     },
     {
       "id": "05yhl",
       "mlbam_id": "701162",
       "name": "Ben Malgeri",
       "positions": "CF,RF,OF",
-      "rank": 2343,
+      "rank": 2349,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "AAA",
       "toLevel": "MLB",
       "toRank": 6,
       "callupDate": "2026-06-23",
-      "daysAgo": 17,
+      "daysAgo": 18,
       "statLine": "9 G · .675 OPS · 24.0% K% · 16.0% BB% · 0 HR · 0 SB"
     },
     {
@@ -1356,89 +1416,89 @@
       "mlbam_id": "800231",
       "name": "Won-Bin Cho",
       "positions": "CF,RF,OF",
-      "rank": 2434,
+      "rank": 2400,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "High-A",
       "toLevel": "AA",
       "toRank": 4,
       "callupDate": "2026-06-23",
-      "daysAgo": 17,
-      "statLine": "11 G · 1.120 OPS · 27.9% K% · 9.3% BB% · 7 HR · 0 SB"
+      "daysAgo": 18,
+      "statLine": "12 G · 1.261 OPS · 29.2% K% · 10.4% BB% · 9 HR · 0 SB"
     },
     {
       "id": "06yy8",
       "mlbam_id": "827719",
       "name": "Jake Munroe",
       "positions": "3B,INF",
-      "rank": 2696,
+      "rank": 2597,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "High-A",
       "toLevel": "AA",
       "toRank": 4,
       "callupDate": "2026-06-23",
-      "daysAgo": 17,
-      "statLine": "14 G · .786 OPS · 18.0% K% · 8.2% BB% · 0 HR · 2 SB"
+      "daysAgo": 18,
+      "statLine": "15 G · .813 OPS · 18.5% K% · 10.8% BB% · 0 HR · 2 SB"
     },
     {
       "id": "06hf5",
       "mlbam_id": "694742",
       "name": "Josh Moylan",
       "positions": "1B,3B,INF",
-      "rank": 3252,
+      "rank": 3249,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "High-A",
       "toLevel": "AA",
       "toRank": 4,
       "callupDate": "2026-06-23",
-      "daysAgo": 17,
-      "statLine": "14 G · .772 OPS · 34.0% K% · 11.3% BB% · 3 HR · 1 SB"
+      "daysAgo": 18,
+      "statLine": "15 G · .778 OPS · 33.3% K% · 12.3% BB% · 3 HR · 1 SB"
     },
     {
       "id": "06z0q",
       "mlbam_id": "813400",
       "name": "Jack Winnay",
       "positions": "3B,INF",
-      "rank": 3354,
+      "rank": 3618,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "High-A",
       "toLevel": "AA",
       "toRank": 4,
       "callupDate": "2026-06-23",
-      "daysAgo": 17,
-      "statLine": "12 G · .903 OPS · 15.7% K% · 9.8% BB% · 2 HR · 0 SB"
+      "daysAgo": 18,
+      "statLine": "13 G · .817 OPS · 16.1% K% · 8.9% BB% · 2 HR · 0 SB"
     },
     {
       "id": "06dn5",
       "mlbam_id": "801507",
       "name": "Jake Cunningham",
       "positions": "LF,RF,OF",
-      "rank": 3802,
+      "rank": 3795,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "High-A",
       "toLevel": "AA",
       "toRank": 4,
       "callupDate": "2026-06-23",
-      "daysAgo": 17,
-      "statLine": "13 G · .808 OPS · 32.1% K% · 3.6% BB% · 2 HR · 1 SB"
+      "daysAgo": 18,
+      "statLine": "14 G · .839 OPS · 31.7% K% · 3.3% BB% · 2 HR · 1 SB"
     },
     {
       "id": "06bpt",
       "mlbam_id": "814452",
       "name": "Anthony Martinez",
       "positions": "UT",
-      "rank": 4409,
+      "rank": 4423,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "Single-A",
       "toLevel": "High-A",
       "toRank": 3,
       "callupDate": "2026-06-23",
-      "daysAgo": 17,
+      "daysAgo": 18,
       "statLine": "8 G · .848 OPS · 11.1% K% · 16.7% BB% · 1 HR · 0 SB"
     },
     {
@@ -1446,45 +1506,45 @@
       "mlbam_id": "823295",
       "name": "Jay Thomason",
       "positions": "3B,INF",
-      "rank": 5441,
+      "rank": 5454,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "High-A",
       "toLevel": "AA",
       "toRank": 4,
       "callupDate": "2026-06-23",
-      "daysAgo": 17,
-      "statLine": "11 G · .557 OPS · 26.1% K% · 10.9% BB% · 0 HR · 3 SB"
+      "daysAgo": 18,
+      "statLine": "12 G · .679 OPS · 25.5% K% · 11.8% BB% · 1 HR · 3 SB"
     },
     {
       "id": "06sum",
       "mlbam_id": "808306",
       "name": "Carlos De Sousa",
       "positions": "C",
-      "rank": 6222,
+      "rank": 6224,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "DSL",
       "toLevel": "Complex",
       "toRank": 1,
       "callupDate": "2026-06-23",
-      "daysAgo": 17,
-      "statLine": "6 G · .369 OPS · 29.4% K% · 5.9% BB% · 0 HR · 0 SB"
+      "daysAgo": 18,
+      "statLine": "7 G · .347 OPS · 33.3% K% · 5.6% BB% · 0 HR · 0 SB"
     },
     {
       "id": "06zb1",
       "mlbam_id": "809633",
       "name": "Michael Dattalo",
       "positions": "3B,INF",
-      "rank": 6239,
+      "rank": 6242,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "Single-A",
       "toLevel": "High-A",
       "toRank": 3,
       "callupDate": "2026-06-23",
-      "daysAgo": 17,
-      "statLine": "12 G · .417 OPS · 22.4% K% · 10.2% BB% · 0 HR · 1 SB"
+      "daysAgo": 18,
+      "statLine": "13 G · .480 OPS · 20.4% K% · 11.1% BB% · 0 HR · 1 SB"
     },
     {
       "id": "06zlh",
@@ -1498,22 +1558,22 @@
       "toLevel": "High-A",
       "toRank": 3,
       "callupDate": "2026-06-23",
-      "daysAgo": 17,
-      "statLine": "12 G · .696 OPS · 20.8% K% · 18.8% BB% · 2 HR · 1 SB"
+      "daysAgo": 18,
+      "statLine": "13 G · .665 OPS · 22.6% K% · 17.0% BB% · 2 HR · 1 SB"
     },
     {
       "id": "06z5o",
       "mlbam_id": "832705",
       "name": "Abraham Bastidas",
       "positions": "2B,INF",
-      "rank": 4331,
+      "rank": 4337,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "DSL",
       "toLevel": "Complex",
       "toRank": 1,
       "callupDate": "2026-06-22",
-      "daysAgo": 18,
+      "daysAgo": 19,
       "statLine": "8 G · .667 OPS · 29.0% K% · 16.1% BB% · 0 HR · 0 SB"
     },
     {
@@ -1521,14 +1581,14 @@
       "mlbam_id": "702068",
       "name": "Cole Gabrielson",
       "positions": "LF,RF,OF",
-      "rank": 6013,
+      "rank": 6022,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "AA",
       "toLevel": "AAA",
       "toRank": 5,
       "callupDate": "2026-06-21",
-      "daysAgo": 19,
+      "daysAgo": 20,
       "statLine": "6 G · .568 OPS · 18.2% K% · 9.1% BB% · 0 HR · 0 SB"
     },
     {
@@ -1536,14 +1596,14 @@
       "mlbam_id": "815694",
       "name": "Lou Albrecht",
       "positions": "C",
-      "rank": 6297,
+      "rank": 6293,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "AA",
       "toLevel": "AAA",
       "toRank": 5,
       "callupDate": "2026-06-21",
-      "daysAgo": 19,
+      "daysAgo": 20,
       "statLine": "1 G · .000 OPS · 0.0% K% · 0.0% BB% · 0 HR · 0 SB"
     },
     {
@@ -1551,14 +1611,14 @@
       "mlbam_id": "682003",
       "name": "Garrett Martin",
       "positions": "LF,CF,RF,OF",
-      "rank": 3596,
+      "rank": 3584,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "AA",
       "toLevel": "AAA",
       "toRank": 5,
       "callupDate": "2026-06-20",
-      "daysAgo": 20,
+      "daysAgo": 21,
       "statLine": "8 G · .874 OPS · 31.4% K% · 2.9% BB% · 3 HR · 1 SB"
     },
     {
@@ -1566,14 +1626,14 @@
       "mlbam_id": "675448",
       "name": "Blake Hunt",
       "positions": "C",
-      "rank": 2392,
+      "rank": 2402,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "AAA",
       "toLevel": "MLB",
       "toRank": 6,
       "callupDate": "2026-06-19",
-      "daysAgo": 21,
+      "daysAgo": 22,
       "statLine": "2 G · .000 OPS · 100.0% K% · 0.0% BB% · 0 HR · 0 SB"
     },
     {
@@ -1581,14 +1641,14 @@
       "mlbam_id": "815204",
       "name": "Justin Barry",
       "positions": "3B,INF",
-      "rank": 3432,
+      "rank": 3428,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "Rookie",
       "toLevel": "Single-A",
       "toRank": 2,
       "callupDate": "2026-06-19",
-      "daysAgo": 21,
+      "daysAgo": 22,
       "statLine": "11 G · .515 OPS · 29.5% K% · 22.7% BB% · 0 HR · 6 SB"
     },
     {
@@ -1596,14 +1656,14 @@
       "mlbam_id": "669360",
       "name": "Trei Cruz",
       "positions": "3B,SS,INF,CF,OF",
-      "rank": 3922,
+      "rank": 3921,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "AAA",
       "toLevel": "MLB",
       "toRank": 6,
       "callupDate": "2026-06-19",
-      "daysAgo": 21,
+      "daysAgo": 22,
       "statLine": "2 G · .000 OPS · 60.0% K% · 0.0% BB% · 0 HR · 0 SB"
     },
     {
@@ -1611,15 +1671,15 @@
       "mlbam_id": "829739",
       "name": "Mayki De La Rosa",
       "positions": "LF,OF",
-      "rank": 4865,
+      "rank": 4868,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "DSL",
       "toLevel": "Complex",
       "toRank": 1,
       "callupDate": "2026-06-19",
-      "daysAgo": 21,
-      "statLine": "12 G · .592 OPS · 43.9% K% · 24.4% BB% · 0 HR · 0 SB"
+      "daysAgo": 22,
+      "statLine": "13 G · .613 OPS · 42.2% K% · 24.4% BB% · 0 HR · 0 SB"
     },
     {
       "id": "05rau",
@@ -1633,8 +1693,8 @@
       "toLevel": "MLB",
       "toRank": 6,
       "callupDate": "2026-06-18",
-      "daysAgo": 22,
-      "statLine": "19 G · .575 OPS · 36.4% K% · 4.5% BB% · 1 HR · 7 SB"
+      "daysAgo": 23,
+      "statLine": "20 G · .558 OPS · 36.8% K% · 4.4% BB% · 1 HR · 7 SB"
     },
     {
       "id": "0558r",
@@ -1648,8 +1708,8 @@
       "toLevel": "MLB",
       "toRank": 6,
       "callupDate": "2026-06-18",
-      "daysAgo": 22,
-      "statLine": "15 G · .600 OPS · 37.9% K% · 3.4% BB% · 2 HR · 0 SB"
+      "daysAgo": 23,
+      "statLine": "16 G · .560 OPS · 41.9% K% · 3.2% BB% · 2 HR · 0 SB"
     },
     {
       "id": "06k80",
@@ -1663,22 +1723,22 @@
       "toLevel": "Complex",
       "toRank": 1,
       "callupDate": "2026-06-18",
-      "daysAgo": 22,
-      "statLine": "14 G · 1.161 OPS · 30.6% K% · 16.3% BB% · 3 HR · 0 SB"
+      "daysAgo": 23,
+      "statLine": "15 G · 1.295 OPS · 29.6% K% · 16.7% BB% · 4 HR · 0 SB"
     },
     {
       "id": "06uv8",
       "mlbam_id": "821671",
       "name": "Ricardo Paez",
       "positions": "LF,OF",
-      "rank": 3246,
+      "rank": 3241,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "Rookie",
       "toLevel": "Single-A",
       "toRank": 2,
       "callupDate": "2026-06-18",
-      "daysAgo": 22,
+      "daysAgo": 23,
       "statLine": "11 G · .711 OPS · 24.4% K% · 15.6% BB% · 0 HR · 3 SB"
     },
     {
@@ -1686,44 +1746,44 @@
       "mlbam_id": "820995",
       "name": "Raily Liriano",
       "positions": "CF,OF",
-      "rank": 3684,
+      "rank": 3679,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "DSL",
       "toLevel": "Complex",
       "toRank": 1,
       "callupDate": "2026-06-18",
-      "daysAgo": 22,
-      "statLine": "14 G · .626 OPS · 30.5% K% · 8.5% BB% · 1 HR · 2 SB"
+      "daysAgo": 23,
+      "statLine": "15 G · .712 OPS · 32.8% K% · 7.8% BB% · 2 HR · 3 SB"
     },
     {
       "id": "06qe0",
       "mlbam_id": "802398",
       "name": "Sebastian Baquera",
       "positions": "C",
-      "rank": 3690,
+      "rank": 4018,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "Rookie",
       "toLevel": "Single-A",
       "toRank": 2,
       "callupDate": "2026-06-18",
-      "daysAgo": 22,
-      "statLine": "15 G · .747 OPS · 23.7% K% · 8.5% BB% · 1 HR · 0 SB"
+      "daysAgo": 23,
+      "statLine": "16 G · .696 OPS · 25.4% K% · 7.9% BB% · 1 HR · 0 SB"
     },
     {
       "id": "06krr",
       "mlbam_id": "821684",
       "name": "Yojackson Laya",
       "positions": "SS,INF",
-      "rank": 4727,
+      "rank": 4371,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "DSL",
       "toLevel": "Complex",
       "toRank": 1,
       "callupDate": "2026-06-18",
-      "daysAgo": 22,
+      "daysAgo": 23,
       "statLine": "11 G · .632 OPS · 17.9% K% · 10.3% BB% · 0 HR · 1 SB"
     },
     {
@@ -1731,29 +1791,29 @@
       "mlbam_id": "815874",
       "name": "Nick Roselli",
       "positions": "2B,INF,LF,OF",
-      "rank": 6243,
+      "rank": 6246,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "High-A",
       "toLevel": "AA",
       "toRank": 4,
       "callupDate": "2026-06-18",
-      "daysAgo": 22,
-      "statLine": "11 G · .440 OPS · 31.6% K% · 10.5% BB% · 0 HR · 0 SB"
+      "daysAgo": 23,
+      "statLine": "12 G · .446 OPS · 31.0% K% · 9.5% BB% · 0 HR · 0 SB"
     },
     {
       "id": "06qy3",
       "mlbam_id": "821274",
       "name": "Deuri Castillo",
       "positions": "1B,INF,LF,OF",
-      "rank": 7334,
+      "rank": 7331,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "DSL",
       "toLevel": "Complex",
       "toRank": 1,
       "callupDate": "2026-06-18",
-      "daysAgo": 22,
+      "daysAgo": 23,
       "statLine": "4 G · .350 OPS · 50.0% K% · 16.7% BB% · 0 HR · 0 SB"
     },
     {
@@ -1768,8 +1828,8 @@
       "toLevel": "AA",
       "toRank": 4,
       "callupDate": "2026-06-17",
-      "daysAgo": 23,
-      "statLine": "19 G · .772 OPS · 24.4% K% · 15.9% BB% · 3 HR · 3 SB"
+      "daysAgo": 24,
+      "statLine": "20 G · .831 OPS · 23.0% K% · 14.9% BB% · 4 HR · 3 SB"
     },
     {
       "id": "06hth",
@@ -1783,8 +1843,8 @@
       "toLevel": "AA",
       "toRank": 4,
       "callupDate": "2026-06-17",
-      "daysAgo": 23,
-      "statLine": "17 G · .940 OPS · 19.4% K% · 12.5% BB% · 2 HR · 2 SB"
+      "daysAgo": 24,
+      "statLine": "18 G · .910 OPS · 17.9% K% · 12.8% BB% · 2 HR · 2 SB"
     },
     {
       "id": "06k7t",
@@ -1798,8 +1858,8 @@
       "toLevel": "AA",
       "toRank": 4,
       "callupDate": "2026-06-17",
-      "daysAgo": 23,
-      "statLine": "18 G · 1.266 OPS · 33.8% K% · 17.6% BB% · 8 HR · 3 SB"
+      "daysAgo": 24,
+      "statLine": "19 G · 1.206 OPS · 35.0% K% · 18.8% BB% · 8 HR · 3 SB"
     },
     {
       "id": "06o02",
@@ -1813,22 +1873,22 @@
       "toLevel": "AA",
       "toRank": 4,
       "callupDate": "2026-06-17",
-      "daysAgo": 23,
-      "statLine": "16 G · .707 OPS · 13.2% K% · 15.8% BB% · 0 HR · 3 SB"
+      "daysAgo": 24,
+      "statLine": "17 G · .658 OPS · 13.6% K% · 14.8% BB% · 0 HR · 3 SB"
     },
     {
       "id": "06cgi",
       "mlbam_id": "808024",
       "name": "Carlos Virahonda",
       "positions": "C",
-      "rank": 2497,
+      "rank": 2509,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "Single-A",
       "toLevel": "High-A",
       "toRank": 3,
       "callupDate": "2026-06-17",
-      "daysAgo": 23,
+      "daysAgo": 24,
       "statLine": "16 G · .737 OPS · 15.9% K% · 12.7% BB% · 3 HR · 0 SB"
     },
     {
@@ -1836,14 +1896,14 @@
       "mlbam_id": "808094",
       "name": "Jhorvic Abreus",
       "positions": "2B,INF",
-      "rank": 3894,
+      "rank": 3891,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "Single-A",
       "toLevel": "AA",
       "toRank": 4,
       "callupDate": "2026-06-17",
-      "daysAgo": 23,
+      "daysAgo": 24,
       "statLine": "1 G · 1.167 OPS · 33.3% K% · 33.3% BB% · 0 HR · 0 SB"
     },
     {
@@ -1858,8 +1918,8 @@
       "toLevel": "Single-A",
       "toRank": 2,
       "callupDate": "2026-06-16",
-      "daysAgo": 24,
-      "statLine": "17 G · .627 OPS · 25.3% K% · 15.7% BB% · 1 HR · 8 SB"
+      "daysAgo": 25,
+      "statLine": "18 G · .613 OPS · 26.1% K% · 14.8% BB% · 1 HR · 8 SB"
     },
     {
       "id": "067xj",
@@ -1873,8 +1933,8 @@
       "toLevel": "MLB",
       "toRank": 6,
       "callupDate": "2026-06-16",
-      "daysAgo": 24,
-      "statLine": "21 G · .662 OPS · 15.6% K% · 14.3% BB% · 0 HR · 6 SB"
+      "daysAgo": 25,
+      "statLine": "22 G · .698 OPS · 16.0% K% · 14.8% BB% · 0 HR · 6 SB"
     },
     {
       "id": "066j0",
@@ -1888,8 +1948,8 @@
       "toLevel": "High-A",
       "toRank": 3,
       "callupDate": "2026-06-16",
-      "daysAgo": 24,
-      "statLine": "18 G · .723 OPS · 20.0% K% · 13.8% BB% · 0 HR · 6 SB"
+      "daysAgo": 25,
+      "statLine": "19 G · .780 OPS · 18.8% K% · 14.1% BB% · 0 HR · 8 SB"
     },
     {
       "id": "066mg",
@@ -1903,7 +1963,7 @@
       "toLevel": "High-A",
       "toRank": 3,
       "callupDate": "2026-06-16",
-      "daysAgo": 24,
+      "daysAgo": 25,
       "statLine": "14 G · .660 OPS · 23.8% K% · 15.9% BB% · 3 HR · 0 SB"
     },
     {
@@ -1918,7 +1978,7 @@
       "toLevel": "AA",
       "toRank": 4,
       "callupDate": "2026-06-16",
-      "daysAgo": 24,
+      "daysAgo": 25,
       "statLine": "17 G · .782 OPS · 26.0% K% · 6.8% BB% · 4 HR · 0 SB"
     },
     {
@@ -1933,8 +1993,8 @@
       "toLevel": "AAA",
       "toRank": 5,
       "callupDate": "2026-06-16",
-      "daysAgo": 24,
-      "statLine": "17 G · .843 OPS · 18.9% K% · 8.1% BB% · 2 HR · 3 SB"
+      "daysAgo": 25,
+      "statLine": "18 G · .910 OPS · 19.0% K% · 7.6% BB% · 3 HR · 3 SB"
     },
     {
       "id": "06hte",
@@ -1948,8 +2008,8 @@
       "toLevel": "AA",
       "toRank": 4,
       "callupDate": "2026-06-16",
-      "daysAgo": 24,
-      "statLine": "16 G · .693 OPS · 25.4% K% · 11.9% BB% · 3 HR · 12 SB"
+      "daysAgo": 25,
+      "statLine": "17 G · .748 OPS · 25.0% K% · 11.1% BB% · 4 HR · 12 SB"
     },
     {
       "id": "04ye6",
@@ -1963,83 +2023,83 @@
       "toLevel": "AAA",
       "toRank": 5,
       "callupDate": "2026-06-16",
-      "daysAgo": 24,
-      "statLine": "17 G · .494 OPS · 36.5% K% · 11.5% BB% · 0 HR · 0 SB"
+      "daysAgo": 25,
+      "statLine": "18 G · .456 OPS · 41.1% K% · 10.7% BB% · 0 HR · 0 SB"
     },
     {
       "id": "066rw",
       "mlbam_id": "800569",
       "name": "Alberto Barriga",
       "positions": "C",
-      "rank": 2463,
+      "rank": 2476,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "High-A",
       "toLevel": "AA",
       "toRank": 4,
       "callupDate": "2026-06-16",
-      "daysAgo": 24,
-      "statLine": "16 G · .691 OPS · 19.4% K% · 9.7% BB% · 3 HR · 1 SB"
+      "daysAgo": 25,
+      "statLine": "17 G · .695 OPS · 19.7% K% · 9.1% BB% · 3 HR · 1 SB"
     },
     {
       "id": "06z51",
       "mlbam_id": "830432",
       "name": "Moises Acacio",
       "positions": "2B,INF",
-      "rank": 2989,
+      "rank": 3233,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "DSL",
       "toLevel": "Complex",
       "toRank": 1,
       "callupDate": "2026-06-16",
-      "daysAgo": 24,
-      "statLine": "14 G · 1.126 OPS · 14.3% K% · 16.3% BB% · 1 HR · 0 SB"
+      "daysAgo": 25,
+      "statLine": "15 G · 1.120 OPS · 13.5% K% · 15.4% BB% · 1 HR · 0 SB"
     },
     {
       "id": "06eo1",
       "mlbam_id": "699228",
       "name": "Jakey Josepha",
       "positions": "CF,RF,OF",
-      "rank": 4806,
+      "rank": 5100,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "Single-A",
       "toLevel": "High-A",
       "toRank": 3,
       "callupDate": "2026-06-16",
-      "daysAgo": 24,
-      "statLine": "18 G · .777 OPS · 22.2% K% · 7.9% BB% · 1 HR · 3 SB"
+      "daysAgo": 25,
+      "statLine": "19 G · .770 OPS · 22.1% K% · 8.8% BB% · 1 HR · 3 SB"
     },
     {
       "id": "06q32",
       "mlbam_id": "815632",
       "name": "Tytus Cissell",
       "positions": "SS,INF",
-      "rank": 5593,
+      "rank": 5870,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "Rookie",
       "toLevel": "Single-A",
       "toRank": 2,
       "callupDate": "2026-06-16",
-      "daysAgo": 24,
-      "statLine": "19 G · .379 OPS · 27.1% K% · 7.1% BB% · 0 HR · 2 SB"
+      "daysAgo": 25,
+      "statLine": "20 G · .358 OPS · 28.4% K% · 6.8% BB% · 0 HR · 2 SB"
     },
     {
       "id": "06qew",
       "mlbam_id": "815563",
       "name": "Bo Walker",
       "positions": "LF,OF",
-      "rank": 5999,
+      "rank": 6011,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "Rookie",
       "toLevel": "Single-A",
       "toRank": 2,
       "callupDate": "2026-06-16",
-      "daysAgo": 24,
-      "statLine": "17 G · .572 OPS · 31.9% K% · 13.9% BB% · 1 HR · 1 SB"
+      "daysAgo": 25,
+      "statLine": "18 G · .614 OPS · 31.6% K% · 13.2% BB% · 2 HR · 1 SB"
     },
     {
       "id": "06zau",
@@ -2053,7 +2113,7 @@
       "toLevel": "High-A",
       "toRank": 3,
       "callupDate": "2026-06-16",
-      "daysAgo": 24,
+      "daysAgo": 25,
       "statLine": "10 G · .703 OPS · 20.5% K% · 17.9% BB% · 0 HR · 0 SB"
     },
     {
@@ -2068,7 +2128,7 @@
       "toLevel": "MLB",
       "toRank": 6,
       "callupDate": "2026-06-15",
-      "daysAgo": 25,
+      "daysAgo": 26,
       "statLine": "14 G · .111 OPS · 42.1% K% · 10.5% BB% · 0 HR · 0 SB"
     },
     {
@@ -2076,29 +2136,29 @@
       "mlbam_id": "820993",
       "name": "Carlos Matias",
       "positions": "LF,OF",
-      "rank": 4028,
+      "rank": 4031,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "DSL",
       "toLevel": "Complex",
       "toRank": 1,
       "callupDate": "2026-06-15",
-      "daysAgo": 25,
-      "statLine": "13 G · .609 OPS · 24.1% K% · 7.4% BB% · 1 HR · 5 SB"
+      "daysAgo": 26,
+      "statLine": "14 G · .626 OPS · 25.4% K% · 6.8% BB% · 1 HR · 5 SB"
     },
     {
       "id": "04ps5",
       "mlbam_id": "669384",
       "name": "Raynel Delgado",
       "positions": "2B,INF",
-      "rank": 2388,
+      "rank": 2391,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "AAA",
       "toLevel": "MLB",
       "toRank": 6,
       "callupDate": "2026-06-14",
-      "daysAgo": 26,
+      "daysAgo": 27,
       "statLine": "16 G · .713 OPS · 15.2% K% · 6.1% BB% · 1 HR · 0 SB"
     },
     {
@@ -2106,14 +2166,14 @@
       "mlbam_id": "821673",
       "name": "Jurdrick Profar",
       "positions": "2B,INF",
-      "rank": 3812,
+      "rank": 3807,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "Rookie",
       "toLevel": "Single-A",
       "toRank": 2,
       "callupDate": "2026-06-14",
-      "daysAgo": 26,
+      "daysAgo": 27,
       "statLine": "18 G · .582 OPS · 28.2% K% · 7.7% BB% · 1 HR · 0 SB"
     },
     {
@@ -2121,14 +2181,14 @@
       "mlbam_id": "805025",
       "name": "Rylan Galvan",
       "positions": "C",
-      "rank": 7086,
+      "rank": 7080,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "Single-A",
       "toLevel": "High-A",
       "toRank": 3,
       "callupDate": "2026-06-14",
-      "daysAgo": 26,
+      "daysAgo": 27,
       "statLine": "5 G · .831 OPS · 27.3% K% · 31.8% BB% · 0 HR · 0 SB"
     },
     {
@@ -2143,7 +2203,7 @@
       "toLevel": "AA",
       "toRank": 4,
       "callupDate": "2026-06-13",
-      "daysAgo": 27,
+      "daysAgo": 28,
       "statLine": "17 G · .684 OPS · 20.3% K% · 21.7% BB% · 0 HR · 4 SB"
     },
     {
@@ -2151,14 +2211,14 @@
       "mlbam_id": "803385",
       "name": "Jay Harry",
       "positions": "SS,INF,CF,OF",
-      "rank": 2306,
+      "rank": 2307,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "AA",
       "toLevel": "AAA",
       "toRank": 5,
       "callupDate": "2026-06-13",
-      "daysAgo": 27,
+      "daysAgo": 28,
       "statLine": "21 G · .962 OPS · 18.4% K% · 6.1% BB% · 5 HR · 0 SB"
     },
     {
@@ -2166,14 +2226,14 @@
       "mlbam_id": "834966",
       "name": "Dylan Grego",
       "positions": "2B,INF",
-      "rank": 3630,
+      "rank": 3623,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "High-A",
       "toLevel": "AAA",
       "toRank": 5,
       "callupDate": "2026-06-13",
-      "daysAgo": 27,
+      "daysAgo": 28,
       "statLine": "5 G · 1.217 OPS · 15.0% K% · 10.0% BB% · 0 HR · 0 SB"
     },
     {
@@ -2181,14 +2241,14 @@
       "mlbam_id": "800331",
       "name": "Francisco Toledo",
       "positions": "C",
-      "rank": 4971,
+      "rank": 5253,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "Single-A",
       "toLevel": "High-A",
       "toRank": 3,
       "callupDate": "2026-06-13",
-      "daysAgo": 27,
+      "daysAgo": 28,
       "statLine": "1 G · .500 OPS · 25.0% K% · 0.0% BB% · 0 HR · 0 SB"
     },
     {
@@ -2196,14 +2256,14 @@
       "mlbam_id": "805964",
       "name": "Stanley Tucker",
       "positions": "RF,OF",
-      "rank": 5730,
+      "rank": 5475,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "High-A",
       "toLevel": "AA",
       "toRank": 4,
       "callupDate": "2026-06-13",
-      "daysAgo": 27,
+      "daysAgo": 28,
       "statLine": "6 G · 1.387 OPS · 11.8% K% · 11.8% BB% · 1 HR · 3 SB"
     },
     {
@@ -2211,14 +2271,14 @@
       "mlbam_id": "687600",
       "name": "Kaden Hopson",
       "positions": "UT",
-      "rank": 6566,
+      "rank": 6570,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "Rookie",
       "toLevel": "AAA",
       "toRank": 5,
       "callupDate": "2026-06-13",
-      "daysAgo": 27,
+      "daysAgo": 28,
       "statLine": "1 G · .500 OPS · 0.0% K% · 0.0% BB% · 0 HR · 0 SB"
     },
     {
@@ -2226,14 +2286,14 @@
       "mlbam_id": "674976",
       "name": "Griffin Lockwood-Powell",
       "positions": "C",
-      "rank": 7432,
+      "rank": 7434,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "AA",
       "toLevel": "AAA",
       "toRank": 5,
       "callupDate": "2026-06-13",
-      "daysAgo": 27,
+      "daysAgo": 28,
       "statLine": "12 G · .584 OPS · 14.9% K% · 6.4% BB% · 1 HR · 0 SB"
     },
     {
@@ -2248,7 +2308,7 @@
       "toLevel": "MLB",
       "toRank": 6,
       "callupDate": "2026-06-12",
-      "daysAgo": 28,
+      "daysAgo": 29,
       "statLine": "21 G · .603 OPS · 10.4% K% · 3.9% BB% · 1 HR · 0 SB"
     },
     {
@@ -2263,22 +2323,22 @@
       "toLevel": "MLB",
       "toRank": 6,
       "callupDate": "2026-06-12",
-      "daysAgo": 28,
-      "statLine": "18 G · .606 OPS · 26.7% K% · 3.3% BB% · 2 HR · 0 SB"
+      "daysAgo": 29,
+      "statLine": "19 G · .598 OPS · 25.4% K% · 3.2% BB% · 2 HR · 0 SB"
     },
     {
       "id": "06z5d",
       "mlbam_id": "825616",
       "name": "Leonard Rijo",
       "positions": "SS,INF",
-      "rank": 3571,
+      "rank": 3556,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "DSL",
       "toLevel": "Complex",
       "toRank": 1,
       "callupDate": "2026-06-12",
-      "daysAgo": 28,
+      "daysAgo": 29,
       "statLine": "14 G · .777 OPS · 15.3% K% · 10.2% BB% · 0 HR · 1 SB"
     },
     {
@@ -2286,29 +2346,29 @@
       "mlbam_id": "690804",
       "name": "Ryan Nicholson",
       "positions": "1B,INF",
-      "rank": 5208,
+      "rank": 5209,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "AA",
       "toLevel": "AAA",
       "toRank": 5,
       "callupDate": "2026-06-12",
-      "daysAgo": 28,
-      "statLine": "17 G · .640 OPS · 29.4% K% · 7.4% BB% · 2 HR · 1 SB"
+      "daysAgo": 29,
+      "statLine": "18 G · .602 OPS · 30.6% K% · 6.9% BB% · 2 HR · 1 SB"
     },
     {
       "id": "06hep",
       "mlbam_id": "800615",
       "name": "Luke Scherrer",
       "positions": "1B,INF",
-      "rank": 5674,
+      "rank": 5413,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "Single-A",
       "toLevel": "High-A",
       "toRank": 3,
       "callupDate": "2026-06-12",
-      "daysAgo": 28,
+      "daysAgo": 29,
       "statLine": "2 G · .500 OPS · 25.0% K% · 50.0% BB% · 0 HR · 0 SB"
     },
     {
@@ -2316,14 +2376,14 @@
       "mlbam_id": "701816",
       "name": "John Cristino",
       "positions": "C",
-      "rank": 7592,
+      "rank": 7590,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "High-A",
       "toLevel": "AA",
       "toRank": 4,
       "callupDate": "2026-06-12",
-      "daysAgo": 28,
+      "daysAgo": 29,
       "statLine": "2 G · .000 OPS · 100.0% K% · 0.0% BB% · 0 HR · 0 SB"
     },
     {
@@ -2338,8 +2398,8 @@
       "toLevel": "High-A",
       "toRank": 3,
       "callupDate": "2026-06-11",
-      "daysAgo": 29,
-      "statLine": "19 G · .864 OPS · 9.5% K% · 9.5% BB% · 0 HR · 8 SB"
+      "daysAgo": 30,
+      "statLine": "20 G · .900 OPS · 9.1% K% · 9.1% BB% · 0 HR · 8 SB"
     },
     {
       "id": "06nua",
@@ -2353,22 +2413,22 @@
       "toLevel": "AA",
       "toRank": 4,
       "callupDate": "2026-06-11",
-      "daysAgo": 29,
-      "statLine": "22 G · .957 OPS · 13.0% K% · 18.5% BB% · 3 HR · 7 SB"
+      "daysAgo": 30,
+      "statLine": "23 G · .912 OPS · 13.5% K% · 17.7% BB% · 3 HR · 7 SB"
     },
     {
       "id": "06qzo",
       "mlbam_id": "807647",
       "name": "Pablo Nunez",
       "positions": "CF,OF",
-      "rank": 2895,
+      "rank": 3120,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "Rookie",
       "toLevel": "Single-A",
       "toRank": 2,
       "callupDate": "2026-06-11",
-      "daysAgo": 29,
+      "daysAgo": 30,
       "statLine": "14 G · .581 OPS · 9.5% K% · 22.2% BB% · 0 HR · 0 SB"
     },
     {
@@ -2376,14 +2436,14 @@
       "mlbam_id": "806273",
       "name": "Adam Retzbach",
       "positions": "C,1B,INF",
-      "rank": 6214,
+      "rank": 6216,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "AA",
       "toLevel": "AAA",
       "toRank": 5,
       "callupDate": "2026-06-11",
-      "daysAgo": 29,
+      "daysAgo": 30,
       "statLine": "1 G · .333 OPS · 33.3% K% · 33.3% BB% · 0 HR · 0 SB"
     },
     {
@@ -2398,7 +2458,7 @@
       "toLevel": "AAA",
       "toRank": 5,
       "callupDate": "2026-06-10",
-      "daysAgo": 30,
+      "daysAgo": 31,
       "statLine": "9 G · 1.000 OPS · 28.1% K% · 0.0% BB% · 2 HR · 1 SB"
     },
     {
@@ -2406,14 +2466,14 @@
       "mlbam_id": "694186",
       "name": "Shalin Polanco",
       "positions": "LF,CF,RF,OF",
-      "rank": 2581,
+      "rank": 2593,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "High-A",
       "toLevel": "AA",
       "toRank": 4,
       "callupDate": "2026-06-10",
-      "daysAgo": 30,
+      "daysAgo": 31,
       "statLine": "12 G · .475 OPS · 44.2% K% · 9.3% BB% · 0 HR · 0 SB"
     },
     {
@@ -2421,14 +2481,14 @@
       "mlbam_id": "703430",
       "name": "Anthony Scull",
       "positions": "CF,OF",
-      "rank": 2592,
+      "rank": 2602,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "High-A",
       "toLevel": "AA",
       "toRank": 4,
       "callupDate": "2026-06-10",
-      "daysAgo": 30,
+      "daysAgo": 31,
       "statLine": "12 G · .531 OPS · 27.9% K% · 2.3% BB% · 1 HR · 0 SB"
     },
     {
@@ -2436,14 +2496,14 @@
       "mlbam_id": "814261",
       "name": "Carlos Caro",
       "positions": "2B,INF",
-      "rank": 3193,
+      "rank": 3190,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "High-A",
       "toLevel": "AA",
       "toRank": 4,
       "callupDate": "2026-06-10",
-      "daysAgo": 30,
+      "daysAgo": 31,
       "statLine": "3 G · .300 OPS · 30.0% K% · 30.0% BB% · 0 HR · 1 SB"
     },
     {
@@ -2451,14 +2511,14 @@
       "mlbam_id": "829774",
       "name": "Yorber Semprun",
       "positions": "2B,INF",
-      "rank": 3830,
+      "rank": 3826,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "DSL",
       "toLevel": "Complex",
       "toRank": 1,
       "callupDate": "2026-06-10",
-      "daysAgo": 30,
+      "daysAgo": 31,
       "statLine": "18 G · .711 OPS · 25.9% K% · 13.0% BB% · 0 HR · 7 SB"
     },
     {
@@ -2466,29 +2526,29 @@
       "mlbam_id": "823173",
       "name": "James Taussig",
       "positions": "RF,OF",
-      "rank": 5020,
+      "rank": 5012,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "Single-A",
       "toLevel": "High-A",
       "toRank": 3,
       "callupDate": "2026-06-10",
-      "daysAgo": 30,
-      "statLine": "24 G · .965 OPS · 30.6% K% · 12.6% BB% · 8 HR · 0 SB"
+      "daysAgo": 31,
+      "statLine": "25 G · .962 OPS · 30.4% K% · 13.0% BB% · 8 HR · 0 SB"
     },
     {
       "id": "070dn",
       "mlbam_id": "807587",
       "name": "Angel Ramirez",
       "positions": "LF,OF",
-      "rank": 5528,
+      "rank": 5538,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "Rookie",
       "toLevel": "Single-A",
       "toRank": 2,
       "callupDate": "2026-06-10",
-      "daysAgo": 30,
+      "daysAgo": 31,
       "statLine": "20 G · .550 OPS · 19.0% K% · 10.1% BB% · 2 HR · 1 SB"
     },
     {
@@ -2496,74 +2556,74 @@
       "mlbam_id": "815299",
       "name": "Will Verdung",
       "positions": "1B,3B,INF",
-      "rank": 5571,
+      "rank": 5576,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "High-A",
       "toLevel": "AA",
       "toRank": 4,
       "callupDate": "2026-06-10",
-      "daysAgo": 30,
-      "statLine": "21 G · .360 OPS · 21.7% K% · 7.2% BB% · 0 HR · 2 SB"
+      "daysAgo": 31,
+      "statLine": "22 G · .407 OPS · 23.0% K% · 8.0% BB% · 0 HR · 2 SB"
     },
     {
       "id": "06beo",
       "mlbam_id": "800346",
       "name": "Juanfel Peguero",
       "positions": "SS,INF",
-      "rank": 5680,
+      "rank": 5677,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "Rookie",
       "toLevel": "High-A",
       "toRank": 3,
       "callupDate": "2026-06-10",
-      "daysAgo": 30,
-      "statLine": "13 G · .580 OPS · 33.3% K% · 11.9% BB% · 0 HR · 1 SB"
-    },
-    {
-      "id": "06qv2",
-      "mlbam_id": "815074",
-      "name": "Derek Berg",
-      "positions": "C,1B,INF",
-      "rank": 6105,
-      "isPit": false,
-      "isTwoWay": false,
-      "fromLevel": "AA",
-      "toLevel": "AAA",
-      "toRank": 5,
-      "callupDate": "2026-06-10",
-      "daysAgo": 30,
-      "statLine": "5 G · .583 OPS · 46.2% K% · 0.0% BB% · 1 HR · 0 SB"
+      "daysAgo": 31,
+      "statLine": "14 G · .554 OPS · 36.2% K% · 12.8% BB% · 0 HR · 1 SB"
     },
     {
       "id": "066jw",
       "mlbam_id": "800683",
       "name": "Blake Rambusch",
       "positions": "2B,INF,LF,OF",
-      "rank": 6147,
+      "rank": 5929,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "AA",
       "toLevel": "AAA",
       "toRank": 5,
       "callupDate": "2026-06-10",
-      "daysAgo": 30,
+      "daysAgo": 31,
       "statLine": "22 G · .729 OPS · 16.3% K% · 7.5% BB% · 1 HR · 9 SB"
+    },
+    {
+      "id": "06qv2",
+      "mlbam_id": "815074",
+      "name": "Derek Berg",
+      "positions": "C,1B,INF",
+      "rank": 6111,
+      "isPit": false,
+      "isTwoWay": false,
+      "fromLevel": "AA",
+      "toLevel": "AAA",
+      "toRank": 5,
+      "callupDate": "2026-06-10",
+      "daysAgo": 31,
+      "statLine": "5 G · .583 OPS · 46.2% K% · 0.0% BB% · 1 HR · 0 SB"
     },
     {
       "id": "065nt",
       "mlbam_id": "805891",
       "name": "Taylor Young",
       "positions": "2B,3B,INF",
-      "rank": 6842,
+      "rank": 6844,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "AA",
       "toLevel": "AAA",
       "toRank": 5,
       "callupDate": "2026-06-10",
-      "daysAgo": 30,
+      "daysAgo": 31,
       "statLine": "13 G · 1.079 OPS · 10.0% K% · 14.0% BB% · 2 HR · 0 SB"
     },
     {
@@ -2571,288 +2631,63 @@
       "mlbam_id": "686944",
       "name": "Grant Magill",
       "positions": "C",
-      "rank": 7447,
+      "rank": 7450,
       "isPit": false,
       "isTwoWay": false,
       "fromLevel": "High-A",
       "toLevel": "AA",
       "toRank": 4,
       "callupDate": "2026-06-10",
-      "daysAgo": 30,
-      "statLine": "14 G · .817 OPS · 26.9% K% · 9.6% BB% · 2 HR · 1 SB"
-    },
-    {
-      "id": "06n8y",
-      "mlbam_id": "816113",
-      "name": "Eli Willits",
-      "positions": "SS,INF",
-      "rank": 81,
-      "isPit": false,
-      "isTwoWay": false,
-      "fromLevel": "Single-A",
-      "toLevel": "High-A",
-      "toRank": 3,
-      "callupDate": "2026-06-09",
       "daysAgo": 31,
-      "statLine": "22 G · .905 OPS · 15.9% K% · 20.6% BB% · 6 HR · 9 SB"
-    },
-    {
-      "id": "05rcg",
-      "mlbam_id": "695731",
-      "name": "Braden Montgomery",
-      "positions": "CF,RF,OF",
-      "rank": 211,
-      "isPit": false,
-      "isTwoWay": false,
-      "fromLevel": "AAA",
-      "toLevel": "MLB",
-      "toRank": 6,
-      "callupDate": "2026-06-09",
-      "daysAgo": 31,
-      "statLine": "25 G · .685 OPS · 22.0% K% · 10.0% BB% · 2 HR · 0 SB"
-    },
-    {
-      "id": "06p5z",
-      "mlbam_id": "803849",
-      "name": "Devin Fitz-Gerald",
-      "positions": "SS,INF",
-      "rank": 223,
-      "isPit": false,
-      "isTwoWay": false,
-      "fromLevel": "High-A",
-      "toLevel": "AA",
-      "toRank": 4,
-      "callupDate": "2026-06-09",
-      "daysAgo": 31,
-      "statLine": "23 G · .440 OPS · 27.3% K% · 5.1% BB% · 1 HR · 2 SB"
-    },
-    {
-      "id": "05yff",
-      "mlbam_id": "701337",
-      "name": "Ethan Petry",
-      "positions": "LF,OF",
-      "rank": 333,
-      "isPit": false,
-      "isTwoWay": false,
-      "fromLevel": "High-A",
-      "toLevel": "AA",
-      "toRank": 4,
-      "callupDate": "2026-06-09",
-      "daysAgo": 31,
-      "statLine": "22 G · .652 OPS · 32.9% K% · 9.4% BB% · 4 HR · 1 SB"
-    },
-    {
-      "id": "067z9",
-      "mlbam_id": "815617",
-      "name": "Kayson Cunningham",
-      "positions": "SS,INF",
-      "rank": 508,
-      "isPit": false,
-      "isTwoWay": false,
-      "fromLevel": "Single-A",
-      "toLevel": "High-A",
-      "toRank": 3,
-      "callupDate": "2026-06-09",
-      "daysAgo": 31,
-      "statLine": "22 G · .585 OPS · 22.1% K% · 12.6% BB% · 1 HR · 4 SB"
-    },
-    {
-      "id": "066eo",
-      "mlbam_id": "694249",
-      "name": "Cole Carrigg",
-      "positions": "CF,OF",
-      "rank": 522,
-      "isPit": false,
-      "isTwoWay": false,
-      "fromLevel": "AAA",
-      "toLevel": "MLB",
-      "toRank": 6,
-      "callupDate": "2026-06-09",
-      "daysAgo": 31,
-      "statLine": "27 G · .976 OPS · 19.0% K% · 11.4% BB% · 4 HR · 2 SB"
-    },
-    {
-      "id": "06c0z",
-      "mlbam_id": "805127",
-      "name": "Devin Taylor",
-      "positions": "LF,OF",
-      "rank": 682,
-      "isPit": false,
-      "isTwoWay": false,
-      "fromLevel": "High-A",
-      "toLevel": "AA",
-      "toRank": 4,
-      "callupDate": "2026-06-09",
-      "daysAgo": 31,
-      "statLine": "26 G · 1.051 OPS · 23.5% K% · 8.4% BB% · 8 HR · 3 SB"
-    },
-    {
-      "id": "061z7",
-      "mlbam_id": "700731",
-      "name": "Keiner Delgado",
-      "positions": "2B,3B,INF",
-      "rank": 945,
-      "isPit": false,
-      "isTwoWay": false,
-      "fromLevel": "AA",
-      "toLevel": "AAA",
-      "toRank": 5,
-      "callupDate": "2026-06-09",
-      "daysAgo": 31,
-      "statLine": "17 G · .648 OPS · 18.7% K% · 13.3% BB% · 1 HR · 4 SB"
-    },
-    {
-      "id": "06ax7",
-      "mlbam_id": "800254",
-      "name": "Abrahan Ramirez",
-      "positions": "2B,3B,INF",
-      "rank": 1658,
-      "isPit": false,
-      "isTwoWay": false,
-      "fromLevel": "Single-A",
-      "toLevel": "High-A",
-      "toRank": 3,
-      "callupDate": "2026-06-09",
-      "daysAgo": 31,
-      "statLine": "20 G · .641 OPS · 16.9% K% · 9.6% BB% · 0 HR · 6 SB"
-    },
-    {
-      "id": "06mox",
-      "mlbam_id": "821279",
-      "name": "Edgardo De Leon",
-      "positions": "1B,INF",
-      "rank": 1808,
-      "isPit": false,
-      "isTwoWay": false,
-      "fromLevel": "Rookie",
-      "toLevel": "Single-A",
-      "toRank": 2,
-      "callupDate": "2026-06-09",
-      "daysAgo": 31,
-      "statLine": "21 G · .587 OPS · 31.2% K% · 5.4% BB% · 4 HR · 1 SB"
-    },
-    {
-      "id": "05xon",
-      "mlbam_id": "695604",
-      "name": "T.J. White",
-      "positions": "LF,OF",
-      "rank": 2862,
-      "isPit": false,
-      "isTwoWay": false,
-      "fromLevel": "High-A",
-      "toLevel": "AA",
-      "toRank": 4,
-      "callupDate": "2026-06-09",
-      "daysAgo": 31,
-      "statLine": "19 G · .596 OPS · 32.3% K% · 6.2% BB% · 2 HR · 0 SB"
-    },
-    {
-      "id": "06uow",
-      "mlbam_id": "831918",
-      "name": "Marco Argudin",
-      "positions": "CF,OF",
-      "rank": 3871,
-      "isPit": false,
-      "isTwoWay": false,
-      "fromLevel": "Rookie",
-      "toLevel": "Single-A",
-      "toRank": 2,
-      "callupDate": "2026-06-09",
-      "daysAgo": 31,
-      "statLine": "25 G · .854 OPS · 18.8% K% · 20.5% BB% · 1 HR · 4 SB"
-    },
-    {
-      "id": "06icb",
-      "mlbam_id": "815923",
-      "name": "Bralyn Brazoban",
-      "positions": "CF,OF",
-      "rank": 3985,
-      "isPit": false,
-      "isTwoWay": false,
-      "fromLevel": "Rookie",
-      "toLevel": "Single-A",
-      "toRank": 2,
-      "callupDate": "2026-06-09",
-      "daysAgo": 31,
-      "statLine": "22 G · .688 OPS · 33.3% K% · 11.5% BB% · 2 HR · 2 SB"
-    },
-    {
-      "id": "06jfk",
-      "mlbam_id": "821791",
-      "name": "Angel Brachi",
-      "positions": "2B,INF",
-      "rank": 3995,
-      "isPit": false,
-      "isTwoWay": false,
-      "fromLevel": "DSL",
-      "toLevel": "Complex",
-      "toRank": 1,
-      "callupDate": "2026-06-09",
-      "daysAgo": 31,
-      "statLine": "11 G · .782 OPS · 14.3% K% · 14.3% BB% · 0 HR · 2 SB"
-    },
-    {
-      "id": "06jhk",
-      "mlbam_id": "821663",
-      "name": "Joaquin Arias Jr.",
-      "positions": "LF,OF",
-      "rank": 4710,
-      "isPit": false,
-      "isTwoWay": false,
-      "fromLevel": "DSL",
-      "toLevel": "Complex",
-      "toRank": 1,
-      "callupDate": "2026-06-09",
-      "daysAgo": 31,
-      "statLine": "17 G · .616 OPS · 27.5% K% · 11.6% BB% · 0 HR · 1 SB"
-    },
-    {
-      "id": "06r39",
-      "mlbam_id": "821636",
-      "name": "Leider Padilla",
-      "positions": "LF,RF,OF",
-      "rank": 5352,
-      "isPit": false,
-      "isTwoWay": false,
-      "fromLevel": "DSL",
-      "toLevel": "Complex",
-      "toRank": 1,
-      "callupDate": "2026-06-09",
-      "daysAgo": 31,
-      "statLine": "14 G · .445 OPS · 37.5% K% · 7.5% BB% · 0 HR · 0 SB"
-    },
-    {
-      "id": "06zrc",
-      "mlbam_id": "702495",
-      "name": "Josh Tate",
-      "positions": "CF,OF",
-      "rank": 5559,
-      "isPit": false,
-      "isTwoWay": false,
-      "fromLevel": "Single-A",
-      "toLevel": "High-A",
-      "toRank": 3,
-      "callupDate": "2026-06-09",
-      "daysAgo": 31,
-      "statLine": "22 G · .871 OPS · 20.9% K% · 9.9% BB% · 3 HR · 7 SB"
-    },
-    {
-      "id": "05zq3",
-      "mlbam_id": "701862",
-      "name": "Jacob Walsh",
-      "positions": "1B,INF",
-      "rank": 6804,
-      "isPit": false,
-      "isTwoWay": false,
-      "fromLevel": "Single-A",
-      "toLevel": "High-A",
-      "toRank": 3,
-      "callupDate": "2026-06-09",
-      "daysAgo": 31,
-      "statLine": "23 G · .674 OPS · 31.4% K% · 6.9% BB% · 4 HR · 1 SB"
+      "statLine": "15 G · .840 OPS · 26.8% K% · 10.7% BB% · 2 HR · 1 SB"
     }
   ],
   "arms": [
+    {
+      "id": "06i08",
+      "mlbam_id": "808970",
+      "name": "Woo-Suk Go",
+      "positions": "RP",
+      "rank": 4694,
+      "isPit": true,
+      "isTwoWay": false,
+      "fromLevel": "AAA",
+      "toLevel": "MLB",
+      "toRank": 6,
+      "callupDate": "2026-07-09",
+      "daysAgo": 2,
+      "statLine": "1 G · 0-0 · 1.0 IP · 9.00 ERA · 25.0% K% · 0.0% BB%"
+    },
+    {
+      "id": "06aky",
+      "mlbam_id": "808486",
+      "name": "Chen-Hsun Lee",
+      "positions": "SP",
+      "rank": 6846,
+      "isPit": true,
+      "isTwoWay": false,
+      "fromLevel": "Rookie",
+      "toLevel": "Single-A",
+      "toRank": 2,
+      "callupDate": "2026-07-09",
+      "daysAgo": 2,
+      "statLine": "1 G · 0-0 · 2.0 IP · 0.00 ERA · 16.7% K% · 0.0% BB%"
+    },
+    {
+      "id": "0701q",
+      "mlbam_id": "805783",
+      "name": "Mason Nichols",
+      "positions": "RP",
+      "rank": 8308,
+      "isPit": true,
+      "isTwoWay": false,
+      "fromLevel": "Single-A",
+      "toLevel": "High-A",
+      "toRank": 3,
+      "callupDate": "2026-07-09",
+      "daysAgo": 2,
+      "statLine": "1 G · 1-0 · 2.0 IP · 4.50 ERA · 18.2% K% · 18.2% BB%"
+    },
     {
       "id": "06qgo",
       "mlbam_id": "703725",
@@ -2865,8 +2700,8 @@
       "toLevel": "MLB",
       "toRank": 6,
       "callupDate": "2026-07-08",
-      "daysAgo": 2,
-      "statLine": "1 G · 0-0 · 0.2 IP · 0.00 ERA · 0.0% K% · 0.0% BB%"
+      "daysAgo": 3,
+      "statLine": "2 G · 0-0 · 1.2 IP · 5.40 ERA · 12.5% K% · 0.0% BB%"
     },
     {
       "id": "06uhk",
@@ -2880,7 +2715,7 @@
       "toLevel": "AAA",
       "toRank": 5,
       "callupDate": "2026-07-08",
-      "daysAgo": 2,
+      "daysAgo": 3,
       "statLine": "1 G · 1-0 · 5.0 IP · 1.80 ERA · 30.0% K% · 10.0% BB%"
     },
     {
@@ -2895,7 +2730,7 @@
       "toLevel": "AAA",
       "toRank": 5,
       "callupDate": "2026-07-08",
-      "daysAgo": 2,
+      "daysAgo": 3,
       "statLine": "1 G · 0-0 · 3.0 IP · 3.00 ERA · 20.0% K% · 26.7% BB%"
     },
     {
@@ -2903,14 +2738,14 @@
       "mlbam_id": "820832",
       "name": "Blake Aita",
       "positions": "SP",
-      "rank": 2666,
+      "rank": 2668,
       "isPit": true,
       "isTwoWay": false,
       "fromLevel": "High-A",
       "toLevel": "AA",
       "toRank": 4,
       "callupDate": "2026-07-08",
-      "daysAgo": 2,
+      "daysAgo": 3,
       "statLine": "1 G · 0-1 · 6.0 IP · 6.00 ERA · 20.0% K% · 4.0% BB%"
     },
     {
@@ -2918,14 +2753,14 @@
       "mlbam_id": "815454",
       "name": "Chris Kean",
       "positions": "RP",
-      "rank": 4072,
+      "rank": 4064,
       "isPit": true,
       "isTwoWay": false,
       "fromLevel": "AA",
       "toLevel": "AAA",
       "toRank": 5,
       "callupDate": "2026-07-08",
-      "daysAgo": 2,
+      "daysAgo": 3,
       "statLine": "1 G · 0-0 · 1.0 IP · 0.00 ERA · 40.0% K% · 40.0% BB%"
     },
     {
@@ -2933,14 +2768,14 @@
       "mlbam_id": "806724",
       "name": "Adam Bates",
       "positions": "SP,RP",
-      "rank": 5058,
+      "rank": 5039,
       "isPit": true,
       "isTwoWay": false,
       "fromLevel": "Single-A",
       "toLevel": "High-A",
       "toRank": 3,
       "callupDate": "2026-07-08",
-      "daysAgo": 2,
+      "daysAgo": 3,
       "statLine": "1 G · 0-0 · 1.1 IP · 0.00 ERA · 10.0% K% · 10.0% BB%"
     },
     {
@@ -2955,7 +2790,7 @@
       "toLevel": "High-A",
       "toRank": 3,
       "callupDate": "2026-07-07",
-      "daysAgo": 3,
+      "daysAgo": 4,
       "statLine": "1 G · 0-0 · 2.0 IP · 4.50 ERA · 44.4% K% · 0.0% BB%"
     },
     {
@@ -2963,14 +2798,14 @@
       "mlbam_id": "807748",
       "name": "Kannon Kemp",
       "positions": "SP,RP",
-      "rank": 3768,
+      "rank": 3779,
       "isPit": true,
       "isTwoWay": false,
       "fromLevel": "Single-A",
       "toLevel": "High-A",
       "toRank": 3,
       "callupDate": "2026-07-07",
-      "daysAgo": 3,
+      "daysAgo": 4,
       "statLine": "1 G · 0-1 · 3.0 IP · 6.00 ERA · 15.4% K% · 15.4% BB%"
     },
     {
@@ -2978,14 +2813,14 @@
       "mlbam_id": "676910",
       "name": "Matt Seelinger",
       "positions": "RP",
-      "rank": 6350,
+      "rank": 6366,
       "isPit": true,
       "isTwoWay": false,
       "fromLevel": "AAA",
       "toLevel": "MLB",
       "toRank": 6,
       "callupDate": "2026-07-07",
-      "daysAgo": 3,
+      "daysAgo": 4,
       "statLine": "1 G · 0-1 · 2.0 IP · 31.50 ERA · 13.3% K% · 26.7% BB%"
     },
     {
@@ -2993,14 +2828,14 @@
       "mlbam_id": "821111",
       "name": "Erich Tovar",
       "positions": "RP",
-      "rank": 8767,
+      "rank": 8769,
       "isPit": true,
       "isTwoWay": false,
       "fromLevel": "DSL",
       "toLevel": "Complex",
       "toRank": 1,
       "callupDate": "2026-07-07",
-      "daysAgo": 3,
+      "daysAgo": 4,
       "statLine": "1 G · 0-0 · 1.2 IP · 0.00 ERA · 28.6% K% · 0.0% BB%"
     },
     {
@@ -3015,7 +2850,7 @@
       "toLevel": "MLB",
       "toRank": 6,
       "callupDate": "2026-07-06",
-      "daysAgo": 4,
+      "daysAgo": 5,
       "statLine": "1 G · 0-1 · 1.0 IP · 9.00 ERA · 20.0% K% · 0.0% BB%"
     },
     {
@@ -3023,14 +2858,14 @@
       "mlbam_id": "806706",
       "name": "Ismael Cabral",
       "positions": "SP",
-      "rank": 6714,
+      "rank": 6720,
       "isPit": true,
       "isTwoWay": false,
       "fromLevel": "DSL",
       "toLevel": "Complex",
       "toRank": 1,
       "callupDate": "2026-07-06",
-      "daysAgo": 4,
+      "daysAgo": 5,
       "statLine": "1 G · 0-0 · 1.1 IP · 0.00 ERA · 33.3% K% · 16.7% BB%"
     },
     {
@@ -3038,14 +2873,14 @@
       "mlbam_id": "694805",
       "name": "Kyle Carr",
       "positions": "SP",
-      "rank": 2403,
+      "rank": 2406,
       "isPit": true,
       "isTwoWay": false,
       "fromLevel": "AA",
       "toLevel": "AAA",
       "toRank": 5,
       "callupDate": "2026-07-05",
-      "daysAgo": 5,
+      "daysAgo": 6,
       "statLine": "1 G · 0-0 · 5.2 IP · 0.00 ERA · 30.4% K% · 13.0% BB%"
     },
     {
@@ -3053,14 +2888,14 @@
       "mlbam_id": "820889",
       "name": "Efrailin Ramos",
       "positions": "SP,RP",
-      "rank": 3650,
+      "rank": 3655,
       "isPit": true,
       "isTwoWay": false,
       "fromLevel": "Rookie",
       "toLevel": "Single-A",
       "toRank": 2,
       "callupDate": "2026-07-05",
-      "daysAgo": 5,
+      "daysAgo": 6,
       "statLine": "1 G · 0-0 · 2.2 IP · 0.00 ERA · 20.0% K% · 0.0% BB%"
     },
     {
@@ -3068,14 +2903,14 @@
       "mlbam_id": "678868",
       "name": "Eddy Yean",
       "positions": "RP",
-      "rank": 4353,
+      "rank": 4343,
       "isPit": true,
       "isTwoWay": false,
       "fromLevel": "AAA",
       "toLevel": "MLB",
       "toRank": 6,
       "callupDate": "2026-07-05",
-      "daysAgo": 5,
+      "daysAgo": 6,
       "statLine": "1 G · 0-0 · 2.0 IP · 0.00 ERA · 42.9% K% · 14.3% BB%"
     },
     {
@@ -3083,14 +2918,14 @@
       "mlbam_id": "807833",
       "name": "Jose Vasquez",
       "positions": "SP",
-      "rank": 5548,
+      "rank": 5551,
       "isPit": true,
       "isTwoWay": false,
       "fromLevel": "Rookie",
       "toLevel": "Single-A",
       "toRank": 2,
       "callupDate": "2026-07-05",
-      "daysAgo": 5,
+      "daysAgo": 6,
       "statLine": "1 G · 1-0 · 2.0 IP · 0.00 ERA · 28.6% K% · 28.6% BB%"
     },
     {
@@ -3105,7 +2940,7 @@
       "toLevel": "AAA",
       "toRank": 5,
       "callupDate": "2026-07-04",
-      "daysAgo": 6,
+      "daysAgo": 7,
       "statLine": "1 G · 0-0 · 4.0 IP · 6.75 ERA · 36.4% K% · 13.6% BB%"
     },
     {
@@ -3113,14 +2948,14 @@
       "mlbam_id": "687239",
       "name": "Ben Peoples",
       "positions": "RP",
-      "rank": 2282,
+      "rank": 2281,
       "isPit": true,
       "isTwoWay": false,
       "fromLevel": "AAA",
       "toLevel": "MLB",
       "toRank": 6,
       "callupDate": "2026-07-04",
-      "daysAgo": 6,
+      "daysAgo": 7,
       "statLine": "2 G · 0-0 · 3.0 IP · 0.00 ERA · 18.2% K% · 0.0% BB%"
     },
     {
@@ -3128,14 +2963,14 @@
       "mlbam_id": "807966",
       "name": "Anderson Cardenas",
       "positions": "RP",
-      "rank": 2322,
+      "rank": 2317,
       "isPit": true,
       "isTwoWay": false,
       "fromLevel": "Rookie",
       "toLevel": "Single-A",
       "toRank": 2,
       "callupDate": "2026-07-04",
-      "daysAgo": 6,
+      "daysAgo": 7,
       "statLine": "1 G · 0-0 · 4.0 IP · 0.00 ERA · 64.3% K% · 0.0% BB%"
     },
     {
@@ -3143,14 +2978,14 @@
       "mlbam_id": "801293",
       "name": "Eric Yost",
       "positions": "SP",
-      "rank": 2983,
+      "rank": 2977,
       "isPit": true,
       "isTwoWay": false,
       "fromLevel": "AA",
       "toLevel": "AAA",
       "toRank": 5,
       "callupDate": "2026-07-04",
-      "daysAgo": 6,
+      "daysAgo": 7,
       "statLine": "1 G · 0-0 · 3.1 IP · 13.50 ERA · 15.8% K% · 15.8% BB%"
     },
     {
@@ -3158,14 +2993,14 @@
       "mlbam_id": "800970",
       "name": "Landry Jurecka",
       "positions": "SP",
-      "rank": 5599,
+      "rank": 5598,
       "isPit": true,
       "isTwoWay": false,
       "fromLevel": "Single-A",
       "toLevel": "AA",
       "toRank": 4,
       "callupDate": "2026-07-04",
-      "daysAgo": 6,
+      "daysAgo": 7,
       "statLine": "1 G · 1-0 · 3.0 IP · 3.00 ERA · 25.0% K% · 8.3% BB%"
     },
     {
@@ -3180,7 +3015,7 @@
       "toLevel": "MLB",
       "toRank": 6,
       "callupDate": "2026-07-03",
-      "daysAgo": 7,
+      "daysAgo": 8,
       "statLine": "2 G · 0-0 · 9.0 IP · 3.00 ERA · 22.9% K% · 8.6% BB%"
     },
     {
@@ -3188,29 +3023,29 @@
       "mlbam_id": "824600",
       "name": "Riley Maddox",
       "positions": "SP,RP",
-      "rank": 3931,
+      "rank": 4159,
       "isPit": true,
       "isTwoWay": false,
       "fromLevel": "High-A",
       "toLevel": "AA",
       "toRank": 4,
       "callupDate": "2026-07-03",
-      "daysAgo": 7,
-      "statLine": "1 G · 0-0 · 5.0 IP · 9.00 ERA · 16.7% K% · 4.2% BB%"
+      "daysAgo": 8,
+      "statLine": "2 G · 1-0 · 12.0 IP · 4.50 ERA · 11.8% K% · 3.9% BB%"
     },
     {
       "id": "04eot",
       "mlbam_id": "676700",
       "name": "Caleb Bolden",
       "positions": "SP,RP",
-      "rank": 5091,
+      "rank": 5080,
       "isPit": true,
       "isTwoWay": false,
       "fromLevel": "AA",
       "toLevel": "AAA",
       "toRank": 5,
       "callupDate": "2026-07-03",
-      "daysAgo": 7,
+      "daysAgo": 8,
       "statLine": "1 G · 0-1 · 2.0 IP · 9.00 ERA · 27.3% K% · 18.2% BB%"
     },
     {
@@ -3218,14 +3053,14 @@
       "mlbam_id": "695308",
       "name": "Paulshawn Pasqualotto",
       "positions": "RP",
-      "rank": 7249,
+      "rank": 7266,
       "isPit": true,
       "isTwoWay": false,
       "fromLevel": "AA",
       "toLevel": "AAA",
       "toRank": 5,
       "callupDate": "2026-07-03",
-      "daysAgo": 7,
+      "daysAgo": 8,
       "statLine": "1 G · 0-0 · 1.0 IP · 0.00 ERA · 50.0% K% · 16.7% BB%"
     },
     {
@@ -3240,8 +3075,8 @@
       "toLevel": "High-A",
       "toRank": 3,
       "callupDate": "2026-07-03",
-      "daysAgo": 7,
-      "statLine": "1 G · 1-0 · 2.2 IP · 10.13 ERA · 13.3% K% · 13.3% BB%"
+      "daysAgo": 8,
+      "statLine": "2 G · 1-0 · 5.2 IP · 9.53 ERA · 17.2% K% · 10.3% BB%"
     },
     {
       "id": "060vg",
@@ -3255,7 +3090,7 @@
       "toLevel": "AAA",
       "toRank": 5,
       "callupDate": "2026-07-02",
-      "daysAgo": 8,
+      "daysAgo": 9,
       "statLine": "2 G · 0-1 · 11.0 IP · 4.91 ERA · 23.9% K% · 4.3% BB%"
     },
     {
@@ -3263,14 +3098,14 @@
       "mlbam_id": "668831",
       "name": "Garrett Stallings",
       "positions": "SP,RP",
-      "rank": 2732,
+      "rank": 2743,
       "isPit": true,
       "isTwoWay": false,
       "fromLevel": "AAA",
       "toLevel": "MLB",
       "toRank": 6,
       "callupDate": "2026-07-02",
-      "daysAgo": 8,
+      "daysAgo": 9,
       "statLine": "2 G · 0-0 · 3.0 IP · 0.00 ERA · 36.4% K% · 9.1% BB%"
     },
     {
@@ -3278,14 +3113,14 @@
       "mlbam_id": "702300",
       "name": "Johnathan Lavallee",
       "positions": "RP",
-      "rank": 7803,
+      "rank": 7805,
       "isPit": true,
       "isTwoWay": false,
       "fromLevel": "AA",
       "toLevel": "AAA",
       "toRank": 5,
       "callupDate": "2026-07-02",
-      "daysAgo": 8,
+      "daysAgo": 9,
       "statLine": "2 G · 0-0 · 4.0 IP · 0.00 ERA · 7.7% K% · 7.7% BB%"
     },
     {
@@ -3300,7 +3135,7 @@
       "toLevel": "AA",
       "toRank": 4,
       "callupDate": "2026-07-01",
-      "daysAgo": 9,
+      "daysAgo": 10,
       "statLine": "2 G · 0-1 · 8.1 IP · 8.64 ERA · 20.0% K% · 5.0% BB%"
     },
     {
@@ -3315,7 +3150,7 @@
       "toLevel": "MLB",
       "toRank": 6,
       "callupDate": "2026-07-01",
-      "daysAgo": 9,
+      "daysAgo": 10,
       "statLine": "1 G · 0-0 · 2.0 IP · 9.00 ERA · 11.1% K% · 11.1% BB%"
     },
     {
@@ -3330,7 +3165,7 @@
       "toLevel": "High-A",
       "toRank": 3,
       "callupDate": "2026-07-01",
-      "daysAgo": 9,
+      "daysAgo": 10,
       "statLine": "2 G · 1-1 · 11.0 IP · 3.27 ERA · 19.1% K% · 6.4% BB%"
     },
     {
@@ -3338,14 +3173,14 @@
       "mlbam_id": "831572",
       "name": "Carson Fischer",
       "positions": "RP",
-      "rank": 6236,
+      "rank": 6250,
       "isPit": true,
       "isTwoWay": false,
       "fromLevel": "Single-A",
       "toLevel": "High-A",
       "toRank": 3,
       "callupDate": "2026-07-01",
-      "daysAgo": 9,
+      "daysAgo": 10,
       "statLine": "2 G · 2-0 · 12.0 IP · 3.00 ERA · 8.3% K% · 8.3% BB%"
     },
     {
@@ -3353,14 +3188,14 @@
       "mlbam_id": "703242",
       "name": "Anyer Laureano",
       "positions": "RP",
-      "rank": 7494,
+      "rank": 7717,
       "isPit": true,
       "isTwoWay": false,
       "fromLevel": "Single-A",
       "toLevel": "AA",
       "toRank": 4,
       "callupDate": "2026-07-01",
-      "daysAgo": 9,
+      "daysAgo": 10,
       "statLine": "2 G · 0-0 · 1.2 IP · 16.20 ERA · 0.0% K% · 22.2% BB%"
     },
     {
@@ -3375,7 +3210,7 @@
       "toLevel": "AA",
       "toRank": 4,
       "callupDate": "2026-06-30",
-      "daysAgo": 10,
+      "daysAgo": 11,
       "statLine": "1 G · 0-0 · 3.0 IP · 0.00 ERA · 58.3% K% · 16.7% BB%"
     },
     {
@@ -3390,7 +3225,7 @@
       "toLevel": "AAA",
       "toRank": 5,
       "callupDate": "2026-06-30",
-      "daysAgo": 10,
+      "daysAgo": 11,
       "statLine": "2 G · 0-0 · 4.0 IP · 4.50 ERA · 20.0% K% · 20.0% BB%"
     },
     {
@@ -3398,14 +3233,14 @@
       "mlbam_id": "821646",
       "name": "Luis Espinoza",
       "positions": "SP",
-      "rank": 3981,
+      "rank": 3994,
       "isPit": true,
       "isTwoWay": false,
       "fromLevel": "DSL",
       "toLevel": "Complex",
       "toRank": 1,
       "callupDate": "2026-06-30",
-      "daysAgo": 10,
+      "daysAgo": 11,
       "statLine": "2 G · 1-0 · 1.0 IP · 36.00 ERA · 0.0% K% · 11.1% BB%"
     },
     {
@@ -3420,7 +3255,7 @@
       "toLevel": "MLB",
       "toRank": 6,
       "callupDate": "2026-06-29",
-      "daysAgo": 11,
+      "daysAgo": 12,
       "statLine": "2 G · 0-0 · 4.0 IP · 0.00 ERA · 50.0% K% · 0.0% BB%"
     },
     {
@@ -3428,14 +3263,14 @@
       "mlbam_id": "821634",
       "name": "Luis Maracara",
       "positions": "RP",
-      "rank": 2750,
+      "rank": 2740,
       "isPit": true,
       "isTwoWay": false,
       "fromLevel": "Rookie",
       "toLevel": "Single-A",
       "toRank": 2,
       "callupDate": "2026-06-28",
-      "daysAgo": 12,
+      "daysAgo": 13,
       "statLine": "2 G · 1-1 · 4.0 IP · 15.75 ERA · 23.8% K% · 9.5% BB%"
     },
     {
@@ -3443,14 +3278,14 @@
       "mlbam_id": "702640",
       "name": "Tyler Gough",
       "positions": "SP",
-      "rank": 2886,
+      "rank": 2884,
       "isPit": true,
       "isTwoWay": false,
       "fromLevel": "Single-A",
       "toLevel": "High-A",
       "toRank": 3,
       "callupDate": "2026-06-28",
-      "daysAgo": 12,
+      "daysAgo": 13,
       "statLine": "2 G · 1-0 · 10.0 IP · 0.00 ERA · 36.1% K% · 13.9% BB%"
     },
     {
@@ -3458,14 +3293,14 @@
       "mlbam_id": "691103",
       "name": "Koen Moreno",
       "positions": "RP",
-      "rank": 7680,
+      "rank": 7678,
       "isPit": true,
       "isTwoWay": false,
       "fromLevel": "High-A",
       "toLevel": "AA",
       "toRank": 4,
       "callupDate": "2026-06-28",
-      "daysAgo": 12,
+      "daysAgo": 13,
       "statLine": "1 G · 0-0 · 4.0 IP · 4.50 ERA · 23.5% K% · 11.8% BB%"
     },
     {
@@ -3480,7 +3315,7 @@
       "toLevel": "MLB",
       "toRank": 6,
       "callupDate": "2026-06-27",
-      "daysAgo": 13,
+      "daysAgo": 14,
       "statLine": "3 G · 0-0 · 6.0 IP · 3.00 ERA · 16.0% K% · 12.0% BB%"
     },
     {
@@ -3488,14 +3323,14 @@
       "mlbam_id": "805990",
       "name": "Grant Kipp",
       "positions": "SP",
-      "rank": 2604,
+      "rank": 2612,
       "isPit": true,
       "isTwoWay": false,
       "fromLevel": "AA",
       "toLevel": "AAA",
       "toRank": 5,
       "callupDate": "2026-06-27",
-      "daysAgo": 13,
+      "daysAgo": 14,
       "statLine": "2 G · 0-0 · 7.2 IP · 9.39 ERA · 36.8% K% · 10.5% BB%"
     },
     {
@@ -3503,14 +3338,14 @@
       "mlbam_id": "808893",
       "name": "Bryan Balzer",
       "positions": "SP",
-      "rank": 3356,
+      "rank": 3169,
       "isPit": true,
       "isTwoWay": false,
       "fromLevel": "Single-A",
       "toLevel": "High-A",
       "toRank": 3,
       "callupDate": "2026-06-27",
-      "daysAgo": 13,
+      "daysAgo": 14,
       "statLine": "2 G · 0-1 · 7.1 IP · 8.59 ERA · 20.5% K% · 15.4% BB%"
     },
     {
@@ -3518,14 +3353,14 @@
       "mlbam_id": "808102",
       "name": "Carlos Mateo",
       "positions": "RP",
-      "rank": 8286,
+      "rank": 8183,
       "isPit": true,
       "isTwoWay": false,
       "fromLevel": "Rookie",
       "toLevel": "Single-A",
       "toRank": 2,
       "callupDate": "2026-06-27",
-      "daysAgo": 13,
+      "daysAgo": 14,
       "statLine": "3 G · 1-0 · 5.0 IP · 1.80 ERA · 47.6% K% · 9.5% BB%"
     },
     {
@@ -3533,59 +3368,59 @@
       "mlbam_id": "823790",
       "name": "Will McCausland",
       "positions": "SP,RP",
-      "rank": 3269,
+      "rank": 3289,
       "isPit": true,
       "isTwoWay": false,
       "fromLevel": "Single-A",
       "toLevel": "High-A",
       "toRank": 3,
       "callupDate": "2026-06-26",
-      "daysAgo": 14,
+      "daysAgo": 15,
       "statLine": "3 G · 1-2 · 15.1 IP · 6.46 ERA · 18.5% K% · 3.1% BB%"
-    },
-    {
-      "id": "06r2a",
-      "mlbam_id": "806879",
-      "name": "Anhuar Garcia",
-      "positions": "SP",
-      "rank": 3294,
-      "isPit": true,
-      "isTwoWay": false,
-      "fromLevel": "Rookie",
-      "toLevel": "Single-A",
-      "toRank": 2,
-      "callupDate": "2026-06-26",
-      "daysAgo": 14,
-      "statLine": "3 G · 1-0 · 6.2 IP · 0.00 ERA · 43.5% K% · 8.7% BB%"
     },
     {
       "id": "06aq1",
       "mlbam_id": "808122",
       "name": "Erigaldi Perez",
       "positions": "SP",
-      "rank": 3419,
+      "rank": 3412,
       "isPit": true,
       "isTwoWay": false,
       "fromLevel": "Rookie",
       "toLevel": "Single-A",
       "toRank": 2,
       "callupDate": "2026-06-26",
-      "daysAgo": 14,
+      "daysAgo": 15,
       "statLine": "2 G · 0-1 · 5.2 IP · 11.12 ERA · 16.0% K% · 24.0% BB%"
+    },
+    {
+      "id": "06r2a",
+      "mlbam_id": "806879",
+      "name": "Anhuar Garcia",
+      "positions": "SP",
+      "rank": 3471,
+      "isPit": true,
+      "isTwoWay": false,
+      "fromLevel": "Rookie",
+      "toLevel": "Single-A",
+      "toRank": 2,
+      "callupDate": "2026-06-26",
+      "daysAgo": 15,
+      "statLine": "4 G · 1-0 · 8.2 IP · 4.15 ERA · 38.2% K% · 11.8% BB%"
     },
     {
       "id": "06qle",
       "mlbam_id": "694537",
       "name": "Channing Austin",
       "positions": "SP,RP",
-      "rank": 4208,
+      "rank": 4203,
       "isPit": true,
       "isTwoWay": false,
       "fromLevel": "High-A",
       "toLevel": "AA",
       "toRank": 4,
       "callupDate": "2026-06-26",
-      "daysAgo": 14,
+      "daysAgo": 15,
       "statLine": "3 G · 0-1 · 6.1 IP · 5.68 ERA · 20.7% K% · 20.7% BB%"
     },
     {
@@ -3593,14 +3428,14 @@
       "mlbam_id": "821061",
       "name": "Irwin Ramirez",
       "positions": "SP",
-      "rank": 4684,
+      "rank": 4686,
       "isPit": true,
       "isTwoWay": false,
       "fromLevel": "Rookie",
       "toLevel": "Single-A",
       "toRank": 2,
       "callupDate": "2026-06-26",
-      "daysAgo": 14,
+      "daysAgo": 15,
       "statLine": "3 G · 0-1 · 12.0 IP · 6.00 ERA · 14.3% K% · 17.9% BB%"
     },
     {
@@ -3608,15 +3443,15 @@
       "mlbam_id": "800361",
       "name": "Peter Bonilla",
       "positions": "RP",
-      "rank": 7904,
+      "rank": 7902,
       "isPit": true,
       "isTwoWay": false,
       "fromLevel": "Rookie",
       "toLevel": "Single-A",
       "toRank": 2,
       "callupDate": "2026-06-26",
-      "daysAgo": 14,
-      "statLine": "4 G · 0-1 · 4.0 IP · 9.00 ERA · 10.0% K% · 15.0% BB%"
+      "daysAgo": 15,
+      "statLine": "5 G · 0-1 · 5.0 IP · 12.60 ERA · 13.8% K% · 20.7% BB%"
     },
     {
       "id": "06207",
@@ -3630,7 +3465,7 @@
       "toLevel": "AA",
       "toRank": 4,
       "callupDate": "2026-06-25",
-      "daysAgo": 15,
+      "daysAgo": 16,
       "statLine": "3 G · 0-0 · 14.0 IP · 1.93 ERA · 46.2% K% · 1.9% BB%"
     },
     {
@@ -3638,14 +3473,14 @@
       "mlbam_id": "809733",
       "name": "Connor Wietgrefe",
       "positions": "SP",
-      "rank": 2547,
+      "rank": 2561,
       "isPit": true,
       "isTwoWay": false,
       "fromLevel": "AA",
       "toLevel": "AAA",
       "toRank": 5,
       "callupDate": "2026-06-25",
-      "daysAgo": 15,
+      "daysAgo": 16,
       "statLine": "3 G · 1-2 · 17.0 IP · 5.29 ERA · 14.3% K% · 5.7% BB%"
     },
     {
@@ -3653,14 +3488,14 @@
       "mlbam_id": "821644",
       "name": "Marco Eluscat",
       "positions": "SP",
-      "rank": 3513,
+      "rank": 3506,
       "isPit": true,
       "isTwoWay": false,
       "fromLevel": "DSL",
       "toLevel": "Complex",
       "toRank": 1,
       "callupDate": "2026-06-25",
-      "daysAgo": 15,
+      "daysAgo": 16,
       "statLine": "2 G · 0-1 · 2.2 IP · 23.63 ERA · 35.3% K% · 11.8% BB%"
     },
     {
@@ -3668,14 +3503,14 @@
       "mlbam_id": "804985",
       "name": "Jack Anker",
       "positions": "RP",
-      "rank": 3657,
+      "rank": 3648,
       "isPit": true,
       "isTwoWay": false,
       "fromLevel": "Single-A",
       "toLevel": "High-A",
       "toRank": 3,
       "callupDate": "2026-06-25",
-      "daysAgo": 15,
+      "daysAgo": 16,
       "statLine": "3 G · 0-1 · 13.2 IP · 5.93 ERA · 32.3% K% · 11.3% BB%"
     },
     {
@@ -3683,15 +3518,15 @@
       "mlbam_id": "821417",
       "name": "Victor Espiritu",
       "positions": "RP",
-      "rank": 7911,
+      "rank": 8011,
       "isPit": true,
       "isTwoWay": false,
       "fromLevel": "DSL",
       "toLevel": "Complex",
       "toRank": 1,
       "callupDate": "2026-06-25",
-      "daysAgo": 15,
-      "statLine": "3 G · 0-1 · 9.1 IP · 0.96 ERA · 20.5% K% · 7.7% BB%"
+      "daysAgo": 16,
+      "statLine": "4 G · 0-1 · 10.2 IP · 0.84 ERA · 23.9% K% · 10.9% BB%"
     },
     {
       "id": "05xq2",
@@ -3705,7 +3540,7 @@
       "toLevel": "MLB",
       "toRank": 6,
       "callupDate": "2026-06-24",
-      "daysAgo": 16,
+      "daysAgo": 17,
       "statLine": "1 G · 0-0 · 3.0 IP · 3.00 ERA · 23.1% K% · 15.4% BB%"
     },
     {
@@ -3720,7 +3555,7 @@
       "toLevel": "High-A",
       "toRank": 3,
       "callupDate": "2026-06-24",
-      "daysAgo": 16,
+      "daysAgo": 17,
       "statLine": "3 G · 1-2 · 10.1 IP · 8.71 ERA · 19.2% K% · 23.1% BB%"
     },
     {
@@ -3735,22 +3570,22 @@
       "toLevel": "AA",
       "toRank": 4,
       "callupDate": "2026-06-24",
-      "daysAgo": 16,
-      "statLine": "4 G · 2-0 · 7.0 IP · 0.00 ERA · 40.0% K% · 0.0% BB%"
+      "daysAgo": 17,
+      "statLine": "5 G · 2-0 · 9.0 IP · 0.00 ERA · 37.5% K% · 0.0% BB%"
     },
     {
       "id": "0647p",
       "mlbam_id": "802410",
       "name": "Jacob Zibin",
       "positions": "SP",
-      "rank": 2943,
+      "rank": 2936,
       "isPit": true,
       "isTwoWay": false,
       "fromLevel": "Single-A",
       "toLevel": "High-A",
       "toRank": 3,
       "callupDate": "2026-06-24",
-      "daysAgo": 16,
+      "daysAgo": 17,
       "statLine": "3 G · 1-1 · 14.1 IP · 5.65 ERA · 31.1% K% · 13.1% BB%"
     },
     {
@@ -3758,14 +3593,14 @@
       "mlbam_id": "688354",
       "name": "Hayden Minton",
       "positions": "SP",
-      "rank": 3887,
+      "rank": 3898,
       "isPit": true,
       "isTwoWay": false,
       "fromLevel": "High-A",
       "toLevel": "AA",
       "toRank": 4,
       "callupDate": "2026-06-24",
-      "daysAgo": 16,
+      "daysAgo": 17,
       "statLine": "3 G · 0-0 · 10.2 IP · 4.22 ERA · 14.6% K% · 12.5% BB%"
     },
     {
@@ -3773,14 +3608,14 @@
       "mlbam_id": "814491",
       "name": "Tucker Musgrove",
       "positions": "SP",
-      "rank": 5853,
+      "rank": 5847,
       "isPit": true,
       "isTwoWay": false,
       "fromLevel": "High-A",
       "toLevel": "AA",
       "toRank": 4,
       "callupDate": "2026-06-24",
-      "daysAgo": 16,
+      "daysAgo": 17,
       "statLine": "4 G · 0-1 · 4.0 IP · 4.50 ERA · 28.6% K% · 33.3% BB%"
     },
     {
@@ -3788,14 +3623,14 @@
       "mlbam_id": "695572",
       "name": "Will Koger",
       "positions": "RP",
-      "rank": 8803,
+      "rank": 8807,
       "isPit": true,
       "isTwoWay": false,
       "fromLevel": "Single-A",
       "toLevel": "High-A",
       "toRank": 3,
       "callupDate": "2026-06-24",
-      "daysAgo": 16,
+      "daysAgo": 17,
       "statLine": "5 G · 0-0 · 6.2 IP · 5.40 ERA · 15.6% K% · 28.1% BB%"
     },
     {
@@ -3803,14 +3638,14 @@
       "mlbam_id": "670062",
       "name": "Julian Garcia",
       "positions": "SP",
-      "rank": 2291,
+      "rank": 2295,
       "isPit": true,
       "isTwoWay": false,
       "fromLevel": "AAA",
       "toLevel": "MLB",
       "toRank": 6,
       "callupDate": "2026-06-23",
-      "daysAgo": 17,
+      "daysAgo": 18,
       "statLine": "6 G · 0-1 · 9.1 IP · 1.93 ERA · 25.7% K% · 17.1% BB%"
     },
     {
@@ -3818,14 +3653,14 @@
       "mlbam_id": "687900",
       "name": "Andrew Baker",
       "positions": "RP",
-      "rank": 4889,
+      "rank": 4433,
       "isPit": true,
       "isTwoWay": false,
       "fromLevel": "AA",
       "toLevel": "AAA",
       "toRank": 5,
       "callupDate": "2026-06-23",
-      "daysAgo": 17,
+      "daysAgo": 18,
       "statLine": "6 G · 1-1 · 7.0 IP · 5.14 ERA · 38.7% K% · 12.9% BB%"
     },
     {
@@ -3833,14 +3668,14 @@
       "mlbam_id": "691721",
       "name": "Jared Kelley",
       "positions": "RP",
-      "rank": 7181,
+      "rank": 7211,
       "isPit": true,
       "isTwoWay": false,
       "fromLevel": "AA",
       "toLevel": "AAA",
       "toRank": 5,
       "callupDate": "2026-06-23",
-      "daysAgo": 17,
+      "daysAgo": 18,
       "statLine": "2 G · 0-0 · 4.0 IP · 0.00 ERA · 26.7% K% · 13.3% BB%"
     },
     {
@@ -3848,14 +3683,14 @@
       "mlbam_id": "805315",
       "name": "Michael Walsh",
       "positions": "RP",
-      "rank": 7728,
+      "rank": 7729,
       "isPit": true,
       "isTwoWay": false,
       "fromLevel": "AA",
       "toLevel": "AAA",
       "toRank": 5,
       "callupDate": "2026-06-23",
-      "daysAgo": 17,
+      "daysAgo": 18,
       "statLine": "2 G · 0-0 · 2.0 IP · 4.50 ERA · 15.4% K% · 7.7% BB%"
     },
     {
@@ -3863,14 +3698,14 @@
       "mlbam_id": "803252",
       "name": "Eliseo Mota",
       "positions": "RP",
-      "rank": 8051,
+      "rank": 8048,
       "isPit": true,
       "isTwoWay": false,
       "fromLevel": "Single-A",
       "toLevel": "High-A",
       "toRank": 3,
       "callupDate": "2026-06-23",
-      "daysAgo": 17,
+      "daysAgo": 18,
       "statLine": "5 G · 0-0 · 8.0 IP · 3.38 ERA · 5.7% K% · 8.6% BB%"
     },
     {
@@ -3878,29 +3713,29 @@
       "mlbam_id": "703670",
       "name": "Pierce George",
       "positions": "RP",
-      "rank": 8077,
+      "rank": 8190,
       "isPit": true,
       "isTwoWay": false,
       "fromLevel": "High-A",
       "toLevel": "AA",
       "toRank": 4,
       "callupDate": "2026-06-23",
-      "daysAgo": 17,
-      "statLine": "6 G · 1-0 · 7.0 IP · 3.86 ERA · 15.2% K% · 15.2% BB%"
+      "daysAgo": 18,
+      "statLine": "7 G · 1-0 · 7.1 IP · 9.82 ERA · 12.8% K% · 15.4% BB%"
     },
     {
       "id": "06pla",
       "mlbam_id": "695618",
       "name": "Anthony Susac",
       "positions": "RP",
-      "rank": 8368,
+      "rank": 8372,
       "isPit": true,
       "isTwoWay": false,
       "fromLevel": "High-A",
       "toLevel": "AA",
       "toRank": 4,
       "callupDate": "2026-06-23",
-      "daysAgo": 17,
+      "daysAgo": 18,
       "statLine": "5 G · 0-0 · 4.2 IP · 13.50 ERA · 25.0% K% · 10.7% BB%"
     },
     {
@@ -3908,14 +3743,14 @@
       "mlbam_id": "811638",
       "name": "Naoel Mejia",
       "positions": "RP",
-      "rank": 9102,
+      "rank": 9103,
       "isPit": true,
       "isTwoWay": false,
       "fromLevel": "DSL",
       "toLevel": "Complex",
       "toRank": 1,
       "callupDate": "2026-06-23",
-      "daysAgo": 17,
+      "daysAgo": 18,
       "statLine": "5 G · 1-0 · 5.1 IP · 5.06 ERA · 25.0% K% · 16.7% BB%"
     },
     {
@@ -3930,7 +3765,7 @@
       "toLevel": "MLB",
       "toRank": 6,
       "callupDate": "2026-06-21",
-      "daysAgo": 19,
+      "daysAgo": 20,
       "statLine": "4 G · 0-2 · 17.2 IP · 5.60 ERA · 14.8% K% · 8.6% BB%"
     },
     {
@@ -3938,14 +3773,14 @@
       "mlbam_id": "822473",
       "name": "Liam Paddack",
       "positions": "RP",
-      "rank": 5241,
+      "rank": 5277,
       "isPit": true,
       "isTwoWay": false,
       "fromLevel": "High-A",
       "toLevel": "AA",
       "toRank": 4,
       "callupDate": "2026-06-21",
-      "daysAgo": 19,
+      "daysAgo": 20,
       "statLine": "6 G · 1-0 · 7.1 IP · 4.91 ERA · 29.0% K% · 22.6% BB%"
     },
     {
@@ -3953,14 +3788,14 @@
       "mlbam_id": "823714",
       "name": "Cesar Aquino",
       "positions": "RP",
-      "rank": 5518,
+      "rank": 5552,
       "isPit": true,
       "isTwoWay": false,
       "fromLevel": "Single-A",
       "toLevel": "AA",
       "toRank": 4,
       "callupDate": "2026-06-21",
-      "daysAgo": 19,
+      "daysAgo": 20,
       "statLine": "1 G · 0-0 · 1.2 IP · 0.00 ERA · 0.0% K% · 0.0% BB%"
     },
     {
@@ -3968,14 +3803,14 @@
       "mlbam_id": "692593",
       "name": "Ismael Luciano",
       "positions": "SP,RP",
-      "rank": 5747,
+      "rank": 5741,
       "isPit": true,
       "isTwoWay": false,
       "fromLevel": "Single-A",
       "toLevel": "High-A",
       "toRank": 3,
       "callupDate": "2026-06-21",
-      "daysAgo": 19,
+      "daysAgo": 20,
       "statLine": "4 G · 0-0 · 6.0 IP · 12.00 ERA · 15.2% K% · 21.2% BB%"
     },
     {
@@ -3983,44 +3818,44 @@
       "mlbam_id": "803373",
       "name": "Anderson Guevara",
       "positions": "RP",
-      "rank": 7708,
+      "rank": 7446,
       "isPit": true,
       "isTwoWay": false,
       "fromLevel": "Rookie",
       "toLevel": "Single-A",
       "toRank": 2,
       "callupDate": "2026-06-21",
-      "daysAgo": 19,
-      "statLine": "4 G · 0-1 · 7.2 IP · 1.17 ERA · 41.4% K% · 6.9% BB%"
+      "daysAgo": 20,
+      "statLine": "5 G · 0-1 · 10.0 IP · 1.80 ERA · 37.5% K% · 7.5% BB%"
     },
     {
       "id": "06hve",
       "mlbam_id": "694832",
       "name": "Cody Adcock",
       "positions": "RP",
-      "rank": 7807,
+      "rank": 7809,
       "isPit": true,
       "isTwoWay": false,
       "fromLevel": "High-A",
       "toLevel": "AA",
       "toRank": 4,
       "callupDate": "2026-06-21",
-      "daysAgo": 19,
-      "statLine": "5 G · 2-0 · 9.1 IP · 1.93 ERA · 20.0% K% · 15.0% BB%"
+      "daysAgo": 20,
+      "statLine": "6 G · 2-0 · 10.1 IP · 2.61 ERA · 20.0% K% · 13.3% BB%"
     },
     {
       "id": "06tln",
       "mlbam_id": "811594",
       "name": "Bernard Jose",
       "positions": "RP",
-      "rank": 7816,
+      "rank": 7819,
       "isPit": true,
       "isTwoWay": false,
       "fromLevel": "High-A",
       "toLevel": "AA",
       "toRank": 4,
       "callupDate": "2026-06-21",
-      "daysAgo": 19,
+      "daysAgo": 20,
       "statLine": "4 G · 0-0 · 10.1 IP · 1.74 ERA · 23.1% K% · 12.8% BB%"
     },
     {
@@ -4028,59 +3863,59 @@
       "mlbam_id": "683085",
       "name": "Landon Sims",
       "positions": "RP",
-      "rank": 7943,
+      "rank": 7941,
       "isPit": true,
       "isTwoWay": false,
       "fromLevel": "AA",
       "toLevel": "AAA",
       "toRank": 5,
       "callupDate": "2026-06-21",
-      "daysAgo": 19,
+      "daysAgo": 20,
       "statLine": "5 G · 0-0 · 8.2 IP · 5.19 ERA · 15.0% K% · 15.0% BB%"
-    },
-    {
-      "id": "06rmz",
-      "mlbam_id": "695990",
-      "name": "Kenyi Perez",
-      "positions": "RP",
-      "rank": 8000,
-      "isPit": true,
-      "isTwoWay": false,
-      "fromLevel": "High-A",
-      "toLevel": "AA",
-      "toRank": 4,
-      "callupDate": "2026-06-21",
-      "daysAgo": 19,
-      "statLine": "5 G · 0-0 · 6.0 IP · 4.50 ERA · 32.4% K% · 26.5% BB%"
     },
     {
       "id": "06pue",
       "mlbam_id": "811710",
       "name": "Jacob Stretch",
       "positions": "RP",
-      "rank": 8047,
+      "rank": 8044,
       "isPit": true,
       "isTwoWay": false,
       "fromLevel": "Single-A",
       "toLevel": "AAA",
       "toRank": 5,
       "callupDate": "2026-06-21",
-      "daysAgo": 19,
+      "daysAgo": 20,
       "statLine": "1 G · 0-0 · 1.0 IP · 0.00 ERA · 0.0% K% · 0.0% BB%"
+    },
+    {
+      "id": "06rmz",
+      "mlbam_id": "695990",
+      "name": "Kenyi Perez",
+      "positions": "RP",
+      "rank": 8107,
+      "isPit": true,
+      "isTwoWay": false,
+      "fromLevel": "High-A",
+      "toLevel": "AA",
+      "toRank": 4,
+      "callupDate": "2026-06-21",
+      "daysAgo": 20,
+      "statLine": "6 G · 0-0 · 8.2 IP · 3.12 ERA · 30.4% K% · 26.1% BB%"
     },
     {
       "id": "06qov",
       "mlbam_id": "828508",
       "name": "Bryce Alewine",
       "positions": "RP",
-      "rank": 8353,
+      "rank": 8357,
       "isPit": true,
       "isTwoWay": false,
       "fromLevel": "Rookie",
       "toLevel": "Single-A",
       "toRank": 2,
       "callupDate": "2026-06-21",
-      "daysAgo": 19,
+      "daysAgo": 20,
       "statLine": "3 G · 0-0 · 4.1 IP · 8.31 ERA · 9.1% K% · 13.6% BB%"
     },
     {
@@ -4095,7 +3930,7 @@
       "toLevel": "AAA",
       "toRank": 5,
       "callupDate": "2026-06-20",
-      "daysAgo": 20,
+      "daysAgo": 21,
       "statLine": "4 G · 0-1 · 16.0 IP · 5.06 ERA · 35.8% K% · 10.4% BB%"
     },
     {
@@ -4103,15 +3938,15 @@
       "mlbam_id": "815590",
       "name": "Ryan Lobus",
       "positions": "RP",
-      "rank": 2643,
+      "rank": 2505,
       "isPit": true,
       "isTwoWay": false,
       "fromLevel": "AA",
       "toLevel": "AAA",
       "toRank": 5,
       "callupDate": "2026-06-20",
-      "daysAgo": 20,
-      "statLine": "5 G · 1-1 · 6.2 IP · 5.40 ERA · 21.2% K% · 12.1% BB%"
+      "daysAgo": 21,
+      "statLine": "6 G · 1-1 · 8.1 IP · 5.40 ERA · 28.6% K% · 9.5% BB%"
     },
     {
       "id": "06rm6",
@@ -4125,7 +3960,7 @@
       "toLevel": "High-A",
       "toRank": 3,
       "callupDate": "2026-06-19",
-      "daysAgo": 21,
+      "daysAgo": 22,
       "statLine": "4 G · 1-1 · 19.2 IP · 3.20 ERA · 27.3% K% · 3.9% BB%"
     },
     {
@@ -4140,7 +3975,7 @@
       "toLevel": "High-A",
       "toRank": 3,
       "callupDate": "2026-06-19",
-      "daysAgo": 21,
+      "daysAgo": 22,
       "statLine": "3 G · 0-1 · 15.0 IP · 2.40 ERA · 37.0% K% · 11.1% BB%"
     },
     {
@@ -4148,14 +3983,14 @@
       "mlbam_id": "678142",
       "name": "Cedric De Grandpre",
       "positions": "SP",
-      "rank": 2436,
+      "rank": 2439,
       "isPit": true,
       "isTwoWay": false,
       "fromLevel": "High-A",
       "toLevel": "AA",
       "toRank": 4,
       "callupDate": "2026-06-19",
-      "daysAgo": 21,
+      "daysAgo": 22,
       "statLine": "4 G · 2-1 · 18.0 IP · 5.00 ERA · 32.1% K% · 12.8% BB%"
     },
     {
@@ -4163,14 +3998,14 @@
       "mlbam_id": "806640",
       "name": "Daniel Keaney",
       "positions": "RP",
-      "rank": 3148,
+      "rank": 3154,
       "isPit": true,
       "isTwoWay": false,
       "fromLevel": "Rookie",
       "toLevel": "Single-A",
       "toRank": 2,
       "callupDate": "2026-06-19",
-      "daysAgo": 21,
+      "daysAgo": 22,
       "statLine": "3 G · 1-1 · 14.0 IP · 2.57 ERA · 24.6% K% · 8.2% BB%"
     },
     {
@@ -4178,14 +4013,14 @@
       "mlbam_id": "827604",
       "name": "Aidan Deakins",
       "positions": "SP",
-      "rank": 3459,
+      "rank": 3710,
       "isPit": true,
       "isTwoWay": false,
       "fromLevel": "Single-A",
       "toLevel": "High-A",
       "toRank": 3,
       "callupDate": "2026-06-19",
-      "daysAgo": 21,
+      "daysAgo": 22,
       "statLine": "1 G · 0-0 · 3.1 IP · 5.40 ERA · 13.3% K% · 6.7% BB%"
     },
     {
@@ -4200,7 +4035,7 @@
       "toLevel": "MLB",
       "toRank": 6,
       "callupDate": "2026-06-18",
-      "daysAgo": 22,
+      "daysAgo": 23,
       "statLine": "6 G · 0-0 · 9.0 IP · 5.00 ERA · 20.5% K% · 15.4% BB%"
     },
     {
@@ -4215,22 +4050,22 @@
       "toLevel": "AAA",
       "toRank": 5,
       "callupDate": "2026-06-18",
-      "daysAgo": 22,
-      "statLine": "7 G · 1-1 · 5.2 IP · 23.82 ERA · 14.3% K% · 20.0% BB%"
+      "daysAgo": 23,
+      "statLine": "8 G · 1-1 · 6.2 IP · 20.25 ERA · 13.2% K% · 18.4% BB%"
     },
     {
       "id": "06tvl",
       "mlbam_id": "816014",
       "name": "Ryan McDonagh",
       "positions": "SP",
-      "rank": 3317,
+      "rank": 3321,
       "isPit": true,
       "isTwoWay": false,
       "fromLevel": "Rookie",
       "toLevel": "Single-A",
       "toRank": 2,
       "callupDate": "2026-06-18",
-      "daysAgo": 22,
+      "daysAgo": 23,
       "statLine": "4 G · 1-2 · 18.1 IP · 4.42 ERA · 25.3% K% · 9.3% BB%"
     },
     {
@@ -4245,7 +4080,7 @@
       "toLevel": "MLB",
       "toRank": 6,
       "callupDate": "2026-06-17",
-      "daysAgo": 23,
+      "daysAgo": 24,
       "statLine": "5 G · 0-0 · 5.0 IP · 5.40 ERA · 39.1% K% · 13.0% BB%"
     },
     {
@@ -4253,14 +4088,14 @@
       "mlbam_id": "695049",
       "name": "Brett Kerry",
       "positions": "SP",
-      "rank": 2601,
+      "rank": 2712,
       "isPit": true,
       "isTwoWay": false,
       "fromLevel": "AAA",
       "toLevel": "MLB",
       "toRank": 6,
       "callupDate": "2026-06-17",
-      "daysAgo": 23,
+      "daysAgo": 24,
       "statLine": "1 G · 0-0 · 4.0 IP · 4.50 ERA · 12.5% K% · 6.3% BB%"
     },
     {
@@ -4268,14 +4103,14 @@
       "mlbam_id": "678163",
       "name": "Ryan Magdic",
       "positions": "RP",
-      "rank": 5792,
+      "rank": 5832,
       "isPit": true,
       "isTwoWay": false,
       "fromLevel": "High-A",
       "toLevel": "AA",
       "toRank": 4,
       "callupDate": "2026-06-17",
-      "daysAgo": 23,
+      "daysAgo": 24,
       "statLine": "4 G · 1-0 · 14.1 IP · 1.88 ERA · 28.6% K% · 5.4% BB%"
     },
     {
@@ -4290,7 +4125,7 @@
       "toLevel": "AAA",
       "toRank": 5,
       "callupDate": "2026-06-17",
-      "daysAgo": 23,
+      "daysAgo": 24,
       "statLine": "8 G · 1-1 · 10.2 IP · 5.91 ERA · 15.7% K% · 21.6% BB%"
     },
     {
@@ -4305,7 +4140,7 @@
       "toLevel": "High-A",
       "toRank": 3,
       "callupDate": "2026-06-17",
-      "daysAgo": 23,
+      "daysAgo": 24,
       "statLine": "6 G · 0-0 · 6.1 IP · 2.84 ERA · 27.3% K% · 15.2% BB%"
     },
     {
@@ -4313,15 +4148,15 @@
       "mlbam_id": "804255",
       "name": "Seamus Barrett",
       "positions": "RP",
-      "rank": 9106,
+      "rank": 9108,
       "isPit": true,
       "isTwoWay": false,
       "fromLevel": "Single-A",
       "toLevel": "High-A",
       "toRank": 3,
       "callupDate": "2026-06-17",
-      "daysAgo": 23,
-      "statLine": "5 G · 0-1 · 4.0 IP · 4.50 ERA · 20.0% K% · 24.0% BB%"
+      "daysAgo": 24,
+      "statLine": "6 G · 0-1 · 5.0 IP · 9.00 ERA · 19.4% K% · 22.6% BB%"
     },
     {
       "id": "06zih",
@@ -4335,7 +4170,7 @@
       "toLevel": "AA",
       "toRank": 4,
       "callupDate": "2026-06-16",
-      "daysAgo": 24,
+      "daysAgo": 25,
       "statLine": "7 G · 0-1 · 9.2 IP · 1.86 ERA · 28.6% K% · 0.0% BB%"
     },
     {
@@ -4343,14 +4178,14 @@
       "mlbam_id": "693739",
       "name": "Alexander Alberto",
       "positions": "RP",
-      "rank": 3375,
+      "rank": 3362,
       "isPit": true,
       "isTwoWay": false,
       "fromLevel": "AA",
       "toLevel": "AAA",
       "toRank": 5,
       "callupDate": "2026-06-16",
-      "daysAgo": 24,
+      "daysAgo": 25,
       "statLine": "7 G · 0-0 · 7.0 IP · 3.86 ERA · 24.3% K% · 10.8% BB%"
     },
     {
@@ -4358,14 +4193,14 @@
       "mlbam_id": "815672",
       "name": "Johan Cabeza",
       "positions": "SP",
-      "rank": 4452,
+      "rank": 4450,
       "isPit": true,
       "isTwoWay": false,
       "fromLevel": "DSL",
       "toLevel": "Complex",
       "toRank": 1,
       "callupDate": "2026-06-15",
-      "daysAgo": 25,
+      "daysAgo": 26,
       "statLine": "4 G · 2-0 · 16.0 IP · 2.25 ERA · 18.3% K% · 10.0% BB%"
     },
     {
@@ -4380,7 +4215,7 @@
       "toLevel": "High-A",
       "toRank": 3,
       "callupDate": "2026-06-14",
-      "daysAgo": 26,
+      "daysAgo": 27,
       "statLine": "4 G · 2-1 · 21.1 IP · 2.95 ERA · 24.4% K% · 5.8% BB%"
     },
     {
@@ -4388,14 +4223,14 @@
       "mlbam_id": "682769",
       "name": "Eiberson Castellano",
       "positions": "RP",
-      "rank": 2234,
+      "rank": 2235,
       "isPit": true,
       "isTwoWay": false,
       "fromLevel": "AAA",
       "toLevel": "MLB",
       "toRank": 6,
       "callupDate": "2026-06-14",
-      "daysAgo": 26,
+      "daysAgo": 27,
       "statLine": "1 G · 0-0 · 3.0 IP · 0.00 ERA · 16.7% K% · 0.0% BB%"
     },
     {
@@ -4410,7 +4245,7 @@
       "toLevel": "AAA",
       "toRank": 5,
       "callupDate": "2026-06-13",
-      "daysAgo": 27,
+      "daysAgo": 28,
       "statLine": "8 G · 1-0 · 13.2 IP · 7.24 ERA · 13.6% K% · 15.2% BB%"
     },
     {
@@ -4425,7 +4260,7 @@
       "toLevel": "AA",
       "toRank": 4,
       "callupDate": "2026-06-13",
-      "daysAgo": 27,
+      "daysAgo": 28,
       "statLine": "8 G · 0-0 · 8.0 IP · 3.38 ERA · 7.5% K% · 10.0% BB%"
     },
     {
@@ -4440,7 +4275,7 @@
       "toLevel": "MLB",
       "toRank": 6,
       "callupDate": "2026-06-12",
-      "daysAgo": 28,
+      "daysAgo": 29,
       "statLine": "5 G · 0-3 · 22.1 IP · 8.87 ERA · 14.0% K% · 9.6% BB%"
     },
     {
@@ -4455,7 +4290,7 @@
       "toLevel": "AA",
       "toRank": 4,
       "callupDate": "2026-06-12",
-      "daysAgo": 28,
+      "daysAgo": 29,
       "statLine": "5 G · 2-2 · 25.0 IP · 5.04 ERA · 25.2% K% · 16.5% BB%"
     },
     {
@@ -4470,7 +4305,7 @@
       "toLevel": "AA",
       "toRank": 4,
       "callupDate": "2026-06-12",
-      "daysAgo": 28,
+      "daysAgo": 29,
       "statLine": "4 G · 1-0 · 17.1 IP · 1.56 ERA · 11.9% K% · 11.9% BB%"
     },
     {
@@ -4485,7 +4320,7 @@
       "toLevel": "MLB",
       "toRank": 6,
       "callupDate": "2026-06-12",
-      "daysAgo": 28,
+      "daysAgo": 29,
       "statLine": "1 G · 0-0 · 2.1 IP · 7.71 ERA · 11.1% K% · 11.1% BB%"
     },
     {
@@ -4500,7 +4335,7 @@
       "toLevel": "AAA",
       "toRank": 5,
       "callupDate": "2026-06-12",
-      "daysAgo": 28,
+      "daysAgo": 29,
       "statLine": "5 G · 2-1 · 16.2 IP · 7.02 ERA · 31.2% K% · 13.0% BB%"
     },
     {
@@ -4515,7 +4350,7 @@
       "toLevel": "AA",
       "toRank": 4,
       "callupDate": "2026-06-12",
-      "daysAgo": 28,
+      "daysAgo": 29,
       "statLine": "5 G · 0-2 · 23.0 IP · 7.43 ERA · 19.1% K% · 8.2% BB%"
     },
     {
@@ -4523,14 +4358,14 @@
       "mlbam_id": "695605",
       "name": "Travis Smith",
       "positions": "SP",
-      "rank": 4528,
+      "rank": 4531,
       "isPit": true,
       "isTwoWay": false,
       "fromLevel": "High-A",
       "toLevel": "AA",
       "toRank": 4,
       "callupDate": "2026-06-12",
-      "daysAgo": 28,
+      "daysAgo": 29,
       "statLine": "5 G · 0-1 · 10.2 IP · 6.75 ERA · 13.7% K% · 19.6% BB%"
     },
     {
@@ -4538,14 +4373,14 @@
       "mlbam_id": "700179",
       "name": "Connor Oliver",
       "positions": "SP,RP",
-      "rank": 4703,
+      "rank": 4700,
       "isPit": true,
       "isTwoWay": false,
       "fromLevel": "High-A",
       "toLevel": "AA",
       "toRank": 4,
       "callupDate": "2026-06-12",
-      "daysAgo": 28,
+      "daysAgo": 29,
       "statLine": "5 G · 2-1 · 25.1 IP · 4.97 ERA · 18.7% K% · 10.3% BB%"
     },
     {
@@ -4553,14 +4388,14 @@
       "mlbam_id": "687114",
       "name": "Bryce Hubbart",
       "positions": "RP",
-      "rank": 5311,
+      "rank": 5351,
       "isPit": true,
       "isTwoWay": false,
       "fromLevel": "AA",
       "toLevel": "AAA",
       "toRank": 5,
       "callupDate": "2026-06-12",
-      "daysAgo": 28,
+      "daysAgo": 29,
       "statLine": "1 G · 0-0 · 1.1 IP · 20.25 ERA · 12.5% K% · 0.0% BB%"
     },
     {
@@ -4568,14 +4403,14 @@
       "mlbam_id": "687308",
       "name": "Ryan Harvey",
       "positions": "RP",
-      "rank": 8393,
+      "rank": 8395,
       "isPit": true,
       "isTwoWay": false,
       "fromLevel": "High-A",
       "toLevel": "AA",
       "toRank": 4,
       "callupDate": "2026-06-12",
-      "daysAgo": 28,
+      "daysAgo": 29,
       "statLine": "1 G · 0-0 · 2.0 IP · 9.00 ERA · 27.3% K% · 0.0% BB%"
     },
     {
@@ -4590,7 +4425,7 @@
       "toLevel": "Single-A",
       "toRank": 2,
       "callupDate": "2026-06-11",
-      "daysAgo": 29,
+      "daysAgo": 30,
       "statLine": "2 G · 1-1 · 5.2 IP · 4.76 ERA · 40.7% K% · 22.2% BB%"
     },
     {
@@ -4605,7 +4440,7 @@
       "toLevel": "High-A",
       "toRank": 3,
       "callupDate": "2026-06-11",
-      "daysAgo": 29,
+      "daysAgo": 30,
       "statLine": "5 G · 0-1 · 20.1 IP · 7.08 ERA · 18.4% K% · 18.4% BB%"
     },
     {
@@ -4613,14 +4448,14 @@
       "mlbam_id": "803833",
       "name": "Garrett Baumann",
       "positions": "SP",
-      "rank": 2305,
+      "rank": 2308,
       "isPit": true,
       "isTwoWay": false,
       "fromLevel": "AA",
       "toLevel": "AAA",
       "toRank": 5,
       "callupDate": "2026-06-11",
-      "daysAgo": 29,
+      "daysAgo": 30,
       "statLine": "5 G · 1-2 · 21.2 IP · 10.38 ERA · 19.0% K% · 8.6% BB%"
     },
     {
@@ -4628,14 +4463,14 @@
       "mlbam_id": "682981",
       "name": "Derek Diamond",
       "positions": "RP",
-      "rank": 3004,
+      "rank": 3001,
       "isPit": true,
       "isTwoWay": false,
       "fromLevel": "AA",
       "toLevel": "AAA",
       "toRank": 5,
       "callupDate": "2026-06-11",
-      "daysAgo": 29,
+      "daysAgo": 30,
       "statLine": "10 G · 1-0 · 12.0 IP · 6.00 ERA · 14.0% K% · 3.5% BB%"
     },
     {
@@ -4643,14 +4478,14 @@
       "mlbam_id": "802087",
       "name": "Frankeli Arias",
       "positions": "SP,RP",
-      "rank": 3066,
+      "rank": 3067,
       "isPit": true,
       "isTwoWay": false,
       "fromLevel": "High-A",
       "toLevel": "AAA",
       "toRank": 5,
       "callupDate": "2026-06-11",
-      "daysAgo": 29,
+      "daysAgo": 30,
       "statLine": "1 G · 0-0 · 0.2 IP · 13.50 ERA · 0.0% K% · 33.3% BB%"
     },
     {
@@ -4658,14 +4493,14 @@
       "mlbam_id": "703566",
       "name": "Carson Messina",
       "positions": "RP",
-      "rank": 5991,
+      "rank": 6021,
       "isPit": true,
       "isTwoWay": false,
       "fromLevel": "Rookie",
       "toLevel": "Single-A",
       "toRank": 2,
       "callupDate": "2026-06-11",
-      "daysAgo": 29,
+      "daysAgo": 30,
       "statLine": "5 G · 0-0 · 11.1 IP · 5.56 ERA · 30.8% K% · 15.4% BB%"
     },
     {
@@ -4673,14 +4508,14 @@
       "mlbam_id": "676153",
       "name": "Austin Love",
       "positions": "RP",
-      "rank": 7011,
+      "rank": 7041,
       "isPit": true,
       "isTwoWay": false,
       "fromLevel": "AA",
       "toLevel": "AAA",
       "toRank": 5,
       "callupDate": "2026-06-11",
-      "daysAgo": 29,
+      "daysAgo": 30,
       "statLine": "10 G · 2-0 · 11.1 IP · 7.15 ERA · 24.1% K% · 24.1% BB%"
     },
     {
@@ -4688,14 +4523,14 @@
       "mlbam_id": "684608",
       "name": "Will Brian",
       "positions": "RP",
-      "rank": 7397,
+      "rank": 7386,
       "isPit": true,
       "isTwoWay": false,
       "fromLevel": "AA",
       "toLevel": "AAA",
       "toRank": 5,
       "callupDate": "2026-06-11",
-      "daysAgo": 29,
+      "daysAgo": 30,
       "statLine": "6 G · 0-0 · 9.1 IP · 1.93 ERA · 32.5% K% · 17.5% BB%"
     },
     {
@@ -4703,15 +4538,15 @@
       "mlbam_id": "813535",
       "name": "Tayler Montiel",
       "positions": "RP",
-      "rank": 8035,
+      "rank": 8031,
       "isPit": true,
       "isTwoWay": false,
       "fromLevel": "Single-A",
       "toLevel": "High-A",
       "toRank": 3,
       "callupDate": "2026-06-11",
-      "daysAgo": 29,
-      "statLine": "6 G · 1-1 · 10.2 IP · 1.69 ERA · 52.4% K% · 11.9% BB%"
+      "daysAgo": 30,
+      "statLine": "7 G · 1-1 · 12.1 IP · 2.92 ERA · 47.1% K% · 9.8% BB%"
     },
     {
       "id": "06hwt",
@@ -4725,7 +4560,7 @@
       "toLevel": "AAA",
       "toRank": 5,
       "callupDate": "2026-06-10",
-      "daysAgo": 30,
+      "daysAgo": 31,
       "statLine": "6 G · 1-2 · 24.2 IP · 5.84 ERA · 25.7% K% · 10.5% BB%"
     },
     {
@@ -4740,83 +4575,23 @@
       "toLevel": "AA",
       "toRank": 4,
       "callupDate": "2026-06-10",
-      "daysAgo": 30,
-      "statLine": "5 G · 1-2 · 19.1 IP · 6.05 ERA · 19.8% K% · 11.6% BB%"
+      "daysAgo": 31,
+      "statLine": "6 G · 1-2 · 24.0 IP · 5.63 ERA · 19.4% K% · 13.0% BB%"
     },
     {
       "id": "06qix",
       "mlbam_id": "694793",
       "name": "Jadon Bercovich",
       "positions": "RP",
-      "rank": 8373,
+      "rank": 8377,
       "isPit": true,
       "isTwoWay": false,
       "fromLevel": "Single-A",
       "toLevel": "High-A",
       "toRank": 3,
       "callupDate": "2026-06-10",
-      "daysAgo": 30,
-      "statLine": "6 G · 0-0 · 9.1 IP · 6.75 ERA · 25.0% K% · 6.8% BB%"
-    },
-    {
-      "id": "06uhl",
-      "mlbam_id": "693781",
-      "name": "Wilian Bormie",
-      "positions": "RP",
-      "rank": 1010,
-      "isPit": true,
-      "isTwoWay": false,
-      "fromLevel": "AA",
-      "toLevel": "AAA",
-      "toRank": 5,
-      "callupDate": "2026-06-09",
       "daysAgo": 31,
-      "statLine": "11 G · 2-0 · 12.1 IP · 2.19 ERA · 25.0% K% · 10.7% BB%"
-    },
-    {
-      "id": "06mwg",
-      "mlbam_id": "695771",
-      "name": "Jacob Kmatz",
-      "positions": "SP",
-      "rank": 1727,
-      "isPit": true,
-      "isTwoWay": false,
-      "fromLevel": "High-A",
-      "toLevel": "AA",
-      "toRank": 4,
-      "callupDate": "2026-06-09",
-      "daysAgo": 31,
-      "statLine": "9 G · 0-1 · 14.0 IP · 5.79 ERA · 29.3% K% · 1.7% BB%"
-    },
-    {
-      "id": "067z7",
-      "mlbam_id": "692243",
-      "name": "Jaden Woods",
-      "positions": "RP",
-      "rank": 3606,
-      "isPit": true,
-      "isTwoWay": false,
-      "fromLevel": "AA",
-      "toLevel": "AAA",
-      "toRank": 5,
-      "callupDate": "2026-06-09",
-      "daysAgo": 31,
-      "statLine": "10 G · 0-0 · 9.2 IP · 9.31 ERA · 28.3% K% · 6.5% BB%"
-    },
-    {
-      "id": "06akj",
-      "mlbam_id": "808292",
-      "name": "Wilmer Lugo",
-      "positions": "RP",
-      "rank": 8513,
-      "isPit": true,
-      "isTwoWay": false,
-      "fromLevel": "DSL",
-      "toLevel": "Complex",
-      "toRank": 1,
-      "callupDate": "2026-06-09",
-      "daysAgo": 31,
-      "statLine": "5 G · 0-0 · 6.2 IP · 13.50 ERA · 17.9% K% · 15.4% BB%"
+      "statLine": "7 G · 0-0 · 11.1 IP · 5.56 ERA · 29.4% K% · 5.9% BB%"
     }
   ]
 }
