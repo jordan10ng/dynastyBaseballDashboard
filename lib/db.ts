@@ -36,6 +36,11 @@ export function loadPlayers(): Record<string, any> {
   return {}
 }
 
+export function savePlayers(players: Record<string, any>): void {
+  try { fs.writeFileSync(PLAYERS_PATH, JSON.stringify(players, null, 2), 'utf-8') }
+  catch (e) { console.error('players save error:', e) }
+}
+
 export async function getSetting(key: string): Promise<string | null> {
   return load().settings[key] ?? null
 }

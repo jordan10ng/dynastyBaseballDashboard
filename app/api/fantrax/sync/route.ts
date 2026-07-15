@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
-import { getLeagueInfo, getTeamRosters } from '@/lib/fantrax'
-import { queryRun, loadPlayers } from '@/lib/db'
+import { getLeagueInfo, getTeamRosters, getPlayerTeams } from '@/lib/fantrax'
+import { queryRun, loadPlayers, savePlayers } from '@/lib/db'
 
 const LEAGUE_IDS = [
   '0ehfuam0mg7wqpn7',
@@ -13,6 +13,21 @@ export async function POST() {
   const results = []
   const playerMap = loadPlayers()
   console.log(`Loaded ${Object.keys(playerMap).length} players from players.json`)
+
+  try {
+    const teamMap = await getPlayerTeams()
+    let updated = 0
+    for (const [id, team] of Object.entries(teamMap)) {
+      if (playerMap[id] && playerMap[id].team !== team) {
+        playerMap[id].team = team
+        updated++
+      }
+    }
+    console.log(`getPlayerTeams: ${Object.keys(teamMap).length} teams fetched, ${updated} players updated`)
+    if (updated > 0) savePlayers(playerMap)
+  } catch (err: any) {
+    console.error('Failed getPlayerTeams:', err.message)
+  }
 
   for (const leagueId of LEAGUE_IDS) {
     try {

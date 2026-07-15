@@ -60,6 +60,17 @@ export async function getTeamRosters(leagueId: string) {
   return json
 }
 
+export async function getPlayerTeams(): Promise<Record<string, string>> {
+  const url = `${FXEA}/getPlayerIds?sport=MLB`
+  const res = await fetch(url, { headers: getHeaders(), cache: 'no-store' })
+  const json = await res.json() as Record<string, { fantraxId: string; team?: string }>
+  const teams: Record<string, string> = {}
+  for (const entry of Object.values(json)) {
+    if (entry.fantraxId && entry.team) teams[entry.fantraxId] = entry.team
+  }
+  return teams
+}
+
 export async function getStandings(leagueId: string) {
   const url = `${FXEA}/getStandings?leagueId=${leagueId}`
   const res = await fetch(url, { headers: getHeaders(), cache: 'no-store' })

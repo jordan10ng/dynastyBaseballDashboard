@@ -33,6 +33,16 @@ async function getTeamRosters(leagueId) {
   return res.json()
 }
 
+async function getPlayerTeams() {
+  const res = await fetch(`${FXEA}/getPlayerIds?sport=MLB`, { headers: headers(), cache: 'no-store' })
+  const json = await res.json()
+  const teams = {}
+  for (const entry of Object.values(json)) {
+    if (entry.fantraxId && entry.team) teams[entry.fantraxId] = entry.team
+  }
+  return teams
+}
+
 async function fxpaRequest(leagueId, methods) {
   const msgs = methods.map(m => ({ method: m.method, data: { leagueId, ...m.data } }))
   const res = await fetch(`${FXPA}?leagueId=${encodeURIComponent(leagueId)}`, {
@@ -94,6 +104,23 @@ async function main() {
 
   let authFailed = false
   let anySuccess = false
+  let playersChanged = false
+
+  try {
+    const teamMap = await getPlayerTeams()
+    let updated = 0
+    for (const [id, team] of Object.entries(teamMap)) {
+      if (players[id] && players[id].team !== team) {
+        players[id].team = team
+        updated++
+      }
+    }
+    console.log(`getPlayerTeams: ${Object.keys(teamMap).length} teams fetched, ${updated} players updated`)
+    if (updated > 0) playersChanged = true
+  } catch (err) {
+    console.error('Failed getPlayerTeams:', err.message)
+    if (String(err.message).startsWith('AUTH:')) authFailed = true
+  }
 
   for (const leagueId of LEAGUE_IDS) {
     try {
@@ -139,6 +166,11 @@ async function main() {
 
   fs.writeFileSync(DB_PATH, JSON.stringify(db, null, 2), 'utf-8')
   console.log(`Wrote ${DB_PATH} — ${Object.keys(db.leagues).length} leagues, ${Object.keys(db.teams).length} teams, ${db.rosters.length} rosters`)
+
+  if (playersChanged) {
+    fs.writeFileSync(PLAYERS_PATH, JSON.stringify(players, null, 2), 'utf-8')
+    console.log(`Wrote ${PLAYERS_PATH} — team fields updated from Fantrax`)
+  }
 
   if (authFailed || !anySuccess) {
     console.error('Fantrax sync failed (auth or no leagues synced)')
