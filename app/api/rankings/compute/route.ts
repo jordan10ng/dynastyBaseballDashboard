@@ -266,15 +266,27 @@ export async function POST() {
     // a better percentile within a prospects-only pool than within a pool that
     // also includes every MLB regular, so "pick whichever percentile is best"
     // was wrong — it overrode real, converged overall consensus).
+    //
+    // A prospect ranked by only 1 source has zero corroboration — comparing its
+    // raw percentile directly against the much larger, MLB-heavy overall pool
+    // lets one board's lone opinion land a name next to genuine All-Stars.
+    // Prospects with 2+ corroborating sources ("established") still compete on
+    // percentile as before; solo-sourced prospects are excluded from that and
+    // instead anchored against established prospects below, same mechanism as
+    // open-universe candidates.
     const REAL_COVERAGE_THRESHOLD = 0.5
     const overallPctById: Record<string, number> = {}
     const overallCoverageById: Record<string, number> = {}
     overallRanked.forEach((p, i) => { overallPctById[p.id] = (i + 1) / overallRanked.length; overallCoverageById[p.id] = p.realCoverage })
 
-    const prospectPctById: Record<string, number> = {}
-    fullProspectRanked.forEach((p, i) => { prospectPctById[p.id] = (i + 1) / fullProspectRanked.length })
+    const prospectSourceCount: Record<string, number> = {}
+    for (const [pid, entries] of Object.entries(prospectEntries)) prospectSourceCount[pid] = entries.length
+    const establishedProspects = fullProspectRanked.filter(p => (prospectSourceCount[p.id] ?? 0) >= 2)
 
-    const combinedIds = new Set<string>([...overallRanked.map(p => p.id), ...fullProspectRanked.map(p => p.id)])
+    const prospectPctById: Record<string, number> = {}
+    establishedProspects.forEach((p, i) => { prospectPctById[p.id] = (i + 1) / establishedProspects.length })
+
+    const combinedIds = new Set<string>([...overallRanked.map(p => p.id), ...establishedProspects.map(p => p.id)])
     const combined: Array<{ id: string; name: string; pct: number; fromProspect: boolean }> = []
     for (const id of Array.from(combinedIds)) {
       const oPct = overallPctById[id]
@@ -286,15 +298,27 @@ export async function POST() {
     }
     combined.sort((a, b) => a.pct - b.pct)
 
-    // --- OPEN UNIVERSE CANDIDATES ---
-    // Collect X players for insertion in build-blend-rank.js using minors_rank anchoring
+    // --- X CANDIDATES (solo-sourced prospects + open universe) ---
+    // Both get inserted in build-blend-rank.js by anchoring next to an established,
+    // already-ranked prospect at a given position, rather than competing on raw
+    // percentile — a name only 1 board has evaluated shouldn't out-rank a name
+    // multiple boards agree on. Collected for insertion via minors_rank anchoring.
     const xCandidates: Array<{ id: string | null; name: string; position: string; team: string; targetPPosition: number }> = []
+
+    let establishedSoFar = 0
+    for (const p of fullProspectRanked) {
+      if ((prospectSourceCount[p.id] ?? 0) >= 2) { establishedSoFar++; continue }
+      if (combinedIds.has(p.id)) continue // already placed via the overall pool
+      xCandidates.push({ id: p.id, name: p.name, position: '', team: '', targetPPosition: Math.max(establishedSoFar, 1) })
+    }
+    const soloProspectIds = new Set(xCandidates.map(x => x.id).filter(Boolean))
+
     for (const source of openSources) {
       for (const row of source.players) {
         if (!row.rank) continue
         const ids = resolveIds(row, nameMap, players)
         const id = ids.length >= 1 ? ids[0] : null
-        if (id && combinedIds.has(id)) continue
+        if (id && (combinedIds.has(id) || soloProspectIds.has(id))) continue
         xCandidates.push({ id, name: row.name, position: row.position ?? '', team: row.team ?? '', targetPPosition: row.rank })
       }
     }
