@@ -28,6 +28,32 @@ function stalenessWeight(dateStr: string): number {
   return Math.pow(0.5, d / HALF_LIFE_DAYS)
 }
 
+// When the 2 most recent source entries for a player agree (both rank them
+// closely, or both leave them off), an older entry that disagrees is stale
+// signal, not a valid data point — drop it instead of blending it into the
+// average. Requires 3+ entries so there's an "older" entry to evaluate.
+type RankEntry = { date: string; weight: number; value: number; isPenalty: boolean; poolSize: number }
+const AGREEMENT_TOLERANCE_PCT = 0.15
+function pruneOutliers(entries: RankEntry[]): RankEntry[] {
+  if (entries.length < 3) return entries
+  const sorted = [...entries].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+  const [newest, secondNewest, ...older] = sorted
+  const poolAvg = (newest.poolSize + secondNewest.poolSize) / 2
+  const agree = newest.isPenalty === secondNewest.isPenalty &&
+    (newest.isPenalty || Math.abs(newest.value - secondNewest.value) <= AGREEMENT_TOLERANCE_PCT * poolAvg)
+  if (!agree) return entries
+  const refValue = (newest.value + secondNewest.value) / 2
+  const refIsPenalty = newest.isPenalty
+  const survivors = [newest, secondNewest]
+  for (const entry of older) {
+    const refPoolAvg = (entry.poolSize + poolAvg) / 2
+    const disagrees = entry.isPenalty !== refIsPenalty ||
+      (!refIsPenalty && Math.abs(entry.value - refValue) > AGREEMENT_TOLERANCE_PCT * refPoolAvg)
+    if (!disagrees) survivors.push(entry)
+  }
+  return survivors
+}
+
 function matchPlayer(
   row: { name: string; position: string; team: string },
   nameMap: Record<string, string[]>,
@@ -139,26 +165,39 @@ export async function POST() {
     // realWeightSum tracks weight from sources that actually ranked the player,
     // as opposed to weight from the absence penalty — used below to tell "genuinely
     // ranked, just not highly" apart from "mostly unranked, filled in with penalties."
-    const overallData: Record<string, { weightedSum: number; weightSum: number; realWeightSum: number; name: string; position: string; team: string }> = {}
+    const overallEntries: Record<string, RankEntry[]> = {}
+    const overallMeta: Record<string, { name: string; position: string; team: string }> = {}
     for (let si = 0; si < overallSources.length; si++) {
       const source = overallSources[si]
       const penalty = sourcePenalties[si]
+      const poolSize = penalty - 1
       for (const row of source.players) {
         const rank = row.rank ?? penalty
         for (const pid of resolveIds(row, nameMap, players)) {
-          if (!overallData[pid]) overallData[pid] = { weightedSum: 0, weightSum: 0, realWeightSum: 0, name: players[pid]?.name ?? row.name, position: row.position, team: row.team }
-          overallData[pid].weightedSum += rank * source.weight
-          overallData[pid].weightSum += source.weight
-          overallData[pid].realWeightSum += source.weight
+          if (!overallEntries[pid]) overallEntries[pid] = []
+          overallEntries[pid].push({ date: source.date, weight: source.weight, value: rank, isPenalty: false, poolSize })
+          if (!overallMeta[pid]) overallMeta[pid] = { name: players[pid]?.name ?? row.name, position: row.position, team: row.team }
         }
       }
       for (const pid of Array.from(allOverallPids)) {
         if (!sourcePidSets[si].has(pid)) {
-          if (!overallData[pid]) overallData[pid] = { weightedSum: 0, weightSum: 0, realWeightSum: 0, name: players[pid]?.name ?? '', position: players[pid]?.positions ?? '', team: players[pid]?.team ?? '' }
-          overallData[pid].weightedSum += penalty * source.weight
-          overallData[pid].weightSum += source.weight
+          if (!overallEntries[pid]) overallEntries[pid] = []
+          overallEntries[pid].push({ date: source.date, weight: source.weight, value: penalty, isPenalty: true, poolSize })
+          if (!overallMeta[pid]) overallMeta[pid] = { name: players[pid]?.name ?? '', position: players[pid]?.positions ?? '', team: players[pid]?.team ?? '' }
         }
       }
+    }
+
+    const overallData: Record<string, { weightedSum: number; weightSum: number; realWeightSum: number; name: string; position: string; team: string }> = {}
+    for (const [pid, entries] of Object.entries(overallEntries)) {
+      const meta = overallMeta[pid]
+      const data = { weightedSum: 0, weightSum: 0, realWeightSum: 0, name: meta.name, position: meta.position, team: meta.team }
+      for (const e of pruneOutliers(entries)) {
+        data.weightedSum += e.value * e.weight
+        data.weightSum += e.weight
+        if (!e.isPenalty) data.realWeightSum += e.weight
+      }
+      overallData[pid] = data
     }
 
     const overallRanked: Array<{ id: string; name: string; position: string; team: string; avgRank: number; realCoverage: number }> = []
@@ -180,20 +219,32 @@ export async function POST() {
     for (const p of overallResult) overallRankById[p.id] = p.rank
 
     // --- FULL PROSPECT RANKING ---
-    const fullProspectData: Record<string, { weightedSum: number; weightSum: number; name: string }> = {}
+    const prospectEntries: Record<string, RankEntry[]> = {}
+    const prospectMeta: Record<string, { name: string }> = {}
     for (const source of prospectSources) {
       const maxRank = Math.max(...source.players.map((p: any) => p.rank ?? 0))
       const penalty = maxRank + 1
+      const poolSize = maxRank
       for (const row of source.players) {
         const rank = row.rank ?? penalty
         const ids = resolveIds(row, nameMap, players)
         if (ids.length === 0) unmatched.push({ source: source.sourceName, rankType: source.rankType, name: row.name })
         for (const pid of ids) {
-          if (!fullProspectData[pid]) fullProspectData[pid] = { weightedSum: 0, weightSum: 0, name: players[pid]?.name ?? row.name }
-          fullProspectData[pid].weightedSum += rank * source.weight
-          fullProspectData[pid].weightSum += source.weight
+          if (!prospectEntries[pid]) prospectEntries[pid] = []
+          prospectEntries[pid].push({ date: source.date, weight: source.weight, value: rank, isPenalty: row.rank == null, poolSize })
+          if (!prospectMeta[pid]) prospectMeta[pid] = { name: players[pid]?.name ?? row.name }
         }
       }
+    }
+
+    const fullProspectData: Record<string, { weightedSum: number; weightSum: number; name: string }> = {}
+    for (const [pid, entries] of Object.entries(prospectEntries)) {
+      const data = { weightedSum: 0, weightSum: 0, name: prospectMeta[pid].name }
+      for (const e of pruneOutliers(entries)) {
+        data.weightedSum += e.value * e.weight
+        data.weightSum += e.weight
+      }
+      fullProspectData[pid] = data
     }
 
     const fullProspectRanked: Array<{ id: string; name: string; avgRank: number }> = []
