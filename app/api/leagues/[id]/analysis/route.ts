@@ -41,7 +41,7 @@ export async function GET(_req: NextRequest, { params }: { params: Promise<{ id:
         const rank: number | null = p.rank ?? null
         const age: number | null = p.age ?? null
         const resolvedLevel = resolveLevel(p.mlbam_id) ?? p.level ?? null
-        const isMinors = r.status === 'MINORS'
+        const isMinors = resolvedLevel !== 'MLB'
         const val = rankValue(rank)
         const arm = isPitcher(positions) ? val : 0
         const bat = !isPitcher(positions) && positions.length > 0 ? val : 0
