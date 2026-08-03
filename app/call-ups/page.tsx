@@ -221,7 +221,7 @@ export default function CallUpsPage() {
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', flexWrap: 'nowrap', overflow: 'hidden' }}>
                     <span style={{ fontWeight: 600, fontSize: '0.88rem', color: myTeamOwned ? '#f59e0b' : 'var(--text)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{r.name}</span>
                     <span style={{ fontSize: '0.65rem', color: 'var(--muted)', fontFamily: 'var(--font-display)', fontWeight: 600, whiteSpace: 'nowrap', flexShrink: 0 }}>
-                      {[cleanPositions(r.positions), moveLabel(r)].filter(Boolean).join(' · ')}
+                      {[cleanPositions(r.positions), player?.team, moveLabel(r)].filter(Boolean).join(' · ')}
                     </span>
                     {r.rank && <span style={{ fontSize: '0.62rem', fontFamily: 'var(--font-display)', color: 'var(--muted)', flexShrink: 0 }}>#{r.rank}</span>}
                     <div style={{ display: 'flex', gap: '3px', flexShrink: 0 }}>
@@ -313,6 +313,7 @@ export default function CallUpsPage() {
                 <div style={{ minWidth: 0 }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', flexWrap: 'nowrap' }}>
                     <span style={{ fontWeight: 600, fontSize: '0.875rem', color: myTeamOwned ? '#f59e0b' : 'var(--text)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{r.name}</span>
+                    {player?.team && <span style={{ fontSize: '0.65rem', fontFamily: 'var(--font-display)', fontWeight: 600, color: 'var(--muted)', flexShrink: 0 }}>{player.team}</span>}
                     {r.rank && <span style={{ fontSize: '0.65rem', fontFamily: 'var(--font-display)', color: 'var(--muted)', flexShrink: 0 }}>#{r.rank}</span>}
                     <div style={{ display: 'flex', gap: '3px', flexShrink: 0 }}>
                       {LEAGUES.map(league => {
