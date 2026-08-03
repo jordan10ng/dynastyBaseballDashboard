@@ -292,6 +292,7 @@ export async function POST() {
     { cmd: `node "${SCRIPTS}/build-scores.js"`, label: 'scores' },
     { cmd: `node "${SCRIPTS}/build-model-rank.js"`, label: 'model-rank' },
     { cmd: `node "${SCRIPTS}/build-blend-rank.js"`, label: 'blend-rank' },
+    { cmd: `node "${SCRIPTS}/build-callups.js"`, label: 'call-ups' },
   ]
   const modelResults: Record<string, string> = {}
   for (const step of modelSteps) {

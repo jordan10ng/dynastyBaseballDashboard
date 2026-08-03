@@ -27,17 +27,17 @@ caffeinate -i & npm run dev
 - GHA only touches data files — scripts are never modified by GHA. Safe recovery:
   ```bash
   git fetch origin
-  git checkout origin/main -- data/history/2026.json data/players.json data/model/norms.json data/model/mlb-tools.json data/model/regression.json data/model/hot-sheet.json data/model/scores-snapshot.json
-  node scripts/build-norms.js && python3 scripts/build-regression.py && node scripts/build-scores.js && node scripts/build-model-rank.js && node scripts/build-blend-rank.js
+  git checkout origin/main -- data/history/2026.json data/players.json data/model/norms.json data/model/mlb-tools.json data/model/regression.json data/model/hot-sheet.json data/model/scores-snapshot.json data/model/call-ups.json
+  node scripts/build-norms.js && python3 scripts/build-regression.py && node scripts/build-scores.js && node scripts/build-model-rank.js && node scripts/build-blend-rank.js && node scripts/build-callups.js
   git add -A && git commit -m "..." && git push
   ```
-- ⚠️ CRITICAL: After GHA recovery, always re-run the FULL pipeline (norms → regression → scores). Pulling data files from GitHub overwrites locally-built model files. Never run build-scores.js without first rebuilding regression.json from the current scripts.
+- ⚠️ CRITICAL: After GHA recovery, always re-run the FULL pipeline (norms → regression → scores → model-rank → blend-rank → call-ups). Pulling data files from GitHub overwrites locally-built model files. Never run build-scores.js without first rebuilding regression.json from the current scripts. Forgetting `build-callups.js` silently reverts Call-Ups to whatever stale copy was last sitting locally, even though GHA regenerates it correctly every night -- this happened for real (stuck on 2026-07-21 for 2+ weeks) before this note was added.
 - DO NOT use `git pull --rebase` — causes detached HEAD and loses local file changes
 - DO NOT use `git reset --hard` before verifying local changes are committed or saved elsewhere
 
 ## Daily Sync (GitHub Actions)
 - Runs every night at 1am PT (9am UTC) via `.github/workflows/daily-sync.yml`
-- Pipeline: sync-stats-gha.js → build-norms → build-mlb-tools → build-regression → build-scores → build-model-rank → build-blend-rank
+- Pipeline: sync-stats-gha.js → build-norms → build-mlb-tools → build-regression → build-scores → build-model-rank → build-blend-rank → build-callups
 - Commits updated `data/history/2026.json`, `data/players.json`, `data/model/*.json` to GitHub
 - Vercel detects the push → auto-redeploys with fresh data
 - Can also trigger manually: https://github.com/jordan10ng/dynastyBaseballDashboard/actions → Daily Stats + Model Sync → Run workflow
@@ -438,7 +438,7 @@ Both use SPORT_ID_TO_LEVEL + sportAbbrToLevel() with sportId fallback. Both fetc
 - Before asserting anything about file contents, verify with grep or cat — never assume
 - GHA conflict recovery — local is ALWAYS source of truth. Never merge. Force push after rebuilding:
   ```bash
-  node scripts/build-norms.js && python3 scripts/build-regression.py && node scripts/build-scores.js && node scripts/build-model-rank.js && node scripts/build-blend-rank.js
+  node scripts/build-norms.js && python3 scripts/build-regression.py && node scripts/build-scores.js && node scripts/build-model-rank.js && node scripts/build-blend-rank.js && node scripts/build-callups.js
   git add -A && git commit -m "..." && git push --force
   ```
 - Never use `git pull --rebase` — causes detached HEAD

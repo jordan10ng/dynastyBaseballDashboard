@@ -39,7 +39,7 @@ git add -A && git commit -m "..." && git push --force
 - Never `git pull --rebase` (detached HEAD)
 - Never `git reset --hard` without confirming local saved
 - Never `git merge` after GHA push — local is source of truth
-- After GHA conflict: see `SCOUT_README.md` recovery block. Always re-run full pipeline (norms → regression → scores → model-rank → blend-rank) after pulling data files.
+- After GHA conflict: see `SCOUT_README.md` recovery block. Always re-run full pipeline (norms → regression → scores → model-rank → blend-rank → call-ups) after pulling data files.
 
 ## Architecture Tripwires
 
@@ -49,7 +49,7 @@ These cause silent breakage if missed. Full details in `SCOUT_README.md`.
 - **Two sync files must stay in lockstep:** `scripts/sync-stats-gha.js` and `app/api/stats/sync/route.ts`. Update both together.
 - **`FRIEND_TEAMS` color map duplicated in 5 files** (`PlayerRow.tsx`, `app/players/page.tsx`, `app/hot-sheet/page.tsx`, `components/players/PlayerDrawer.tsx`, `app/leagues/[id]/page.tsx`). Patch all five.
 - **Two-way players:** `isPitcher()` / `isTwoWay()` must check ALL positions, not just first. `scoreTool` must filter by `s.type === expectedType` to prevent cross-contamination.
-- **Pipeline order is mandatory:** norms → mlb-tools → regression → scores → model-rank → blend-rank. Never run `build-scores.js` without a fresh `regression.json`.
+- **Pipeline order is mandatory:** norms → mlb-tools → regression → scores → model-rank → blend-rank → call-ups. Never run `build-scores.js` without a fresh `regression.json`. Skipping `build-callups.js` doesn't error — it just silently reverts Call-Ups to whatever stale copy was last committed locally, even though GHA regenerates it correctly every night.
 - **`POOL_CENTER = 95`** (not 100). Don't change without understanding cascade.
 - **`VirtualList.tsx` freeze-pane** uses hidden synced header + `onHScroll`. Preserve on scroll edits.
 - **Next.js 16 dynamic routes:** `params` is a Promise — `await params` before destructuring.
