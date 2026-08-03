@@ -119,6 +119,40 @@ function splitsToRow(splits, group, isMLB) {
   }
 }
 
+// New draftees/signees often lack an mlbam_id because they aren't indexed by
+// MLB's people/search API yet. The per-level roster endpoint (sportId 1 = MLB,
+// 11-17 = MiLB levels) does list them by name, so resolve unlinked players here
+// before the stats fetch. Ambiguous (non-unique) name matches are skipped rather
+// than guessed, since a wrong mlbam_id silently corrupts that player's stats.
+const ROSTER_SPORT_IDS = [1, 11, 12, 13, 14, 15, 16, 17]
+
+async function resolveMissingMlbamIds(players) {
+  const missing = Object.values(players).filter(p => !p.mlbam_id)
+  if (missing.length === 0) return 0
+
+  const nameToIds = {}
+  for (const sportId of ROSTER_SPORT_IDS) {
+    try {
+      const data = await get(`https://statsapi.mlb.com/api/v1/sports/${sportId}/players?season=${CURRENT_SEASON}`)
+      for (const person of data?.people ?? []) {
+        if (!person.fullName || !person.id) continue
+        if (!nameToIds[person.fullName]) nameToIds[person.fullName] = new Set()
+        nameToIds[person.fullName].add(person.id)
+      }
+    } catch {}
+  }
+
+  let resolved = 0
+  for (const player of missing) {
+    const ids = nameToIds[player.name]
+    if (ids && ids.size === 1) {
+      player.mlbam_id = String([...ids][0])
+      resolved++
+    }
+  }
+  return resolved
+}
+
 async function fetchRows(mlbamId, group) {
   try {
     const [mlbData, milbData] = await Promise.all([
@@ -141,6 +175,13 @@ async function fetchRows(mlbamId, group) {
 
 async function main() {
   const players = JSON.parse(fs.readFileSync(PLAYERS_PATH, 'utf8'))
+
+  const resolved = await resolveMissingMlbamIds(players)
+  if (resolved > 0) {
+    fs.writeFileSync(PLAYERS_PATH, JSON.stringify(players, null, 2))
+    console.log(`Resolved mlbam_id for ${resolved} previously-unlinked players`)
+  }
+
   const linked = Object.entries(players).filter(([, p]) => p.mlbam_id)
   console.log(`Syncing stats for ${linked.length} linked players into history/${CURRENT_SEASON}.json...`)
 
