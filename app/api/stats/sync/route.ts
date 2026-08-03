@@ -116,6 +116,12 @@ async function resolveMissingMlbamIds(players: Record<string, any>): Promise<num
   const missing = Object.values(players).filter((p: any) => !p.mlbam_id)
   if (missing.length === 0) return 0
 
+  // Ids already claimed by some other player in the pool must never be handed
+  // out again here -- two real people can share a name, and if one of them is
+  // already correctly linked, the other should stay unlinked rather than be
+  // silently merged onto the same id (this exact bug corrupted stats for both).
+  const claimedIds = new Set(Object.values(players).filter((p: any) => p.mlbam_id).map((p: any) => String(p.mlbam_id)))
+
   const nameToIds: Record<string, Set<number>> = {}
   for (const sportId of ROSTER_SPORT_IDS) {
     try {
@@ -132,8 +138,11 @@ async function resolveMissingMlbamIds(players: Record<string, any>): Promise<num
   let resolved = 0
   for (const player of missing as any[]) {
     const ids = nameToIds[player.name]
-    if (ids && ids.size === 1) {
-      player.mlbam_id = String(Array.from(ids)[0])
+    if (!ids) continue
+    const candidates = Array.from(ids).filter(id => !claimedIds.has(String(id)))
+    if (candidates.length === 1) {
+      player.mlbam_id = String(candidates[0])
+      claimedIds.add(String(candidates[0]))
       resolved++
     }
   }
