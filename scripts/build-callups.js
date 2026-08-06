@@ -64,6 +64,7 @@ const histFiles = fs.readdirSync(HISTORY_DIR).filter(f => /^\d{4}\.json$/.test(f
 // cyLevels[mlbamId]  = Set of level ranks played in CURRENT_YEAR (per type)
 const careerMax = {}
 const cyMaxRank = {}
+const cyMinRank = {}
 for (const file of histFiles) {
   const year = parseInt(file)
   const data = JSON.parse(fs.readFileSync(path.join(HISTORY_DIR, file), 'utf8'))
@@ -72,12 +73,18 @@ for (const file of histFiles) {
       const r = rankOf(canonLevel(s.level, year))
       if (r == null) continue
       if (year < CURRENT_YEAR) careerMax[mid] = Math.max(careerMax[mid] ?? -1, r)
-      else if (year === CURRENT_YEAR) cyMaxRank[mid] = Math.max(cyMaxRank[mid] ?? -1, r)
+      else if (year === CURRENT_YEAR) {
+        cyMaxRank[mid] = Math.max(cyMaxRank[mid] ?? -1, r)
+        cyMinRank[mid] = Math.min(cyMinRank[mid] ?? 99, r)
+      }
     }
   }
 }
 
 // Candidate = reached a CY level strictly above career-max (a never-before level).
+// Players with no prior-year baseline (pure debuts) still qualify if they were
+// promoted WITHIN the current season (cy > their own season-low) — this only
+// excludes debut players who've stayed at a single level all year.
 const byMlbam = {}
 for (const [id, p] of Object.entries(players)) {
   if (p.mlbam_id && p.rank != null) byMlbam[String(p.mlbam_id)] = { id, ...p }
@@ -85,7 +92,8 @@ for (const [id, p] of Object.entries(players)) {
 const candidates = Object.keys(byMlbam).filter(mid => {
   const cm = careerMax[mid] ?? -1
   const cy = cyMaxRank[mid]
-  return cy != null && cm >= 0 && cy > cm   // cm>=0 → has prior baseline (skip pure pro debuts)
+  if (cy == null) return false
+  return cm >= 0 ? cy > cm : cy > (cyMinRank[mid] ?? cy)
 })
 console.log(`Candidates (reached new career level in ${CURRENT_YEAR}): ${candidates.length}`)
 
