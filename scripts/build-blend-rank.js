@@ -29,8 +29,13 @@ console.log(`Consensus ranked: ${totalRanked}`);
 
 const modelMap = modelRank.players ?? {};
 
+// X candidates (anchored prospects) are placed purely by anchor position below --
+// exclude them here so a leftover model-only entry can't overwrite that anchor.
+const xIds = new Set((rankings.xCandidates ?? []).map(x => x.id).filter(Boolean));
+
 const ranked=[], unranked=[];
 for (const [fantraxId, player] of Object.entries(players)) {
+  if (xIds.has(fantraxId)) continue;
   const modelEntry = modelMap[fantraxId];
   const cnsRank = consensusMap[fantraxId] ?? null;
   // Keep any player with a rank source: consensus and/or model.
@@ -70,9 +75,13 @@ const xEntries = [];
 for (const xc of xCandidates) {
   const anchor = nonGradRanked[xc.targetPPosition - 1];
   if (!anchor) continue;
+  const modelEntry = xc.id ? modelMap[xc.id] : null;
+  const player = xc.id ? players[xc.id] : null;
   xEntries.push({ fantraxId: xc.id ?? '', name: xc.name, position: xc.position ?? '', team: xc.team ?? '',
     sortKey: anchor.final_rank + 0.5, cns_rank: null, model_rank: null, blended_rank: null,
-    overall: null, dynasty_score: null, level: null, pos_type: null, mlbam_id: null, age: null });
+    overall: modelEntry?.overall ?? null, dynasty_score: modelEntry?.dynasty_score ?? null,
+    level: modelEntry?.level ?? null, pos_type: modelEntry?.pos_type ?? null,
+    mlbam_id: modelEntry?.mlbam_id ?? player?.mlbam_id ?? null, age: player?.age ?? null });
 }
 
 // Merge ranked + X entries, re-sort, reassign final ranks
