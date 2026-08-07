@@ -534,19 +534,22 @@ async function run() {
         return d;
       };
 
+      // "Current" snapshot via the SAME windowed pipeline used for the cutoff snapshots
+      // below (preCum + all CY games) -- NOT riser.overall, which comes from the main
+      // scoring pipeline (scoreMilbToolRaw + pool-norm + shrink()) and isn't on the same
+      // scale as scoreWindowedOverall's output. Diffing across two different pipelines
+      // produced non-monotonic deltas (e.g. a player's "d30" snapshot scoring higher than
+      // their "d15" snapshot). Keeping both ends of every diff on one pipeline fixes that.
+      const currentViaWindowed = scoreWindowedOverall(preCum, allCYGames, isPit, player.birthDate, regression2, norms, poolStats2);
+
       const deltas = { season: riser.delta };
       for (const days of WINDOWS) {
         const since = cutoff(days);
         const windowGames = allCYGames.filter(g => new Date(g.date) >= since);
         if (!windowGames.length) { deltas[`d${days}`] = null; continue; }
-        // Delta = current overall minus overall AS OF the cutoff (preCum + CY games
-        // strictly before it) -- i.e. what actually moved within this window. Diffing
-        // against the fixed pre-season baseline (riser.prevOverall) for every window
-        // size just re-measures "vs last year," which converges to the season total
-        // for anyone who's been steadily elevated for months, not a recent move.
         const gamesBeforeCutoff = allCYGames.filter(g => new Date(g.date) < since);
         const asOfCutoffOverall = scoreWindowedOverall(preCum, gamesBeforeCutoff, isPit, player.birthDate, regression2, norms, poolStats2);
-        deltas[`d${days}`] = asOfCutoffOverall != null ? riser.overall - asOfCutoffOverall : null;
+        deltas[`d${days}`] = (currentViaWindowed != null && asOfCutoffOverall != null) ? currentViaWindowed - asOfCutoffOverall : null;
       }
       riser.deltas = deltas;
     }));
