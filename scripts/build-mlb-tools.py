@@ -13,7 +13,6 @@ HIST_DIR   = os.path.join(BASE, 'history')
 NORMS_PATH = os.path.join(BASE, 'model', 'norms.json')
 OUTPUT     = os.path.join(BASE, 'model', 'mlb-tools.json')
 
-MIN_SEASONS = 1
 MIN_PA      = 100
 MIN_IP      = 50.0
 MIN_GS      = 5
@@ -49,10 +48,20 @@ def zscore(val, norm_entry, stat, invert=False):
     return -z if invert else z
 
 def career_hitter(pid):
+    # Cumulative PA >= MIN_PA, not per-season — matches career_pitcher's convention
+    # (no per-season IP floor, just cumulative IP >= MIN_IP). The old per-season gate let
+    # a real MLB track record fall through with zero grade if no single season hit 100 PA
+    # (e.g. four straight partial seasons of 99/49/41/5 PA) even with 165+ PA total —
+    # the player reads as "graduated" (rookie-ineligible) but silently gets no real MLB
+    # grade at all, so overall/peak3 fall back to a pure MiLB projection that never learns
+    # the real MLB record contradicted it. Every season still weighted by its own PA below,
+    # so thin cameo seasons naturally contribute little — they're just no longer excluded
+    # outright.
     mlb = [s for s in history.get(str(pid), [])
            if s.get('level') == 'MLB' and s.get('type') == 'hitting'
-           and s['year'] in VALID_YEARS and (s.get('pa') or 0) >= MIN_PA]
-    if len(mlb) < MIN_SEASONS: return None
+           and s['year'] in VALID_YEARS and (s.get('pa') or 0) > 0 and s.get('team')]
+    if not mlb: return None
+    if sum(s.get('pa') or 0 for s in mlb) < MIN_PA: return None
 
     stat_sums = defaultdict(float)
     total_pa  = 0.0
@@ -112,9 +121,12 @@ def career_hitter(pid):
     }
 
 def career_pitcher(pid):
+    # team filter excludes the blank-team aggregate row present for mid-season trades
+    # (a synthetic sum of that year's per-team splits) — without it, traded players'
+    # IP/BF double-count. Same convention as build-regression.py's MiLB filters.
     mlb = [s for s in history.get(str(pid), [])
            if s.get('level') == 'MLB' and s.get('type') == 'pitching'
-           and s['year'] in VALID_YEARS]
+           and s['year'] in VALID_YEARS and s.get('team')]
     if not mlb: return None
     if sum(ip_to_float(s.get('ip',0)) for s in mlb) < MIN_IP: return None
 

@@ -19,7 +19,6 @@ NORMS_PATH = os.path.join(BASE, 'model', 'norms.json')
 TOOLS_PATH = os.path.join(BASE, 'model', 'mlb-tools.json')
 OUTPUT     = os.path.join(BASE, 'model', 'peak-tools.json')
 
-MIN_SEASONS  = 1
 MIN_PA       = 100
 MIN_IP       = 50.0
 WINDOW       = 3
@@ -63,8 +62,12 @@ def to_plus(z): return 100 + z * 15
 
 # ── per-season z components, same formulas as build-mlb-tools.py's career rollup ──
 def hitter_season_z(s):
+    # No per-season PA floor — matches pitcher_season_z's bf>0 convention. Population
+    # membership is gated by cumulative career PA in peak_hitter() instead; each season
+    # is still weighted by its own PA below, so a thin cameo naturally contributes little
+    # rather than being excluded outright (see build-mlb-tools.py for the same fix and why).
     pa = s.get('pa') or 0
-    if pa < MIN_PA: return None
+    if pa <= 0: return None
     ab, h, bb, so, hbp, sb = s.get('ab') or 0, s.get('h') or 0, s.get('bb') or 0, s.get('so') or 0, s.get('hbp') or 0, s.get('sb') or 0
     slg = float(s.get('slg') or 0)
     avg = h / ab if ab > 0 else 0
@@ -126,13 +129,15 @@ def best_window(per_season, tool_fn):
     return best_val, best_window_years
 
 def peak_hitter(pid):
-    all_mlb = [s for s in history.get(str(pid), []) if s.get('level') == 'MLB' and s.get('type') == 'hitting' and s['year'] in VALID_YEARS]
+    # team filter excludes the blank-team aggregate row for mid-season trades (a synthetic
+    # sum of that year's per-team splits) — without it, traded players' PA double-counts.
+    all_mlb = [s for s in history.get(str(pid), []) if s.get('level') == 'MLB' and s.get('type') == 'hitting' and s['year'] in VALID_YEARS and s.get('team')]
     if not all_mlb: return None
     debut = min(s['year'] for s in all_mlb)
     career_pa = sum(s.get('pa') or 0 for s in all_mlb)
 
-    qualifying = sorted([s for s in all_mlb if (s.get('pa') or 0) >= MIN_PA], key=lambda s: s['year'])
-    if len(qualifying) < MIN_SEASONS: return None
+    if career_pa < MIN_PA: return None
+    qualifying = sorted([s for s in all_mlb if (s.get('pa') or 0) > 0], key=lambda s: s['year'])
     per_season = []
     for s in qualifying:
         r = hitter_season_z(s)
@@ -149,7 +154,7 @@ def peak_hitter(pid):
     return result
 
 def peak_pitcher(pid):
-    all_mlb = [s for s in history.get(str(pid), []) if s.get('level') == 'MLB' and s.get('type') == 'pitching' and s['year'] in VALID_YEARS]
+    all_mlb = [s for s in history.get(str(pid), []) if s.get('level') == 'MLB' and s.get('type') == 'pitching' and s['year'] in VALID_YEARS and s.get('team')]
     if not all_mlb: return None
     debut = min(s['year'] for s in all_mlb)
     career_ip = sum(ip_to_float(s.get('ip', 0)) for s in all_mlb)
