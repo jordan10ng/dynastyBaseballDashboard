@@ -16,6 +16,16 @@ const norms       = JSON.parse(fs.readFileSync(NORMS_PATH, 'utf8'));
 const MLB_TOOLS_PATH = path.join(BASE, 'model/mlb-tools.json');
 const mlbTools    = fs.existsSync(MLB_TOOLS_PATH) ? JSON.parse(fs.readFileSync(MLB_TOOLS_PATH, 'utf8')) : {};
 
+// Peak3 (best rolling 3-yr MLB window) + worthy-career calibration — additive display
+// stats only. Never touch model_scores.overall or dynasty_score. Both optional: script
+// degrades gracefully (fields just omitted) if these haven't been built yet.
+const PEAK_REGR_PATH   = path.join(BASE, 'model/peak-regression.json');
+const PEAK_TOOLS_PATH  = path.join(BASE, 'model/peak-tools.json');
+const WORTHY_CALIB_PATH = path.join(BASE, 'model/worthy-calibration.json');
+const peakRegression = fs.existsSync(PEAK_REGR_PATH) ? JSON.parse(fs.readFileSync(PEAK_REGR_PATH, 'utf8')) : null;
+const peakTools      = fs.existsSync(PEAK_TOOLS_PATH) ? JSON.parse(fs.readFileSync(PEAK_TOOLS_PATH, 'utf8')) : {};
+const worthyCalib    = fs.existsSync(WORTHY_CALIB_PATH) ? JSON.parse(fs.readFileSync(WORTHY_CALIB_PATH, 'utf8')) : null;
+
 const VALID_YEARS   = new Set([2015,2016,2017,2018,2019,2021,2022,2023,2024,2025,2026]);
 const CURRENT_YEAR  = new Date().getFullYear();
 
@@ -149,6 +159,77 @@ function scoreTool(mlbamId, player, tool, isPitcher) {
   return { score: r.rawWeighted, wSum: r.wSum, wTot: r.wTot, cySum: r.cySum, cyTot: r.cyTot, sample: r.totalSample };
 }
 
+// Same shape as scoreTool but scores against peak-regression.json's models (fit on best
+// rolling 3-yr MLB window instead of career average). Same predictor stats — testing
+// found peak needs no different feature set, just a separate fit (noisier outcome).
+function scoreToolPeak(mlbamId, player, tool, isPitcher) {
+  if (!peakRegression?.models?.[tool]) return { score: null, sample: 0 };
+  const expectedType = isPitcher ? 'pitching' : 'hitting';
+  const seasons = (history[String(mlbamId)] || [])
+    .filter(s => MILB_LEVELS.has(canonLevel(s.level, s.year)) && VALID_YEARS.has(s.year) && s.team && s.type === expectedType);
+  const buckets = seasons.map(s => {
+    const ipParts = String(s.ip || '0').split('.');
+    const ipOuts  = (parseInt(ipParts[0] || '0') * 3) + parseInt(ipParts[1] || '0');
+    return {
+      year: s.year, level: canonLevel(s.level, s.year),
+      ab:  s.ab  || 0, bb: s.bb || 0, hbp: s.hbp || 0,
+      so:  s.so  || 0, h:  s.h  || 0,
+      xbh: (s.doubles || 0) + (s.triples || 0) + (s.hr || 0),
+      sb:  s.sb  || 0,
+      tb:  s.tb  || Math.round((parseFloat(s.slg || '0') || 0) * (s.ab || 0)),
+      bf:  s.bf  || 0,
+      ipOuts,
+    };
+  });
+  const r = scoreMilbToolRaw(buckets, tool, {
+    models: peakRegression.models, norms,
+    isPit: isPitcher,
+    referenceYear: CURRENT_YEAR,
+    getAge: (yr) => getAge(player.birthDate, yr),
+    currentYearForExclusion: CURRENT_YEAR,
+  });
+  return { score: r.rawWeighted, sample: r.totalSample };
+}
+
+// Hitter-only: sample-weighted xbh_rate z at AAA specifically. Testing found this is the
+// one candidate stat that adds real incremental lift for the worthy-career calibration
+// (AAA-specific — didn't replicate at AA or below). 0 = league-average default when the
+// player has no AAA sample (most prospects haven't reached AAA yet).
+function xbhRateZAaa(mlbamId) {
+  const seasons = (history[String(mlbamId)] || [])
+    .filter(s => s.level === 'AAA' && VALID_YEARS.has(s.year) && s.team && s.type === 'hitting');
+  let zsum = 0, wsum = 0;
+  for (const s of seasons) {
+    const pa = s.pa || 0;
+    if (pa < 30) continue;
+    const n = norms[`AAA|${s.year}`]?.hitters?.xbh_rate;
+    if (!n || n.stdev === 0) continue;
+    const xbhRate = ((s.doubles || 0) + (s.triples || 0) + (s.hr || 0)) / pa;
+    const z = (xbhRate - n.mean) / n.stdev;
+    zsum += z * pa; wsum += pa;
+  }
+  return wsum > 0 ? zsum / wsum : 0;
+}
+function sigmoid(x) { return 1 / (1 + Math.exp(-x)); }
+
+// Actual (realized) peak/worthy composite for graduated players, from peak-tools.json.
+// Two-way: 50/50 blend of both sides present, matching lib/score-tools.js's _composite().
+function peakActualComposite(pt) {
+  if (!pt) return null;
+  const hasPitch = pt.stuff != null && pt.control != null;
+  const hasHit   = pt.hit != null && pt.power != null && pt.speed != null;
+  const pitchOverall = hasPitch ? (pt.stuff * COMPOSITE_WEIGHTS.pitcher.stuff + pt.control * COMPOSITE_WEIGHTS.pitcher.control) : null;
+  const hitOverall   = hasHit   ? (pt.hit * COMPOSITE_WEIGHTS.hitter.hit + pt.power * COMPOSITE_WEIGHTS.hitter.power + pt.speed * COMPOSITE_WEIGHTS.hitter.speed) : null;
+  if (pitchOverall != null && hitOverall != null) return Math.round((pitchOverall + hitOverall) / 2);
+  return pitchOverall != null ? Math.round(pitchOverall) : (hitOverall != null ? Math.round(hitOverall) : null);
+}
+function peakActualWorthy(pt) {
+  if (!pt) return null;
+  const vals = [pt._worthy, pt._worthy_pitch].filter(v => v != null);
+  if (!vals.length) return null;
+  return vals.includes(1) ? 1 : 0;
+}
+
 async function run() {
   console.log('Scoring prospects...');
   const updatedPlayers = { ...players };
@@ -190,6 +271,7 @@ async function run() {
 
     const toolScores  = {};
     const toolWeights = {};
+    const peakToolScores = {};
     let pitchSample = 0, hitSample = 0, hasAny = false;
 
     for (const { isPitcher } of sidesEligible) {
@@ -201,6 +283,8 @@ async function run() {
         if (isPitcher) pitchSample = Math.max(pitchSample, sample);
         else           hitSample   = Math.max(hitSample, sample);
         if (score != null) hasAny = true;
+
+        if (peakRegression) peakToolScores[tool] = scoreToolPeak(mlbamId, player, tool, isPitcher).score;
       }
     }
 
@@ -209,7 +293,7 @@ async function run() {
     // graduated = no side is rookie-eligible (used to exclude from prospect pool + risers)
     const graduated = sidesEligible.length > 0 && sidesEligible.every(s => s.graduated);
     rawPool[id] = {
-      toolScores, toolWeights,
+      toolScores, toolWeights, peakToolScores,
       totalSample: Math.max(pitchSample, hitSample),
       pitchSample, hitSample,
       isPitcher, isTwoWay, hasArm, hasBat,
@@ -231,7 +315,7 @@ async function run() {
   fs.writeFileSync(path.join(BASE, 'model/pool-stats.json'), JSON.stringify(toolVals, null, 2));
   console.log('Pool stats written:', Object.keys(toolVals).map(t => `${t}:${toolVals[t].mean.toFixed(2)}±${toolVals[t].stdev.toFixed(2)}`).join(', '));
 
-  for (const [id, { toolScores, toolWeights, totalSample, pitchSample, hitSample, isPitcher, isTwoWay, hasArm, hasBat }] of Object.entries(rawPool)) {
+  for (const [id, { toolScores, toolWeights, peakToolScores, totalSample, pitchSample, hitSample, isPitcher, isTwoWay, hasArm, hasBat, graduated }] of Object.entries(rawPool)) {
 
     const normedTools = {};
     for (const [tool, raw] of Object.entries(toolScores)) {
@@ -298,12 +382,86 @@ async function run() {
       for (const s of allPit) { totalIP += ipToFloat(s.ip); totalG += s.g || 0; }
       if (totalG > 0) careerIPG = totalIP / totalG;
     }
+    // ── Peak3 (best rolling 3-yr MLB window) + worthy-career probability ──────────────
+    // Additive only — never read by dynasty_score/model-rank/blend-rank. Prefer the
+    // realized peak-tools.json value for graduated players, fall back to the MiLB
+    // projection (peak-regression.json) otherwise. worthy_pct is a projected probability
+    // (prospects only, from the calibration fit); graduated+debut-gated players get the
+    // realized worthy_actual fact instead — no point projecting an outcome already known.
+    //
+    // Normed against toolVals (the CAREER pool), not a separate peak pool. Peak-regression's
+    // raw scores run hot across the whole population (best-3yr always >= career-avg), so a
+    // peak-specific pool baseline would itself run hot — normalizing against it cancels that
+    // signal back out and can invert the intuitive relationship (peak3 < overall for a player
+    // whose peak raw stats are strictly better on every tool). Sharing the career pool keeps
+    // peak3 on the same scale as overall, so "better raw peak on every tool" reliably means
+    // "higher peak3."
+    let peak3 = null, worthyPct = null, worthyActual = null;
+    if (peakRegression) {
+      const normedPeak = {};
+      for (const [tool, raw] of Object.entries(peakToolScores)) {
+        if (raw == null || !toolVals[tool]) { normedPeak[tool] = null; continue; }
+        const { mean, stdev } = toolVals[tool];
+        normedPeak[tool] = POOL_CENTER + ((raw - mean) / stdev) * POOL_STDEV;
+      }
+      function peakSideOverall(wts, sampleForShrink, sideIsPitcher) {
+        let wsum = 0, wtot = 0;
+        for (const [tool, w] of Object.entries(wts)) {
+          if (normedPeak[tool] != null) { wsum += normedPeak[tool] * w; wtot += w; }
+        }
+        const normed = wtot > 0 ? wsum / wtot : null;
+        return shrink(normed, sampleForShrink, sideIsPitcher);
+      }
+      let peakPitch = null, peakHit = null;
+      if (hasArm) peakPitch = peakSideOverall(COMPOSITE_WEIGHTS.pitcher, pitchSample || totalSample, true);
+      if (hasBat) peakHit   = peakSideOverall(COMPOSITE_WEIGHTS.hitter,  hitSample  || totalSample, false);
+      let peakProjected = null;
+      if (isTwoWay) {
+        const parts = [peakPitch, peakHit].filter(v => v != null);
+        peakProjected = parts.length ? parts.reduce((a,b) => a+b, 0) / parts.length : null;
+      } else {
+        peakProjected = hasArm ? peakPitch : peakHit;
+      }
+
+      const pt = peakTools[String(updatedPlayers[id].mlbam_id)];
+      peak3 = graduated ? peakActualComposite(pt) : null;
+      if (peak3 == null) peak3 = peakProjected != null ? Math.round(peakProjected) : null;
+
+      if (graduated) {
+        worthyActual = peakActualWorthy(pt);
+      } else if (worthyCalib && !isTwoWay) {
+        const w = isPitcher ? COMPOSITE_WEIGHTS.pitcher : COMPOSITE_WEIGHTS.hitter;
+        let num = 0, den = 0;
+        for (const [tool, wt] of Object.entries(w)) {
+          const v = toolScores[tool];
+          if (v == null) continue;
+          num += v * wt; den += wt;
+        }
+        const rawPredicted = den > 0 ? num / den : null;
+        if (rawPredicted != null) {
+          if (isPitcher && worthyCalib.pitcher) {
+            const logit = worthyCalib.pitcher.intercept + worthyCalib.pitcher.coef_overall * rawPredicted;
+            worthyPct = Math.round(sigmoid(logit) * 100);
+          } else if (!isPitcher && worthyCalib.hitter) {
+            const xbhZ = xbhRateZAaa(updatedPlayers[id].mlbam_id);
+            const logit = worthyCalib.hitter.intercept + worthyCalib.hitter.coef_overall * rawPredicted + worthyCalib.hitter.coef_xbh_aaa * xbhZ;
+            worthyPct = Math.round(sigmoid(logit) * 100);
+          }
+        }
+      }
+    }
+
     // Canonical career-grade blend — single source of truth for row + drawer tile + model-rank.
-    updatedPlayers[id].career_blend = blendCareer(
-      updatedPlayers[id].model_scores,
-      mlbTools[String(updatedPlayers[id].mlbam_id)] ?? null,
-      { ipg: careerIPG }
-    );
+    updatedPlayers[id].career_blend = {
+      ...blendCareer(
+        updatedPlayers[id].model_scores,
+        mlbTools[String(updatedPlayers[id].mlbam_id)] ?? null,
+        { ipg: careerIPG }
+      ),
+      ...(peak3 != null ? { peak3 } : {}),
+      ...(worthyPct != null ? { worthy_pct: worthyPct } : {}),
+      ...(worthyActual != null ? { worthy_actual: worthyActual } : {}),
+    };
     scored++;
 
     {
@@ -350,7 +508,14 @@ async function run() {
       for (const s of allPit) { totalIP += ipToFloat(s.ip); totalG += s.g || 0; }
       if (totalG > 0) careerIPG = totalIP / totalG;
     }
-    updatedPlayers[id].career_blend = blendCareer(null, mlbEntry, { ipg: careerIPG });
+    const pt = player.mlbam_id ? peakTools[String(player.mlbam_id)] : null;
+    const peak3 = peakActualComposite(pt);
+    const worthyActual = peakActualWorthy(pt);
+    updatedPlayers[id].career_blend = {
+      ...blendCareer(null, mlbEntry, { ipg: careerIPG }),
+      ...(peak3 != null ? { peak3 } : {}),
+      ...(worthyActual != null ? { worthy_actual: worthyActual } : {}),
+    };
   }
 
   const MIN_OVERALL = 95, MIN_RISER_DELTA = 1;

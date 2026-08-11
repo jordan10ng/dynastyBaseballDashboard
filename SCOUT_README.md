@@ -27,17 +27,18 @@ caffeinate -i & npm run dev
 - GHA only touches data files — scripts are never modified by GHA. Safe recovery:
   ```bash
   git fetch origin
-  git checkout origin/main -- data/history/2026.json data/players.json data/model/norms.json data/model/mlb-tools.json data/model/regression.json data/model/hot-sheet.json data/model/scores-snapshot.json data/model/call-ups.json
-  node scripts/build-norms.js && python3 scripts/build-regression.py && node scripts/build-scores.js && node scripts/build-model-rank.js && node scripts/build-blend-rank.js && node scripts/build-callups.js
+  git checkout origin/main -- data/history/2026.json data/players.json data/model/norms.json data/model/mlb-tools.json data/model/regression.json data/model/peak-tools.json data/model/peak-regression.json data/model/worthy-calibration.json data/model/hot-sheet.json data/model/scores-snapshot.json data/model/call-ups.json
+  node scripts/build-norms.js && python3 scripts/build-regression.py && python3 scripts/build-peak-tools.py && python3 scripts/build-peak-regression.py && python3 scripts/build-worthy-calibration.py && node scripts/build-scores.js && node scripts/build-model-rank.js && node scripts/build-blend-rank.js && node scripts/build-callups.js
   git add -A && git commit -m "..." && git push
   ```
-- ⚠️ CRITICAL: After GHA recovery, always re-run the FULL pipeline (norms → regression → scores → model-rank → blend-rank → call-ups). Pulling data files from GitHub overwrites locally-built model files. Never run build-scores.js without first rebuilding regression.json from the current scripts. Forgetting `build-callups.js` silently reverts Call-Ups to whatever stale copy was last sitting locally, even though GHA regenerates it correctly every night -- this happened for real (stuck on 2026-07-21 for 2+ weeks) before this note was added.
+- ⚠️ CRITICAL: After GHA recovery, always re-run the FULL pipeline (norms → regression → peak-tools → peak-regression → worthy-calibration → scores → model-rank → blend-rank → call-ups). Pulling data files from GitHub overwrites locally-built model files. Never run build-scores.js without first rebuilding regression.json from the current scripts. Forgetting `build-callups.js` silently reverts Call-Ups to whatever stale copy was last sitting locally, even though GHA regenerates it correctly every night -- this happened for real (stuck on 2026-07-21 for 2+ weeks) before this note was added.
 - DO NOT use `git pull --rebase` — causes detached HEAD and loses local file changes
 - DO NOT use `git reset --hard` before verifying local changes are committed or saved elsewhere
 
 ## Daily Sync (GitHub Actions)
 - Runs every night at 1am PT (9am UTC) via `.github/workflows/daily-sync.yml`
-- Pipeline: sync-stats-gha.js → build-norms → build-mlb-tools → build-regression → build-scores → build-model-rank → build-blend-rank → build-callups
+- Pipeline: sync-stats-gha.js → build-norms → build-mlb-tools → build-regression → build-peak-tools → build-peak-regression → build-worthy-calibration → build-scores → build-model-rank → build-blend-rank → build-callups
+- `peak-tools.json`/`peak-regression.json`/`worthy-calibration.json`: additive display-only stats (`career_blend.peak3`, `.worthy_pct`, `.worthy_actual`). Never read by dynasty_score, model-rank, or blend-rank — safe to skip in an emergency rebuild, but do it anyway or those fields go stale.
 - Commits updated `data/history/2026.json`, `data/players.json`, `data/model/*.json` to GitHub
 - Vercel detects the push → auto-redeploys with fresh data
 - Can also trigger manually: https://github.com/jordan10ng/dynastyBaseballDashboard/actions → Daily Stats + Model Sync → Run workflow
@@ -98,7 +99,10 @@ fantasy-baseball/
 │   ├── build-mlb-tools.py               # MLB career tool grades → data/model/mlb-tools.json. Two-way players get type:'two-way' with all 5 tools.
 │   ├── build-age-elasticity.py          # Per-stat age elasticity → data/model/age-elasticity.json (reference only, not in pipeline)
 │   ├── build-regression.py              # Two-feature regression (z + age_diff) → data/model/regression.json
-│   ├── build-scores.js                  # Scores prospects → players.json model_scores + hot-sheet.json. Fetches CY game logs for all risers (~400 players) to compute windowed deltas. Two-way players scored on both sides independently.
+│   ├── build-peak-tools.py              # Best rolling 3-yr MLB window per tool (ceiling, not career avg) → data/model/peak-tools.json. Also writes the debut-gated (>=4yr) "worthy career" binary flag consumed by build-worthy-calibration.py.
+│   ├── build-peak-regression.py         # Same architecture as build-regression.py, refit against peak-tools.json → data/model/peak-regression.json
+│   ├── build-worthy-calibration.py      # Logistic calibration: predicted_overall (+xbh_rate@AAA for hitters) → P(worthy career) → data/model/worthy-calibration.json. Not a new regression — a thin layer on the existing career model.
+│   ├── build-scores.js                  # Scores prospects → players.json model_scores + hot-sheet.json. Fetches CY game logs for all risers (~400 players) to compute windowed deltas. Two-way players scored on both sides independently. Also attaches peak3/worthy_pct/worthy_actual onto career_blend (additive, doesn't touch model_scores.overall or dynasty_score).
 │   ├── sync-stats-gha.js               # Standalone stats sync for GHA — writes to history/2026.json. Two-way players fetch both hitting + pitching groups.
 │   └── build-gamelogs.js               # RETIRED — game logs now fetched live from MLB Stats API. File kept for reference only.
 ├── data/
@@ -141,6 +145,9 @@ fantasy-baseball/
 - **model/mlb-scores.json** — per-season MLB fantasy point rates. Rebuild by running `build-mlb-scores.js`.
 - **model/mlb-tools.json** — per-player career MLB tool grades keyed by mlbam_id. **Source of truth for MLB vs minors designation** — presence = graduated. Has `_pa`/`_ip` sample counts used for blending. Two-way players: `type: 'two-way'` with all 5 tools + both `_pa` and `_ip`. Rebuild by running `build-mlb-tools.py`.
 - **model/regression.json** — per-tool per-level two-feature model. Keys: `slope_z`, `slope_age`, `intercept`, `corr`, `n`. Rebuild by running `build-regression.py`.
+- **model/peak-tools.json** — per-player best rolling 3-yr MLB window per tool (ceiling), keyed by mlbam_id. Same shape as mlb-tools.json plus `_debut`, `_career_pa`/`_career_ip`, `_worthy` (debut-gated binary, null if <4yr since debut). Rebuild by running `build-peak-tools.py`.
+- **model/peak-regression.json** — same shape as regression.json, fit against peak-tools.json instead of mlb-tools.json. Rebuild by running `build-peak-regression.py`.
+- **model/worthy-calibration.json** — logistic coefficients (`intercept`, `coef_overall`, `coef_xbh_aaa` for hitters) mapping predicted_overall → P(worthy career). Rebuild by running `build-worthy-calibration.py`.
 - **model/hot-sheet.json** — shape: `{ season, d90, d60, d30, d15, d7, generatedAt }`. Each window key has `{ bats: [...], arms: [...] }` — independent top-20 lists ranked by that window's delta. Each player entry has `deltas: { season, d90, d60, d30, d15, d7 }` and `delta` set to the active window's value. Arms filtered by IP/G >= 3.0. Written by build-scores.js every run.
 - **model/scores-snapshot.json** — snapshot of model scores keyed by Fantrax ID. Written as comparison baseline.
 - **model/pool-stats.json** — per-tool mean/stdev of raw regression output across all scored prospects. Written by build-scores.js. Used by tool arc chart to normalize arc scores onto the same 95-center scale as model tiles.
@@ -207,7 +214,10 @@ Click any player → full screen overlay. Escape or ✕ to close.
 1. `build-norms.js` → norms.json
 2. `build-mlb-tools.py` → mlb-tools.json (training targets)
 3. `build-regression.py` → regression.json
-4. `build-scores.js` → model_scores on players.json + hot-sheet.json
+4. `build-peak-tools.py` → peak-tools.json (peak3 training targets + worthy-career flag)
+5. `build-peak-regression.py` → peak-regression.json
+6. `build-worthy-calibration.py` → worthy-calibration.json
+7. `build-scores.js` → model_scores on players.json + hot-sheet.json (+ career_blend.peak3/worthy_pct/worthy_actual)
 
 **Scoring architecture (build-scores.js):**
 - Regression predicts MLB tool grade from MiLB stats using a two-feature model per season per level per stat: `pred = slope_z × z + slope_age × ageDiff + intercept`. Age is a learned feature in the regression, not a post-hoc adjustment.
@@ -438,7 +448,7 @@ Both use SPORT_ID_TO_LEVEL + sportAbbrToLevel() with sportId fallback. Both fetc
 - Before asserting anything about file contents, verify with grep or cat — never assume
 - GHA conflict recovery — local is ALWAYS source of truth. Never merge. Force push after rebuilding:
   ```bash
-  node scripts/build-norms.js && python3 scripts/build-regression.py && node scripts/build-scores.js && node scripts/build-model-rank.js && node scripts/build-blend-rank.js && node scripts/build-callups.js
+  node scripts/build-norms.js && python3 scripts/build-regression.py && python3 scripts/build-peak-tools.py && python3 scripts/build-peak-regression.py && python3 scripts/build-worthy-calibration.py && node scripts/build-scores.js && node scripts/build-model-rank.js && node scripts/build-blend-rank.js && node scripts/build-callups.js
   git add -A && git commit -m "..." && git push --force
   ```
 - Never use `git pull --rebase` — causes detached HEAD

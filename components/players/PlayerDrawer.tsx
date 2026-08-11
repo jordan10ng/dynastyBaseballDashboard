@@ -947,6 +947,28 @@ export function PlayerDrawer({ player, onClose, globalOwnership, minorsIds, mlbT
     )
   })()}
 </div>))}</div>)}
+            {toolGrades&&(toolGrades.peak3!=null||toolGrades.worthy_pct!=null||toolGrades.worthy_actual!=null)&&(
+              <div style={{display:'flex',gap:'1.5rem',flexWrap:'wrap'}}>
+                {toolGrades.peak3!=null&&(
+                  <div>
+                    <div style={{fontSize:'0.62rem',fontFamily:'var(--font-display)',fontWeight:700,letterSpacing:'0.08em',color:'var(--muted)',textTransform:'uppercase',marginBottom:'2px'}} title="Best rolling 3-year MLB window (actual for graduated players, projected from MiLB record otherwise)">Peak (3yr)</div>
+                    <div style={{fontSize:'0.78rem',color:toolColor(toolGrades.peak3),fontWeight:700}}>{toolGrades.peak3}</div>
+                  </div>
+                )}
+                {toolGrades.worthy_pct!=null&&(
+                  <div>
+                    <div style={{fontSize:'0.62rem',fontFamily:'var(--font-display)',fontWeight:700,letterSpacing:'0.08em',color:'var(--muted)',textTransform:'uppercase',marginBottom:'2px'}} title="Projected probability of a worthy MLB career (>=1500 PA / 300 IP at league-average or better), calibrated against past prospects">Worthy Career</div>
+                    <div style={{fontSize:'0.78rem',color:'var(--text)',fontWeight:700}}>{toolGrades.worthy_pct}%</div>
+                  </div>
+                )}
+                {toolGrades.worthy_actual!=null&&(
+                  <div>
+                    <div style={{fontSize:'0.62rem',fontFamily:'var(--font-display)',fontWeight:700,letterSpacing:'0.08em',color:'var(--muted)',textTransform:'uppercase',marginBottom:'2px'}} title="Realized: did this player's MLB career clear >=1500 PA / 300 IP at league-average or better">Worthy Career</div>
+                    <div style={{fontSize:'0.78rem',color:toolGrades.worthy_actual===1?'#4ade80':'#f87171',fontWeight:700}}>{toolGrades.worthy_actual===1?'Yes':'No'}</div>
+                  </div>
+                )}
+              </div>
+            )}
           </div>
 
           {activeTab==='stats'&&(<>
