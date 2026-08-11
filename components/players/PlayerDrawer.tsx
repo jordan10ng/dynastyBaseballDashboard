@@ -484,6 +484,63 @@ export function PlayerDrawer({ player, onClose, globalOwnership, minorsIds, mlbT
   function renderBatRow(s:any,key:string,indent?:boolean){const st=s.stat;const isMR=!isMlbLevel(s._level);return(<tr key={key} style={{borderBottom:'1px solid rgba(48,54,61,0.3)',background:isMR?'rgba(99,102,241,0.04)':'transparent'}}><LabelCell label={indent?'':s.season}/><LabelCell label={s.team?.abbreviation??s.team?.name??'—'} muted/><LabelCell label={fmtLevel(s._level)} muted={!isMR} color={isMR?'rgba(139,92,246,0.7)':undefined}/><StatCell val={st?.gamesPlayed}/><StatCell val={st?.avg}/><StatCell val={st?.obp}/><StatCell val={st?.slg}/><StatCell val={st?.ops}/><StatCell val={st?.strikeOuts}/><StatCell val={st?.baseOnBalls}/><StatCell val={st?.plateAppearances}/><StatCell val={st?.atBats}/><StatCell val={st?.hits}/><StatCell val={st?.doubles}/><StatCell val={st?.triples}/><StatCell val={st?.homeRuns}/><StatCell val={st?.runs}/><StatCell val={st?.rbi}/><StatCell val={st?.stolenBases}/><StatCell val={st?.caughtStealing}/><StatCell val={calcISO(st)}/><StatCell val={calcKPct(st,false)}/><StatCell val={calcBBPct(st,false)}/><StatCell val={calcXBHPct(st)}/></tr>)}
   function renderPitchRow(s:any,key:string,indent?:boolean){const st=s.stat;const isMR=!isMlbLevel(s._level);return(<tr key={key} style={{borderBottom:'1px solid rgba(48,54,61,0.3)',background:isMR?'rgba(99,102,241,0.04)':'transparent'}}><LabelCell label={indent?'':s.season}/><LabelCell label={s.team?.abbreviation??s.team?.name??'—'} muted/><LabelCell label={fmtLevel(s._level)} muted={!isMR} color={isMR?'rgba(139,92,246,0.7)':undefined}/><StatCell val={st?.gamesPlayed}/><StatCell val={fmtWL(st)}/><StatCell val={st?.inningsPitched}/><StatCell val={st?.oAvg??st?.avg}/><StatCell val={st?.era}/><StatCell val={st?.whip}/><StatCell val={st?.hits}/><StatCell val={st?.runs}/><StatCell val={st?.earnedRuns}/><StatCell val={st?.homeRuns}/><StatCell val={st?.baseOnBalls}/><StatCell val={st?.strikeOuts}/><StatCell val={calcKPct(st,true)}/><StatCell val={calcBBPct(st,true)}/><StatCell val={calcKBBPct(st)}/></tr>)}
 
+  // 3-yr peak fantasy-stat projection row — prospects only (career_blend.fantasy_peak3 is
+  // never populated for graduated players, see build-scores.js). Counting stats (2B/3B/HR/
+  // R/RBI) are shown per a reference 600-PA workload since playing time itself isn't
+  // projected — durability testing found no way to predict it, so the row deliberately
+  // doesn't imply a specific number of games.
+  // Reference workloads used to turn rate projections into counting-stat estimates for
+  // display — hitters at a standard everyday-player 600 PA, pitchers at a standard
+  // full-starter 150 IP (≈630 BF at ~4.2 BF/inning). G/W-L stay blank on purpose: role
+  // and durability were explicitly tested and found unpredictable from this data, so the
+  // row never implies a specific number of games or a won-loss record.
+  const REF_PA = 600, REF_AB = 522, REF_IP = 150, REF_BF = 630
+  function fmtRate3(v:number|null|undefined){return v==null?'—':v.toFixed(3).replace(/^0\./,'.')}
+  function fmtPct(v:number|null|undefined){return v==null?'—':(v*100).toFixed(1)+'%'}
+  function fmtN(v:number|null|undefined){return v==null?'—':String(Math.round(v))}
+  function renderFantasyPeakRow(){
+    const fp=(toolGrades as any)?.fantasy_peak3
+    if(!fp)return null
+    if(pitch){
+      if(fp.era==null&&fp.whip==null&&fp.baa==null&&fp.k_bb_pct==null)return null
+      const so=fp.k_pct_pit!=null?fp.k_pct_pit*REF_BF:null
+      const bb=fp.bb_pct_pit!=null?fp.bb_pct_pit*REF_BF:null
+      const bip=(so!=null&&bb!=null)?Math.max(REF_BF-so-bb,0):null
+      const h=(fp.baa!=null&&bip!=null)?fp.baa*bip:null
+      const er=fp.era!=null?fp.era*REF_IP/9:null
+      const r=er!=null?er/0.92:null   // ~92% of runs are earned, league-average split
+      const hr=fp.hr_rate_pit!=null?fp.hr_rate_pit*REF_BF:null
+      return(<tr style={{borderTop:'2px solid var(--accent)',background:'rgba(245,158,11,0.06)'}}>
+        <LabelCell label="3-Yr Peak" bold color="var(--accent)"/><LabelCell label="—" muted/><LabelCell label="—" muted/>
+        <StatCell val="—"/><StatCell val="—"/><StatCell val={String(REF_IP)}/>
+        <StatCell val={fmtRate3(fp.baa)} bold/><StatCell val={fp.era!=null?fp.era.toFixed(2):'—'} bold/><StatCell val={fp.whip!=null?fp.whip.toFixed(2):'—'} bold/>
+        <StatCell val={fmtN(h)} bold/><StatCell val={fmtN(r)} bold/><StatCell val={fmtN(er)} bold/><StatCell val={fmtN(hr)} bold/><StatCell val={fmtN(bb)} bold/><StatCell val={fmtN(so)} bold/>
+        <StatCell val={fmtPct(fp.k_pct_pit)} bold/><StatCell val={fmtPct(fp.bb_pct_pit)} bold/><StatCell val={fp.k_bb_pct!=null?(fp.k_bb_pct*100).toFixed(1)+'%':'—'} bold/>
+      </tr>)
+    }
+    if(fp.avg==null&&fp.obp==null&&fp.slg==null&&fp.ops==null)return null
+    const so=fp.k_pct_hit!=null?fp.k_pct_hit*REF_PA:null
+    const bb=fp.bb_pct_hit!=null?fp.bb_pct_hit*REF_PA:null
+    const h=fp.avg!=null?fp.avg*REF_AB:null
+    const d2=fp['2b_rate']!=null?fp['2b_rate']*REF_PA:null
+    const d3=fp['3b_rate']!=null?fp['3b_rate']*REF_PA:null
+    const hr=fp.hr_rate!=null?fp.hr_rate*REF_AB:null
+    const singles=(h!=null&&d2!=null&&d3!=null&&hr!=null)?Math.max(h-d2-d3-hr,0):null
+    const stealOpps=(singles!=null&&bb!=null)?singles+bb:null   // omits HBP, a minor term
+    const sb=(fp.sb_rate!=null&&stealOpps!=null)?fp.sb_rate*stealOpps:null
+    const cs=sb!=null?sb/3:null   // assumes league-average ~75% SB success rate
+    return(<tr style={{borderTop:'2px solid var(--accent)',background:'rgba(245,158,11,0.06)'}}>
+      <LabelCell label="3-Yr Peak" bold color="var(--accent)"/><LabelCell label="—" muted/><LabelCell label="—" muted/>
+      <StatCell val="—"/>
+      <StatCell val={fmtRate3(fp.avg)} bold/><StatCell val={fmtRate3(fp.obp)} bold/><StatCell val={fmtRate3(fp.slg)} bold/><StatCell val={fmtRate3(fp.ops)} bold/>
+      <StatCell val={fmtN(so)} bold/><StatCell val={fmtN(bb)} bold/><StatCell val={String(REF_PA)}/><StatCell val={String(REF_AB)}/><StatCell val={fmtN(h)} bold/>
+      <StatCell val={fmtN(d2)} bold/><StatCell val={fmtN(d3)} bold/><StatCell val={fmtN(hr)} bold/>
+      <StatCell val={fmtN(fp.r_rate!=null?fp.r_rate*REF_PA:null)} bold/><StatCell val={fmtN(fp.rbi_rate!=null?fp.rbi_rate*REF_PA:null)} bold/>
+      <StatCell val={fmtN(sb)} bold/><StatCell val={fmtN(cs)} bold/><StatCell val={fmtRate3(fp.iso)} bold/>
+      <StatCell val={fmtPct(fp.k_pct_hit)} bold/><StatCell val={fmtPct(fp.bb_pct_hit)} bold/><StatCell val={fmtPct(fp.xbh_pct)} bold/>
+    </tr>)
+  }
+
   function renderBatSumRow(year:string,rows:any[],isExpanded:boolean,onToggle:()=>void){const summed=sumBatStats(rows);const teams=Array.from(new Set(rows.map((s:any)=>s.team?.abbreviation??s.team?.name).filter(Boolean)));const teamLabel=teams.length>1?'mult.':(teams[0]??'—');const levels=Array.from(new Set(rows.map((s:any)=>s._level))).sort((a,b)=>levelSortVal(a)-levelSortVal(b));const hasMinor=rows.some((s:any)=>!isMlbLevel(s._level));return(<tr key={`sum-${year}`} onClick={onToggle} style={{borderBottom:'1px solid rgba(48,54,61,0.5)',background:'rgba(255,255,255,0.02)',cursor:'pointer'}}><td style={{padding:'0.3rem 0.45rem',fontSize:'0.76rem',fontFamily:'var(--font-display)',fontWeight:700,color:'var(--text)',whiteSpace:'nowrap'}}><span style={{marginRight:4,fontSize:'0.6rem',opacity:0.6}}>{isExpanded?'▼':'▶'}</span>{year}</td><LabelCell label={teamLabel} muted/><LabelCell label={levels.join(', ')} muted/><StatCell val={summed?.gamesPlayed} bold/><StatCell val={summed?.avg} bold/><StatCell val={summed?.obp} bold/><StatCell val={summed?.slg} bold/><StatCell val={summed?.ops} bold/><StatCell val={summed?.strikeOuts} bold/><StatCell val={summed?.baseOnBalls} bold/><StatCell val={summed?.plateAppearances} bold/><StatCell val={summed?.atBats} bold/><StatCell val={summed?.hits} bold/><StatCell val={summed?.doubles} bold/><StatCell val={summed?.triples} bold/><StatCell val={summed?.homeRuns} bold/><StatCell val={summed?.runs} bold/><StatCell val={summed?.rbi} bold/><StatCell val={summed?.stolenBases} bold/><StatCell val={summed?.caughtStealing} bold/><StatCell val={calcISO(summed)} bold/><StatCell val={calcKPct(summed,false)} bold/><StatCell val={calcBBPct(summed,false)} bold/><StatCell val={calcXBHPct(summed)} bold/></tr>)}
   function renderPitchSumRow(year:string,rows:any[],isExpanded:boolean,onToggle:()=>void){const summed=sumPitchStats(rows);const teams=Array.from(new Set(rows.map((s:any)=>s.team?.abbreviation??s.team?.name).filter(Boolean)));const teamLabel=teams.length>1?'mult.':(teams[0]??'—');const levels=Array.from(new Set(rows.map((s:any)=>s._level))).sort((a,b)=>levelSortVal(a)-levelSortVal(b));const hasMinor=rows.some((s:any)=>!isMlbLevel(s._level));return(<tr key={`sum-${year}`} onClick={onToggle} style={{borderBottom:'1px solid rgba(48,54,61,0.5)',background:'rgba(255,255,255,0.02)',cursor:'pointer'}}><td style={{padding:'0.3rem 0.45rem',fontSize:'0.76rem',fontFamily:'var(--font-display)',fontWeight:700,color:'var(--text)',whiteSpace:'nowrap'}}><span style={{marginRight:4,fontSize:'0.6rem',opacity:0.6}}>{isExpanded?'▼':'▶'}</span>{year}</td><LabelCell label={teamLabel} muted/><LabelCell label={levels.join(', ')} muted/><StatCell val={summed?.gamesPlayed} bold/><StatCell val={fmtWL(summed)} bold/><StatCell val={summed?.inningsPitched} bold/><StatCell val={summed?.oAvg??summed?.avg} bold/><StatCell val={summed?.era} bold/><StatCell val={summed?.whip} bold/><StatCell val={summed?.hits} bold/><StatCell val={summed?.runs} bold/><StatCell val={summed?.earnedRuns} bold/><StatCell val={summed?.homeRuns} bold/><StatCell val={summed?.baseOnBalls} bold/><StatCell val={summed?.strikeOuts} bold/><StatCell val={calcKPct(summed,true)} bold/><StatCell val={calcBBPct(summed,true)} bold/><StatCell val={calcKBBPct(summed)} bold/></tr>)}
   function renderBatTotalRow(label:string,st:any){return(<tr key={label} style={{background:'rgba(255,255,255,0.03)',borderTop:'1px solid var(--border)'}}><LabelCell label={label} bold/><td/><td/><StatCell val={st?.gamesPlayed} bold/><StatCell val={st?.avg} bold/><StatCell val={st?.obp} bold/><StatCell val={st?.slg} bold/><StatCell val={st?.ops} bold/><StatCell val={st?.strikeOuts} bold/><StatCell val={st?.baseOnBalls} bold/><StatCell val={st?.plateAppearances} bold/><StatCell val={st?.atBats} bold/><StatCell val={st?.hits} bold/><StatCell val={st?.doubles} bold/><StatCell val={st?.triples} bold/><StatCell val={st?.homeRuns} bold/><StatCell val={st?.runs} bold/><StatCell val={st?.rbi} bold/><StatCell val={st?.stolenBases} bold/><StatCell val={st?.caughtStealing} bold/><StatCell val={calcISO(st)} bold/><StatCell val={calcKPct(st,false)} bold/><StatCell val={calcBBPct(st,false)} bold/><StatCell val={calcXBHPct(st)} bold/></tr>)}
@@ -985,6 +1042,7 @@ export function PlayerDrawer({ player, onClose, globalOwnership, minorsIds, mlbT
                     {yearGroups.map(([year,yRows])=>{const isExpanded=expandedYears.has(year);const toggle=()=>setExpandedYears(prev=>{const next=new Set(prev);if(next.has(year))next.delete(year);else next.add(year);return next});if(yRows.length===1)return pitch?renderPitchRow(yRows[0],`row-${year}-0`):renderBatRow(yRows[0],`row-${year}-0`);return(<React.Fragment key={year}>{pitch?renderPitchSumRow(year,yRows,isExpanded,toggle):renderBatSumRow(year,yRows,isExpanded,toggle)}{isExpanded&&[...yRows].sort((a,b)=>levelSortVal(a._level)-levelSortVal(b._level)).map((s,i)=>pitch?renderPitchRow(s,`row-${year}-${i}`,true):renderBatRow(s,`row-${year}-${i}`,true))}</React.Fragment>)})}
                     {mlbTotal&&(pitch?renderPitchTotalRow('MLB Total',mlbTotal):renderBatTotalRow('MLB Total',mlbTotal))}
                     {showMinors&&minorsTotal&&(pitch?renderPitchTotalRow('Minors Total',minorsTotal):renderBatTotalRow('Minors Total',minorsTotal))}
+                    {renderFantasyPeakRow()}
                   </tbody>
                 </table>
               </div>

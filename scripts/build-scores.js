@@ -1,7 +1,7 @@
 const fs   = require('fs');
 const path = require('path');
 const os   = require('os');
-const { scoreMilbToolRaw, scoreMilbTool, blendCareer } = require('../lib/score-tools');
+const { scoreMilbToolRaw, scoreMilbTool, blendCareer, starterFactor } = require('../lib/score-tools');
 
 const BASE          = process.env.DATA_BASE || path.join(os.homedir(), 'Desktop/fantasy-baseball/data');
 const PLAYERS_PATH  = path.join(BASE, 'players.json');
@@ -25,6 +25,13 @@ const WORTHY_CALIB_PATH = path.join(BASE, 'model/worthy-calibration.json');
 const peakRegression = fs.existsSync(PEAK_REGR_PATH) ? JSON.parse(fs.readFileSync(PEAK_REGR_PATH, 'utf8')) : null;
 const peakTools      = fs.existsSync(PEAK_TOOLS_PATH) ? JSON.parse(fs.readFileSync(PEAK_TOOLS_PATH, 'utf8')) : {};
 const worthyCalib    = fs.existsSync(WORTHY_CALIB_PATH) ? JSON.parse(fs.readFileSync(WORTHY_CALIB_PATH, 'utf8')) : null;
+
+// Fantasy-stat peak3 projections (AVG/OBP/SLG/OPS/HR-rate/3B-rate/RBI-rate/R-rate/2B-rate
+// for hitters, WHIP/BAA/ERA/K-BB% for pitchers) — prospects only, never computed for
+// graduated players (they have real stats, a projection would be pointless). Additive,
+// lives under career_blend.fantasy_peak3, never read by ranking.
+const FANTASY_PEAK_PATH = path.join(BASE, 'model/fantasy-peak-regression.json');
+const fantasyPeakRegression = fs.existsSync(FANTASY_PEAK_PATH) ? JSON.parse(fs.readFileSync(FANTASY_PEAK_PATH, 'utf8')) : null;
 
 const VALID_YEARS   = new Set([2015,2016,2017,2018,2019,2021,2022,2023,2024,2025,2026]);
 const CURRENT_YEAR  = new Date().getFullYear();
@@ -213,21 +220,216 @@ function xbhRateZAaa(mlbamId) {
 function sigmoid(x) { return 1 / (1 + Math.exp(-x)); }
 
 // Actual (realized) peak/worthy composite for graduated players, from peak-tools.json.
-// Two-way: 50/50 blend of both sides present, matching lib/score-tools.js's _composite().
+// Returns the two sides separately (not pre-blended) so the caller can apply the
+// starter/workhorse factor to the pitch side before blending — see peakComposite().
 function peakActualComposite(pt) {
-  if (!pt) return null;
+  if (!pt) return { pitchOverall: null, hitOverall: null };
   const hasPitch = pt.stuff != null && pt.control != null;
   const hasHit   = pt.hit != null && pt.power != null && pt.speed != null;
   const pitchOverall = hasPitch ? (pt.stuff * COMPOSITE_WEIGHTS.pitcher.stuff + pt.control * COMPOSITE_WEIGHTS.pitcher.control) : null;
   const hitOverall   = hasHit   ? (pt.hit * COMPOSITE_WEIGHTS.hitter.hit + pt.power * COMPOSITE_WEIGHTS.hitter.power + pt.speed * COMPOSITE_WEIGHTS.hitter.speed) : null;
-  if (pitchOverall != null && hitOverall != null) return Math.round((pitchOverall + hitOverall) / 2);
-  return pitchOverall != null ? Math.round(pitchOverall) : (hitOverall != null ? Math.round(hitOverall) : null);
+  return { pitchOverall, hitOverall };
+}
+// Blends pitch/hit sides into the final peak3 number, applying the SAME starter/workhorse
+// factor career overall gets (lib/score-tools.js's starterFactor) to the pitch side before
+// blending — matches _applyStarter()'s two-way logic. Without this, a reliever's peak3 (an
+// unshrunk, unadjusted best-3yr tool grade) can read far higher than their career overall
+// (which does get the workhorse penalty), which is exactly the inconsistency a reliever
+// like Paul Sewald (peak3 130, overall 93) exposed.
+function peakComposite(pitchOverall, hitOverall, careerIPG) {
+  const sf = starterFactor(careerIPG);
+  const adjPitch = pitchOverall != null ? pitchOverall * sf : null;
+  if (adjPitch != null && hitOverall != null) return Math.round((adjPitch + hitOverall) / 2);
+  if (adjPitch != null) return Math.round(adjPitch);
+  if (hitOverall != null) return Math.round(hitOverall);
+  return null;
 }
 function peakActualWorthy(pt) {
   if (!pt) return null;
   const vals = [pt._worthy, pt._worthy_pitch].filter(v => v != null);
   if (!vals.length) return null;
   return vals.includes(1) ? 1 : 0;
+}
+
+// ── Fantasy-stat peak3 projections (prospects only) ─────────────────────────────────
+// Generic scorer for fantasy-peak-regression.json's {predictors, models} shape. Mirrors
+// build-fantasy-peak.py's extract()/fit_stat() exactly — same predictor kinds, same
+// per-level weighted-z + age_diff + corr-weighted cross-level aggregation.
+function fpExtract(kind, s, ...args) {
+  if (kind === 'direct') {
+    const v = s[args[0]];
+    return (v !== null && v !== undefined && v !== '') ? parseFloat(v) : null;
+  }
+  if (kind === 'ratio') {
+    const [field, den] = args;
+    const d = s[den] || 0;
+    return d > 0 ? (s[field] || 0) / d : null;
+  }
+  if (kind === 'sb_rate') {
+    const h = s.h || 0, bb = s.bb || 0, hbp = s.hbp || 0;
+    const doubles = s.doubles || 0, triples = s.triples || 0, hr = s.hr || 0;
+    const opp = (h - doubles - triples - hr) + bb + hbp;
+    return opp > 0 ? (s.sb || 0) / opp : null;
+  }
+  if (kind === 'iso') {
+    const ab = s.ab || 0;
+    if (ab <= 0) return null;
+    return parseFloat(s.slg || 0) - (s.h || 0) / ab;
+  }
+  if (kind === 'xbh') {
+    const d = s[args[0]] || 0;
+    if (d <= 0) return null;
+    return ((s.doubles || 0) + (s.triples || 0) + (s.hr || 0)) / d;
+  }
+  return null;
+}
+
+const FP_ADHOC_CACHE = {};
+function fpAdhocNorm(pred, isPit) {
+  const key = JSON.stringify(pred);
+  if (FP_ADHOC_CACHE[key]) return FP_ADHOC_CACHE[key];
+  const ttype = isPit ? 'pitching' : 'hitting';
+  const buckets = {};
+  for (const seasons of Object.values(history)) {
+    for (const s of seasons) {
+      if (!MILB_LEVELS.has(canonLevel(s.level, s.year)) || !VALID_YEARS.has(s.year) || !s.team) continue;
+      if (s.type !== ttype) continue;
+      const samp = isPit ? ipToFloat(s.ip) : (s.pa || 0);
+      if (samp < (isPit ? 15 : 30)) continue;
+      const v = fpExtract(pred[0], s, ...pred.slice(1));
+      if (v == null) continue;
+      const k = `${canonLevel(s.level, s.year)}|${s.year}`;
+      (buckets[k] = buckets[k] || []).push([v, samp]);
+    }
+  }
+  const norm = {};
+  for (const [k, pairs] of Object.entries(buckets)) {
+    if (pairs.length < 20) continue;
+    const w = pairs.reduce((a,p) => a+p[1], 0);
+    const mean = pairs.reduce((a,p) => a+p[0]*p[1], 0) / w;
+    const varr = pairs.reduce((a,p) => a+p[1]*(p[0]-mean)**2, 0) / w;
+    norm[k] = { mean, stdev: Math.max(Math.sqrt(varr), 1e-9) };
+  }
+  FP_ADHOC_CACHE[key] = norm;
+  return norm;
+}
+function fpNorm(pred, level, year) {
+  const [kind, a1, a2] = pred;
+  if (kind === 'direct' && ['obp','slg','ops'].includes(a1)) return norms[`${level}|${year}`]?.hitters?.[a1];
+  if (kind === 'direct' && ['era','whip','baa'].includes(a1)) return norms[`${level}|${year}`]?.pitchers?.[a1];
+  if (kind === 'ratio' && a1 === 'so' && a2 === 'bf') return norms[`${level}|${year}`]?.pitchers?.k_pct;
+  if (kind === 'ratio' && a1 === 'bb' && a2 === 'bf') return norms[`${level}|${year}`]?.pitchers?.bb_pct;
+  if (kind === 'ratio' && a1 === 'so' && a2 === 'pa') return norms[`${level}|${year}`]?.hitters?.k_pct;
+  if (kind === 'ratio' && a1 === 'bb' && a2 === 'pa') return norms[`${level}|${year}`]?.hitters?.bb_pct;
+  if (kind === 'iso') return norms[`${level}|${year}`]?.hitters?.iso;
+  if (kind === 'xbh' && a1 === 'pa') return norms[`${level}|${year}`]?.hitters?.xbh_rate;
+  const isPit = kind === 'kbb' || (kind === 'ratio' && a2 === 'bf');
+  return fpAdhocNorm(pred, isPit)[`${level}|${year}`];
+}
+
+function scoreFantasyStatDirect(mlbamId, player, statCfg) {
+  const isPit = statCfg.is_pitcher;
+  const expectedType = isPit ? 'pitching' : 'hitting';
+  const seasons = (history[String(mlbamId)] || [])
+    .filter(s => MILB_LEVELS.has(canonLevel(s.level, s.year)) && VALID_YEARS.has(s.year) && s.team && s.type === expectedType);
+  const acc = {};
+  for (const s of seasons) {
+    const level = canonLevel(s.level, s.year);
+    const samp = isPit ? ipToFloat(s.ip) : (s.pa || 0);
+    if (samp < (isPit ? 15 : 30)) continue;
+    const zs = [];
+    let ok = true;
+    for (const pred of statCfg.predictors) {
+      const n = fpNorm(pred, level, s.year);
+      if (!n || !n.stdev) { ok = false; break; }
+      const v = fpExtract(pred[0], s, ...pred.slice(1));
+      if (v == null) { ok = false; break; }
+      zs.push((v - n.mean) / n.stdev);
+    }
+    if (!ok) continue;
+    const age = getAge(player.birthDate, s.year) ?? AVG_AGES[level];
+    const ageDiff = AVG_AGES[level] - age;
+    if (!acc[level]) acc[level] = { z: statCfg.predictors.map(() => 0), w: 0, age: 0 };
+    const a = acc[level];
+    zs.forEach((z, i) => a.z[i] += z*samp);
+    a.w += samp; a.age += ageDiff*samp;
+  }
+  let wsumAll = 0, wtotAll = 0;
+  for (const [level, a] of Object.entries(acc)) {
+    if (a.w <= 0) continue;
+    const model = statCfg.models[level];
+    if (!model) continue;
+    const ageAvg = a.age/a.w;
+    const x = a.z.map(z => z/a.w).concat([ageAvg, ageAvg**2, 1]);
+    const pred = model.coef.reduce((sum, c, i) => sum + c*x[i], 0);
+    const weight = model.corr * a.w;
+    wsumAll += pred*weight; wtotAll += weight;
+  }
+  return wtotAll > 0 ? wsumAll/wtotAll : null;
+}
+
+function scoreFantasyStat(mlbamId, player, statCfg, normedPeak) {
+  if (statCfg.method === 'tool_cal') {
+    if (!statCfg.coef || !normedPeak) return null;
+    const x = statCfg.tools.map(t => normedPeak[t]);
+    if (x.some(v => v == null)) return null;
+    return statCfg.coef.reduce((sum, c, i) => sum + c*(i < x.length ? x[i] : 1), 0);
+  }
+  if (statCfg.method === 'hybrid') {
+    if (!statCfg.blend_coef || !normedPeak) return null;
+    const directPred = scoreFantasyStatDirect(mlbamId, player, statCfg);
+    if (directPred == null) return null;
+    const toolVals = statCfg.tools.map(t => normedPeak[t]);
+    if (toolVals.some(v => v == null)) return null;
+    const x = [directPred, ...toolVals];
+    return statCfg.blend_coef.reduce((sum, c, i) => sum + c*(i < x.length ? x[i] : 1), 0);
+  }
+  return scoreFantasyStatDirect(mlbamId, player, statCfg);
+}
+
+const FANTASY_HIT_STATS = ['avg','obp','slg','ops','hr_rate','3b_rate','rbi_rate','r_rate','2b_rate','k_pct_hit','bb_pct_hit','iso','xbh_pct','sb_rate'];
+const FANTASY_PIT_STATS = ['whip','baa','era','k_bb_pct','k_pct_pit','bb_pct_pit','hr_rate_pit'];
+// Beyond the physical zero floor: a handful of fringe-pool prospects still extrapolate to
+// below-replacement-level lines (e.g. .063 AVG) that no tracked prospect would actually
+// project to. Rare (~1-7 players per stat out of ~3500) but obviously wrong when it hits —
+// floor at "worst regular," not "impossible."
+const FANTASY_FLOORS = { avg: 0.150, obp: 0.200, ops: 0.400 };
+
+// slg/ops are 'derived' (composed from other already-computed stats, not their own fit —
+// see build-fantasy-peak.py's DERIVED_CONFIG). Resolved as a post-step so component order
+// in FANTASY_HIT_STATS doesn't matter; DERIVED_ORDER matters here since OPS composes SLG.
+const DERIVED_ORDER = ['slg', 'ops'];
+
+function computeFantasyPeak3(mlbamId, player, hasBat, hasArm, normedPeak) {
+  if (!fantasyPeakRegression) return null;
+  const out = {};
+  if (hasBat) for (const stat of FANTASY_HIT_STATS) {
+    const cfg = fantasyPeakRegression[stat];
+    if (!cfg || cfg.method === 'derived') continue;
+    const v = scoreFantasyStat(mlbamId, player, cfg, normedPeak);
+    // None of these 21 stats can be physically negative — clamp linear-extrapolation
+    // artifacts (mainly from tool_cal/hybrid on fringe-pool prospects) rather than show a
+    // negative AVG/HR-rate/ISO in the drawer. A few stats also get a "worst regular"
+    // floor above zero — see FANTASY_FLOORS.
+    if (v != null) out[stat] = Math.max(FANTASY_FLOORS[stat] ?? 0, v);
+  }
+  if (hasArm) for (const stat of FANTASY_PIT_STATS) {
+    const cfg = fantasyPeakRegression[stat];
+    if (!cfg || cfg.method === 'derived') continue;
+    const v = scoreFantasyStat(mlbamId, player, cfg, normedPeak);
+    if (v != null) out[stat] = Math.max(FANTASY_FLOORS[stat] ?? 0, v);
+  }
+  if (hasBat) for (const stat of DERIVED_ORDER) {
+    const cfg = fantasyPeakRegression[stat];
+    if (!cfg || cfg.method !== 'derived') continue;
+    let total = 0, ok = true;
+    for (const [comp, sign] of cfg.formula) {
+      if (out[comp] == null) { ok = false; break; }
+      total += sign * out[comp];
+    }
+    if (ok) out[stat] = Math.max(FANTASY_FLOORS[stat] ?? 0, total);
+  }
+  return Object.keys(out).length ? out : null;
 }
 
 async function run() {
@@ -396,7 +598,7 @@ async function run() {
     // whose peak raw stats are strictly better on every tool). Sharing the career pool keeps
     // peak3 on the same scale as overall, so "better raw peak on every tool" reliably means
     // "higher peak3."
-    let peak3 = null, worthyPct = null, worthyActual = null;
+    let peak3 = null, worthyPct = null, worthyActual = null, fantasyPeak3 = null;
     if (peakRegression) {
       const normedPeak = {};
       for (const [tool, raw] of Object.entries(peakToolScores)) {
@@ -415,16 +617,23 @@ async function run() {
       let peakPitch = null, peakHit = null;
       if (hasArm) peakPitch = peakSideOverall(COMPOSITE_WEIGHTS.pitcher, pitchSample || totalSample, true);
       if (hasBat) peakHit   = peakSideOverall(COMPOSITE_WEIGHTS.hitter,  hitSample  || totalSample, false);
+      // Starter/workhorse factor — same one career overall gets (careerIPG computed just
+      // above) — applied to the pitch side before blending, so a reliever's peak3 doesn't
+      // read far above their career overall the way an unadjusted grade would.
+      const peakPitchAdj = peakPitch != null ? peakPitch * starterFactor(careerIPG) : null;
       let peakProjected = null;
       if (isTwoWay) {
-        const parts = [peakPitch, peakHit].filter(v => v != null);
+        const parts = [peakPitchAdj, peakHit].filter(v => v != null);
         peakProjected = parts.length ? parts.reduce((a,b) => a+b, 0) / parts.length : null;
       } else {
-        peakProjected = hasArm ? peakPitch : peakHit;
+        peakProjected = hasArm ? peakPitchAdj : peakHit;
       }
 
       const pt = peakTools[String(updatedPlayers[id].mlbam_id)];
-      peak3 = graduated ? peakActualComposite(pt) : null;
+      if (graduated) {
+        const { pitchOverall, hitOverall } = peakActualComposite(pt);
+        peak3 = peakComposite(pitchOverall, hitOverall, careerIPG);
+      }
       if (peak3 == null) peak3 = peakProjected != null ? Math.round(peakProjected) : null;
 
       if (graduated) {
@@ -449,6 +658,14 @@ async function run() {
           }
         }
       }
+
+      // Fantasy-stat peak3 projections — prospects only (per the graduated flag already
+      // computed above). Graduated players have real stats; a projection would be noise.
+      // normedPeak (pool-normed peak tool grades, same scale as peak3 itself) is passed
+      // through for the tool_cal stats — see scoreFantasyStat.
+      fantasyPeak3 = !graduated
+        ? computeFantasyPeak3(updatedPlayers[id].mlbam_id, updatedPlayers[id], hasBat, hasArm, normedPeak)
+        : null;
     }
 
     // Canonical career-grade blend — single source of truth for row + drawer tile + model-rank.
@@ -461,6 +678,7 @@ async function run() {
       ...(peak3 != null ? { peak3 } : {}),
       ...(worthyPct != null ? { worthy_pct: worthyPct } : {}),
       ...(worthyActual != null ? { worthy_actual: worthyActual } : {}),
+      ...(fantasyPeak3 != null ? { fantasy_peak3: fantasyPeak3 } : {}),
     };
     scored++;
 
@@ -509,7 +727,8 @@ async function run() {
       if (totalG > 0) careerIPG = totalIP / totalG;
     }
     const pt = player.mlbam_id ? peakTools[String(player.mlbam_id)] : null;
-    const peak3 = peakActualComposite(pt);
+    const { pitchOverall, hitOverall } = peakActualComposite(pt);
+    const peak3 = peakComposite(pitchOverall, hitOverall, careerIPG);
     const worthyActual = peakActualWorthy(pt);
     updatedPlayers[id].career_blend = {
       ...blendCareer(null, mlbEntry, { ipg: careerIPG }),

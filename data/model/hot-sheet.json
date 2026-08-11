@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-11T04:32:32.727Z",
+  "generatedAt": "2026-08-11T19:05:55.593Z",
   "season": {
     "bats": [
       {
@@ -333,10 +333,10 @@
         "ipPerGs": null,
         "deltas": {
           "season": 16,
-          "d7": 1,
-          "d15": 2,
-          "d30": 4,
-          "d60": 10,
+          "d7": 2,
+          "d15": 3,
+          "d30": 5,
+          "d60": 11,
           "d90": null
         }
       },
@@ -411,10 +411,10 @@
         "ipPerGs": null,
         "deltas": {
           "season": 15,
-          "d7": 2,
-          "d15": 3,
-          "d30": 5,
-          "d60": 13,
+          "d7": 3,
+          "d15": 4,
+          "d30": 6,
+          "d60": 14,
           "d90": null
         }
       },
@@ -5115,6 +5115,32 @@
   "d60": {
     "bats": [
       {
+        "id": "072ds",
+        "name": "Santiago Solarte",
+        "rank": 1997,
+        "positions": "SS,INF",
+        "isPit": false,
+        "isTwoWay": false,
+        "overall": 103,
+        "sample": 194,
+        "confidence": {
+          "hit": 68,
+          "power": 62,
+          "speed": 76
+        },
+        "delta": 14,
+        "prevOverall": 88,
+        "ipPerGs": null,
+        "deltas": {
+          "season": 15,
+          "d7": 3,
+          "d15": 4,
+          "d30": 6,
+          "d60": 14,
+          "d90": null
+        }
+      },
+      {
         "id": "0724c",
         "name": "Francisco Renteria",
         "rank": 819,
@@ -5136,32 +5162,6 @@
           "d7": 1,
           "d15": 3,
           "d30": 7,
-          "d60": 13,
-          "d90": null
-        }
-      },
-      {
-        "id": "072ds",
-        "name": "Santiago Solarte",
-        "rank": 1997,
-        "positions": "SS,INF",
-        "isPit": false,
-        "isTwoWay": false,
-        "overall": 103,
-        "sample": 194,
-        "confidence": {
-          "hit": 68,
-          "power": 62,
-          "speed": 76
-        },
-        "delta": 13,
-        "prevOverall": 88,
-        "ipPerGs": null,
-        "deltas": {
-          "season": 15,
-          "d7": 2,
-          "d15": 3,
-          "d30": 5,
           "d60": 13,
           "d90": null
         }
@@ -5216,6 +5216,32 @@
           "d30": 0,
           "d60": 11,
           "d90": 11
+        }
+      },
+      {
+        "id": "072jh",
+        "name": "Samil Serrano",
+        "rank": 1838,
+        "positions": "CF,OF",
+        "isPit": false,
+        "isTwoWay": false,
+        "overall": 104,
+        "sample": 157,
+        "confidence": {
+          "hit": 64,
+          "power": 57,
+          "speed": 72
+        },
+        "delta": 11,
+        "prevOverall": 88,
+        "ipPerGs": null,
+        "deltas": {
+          "season": 16,
+          "d7": 2,
+          "d15": 3,
+          "d30": 5,
+          "d60": 11,
+          "d90": null
         }
       },
       {
@@ -5346,32 +5372,6 @@
           "d30": 3,
           "d60": 10,
           "d90": 9
-        }
-      },
-      {
-        "id": "072jh",
-        "name": "Samil Serrano",
-        "rank": 1838,
-        "positions": "CF,OF",
-        "isPit": false,
-        "isTwoWay": false,
-        "overall": 104,
-        "sample": 157,
-        "confidence": {
-          "hit": 64,
-          "power": 57,
-          "speed": 72
-        },
-        "delta": 10,
-        "prevOverall": 88,
-        "ipPerGs": null,
-        "deltas": {
-          "season": 16,
-          "d7": 1,
-          "d15": 2,
-          "d30": 4,
-          "d60": 10,
-          "d90": null
         }
       },
       {
@@ -5713,6 +5713,32 @@
         }
       },
       {
+        "id": "072h7",
+        "name": "Jeyson Horton",
+        "rank": 3919,
+        "positions": "SS,INF",
+        "isPit": false,
+        "isTwoWay": false,
+        "overall": 97,
+        "sample": 167,
+        "confidence": {
+          "hit": 65,
+          "power": 58,
+          "speed": 74
+        },
+        "delta": 8,
+        "prevOverall": 88,
+        "ipPerGs": null,
+        "deltas": {
+          "season": 9,
+          "d7": 2,
+          "d15": 2,
+          "d30": 2,
+          "d60": 8,
+          "d90": null
+        }
+      },
+      {
         "id": "06y07",
         "name": "John Taylor",
         "rank": 2705,
@@ -5970,32 +5996,6 @@
           "d30": 2,
           "d60": 6,
           "d90": 6
-        }
-      },
-      {
-        "id": "072h7",
-        "name": "Jeyson Horton",
-        "rank": 3919,
-        "positions": "SS,INF",
-        "isPit": false,
-        "isTwoWay": false,
-        "overall": 97,
-        "sample": 167,
-        "confidence": {
-          "hit": 65,
-          "power": 58,
-          "speed": 74
-        },
-        "delta": 6,
-        "prevOverall": 88,
-        "ipPerGs": null,
-        "deltas": {
-          "season": 9,
-          "d7": 0,
-          "d15": 0,
-          "d30": 0,
-          "d60": 6,
-          "d90": null
         }
       },
       {
@@ -7827,6 +7827,32 @@
         }
       },
       {
+        "id": "072ds",
+        "name": "Santiago Solarte",
+        "rank": 1997,
+        "positions": "SS,INF",
+        "isPit": false,
+        "isTwoWay": false,
+        "overall": 103,
+        "sample": 194,
+        "confidence": {
+          "hit": 68,
+          "power": 62,
+          "speed": 76
+        },
+        "delta": 6,
+        "prevOverall": 88,
+        "ipPerGs": null,
+        "deltas": {
+          "season": 15,
+          "d7": 3,
+          "d15": 4,
+          "d30": 6,
+          "d60": 14,
+          "d90": null
+        }
+      },
+      {
         "id": "06yk0",
         "name": "Conor Essenburg",
         "rank": 1078,
@@ -7905,28 +7931,28 @@
         }
       },
       {
-        "id": "072ds",
-        "name": "Santiago Solarte",
-        "rank": 1997,
-        "positions": "SS,INF",
+        "id": "072jh",
+        "name": "Samil Serrano",
+        "rank": 1838,
+        "positions": "CF,OF",
         "isPit": false,
         "isTwoWay": false,
-        "overall": 103,
-        "sample": 194,
+        "overall": 104,
+        "sample": 157,
         "confidence": {
-          "hit": 68,
-          "power": 62,
-          "speed": 76
+          "hit": 64,
+          "power": 57,
+          "speed": 72
         },
         "delta": 5,
         "prevOverall": 88,
         "ipPerGs": null,
         "deltas": {
-          "season": 15,
+          "season": 16,
           "d7": 2,
           "d15": 3,
           "d30": 5,
-          "d60": 13,
+          "d60": 11,
           "d90": null
         }
       },
@@ -7954,6 +7980,32 @@
           "d30": 5,
           "d60": 5,
           "d90": 7
+        }
+      },
+      {
+        "id": "07248",
+        "name": "Victor Valdez",
+        "rank": 1313,
+        "positions": "SS,INF",
+        "isPit": false,
+        "isTwoWay": false,
+        "overall": 98,
+        "sample": 126,
+        "confidence": {
+          "hit": 58,
+          "power": 51,
+          "speed": 68
+        },
+        "delta": 5,
+        "prevOverall": 88,
+        "ipPerGs": null,
+        "deltas": {
+          "season": 10,
+          "d7": 1,
+          "d15": 2,
+          "d30": 5,
+          "d60": null,
+          "d90": null
         }
       },
       {
@@ -8029,32 +8081,6 @@
           "season": 17,
           "d7": 1,
           "d15": 1,
-          "d30": 4,
-          "d60": 10,
-          "d90": null
-        }
-      },
-      {
-        "id": "072jh",
-        "name": "Samil Serrano",
-        "rank": 1838,
-        "positions": "CF,OF",
-        "isPit": false,
-        "isTwoWay": false,
-        "overall": 104,
-        "sample": 157,
-        "confidence": {
-          "hit": 64,
-          "power": 57,
-          "speed": 72
-        },
-        "delta": 4,
-        "prevOverall": 88,
-        "ipPerGs": null,
-        "deltas": {
-          "season": 16,
-          "d7": 1,
-          "d15": 2,
           "d30": 4,
           "d60": 10,
           "d90": null
@@ -8185,32 +8211,6 @@
           "season": 11,
           "d7": 1,
           "d15": 2,
-          "d30": 4,
-          "d60": null,
-          "d90": null
-        }
-      },
-      {
-        "id": "07248",
-        "name": "Victor Valdez",
-        "rank": 1313,
-        "positions": "SS,INF",
-        "isPit": false,
-        "isTwoWay": false,
-        "overall": 98,
-        "sample": 126,
-        "confidence": {
-          "hit": 58,
-          "power": 51,
-          "speed": 68
-        },
-        "delta": 4,
-        "prevOverall": 88,
-        "ipPerGs": null,
-        "deltas": {
-          "season": 10,
-          "d7": 0,
-          "d15": 1,
           "d30": 4,
           "d60": null,
           "d90": null
@@ -10305,6 +10305,32 @@
         }
       },
       {
+        "id": "072ds",
+        "name": "Santiago Solarte",
+        "rank": 1997,
+        "positions": "SS,INF",
+        "isPit": false,
+        "isTwoWay": false,
+        "overall": 103,
+        "sample": 194,
+        "confidence": {
+          "hit": 68,
+          "power": 62,
+          "speed": 76
+        },
+        "delta": 4,
+        "prevOverall": 88,
+        "ipPerGs": null,
+        "deltas": {
+          "season": 15,
+          "d7": 3,
+          "d15": 4,
+          "d30": 6,
+          "d60": 14,
+          "d90": null
+        }
+      },
+      {
         "id": "06dn4",
         "name": "Brock Rodden",
         "rank": 2379,
@@ -10539,6 +10565,32 @@
         }
       },
       {
+        "id": "072jh",
+        "name": "Samil Serrano",
+        "rank": 1838,
+        "positions": "CF,OF",
+        "isPit": false,
+        "isTwoWay": false,
+        "overall": 104,
+        "sample": 157,
+        "confidence": {
+          "hit": 64,
+          "power": 57,
+          "speed": 72
+        },
+        "delta": 3,
+        "prevOverall": 88,
+        "ipPerGs": null,
+        "deltas": {
+          "season": 16,
+          "d7": 2,
+          "d15": 3,
+          "d30": 5,
+          "d60": 11,
+          "d90": null
+        }
+      },
+      {
         "id": "06yxm",
         "name": "Boston Smith",
         "rank": 2003,
@@ -10614,32 +10666,6 @@
           "d30": 2,
           "d60": 5,
           "d90": 6
-        }
-      },
-      {
-        "id": "072ds",
-        "name": "Santiago Solarte",
-        "rank": 1997,
-        "positions": "SS,INF",
-        "isPit": false,
-        "isTwoWay": false,
-        "overall": 103,
-        "sample": 194,
-        "confidence": {
-          "hit": 68,
-          "power": 62,
-          "speed": 76
-        },
-        "delta": 3,
-        "prevOverall": 88,
-        "ipPerGs": null,
-        "deltas": {
-          "season": 15,
-          "d7": 2,
-          "d15": 3,
-          "d30": 5,
-          "d60": 13,
-          "d90": null
         }
       },
       {
@@ -11059,32 +11085,6 @@
         }
       },
       {
-        "id": "072jh",
-        "name": "Samil Serrano",
-        "rank": 1838,
-        "positions": "CF,OF",
-        "isPit": false,
-        "isTwoWay": false,
-        "overall": 104,
-        "sample": 157,
-        "confidence": {
-          "hit": 64,
-          "power": 57,
-          "speed": 72
-        },
-        "delta": 2,
-        "prevOverall": 88,
-        "ipPerGs": null,
-        "deltas": {
-          "season": 16,
-          "d7": 1,
-          "d15": 2,
-          "d30": 4,
-          "d60": 10,
-          "d90": null
-        }
-      },
-      {
         "id": "06k7w",
         "name": "Andreimi Antunez",
         "rank": 2004,
@@ -11423,32 +11423,6 @@
         }
       },
       {
-        "id": "06v6c",
-        "name": "Luis Cruz",
-        "rank": 2876,
-        "positions": "LF,OF",
-        "isPit": false,
-        "isTwoWay": false,
-        "overall": 101,
-        "sample": 352,
-        "confidence": {
-          "hit": 80,
-          "power": 75,
-          "speed": 85
-        },
-        "delta": 2,
-        "prevOverall": 98,
-        "ipPerGs": null,
-        "deltas": {
-          "season": 3,
-          "d7": 0,
-          "d15": 2,
-          "d30": 2,
-          "d60": 2,
-          "d90": 2
-        }
-      },
-      {
         "id": "06qhg",
         "name": "Maykel Coret",
         "rank": 2047,
@@ -11524,6 +11498,32 @@
           "d30": 2,
           "d60": 9,
           "d90": null
+        }
+      },
+      {
+        "id": "06rro",
+        "name": "Johanse Gomez",
+        "rank": 3518,
+        "positions": "CF,RF,OF",
+        "isPit": false,
+        "isTwoWay": false,
+        "overall": 99,
+        "sample": 361,
+        "confidence": {
+          "hit": 80,
+          "power": 75,
+          "speed": 86
+        },
+        "delta": 2,
+        "prevOverall": 96,
+        "ipPerGs": null,
+        "deltas": {
+          "season": 3,
+          "d7": 1,
+          "d15": 2,
+          "d30": 2,
+          "d60": 3,
+          "d90": 4
         }
       }
     ],
@@ -12809,6 +12809,32 @@
         }
       },
       {
+        "id": "072ds",
+        "name": "Santiago Solarte",
+        "rank": 1997,
+        "positions": "SS,INF",
+        "isPit": false,
+        "isTwoWay": false,
+        "overall": 103,
+        "sample": 194,
+        "confidence": {
+          "hit": 68,
+          "power": 62,
+          "speed": 76
+        },
+        "delta": 3,
+        "prevOverall": 88,
+        "ipPerGs": null,
+        "deltas": {
+          "season": 15,
+          "d7": 3,
+          "d15": 4,
+          "d30": 6,
+          "d60": 14,
+          "d90": null
+        }
+      },
+      {
         "id": "06dn4",
         "name": "Brock Rodden",
         "rank": 2379,
@@ -13069,6 +13095,32 @@
         }
       },
       {
+        "id": "072jh",
+        "name": "Samil Serrano",
+        "rank": 1838,
+        "positions": "CF,OF",
+        "isPit": false,
+        "isTwoWay": false,
+        "overall": 104,
+        "sample": 157,
+        "confidence": {
+          "hit": 64,
+          "power": 57,
+          "speed": 72
+        },
+        "delta": 2,
+        "prevOverall": 88,
+        "ipPerGs": null,
+        "deltas": {
+          "season": 16,
+          "d7": 2,
+          "d15": 3,
+          "d30": 5,
+          "d60": 11,
+          "d90": null
+        }
+      },
+      {
         "id": "06tzu",
         "name": "Junior Suriel",
         "rank": 2393,
@@ -13092,32 +13144,6 @@
           "d30": 2,
           "d60": 3,
           "d90": 4
-        }
-      },
-      {
-        "id": "072ds",
-        "name": "Santiago Solarte",
-        "rank": 1997,
-        "positions": "SS,INF",
-        "isPit": false,
-        "isTwoWay": false,
-        "overall": 103,
-        "sample": 194,
-        "confidence": {
-          "hit": 68,
-          "power": 62,
-          "speed": 76
-        },
-        "delta": 2,
-        "prevOverall": 88,
-        "ipPerGs": null,
-        "deltas": {
-          "season": 15,
-          "d7": 2,
-          "d15": 3,
-          "d30": 5,
-          "d60": 13,
-          "d90": null
         }
       },
       {
@@ -13199,6 +13225,32 @@
         }
       },
       {
+        "id": "06krv",
+        "name": "Jose Alpuria",
+        "rank": 2751,
+        "positions": "CF,RF,OF",
+        "isPit": false,
+        "isTwoWay": false,
+        "overall": 100,
+        "sample": 1158,
+        "confidence": {
+          "hit": 93,
+          "power": 91,
+          "speed": 95
+        },
+        "delta": 2,
+        "prevOverall": 97,
+        "ipPerGs": null,
+        "deltas": {
+          "season": 3,
+          "d7": 2,
+          "d15": 1,
+          "d30": 1,
+          "d60": 3,
+          "d90": 5
+        }
+      },
+      {
         "id": "06cgg",
         "name": "Billy Amick",
         "rank": 1814,
@@ -13248,6 +13300,32 @@
           "d30": 5,
           "d60": 5,
           "d90": 7
+        }
+      },
+      {
+        "id": "072h7",
+        "name": "Jeyson Horton",
+        "rank": 3919,
+        "positions": "SS,INF",
+        "isPit": false,
+        "isTwoWay": false,
+        "overall": 97,
+        "sample": 167,
+        "confidence": {
+          "hit": 65,
+          "power": 58,
+          "speed": 74
+        },
+        "delta": 2,
+        "prevOverall": 88,
+        "ipPerGs": null,
+        "deltas": {
+          "season": 9,
+          "d7": 2,
+          "d15": 2,
+          "d30": 2,
+          "d60": 8,
+          "d90": null
         }
       },
       {
@@ -13979,32 +14057,6 @@
         }
       },
       {
-        "id": "072jh",
-        "name": "Samil Serrano",
-        "rank": 1838,
-        "positions": "CF,OF",
-        "isPit": false,
-        "isTwoWay": false,
-        "overall": 104,
-        "sample": 157,
-        "confidence": {
-          "hit": 64,
-          "power": 57,
-          "speed": 72
-        },
-        "delta": 1,
-        "prevOverall": 88,
-        "ipPerGs": null,
-        "deltas": {
-          "season": 16,
-          "d7": 1,
-          "d15": 2,
-          "d30": 4,
-          "d60": 10,
-          "d90": null
-        }
-      },
-      {
         "id": "05yci",
         "name": "Tony Blanco Jr.",
         "rank": 822,
@@ -14028,58 +14080,6 @@
           "d30": 2,
           "d60": 5,
           "d90": 6
-        }
-      },
-      {
-        "id": "06k7w",
-        "name": "Andreimi Antunez",
-        "rank": 2004,
-        "positions": "SS,INF",
-        "isPit": false,
-        "isTwoWay": false,
-        "overall": 104,
-        "sample": 478,
-        "confidence": {
-          "hit": 84,
-          "power": 80,
-          "speed": 89
-        },
-        "delta": 1,
-        "prevOverall": 100,
-        "ipPerGs": null,
-        "deltas": {
-          "season": 4,
-          "d7": 1,
-          "d15": 2,
-          "d30": 3,
-          "d60": 5,
-          "d90": 6
-        }
-      },
-      {
-        "id": "06mhy",
-        "name": "Brandon Compton",
-        "rank": 1032,
-        "positions": "LF,OF",
-        "isPit": false,
-        "isTwoWay": false,
-        "overall": 104,
-        "sample": 526,
-        "confidence": {
-          "hit": 85,
-          "power": 81,
-          "speed": 90
-        },
-        "delta": 1,
-        "prevOverall": 101,
-        "ipPerGs": null,
-        "deltas": {
-          "season": 3,
-          "d7": 1,
-          "d15": 2,
-          "d30": 4,
-          "d60": 9,
-          "d90": 8
         }
       }
     ],

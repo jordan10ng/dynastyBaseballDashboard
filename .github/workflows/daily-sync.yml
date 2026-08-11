@@ -51,10 +51,10 @@ jobs:
           DATA_BASE: ${{ github.workspace }}/data
         run: python3 scripts/build-regression.py
 
-      - name: Build peak3 + worthy-career calibration
+      - name: Build peak3 + worthy-career calibration + fantasy-stat peaks
         env:
           DATA_BASE: ${{ github.workspace }}/data
-        run: python3 scripts/build-peak-tools.py && python3 scripts/build-peak-regression.py && python3 scripts/build-worthy-calibration.py
+        run: python3 scripts/build-peak-tools.py && python3 scripts/build-peak-regression.py && python3 scripts/build-worthy-calibration.py && python3 scripts/build-fantasy-peak.py
 
       - name: Build scores + hot sheet
         env:
