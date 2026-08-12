@@ -1,7 +1,7 @@
 const fs   = require('fs');
 const path = require('path');
 const os   = require('os');
-const { scoreMilbToolRaw, scoreMilbTool, blendCareer, starterFactor } = require('../lib/score-tools');
+const { scoreMilbToolRaw, scoreMilbTool, blendCareer, starterFactor, STARTER_CEIL_IPG } = require('../lib/score-tools');
 
 const BASE          = process.env.DATA_BASE || path.join(os.homedir(), 'Desktop/fantasy-baseball/data');
 const PLAYERS_PATH  = path.join(BASE, 'players.json');
@@ -218,6 +218,125 @@ function xbhRateZAaa(mlbamId) {
   return wsum > 0 ? zsum / wsum : 0;
 }
 function sigmoid(x) { return 1 / (1 + Math.exp(-x)); }
+
+// ── Archetype tags — descriptive profile label from the same career_blend tool grades
+// already shown on the drawer. Bands: ≤92 below avg, 93-107 avg, 108-122 plus, 123+
+// plus-plus (half-SD steps off POOL_STDEV=15, matches the classic 20-80 scouting-scale
+// 45/55/65 breakpoints). Additive display only — never read by dynasty_score/model-rank.
+function archetypeBand(v) {
+  if (v == null) return null;
+  if (v <= 92) return 'below';
+  if (v <= 107) return 'avg';
+  if (v <= 122) return 'plus';
+  return 'plusplus';
+}
+
+const HITTER_CHASSIS = { // key = `${powerBand}|${speedBand}`
+  'below|below': 'Org Depth Bat', 'below|avg': 'Contact-Only Bat', 'below|plus': 'Speedster', 'below|plusplus': 'Burner',
+  'avg|below': 'Fringe Bat', 'avg|avg': 'Average Profile', 'avg|plus': 'Table-Setter', 'avg|plusplus': 'Speed-First Table-Setter',
+  'plus|below': 'Masher', 'plus|avg': 'Power Bat', 'plus|plus': 'Power-Speed Combo', 'plus|plusplus': 'Dynamic Threat',
+  'plusplus|below': 'Slugger', 'plusplus|avg': 'Big Bopper', 'plusplus|plus': 'Power-Speed Masher', 'plusplus|plusplus': '40/40 Threat',
+};
+const PITCHER_CHASSIS = { // key = `${stuffBand}|${controlBand}`
+  'below|below': 'Org Filler Arm', 'below|avg': 'Innings Eater', 'below|plus': 'Command Artist', 'below|plusplus': 'Precision Arm',
+  'avg|below': 'Effectively Wild', 'avg|avg': 'Bag of 50s', 'avg|plus': 'Strike-Thrower', 'avg|plusplus': 'Command-First Arm',
+  'plus|below': 'Power Arm', 'plus|avg': 'Stuff-First Arm', 'plus|plus': 'Power Strike-Thrower', 'plus|plusplus': 'Frontline Weapon',
+  'plusplus|below': 'Max-Effort Flamethrower', 'plusplus|avg': 'Flamethrower', 'plusplus|plus': 'Power-Command Arm', 'plusplus|plusplus': 'Ace Stuff',
+};
+// Tier bands for SP/RP role labels only (chassis bands above stay 4-way) — splits the
+// Plus band in two at 116, the boundary almost used as the Plus-Plus cutoff before the
+// population check backed it off to 123. Gives Skubal-tier arms (good, not 123+ "ace"
+// raw) somewhere to land other than the soft "Mid-Rotation" bucket.
+function tierBand(v) {
+  if (v == null) return null;
+  if (v <= 92) return 'below';
+  if (v <= 107) return 'avg';
+  if (v <= 115) return 'plus_lo';
+  if (v <= 122) return 'plus_hi';
+  return 'plusplus';
+}
+const SP_TIER = { plusplus: 'Ace', plus_hi: 'Top-of-Rotation', plus_lo: 'Mid-Rotation', avg: 'Back-End Starter', below: 'Depth Starter' };
+const RP_TIER = { plusplus: 'High-Leverage', plus_hi: 'Elite Setup', plus_lo: 'Setup/Late-Inning', avg: 'Middle Relief', below: 'Up-and-Down' };
+
+function hitterArchetype(hit, power, speed) {
+  const hBand = archetypeBand(hit), pBand = archetypeBand(power), sBand = archetypeBand(speed);
+  if (hBand == null || pBand == null || sBand == null) return null;
+  const chassis = HITTER_CHASSIS[`${pBand}|${sBand}`];
+  if (hBand === 'avg' && pBand === 'avg' && sBand === 'avg') return 'Bag of 50s';
+  // Neither secondary tool stands out (avg-or-below) — the archetype is the hit tool
+  // itself, not a chassis name that presumes nothing stands out (e.g. Arraez: plus hit,
+  // merely-average power/speed shouldn't read as "Complete Average Profile").
+  const noSecondaryStandout = pBand !== 'plus' && pBand !== 'plusplus' && sBand !== 'plus' && sBand !== 'plusplus';
+  if (noSecondaryStandout) {
+    if (hBand === 'plus') return 'Pure Hitter';
+    if (hBand === 'plusplus') return 'Hit-Tool Savant';
+    return chassis;
+  }
+  if (hBand === 'plusplus' && pBand === 'plusplus' && sBand === 'plusplus') return '5-Tool Superstar';
+  if (hBand === 'plus') return `Complete ${chassis}`;
+  if (hBand === 'plusplus') return `Elite ${chassis}`;
+  return chassis; // below/avg hit -> bare chassis name, hit isn't the story
+}
+
+function pitcherRole(ipg, positions) {
+  if (ipg != null) return ipg >= STARTER_CEIL_IPG ? 'SP' : 'RP';
+  const pos = (positions || '').split(',').map(s => s.trim());
+  if (pos.includes('RP')) return 'RP';
+  return 'SP'; // default fallback (incl. SP-tagged or unlabeled prospects)
+}
+
+function pitcherArchetype(stuff, control, overall, role) {
+  const stBand = archetypeBand(stuff), ctBand = archetypeBand(control), ovTier = tierBand(overall);
+  if (stBand == null || ctBand == null || ovTier == null) return null;
+  const chassis = PITCHER_CHASSIS[`${stBand}|${ctBand}`];
+  const tier = (role === 'SP' ? SP_TIER : RP_TIER)[ovTier];
+  return `${tier} ${chassis}`;
+}
+
+// Hit-tool approach qualifier (Arraez vs. Schwarber): splits Hit+ into its contact half
+// (avg + k_pct) vs. discipline half (bb_pct) and flags a wide gap between them. Only
+// available for graduated hitters with real MLB _z data (mlb-tools.json) — MiLB-regression
+// projections predict the composite Hit+ directly, not the avg/k_pct/bb_pct sub-components,
+// so prospects get no tag rather than a noisy one.
+function hitApproach(mlbToolsEntry) {
+  const z = mlbToolsEntry?.type === 'two-way' ? mlbToolsEntry._z_hit : mlbToolsEntry?._z;
+  if (!z || z.avg == null || z.k_pct == null || z.bb_pct == null) return null;
+  const toPlus = (zz) => 100 + zz * 15;
+  const contact = (toPlus(z.avg) + toPlus(z.k_pct)) / 2;
+  const discipline = toPlus(z.bb_pct);
+  const gap = discipline - contact;
+  if (gap >= 12) return 'Patient';
+  if (gap <= -12) return 'Pure-Contact';
+  return null;
+}
+
+// Single entry point used at both career_blend construction sites.
+function attachArchetype(cb, { ipg, positions, mlbToolsEntry }) {
+  if (!cb) return {};
+  if (cb.type === 'hitter') {
+    return {
+      ...(hitterArchetype(cb.hit, cb.power, cb.speed) != null ? { archetype: hitterArchetype(cb.hit, cb.power, cb.speed) } : {}),
+      ...(hitApproach(mlbToolsEntry) != null ? { hit_approach: hitApproach(mlbToolsEntry) } : {}),
+    };
+  }
+  if (cb.type === 'pitcher') {
+    const role = pitcherRole(ipg, positions);
+    const arch = pitcherArchetype(cb.stuff, cb.control, cb.overall, role);
+    return arch != null ? { archetype: arch } : {};
+  }
+  if (cb.type === 'two-way') {
+    const role = pitcherRole(ipg, positions);
+    const batArch = cb.hit != null ? hitterArchetype(cb.hit, cb.power, cb.speed) : null;
+    const pitArch = cb.stuff != null ? pitcherArchetype(cb.stuff, cb.control, cb.pitch_overall, role) : null;
+    const archetype = [batArch, pitArch].filter(Boolean).join(' / ') || null;
+    const approach = cb.hit != null ? hitApproach(mlbToolsEntry) : null;
+    return {
+      ...(archetype != null ? { archetype } : {}),
+      ...(approach != null ? { hit_approach: approach } : {}),
+    };
+  }
+  return {};
+}
 
 // Actual (realized) peak/worthy composite for graduated players, from peak-tools.json.
 // Returns the two sides separately (not pre-blended) so the caller can apply the
@@ -669,12 +788,11 @@ async function run() {
     }
 
     // Canonical career-grade blend — single source of truth for row + drawer tile + model-rank.
+    const cbMlbToolsEntry = mlbTools[String(updatedPlayers[id].mlbam_id)] ?? null;
+    const cbBase = blendCareer(updatedPlayers[id].model_scores, cbMlbToolsEntry, { ipg: careerIPG });
     updatedPlayers[id].career_blend = {
-      ...blendCareer(
-        updatedPlayers[id].model_scores,
-        mlbTools[String(updatedPlayers[id].mlbam_id)] ?? null,
-        { ipg: careerIPG }
-      ),
+      ...cbBase,
+      ...attachArchetype(cbBase, { ipg: careerIPG, positions: updatedPlayers[id].positions, mlbToolsEntry: cbMlbToolsEntry }),
       ...(peak3 != null ? { peak3 } : {}),
       ...(worthyPct != null ? { worthy_pct: worthyPct } : {}),
       ...(worthyActual != null ? { worthy_actual: worthyActual } : {}),
@@ -730,8 +848,10 @@ async function run() {
     const { pitchOverall, hitOverall } = peakActualComposite(pt);
     const peak3 = peakComposite(pitchOverall, hitOverall, careerIPG);
     const worthyActual = peakActualWorthy(pt);
+    const cbBase = blendCareer(null, mlbEntry, { ipg: careerIPG });
     updatedPlayers[id].career_blend = {
-      ...blendCareer(null, mlbEntry, { ipg: careerIPG }),
+      ...cbBase,
+      ...attachArchetype(cbBase, { ipg: careerIPG, positions: player.positions, mlbToolsEntry: mlbEntry }),
       ...(peak3 != null ? { peak3 } : {}),
       ...(worthyActual != null ? { worthy_actual: worthyActual } : {}),
     };

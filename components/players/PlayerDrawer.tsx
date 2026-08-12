@@ -1003,9 +1003,18 @@ export function PlayerDrawer({ player, onClose, globalOwnership, minorsIds, mlbT
       </div>
     )
   })()}
+  {tile.label==='HIT+'&&toolGrades?.hit_approach&&(
+    <div style={{fontSize:'0.6rem',fontFamily:'var(--font-display)',color:'rgba(150,150,150,0.7)',marginTop:'0.3rem'}} title="Plate-approach qualifier: contact half (AVG+K%) vs. discipline half (BB%) of the Hit+ grade diverge notably">{toolGrades.hit_approach}</div>
+  )}
 </div>))}</div>)}
-            {toolGrades&&(toolGrades.peak3!=null||toolGrades.worthy_pct!=null||toolGrades.worthy_actual!=null)&&(
+            {toolGrades&&(toolGrades.archetype!=null||toolGrades.peak3!=null||toolGrades.worthy_pct!=null||toolGrades.worthy_actual!=null)&&(
               <div style={{display:'flex',gap:'1.5rem',flexWrap:'wrap'}}>
+                {toolGrades.archetype!=null&&(
+                  <div>
+                    <div style={{fontSize:'0.62rem',fontFamily:'var(--font-display)',fontWeight:700,letterSpacing:'0.08em',color:'var(--muted)',textTransform:'uppercase',marginBottom:'2px'}} title="Descriptive profile from the tool grades above (Below Avg ≤92 / Average 93-107 / Plus 108-122 / Plus-Plus 123+)">Archetype</div>
+                    <div style={{fontSize:'0.78rem',color:'var(--text)',fontWeight:700}}>{toolGrades.archetype}</div>
+                  </div>
+                )}
                 {toolGrades.peak3!=null&&(
                   <div>
                     <div style={{fontSize:'0.62rem',fontFamily:'var(--font-display)',fontWeight:700,letterSpacing:'0.08em',color:'var(--muted)',textTransform:'uppercase',marginBottom:'2px'}} title="Best rolling 3-year MLB window (actual for graduated players, projected from MiLB record otherwise)">Peak (3yr)</div>
