@@ -18,6 +18,19 @@ function normalize(s: string): string {
     .trim()
 }
 
+// Ranking sources mix MLB's standard 3-letter codes with our internal short codes for the
+// same team (kcr/kc, sdp/sd, sfg/sf, tbr/tb, wsn/wsh, cws/chw, az/ari, oak/ath) -- exact
+// string equality on the raw team field missed all of these, which silently zeroed out the
+// team-match signal in matchPlayer() for a large chunk of rows and let genuine ties (that
+// should have resolved via team) fall through to "ambiguous, drop the row" instead.
+const TEAM_ALIASES: Record<string, string> = {
+  kcr: 'kc', sdp: 'sd', sfg: 'sf', tbr: 'tb', wsn: 'wsh', cws: 'chw', az: 'ari', oak: 'ath',
+}
+function normalizeTeam(s: string): string {
+  const n = normalize(s)
+  return TEAM_ALIASES[n] ?? n
+}
+
 function daysOld(dateStr: string): number {
   return Math.floor((Date.now() - new Date(dateStr).getTime()) / (1000 * 60 * 60 * 24))
 }
@@ -55,6 +68,16 @@ function pruneOutliers(entries: RankEntry[]): RankEntry[] {
   return survivors
 }
 
+// Position sets, not substring containment — "RP,P" is not a substring of "SP,RP" even
+// though they share "RP", which silently broke disambiguation whenever a source's position
+// format didn't exactly match ours (the Mason Miller case: the real closer's most recent
+// rows used "RP,P" against our "RP", scoring 0 instead of the intended match).
+function positionOverlap(rowPos: string, playerPos: string): boolean {
+  const rowSet = new Set(normalize(rowPos).split(',').map(s => s.trim()).filter(Boolean))
+  const playerSet = normalize(playerPos).split(',').map(s => s.trim()).filter(Boolean)
+  return playerSet.some(p => rowSet.has(p))
+}
+
 function matchPlayer(
   row: { name: string; position: string; team: string },
   nameMap: Record<string, string[]>,
@@ -65,16 +88,20 @@ function matchPlayer(
   if (!candidates || candidates.length === 0) return null
   if (candidates.length === 1) return candidates[0]
   const pos = normalize(row.position)
-  const team = normalize(row.team)
+  const team = normalizeTeam(row.team)
   const scored = candidates.map(id => {
     const p = players[id]
     let score = 0
-    if (pos && normalize(p.positions ?? '').includes(pos)) score++
-    if (team && normalize(p.team ?? '') === team) score++
+    if (pos && positionOverlap(row.position, p.positions ?? '')) score++
+    if (team && normalizeTeam(p.team ?? '') === team) score++
     return { id, score }
   })
   const best = scored.sort((a, b) => b.score - a.score)
   if (best[0].score === 0 && best.length > 1) return null
+  // A genuine, non-zero-score tie between distinct players is still ambiguous, not "pick
+  // whichever happened to be first" — that let a tied row silently favor one real person
+  // over another based on players.json's iteration order.
+  if (best.length > 1 && best[1].score === best[0].score) return null
   return best[0].id
 }
 
@@ -87,7 +114,12 @@ function resolveIds(
   if (id) return [id]
   const key = normalize(row.name)
   const candidates = nameMap[key]
-  return candidates && candidates.length > 0 ? candidates : []
+  // Multiple same-name candidates that matchPlayer couldn't disambiguate are genuinely
+  // different real people (verified case: two distinct real "Mason Miller"s) -- crediting
+  // the row to everyone let one player's real rank data bleed onto an unrelated namesake.
+  // Only single-candidate lookups (nothing to disambiguate) fall through here now.
+  if (candidates && candidates.length === 1) return candidates
+  return []
 }
 
 export async function POST() {
@@ -148,11 +180,23 @@ export async function POST() {
 
     // --- OVERALL ---
     // Pre-scan: per-source PID sets and per-source penalties for absence
+    // Penalty floor is the LARGEST pool size seen across all overall sources, not each
+    // source's own maxRank -- a Top-500-only list not including someone doesn't mean
+    // "they'd be #501," it means the list never evaluated past #500 at all. Scoring that
+    // absence as merely "#501" made players who are absent from small/truncated lists but
+    // present (even mediocrely) on a large, comprehensive list look better than sources
+    // actually think of them -- the truncated list's "penalty" was gentler than a real rank
+    // from the big list, effectively rewarding not being evaluated over being evaluated
+    // and ranked modestly (surfaced by Yohanfer Santana: absent from two ~500-player Top
+    // lists, rank ~523 on the ~1950-player comprehensive one -- his blended rank landed
+    // near 510ish, better than his one real rank, purely because the truncated lists'
+    // penalties were smaller than 523).
+    const globalMaxRank = Math.max(...overallSources.map(s => Math.max(...s.players.map((p: any) => p.rank ?? 0))))
     const sourcePidSets: Set<string>[] = []
     const sourcePenalties: number[] = []
     for (const source of overallSources) {
       const maxRank = Math.max(...source.players.map((p: any) => p.rank ?? 0))
-      sourcePenalties.push(maxRank + 1)
+      sourcePenalties.push(Math.max(maxRank, globalMaxRank) + 1)
       const pids = new Set<string>()
       for (const row of source.players) {
         const ids = resolveIds(row, nameMap, players)

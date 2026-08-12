@@ -48,10 +48,21 @@ const COMPOSITE_WEIGHTS = {
 const K            = 15;
 const CEILING_PCT  = 0.90;
 const FLOOR_PCT    = 0.25;
+// mlb-tools.json/peak-tools.json's own qualifying floor (100 PA / 50 IP) is just "has any
+// real grade at all" -- nowhere near enough sample to trust as a comp's whole story. Packy
+// Naughton (60 IP, a cup of coffee) surfaced as a comp off that bare minimum. Roughly a
+// half-season+ before a real player's real career counts as a legitimate comp candidate.
+const MIN_COMP_SAMPLE = { hitter: 300, pitcher: 100 };
 // Ceiling vector blends raw (unshrunk, upside) with current (shrunk, expected) tool
 // grades rather than using raw alone — pure raw ran too hot. Still upside-leaning, just
 // not maxed out. Tune this if ceilings still read high/low after the next check.
 const CEILING_RAW_WEIGHT = 0.65;
+// Same overfitting lesson, pool side: a real player's peak (best-ever 3yr window) is
+// itself a small, noisy sample -- using it 100% pure let a merely-good career with one
+// fluky great stretch outrank a real, sustained star as a match, diluting who counts as
+// "elite enough" for a top prospect's ceiling. Blending back toward career-average tempers
+// that the same way CEILING_RAW_WEIGHT tempers the prospect's own raw projection.
+const POOL_PEAK_WEIGHT = 0.5;
 // Soft handedness preference — added to distance on mismatch, not a pool filter. Sized so
 // a genuinely better tool match still wins ("accept non-matches when much better"), but
 // nudges a close tie toward the same-handed comp. Pitchers weighted higher than hitters:
@@ -148,17 +159,25 @@ const hitterPool = [];
 const spPool = [];
 const rpPool = [];
 
+function poolBlend(peakVal, currentVal) {
+  if (peakVal == null) return currentVal;
+  if (currentVal == null) return peakVal;
+  return peakVal * POOL_PEAK_WEIGHT + currentVal * (1 - POOL_PEAK_WEIGHT);
+}
+
 for (const [id, p] of Object.entries(players)) {
   const cb = p.career_blend;
   if (!cb || !((cb._mlbSample || 0) > 0)) continue; // graduated (real MLB tool grade) only
   const positions = parsePositions(p.positions);
   const pt = p.mlbam_id ? peakTools[String(p.mlbam_id)] : null;
   if (cb.type === 'hitter') {
-    const hit = pt?.hit ?? cb.hit, power = pt?.power ?? cb.power, speed = pt?.speed ?? cb.speed;
+    if ((cb._mlbSample || 0) < MIN_COMP_SAMPLE.hitter) continue;
+    const hit = poolBlend(pt?.hit, cb.hit), power = poolBlend(pt?.power, cb.power), speed = poolBlend(pt?.speed, cb.speed);
     if (hit == null || power == null || speed == null) continue;
     hitterPool.push({ id, name: p.name, positions, bats: p.bats ?? null, hit, power, speed, peak3: cb.peak3, overall: cb.overall });
   } else if (cb.type === 'pitcher') {
-    const stuff = pt?.stuff ?? cb.stuff, control = pt?.control ?? cb.control;
+    if ((cb._mlbSample || 0) < MIN_COMP_SAMPLE.pitcher) continue;
+    const stuff = poolBlend(pt?.stuff, cb.stuff), control = poolBlend(pt?.control, cb.control);
     if (stuff == null || control == null) continue;
     const entry = { id, name: p.name, positions, throws: p.throws ?? null, stuff, control, peak3: cb.peak3, overall: cb.overall };
     (cb.role === 'RP' ? rpPool : spPool).push(entry);
