@@ -322,7 +322,7 @@ function attachArchetype(cb, { ipg, positions, mlbToolsEntry }) {
   if (cb.type === 'pitcher') {
     const role = pitcherRole(ipg, positions);
     const arch = pitcherArchetype(cb.stuff, cb.control, cb.overall, role);
-    return arch != null ? { archetype: arch } : {};
+    return { role, ...(arch != null ? { archetype: arch } : {}) };
   }
   if (cb.type === 'two-way') {
     const role = pitcherRole(ipg, positions);
@@ -331,6 +331,7 @@ function attachArchetype(cb, { ipg, positions, mlbToolsEntry }) {
     const archetype = [batArch, pitArch].filter(Boolean).join(' / ') || null;
     const approach = cb.hit != null ? hitApproach(mlbToolsEntry) : null;
     return {
+      role,
       ...(archetype != null ? { archetype } : {}),
       ...(approach != null ? { hit_approach: approach } : {}),
     };

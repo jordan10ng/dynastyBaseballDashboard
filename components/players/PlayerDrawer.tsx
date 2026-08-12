@@ -1007,7 +1007,7 @@ export function PlayerDrawer({ player, onClose, globalOwnership, minorsIds, mlbT
     <div style={{fontSize:'0.6rem',fontFamily:'var(--font-display)',color:'rgba(150,150,150,0.7)',marginTop:'0.3rem'}} title="Plate-approach qualifier: contact half (AVG+K%) vs. discipline half (BB%) of the Hit+ grade diverge notably">{toolGrades.hit_approach}</div>
   )}
 </div>))}</div>)}
-            {toolGrades&&(toolGrades.archetype!=null||toolGrades.peak3!=null||toolGrades.worthy_pct!=null||toolGrades.worthy_actual!=null)&&(
+            {toolGrades&&(toolGrades.archetype!=null||toolGrades.peak3!=null||toolGrades.worthy_pct!=null||toolGrades.worthy_actual!=null||toolGrades.comp_ceiling!=null||toolGrades.comp_floor!=null)&&(
               <div style={{display:'flex',gap:'1.5rem',flexWrap:'wrap'}}>
                 {toolGrades.archetype!=null&&(
                   <div>
@@ -1031,6 +1031,18 @@ export function PlayerDrawer({ player, onClose, globalOwnership, minorsIds, mlbT
                   <div>
                     <div style={{fontSize:'0.62rem',fontFamily:'var(--font-display)',fontWeight:700,letterSpacing:'0.08em',color:'var(--muted)',textTransform:'uppercase',marginBottom:'2px'}} title="Realized: did this player's MLB career clear >=1500 PA / 300 IP at league-average or better">MLB Odds</div>
                     <div style={{fontSize:'0.78rem',color:toolGrades.worthy_actual===1?'#4ade80':'#f87171',fontWeight:700}}>{toolGrades.worthy_actual===1?'Yes':'No'}</div>
+                  </div>
+                )}
+                {toolGrades.comp_ceiling!=null&&(
+                  <div>
+                    <div style={{fontSize:'0.62rem',fontFamily:'var(--font-display)',fontWeight:700,letterSpacing:'0.08em',color:'var(--muted)',textTransform:'uppercase',marginBottom:'2px'}} title="Nearest real MLB comps by tool grade (same role, weighted by tool importance) — the one whose realized peak (3yr) sits closest to the 90th percentile of that comp pool">Ceiling Comp</div>
+                    <div style={{fontSize:'0.78rem',color:'#4ade80',fontWeight:700}}>{toolGrades.comp_ceiling.name}</div>
+                  </div>
+                )}
+                {toolGrades.comp_floor!=null&&(
+                  <div>
+                    <div style={{fontSize:'0.62rem',fontFamily:'var(--font-display)',fontWeight:700,letterSpacing:'0.08em',color:'var(--muted)',textTransform:'uppercase',marginBottom:'2px'}} title="Nearest real MLB comps by tool grade (same role, weighted by tool importance) — the one whose realized career overall sits closest to the 25th percentile of that comp pool">Floor Comp</div>
+                    <div style={{fontSize:'0.78rem',color:'#f87171',fontWeight:700}}>{toolGrades.comp_floor.name}</div>
                   </div>
                 )}
               </div>
