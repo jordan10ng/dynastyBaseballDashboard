@@ -62,7 +62,23 @@ const CEILING_RAW_WEIGHT = 0.65;
 // fluky great stretch outrank a real, sustained star as a match, diluting who counts as
 // "elite enough" for a top prospect's ceiling. Blending back toward career-average tempers
 // that the same way CEILING_RAW_WEIGHT tempers the prospect's own raw projection.
-const POOL_PEAK_WEIGHT = 0.5;
+//
+// Ceiling and floor use different weights, not the same blend both directions -- ceiling
+// asks "who could this become at their best" (peak-informed, stays high); floor asks "who
+// does this resemble in sustained, typical production" (should lean on career-average, not
+// peak). Sharing one weight let a real player's peak alone pull them into an elite
+// prospect's floor neighborhood even when their actual career-average profile looked
+// nothing like that prospect (Justin Verlander showing up as a floor comp on the strength
+// of his real ace-level peak, despite a diluted-by-longevity career average that a true
+// floor story should be judged on).
+const CEILING_POOL_PEAK_WEIGHT = 0.5;
+const FLOOR_POOL_PEAK_WEIGHT   = 0.2;
+// Floor-pool eligibility also excludes anyone whose own peak3 sits well above their own
+// overall -- mirrors the ceiling pool's peak3>overall requirement, inverted: a player who
+// had a genuinely big peak was never a "floor" story, no matter how a long decline phase
+// dragged their career average down (Verlander: peak3=127, overall=111, gap=16 -- his
+// career average is a real number, just not a fair floor comp for what the gap represents).
+const FLOOR_EXCLUDE_GAP = 15;
 // Soft handedness preference — added to distance on mismatch, not a pool filter. Sized so
 // a genuinely better tool match still wins ("accept non-matches when much better"), but
 // nudges a close tie toward the same-handed comp. Pitchers weighted higher than hitters:
@@ -155,34 +171,40 @@ function positionCompatible(prospectPositions, candidatePositions) {
 // the prospect-side _raw, which is a MiLB-regression prediction on a different scale).
 // peak3/overall stay as the outcome-target metrics (unchanged) — only the similarity basis
 // moves from career-average to peak.
-const hitterPool = [];
-const spPool = [];
-const rpPool = [];
-
-function poolBlend(peakVal, currentVal) {
+function poolBlend(peakVal, currentVal, peakWeight) {
   if (peakVal == null) return currentVal;
   if (currentVal == null) return peakVal;
-  return peakVal * POOL_PEAK_WEIGHT + currentVal * (1 - POOL_PEAK_WEIGHT);
+  return peakVal * peakWeight + currentVal * (1 - peakWeight);
 }
 
-for (const [id, p] of Object.entries(players)) {
-  const cb = p.career_blend;
-  if (!cb || !((cb._mlbSample || 0) > 0)) continue; // graduated (real MLB tool grade) only
-  const positions = parsePositions(p.positions);
-  const pt = p.mlbam_id ? peakTools[String(p.mlbam_id)] : null;
-  if (cb.type === 'hitter') {
-    if ((cb._mlbSample || 0) < MIN_COMP_SAMPLE.hitter) continue;
-    const hit = poolBlend(pt?.hit, cb.hit), power = poolBlend(pt?.power, cb.power), speed = poolBlend(pt?.speed, cb.speed);
-    if (hit == null || power == null || speed == null) continue;
-    hitterPool.push({ id, name: p.name, positions, bats: p.bats ?? null, hit, power, speed, peak3: cb.peak3, overall: cb.overall });
-  } else if (cb.type === 'pitcher') {
-    if ((cb._mlbSample || 0) < MIN_COMP_SAMPLE.pitcher) continue;
-    const stuff = poolBlend(pt?.stuff, cb.stuff), control = poolBlend(pt?.control, cb.control);
-    if (stuff == null || control == null) continue;
-    const entry = { id, name: p.name, positions, throws: p.throws ?? null, stuff, control, peak3: cb.peak3, overall: cb.overall };
-    (cb.role === 'RP' ? rpPool : spPool).push(entry);
+// excludeGap: floor-only. Skips any candidate whose own peak3 sits more than excludeGap
+// above their own overall -- see FLOOR_EXCLUDE_GAP comment above.
+function buildPools(peakWeight, excludeGap) {
+  const hitterPool = [], spPool = [], rpPool = [];
+  for (const [id, p] of Object.entries(players)) {
+    const cb = p.career_blend;
+    if (!cb || !((cb._mlbSample || 0) > 0)) continue; // graduated (real MLB tool grade) only
+    if (excludeGap != null && cb.peak3 != null && cb.overall != null && (cb.peak3 - cb.overall) > excludeGap) continue;
+    const positions = parsePositions(p.positions);
+    const pt = p.mlbam_id ? peakTools[String(p.mlbam_id)] : null;
+    if (cb.type === 'hitter') {
+      if ((cb._mlbSample || 0) < MIN_COMP_SAMPLE.hitter) continue;
+      const hit = poolBlend(pt?.hit, cb.hit, peakWeight), power = poolBlend(pt?.power, cb.power, peakWeight), speed = poolBlend(pt?.speed, cb.speed, peakWeight);
+      if (hit == null || power == null || speed == null) continue;
+      hitterPool.push({ id, name: p.name, positions, bats: p.bats ?? null, hit, power, speed, peak3: cb.peak3, overall: cb.overall });
+    } else if (cb.type === 'pitcher') {
+      if ((cb._mlbSample || 0) < MIN_COMP_SAMPLE.pitcher) continue;
+      const stuff = poolBlend(pt?.stuff, cb.stuff, peakWeight), control = poolBlend(pt?.control, cb.control, peakWeight);
+      if (stuff == null || control == null) continue;
+      const entry = { id, name: p.name, positions, throws: p.throws ?? null, stuff, control, peak3: cb.peak3, overall: cb.overall };
+      (cb.role === 'RP' ? rpPool : spPool).push(entry);
+    }
   }
+  return { hitterPool, spPool, rpPool };
 }
+
+const ceilingPools = buildPools(CEILING_POOL_PEAK_WEIGHT, null);
+const floorPools   = buildPools(FLOOR_POOL_PEAK_WEIGHT, FLOOR_EXCLUDE_GAP);
 
 function nearestNeighbors(candidateVec, pool, weights, handKey, handPenalty) {
   return pool
@@ -233,19 +255,21 @@ for (const p of Object.values(players)) {
   let ceiling = null, floor = null;
   if (cb.type === 'hitter' && cb.hit != null && cb.power != null && cb.speed != null) {
     const prospectPositions = parsePositions(p.positions);
-    const eligiblePool = hitterPool.filter(c => positionCompatible(prospectPositions, c.positions));
+    const eligibleCeilingPool = ceilingPools.hitterPool.filter(c => positionCompatible(prospectPositions, c.positions));
+    const eligibleFloorPool   = floorPools.hitterPool.filter(c => positionCompatible(prospectPositions, c.positions));
     const rawVec = { hit: cb._raw?.hit ?? cb.hit, power: cb._raw?.power ?? cb.power, speed: cb._raw?.speed ?? cb.speed };
     const shrunkVec = { hit: cb.hit, power: cb.power, speed: cb.speed };
     const bats = p.bats ?? null;
-    ceiling = pickCeiling({ ...blendVec(rawVec, shrunkVec, CEILING_RAW_WEIGHT), bats }, eligiblePool, COMPOSITE_WEIGHTS.hitter, 'bats', HANDEDNESS_PENALTY.hitter);
-    floor   = pickFloor({ ...shrunkVec, bats }, eligiblePool, COMPOSITE_WEIGHTS.hitter, 'bats', HANDEDNESS_PENALTY.hitter);
+    ceiling = pickCeiling({ ...blendVec(rawVec, shrunkVec, CEILING_RAW_WEIGHT), bats }, eligibleCeilingPool, COMPOSITE_WEIGHTS.hitter, 'bats', HANDEDNESS_PENALTY.hitter);
+    floor   = pickFloor({ ...shrunkVec, bats }, eligibleFloorPool, COMPOSITE_WEIGHTS.hitter, 'bats', HANDEDNESS_PENALTY.hitter);
   } else if (cb.type === 'pitcher' && cb.stuff != null && cb.control != null) {
-    const pool = cb.role === 'RP' ? rpPool : spPool;
+    const ceilingPool = cb.role === 'RP' ? ceilingPools.rpPool : ceilingPools.spPool;
+    const floorPool   = cb.role === 'RP' ? floorPools.rpPool   : floorPools.spPool;
     const rawVec = { stuff: cb._raw?.stuff ?? cb.stuff, control: cb._raw?.control ?? cb.control };
     const shrunkVec = { stuff: cb.stuff, control: cb.control };
     const throws = p.throws ?? null;
-    ceiling = pickCeiling({ ...blendVec(rawVec, shrunkVec, CEILING_RAW_WEIGHT), throws }, pool, COMPOSITE_WEIGHTS.pitcher, 'throws', HANDEDNESS_PENALTY.pitcher);
-    floor   = pickFloor({ ...shrunkVec, throws }, pool, COMPOSITE_WEIGHTS.pitcher, 'throws', HANDEDNESS_PENALTY.pitcher);
+    ceiling = pickCeiling({ ...blendVec(rawVec, shrunkVec, CEILING_RAW_WEIGHT), throws }, ceilingPool, COMPOSITE_WEIGHTS.pitcher, 'throws', HANDEDNESS_PENALTY.pitcher);
+    floor   = pickFloor({ ...shrunkVec, throws }, floorPool, COMPOSITE_WEIGHTS.pitcher, 'throws', HANDEDNESS_PENALTY.pitcher);
   }
   if (ceiling || floor) {
     p.career_blend = {
@@ -258,5 +282,6 @@ for (const p of Object.values(players)) {
 }
 
 fs.writeFileSync(PLAYERS_PATH, JSON.stringify(players, null, 2));
-console.log(`Comp pool: ${hitterPool.length} hitters, ${spPool.length} SP, ${rpPool.length} RP`);
+console.log(`Ceiling pool: ${ceilingPools.hitterPool.length} hitters, ${ceilingPools.spPool.length} SP, ${ceilingPools.rpPool.length} RP`);
+console.log(`Floor pool:   ${floorPools.hitterPool.length} hitters, ${floorPools.spPool.length} SP, ${floorPools.rpPool.length} RP`);
 console.log(`Tagged ${tagged} prospects with ceiling/floor comps`);
