@@ -48,6 +48,15 @@ const FLOOR_PCT    = 0.25;
 // grades rather than using raw alone — pure raw ran too hot. Still upside-leaning, just
 // not maxed out. Tune this if ceilings still read high/low after the next check.
 const CEILING_RAW_WEIGHT = 0.65;
+// Soft handedness preference — added to distance on mismatch, not a pool filter. Sized so
+// a genuinely better tool match still wins ("accept non-matches when much better"), but
+// nudges a close tie toward the same-handed comp. Pitchers weighted higher than hitters:
+// arm side changes real outcomes more (batter unfamiliarity with the rarer hand, role/
+// usage patterns) than bat side does. Switch-hitters aren't "compatible with either side"
+// — their aggregate line already carries a built-in platoon advantage a same-handed
+// player doesn't get, so S only matches S (plain equality already gives this for free —
+// no special-case needed beyond comparing the field).
+const HANDEDNESS_PENALTY = { hitter: 3, pitcher: 5 };
 
 function blendVec(rawVec, shrunkVec, rawWeight) {
   const out = {};
@@ -58,13 +67,15 @@ function blendVec(rawVec, shrunkVec, rawWeight) {
   return out;
 }
 
-function distance(weights, a, b) {
+function distance(weights, a, b, handKey, handPenalty) {
   let sumSq = 0;
   for (const [tool, w] of Object.entries(weights)) {
     if (a[tool] == null || b[tool] == null) return Infinity;
     sumSq += w * (a[tool] - b[tool]) ** 2;
   }
-  return Math.sqrt(sumSq);
+  let d = Math.sqrt(sumSq);
+  if (handKey && handPenalty && a[handKey] && b[handKey] && a[handKey] !== b[handKey]) d += handPenalty;
+  return d;
 }
 
 function percentileValue(sortedVals, pct) {
@@ -126,17 +137,17 @@ for (const [id, p] of Object.entries(players)) {
   const positions = parsePositions(p.positions);
   if (cb.type === 'hitter') {
     if (cb.hit == null || cb.power == null || cb.speed == null) continue;
-    hitterPool.push({ id, name: p.name, positions, hit: cb.hit, power: cb.power, speed: cb.speed, peak3: cb.peak3, overall: cb.overall });
+    hitterPool.push({ id, name: p.name, positions, bats: p.bats ?? null, hit: cb.hit, power: cb.power, speed: cb.speed, peak3: cb.peak3, overall: cb.overall });
   } else if (cb.type === 'pitcher') {
     if (cb.stuff == null || cb.control == null) continue;
-    const entry = { id, name: p.name, positions, stuff: cb.stuff, control: cb.control, peak3: cb.peak3, overall: cb.overall };
+    const entry = { id, name: p.name, positions, throws: p.throws ?? null, stuff: cb.stuff, control: cb.control, peak3: cb.peak3, overall: cb.overall };
     (cb.role === 'RP' ? rpPool : spPool).push(entry);
   }
 }
 
-function nearestNeighbors(candidateVec, pool, weights) {
+function nearestNeighbors(candidateVec, pool, weights, handKey, handPenalty) {
   return pool
-    .map(p => ({ ...p, dist: distance(weights, candidateVec, p) }))
+    .map(p => ({ ...p, dist: distance(weights, candidateVec, p, handKey, handPenalty) }))
     .filter(p => isFinite(p.dist))
     .sort((a, b) => a.dist - b.dist)
     .slice(0, K);
@@ -156,16 +167,16 @@ function nearestNeighbors(candidateVec, pool, weights) {
 // (large _sample alongside a real MLB one) can have peak3 BELOW their own overall — their
 // career never validated the grade with an actual peak, so they're a floor story wearing
 // a ceiling label (surfaced by Luis Matos/Evan Carter showing up for Jesus Made).
-function pickCeiling(ceilingVec, pool, weights) {
+function pickCeiling(ceilingVec, pool, weights, handKey, handPenalty) {
   const provenPeak = pool.filter(p => p.peak3 != null && p.overall != null && p.peak3 > p.overall);
-  const neighbors = nearestNeighbors(ceilingVec, provenPeak, weights);
+  const neighbors = nearestNeighbors(ceilingVec, provenPeak, weights, handKey, handPenalty);
   const byPeak3 = neighbors.filter(p => p.peak3 != null).sort((a, b) => a.peak3 - b.peak3);
   const target = percentileValue(byPeak3.map(p => p.peak3), CEILING_PCT);
   const pick = target != null ? closestTo(byPeak3, 'peak3', target) : null;
   return pick ? { name: pick.name, peak3: pick.peak3 } : null;
 }
-function pickFloor(shrunkVec, pool, weights) {
-  const neighbors = nearestNeighbors(shrunkVec, pool, weights);
+function pickFloor(shrunkVec, pool, weights, handKey, handPenalty) {
+  const neighbors = nearestNeighbors(shrunkVec, pool, weights, handKey, handPenalty);
   const byOverall = neighbors.filter(p => p.overall != null).sort((a, b) => a.overall - b.overall);
   const target = percentileValue(byOverall.map(p => p.overall), FLOOR_PCT);
   const pick = target != null ? closestTo(byOverall, 'overall', target) : null;
@@ -186,14 +197,16 @@ for (const p of Object.values(players)) {
     const eligiblePool = hitterPool.filter(c => positionCompatible(prospectPositions, c.positions));
     const rawVec = { hit: cb._raw?.hit ?? cb.hit, power: cb._raw?.power ?? cb.power, speed: cb._raw?.speed ?? cb.speed };
     const shrunkVec = { hit: cb.hit, power: cb.power, speed: cb.speed };
-    ceiling = pickCeiling(blendVec(rawVec, shrunkVec, CEILING_RAW_WEIGHT), eligiblePool, COMPOSITE_WEIGHTS.hitter);
-    floor   = pickFloor(shrunkVec, eligiblePool, COMPOSITE_WEIGHTS.hitter);
+    const bats = p.bats ?? null;
+    ceiling = pickCeiling({ ...blendVec(rawVec, shrunkVec, CEILING_RAW_WEIGHT), bats }, eligiblePool, COMPOSITE_WEIGHTS.hitter, 'bats', HANDEDNESS_PENALTY.hitter);
+    floor   = pickFloor({ ...shrunkVec, bats }, eligiblePool, COMPOSITE_WEIGHTS.hitter, 'bats', HANDEDNESS_PENALTY.hitter);
   } else if (cb.type === 'pitcher' && cb.stuff != null && cb.control != null) {
     const pool = cb.role === 'RP' ? rpPool : spPool;
     const rawVec = { stuff: cb._raw?.stuff ?? cb.stuff, control: cb._raw?.control ?? cb.control };
     const shrunkVec = { stuff: cb.stuff, control: cb.control };
-    ceiling = pickCeiling(blendVec(rawVec, shrunkVec, CEILING_RAW_WEIGHT), pool, COMPOSITE_WEIGHTS.pitcher);
-    floor   = pickFloor(shrunkVec, pool, COMPOSITE_WEIGHTS.pitcher);
+    const throws = p.throws ?? null;
+    ceiling = pickCeiling({ ...blendVec(rawVec, shrunkVec, CEILING_RAW_WEIGHT), throws }, pool, COMPOSITE_WEIGHTS.pitcher, 'throws', HANDEDNESS_PENALTY.pitcher);
+    floor   = pickFloor({ ...shrunkVec, throws }, pool, COMPOSITE_WEIGHTS.pitcher, 'throws', HANDEDNESS_PENALTY.pitcher);
   }
   if (ceiling || floor) {
     p.career_blend = {
