@@ -285,10 +285,21 @@ function pitcherRole(ipg, positions) {
   return 'SP'; // default fallback (incl. SP-tagged or unlabeled prospects)
 }
 
-function pitcherArchetype(stuff, control, overall, role) {
-  const stBand = archetypeBand(stuff), ctBand = archetypeBand(control), ovTier = tierBand(overall);
-  if (stBand == null || ctBand == null || ovTier == null) return null;
+function pitcherArchetype(stuff, control, role) {
+  const stBand = archetypeBand(stuff), ctBand = archetypeBand(control);
+  if (stBand == null || ctBand == null) return null;
   const chassis = PITCHER_CHASSIS[`${stBand}|${ctBand}`];
+  // Tier basis is the undiscounted stuff/control composite, not career_blend.overall (or
+  // .pitch_overall) — those carry starterFactor's workload discount (up to 0.85x for a
+  // pure reliever), which is a dynasty-VALUE adjustment (fewer innings = less roster
+  // value), not a read on how dominant the arm itself is. Reusing the discounted number
+  // for archetype tier meant a legitimately elite closer needed to clear the same 123+ bar
+  // as a starter despite starting from a number already shrunk by up to 15% (Mason Miller:
+  // stuff=154, but overall=118 post-discount — one tier short of "High-Leverage" despite
+  // being clearly more dominant than that tier's SP equivalent, "Ace").
+  const tierBasis = stuff * COMPOSITE_WEIGHTS.pitcher.stuff + control * COMPOSITE_WEIGHTS.pitcher.control;
+  const ovTier = tierBand(tierBasis);
+  if (ovTier == null) return null;
   const tier = (role === 'SP' ? SP_TIER : RP_TIER)[ovTier];
   return `${tier} ${chassis}`;
 }
@@ -321,13 +332,13 @@ function attachArchetype(cb, { ipg, positions, mlbToolsEntry }) {
   }
   if (cb.type === 'pitcher') {
     const role = pitcherRole(ipg, positions);
-    const arch = pitcherArchetype(cb.stuff, cb.control, cb.overall, role);
+    const arch = pitcherArchetype(cb.stuff, cb.control, role);
     return { role, ...(arch != null ? { archetype: arch } : {}) };
   }
   if (cb.type === 'two-way') {
     const role = pitcherRole(ipg, positions);
     const batArch = cb.hit != null ? hitterArchetype(cb.hit, cb.power, cb.speed) : null;
-    const pitArch = cb.stuff != null ? pitcherArchetype(cb.stuff, cb.control, cb.pitch_overall, role) : null;
+    const pitArch = cb.stuff != null ? pitcherArchetype(cb.stuff, cb.control, role) : null;
     const archetype = [batArch, pitArch].filter(Boolean).join(' / ') || null;
     const approach = cb.hit != null ? hitApproach(mlbToolsEntry) : null;
     return {

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-12T20:09:51.114Z",
+  "generatedAt": "2026-08-12T20:30:01.056Z",
   "season": {
     "bats": [
       {
@@ -1846,12 +1846,7 @@
         "prevOverall": 88,
         "ipPerGs": 4.044444444444444,
         "deltas": {
-          "season": 10,
-          "d7": 0,
-          "d15": 0,
-          "d30": 0,
-          "d60": 0,
-          "d90": 2
+          "season": 10
         }
       },
       {
@@ -8711,32 +8706,6 @@
         }
       },
       {
-        "id": "06qnw",
-        "name": "Patrick Clohisy",
-        "rank": 1097,
-        "positions": "LF,CF,RF,OF",
-        "isPit": false,
-        "isTwoWay": false,
-        "overall": 103,
-        "sample": 1075,
-        "confidence": {
-          "hit": 92,
-          "power": 90,
-          "speed": 95
-        },
-        "delta": 3,
-        "prevOverall": 98,
-        "ipPerGs": null,
-        "deltas": {
-          "season": 5,
-          "d7": 0,
-          "d15": 1,
-          "d30": 3,
-          "d60": 5,
-          "d90": 6
-        }
-      },
-      {
         "id": "06ieq",
         "name": "Luke Stevenson",
         "rank": 782,
@@ -8968,6 +8937,32 @@
           "d30": 3,
           "d60": 4,
           "d90": 5
+        }
+      },
+      {
+        "id": "072h7",
+        "name": "Jeyson Horton",
+        "rank": 3657,
+        "positions": "SS,INF",
+        "isPit": false,
+        "isTwoWay": false,
+        "overall": 98,
+        "sample": 172,
+        "confidence": {
+          "hit": 66,
+          "power": 59,
+          "speed": 74
+        },
+        "delta": 3,
+        "prevOverall": 88,
+        "ipPerGs": null,
+        "deltas": {
+          "season": 10,
+          "d7": 2,
+          "d15": 2,
+          "d30": 3,
+          "d60": 8,
+          "d90": null
         }
       }
     ],
@@ -10513,32 +10508,6 @@
         }
       },
       {
-        "id": "05yci",
-        "name": "Tony Blanco Jr.",
-        "rank": 698,
-        "positions": "1B,INF",
-        "isPit": false,
-        "isTwoWay": false,
-        "overall": 104,
-        "sample": 685,
-        "confidence": {
-          "hit": 88,
-          "power": 85,
-          "speed": 92
-        },
-        "delta": 3,
-        "prevOverall": 99,
-        "ipPerGs": null,
-        "deltas": {
-          "season": 5,
-          "d7": 1,
-          "d15": 3,
-          "d30": 2,
-          "d60": 4,
-          "d90": 5
-        }
-      },
-      {
         "id": "0731m",
         "name": "Svert Reinoso",
         "rank": 1243,
@@ -11423,32 +11392,6 @@
         }
       },
       {
-        "id": "066b5",
-        "name": "Tayden Hall",
-        "rank": 2999,
-        "positions": "1B,INF",
-        "isPit": false,
-        "isTwoWay": false,
-        "overall": 99,
-        "sample": 1357,
-        "confidence": {
-          "hit": 94,
-          "power": 92,
-          "speed": 96
-        },
-        "delta": 2,
-        "prevOverall": 98,
-        "ipPerGs": null,
-        "deltas": {
-          "season": 1,
-          "d7": 1,
-          "d15": 2,
-          "d30": 2,
-          "d60": 1,
-          "d90": 1
-        }
-      },
-      {
         "id": "07248",
         "name": "Victor Valdez",
         "rank": 894,
@@ -11524,6 +11467,58 @@
           "d30": 3,
           "d60": 9,
           "d90": 10
+        }
+      },
+      {
+        "id": "07300",
+        "name": "Dawvris Brito",
+        "rank": 3666,
+        "positions": "SS,INF",
+        "isPit": false,
+        "isTwoWay": false,
+        "overall": 98,
+        "sample": 146,
+        "confidence": {
+          "hit": 62,
+          "power": 55,
+          "speed": 71
+        },
+        "delta": 2,
+        "prevOverall": 88,
+        "ipPerGs": null,
+        "deltas": {
+          "season": 10,
+          "d7": 1,
+          "d15": 2,
+          "d30": 4,
+          "d60": null,
+          "d90": null
+        }
+      },
+      {
+        "id": "072wk",
+        "name": "Richard De Los Santos",
+        "rank": 3502,
+        "positions": "SS,INF",
+        "isPit": false,
+        "isTwoWay": false,
+        "overall": 98,
+        "sample": 196,
+        "confidence": {
+          "hit": 69,
+          "power": 62,
+          "speed": 77
+        },
+        "delta": 2,
+        "prevOverall": 88,
+        "ipPerGs": null,
+        "deltas": {
+          "season": 10,
+          "d7": -1,
+          "d15": 2,
+          "d30": 3,
+          "d60": 7,
+          "d90": null
         }
       }
     ],
@@ -13589,32 +13584,6 @@
         }
       },
       {
-        "id": "06kkn",
-        "name": "Cristian Arguelles",
-        "rank": 588,
-        "positions": "CF,OF",
-        "isPit": false,
-        "isTwoWay": false,
-        "overall": 109,
-        "sample": 739,
-        "confidence": {
-          "hit": 89,
-          "power": 86,
-          "speed": 92
-        },
-        "delta": 1,
-        "prevOverall": 104,
-        "ipPerGs": null,
-        "deltas": {
-          "season": 5,
-          "d7": 1,
-          "d15": 1,
-          "d30": 2,
-          "d60": 3,
-          "d90": 5
-        }
-      },
-      {
         "id": "06qrv",
         "name": "Owen Carey",
         "rank": 929,
@@ -13927,32 +13896,6 @@
         }
       },
       {
-        "id": "05yci",
-        "name": "Tony Blanco Jr.",
-        "rank": 698,
-        "positions": "1B,INF",
-        "isPit": false,
-        "isTwoWay": false,
-        "overall": 104,
-        "sample": 685,
-        "confidence": {
-          "hit": 88,
-          "power": 85,
-          "speed": 92
-        },
-        "delta": 1,
-        "prevOverall": 99,
-        "ipPerGs": null,
-        "deltas": {
-          "season": 5,
-          "d7": 1,
-          "d15": 3,
-          "d30": 2,
-          "d60": 4,
-          "d90": 5
-        }
-      },
-      {
         "id": "06k7w",
         "name": "Andreimi Antunez",
         "rank": 1356,
@@ -14080,6 +14023,58 @@
           "d30": 4,
           "d60": 11,
           "d90": null
+        }
+      },
+      {
+        "id": "0731m",
+        "name": "Svert Reinoso",
+        "rank": 1243,
+        "positions": "SS,INF",
+        "isPit": false,
+        "isTwoWay": false,
+        "overall": 103,
+        "sample": 164,
+        "confidence": {
+          "hit": 65,
+          "power": 58,
+          "speed": 73
+        },
+        "delta": 1,
+        "prevOverall": 88,
+        "ipPerGs": null,
+        "deltas": {
+          "season": 15,
+          "d7": 1,
+          "d15": 3,
+          "d30": 5,
+          "d60": 11,
+          "d90": null
+        }
+      },
+      {
+        "id": "05js4",
+        "name": "Yohandy Morales",
+        "rank": 739,
+        "positions": "1B,3B,INF",
+        "isPit": false,
+        "isTwoWay": false,
+        "overall": 103,
+        "sample": 1445,
+        "confidence": {
+          "hit": 94,
+          "power": 92,
+          "speed": 96
+        },
+        "delta": 1,
+        "prevOverall": 97,
+        "ipPerGs": null,
+        "deltas": {
+          "season": 6,
+          "d7": 1,
+          "d15": 1,
+          "d30": 1,
+          "d60": 1,
+          "d90": 3
         }
       }
     ],
