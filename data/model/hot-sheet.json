@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-08-12T15:55:21.115Z",
+  "generatedAt": "2026-08-12T20:09:51.114Z",
   "season": {
     "bats": [
       {
         "id": "06ifw",
         "name": "Josiah Hartshorn",
-        "rank": 208,
+        "rank": 246,
         "positions": "1B,INF,RF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -31,7 +31,7 @@
       {
         "id": "0724c",
         "name": "Francisco Renteria",
-        "rank": 762,
+        "rank": 524,
         "positions": "CF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -57,7 +57,7 @@
       {
         "id": "0724b",
         "name": "Angeibel Gomez",
-        "rank": 456,
+        "rank": 436,
         "positions": "CF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -83,7 +83,7 @@
       {
         "id": "0769m",
         "name": "Leanders Matos",
-        "rank": 1317,
+        "rank": 996,
         "positions": "SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -109,7 +109,7 @@
       {
         "id": "076cj",
         "name": "Jeremy Suriel",
-        "rank": 1941,
+        "rank": 1381,
         "positions": "CF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -135,7 +135,7 @@
       {
         "id": "072pa",
         "name": "Diego Frontado",
-        "rank": 1127,
+        "rank": 820,
         "positions": "SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -151,17 +151,17 @@
         "ipPerGs": null,
         "deltas": {
           "season": 18,
-          "d7": 0,
-          "d15": 2,
-          "d30": 4,
-          "d60": 7,
+          "d7": 1,
+          "d15": 3,
+          "d30": 5,
+          "d60": 8,
           "d90": null
         }
       },
       {
         "id": "076rp",
         "name": "Yostin Pena",
-        "rank": 1206,
+        "rank": 885,
         "positions": "RF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -187,7 +187,7 @@
       {
         "id": "071w9",
         "name": "Luis Hernandez",
-        "rank": 178,
+        "rank": 176,
         "positions": "SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -213,7 +213,7 @@
       {
         "id": "072hf",
         "name": "Joniel Hernandez",
-        "rank": 1777,
+        "rank": 1217,
         "positions": "SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -239,7 +239,7 @@
       {
         "id": "072jh",
         "name": "Samil Serrano",
-        "rank": 1751,
+        "rank": 1191,
         "positions": "CF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -265,7 +265,7 @@
       {
         "id": "0730o",
         "name": "Jaims Martinez",
-        "rank": 2389,
+        "rank": 2397,
         "positions": "SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -291,7 +291,7 @@
       {
         "id": "076uz",
         "name": "Eider Gutierrez",
-        "rank": 2053,
+        "rank": 1937,
         "positions": "RF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -317,7 +317,7 @@
       {
         "id": "06alr",
         "name": "Brady Ebel",
-        "rank": 577,
+        "rank": 568,
         "positions": "SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -343,7 +343,7 @@
       {
         "id": "072ds",
         "name": "Santiago Solarte",
-        "rank": 1910,
+        "rank": 1349,
         "positions": "SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -369,7 +369,7 @@
       {
         "id": "06rry",
         "name": "Tate Southisene",
-        "rank": 507,
+        "rank": 471,
         "positions": "SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -395,7 +395,7 @@
       {
         "id": "072p5",
         "name": "Albert Fermin",
-        "rank": 879,
+        "rank": 738,
         "positions": "SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -421,7 +421,7 @@
       {
         "id": "0731m",
         "name": "Svert Reinoso",
-        "rank": 1803,
+        "rank": 1243,
         "positions": "SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -447,7 +447,7 @@
       {
         "id": "06yxm",
         "name": "Boston Smith",
-        "rank": 1916,
+        "rank": 1355,
         "positions": "C",
         "isPit": false,
         "isTwoWay": false,
@@ -473,7 +473,7 @@
       {
         "id": "06se6",
         "name": "JoJo Parker",
-        "rank": 163,
+        "rank": 161,
         "positions": "SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -499,7 +499,7 @@
       {
         "id": "07247",
         "name": "Elian Rosario",
-        "rank": 1290,
+        "rank": 969,
         "positions": "3B,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -525,7 +525,7 @@
       {
         "id": "06alw",
         "name": "Coy James",
-        "rank": 1063,
+        "rank": 783,
         "positions": "SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -551,7 +551,7 @@
       {
         "id": "06zfn",
         "name": "Jaiden Lo Re",
-        "rank": 1325,
+        "rank": 1004,
         "positions": "SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -577,7 +577,7 @@
       {
         "id": "076g3",
         "name": "Enrique Oropeza",
-        "rank": 1906,
+        "rank": 1345,
         "positions": "RF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -603,7 +603,7 @@
       {
         "id": "06n8y",
         "name": "Eli Willits",
-        "rank": 92,
+        "rank": 88,
         "positions": "SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -629,7 +629,7 @@
       {
         "id": "06rw2",
         "name": "Steele Hall",
-        "rank": 360,
+        "rank": 358,
         "positions": "SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -655,7 +655,7 @@
       {
         "id": "06m0g",
         "name": "Elian Pena",
-        "rank": 411,
+        "rank": 550,
         "positions": "SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -681,7 +681,7 @@
       {
         "id": "06mvg",
         "name": "Murf Gray",
-        "rank": 442,
+        "rank": 456,
         "positions": "3B,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -707,7 +707,7 @@
       {
         "id": "06yxh",
         "name": "Cooper Flemming",
-        "rank": 496,
+        "rank": 464,
         "positions": "SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -733,7 +733,7 @@
       {
         "id": "06al9",
         "name": "Colby Shelton",
-        "rank": 1654,
+        "rank": 1133,
         "positions": "SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -759,7 +759,7 @@
       {
         "id": "05yak",
         "name": "Xavier Neyens",
-        "rank": 450,
+        "rank": 380,
         "positions": "3B,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -785,7 +785,7 @@
       {
         "id": "07262",
         "name": "Juan Rijo",
-        "rank": 1201,
+        "rank": 880,
         "positions": "CF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -811,7 +811,7 @@
       {
         "id": "06yk0",
         "name": "Conor Essenburg",
-        "rank": 1141,
+        "rank": 834,
         "positions": "OF",
         "isPit": false,
         "isTwoWay": false,
@@ -837,7 +837,7 @@
       {
         "id": "05y6v",
         "name": "BJ Murray Jr.",
-        "rank": 2484,
+        "rank": 2494,
         "positions": "1B,3B,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -863,7 +863,7 @@
       {
         "id": "067z9",
         "name": "Kayson Cunningham",
-        "rank": 505,
+        "rank": 470,
         "positions": "SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -889,7 +889,7 @@
       {
         "id": "072bp",
         "name": "Luke Hanson",
-        "rank": 3638,
+        "rank": 3704,
         "positions": "3B,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -915,7 +915,7 @@
       {
         "id": "06zi7",
         "name": "Josiah Ragsdale",
-        "rank": 810,
+        "rank": 711,
         "positions": "CF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -941,7 +941,7 @@
       {
         "id": "06c10",
         "name": "Ike Irish",
-        "rank": 461,
+        "rank": 379,
         "positions": "C,1B,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -967,7 +967,7 @@
       {
         "id": "06y9u",
         "name": "Jaden Fauske",
-        "rank": 846,
+        "rank": 727,
         "positions": "CF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -993,7 +993,7 @@
       {
         "id": "06y4f",
         "name": "Jordan Yost",
-        "rank": 1147,
+        "rank": 840,
         "positions": "SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -1019,7 +1019,7 @@
       {
         "id": "06y9r",
         "name": "Taitn Gray",
-        "rank": 401,
+        "rank": 394,
         "positions": "C",
         "isPit": false,
         "isTwoWay": false,
@@ -1045,7 +1045,7 @@
       {
         "id": "072hk",
         "name": "Ricki Moneys",
-        "rank": 1061,
+        "rank": 781,
         "positions": "SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -1071,7 +1071,7 @@
       {
         "id": "072f7",
         "name": "Cleiner Ramirez",
-        "rank": 3292,
+        "rank": 3341,
         "positions": "CF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -1097,7 +1097,7 @@
       {
         "id": "073k9",
         "name": "Sebastian Romero",
-        "rank": 3307,
+        "rank": 3356,
         "positions": "LF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -1123,7 +1123,7 @@
       {
         "id": "070eh",
         "name": "Tyson Moran",
-        "rank": 3239,
+        "rank": 3288,
         "positions": "SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -1149,7 +1149,7 @@
       {
         "id": "0731n",
         "name": "Karel Naranjo",
-        "rank": 3143,
+        "rank": 3184,
         "positions": "SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -1175,7 +1175,7 @@
       {
         "id": "0731j",
         "name": "Joskairo Ramirez",
-        "rank": 3314,
+        "rank": 3367,
         "positions": "LF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -1201,7 +1201,7 @@
       {
         "id": "06c5r",
         "name": "Caden Bodine",
-        "rank": 619,
+        "rank": 487,
         "positions": "C",
         "isPit": false,
         "isTwoWay": false,
@@ -1227,7 +1227,7 @@
       {
         "id": "06433",
         "name": "Kody Huff",
-        "rank": 1909,
+        "rank": 1348,
         "positions": "C",
         "isPit": false,
         "isTwoWay": false,
@@ -1253,7 +1253,7 @@
       {
         "id": "071wb",
         "name": "Johenssy Colome",
-        "rank": 633,
+        "rank": 629,
         "positions": "SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -1269,9 +1269,9 @@
         "ipPerGs": null,
         "deltas": {
           "season": 10,
-          "d7": 2,
-          "d15": 1,
-          "d30": 8,
+          "d7": 1,
+          "d15": 0,
+          "d30": 7,
           "d60": null,
           "d90": null
         }
@@ -1279,7 +1279,7 @@
       {
         "id": "06cqi",
         "name": "Josh Hammond",
-        "rank": 460,
+        "rank": 439,
         "positions": "3B,SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -1307,7 +1307,7 @@
       {
         "id": "05ydp",
         "name": "Kade Anderson",
-        "rank": 75,
+        "rank": 74,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -1332,7 +1332,7 @@
       {
         "id": "067yn",
         "name": "Seth Hernandez",
-        "rank": 83,
+        "rank": 79,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -1357,7 +1357,7 @@
       {
         "id": "06mph",
         "name": "Anthony Eyanson",
-        "rank": 224,
+        "rank": 221,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -1382,7 +1382,7 @@
       {
         "id": "06rre",
         "name": "Joseph Dzierwa",
-        "rank": 409,
+        "rank": 401,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -1407,7 +1407,7 @@
       {
         "id": "06z0x",
         "name": "Caden Hunter",
-        "rank": 1078,
+        "rank": 792,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -1432,7 +1432,7 @@
       {
         "id": "06ybd",
         "name": "Miguel Sime",
-        "rank": 609,
+        "rank": 589,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -1457,7 +1457,7 @@
       {
         "id": "06zrd",
         "name": "Dylan Brown",
-        "rank": 1827,
+        "rank": 1267,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -1482,7 +1482,7 @@
       {
         "id": "06kxc",
         "name": "Zach Root",
-        "rank": 546,
+        "rank": 536,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -1507,7 +1507,7 @@
       {
         "id": "06qwt",
         "name": "Ben Jacobs",
-        "rank": 1123,
+        "rank": 816,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -1532,7 +1532,7 @@
       {
         "id": "06yjw",
         "name": "Cody Bowker",
-        "rank": 1814,
+        "rank": 1254,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -1557,7 +1557,7 @@
       {
         "id": "04yij",
         "name": "Riley Cornelio",
-        "rank": 1858,
+        "rank": 1297,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -1582,7 +1582,7 @@
       {
         "id": "070c4",
         "name": "Talon Haley",
-        "rank": 1559,
+        "rank": 1038,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -1607,7 +1607,7 @@
       {
         "id": "06kza",
         "name": "Justin Lamkin",
-        "rank": 1219,
+        "rank": 898,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -1632,7 +1632,7 @@
       {
         "id": "06ybe",
         "name": "JT Quinn",
-        "rank": 878,
+        "rank": 737,
         "positions": "SP,RP",
         "isPit": true,
         "isTwoWay": false,
@@ -1657,7 +1657,7 @@
       {
         "id": "072ep",
         "name": "Mikey Cascino",
-        "rank": 2530,
+        "rank": 2509,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -1682,7 +1682,7 @@
       {
         "id": "072as",
         "name": "Charlie Christensen",
-        "rank": 2744,
+        "rank": 2711,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -1707,7 +1707,7 @@
       {
         "id": "066iu",
         "name": "Gage Ziehl",
-        "rank": 1887,
+        "rank": 1326,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -1732,7 +1732,7 @@
       {
         "id": "06icx",
         "name": "Tyler Bremner",
-        "rank": 436,
+        "rank": 477,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -1757,7 +1757,7 @@
       {
         "id": "06z3q",
         "name": "Mason Peters",
-        "rank": 1598,
+        "rank": 1077,
         "positions": "RP",
         "isPit": true,
         "isTwoWay": false,
@@ -1782,7 +1782,7 @@
       {
         "id": "06zrf",
         "name": "Aidan Cremarosa",
-        "rank": 1264,
+        "rank": 943,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -1807,7 +1807,7 @@
       {
         "id": "06zcl",
         "name": "Braylon Owens",
-        "rank": 2570,
+        "rank": 2547,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -1832,7 +1832,7 @@
       {
         "id": "06yyk",
         "name": "Jason Gilman",
-        "rank": 2743,
+        "rank": 2709,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -1857,7 +1857,7 @@
       {
         "id": "06zae",
         "name": "Brady Parker",
-        "rank": 2789,
+        "rank": 2765,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -1882,7 +1882,7 @@
       {
         "id": "075my",
         "name": "Jesus A. Castro",
-        "rank": 2077,
+        "rank": 1961,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -1907,7 +1907,7 @@
       {
         "id": "06ajt",
         "name": "Brandon White",
-        "rank": 2659,
+        "rank": 2633,
         "positions": "SP,RP",
         "isPit": true,
         "isTwoWay": false,
@@ -1932,7 +1932,7 @@
       {
         "id": "067xg",
         "name": "Nolan Perry",
-        "rank": 485,
+        "rank": 563,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -1957,7 +1957,7 @@
       {
         "id": "05ubl",
         "name": "Gabriel Hughes",
-        "rank": 922,
+        "rank": 1547,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -1982,7 +1982,7 @@
       {
         "id": "06ktt",
         "name": "Jamie Arnold",
-        "rank": 343,
+        "rank": 301,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -2007,7 +2007,7 @@
       {
         "id": "06rrl",
         "name": "Riley Quick",
-        "rank": 624,
+        "rank": 597,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -2032,7 +2032,7 @@
       {
         "id": "06yez",
         "name": "Michael Lombardi",
-        "rank": 1091,
+        "rank": 805,
         "positions": "SP,RP",
         "isPit": true,
         "isTwoWay": false,
@@ -2057,7 +2057,7 @@
       {
         "id": "06roy",
         "name": "Brian Curley",
-        "rank": 1142,
+        "rank": 835,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -2082,7 +2082,7 @@
       {
         "id": "06z7l",
         "name": "Cade Crossland",
-        "rank": 3036,
+        "rank": 3024,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -2107,7 +2107,7 @@
       {
         "id": "06zgr",
         "name": "Nelson Keljo",
-        "rank": 2857,
+        "rank": 2835,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -2132,7 +2132,7 @@
       {
         "id": "06qus",
         "name": "Christian Rodriguez",
-        "rank": 3109,
+        "rank": 3081,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -2157,7 +2157,7 @@
       {
         "id": "06207",
         "name": "Christian Zazueta",
-        "rank": 422,
+        "rank": 413,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -2182,7 +2182,7 @@
       {
         "id": "06qu7",
         "name": "Brooks Caple",
-        "rank": 1658,
+        "rank": 1137,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -2207,7 +2207,7 @@
       {
         "id": "06yjc",
         "name": "Malachi Witherspoon",
-        "rank": 1585,
+        "rank": 1064,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -2232,7 +2232,7 @@
       {
         "id": "06z7p",
         "name": "Riley Kelly",
-        "rank": 3131,
+        "rank": 3104,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -2257,7 +2257,7 @@
       {
         "id": "06yyu",
         "name": "Rory Fox",
-        "rank": 2051,
+        "rank": 1935,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -2282,7 +2282,7 @@
       {
         "id": "072cm",
         "name": "Reed Moring",
-        "rank": 2948,
+        "rank": 2934,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -2307,7 +2307,7 @@
       {
         "id": "05zdb",
         "name": "Mason McGwire",
-        "rank": 1699,
+        "rank": 1178,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -2332,7 +2332,7 @@
       {
         "id": "06y0k",
         "name": "Ramon Marquez",
-        "rank": 606,
+        "rank": 512,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -2357,7 +2357,7 @@
       {
         "id": "060es",
         "name": "Devin Futrell",
-        "rank": 2083,
+        "rank": 1967,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -2382,7 +2382,7 @@
       {
         "id": "06rw3",
         "name": "Briggs McKenzie",
-        "rank": 599,
+        "rank": 584,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -2407,7 +2407,7 @@
       {
         "id": "06uth",
         "name": "Matthew Fisher",
-        "rank": 1237,
+        "rank": 916,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -2432,7 +2432,7 @@
       {
         "id": "06id0",
         "name": "Cade Obermueller",
-        "rank": 1573,
+        "rank": 1052,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -2457,7 +2457,7 @@
       {
         "id": "06mwe",
         "name": "Gabe Davis",
-        "rank": 1328,
+        "rank": 1007,
         "positions": "RP",
         "isPit": true,
         "isTwoWay": false,
@@ -2482,7 +2482,7 @@
       {
         "id": "06zfo",
         "name": "Nick Potter",
-        "rank": 3814,
+        "rank": 3887,
         "positions": "RP",
         "isPit": true,
         "isTwoWay": false,
@@ -2507,7 +2507,7 @@
       {
         "id": "05y5h",
         "name": "DJ McCarty",
-        "rank": 2976,
+        "rank": 2961,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -2532,7 +2532,7 @@
       {
         "id": "06yw7",
         "name": "Justin West",
-        "rank": 4162,
+        "rank": 4317,
         "positions": "RP",
         "isPit": true,
         "isTwoWay": false,
@@ -2561,7 +2561,7 @@
       {
         "id": "06n8y",
         "name": "Eli Willits",
-        "rank": 92,
+        "rank": 88,
         "positions": "SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -2587,7 +2587,7 @@
       {
         "id": "06yxm",
         "name": "Boston Smith",
-        "rank": 1916,
+        "rank": 1355,
         "positions": "C",
         "isPit": false,
         "isTwoWay": false,
@@ -2613,7 +2613,7 @@
       {
         "id": "06alk",
         "name": "Charlie Condon",
-        "rank": 261,
+        "rank": 260,
         "positions": "1B,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -2639,7 +2639,7 @@
       {
         "id": "06c1j",
         "name": "Cam Cannarella",
-        "rank": 548,
+        "rank": 538,
         "positions": "CF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -2665,7 +2665,7 @@
       {
         "id": "06zfn",
         "name": "Jaiden Lo Re",
-        "rank": 1325,
+        "rank": 1004,
         "positions": "SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -2691,7 +2691,7 @@
       {
         "id": "06yk0",
         "name": "Conor Essenburg",
-        "rank": 1141,
+        "rank": 834,
         "positions": "OF",
         "isPit": false,
         "isTwoWay": false,
@@ -2717,7 +2717,7 @@
       {
         "id": "05gbg",
         "name": "Zac Veen",
-        "rank": 672,
+        "rank": 630,
         "positions": "LF,RF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -2743,7 +2743,7 @@
       {
         "id": "06ifw",
         "name": "Josiah Hartshorn",
-        "rank": 208,
+        "rank": 246,
         "positions": "1B,INF,RF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -2769,7 +2769,7 @@
       {
         "id": "06alr",
         "name": "Brady Ebel",
-        "rank": 577,
+        "rank": 568,
         "positions": "SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -2795,7 +2795,7 @@
       {
         "id": "06rqr",
         "name": "Isaias Castillo",
-        "rank": 1556,
+        "rank": 1035,
         "positions": "LF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -2821,7 +2821,7 @@
       {
         "id": "06zi7",
         "name": "Josiah Ragsdale",
-        "rank": 810,
+        "rank": 711,
         "positions": "CF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -2847,7 +2847,7 @@
       {
         "id": "06mvg",
         "name": "Murf Gray",
-        "rank": 442,
+        "rank": 456,
         "positions": "3B,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -2873,7 +2873,7 @@
       {
         "id": "06lz2",
         "name": "Daniel Dickinson",
-        "rank": 3598,
+        "rank": 3661,
         "positions": "2B,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -2899,7 +2899,7 @@
       {
         "id": "06nvj",
         "name": "Turner Hill",
-        "rank": 3153,
+        "rank": 3196,
         "positions": "LF,CF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -2925,7 +2925,7 @@
       {
         "id": "06nud",
         "name": "Gage Miller",
-        "rank": 2219,
+        "rank": 2201,
         "positions": "2B,3B,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -2951,7 +2951,7 @@
       {
         "id": "06yyj",
         "name": "Core Jackson",
-        "rank": 1786,
+        "rank": 1226,
         "positions": "SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -2977,7 +2977,7 @@
       {
         "id": "06y07",
         "name": "John Taylor",
-        "rank": 2880,
+        "rank": 2919,
         "positions": "2B,SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -3003,7 +3003,7 @@
       {
         "id": "06r1g",
         "name": "Alejandro Blasco",
-        "rank": 1937,
+        "rank": 1377,
         "positions": "LF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -3029,7 +3029,7 @@
       {
         "id": "071w9",
         "name": "Luis Hernandez",
-        "rank": 178,
+        "rank": 176,
         "positions": "SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -3055,7 +3055,7 @@
       {
         "id": "06cmf",
         "name": "Mitch Voit",
-        "rank": 642,
+        "rank": 615,
         "positions": "2B,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -3081,7 +3081,7 @@
       {
         "id": "06yyn",
         "name": "Franklin Primera",
-        "rank": 607,
+        "rank": 587,
         "positions": "C",
         "isPit": false,
         "isTwoWay": false,
@@ -3107,7 +3107,7 @@
       {
         "id": "06z51",
         "name": "Moises Acacio",
-        "rank": 2106,
+        "rank": 1990,
         "positions": "2B,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -3133,7 +3133,7 @@
       {
         "id": "06uf2",
         "name": "Luis Ramon King",
-        "rank": 2975,
+        "rank": 3009,
         "positions": "CF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -3159,7 +3159,7 @@
       {
         "id": "06fus",
         "name": "Easton Shelton",
-        "rank": 1304,
+        "rank": 983,
         "positions": "1B,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -3185,7 +3185,7 @@
       {
         "id": "05re4",
         "name": "Nolan Schubart",
-        "rank": 1726,
+        "rank": 2051,
         "positions": "1B,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -3211,7 +3211,7 @@
       {
         "id": "06y4f",
         "name": "Jordan Yost",
-        "rank": 1147,
+        "rank": 840,
         "positions": "SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -3237,7 +3237,7 @@
       {
         "id": "0664t",
         "name": "Brett Squires",
-        "rank": 2730,
+        "rank": 2761,
         "positions": "1B,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -3263,7 +3263,7 @@
       {
         "id": "072ff",
         "name": "Noah Franklin",
-        "rank": 3996,
+        "rank": 4080,
         "positions": "C",
         "isPit": false,
         "isTwoWay": false,
@@ -3289,7 +3289,7 @@
       {
         "id": "06582",
         "name": "Luke Adams",
-        "rank": 553,
+        "rank": 586,
         "positions": "1B,3B,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -3341,7 +3341,7 @@
       {
         "id": "066l0",
         "name": "Zach Ehrhard",
-        "rank": 1255,
+        "rank": 934,
         "positions": "LF,CF,RF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -3367,7 +3367,7 @@
       {
         "id": "06ytw",
         "name": "Juan Torres",
-        "rank": 2237,
+        "rank": 2232,
         "positions": "2B,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -3393,7 +3393,7 @@
       {
         "id": "06ri4",
         "name": "Reiner Herrera",
-        "rank": 2326,
+        "rank": 2333,
         "positions": "C",
         "isPit": false,
         "isTwoWay": false,
@@ -3419,7 +3419,7 @@
       {
         "id": "06k7t",
         "name": "Andrew Fischer",
-        "rank": 434,
+        "rank": 421,
         "positions": "3B,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -3445,7 +3445,7 @@
       {
         "id": "06rq4",
         "name": "Alexander Frias",
-        "rank": 596,
+        "rank": 507,
         "positions": "RF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -3471,7 +3471,7 @@
       {
         "id": "06mhy",
         "name": "Brandon Compton",
-        "rank": 1082,
+        "rank": 796,
         "positions": "LF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -3497,7 +3497,7 @@
       {
         "id": "06se6",
         "name": "JoJo Parker",
-        "rank": 163,
+        "rank": 161,
         "positions": "SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -3523,7 +3523,7 @@
       {
         "id": "06rw2",
         "name": "Steele Hall",
-        "rank": 360,
+        "rank": 358,
         "positions": "SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -3549,7 +3549,7 @@
       {
         "id": "06dn4",
         "name": "Brock Rodden",
-        "rank": 2374,
+        "rank": 2381,
         "positions": "SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -3575,7 +3575,7 @@
       {
         "id": "06pg6",
         "name": "Aiva Arquette",
-        "rank": 303,
+        "rank": 248,
         "positions": "SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -3601,7 +3601,7 @@
       {
         "id": "06vy4",
         "name": "Esnaider Vargas",
-        "rank": 2977,
+        "rank": 3011,
         "positions": "RF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -3627,7 +3627,7 @@
       {
         "id": "06jfj",
         "name": "Angel Arredondo",
-        "rank": 2691,
+        "rank": 2717,
         "positions": "3B,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -3653,7 +3653,7 @@
       {
         "id": "072co",
         "name": "JP Smith",
-        "rank": 2934,
+        "rank": 2969,
         "positions": "1B,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -3679,7 +3679,7 @@
       {
         "id": "06rm4",
         "name": "Yilver De Paula",
-        "rank": 3174,
+        "rank": 3219,
         "positions": "SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -3705,7 +3705,7 @@
       {
         "id": "070eh",
         "name": "Tyson Moran",
-        "rank": 3239,
+        "rank": 3288,
         "positions": "SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -3731,7 +3731,7 @@
       {
         "id": "06rmc",
         "name": "Gerlyn Payano",
-        "rank": 3914,
+        "rank": 3997,
         "positions": "RF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -3757,7 +3757,7 @@
       {
         "id": "06zgw",
         "name": "Jack Wheeler",
-        "rank": 4660,
+        "rank": 4754,
         "positions": "3B,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -3783,7 +3783,7 @@
       {
         "id": "062cy",
         "name": "Sean Gamble",
-        "rank": 893,
+        "rank": 752,
         "positions": "SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -3809,7 +3809,7 @@
       {
         "id": "06oo7",
         "name": "Sean Keys",
-        "rank": 588,
+        "rank": 594,
         "positions": "1B,3B,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -3835,7 +3835,7 @@
       {
         "id": "05yim",
         "name": "Jhonny Severino",
-        "rank": 2152,
+        "rank": 2035,
         "positions": "2B,3B,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -3863,7 +3863,7 @@
       {
         "id": "05ydp",
         "name": "Kade Anderson",
-        "rank": 75,
+        "rank": 74,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -3888,7 +3888,7 @@
       {
         "id": "06z0x",
         "name": "Caden Hunter",
-        "rank": 1078,
+        "rank": 792,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -3913,7 +3913,7 @@
       {
         "id": "06y0k",
         "name": "Ramon Marquez",
-        "rank": 606,
+        "rank": 512,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -3938,7 +3938,7 @@
       {
         "id": "06kxc",
         "name": "Zach Root",
-        "rank": 546,
+        "rank": 536,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -3963,7 +3963,7 @@
       {
         "id": "072ep",
         "name": "Mikey Cascino",
-        "rank": 2530,
+        "rank": 2509,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -3988,7 +3988,7 @@
       {
         "id": "06mph",
         "name": "Anthony Eyanson",
-        "rank": 224,
+        "rank": 221,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -4013,7 +4013,7 @@
       {
         "id": "06rre",
         "name": "Joseph Dzierwa",
-        "rank": 409,
+        "rank": 401,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -4038,7 +4038,7 @@
       {
         "id": "066iu",
         "name": "Gage Ziehl",
-        "rank": 1887,
+        "rank": 1326,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -4063,7 +4063,7 @@
       {
         "id": "06zrd",
         "name": "Dylan Brown",
-        "rank": 1827,
+        "rank": 1267,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -4088,7 +4088,7 @@
       {
         "id": "06r9y",
         "name": "Sadbiel Delzine",
-        "rank": 1152,
+        "rank": 845,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -4113,7 +4113,7 @@
       {
         "id": "06ier",
         "name": "Ryan Sloan",
-        "rank": 105,
+        "rank": 101,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -4138,7 +4138,7 @@
       {
         "id": "072as",
         "name": "Charlie Christensen",
-        "rank": 2744,
+        "rank": 2711,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -4163,7 +4163,7 @@
       {
         "id": "06zae",
         "name": "Brady Parker",
-        "rank": 2789,
+        "rank": 2765,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -4188,7 +4188,7 @@
       {
         "id": "075my",
         "name": "Jesus A. Castro",
-        "rank": 2077,
+        "rank": 1961,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -4213,7 +4213,7 @@
       {
         "id": "067yn",
         "name": "Seth Hernandez",
-        "rank": 83,
+        "rank": 79,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -4238,7 +4238,7 @@
       {
         "id": "06ybd",
         "name": "Miguel Sime",
-        "rank": 609,
+        "rank": 589,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -4263,7 +4263,7 @@
       {
         "id": "051gy",
         "name": "Jace Beck",
-        "rank": 3776,
+        "rank": 3823,
         "positions": "RP",
         "isPit": true,
         "isTwoWay": false,
@@ -4288,7 +4288,7 @@
       {
         "id": "05ym5",
         "name": "Henry Lalane",
-        "rank": 675,
+        "rank": 633,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -4313,7 +4313,7 @@
       {
         "id": "06yjw",
         "name": "Cody Bowker",
-        "rank": 1814,
+        "rank": 1254,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -4338,7 +4338,7 @@
       {
         "id": "070c4",
         "name": "Talon Haley",
-        "rank": 1559,
+        "rank": 1038,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -4363,7 +4363,7 @@
       {
         "id": "06ajt",
         "name": "Brandon White",
-        "rank": 2659,
+        "rank": 2633,
         "positions": "SP,RP",
         "isPit": true,
         "isTwoWay": false,
@@ -4388,7 +4388,7 @@
       {
         "id": "06uth",
         "name": "Matthew Fisher",
-        "rank": 1237,
+        "rank": 916,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -4413,7 +4413,7 @@
       {
         "id": "0724i",
         "name": "Merit Jones",
-        "rank": 3242,
+        "rank": 3216,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -4438,7 +4438,7 @@
       {
         "id": "06htl",
         "name": "Ty Johnson",
-        "rank": 687,
+        "rank": 522,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -4463,7 +4463,7 @@
       {
         "id": "06207",
         "name": "Christian Zazueta",
-        "rank": 422,
+        "rank": 413,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -4488,7 +4488,7 @@
       {
         "id": "06krw",
         "name": "Eliazar Dishmey",
-        "rank": 1638,
+        "rank": 1117,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -4513,7 +4513,7 @@
       {
         "id": "06kk6",
         "name": "Braylon Doughty",
-        "rank": 387,
+        "rank": 329,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -4538,7 +4538,7 @@
       {
         "id": "06pg1",
         "name": "Xavier Rivas",
-        "rank": 2208,
+        "rank": 2196,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -4563,7 +4563,7 @@
       {
         "id": "06nuj",
         "name": "Jackson Kent",
-        "rank": 1148,
+        "rank": 841,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -4588,7 +4588,7 @@
       {
         "id": "06p61",
         "name": "Dylan Jordan",
-        "rank": 1202,
+        "rank": 881,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -4613,7 +4613,7 @@
       {
         "id": "06mq3",
         "name": "Reinold Navarro",
-        "rank": 1203,
+        "rank": 882,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -4638,7 +4638,7 @@
       {
         "id": "04yij",
         "name": "Riley Cornelio",
-        "rank": 1858,
+        "rank": 1297,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -4663,7 +4663,7 @@
       {
         "id": "06hf3",
         "name": "Levi Sterling",
-        "rank": 1849,
+        "rank": 1288,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -4688,7 +4688,7 @@
       {
         "id": "06pk6",
         "name": "Ethan Bagwell",
-        "rank": 1320,
+        "rank": 999,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -4713,7 +4713,7 @@
       {
         "id": "06ruo",
         "name": "Juan Fraide",
-        "rank": 2636,
+        "rank": 2612,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -4738,7 +4738,7 @@
       {
         "id": "06z7l",
         "name": "Cade Crossland",
-        "rank": 3036,
+        "rank": 3024,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -4763,7 +4763,7 @@
       {
         "id": "05jpf",
         "name": "Trenton Denholm",
-        "rank": 2449,
+        "rank": 2435,
         "positions": "SP,RP",
         "isPit": true,
         "isTwoWay": false,
@@ -4788,7 +4788,7 @@
       {
         "id": "06yyu",
         "name": "Rory Fox",
-        "rank": 2051,
+        "rank": 1935,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -4813,7 +4813,7 @@
       {
         "id": "072cm",
         "name": "Reed Moring",
-        "rank": 2948,
+        "rank": 2934,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -4838,7 +4838,7 @@
       {
         "id": "05ubs",
         "name": "Nazier Mule",
-        "rank": 3327,
+        "rank": 3300,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -4863,7 +4863,7 @@
       {
         "id": "06qp2",
         "name": "Nate Payne",
-        "rank": 1166,
+        "rank": 859,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -4888,7 +4888,7 @@
       {
         "id": "06s7q",
         "name": "Liomar Martinez",
-        "rank": 1816,
+        "rank": 1256,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -4913,7 +4913,7 @@
       {
         "id": "05uce",
         "name": "Brendan Beck",
-        "rank": 2182,
+        "rank": 2176,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -4938,7 +4938,7 @@
       {
         "id": "06kkb",
         "name": "Boston Bateman",
-        "rank": 1297,
+        "rank": 976,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -4963,7 +4963,7 @@
       {
         "id": "06146",
         "name": "Jackson Cox",
-        "rank": 1294,
+        "rank": 973,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -4988,7 +4988,7 @@
       {
         "id": "06ftt",
         "name": "Brady Smith",
-        "rank": 1093,
+        "rank": 807,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -5013,7 +5013,7 @@
       {
         "id": "0620i",
         "name": "Julio Mendez",
-        "rank": 2304,
+        "rank": 2300,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -5038,7 +5038,7 @@
       {
         "id": "06qsu",
         "name": "Jacob Kisting",
-        "rank": 2073,
+        "rank": 1957,
         "positions": "RP",
         "isPit": true,
         "isTwoWay": false,
@@ -5063,7 +5063,7 @@
       {
         "id": "06qwt",
         "name": "Ben Jacobs",
-        "rank": 1123,
+        "rank": 816,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -5088,7 +5088,7 @@
       {
         "id": "06fwg",
         "name": "Khristian Curtis",
-        "rank": 1298,
+        "rank": 977,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -5117,7 +5117,7 @@
       {
         "id": "0724c",
         "name": "Francisco Renteria",
-        "rank": 762,
+        "rank": 524,
         "positions": "CF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -5143,7 +5143,7 @@
       {
         "id": "072ds",
         "name": "Santiago Solarte",
-        "rank": 1910,
+        "rank": 1349,
         "positions": "SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -5169,7 +5169,7 @@
       {
         "id": "0724b",
         "name": "Angeibel Gomez",
-        "rank": 456,
+        "rank": 436,
         "positions": "CF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -5195,7 +5195,7 @@
       {
         "id": "0730o",
         "name": "Jaims Martinez",
-        "rank": 2389,
+        "rank": 2397,
         "positions": "SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -5221,7 +5221,7 @@
       {
         "id": "072p5",
         "name": "Albert Fermin",
-        "rank": 879,
+        "rank": 738,
         "positions": "SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -5247,7 +5247,7 @@
       {
         "id": "0731m",
         "name": "Svert Reinoso",
-        "rank": 1803,
+        "rank": 1243,
         "positions": "SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -5273,7 +5273,7 @@
       {
         "id": "0769m",
         "name": "Leanders Matos",
-        "rank": 1317,
+        "rank": 996,
         "positions": "SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -5299,7 +5299,7 @@
       {
         "id": "072hf",
         "name": "Joniel Hernandez",
-        "rank": 1777,
+        "rank": 1217,
         "positions": "SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -5325,7 +5325,7 @@
       {
         "id": "072jh",
         "name": "Samil Serrano",
-        "rank": 1751,
+        "rank": 1191,
         "positions": "CF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -5351,7 +5351,7 @@
       {
         "id": "076uz",
         "name": "Eider Gutierrez",
-        "rank": 2053,
+        "rank": 1937,
         "positions": "RF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -5377,7 +5377,7 @@
       {
         "id": "06c1j",
         "name": "Cam Cannarella",
-        "rank": 548,
+        "rank": 538,
         "positions": "CF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -5403,7 +5403,7 @@
       {
         "id": "06zi7",
         "name": "Josiah Ragsdale",
-        "rank": 810,
+        "rank": 711,
         "positions": "CF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -5429,7 +5429,7 @@
       {
         "id": "06lz2",
         "name": "Daniel Dickinson",
-        "rank": 3598,
+        "rank": 3661,
         "positions": "2B,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -5455,7 +5455,7 @@
       {
         "id": "076cj",
         "name": "Jeremy Suriel",
-        "rank": 1941,
+        "rank": 1381,
         "positions": "CF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -5479,9 +5479,35 @@
         }
       },
       {
+        "id": "072pa",
+        "name": "Diego Frontado",
+        "rank": 820,
+        "positions": "SS,INF",
+        "isPit": false,
+        "isTwoWay": false,
+        "overall": 106,
+        "sample": 171,
+        "confidence": {
+          "hit": 66,
+          "power": 59,
+          "speed": 74
+        },
+        "delta": 8,
+        "prevOverall": 88,
+        "ipPerGs": null,
+        "deltas": {
+          "season": 18,
+          "d7": 1,
+          "d15": 3,
+          "d30": 5,
+          "d60": 8,
+          "d90": null
+        }
+      },
+      {
         "id": "076rp",
         "name": "Yostin Pena",
-        "rank": 1206,
+        "rank": 885,
         "positions": "RF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -5507,7 +5533,7 @@
       {
         "id": "06yxm",
         "name": "Boston Smith",
-        "rank": 1916,
+        "rank": 1355,
         "positions": "C",
         "isPit": false,
         "isTwoWay": false,
@@ -5533,7 +5559,7 @@
       {
         "id": "06mhy",
         "name": "Brandon Compton",
-        "rank": 1082,
+        "rank": 796,
         "positions": "LF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -5559,7 +5585,7 @@
       {
         "id": "07247",
         "name": "Elian Rosario",
-        "rank": 1290,
+        "rank": 969,
         "positions": "3B,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -5585,7 +5611,7 @@
       {
         "id": "06uf2",
         "name": "Luis Ramon King",
-        "rank": 2975,
+        "rank": 3009,
         "positions": "CF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -5611,7 +5637,7 @@
       {
         "id": "07262",
         "name": "Juan Rijo",
-        "rank": 1201,
+        "rank": 880,
         "positions": "CF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -5637,7 +5663,7 @@
       {
         "id": "06yk0",
         "name": "Conor Essenburg",
-        "rank": 1141,
+        "rank": 834,
         "positions": "OF",
         "isPit": false,
         "isTwoWay": false,
@@ -5663,7 +5689,7 @@
       {
         "id": "072h7",
         "name": "Jeyson Horton",
-        "rank": 3592,
+        "rank": 3657,
         "positions": "SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -5689,7 +5715,7 @@
       {
         "id": "06nvj",
         "name": "Turner Hill",
-        "rank": 3153,
+        "rank": 3196,
         "positions": "LF,CF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -5715,7 +5741,7 @@
       {
         "id": "06nud",
         "name": "Gage Miller",
-        "rank": 2219,
+        "rank": 2201,
         "positions": "2B,3B,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -5739,35 +5765,9 @@
         }
       },
       {
-        "id": "072pa",
-        "name": "Diego Frontado",
-        "rank": 1127,
-        "positions": "SS,INF",
-        "isPit": false,
-        "isTwoWay": false,
-        "overall": 106,
-        "sample": 171,
-        "confidence": {
-          "hit": 66,
-          "power": 59,
-          "speed": 74
-        },
-        "delta": 7,
-        "prevOverall": 88,
-        "ipPerGs": null,
-        "deltas": {
-          "season": 18,
-          "d7": 0,
-          "d15": 2,
-          "d30": 4,
-          "d60": 7,
-          "d90": null
-        }
-      },
-      {
         "id": "076g3",
         "name": "Enrique Oropeza",
-        "rank": 1906,
+        "rank": 1345,
         "positions": "RF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -5793,7 +5793,7 @@
       {
         "id": "06dn4",
         "name": "Brock Rodden",
-        "rank": 2374,
+        "rank": 2381,
         "positions": "SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -5819,7 +5819,7 @@
       {
         "id": "072wk",
         "name": "Richard De Los Santos",
-        "rank": 3440,
+        "rank": 3502,
         "positions": "SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -5845,7 +5845,7 @@
       {
         "id": "06y07",
         "name": "John Taylor",
-        "rank": 2880,
+        "rank": 2919,
         "positions": "2B,SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -5871,7 +5871,7 @@
       {
         "id": "05gbg",
         "name": "Zac Veen",
-        "rank": 672,
+        "rank": 630,
         "positions": "LF,RF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -5897,7 +5897,7 @@
       {
         "id": "06oo7",
         "name": "Sean Keys",
-        "rank": 588,
+        "rank": 594,
         "positions": "1B,3B,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -5923,7 +5923,7 @@
       {
         "id": "06c1m",
         "name": "Sammy Stafura",
-        "rank": 1195,
+        "rank": 874,
         "positions": "SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -5949,7 +5949,7 @@
       {
         "id": "06ieq",
         "name": "Luke Stevenson",
-        "rank": 1062,
+        "rank": 782,
         "positions": "C",
         "isPit": false,
         "isTwoWay": false,
@@ -5975,7 +5975,7 @@
       {
         "id": "06r5o",
         "name": "Brailyn Antunez",
-        "rank": 1272,
+        "rank": 951,
         "positions": "CF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -6001,7 +6001,7 @@
       {
         "id": "06se6",
         "name": "JoJo Parker",
-        "rank": 163,
+        "rank": 161,
         "positions": "SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -6027,7 +6027,7 @@
       {
         "id": "06yyj",
         "name": "Core Jackson",
-        "rank": 1786,
+        "rank": 1226,
         "positions": "SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -6053,7 +6053,7 @@
       {
         "id": "06rh0",
         "name": "Hiverson Lopez",
-        "rank": 2954,
+        "rank": 2990,
         "positions": "C",
         "isPit": false,
         "isTwoWay": false,
@@ -6079,7 +6079,7 @@
       {
         "id": "05yak",
         "name": "Xavier Neyens",
-        "rank": 450,
+        "rank": 380,
         "positions": "3B,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -6105,7 +6105,7 @@
       {
         "id": "0703b",
         "name": "Matthew Boughton",
-        "rank": 4181,
+        "rank": 4265,
         "positions": "SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -6131,7 +6131,7 @@
       {
         "id": "06rom",
         "name": "Max Williams",
-        "rank": 4034,
+        "rank": 4123,
         "positions": "LF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -6157,7 +6157,7 @@
       {
         "id": "05u3v",
         "name": "Walker Jenkins",
-        "rank": 197,
+        "rank": 164,
         "positions": "CF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -6183,7 +6183,7 @@
       {
         "id": "06n8y",
         "name": "Eli Willits",
-        "rank": 92,
+        "rank": 88,
         "positions": "SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -6209,7 +6209,7 @@
       {
         "id": "05u2m",
         "name": "Theo Gillen",
-        "rank": 88,
+        "rank": 84,
         "positions": "CF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -6235,7 +6235,7 @@
       {
         "id": "06ytw",
         "name": "Juan Torres",
-        "rank": 2237,
+        "rank": 2232,
         "positions": "2B,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -6261,7 +6261,7 @@
       {
         "id": "066mk",
         "name": "Welbyn Francisca",
-        "rank": 1218,
+        "rank": 897,
         "positions": "SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -6287,7 +6287,7 @@
       {
         "id": "06tzx",
         "name": "Johan Machado",
-        "rank": 2362,
+        "rank": 2372,
         "positions": "3B,SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -6313,7 +6313,7 @@
       {
         "id": "06alr",
         "name": "Brady Ebel",
-        "rank": 577,
+        "rank": 568,
         "positions": "SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -6339,7 +6339,7 @@
       {
         "id": "06cmf",
         "name": "Mitch Voit",
-        "rank": 642,
+        "rank": 615,
         "positions": "2B,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -6365,7 +6365,7 @@
       {
         "id": "06k7w",
         "name": "Andreimi Antunez",
-        "rank": 1917,
+        "rank": 1356,
         "positions": "SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -6391,7 +6391,7 @@
       {
         "id": "06z51",
         "name": "Moises Acacio",
-        "rank": 2106,
+        "rank": 1990,
         "positions": "2B,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -6419,7 +6419,7 @@
       {
         "id": "06z0x",
         "name": "Caden Hunter",
-        "rank": 1078,
+        "rank": 792,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -6444,7 +6444,7 @@
       {
         "id": "06y0k",
         "name": "Ramon Marquez",
-        "rank": 606,
+        "rank": 512,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -6469,7 +6469,7 @@
       {
         "id": "06mph",
         "name": "Anthony Eyanson",
-        "rank": 224,
+        "rank": 221,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -6494,7 +6494,7 @@
       {
         "id": "066iu",
         "name": "Gage Ziehl",
-        "rank": 1887,
+        "rank": 1326,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -6519,7 +6519,7 @@
       {
         "id": "072ep",
         "name": "Mikey Cascino",
-        "rank": 2530,
+        "rank": 2509,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -6544,7 +6544,7 @@
       {
         "id": "06htl",
         "name": "Ty Johnson",
-        "rank": 687,
+        "rank": 522,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -6569,7 +6569,7 @@
       {
         "id": "05ydp",
         "name": "Kade Anderson",
-        "rank": 75,
+        "rank": 74,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -6594,7 +6594,7 @@
       {
         "id": "06zrd",
         "name": "Dylan Brown",
-        "rank": 1827,
+        "rank": 1267,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -6619,7 +6619,7 @@
       {
         "id": "06207",
         "name": "Christian Zazueta",
-        "rank": 422,
+        "rank": 413,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -6644,7 +6644,7 @@
       {
         "id": "06mq3",
         "name": "Reinold Navarro",
-        "rank": 1203,
+        "rank": 882,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -6669,7 +6669,7 @@
       {
         "id": "070c4",
         "name": "Talon Haley",
-        "rank": 1559,
+        "rank": 1038,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -6694,7 +6694,7 @@
       {
         "id": "06r9y",
         "name": "Sadbiel Delzine",
-        "rank": 1152,
+        "rank": 845,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -6719,7 +6719,7 @@
       {
         "id": "067yn",
         "name": "Seth Hernandez",
-        "rank": 83,
+        "rank": 79,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -6744,7 +6744,7 @@
       {
         "id": "06pg1",
         "name": "Xavier Rivas",
-        "rank": 2208,
+        "rank": 2196,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -6769,7 +6769,7 @@
       {
         "id": "04yij",
         "name": "Riley Cornelio",
-        "rank": 1858,
+        "rank": 1297,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -6794,7 +6794,7 @@
       {
         "id": "05uce",
         "name": "Brendan Beck",
-        "rank": 2182,
+        "rank": 2176,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -6819,7 +6819,7 @@
       {
         "id": "06qsu",
         "name": "Jacob Kisting",
-        "rank": 2073,
+        "rank": 1957,
         "positions": "RP",
         "isPit": true,
         "isTwoWay": false,
@@ -6844,7 +6844,7 @@
       {
         "id": "06yjw",
         "name": "Cody Bowker",
-        "rank": 1814,
+        "rank": 1254,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -6869,7 +6869,7 @@
       {
         "id": "06ktt",
         "name": "Jamie Arnold",
-        "rank": 343,
+        "rank": 301,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -6894,7 +6894,7 @@
       {
         "id": "060es",
         "name": "Devin Futrell",
-        "rank": 2083,
+        "rank": 1967,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -6919,7 +6919,7 @@
       {
         "id": "06z7p",
         "name": "Riley Kelly",
-        "rank": 3131,
+        "rank": 3104,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -6944,7 +6944,7 @@
       {
         "id": "06yyu",
         "name": "Rory Fox",
-        "rank": 2051,
+        "rank": 1935,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -6969,7 +6969,7 @@
       {
         "id": "06ajt",
         "name": "Brandon White",
-        "rank": 2659,
+        "rank": 2633,
         "positions": "SP,RP",
         "isPit": true,
         "isTwoWay": false,
@@ -6994,7 +6994,7 @@
       {
         "id": "06uth",
         "name": "Matthew Fisher",
-        "rank": 1237,
+        "rank": 916,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -7019,7 +7019,7 @@
       {
         "id": "06mcc",
         "name": "Yhoiker Fajardo",
-        "rank": 813,
+        "rank": 695,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -7044,7 +7044,7 @@
       {
         "id": "06p61",
         "name": "Dylan Jordan",
-        "rank": 1202,
+        "rank": 881,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -7069,7 +7069,7 @@
       {
         "id": "06ybd",
         "name": "Miguel Sime",
-        "rank": 609,
+        "rank": 589,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -7094,7 +7094,7 @@
       {
         "id": "061v6",
         "name": "Yorman Gomez",
-        "rank": 1780,
+        "rank": 1220,
         "positions": "SP,RP",
         "isPit": true,
         "isTwoWay": false,
@@ -7119,7 +7119,7 @@
       {
         "id": "06ftt",
         "name": "Brady Smith",
-        "rank": 1093,
+        "rank": 807,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -7144,7 +7144,7 @@
       {
         "id": "051gy",
         "name": "Jace Beck",
-        "rank": 3776,
+        "rank": 3823,
         "positions": "RP",
         "isPit": true,
         "isTwoWay": false,
@@ -7169,7 +7169,7 @@
       {
         "id": "05ym5",
         "name": "Henry Lalane",
-        "rank": 675,
+        "rank": 633,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -7194,7 +7194,7 @@
       {
         "id": "06pge",
         "name": "John Holobetz",
-        "rank": 1309,
+        "rank": 988,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -7219,7 +7219,7 @@
       {
         "id": "06kxc",
         "name": "Zach Root",
-        "rank": 546,
+        "rank": 536,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -7244,7 +7244,7 @@
       {
         "id": "06hf3",
         "name": "Levi Sterling",
-        "rank": 1849,
+        "rank": 1288,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -7269,7 +7269,7 @@
       {
         "id": "06hwr",
         "name": "Jacob Odle",
-        "rank": 1327,
+        "rank": 1006,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -7294,7 +7294,7 @@
       {
         "id": "06ybe",
         "name": "JT Quinn",
-        "rank": 878,
+        "rank": 737,
         "positions": "SP,RP",
         "isPit": true,
         "isTwoWay": false,
@@ -7319,7 +7319,7 @@
       {
         "id": "072as",
         "name": "Charlie Christensen",
-        "rank": 2744,
+        "rank": 2711,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -7344,7 +7344,7 @@
       {
         "id": "06icx",
         "name": "Tyler Bremner",
-        "rank": 436,
+        "rank": 477,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -7369,7 +7369,7 @@
       {
         "id": "06z3p",
         "name": "Colton Shaw",
-        "rank": 1679,
+        "rank": 1158,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -7394,7 +7394,7 @@
       {
         "id": "06zgr",
         "name": "Nelson Keljo",
-        "rank": 2857,
+        "rank": 2835,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -7419,7 +7419,7 @@
       {
         "id": "05jpf",
         "name": "Trenton Denholm",
-        "rank": 2449,
+        "rank": 2435,
         "positions": "SP,RP",
         "isPit": true,
         "isTwoWay": false,
@@ -7444,7 +7444,7 @@
       {
         "id": "072cm",
         "name": "Reed Moring",
-        "rank": 2948,
+        "rank": 2934,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -7469,7 +7469,7 @@
       {
         "id": "06hna",
         "name": "Adler Cecil",
-        "rank": 6897,
+        "rank": 7025,
         "positions": "RP",
         "isPit": true,
         "isTwoWay": false,
@@ -7494,7 +7494,7 @@
       {
         "id": "06id0",
         "name": "Cade Obermueller",
-        "rank": 1573,
+        "rank": 1052,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -7519,7 +7519,7 @@
       {
         "id": "06zfo",
         "name": "Nick Potter",
-        "rank": 3814,
+        "rank": 3887,
         "positions": "RP",
         "isPit": true,
         "isTwoWay": false,
@@ -7544,7 +7544,7 @@
       {
         "id": "05ubs",
         "name": "Nazier Mule",
-        "rank": 3327,
+        "rank": 3300,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -7569,7 +7569,7 @@
       {
         "id": "06hpu",
         "name": "Ethan Flanagan",
-        "rank": 3376,
+        "rank": 3360,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -7594,7 +7594,7 @@
       {
         "id": "06ier",
         "name": "Ryan Sloan",
-        "rank": 105,
+        "rank": 101,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -7619,7 +7619,7 @@
       {
         "id": "06krw",
         "name": "Eliazar Dishmey",
-        "rank": 1638,
+        "rank": 1117,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -7644,7 +7644,7 @@
       {
         "id": "06kk6",
         "name": "Braylon Doughty",
-        "rank": 387,
+        "rank": 329,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -7673,7 +7673,7 @@
       {
         "id": "071wb",
         "name": "Johenssy Colome",
-        "rank": 633,
+        "rank": 629,
         "positions": "SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -7684,14 +7684,14 @@
           "power": 48,
           "speed": 65
         },
-        "delta": 8,
+        "delta": 7,
         "prevOverall": 88,
         "ipPerGs": null,
         "deltas": {
           "season": 10,
-          "d7": 2,
-          "d15": 1,
-          "d30": 8,
+          "d7": 1,
+          "d15": 0,
+          "d30": 7,
           "d60": null,
           "d90": null
         }
@@ -7699,7 +7699,7 @@
       {
         "id": "071wa",
         "name": "Wandy Asigen",
-        "rank": 705,
+        "rank": 493,
         "positions": "SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -7725,7 +7725,7 @@
       {
         "id": "05u2m",
         "name": "Theo Gillen",
-        "rank": 88,
+        "rank": 84,
         "positions": "CF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -7751,7 +7751,7 @@
       {
         "id": "0724c",
         "name": "Francisco Renteria",
-        "rank": 762,
+        "rank": 524,
         "positions": "CF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -7777,7 +7777,7 @@
       {
         "id": "06yk0",
         "name": "Conor Essenburg",
-        "rank": 1141,
+        "rank": 834,
         "positions": "OF",
         "isPit": false,
         "isTwoWay": false,
@@ -7803,7 +7803,7 @@
       {
         "id": "0724b",
         "name": "Angeibel Gomez",
-        "rank": 456,
+        "rank": 436,
         "positions": "CF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -7827,9 +7827,35 @@
         }
       },
       {
+        "id": "072pa",
+        "name": "Diego Frontado",
+        "rank": 820,
+        "positions": "SS,INF",
+        "isPit": false,
+        "isTwoWay": false,
+        "overall": 106,
+        "sample": 171,
+        "confidence": {
+          "hit": 66,
+          "power": 59,
+          "speed": 74
+        },
+        "delta": 5,
+        "prevOverall": 88,
+        "ipPerGs": null,
+        "deltas": {
+          "season": 18,
+          "d7": 1,
+          "d15": 3,
+          "d30": 5,
+          "d60": 8,
+          "d90": null
+        }
+      },
+      {
         "id": "072jh",
         "name": "Samil Serrano",
-        "rank": 1751,
+        "rank": 1191,
         "positions": "CF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -7855,7 +7881,7 @@
       {
         "id": "0730o",
         "name": "Jaims Martinez",
-        "rank": 2389,
+        "rank": 2397,
         "positions": "SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -7881,7 +7907,7 @@
       {
         "id": "072ds",
         "name": "Santiago Solarte",
-        "rank": 1910,
+        "rank": 1349,
         "positions": "SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -7907,7 +7933,7 @@
       {
         "id": "0731m",
         "name": "Svert Reinoso",
-        "rank": 1803,
+        "rank": 1243,
         "positions": "SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -7933,7 +7959,7 @@
       {
         "id": "06yxm",
         "name": "Boston Smith",
-        "rank": 1916,
+        "rank": 1355,
         "positions": "C",
         "isPit": false,
         "isTwoWay": false,
@@ -7959,7 +7985,7 @@
       {
         "id": "072co",
         "name": "JP Smith",
-        "rank": 2934,
+        "rank": 2969,
         "positions": "1B,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -7985,7 +8011,7 @@
       {
         "id": "06rom",
         "name": "Max Williams",
-        "rank": 4034,
+        "rank": 4123,
         "positions": "LF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -8011,7 +8037,7 @@
       {
         "id": "05gbg",
         "name": "Zac Veen",
-        "rank": 672,
+        "rank": 630,
         "positions": "LF,RF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -8037,7 +8063,7 @@
       {
         "id": "06ifw",
         "name": "Josiah Hartshorn",
-        "rank": 208,
+        "rank": 246,
         "positions": "1B,INF,RF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -8061,35 +8087,9 @@
         }
       },
       {
-        "id": "072pa",
-        "name": "Diego Frontado",
-        "rank": 1127,
-        "positions": "SS,INF",
-        "isPit": false,
-        "isTwoWay": false,
-        "overall": 106,
-        "sample": 171,
-        "confidence": {
-          "hit": 66,
-          "power": 59,
-          "speed": 74
-        },
-        "delta": 4,
-        "prevOverall": 88,
-        "ipPerGs": null,
-        "deltas": {
-          "season": 18,
-          "d7": 0,
-          "d15": 2,
-          "d30": 4,
-          "d60": 7,
-          "d90": null
-        }
-      },
-      {
         "id": "076rp",
         "name": "Yostin Pena",
-        "rank": 1206,
+        "rank": 885,
         "positions": "RF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -8115,7 +8115,7 @@
       {
         "id": "076uz",
         "name": "Eider Gutierrez",
-        "rank": 2053,
+        "rank": 1937,
         "positions": "RF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -8141,7 +8141,7 @@
       {
         "id": "072p5",
         "name": "Albert Fermin",
-        "rank": 879,
+        "rank": 738,
         "positions": "SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -8167,7 +8167,7 @@
       {
         "id": "06zi7",
         "name": "Josiah Ragsdale",
-        "rank": 810,
+        "rank": 711,
         "positions": "CF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -8193,7 +8193,7 @@
       {
         "id": "060uv",
         "name": "Leandro Pineda",
-        "rank": 2268,
+        "rank": 2269,
         "positions": "RF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -8219,7 +8219,7 @@
       {
         "id": "057z9",
         "name": "Brayan Buelvas",
-        "rank": 2293,
+        "rank": 2294,
         "positions": "CF,RF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -8245,7 +8245,7 @@
       {
         "id": "06dn4",
         "name": "Brock Rodden",
-        "rank": 2374,
+        "rank": 2381,
         "positions": "SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -8269,9 +8269,35 @@
         }
       },
       {
+        "id": "07248",
+        "name": "Victor Valdez",
+        "rank": 894,
+        "positions": "SS,INF",
+        "isPit": false,
+        "isTwoWay": false,
+        "overall": 98,
+        "sample": 129,
+        "confidence": {
+          "hit": 59,
+          "power": 52,
+          "speed": 68
+        },
+        "delta": 4,
+        "prevOverall": 88,
+        "ipPerGs": null,
+        "deltas": {
+          "season": 10,
+          "d7": 1,
+          "d15": 2,
+          "d30": 4,
+          "d60": null,
+          "d90": null
+        }
+      },
+      {
         "id": "07300",
         "name": "Dawvris Brito",
-        "rank": 3605,
+        "rank": 3666,
         "positions": "SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -8295,9 +8321,35 @@
         }
       },
       {
+        "id": "0734g",
+        "name": "Carlos Done",
+        "rank": 4717,
+        "positions": "LF,RF,OF",
+        "isPit": false,
+        "isTwoWay": false,
+        "overall": 95,
+        "sample": 198,
+        "confidence": {
+          "hit": 69,
+          "power": 62,
+          "speed": 77
+        },
+        "delta": 4,
+        "prevOverall": 88,
+        "ipPerGs": null,
+        "deltas": {
+          "season": 7,
+          "d7": 1,
+          "d15": 1,
+          "d30": 4,
+          "d60": 4,
+          "d90": null
+        }
+      },
+      {
         "id": "05ybr",
         "name": "Ethan Salas",
-        "rank": 249,
+        "rank": 220,
         "positions": "C",
         "isPit": false,
         "isTwoWay": false,
@@ -8323,7 +8375,7 @@
       {
         "id": "0769m",
         "name": "Leanders Matos",
-        "rank": 1317,
+        "rank": 996,
         "positions": "SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -8349,7 +8401,7 @@
       {
         "id": "066mk",
         "name": "Welbyn Francisca",
-        "rank": 1218,
+        "rank": 897,
         "positions": "SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -8375,7 +8427,7 @@
       {
         "id": "06nln",
         "name": "Enddy Azocar",
-        "rank": 620,
+        "rank": 593,
         "positions": "CF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -8401,7 +8453,7 @@
       {
         "id": "076cj",
         "name": "Jeremy Suriel",
-        "rank": 1941,
+        "rank": 1381,
         "positions": "CF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -8427,7 +8479,7 @@
       {
         "id": "06tzx",
         "name": "Johan Machado",
-        "rank": 2362,
+        "rank": 2372,
         "positions": "3B,SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -8453,7 +8505,7 @@
       {
         "id": "06psn",
         "name": "Kevin Alvarez",
-        "rank": 440,
+        "rank": 423,
         "positions": "CF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -8479,7 +8531,7 @@
       {
         "id": "072hf",
         "name": "Joniel Hernandez",
-        "rank": 1777,
+        "rank": 1217,
         "positions": "SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -8505,7 +8557,7 @@
       {
         "id": "06alr",
         "name": "Brady Ebel",
-        "rank": 577,
+        "rank": 568,
         "positions": "SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -8531,7 +8583,7 @@
       {
         "id": "06rqr",
         "name": "Isaias Castillo",
-        "rank": 1556,
+        "rank": 1035,
         "positions": "LF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -8557,7 +8609,7 @@
       {
         "id": "06cmf",
         "name": "Mitch Voit",
-        "rank": 642,
+        "rank": 615,
         "positions": "2B,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -8583,7 +8635,7 @@
       {
         "id": "06tvi",
         "name": "David Carrera",
-        "rank": 2561,
+        "rank": 2588,
         "positions": "LF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -8609,7 +8661,7 @@
       {
         "id": "06k7w",
         "name": "Andreimi Antunez",
-        "rank": 1917,
+        "rank": 1356,
         "positions": "SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -8635,7 +8687,7 @@
       {
         "id": "06ytz",
         "name": "Yovanny Duran",
-        "rank": 1589,
+        "rank": 1068,
         "positions": "CF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -8661,7 +8713,7 @@
       {
         "id": "06qnw",
         "name": "Patrick Clohisy",
-        "rank": 1618,
+        "rank": 1097,
         "positions": "LF,CF,RF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -8687,7 +8739,7 @@
       {
         "id": "06ieq",
         "name": "Luke Stevenson",
-        "rank": 1062,
+        "rank": 782,
         "positions": "C",
         "isPit": false,
         "isTwoWay": false,
@@ -8713,7 +8765,7 @@
       {
         "id": "06r5o",
         "name": "Brailyn Antunez",
-        "rank": 1272,
+        "rank": 951,
         "positions": "CF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -8739,7 +8791,7 @@
       {
         "id": "06rh1",
         "name": "Kenly Hunter",
-        "rank": 2534,
+        "rank": 2558,
         "positions": "CF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -8765,7 +8817,7 @@
       {
         "id": "06mhy",
         "name": "Brandon Compton",
-        "rank": 1082,
+        "rank": 796,
         "positions": "LF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -8791,7 +8843,7 @@
       {
         "id": "06alw",
         "name": "Coy James",
-        "rank": 1063,
+        "rank": 783,
         "positions": "SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -8817,7 +8869,7 @@
       {
         "id": "06c10",
         "name": "Ike Irish",
-        "rank": 461,
+        "rank": 379,
         "positions": "C,1B,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -8843,7 +8895,7 @@
       {
         "id": "06r5i",
         "name": "Dayquer Alfonzo",
-        "rank": 2767,
+        "rank": 2791,
         "positions": "1B,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -8869,7 +8921,7 @@
       {
         "id": "06pie",
         "name": "Ryan Cesarini",
-        "rank": 2504,
+        "rank": 2524,
         "positions": "RF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -8895,7 +8947,7 @@
       {
         "id": "067z9",
         "name": "Kayson Cunningham",
-        "rank": 505,
+        "rank": 470,
         "positions": "SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -8917,65 +8969,13 @@
           "d60": 4,
           "d90": 5
         }
-      },
-      {
-        "id": "07248",
-        "name": "Victor Valdez",
-        "rank": 1215,
-        "positions": "SS,INF",
-        "isPit": false,
-        "isTwoWay": false,
-        "overall": 98,
-        "sample": 129,
-        "confidence": {
-          "hit": 59,
-          "power": 52,
-          "speed": 68
-        },
-        "delta": 3,
-        "prevOverall": 88,
-        "ipPerGs": null,
-        "deltas": {
-          "season": 10,
-          "d7": 0,
-          "d15": 1,
-          "d30": 3,
-          "d60": null,
-          "d90": null
-        }
-      },
-      {
-        "id": "072h7",
-        "name": "Jeyson Horton",
-        "rank": 3592,
-        "positions": "SS,INF",
-        "isPit": false,
-        "isTwoWay": false,
-        "overall": 98,
-        "sample": 172,
-        "confidence": {
-          "hit": 66,
-          "power": 59,
-          "speed": 74
-        },
-        "delta": 3,
-        "prevOverall": 88,
-        "ipPerGs": null,
-        "deltas": {
-          "season": 10,
-          "d7": 2,
-          "d15": 2,
-          "d30": 3,
-          "d60": 8,
-          "d90": null
-        }
       }
     ],
     "arms": [
       {
         "id": "06mph",
         "name": "Anthony Eyanson",
-        "rank": 224,
+        "rank": 221,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -9000,7 +9000,7 @@
       {
         "id": "06z0x",
         "name": "Caden Hunter",
-        "rank": 1078,
+        "rank": 792,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -9025,7 +9025,7 @@
       {
         "id": "066iu",
         "name": "Gage Ziehl",
-        "rank": 1887,
+        "rank": 1326,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -9050,7 +9050,7 @@
       {
         "id": "05uce",
         "name": "Brendan Beck",
-        "rank": 2182,
+        "rank": 2176,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -9075,7 +9075,7 @@
       {
         "id": "072ep",
         "name": "Mikey Cascino",
-        "rank": 2530,
+        "rank": 2509,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -9100,7 +9100,7 @@
       {
         "id": "06ktt",
         "name": "Jamie Arnold",
-        "rank": 343,
+        "rank": 301,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -9125,7 +9125,7 @@
       {
         "id": "06y0k",
         "name": "Ramon Marquez",
-        "rank": 606,
+        "rank": 512,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -9150,7 +9150,7 @@
       {
         "id": "06mcc",
         "name": "Yhoiker Fajardo",
-        "rank": 813,
+        "rank": 695,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -9175,7 +9175,7 @@
       {
         "id": "06ybd",
         "name": "Miguel Sime",
-        "rank": 609,
+        "rank": 589,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -9200,7 +9200,7 @@
       {
         "id": "06zrd",
         "name": "Dylan Brown",
-        "rank": 1827,
+        "rank": 1267,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -9225,7 +9225,7 @@
       {
         "id": "06yjw",
         "name": "Cody Bowker",
-        "rank": 1814,
+        "rank": 1254,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -9250,7 +9250,7 @@
       {
         "id": "06r9y",
         "name": "Sadbiel Delzine",
-        "rank": 1152,
+        "rank": 845,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -9275,7 +9275,7 @@
       {
         "id": "072cm",
         "name": "Reed Moring",
-        "rank": 2948,
+        "rank": 2934,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -9300,7 +9300,7 @@
       {
         "id": "0724i",
         "name": "Merit Jones",
-        "rank": 3242,
+        "rank": 3216,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -9325,7 +9325,7 @@
       {
         "id": "05ydp",
         "name": "Kade Anderson",
-        "rank": 75,
+        "rank": 74,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -9350,7 +9350,7 @@
       {
         "id": "06krw",
         "name": "Eliazar Dishmey",
-        "rank": 1638,
+        "rank": 1117,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -9375,7 +9375,7 @@
       {
         "id": "06nuj",
         "name": "Jackson Kent",
-        "rank": 1148,
+        "rank": 841,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -9400,7 +9400,7 @@
       {
         "id": "06qra",
         "name": "Bryce Mayer",
-        "rank": 688,
+        "rank": 639,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -9425,7 +9425,7 @@
       {
         "id": "06146",
         "name": "Jackson Cox",
-        "rank": 1294,
+        "rank": 973,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -9450,7 +9450,7 @@
       {
         "id": "06qsu",
         "name": "Jacob Kisting",
-        "rank": 2073,
+        "rank": 1957,
         "positions": "RP",
         "isPit": true,
         "isTwoWay": false,
@@ -9475,7 +9475,7 @@
       {
         "id": "06hf3",
         "name": "Levi Sterling",
-        "rank": 1849,
+        "rank": 1288,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -9500,7 +9500,7 @@
       {
         "id": "070c4",
         "name": "Talon Haley",
-        "rank": 1559,
+        "rank": 1038,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -9525,7 +9525,7 @@
       {
         "id": "064of",
         "name": "Luichi Casilla",
-        "rank": 2783,
+        "rank": 2756,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -9550,7 +9550,7 @@
       {
         "id": "06ybe",
         "name": "JT Quinn",
-        "rank": 878,
+        "rank": 737,
         "positions": "SP,RP",
         "isPit": true,
         "isTwoWay": false,
@@ -9575,7 +9575,7 @@
       {
         "id": "06pk6",
         "name": "Ethan Bagwell",
-        "rank": 1320,
+        "rank": 999,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -9600,7 +9600,7 @@
       {
         "id": "075my",
         "name": "Jesus A. Castro",
-        "rank": 2077,
+        "rank": 1961,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -9625,7 +9625,7 @@
       {
         "id": "06plg",
         "name": "Jose Cabrera",
-        "rank": 1151,
+        "rank": 844,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -9650,7 +9650,7 @@
       {
         "id": "06qu7",
         "name": "Brooks Caple",
-        "rank": 1658,
+        "rank": 1137,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -9675,7 +9675,7 @@
       {
         "id": "060es",
         "name": "Devin Futrell",
-        "rank": 2083,
+        "rank": 1967,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -9700,7 +9700,7 @@
       {
         "id": "06z7p",
         "name": "Riley Kelly",
-        "rank": 3131,
+        "rank": 3104,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -9725,7 +9725,7 @@
       {
         "id": "06qrw",
         "name": "Luke Gabrysh",
-        "rank": 3058,
+        "rank": 3040,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -9750,7 +9750,7 @@
       {
         "id": "05xpp",
         "name": "Chad Dallas",
-        "rank": 2266,
+        "rank": 2254,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -9775,7 +9775,7 @@
       {
         "id": "06uth",
         "name": "Matthew Fisher",
-        "rank": 1237,
+        "rank": 916,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -9800,7 +9800,7 @@
       {
         "id": "06zfo",
         "name": "Nick Potter",
-        "rank": 3814,
+        "rank": 3887,
         "positions": "RP",
         "isPit": true,
         "isTwoWay": false,
@@ -9825,7 +9825,7 @@
       {
         "id": "05ubs",
         "name": "Nazier Mule",
-        "rank": 3327,
+        "rank": 3300,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -9850,7 +9850,7 @@
       {
         "id": "06207",
         "name": "Christian Zazueta",
-        "rank": 422,
+        "rank": 413,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -9875,7 +9875,7 @@
       {
         "id": "06dmr",
         "name": "Matt Wilkinson",
-        "rank": 1259,
+        "rank": 938,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -9900,7 +9900,7 @@
       {
         "id": "067yn",
         "name": "Seth Hernandez",
-        "rank": 83,
+        "rank": 79,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -9925,7 +9925,7 @@
       {
         "id": "06kk6",
         "name": "Braylon Doughty",
-        "rank": 387,
+        "rank": 329,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -9950,7 +9950,7 @@
       {
         "id": "06s7q",
         "name": "Liomar Martinez",
-        "rank": 1816,
+        "rank": 1256,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -9975,7 +9975,7 @@
       {
         "id": "06p61",
         "name": "Dylan Jordan",
-        "rank": 1202,
+        "rank": 881,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -10000,7 +10000,7 @@
       {
         "id": "06mq3",
         "name": "Reinold Navarro",
-        "rank": 1203,
+        "rank": 882,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -10025,7 +10025,7 @@
       {
         "id": "04yij",
         "name": "Riley Cornelio",
-        "rank": 1858,
+        "rank": 1297,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -10050,7 +10050,7 @@
       {
         "id": "06f1o",
         "name": "Trevor Harrison",
-        "rank": 1859,
+        "rank": 1298,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -10075,7 +10075,7 @@
       {
         "id": "0620i",
         "name": "Julio Mendez",
-        "rank": 2304,
+        "rank": 2300,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -10100,7 +10100,7 @@
       {
         "id": "06r2u",
         "name": "Junior Sanchez",
-        "rank": 1286,
+        "rank": 965,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -10123,9 +10123,34 @@
         }
       },
       {
+        "id": "06uhj",
+        "name": "Daniel Guerra",
+        "rank": 1257,
+        "positions": "SP,RP",
+        "isPit": true,
+        "isTwoWay": false,
+        "overall": 102,
+        "sample": 271,
+        "confidence": {
+          "stuff": 93,
+          "control": 87
+        },
+        "delta": 1,
+        "prevOverall": 99,
+        "ipPerGs": 4.155555555555556,
+        "deltas": {
+          "season": 3,
+          "d7": 1,
+          "d15": 0,
+          "d30": 1,
+          "d60": 1,
+          "d90": 3
+        }
+      },
+      {
         "id": "06pge",
         "name": "John Holobetz",
-        "rank": 1309,
+        "rank": 988,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -10150,7 +10175,7 @@
       {
         "id": "06cqu",
         "name": "Ismael Agreda",
-        "rank": 2616,
+        "rank": 2593,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -10175,7 +10200,7 @@
       {
         "id": "06kxc",
         "name": "Zach Root",
-        "rank": 546,
+        "rank": 536,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -10196,31 +10221,6 @@
           "d60": 3,
           "d90": 10
         }
-      },
-      {
-        "id": "06l4z",
-        "name": "Nestor Lorant",
-        "rank": 1795,
-        "positions": "SP",
-        "isPit": true,
-        "isTwoWay": false,
-        "overall": 101,
-        "sample": 381,
-        "confidence": {
-          "stuff": 95,
-          "control": 90
-        },
-        "delta": 1,
-        "prevOverall": 98,
-        "ipPerGs": 4.769230769230769,
-        "deltas": {
-          "season": 3,
-          "d7": 1,
-          "d15": 1,
-          "d30": 1,
-          "d60": 1,
-          "d90": 2
-        }
       }
     ]
   },
@@ -10229,7 +10229,7 @@
       {
         "id": "05ybr",
         "name": "Ethan Salas",
-        "rank": 249,
+        "rank": 220,
         "positions": "C",
         "isPit": false,
         "isTwoWay": false,
@@ -10255,7 +10255,7 @@
       {
         "id": "072co",
         "name": "JP Smith",
-        "rank": 2934,
+        "rank": 2969,
         "positions": "1B,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -10281,7 +10281,7 @@
       {
         "id": "071wa",
         "name": "Wandy Asigen",
-        "rank": 705,
+        "rank": 493,
         "positions": "SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -10307,7 +10307,7 @@
       {
         "id": "06rom",
         "name": "Max Williams",
-        "rank": 4034,
+        "rank": 4123,
         "positions": "LF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -10333,7 +10333,7 @@
       {
         "id": "05gbg",
         "name": "Zac Veen",
-        "rank": 672,
+        "rank": 630,
         "positions": "LF,RF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -10359,7 +10359,7 @@
       {
         "id": "06ifw",
         "name": "Josiah Hartshorn",
-        "rank": 208,
+        "rank": 246,
         "positions": "1B,INF,RF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -10385,7 +10385,7 @@
       {
         "id": "0724c",
         "name": "Francisco Renteria",
-        "rank": 762,
+        "rank": 524,
         "positions": "CF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -10411,7 +10411,7 @@
       {
         "id": "06tzx",
         "name": "Johan Machado",
-        "rank": 2362,
+        "rank": 2372,
         "positions": "3B,SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -10435,9 +10435,35 @@
         }
       },
       {
+        "id": "072pa",
+        "name": "Diego Frontado",
+        "rank": 820,
+        "positions": "SS,INF",
+        "isPit": false,
+        "isTwoWay": false,
+        "overall": 106,
+        "sample": 171,
+        "confidence": {
+          "hit": 66,
+          "power": 59,
+          "speed": 74
+        },
+        "delta": 3,
+        "prevOverall": 88,
+        "ipPerGs": null,
+        "deltas": {
+          "season": 18,
+          "d7": 1,
+          "d15": 3,
+          "d30": 5,
+          "d60": 8,
+          "d90": null
+        }
+      },
+      {
         "id": "072ds",
         "name": "Santiago Solarte",
-        "rank": 1910,
+        "rank": 1349,
         "positions": "SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -10463,7 +10489,7 @@
       {
         "id": "06cmf",
         "name": "Mitch Voit",
-        "rank": 642,
+        "rank": 615,
         "positions": "2B,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -10489,7 +10515,7 @@
       {
         "id": "05yci",
         "name": "Tony Blanco Jr.",
-        "rank": 798,
+        "rank": 698,
         "positions": "1B,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -10515,7 +10541,7 @@
       {
         "id": "0731m",
         "name": "Svert Reinoso",
-        "rank": 1803,
+        "rank": 1243,
         "positions": "SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -10541,7 +10567,7 @@
       {
         "id": "060uv",
         "name": "Leandro Pineda",
-        "rank": 2268,
+        "rank": 2269,
         "positions": "RF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -10567,7 +10593,7 @@
       {
         "id": "06pie",
         "name": "Ryan Cesarini",
-        "rank": 2504,
+        "rank": 2524,
         "positions": "RF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -10593,7 +10619,7 @@
       {
         "id": "06dn4",
         "name": "Brock Rodden",
-        "rank": 2374,
+        "rank": 2381,
         "positions": "SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -10619,7 +10645,7 @@
       {
         "id": "06qu9",
         "name": "Dub Gleed",
-        "rank": 3505,
+        "rank": 3566,
         "positions": "1B,3B,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -10671,7 +10697,7 @@
       {
         "id": "06f0p",
         "name": "Cooper Ingle",
-        "rank": 679,
+        "rank": 490,
         "positions": "C",
         "isPit": false,
         "isTwoWay": false,
@@ -10697,7 +10723,7 @@
       {
         "id": "06n8y",
         "name": "Eli Willits",
-        "rank": 92,
+        "rank": 88,
         "positions": "SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -10723,7 +10749,7 @@
       {
         "id": "05u2m",
         "name": "Theo Gillen",
-        "rank": 88,
+        "rank": 84,
         "positions": "CF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -10749,7 +10775,7 @@
       {
         "id": "0724b",
         "name": "Angeibel Gomez",
-        "rank": 456,
+        "rank": 436,
         "positions": "CF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -10775,7 +10801,7 @@
       {
         "id": "066mk",
         "name": "Welbyn Francisca",
-        "rank": 1218,
+        "rank": 897,
         "positions": "SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -10801,7 +10827,7 @@
       {
         "id": "06nln",
         "name": "Enddy Azocar",
-        "rank": 620,
+        "rank": 593,
         "positions": "CF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -10827,7 +10853,7 @@
       {
         "id": "06nud",
         "name": "Gage Miller",
-        "rank": 2219,
+        "rank": 2201,
         "positions": "2B,3B,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -10853,7 +10879,7 @@
       {
         "id": "0518r",
         "name": "Dustin Harris",
-        "rank": 1410,
+        "rank": 1779,
         "positions": "LF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -10877,35 +10903,9 @@
         }
       },
       {
-        "id": "072pa",
-        "name": "Diego Frontado",
-        "rank": 1127,
-        "positions": "SS,INF",
-        "isPit": false,
-        "isTwoWay": false,
-        "overall": 106,
-        "sample": 171,
-        "confidence": {
-          "hit": 66,
-          "power": 59,
-          "speed": 74
-        },
-        "delta": 2,
-        "prevOverall": 88,
-        "ipPerGs": null,
-        "deltas": {
-          "season": 18,
-          "d7": 0,
-          "d15": 2,
-          "d30": 4,
-          "d60": 7,
-          "d90": null
-        }
-      },
-      {
         "id": "072hf",
         "name": "Joniel Hernandez",
-        "rank": 1777,
+        "rank": 1217,
         "positions": "SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -10931,7 +10931,7 @@
       {
         "id": "072jh",
         "name": "Samil Serrano",
-        "rank": 1751,
+        "rank": 1191,
         "positions": "CF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -10957,7 +10957,7 @@
       {
         "id": "0730o",
         "name": "Jaims Martinez",
-        "rank": 2389,
+        "rank": 2397,
         "positions": "SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -10983,7 +10983,7 @@
       {
         "id": "076uz",
         "name": "Eider Gutierrez",
-        "rank": 2053,
+        "rank": 1937,
         "positions": "RF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -11009,7 +11009,7 @@
       {
         "id": "06qwv",
         "name": "Kane Kepley",
-        "rank": 815,
+        "rank": 714,
         "positions": "CF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -11035,7 +11035,7 @@
       {
         "id": "06ytz",
         "name": "Yovanny Duran",
-        "rank": 1589,
+        "rank": 1068,
         "positions": "CF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -11061,7 +11061,7 @@
       {
         "id": "05h2t",
         "name": "Milan Tolentino",
-        "rank": 2259,
+        "rank": 2257,
         "positions": "2B,3B,SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -11087,7 +11087,7 @@
       {
         "id": "05uwb",
         "name": "Reed Trimble",
-        "rank": 1845,
+        "rank": 1284,
         "positions": "LF,CF,RF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -11113,7 +11113,7 @@
       {
         "id": "06yxm",
         "name": "Boston Smith",
-        "rank": 1916,
+        "rank": 1355,
         "positions": "C",
         "isPit": false,
         "isTwoWay": false,
@@ -11139,7 +11139,7 @@
       {
         "id": "06zi7",
         "name": "Josiah Ragsdale",
-        "rank": 810,
+        "rank": 711,
         "positions": "CF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -11165,7 +11165,7 @@
       {
         "id": "06se6",
         "name": "JoJo Parker",
-        "rank": 163,
+        "rank": 161,
         "positions": "SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -11191,7 +11191,7 @@
       {
         "id": "06alw",
         "name": "Coy James",
-        "rank": 1063,
+        "rank": 783,
         "positions": "SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -11217,7 +11217,7 @@
       {
         "id": "06zfn",
         "name": "Jaiden Lo Re",
-        "rank": 1325,
+        "rank": 1004,
         "positions": "SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -11243,7 +11243,7 @@
       {
         "id": "065j9",
         "name": "Sammy Hernandez",
-        "rank": 2487,
+        "rank": 2497,
         "positions": "C,1B,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -11269,7 +11269,7 @@
       {
         "id": "057z9",
         "name": "Brayan Buelvas",
-        "rank": 2293,
+        "rank": 2294,
         "positions": "CF,RF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -11295,7 +11295,7 @@
       {
         "id": "068z1",
         "name": "Pablo Guerrero",
-        "rank": 1690,
+        "rank": 1169,
         "positions": "1B,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -11321,7 +11321,7 @@
       {
         "id": "06mwb",
         "name": "Yimy Tovar",
-        "rank": 2697,
+        "rank": 2721,
         "positions": "SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -11347,7 +11347,7 @@
       {
         "id": "06fqt",
         "name": "Scott Bandura",
-        "rank": 2395,
+        "rank": 2404,
         "positions": "LF,RF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -11373,7 +11373,7 @@
       {
         "id": "06ynn",
         "name": "Trevor Cohen",
-        "rank": 1848,
+        "rank": 1287,
         "positions": "CF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -11399,7 +11399,7 @@
       {
         "id": "06sbv",
         "name": "Ismael Mejia",
-        "rank": 3316,
+        "rank": 3369,
         "positions": "1B,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -11425,7 +11425,7 @@
       {
         "id": "066b5",
         "name": "Tayden Hall",
-        "rank": 2963,
+        "rank": 2999,
         "positions": "1B,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -11449,9 +11449,35 @@
         }
       },
       {
+        "id": "07248",
+        "name": "Victor Valdez",
+        "rank": 894,
+        "positions": "SS,INF",
+        "isPit": false,
+        "isTwoWay": false,
+        "overall": 98,
+        "sample": 129,
+        "confidence": {
+          "hit": 59,
+          "power": 52,
+          "speed": 68
+        },
+        "delta": 2,
+        "prevOverall": 88,
+        "ipPerGs": null,
+        "deltas": {
+          "season": 10,
+          "d7": 1,
+          "d15": 2,
+          "d30": 4,
+          "d60": null,
+          "d90": null
+        }
+      },
+      {
         "id": "072h7",
         "name": "Jeyson Horton",
-        "rank": 3592,
+        "rank": 3657,
         "positions": "SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -11477,7 +11503,7 @@
       {
         "id": "06lz2",
         "name": "Daniel Dickinson",
-        "rank": 3598,
+        "rank": 3661,
         "positions": "2B,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -11499,39 +11525,13 @@
           "d60": 9,
           "d90": 10
         }
-      },
-      {
-        "id": "07300",
-        "name": "Dawvris Brito",
-        "rank": 3605,
-        "positions": "SS,INF",
-        "isPit": false,
-        "isTwoWay": false,
-        "overall": 98,
-        "sample": 146,
-        "confidence": {
-          "hit": 62,
-          "power": 55,
-          "speed": 71
-        },
-        "delta": 2,
-        "prevOverall": 88,
-        "ipPerGs": null,
-        "deltas": {
-          "season": 10,
-          "d7": 1,
-          "d15": 2,
-          "d30": 4,
-          "d60": null,
-          "d90": null
-        }
       }
     ],
     "arms": [
       {
         "id": "066iu",
         "name": "Gage Ziehl",
-        "rank": 1887,
+        "rank": 1326,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -11556,7 +11556,7 @@
       {
         "id": "06mph",
         "name": "Anthony Eyanson",
-        "rank": 224,
+        "rank": 221,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -11581,7 +11581,7 @@
       {
         "id": "06z0x",
         "name": "Caden Hunter",
-        "rank": 1078,
+        "rank": 792,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -11606,7 +11606,7 @@
       {
         "id": "06ktt",
         "name": "Jamie Arnold",
-        "rank": 343,
+        "rank": 301,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -11631,7 +11631,7 @@
       {
         "id": "05uce",
         "name": "Brendan Beck",
-        "rank": 2182,
+        "rank": 2176,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -11656,7 +11656,7 @@
       {
         "id": "06zrd",
         "name": "Dylan Brown",
-        "rank": 1827,
+        "rank": 1267,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -11681,7 +11681,7 @@
       {
         "id": "072ep",
         "name": "Mikey Cascino",
-        "rank": 2530,
+        "rank": 2509,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -11706,7 +11706,7 @@
       {
         "id": "06krw",
         "name": "Eliazar Dishmey",
-        "rank": 1638,
+        "rank": 1117,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -11731,7 +11731,7 @@
       {
         "id": "06rre",
         "name": "Joseph Dzierwa",
-        "rank": 409,
+        "rank": 401,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -11756,7 +11756,7 @@
       {
         "id": "06ybd",
         "name": "Miguel Sime",
-        "rank": 609,
+        "rank": 589,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -11781,7 +11781,7 @@
       {
         "id": "06qsu",
         "name": "Jacob Kisting",
-        "rank": 2073,
+        "rank": 1957,
         "positions": "RP",
         "isPit": true,
         "isTwoWay": false,
@@ -11806,7 +11806,7 @@
       {
         "id": "06yjw",
         "name": "Cody Bowker",
-        "rank": 1814,
+        "rank": 1254,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -11831,7 +11831,7 @@
       {
         "id": "070c4",
         "name": "Talon Haley",
-        "rank": 1559,
+        "rank": 1038,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -11856,7 +11856,7 @@
       {
         "id": "06r9y",
         "name": "Sadbiel Delzine",
-        "rank": 1152,
+        "rank": 845,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -11881,7 +11881,7 @@
       {
         "id": "064of",
         "name": "Luichi Casilla",
-        "rank": 2783,
+        "rank": 2756,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -11906,7 +11906,7 @@
       {
         "id": "0649f",
         "name": "Tyler Gough",
-        "rank": 2607,
+        "rank": 2583,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -11931,7 +11931,7 @@
       {
         "id": "06plg",
         "name": "Jose Cabrera",
-        "rank": 1151,
+        "rank": 844,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -11956,7 +11956,7 @@
       {
         "id": "06uth",
         "name": "Matthew Fisher",
-        "rank": 1237,
+        "rank": 916,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -11981,7 +11981,7 @@
       {
         "id": "06zfo",
         "name": "Nick Potter",
-        "rank": 3814,
+        "rank": 3887,
         "positions": "RP",
         "isPit": true,
         "isTwoWay": false,
@@ -12006,7 +12006,7 @@
       {
         "id": "05ubs",
         "name": "Nazier Mule",
-        "rank": 3327,
+        "rank": 3300,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -12031,7 +12031,7 @@
       {
         "id": "06htl",
         "name": "Ty Johnson",
-        "rank": 687,
+        "rank": 522,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -12056,7 +12056,7 @@
       {
         "id": "05ydp",
         "name": "Kade Anderson",
-        "rank": 75,
+        "rank": 74,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -12081,7 +12081,7 @@
       {
         "id": "06y0k",
         "name": "Ramon Marquez",
-        "rank": 606,
+        "rank": 512,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -12106,7 +12106,7 @@
       {
         "id": "06mcc",
         "name": "Yhoiker Fajardo",
-        "rank": 813,
+        "rank": 695,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -12131,7 +12131,7 @@
       {
         "id": "06s7q",
         "name": "Liomar Martinez",
-        "rank": 1816,
+        "rank": 1256,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -12156,7 +12156,7 @@
       {
         "id": "04yij",
         "name": "Riley Cornelio",
-        "rank": 1858,
+        "rank": 1297,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -12181,7 +12181,7 @@
       {
         "id": "06kkb",
         "name": "Boston Bateman",
-        "rank": 1297,
+        "rank": 976,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -12206,7 +12206,7 @@
       {
         "id": "06f1o",
         "name": "Trevor Harrison",
-        "rank": 1859,
+        "rank": 1298,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -12231,7 +12231,7 @@
       {
         "id": "0620i",
         "name": "Julio Mendez",
-        "rank": 2304,
+        "rank": 2300,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -12256,7 +12256,7 @@
       {
         "id": "051gy",
         "name": "Jace Beck",
-        "rank": 3776,
+        "rank": 3823,
         "positions": "RP",
         "isPit": true,
         "isTwoWay": false,
@@ -12281,7 +12281,7 @@
       {
         "id": "06r2u",
         "name": "Junior Sanchez",
-        "rank": 1286,
+        "rank": 965,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -12306,7 +12306,7 @@
       {
         "id": "06dlx",
         "name": "Jackson Nezuh",
-        "rank": 2238,
+        "rank": 2228,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -12331,7 +12331,7 @@
       {
         "id": "06cqu",
         "name": "Ismael Agreda",
-        "rank": 2616,
+        "rank": 2593,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -12356,7 +12356,7 @@
       {
         "id": "06kxc",
         "name": "Zach Root",
-        "rank": 546,
+        "rank": 536,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -12381,7 +12381,7 @@
       {
         "id": "06qwt",
         "name": "Ben Jacobs",
-        "rank": 1123,
+        "rank": 816,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -12406,7 +12406,7 @@
       {
         "id": "06l4z",
         "name": "Nestor Lorant",
-        "rank": 1795,
+        "rank": 1235,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -12431,7 +12431,7 @@
       {
         "id": "06nyu",
         "name": "Davis Polo",
-        "rank": 2455,
+        "rank": 2439,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -12456,7 +12456,7 @@
       {
         "id": "056j7",
         "name": "Luis Gutierrez",
-        "rank": 2320,
+        "rank": 2312,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -12481,7 +12481,7 @@
       {
         "id": "06hwr",
         "name": "Jacob Odle",
-        "rank": 1327,
+        "rank": 1006,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -12506,7 +12506,7 @@
       {
         "id": "06ybe",
         "name": "JT Quinn",
-        "rank": 878,
+        "rank": 737,
         "positions": "SP,RP",
         "isPit": true,
         "isTwoWay": false,
@@ -12531,7 +12531,7 @@
       {
         "id": "06pk6",
         "name": "Ethan Bagwell",
-        "rank": 1320,
+        "rank": 999,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -12556,7 +12556,7 @@
       {
         "id": "061bn",
         "name": "Austin Peterson",
-        "rank": 2342,
+        "rank": 2334,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -12581,7 +12581,7 @@
       {
         "id": "06icx",
         "name": "Tyler Bremner",
-        "rank": 436,
+        "rank": 477,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -12606,7 +12606,7 @@
       {
         "id": "06z3q",
         "name": "Mason Peters",
-        "rank": 1598,
+        "rank": 1077,
         "positions": "RP",
         "isPit": true,
         "isTwoWay": false,
@@ -12631,7 +12631,7 @@
       {
         "id": "06zae",
         "name": "Brady Parker",
-        "rank": 2789,
+        "rank": 2765,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -12656,7 +12656,7 @@
       {
         "id": "06r1m",
         "name": "Alejandro Rivera",
-        "rank": 2773,
+        "rank": 2746,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -12681,7 +12681,7 @@
       {
         "id": "06yez",
         "name": "Michael Lombardi",
-        "rank": 1091,
+        "rank": 805,
         "positions": "SP,RP",
         "isPit": true,
         "isTwoWay": false,
@@ -12706,7 +12706,7 @@
       {
         "id": "06zgr",
         "name": "Nelson Keljo",
-        "rank": 2857,
+        "rank": 2835,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -12731,7 +12731,7 @@
       {
         "id": "06qu7",
         "name": "Brooks Caple",
-        "rank": 1658,
+        "rank": 1137,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -12756,7 +12756,7 @@
       {
         "id": "05jpf",
         "name": "Trenton Denholm",
-        "rank": 2449,
+        "rank": 2435,
         "positions": "SP,RP",
         "isPit": true,
         "isTwoWay": false,
@@ -12785,7 +12785,7 @@
       {
         "id": "05ybr",
         "name": "Ethan Salas",
-        "rank": 249,
+        "rank": 220,
         "positions": "C",
         "isPit": false,
         "isTwoWay": false,
@@ -12811,7 +12811,7 @@
       {
         "id": "06yxm",
         "name": "Boston Smith",
-        "rank": 1916,
+        "rank": 1355,
         "positions": "C",
         "isPit": false,
         "isTwoWay": false,
@@ -12837,7 +12837,7 @@
       {
         "id": "06pie",
         "name": "Ryan Cesarini",
-        "rank": 2504,
+        "rank": 2524,
         "positions": "RF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -12863,7 +12863,7 @@
       {
         "id": "06rom",
         "name": "Max Williams",
-        "rank": 4034,
+        "rank": 4123,
         "positions": "LF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -12889,7 +12889,7 @@
       {
         "id": "05gbg",
         "name": "Zac Veen",
-        "rank": 672,
+        "rank": 630,
         "positions": "LF,RF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -12915,7 +12915,7 @@
       {
         "id": "05u3v",
         "name": "Walker Jenkins",
-        "rank": 197,
+        "rank": 164,
         "positions": "CF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -12941,7 +12941,7 @@
       {
         "id": "0724b",
         "name": "Angeibel Gomez",
-        "rank": 456,
+        "rank": 436,
         "positions": "CF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -12967,7 +12967,7 @@
       {
         "id": "066mk",
         "name": "Welbyn Francisca",
-        "rank": 1218,
+        "rank": 897,
         "positions": "SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -12993,7 +12993,7 @@
       {
         "id": "06tzx",
         "name": "Johan Machado",
-        "rank": 2362,
+        "rank": 2372,
         "positions": "3B,SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -13019,7 +13019,7 @@
       {
         "id": "0730o",
         "name": "Jaims Martinez",
-        "rank": 2389,
+        "rank": 2397,
         "positions": "SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -13045,7 +13045,7 @@
       {
         "id": "06ytz",
         "name": "Yovanny Duran",
-        "rank": 1589,
+        "rank": 1068,
         "positions": "CF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -13071,7 +13071,7 @@
       {
         "id": "060uv",
         "name": "Leandro Pineda",
-        "rank": 2268,
+        "rank": 2269,
         "positions": "RF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -13097,7 +13097,7 @@
       {
         "id": "07247",
         "name": "Elian Rosario",
-        "rank": 1290,
+        "rank": 969,
         "positions": "3B,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -13123,7 +13123,7 @@
       {
         "id": "06yjd",
         "name": "Aaron Walton",
-        "rank": 1268,
+        "rank": 947,
         "positions": "CF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -13149,7 +13149,7 @@
       {
         "id": "072co",
         "name": "JP Smith",
-        "rank": 2934,
+        "rank": 2969,
         "positions": "1B,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -13175,7 +13175,7 @@
       {
         "id": "06cgg",
         "name": "Billy Amick",
-        "rank": 1693,
+        "rank": 1172,
         "positions": "1B,3B,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -13199,35 +13199,9 @@
         }
       },
       {
-        "id": "071wb",
-        "name": "Johenssy Colome",
-        "rank": 633,
-        "positions": "SS,INF",
-        "isPit": false,
-        "isTwoWay": false,
-        "overall": 98,
-        "sample": 112,
-        "confidence": {
-          "hit": 55,
-          "power": 48,
-          "speed": 65
-        },
-        "delta": 2,
-        "prevOverall": 88,
-        "ipPerGs": null,
-        "deltas": {
-          "season": 10,
-          "d7": 2,
-          "d15": 1,
-          "d30": 8,
-          "d60": null,
-          "d90": null
-        }
-      },
-      {
         "id": "072h7",
         "name": "Jeyson Horton",
-        "rank": 3592,
+        "rank": 3657,
         "positions": "SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -13253,7 +13227,7 @@
       {
         "id": "06lz2",
         "name": "Daniel Dickinson",
-        "rank": 3598,
+        "rank": 3661,
         "positions": "2B,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -13279,7 +13253,7 @@
       {
         "id": "06y07",
         "name": "John Taylor",
-        "rank": 2880,
+        "rank": 2919,
         "positions": "2B,SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -13305,7 +13279,7 @@
       {
         "id": "06ksc",
         "name": "Dean Curley",
-        "rank": 1211,
+        "rank": 890,
         "positions": "SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -13331,7 +13305,7 @@
       {
         "id": "06nvj",
         "name": "Turner Hill",
-        "rank": 3153,
+        "rank": 3196,
         "positions": "LF,CF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -13357,7 +13331,7 @@
       {
         "id": "066l0",
         "name": "Zach Ehrhard",
-        "rank": 1255,
+        "rank": 934,
         "positions": "LF,CF,RF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -13383,7 +13357,7 @@
       {
         "id": "06n8y",
         "name": "Eli Willits",
-        "rank": 92,
+        "rank": 88,
         "positions": "SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -13409,7 +13383,7 @@
       {
         "id": "06alk",
         "name": "Charlie Condon",
-        "rank": 261,
+        "rank": 260,
         "positions": "1B,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -13435,7 +13409,7 @@
       {
         "id": "06oo7",
         "name": "Sean Keys",
-        "rank": 588,
+        "rank": 594,
         "positions": "1B,3B,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -13461,7 +13435,7 @@
       {
         "id": "06ytw",
         "name": "Juan Torres",
-        "rank": 2237,
+        "rank": 2232,
         "positions": "2B,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -13487,7 +13461,7 @@
       {
         "id": "06ibo",
         "name": "Emil Morales",
-        "rank": 308,
+        "rank": 247,
         "positions": "SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -13513,7 +13487,7 @@
       {
         "id": "061wh",
         "name": "Jefferson Rojas",
-        "rank": 438,
+        "rank": 369,
         "positions": "2B,SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -13539,7 +13513,7 @@
       {
         "id": "04qow",
         "name": "Kevin Alcantara",
-        "rank": 603,
+        "rank": 1405,
         "positions": "CF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -13565,7 +13539,7 @@
       {
         "id": "06dvu",
         "name": "Lisbel Diaz",
-        "rank": 1806,
+        "rank": 1246,
         "positions": "LF,CF,RF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -13591,7 +13565,7 @@
       {
         "id": "0724c",
         "name": "Francisco Renteria",
-        "rank": 762,
+        "rank": 524,
         "positions": "CF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -13617,7 +13591,7 @@
       {
         "id": "06kkn",
         "name": "Cristian Arguelles",
-        "rank": 608,
+        "rank": 588,
         "positions": "CF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -13643,7 +13617,7 @@
       {
         "id": "06qrv",
         "name": "Owen Carey",
-        "rank": 1250,
+        "rank": 929,
         "positions": "LF,CF,RF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -13669,7 +13643,7 @@
       {
         "id": "0518r",
         "name": "Dustin Harris",
-        "rank": 1410,
+        "rank": 1779,
         "positions": "LF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -13693,9 +13667,35 @@
         }
       },
       {
+        "id": "072pa",
+        "name": "Diego Frontado",
+        "rank": 820,
+        "positions": "SS,INF",
+        "isPit": false,
+        "isTwoWay": false,
+        "overall": 106,
+        "sample": 171,
+        "confidence": {
+          "hit": 66,
+          "power": 59,
+          "speed": 74
+        },
+        "delta": 1,
+        "prevOverall": 88,
+        "ipPerGs": null,
+        "deltas": {
+          "season": 18,
+          "d7": 1,
+          "d15": 3,
+          "d30": 5,
+          "d60": 8,
+          "d90": null
+        }
+      },
+      {
         "id": "072jh",
         "name": "Samil Serrano",
-        "rank": 1751,
+        "rank": 1191,
         "positions": "CF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -13721,7 +13721,7 @@
       {
         "id": "06alr",
         "name": "Brady Ebel",
-        "rank": 577,
+        "rank": 568,
         "positions": "SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -13745,9 +13745,35 @@
         }
       },
       {
+        "id": "05ygt",
+        "name": "Yordany De Los Santos",
+        "rank": 1247,
+        "positions": "2B,SS,INF",
+        "isPit": false,
+        "isTwoWay": false,
+        "overall": 105,
+        "sample": 1600,
+        "confidence": {
+          "hit": 95,
+          "power": 93,
+          "speed": 96
+        },
+        "delta": 1,
+        "prevOverall": 102,
+        "ipPerGs": null,
+        "deltas": {
+          "season": 3,
+          "d7": 1,
+          "d15": 0,
+          "d30": 0,
+          "d60": 1,
+          "d90": 4
+        }
+      },
+      {
         "id": "06k81",
         "name": "Yairo Padilla",
-        "rank": 703,
+        "rank": 648,
         "positions": "SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -13773,7 +13799,7 @@
       {
         "id": "06o0h",
         "name": "Luis Escudero",
-        "rank": 1600,
+        "rank": 1079,
         "positions": "2B,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -13799,7 +13825,7 @@
       {
         "id": "06kjz",
         "name": "Chase Harlan",
-        "rank": 542,
+        "rank": 486,
         "positions": "3B,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -13825,7 +13851,7 @@
       {
         "id": "06qwv",
         "name": "Kane Kepley",
-        "rank": 815,
+        "rank": 714,
         "positions": "CF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -13851,7 +13877,7 @@
       {
         "id": "072ds",
         "name": "Santiago Solarte",
-        "rank": 1910,
+        "rank": 1349,
         "positions": "SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -13877,7 +13903,7 @@
       {
         "id": "06c1j",
         "name": "Cam Cannarella",
-        "rank": 548,
+        "rank": 538,
         "positions": "CF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -13903,7 +13929,7 @@
       {
         "id": "05yci",
         "name": "Tony Blanco Jr.",
-        "rank": 798,
+        "rank": 698,
         "positions": "1B,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -13929,7 +13955,7 @@
       {
         "id": "06k7w",
         "name": "Andreimi Antunez",
-        "rank": 1917,
+        "rank": 1356,
         "positions": "SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -13955,7 +13981,7 @@
       {
         "id": "064nj",
         "name": "Nico Perez",
-        "rank": 1674,
+        "rank": 1153,
         "positions": "2B,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -13981,7 +14007,7 @@
       {
         "id": "05h2t",
         "name": "Milan Tolentino",
-        "rank": 2259,
+        "rank": 2257,
         "positions": "2B,3B,SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -14007,7 +14033,7 @@
       {
         "id": "06tzu",
         "name": "Junior Suriel",
-        "rank": 2457,
+        "rank": 2468,
         "positions": "CF,OF",
         "isPit": false,
         "isTwoWay": false,
@@ -14033,7 +14059,7 @@
       {
         "id": "072p5",
         "name": "Albert Fermin",
-        "rank": 879,
+        "rank": 738,
         "positions": "SS,INF",
         "isPit": false,
         "isTwoWay": false,
@@ -14055,39 +14081,13 @@
           "d60": 11,
           "d90": null
         }
-      },
-      {
-        "id": "0731m",
-        "name": "Svert Reinoso",
-        "rank": 1803,
-        "positions": "SS,INF",
-        "isPit": false,
-        "isTwoWay": false,
-        "overall": 103,
-        "sample": 164,
-        "confidence": {
-          "hit": 65,
-          "power": 58,
-          "speed": 73
-        },
-        "delta": 1,
-        "prevOverall": 88,
-        "ipPerGs": null,
-        "deltas": {
-          "season": 15,
-          "d7": 1,
-          "d15": 3,
-          "d30": 5,
-          "d60": 11,
-          "d90": null
-        }
       }
     ],
     "arms": [
       {
         "id": "066iu",
         "name": "Gage Ziehl",
-        "rank": 1887,
+        "rank": 1326,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -14112,7 +14112,7 @@
       {
         "id": "072ep",
         "name": "Mikey Cascino",
-        "rank": 2530,
+        "rank": 2509,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -14137,7 +14137,7 @@
       {
         "id": "06krw",
         "name": "Eliazar Dishmey",
-        "rank": 1638,
+        "rank": 1117,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -14162,7 +14162,7 @@
       {
         "id": "06mph",
         "name": "Anthony Eyanson",
-        "rank": 224,
+        "rank": 221,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -14187,7 +14187,7 @@
       {
         "id": "06zrd",
         "name": "Dylan Brown",
-        "rank": 1827,
+        "rank": 1267,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -14212,7 +14212,7 @@
       {
         "id": "06kxc",
         "name": "Zach Root",
-        "rank": 546,
+        "rank": 536,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -14237,7 +14237,7 @@
       {
         "id": "06htl",
         "name": "Ty Johnson",
-        "rank": 687,
+        "rank": 522,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -14262,7 +14262,7 @@
       {
         "id": "05ydp",
         "name": "Kade Anderson",
-        "rank": 75,
+        "rank": 74,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -14287,7 +14287,7 @@
       {
         "id": "06y0k",
         "name": "Ramon Marquez",
-        "rank": 606,
+        "rank": 512,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -14312,7 +14312,7 @@
       {
         "id": "06rre",
         "name": "Joseph Dzierwa",
-        "rank": 409,
+        "rank": 401,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -14337,7 +14337,7 @@
       {
         "id": "06qp2",
         "name": "Nate Payne",
-        "rank": 1166,
+        "rank": 859,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -14362,7 +14362,7 @@
       {
         "id": "06s7q",
         "name": "Liomar Martinez",
-        "rank": 1816,
+        "rank": 1256,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -14387,7 +14387,7 @@
       {
         "id": "06mq3",
         "name": "Reinold Navarro",
-        "rank": 1203,
+        "rank": 882,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -14412,7 +14412,7 @@
       {
         "id": "04yij",
         "name": "Riley Cornelio",
-        "rank": 1858,
+        "rank": 1297,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -14437,7 +14437,7 @@
       {
         "id": "06f1o",
         "name": "Trevor Harrison",
-        "rank": 1859,
+        "rank": 1298,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -14462,7 +14462,7 @@
       {
         "id": "0620i",
         "name": "Julio Mendez",
-        "rank": 2304,
+        "rank": 2300,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -14487,7 +14487,7 @@
       {
         "id": "051gy",
         "name": "Jace Beck",
-        "rank": 3776,
+        "rank": 3823,
         "positions": "RP",
         "isPit": true,
         "isTwoWay": false,
@@ -14510,9 +14510,34 @@
         }
       },
       {
+        "id": "06uhj",
+        "name": "Daniel Guerra",
+        "rank": 1257,
+        "positions": "SP,RP",
+        "isPit": true,
+        "isTwoWay": false,
+        "overall": 102,
+        "sample": 271,
+        "confidence": {
+          "stuff": 93,
+          "control": 87
+        },
+        "delta": 1,
+        "prevOverall": 99,
+        "ipPerGs": 4.155555555555556,
+        "deltas": {
+          "season": 3,
+          "d7": 1,
+          "d15": 0,
+          "d30": 1,
+          "d60": 1,
+          "d90": 3
+        }
+      },
+      {
         "id": "06qsu",
         "name": "Jacob Kisting",
-        "rank": 2073,
+        "rank": 1957,
         "positions": "RP",
         "isPit": true,
         "isTwoWay": false,
@@ -14537,7 +14562,7 @@
       {
         "id": "06yjw",
         "name": "Cody Bowker",
-        "rank": 1814,
+        "rank": 1254,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -14562,7 +14587,7 @@
       {
         "id": "06l4z",
         "name": "Nestor Lorant",
-        "rank": 1795,
+        "rank": 1235,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -14587,7 +14612,7 @@
       {
         "id": "06nyu",
         "name": "Davis Polo",
-        "rank": 2455,
+        "rank": 2439,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -14612,7 +14637,7 @@
       {
         "id": "06hf3",
         "name": "Levi Sterling",
-        "rank": 1849,
+        "rank": 1288,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -14637,7 +14662,7 @@
       {
         "id": "06r9y",
         "name": "Sadbiel Delzine",
-        "rank": 1152,
+        "rank": 845,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -14662,7 +14687,7 @@
       {
         "id": "064of",
         "name": "Luichi Casilla",
-        "rank": 2783,
+        "rank": 2756,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -14687,7 +14712,7 @@
       {
         "id": "061bn",
         "name": "Austin Peterson",
-        "rank": 2342,
+        "rank": 2334,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -14712,7 +14737,7 @@
       {
         "id": "06z3q",
         "name": "Mason Peters",
-        "rank": 1598,
+        "rank": 1077,
         "positions": "RP",
         "isPit": true,
         "isTwoWay": false,
@@ -14737,7 +14762,7 @@
       {
         "id": "06zcl",
         "name": "Braylon Owens",
-        "rank": 2570,
+        "rank": 2547,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -14762,7 +14787,7 @@
       {
         "id": "06z3p",
         "name": "Colton Shaw",
-        "rank": 1679,
+        "rank": 1158,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -14787,7 +14812,7 @@
       {
         "id": "06r1m",
         "name": "Alejandro Rivera",
-        "rank": 2773,
+        "rank": 2746,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -14812,7 +14837,7 @@
       {
         "id": "06ktt",
         "name": "Jamie Arnold",
-        "rank": 343,
+        "rank": 301,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -14837,7 +14862,7 @@
       {
         "id": "06qus",
         "name": "Christian Rodriguez",
-        "rank": 3109,
+        "rank": 3081,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -14862,7 +14887,7 @@
       {
         "id": "06qu7",
         "name": "Brooks Caple",
-        "rank": 1658,
+        "rank": 1137,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -14887,7 +14912,7 @@
       {
         "id": "06657",
         "name": "Mason Adams",
-        "rank": 2044,
+        "rank": 2153,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -14912,7 +14937,7 @@
       {
         "id": "06yyu",
         "name": "Rory Fox",
-        "rank": 2051,
+        "rank": 1935,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -14937,7 +14962,7 @@
       {
         "id": "072cm",
         "name": "Reed Moring",
-        "rank": 2948,
+        "rank": 2934,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -14962,7 +14987,7 @@
       {
         "id": "06qrw",
         "name": "Luke Gabrysh",
-        "rank": 3058,
+        "rank": 3040,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -14987,7 +15012,7 @@
       {
         "id": "05xpp",
         "name": "Chad Dallas",
-        "rank": 2266,
+        "rank": 2254,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -15012,7 +15037,7 @@
       {
         "id": "06hna",
         "name": "Adler Cecil",
-        "rank": 6897,
+        "rank": 7025,
         "positions": "RP",
         "isPit": true,
         "isTwoWay": false,
@@ -15037,7 +15062,7 @@
       {
         "id": "06upu",
         "name": "Miguel Toscano",
-        "rank": 2921,
+        "rank": 2902,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -15062,7 +15087,7 @@
       {
         "id": "06uth",
         "name": "Matthew Fisher",
-        "rank": 1237,
+        "rank": 916,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
@@ -15087,7 +15112,7 @@
       {
         "id": "06zfo",
         "name": "Nick Potter",
-        "rank": 3814,
+        "rank": 3887,
         "positions": "RP",
         "isPit": true,
         "isTwoWay": false,
@@ -15112,7 +15137,7 @@
       {
         "id": "06fzc",
         "name": "Corey Avant",
-        "rank": 3506,
+        "rank": 3495,
         "positions": "SP,RP",
         "isPit": true,
         "isTwoWay": false,
@@ -15137,7 +15162,7 @@
       {
         "id": "06cqx",
         "name": "Steven Echavarria",
-        "rank": 2819,
+        "rank": 2793,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,

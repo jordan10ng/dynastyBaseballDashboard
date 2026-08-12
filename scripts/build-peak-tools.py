@@ -109,8 +109,14 @@ PITCH_TOOLS = {
     'control': lambda z: to_plus(z.get('bb_pct') or 0),
 }
 
-def best_window(per_season, tool_fn):
-    """per_season: list of (year, z_dict, weight). Returns (best_value, [y0,y1]) or (None, None)."""
+def best_window(per_season, tool_fn, min_sample):
+    """per_season: list of (year, z_dict, weight). Returns (best_value, [y0,y1]) or (None, None).
+    min_sample floors a candidate window's total PA/IP at the same bar used to qualify a
+    player's whole career (MIN_PA/MIN_IP) -- without it, a window at the tail of a player's
+    data (nothing after it to widen the chunk to a real 3 years) can be a single injury-
+    shortened stint of a few PA/IP, and an extreme small-sample z-score from that alone can
+    "win" as someone's peak (Zach Eflin: a 2026 window of just 3.2 IP / 17 BF produced a
+    155 stuff grade off a 41% K% in that tiny sample, becoming his official career peak)."""
     if not per_season: return None, None
     best_val, best_window_years = None, None
     for i in range(len(per_season)):
@@ -121,7 +127,7 @@ def best_window(per_season, tool_fn):
             for k, v in z.items():
                 if v is not None: zsum[k] += v * w
             wsum += w
-        if wsum <= 0: continue
+        if wsum < min_sample: continue
         cz = {k: v / wsum for k, v in zsum.items()}
         val = tool_fn(cz)
         if best_val is None or val > best_val:
@@ -148,7 +154,7 @@ def peak_hitter(pid):
 
     result = {'type': 'hitter', '_seasons': len(qualifying), '_debut': debut, '_career_pa': round(career_pa)}
     for tool, fn in HIT_TOOLS.items():
-        val, window = best_window(per_season, fn)
+        val, window = best_window(per_season, fn, MIN_PA)
         result[tool] = round(val) if val is not None else None
         result[f'_{tool}_window'] = window
     return result
@@ -170,7 +176,7 @@ def peak_pitcher(pid):
 
     result = {'type': 'pitcher', '_seasons': len(all_mlb), '_debut': debut, '_career_ip': round(career_ip)}
     for tool, fn in PITCH_TOOLS.items():
-        val, window = best_window(per_season, fn)
+        val, window = best_window(per_season, fn, MIN_IP)
         result[tool] = round(val) if val is not None else None
         result[f'_{tool}_window'] = window
     return result
