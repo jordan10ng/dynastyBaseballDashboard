@@ -2,15 +2,17 @@
  * build-comp-pool.js
  * Prospect-only "pro comp" — ceiling (90th pct) and floor (25th pct) real-player comps.
  *
- * Comp pool = graduated players' REAL career MLB tool grades (career_blend.hit/power/speed
- * or .stuff/.control) — not a reconstructed "what they looked like as a prospect"
- * projection. A prospect's own career_blend tool grades are already the model's
+ * Comp pool = graduated players' REAL peak (best rolling 3yr window, peak-tools.json) tool
+ * grades — not a reconstructed "what they looked like as a prospect" projection, and not
+ * their career-average either (a long career's average can sit well below what a player
+ * actually proved at their best, misleadingly pulling them into a similarity match their
+ * peak was never actually close to). A prospect's own tool grades are already the model's
  * MLB-translated projection (regression.json's targets are mlb-tools.json's real grades),
  * so comparing that projection directly against graduated players' real grades is
  * apples-to-apples by construction. No point predicting a graduated player's past when we
  * already know what they became.
  *
- * Similarity: weighted Euclidean distance on tool grades (same weights as the overall
+ * Similarity: weighted Euclidean distance on peak tool grades (same weights as the overall
  * composite), same role (hitter / SP / RP — pitcher role already persisted on career_blend
  * by build-scores.js). From the K nearest neighbors, pick whichever real comp's realized
  * outcome sits closest to the pool's 90th percentile (ceiling, by peak3) and 25th
@@ -25,10 +27,12 @@ const fs   = require('fs');
 const path = require('path');
 const os   = require('os');
 
-const BASE         = process.env.DATA_BASE || path.join(os.homedir(), 'Desktop/fantasy-baseball/data');
-const PLAYERS_PATH = path.join(BASE, 'players.json');
+const BASE           = process.env.DATA_BASE || path.join(os.homedir(), 'Desktop/fantasy-baseball/data');
+const PLAYERS_PATH   = path.join(BASE, 'players.json');
+const PEAK_TOOLS_PATH = path.join(BASE, 'model/peak-tools.json');
 
-const players = JSON.parse(fs.readFileSync(PLAYERS_PATH, 'utf8'));
+const players   = JSON.parse(fs.readFileSync(PLAYERS_PATH, 'utf8'));
+const peakTools = fs.existsSync(PEAK_TOOLS_PATH) ? JSON.parse(fs.readFileSync(PEAK_TOOLS_PATH, 'utf8')) : {};
 
 const COMPOSITE_WEIGHTS = {
   hitter:  { hit: 0.42, power: 0.47, speed: 0.11 },
@@ -126,7 +130,20 @@ function positionCompatible(prospectPositions, candidatePositions) {
   return candidatePositions.some(p => allowed.has(p));
 }
 
-// ── Build comp pools from graduated players' real career_blend grades ──────────────────
+// ── Build comp pools from graduated players' REAL PEAK tool grades ─────────────────────
+// Similarity uses each real player's best rolling-3yr-window tool grades (peak-tools.json)
+// instead of their career-average (career_blend.hit/power/speed) — a long career's average
+// can be dragged well below what the player actually proved at their best (Justin
+// Verlander: career stuff/control 111/112, diluted by a 12-season sample, vs. his real
+// 2018-19 peak of 130/119 -- ACE-caliber). Matching prospects against the diluted average
+// let modest projections pull in a comp whose peak was nothing like them (Verlander showing
+// up as a FLOOR comp for an unremarkable prospect, purely because his career-long average
+// happened to look modest -- not because his talent ever was). Peak-tools.json's raw
+// hit/power/speed (or stuff/control) are already on the same real-MLB-average-centered
+// scale as career_blend's, same to_plus(z) formula, no extra pool-norming needed (unlike
+// the prospect-side _raw, which is a MiLB-regression prediction on a different scale).
+// peak3/overall stay as the outcome-target metrics (unchanged) — only the similarity basis
+// moves from career-average to peak.
 const hitterPool = [];
 const spPool = [];
 const rpPool = [];
@@ -135,12 +152,15 @@ for (const [id, p] of Object.entries(players)) {
   const cb = p.career_blend;
   if (!cb || !((cb._mlbSample || 0) > 0)) continue; // graduated (real MLB tool grade) only
   const positions = parsePositions(p.positions);
+  const pt = p.mlbam_id ? peakTools[String(p.mlbam_id)] : null;
   if (cb.type === 'hitter') {
-    if (cb.hit == null || cb.power == null || cb.speed == null) continue;
-    hitterPool.push({ id, name: p.name, positions, bats: p.bats ?? null, hit: cb.hit, power: cb.power, speed: cb.speed, peak3: cb.peak3, overall: cb.overall });
+    const hit = pt?.hit ?? cb.hit, power = pt?.power ?? cb.power, speed = pt?.speed ?? cb.speed;
+    if (hit == null || power == null || speed == null) continue;
+    hitterPool.push({ id, name: p.name, positions, bats: p.bats ?? null, hit, power, speed, peak3: cb.peak3, overall: cb.overall });
   } else if (cb.type === 'pitcher') {
-    if (cb.stuff == null || cb.control == null) continue;
-    const entry = { id, name: p.name, positions, throws: p.throws ?? null, stuff: cb.stuff, control: cb.control, peak3: cb.peak3, overall: cb.overall };
+    const stuff = pt?.stuff ?? cb.stuff, control = pt?.control ?? cb.control;
+    if (stuff == null || control == null) continue;
+    const entry = { id, name: p.name, positions, throws: p.throws ?? null, stuff, control, peak3: cb.peak3, overall: cb.overall };
     (cb.role === 'RP' ? rpPool : spPool).push(entry);
   }
 }
