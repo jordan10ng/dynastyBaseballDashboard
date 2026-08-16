@@ -30,9 +30,46 @@ const os   = require('os');
 const BASE           = process.env.DATA_BASE || path.join(os.homedir(), 'Desktop/fantasy-baseball/data');
 const PLAYERS_PATH   = path.join(BASE, 'players.json');
 const PEAK_TOOLS_PATH = path.join(BASE, 'model/peak-tools.json');
+const HISTORY_DIR    = path.join(BASE, 'history');
 
 const players   = JSON.parse(fs.readFileSync(PLAYERS_PATH, 'utf8'));
 const peakTools = fs.existsSync(PEAK_TOOLS_PATH) ? JSON.parse(fs.readFileSync(PEAK_TOOLS_PATH, 'utf8')) : {};
+
+function ipToFloat(ip) {
+  const parts = String(ip || 0).split('.');
+  return parseInt(parts[0] || 0) + (parseInt(parts[1] || 0)) / 3;
+}
+
+// MIN_COMP_SAMPLE only checks *cumulative* career PA/IP -- a single monster
+// rookie year (Chase DeLauter: 452 PA, all one 2026 season) clears it despite
+// being a one-year track record, not a real career. Require at least 2 separate
+// MLB seasons with meaningful playing time (not a cameo) before a real player
+// counts as a comp candidate. Tested against 3: excludes 22% of the pool,
+// including plenty of legitimately-proven 2-year comps -- too blunt. 2 excludes
+// the one-year-wonders (~5% of the pool) without gutting it.
+const MIN_QUALIFYING_SEASONS = 2;
+const SEASON_MIN = { hitter: 100, pitcher: 20 };
+
+function computeQualifyingSeasons() {
+  const counts = {}; // mlbam_id -> Set of qualifying years
+  const files = fs.readdirSync(HISTORY_DIR).filter(f => /^\d{4}\.json$/.test(f));
+  for (const f of files) {
+    const year = f.slice(0, 4);
+    const data = JSON.parse(fs.readFileSync(path.join(HISTORY_DIR, f), 'utf8'));
+    for (const [id, rows] of Object.entries(data)) {
+      for (const r of rows) {
+        if (r.level !== 'MLB') continue;
+        if (r.type === 'hitting' && (r.pa || 0) >= SEASON_MIN.hitter) {
+          (counts[id] ??= new Set()).add(year);
+        } else if (r.type === 'pitching' && ipToFloat(r.ip) >= SEASON_MIN.pitcher) {
+          (counts[id] ??= new Set()).add(year);
+        }
+      }
+    }
+  }
+  return counts;
+}
+const qualifyingSeasons = computeQualifyingSeasons();
 
 const COMPOSITE_WEIGHTS = {
   hitter:  { hit: 0.42, power: 0.47, speed: 0.11 },
@@ -184,6 +221,8 @@ function buildPools(peakWeight, excludeGap) {
   for (const [id, p] of Object.entries(players)) {
     const cb = p.career_blend;
     if (!cb || !((cb._mlbSample || 0) > 0)) continue; // graduated (real MLB tool grade) only
+    const seasons = p.mlbam_id ? (qualifyingSeasons[String(p.mlbam_id)]?.size || 0) : 0;
+    if (seasons < MIN_QUALIFYING_SEASONS) continue;
     if (excludeGap != null && cb.peak3 != null && cb.overall != null && (cb.peak3 - cb.overall) > excludeGap) continue;
     const positions = parsePositions(p.positions);
     const pt = p.mlbam_id ? peakTools[String(p.mlbam_id)] : null;
