@@ -28,16 +28,16 @@ caffeinate -i & npm run dev
   ```bash
   git fetch origin
   git checkout origin/main -- data/history/2026.json data/players.json data/model/norms.json data/model/mlb-tools.json data/model/regression.json data/model/peak-tools.json data/model/peak-regression.json data/model/worthy-calibration.json data/model/fantasy-peak-regression.json data/model/hot-sheet.json data/model/scores-snapshot.json data/model/call-ups.json
-  node scripts/build-norms.js && python3 scripts/build-regression.py && python3 scripts/build-peak-tools.py && python3 scripts/build-peak-regression.py && python3 scripts/build-worthy-calibration.py && python3 scripts/build-fantasy-peak.py && node scripts/build-scores.js && node scripts/build-model-rank.js && node scripts/build-blend-rank.js && node scripts/build-callups.js
+  node scripts/build-norms.js && python3 scripts/build-regression.py && python3 scripts/build-peak-tools.py && python3 scripts/build-peak-regression.py && python3 scripts/build-worthy-calibration.py && python3 scripts/build-fantasy-peak.py && node scripts/build-scores.js && node scripts/build-model-rank.js && node scripts/build-blend-rank.js && node scripts/build-callups.js && node scripts/build-comp-pool.js
   git add -A && git commit -m "..." && git push
   ```
-- ⚠️ CRITICAL: After GHA recovery, always re-run the FULL pipeline (norms → regression → peak-tools → peak-regression → worthy-calibration → fantasy-peak → scores → model-rank → blend-rank → call-ups). Pulling data files from GitHub overwrites locally-built model files. Never run build-scores.js without first rebuilding regression.json from the current scripts. Forgetting `build-callups.js` silently reverts Call-Ups to whatever stale copy was last sitting locally, even though GHA regenerates it correctly every night -- this happened for real (stuck on 2026-07-21 for 2+ weeks) before this note was added.
+- ⚠️ CRITICAL: After GHA recovery, always re-run the FULL pipeline (norms → regression → peak-tools → peak-regression → worthy-calibration → fantasy-peak → scores → model-rank → blend-rank → call-ups → comp-pool). Pulling data files from GitHub overwrites locally-built model files. Never run build-scores.js without first rebuilding regression.json from the current scripts. Forgetting `build-callups.js` silently reverts Call-Ups to whatever stale copy was last sitting locally, even though GHA regenerates it correctly every night -- this happened for real (stuck on 2026-07-21 for 2+ weeks) before this note was added. Forgetting `build-comp-pool.js` silently wipes `career_blend.comp_ceiling`/`comp_floor` (build-scores.js rebuilds career_blend from scratch each run) -- this happened for real (Aug 2026) before this note was added.
 - DO NOT use `git pull --rebase` — causes detached HEAD and loses local file changes
 - DO NOT use `git reset --hard` before verifying local changes are committed or saved elsewhere
 
 ## Daily Sync (GitHub Actions)
 - Runs every night at 1am PT (9am UTC) via `.github/workflows/daily-sync.yml`
-- Pipeline: sync-stats-gha.js → build-norms → build-mlb-tools → build-regression → build-peak-tools → build-peak-regression → build-worthy-calibration → build-fantasy-peak → build-scores → build-model-rank → build-blend-rank → build-callups
+- Pipeline: sync-stats-gha.js → build-norms → build-mlb-tools → build-regression → build-peak-tools → build-peak-regression → build-worthy-calibration → build-fantasy-peak → build-scores → build-model-rank → build-blend-rank → build-callups → build-comp-pool
 - `peak-tools.json`/`peak-regression.json`/`worthy-calibration.json`/`fantasy-peak-regression.json`: additive display-only stats (`career_blend.peak3`, `.worthy_pct`, `.worthy_actual`, `.fantasy_peak3`). Never read by dynasty_score, model-rank, or blend-rank — safe to skip in an emergency rebuild, but do it anyway or those fields go stale. `fantasy_peak3` is prospects-only — graduated players get `null` there by design.
 - Commits updated `data/history/2026.json`, `data/players.json`, `data/model/*.json` to GitHub
 - Vercel detects the push → auto-redeploys with fresh data
@@ -451,7 +451,7 @@ Both use SPORT_ID_TO_LEVEL + sportAbbrToLevel() with sportId fallback. Both fetc
 - Before asserting anything about file contents, verify with grep or cat — never assume
 - GHA conflict recovery — local is ALWAYS source of truth. Never merge. Force push after rebuilding:
   ```bash
-  node scripts/build-norms.js && python3 scripts/build-regression.py && python3 scripts/build-peak-tools.py && python3 scripts/build-peak-regression.py && python3 scripts/build-worthy-calibration.py && node scripts/build-scores.js && node scripts/build-model-rank.js && node scripts/build-blend-rank.js && node scripts/build-callups.js
+  node scripts/build-norms.js && python3 scripts/build-regression.py && python3 scripts/build-peak-tools.py && python3 scripts/build-peak-regression.py && python3 scripts/build-worthy-calibration.py && node scripts/build-scores.js && node scripts/build-model-rank.js && node scripts/build-blend-rank.js && node scripts/build-callups.js && node scripts/build-comp-pool.js
   git add -A && git commit -m "..." && git push --force
   ```
 - Never use `git pull --rebase` — causes detached HEAD

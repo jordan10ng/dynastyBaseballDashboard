@@ -59,7 +59,7 @@ jobs:
       - name: Build scores + hot sheet
         env:
           DATA_BASE: ${{ github.workspace }}/data
-        run: node scripts/build-scores.js && node scripts/build-model-rank.js && node scripts/build-blend-rank.js && node scripts/build-callups.js
+        run: node scripts/build-scores.js && node scripts/build-model-rank.js && node scripts/build-blend-rank.js && node scripts/build-callups.js && node scripts/build-comp-pool.js
 
       - name: Sync Fantrax rosters
         continue-on-error: true   # cookie expiry shouldn't block the stats commit
