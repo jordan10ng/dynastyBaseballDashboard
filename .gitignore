@@ -17,3 +17,7 @@ npm-debug.log*
 
 # Claude
 .claude/
+
+# Local-only MCP tooling (not part of the app, not deployed)
+.mcp.json
+mcp/
