@@ -79,7 +79,7 @@ const PITCHER_CODES = new Set(['p', 'sp', 'rp'])
 function positionOverlap(rowPos: string, playerPos: string): boolean {
   const rowSet = new Set(normalize(rowPos).split(',').map(s => s.trim()).filter(Boolean))
   const playerSet = normalize(playerPos).split(',').map(s => s.trim()).filter(Boolean)
-  if ([...rowSet].some(p => PITCHER_CODES.has(p)) && playerSet.some(p => PITCHER_CODES.has(p))) return true
+  if (Array.from(rowSet).some(p => PITCHER_CODES.has(p)) && playerSet.some(p => PITCHER_CODES.has(p))) return true
   return playerSet.some(p => rowSet.has(p))
 }
 
