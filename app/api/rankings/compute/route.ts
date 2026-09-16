@@ -72,9 +72,14 @@ function pruneOutliers(entries: RankEntry[]): RankEntry[] {
 // though they share "RP", which silently broke disambiguation whenever a source's position
 // format didn't exactly match ours (the Mason Miller case: the real closer's most recent
 // rows used "RP,P" against our "RP", scoring 0 instead of the intended match).
+// Sources also mix a generic "P" pitcher tag with our specific "SP"/"RP" role tags for the
+// same real player (the Jared Jones case: our SP tag against a source's "P" or "RP" scored 0
+// instead of the intended match), so any pitcher code on either side counts as overlap.
+const PITCHER_CODES = new Set(['p', 'sp', 'rp'])
 function positionOverlap(rowPos: string, playerPos: string): boolean {
   const rowSet = new Set(normalize(rowPos).split(',').map(s => s.trim()).filter(Boolean))
   const playerSet = normalize(playerPos).split(',').map(s => s.trim()).filter(Boolean)
+  if ([...rowSet].some(p => PITCHER_CODES.has(p)) && playerSet.some(p => PITCHER_CODES.has(p))) return true
   return playerSet.some(p => rowSet.has(p))
 }
 
