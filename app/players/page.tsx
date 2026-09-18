@@ -3,6 +3,7 @@ import { useState, useEffect, useMemo, useCallback, useRef } from 'react'
 import { FixedSizeList as List } from "../../components/players/VirtualList"
 import { PlayerRow, StatCol } from '../../components/players/PlayerRow'
 import { PlayerDrawer } from '../../components/players/PlayerDrawer'
+import { isAFLPlayer } from '../../lib/afl' // TEMPORARY — remove with lib/afl.ts + data/afl-2026.json when AFL ends
 
 const LEAGUES: { id: string; label: string }[] = [
   { id: '0ehfuam0mg7wqpn7', label: 'D28' },
@@ -519,6 +520,7 @@ export default function PlayersPage() {
   }, [activeCols, availableToolKeys])
   const toggleTeam = useCallback((id: string) => setSelectedTeam(prev => prev === id ? '' : id), [])
   const [showFA, setShowFA] = useState(false)
+  const [aflOnly, setAflOnly] = useState(false) // TEMPORARY — AFL toggle, remove with lib/afl.ts
   const togglePosFilter = useCallback((pos: string) => {
     setSelectedPosFilters(prev => prev.includes(pos) ? prev.filter(x => x !== pos) : [...prev, pos])
   }, [])
@@ -538,6 +540,7 @@ export default function PlayersPage() {
       if (minorsFilter === 'minors' && !minorsIds.has(p.id)) return false
       if (batArmsFilter === 'bats' && isPitcher(p.positions) && !isTwoWayPlayer(p.positions)) return false
       if (batArmsFilter === 'arms' && !isPitcher(p.positions)) return false
+      if (aflOnly && !isAFLPlayer(p.name)) return false // TEMPORARY — AFL filter
 
       {
         const pOwn = globalOwnership[p.id] || {}
@@ -640,7 +643,7 @@ export default function PlayersPage() {
   }, [allPlayers, search, minorsFilter, batArmsFilter, ownFilter, selectedLeague, selectedTeam,
       rankMin, rankMax, ageMin, ageMax, selectedMlbTeam, selectedPosFilters, selectedLevelFilters,
       sortMode, statSortKey, toolSortKey, showStatCols, showToolCols, activeCols, statsMap,
-      statFilters, minorsIds, ownershipMap, globalOwnership, playerToolsMap, availableToolKeys])
+      statFilters, minorsIds, ownershipMap, globalOwnership, playerToolsMap, availableToolKeys, aflOnly])
 
   const grouped = useMemo(() => {
     if (sortMode !== 'position') return []
@@ -772,6 +775,11 @@ export default function PlayersPage() {
           {([{ val: 'all', label: 'All' }, { val: 'bats', label: 'Bats' }, { val: 'arms', label: 'Arms' }] as { val: BatArmsFilter; label: string }[]).map(opt => (
             <button key={opt.val} onClick={() => setBatArmsFilter(opt.val)} style={btn(batArmsFilter === opt.val)}>{opt.label}</button>
           ))}
+        </div>
+
+        {/* TEMPORARY — AFL toggle, remove with lib/afl.ts + data/afl-2026.json */}
+        <div style={{ display: 'flex', gap: 4, marginLeft: '0.5rem' }}>
+          <button onClick={() => setAflOnly(v => !v)} style={btn(aflOnly)}>AFL</button>
         </div>
 
         {mounted && (

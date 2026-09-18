@@ -67,6 +67,10 @@ These cause silent breakage if missed. Full details in `SCOUT_README.md`.
 - Rewrite whole files for small fixes
 - Write `jordan` anywhere
 
+## Temp Features
+
+- **AFL tag/filter (added 2026-09-17, remove when asked ~early Oct):** `data/afl-2026.json` (roster) + `lib/afl.ts` (`isAFLPlayer(name)`) + one toggle button/filter line in `app/players/page.tsx` (grep `TEMPORARY`). Fully self-contained — to remove, delete both files and the marked lines in `page.tsx`.
+
 ## Test Subjects
 
 | Role | Name | mlbam_id |
