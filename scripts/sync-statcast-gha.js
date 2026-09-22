@@ -14,11 +14,16 @@ const START_DATE = '2015-01-01'
 const TODAY = new Date().toISOString().slice(0, 10)
 const CONCURRENCY = 5
 const SAVE_EVERY = 100
+// GitHub Actions runners hit Savant from a shared/datacenter IP range, which is far
+// slower and flakier than a residential IP -- fail fast rather than retry patiently,
+// since a missed player just gets picked up again tomorrow (lastSyncDate won't advance).
+const FETCH_TRIES = 2
+const FETCH_TIMEOUT_MS = 10000
 
 function sleep(ms) { return new Promise(r => setTimeout(r, ms)) }
 
 async function pullOne(mlbamId, playerType, dateGt) {
-  const csv = await fetchCSV(savantUrl(playerType, mlbamId, dateGt, TODAY))
+  const csv = await fetchCSV(savantUrl(playerType, mlbamId, dateGt, TODAY), FETCH_TRIES, FETCH_TIMEOUT_MS)
   const rows = parseStatcastCSV(csv)
   return reduceRows(rows, playerType === 'pitcher')
 }
@@ -45,18 +50,18 @@ async function main() {
       const dateGt = existing?._meta?.lastSyncDate || START_DATE
       if (dateGt >= TODAY) { done++; continue }
       try {
-        if (hasBat) {
-          const add = await pullOne(mlbamId, 'batter', dateGt)
-          if (!existing?.bat) { if (!out[mlbamId]) out[mlbamId] = {}; out[mlbamId].bat = add }
-          else mergeTreeInto(existing.bat, add, false)
-          await sleep(200)
-        }
-        if (hasArm) {
-          const add = await pullOne(mlbamId, 'pitcher', dateGt)
-          if (!existing?.pitch) { if (!out[mlbamId]) out[mlbamId] = {}; out[mlbamId].pitch = add }
-          else mergeTreeInto(existing.pitch, add, true)
-          await sleep(200)
-        }
+        // Fetch everything needed for this player first, and only merge into `out`
+        // once all of it has succeeded -- a partial merge (e.g. bat ok, pitch fails
+        // for a two-way player) would advance nothing, but if we merged bat first
+        // and then threw, tomorrow's sync would still see the old lastSyncDate and
+        // re-fetch + double-count that same batter window.
+        let batAdd = null, pitchAdd = null
+        if (hasBat) { batAdd = await pullOne(mlbamId, 'batter', dateGt); await sleep(200) }
+        if (hasArm) { pitchAdd = await pullOne(mlbamId, 'pitcher', dateGt); await sleep(200) }
+
+        if (!out[mlbamId]) out[mlbamId] = {}
+        if (batAdd) { if (!existing?.bat) out[mlbamId].bat = batAdd; else mergeTreeInto(existing.bat, batAdd, false) }
+        if (pitchAdd) { if (!existing?.pitch) out[mlbamId].pitch = pitchAdd; else mergeTreeInto(existing.pitch, pitchAdd, true) }
         if (!out[mlbamId]._meta) out[mlbamId]._meta = {}
         out[mlbamId]._meta.hasArm = hasArm
         out[mlbamId]._meta.hasBat = hasBat

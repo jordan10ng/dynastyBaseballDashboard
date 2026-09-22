@@ -8,7 +8,7 @@ on:
 jobs:
   sync:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 45
 
     steps:
       - name: Checkout repo
@@ -63,6 +63,7 @@ jobs:
 
       - name: Sync Statcast totals (additive, no raw pitches stored)
         continue-on-error: true   # Savant rate-limits shouldn't block the stats commit
+        timeout-minutes: 15       # hard cap -- must never be able to eat the whole job's budget
         env:
           DATA_BASE: ${{ github.workspace }}/data
         run: node scripts/sync-statcast-gha.js
