@@ -36,14 +36,17 @@ async function main() {
   console.log(`Tracking ${Object.keys(playerIndex).length} players with mlbam_id`)
 
   let out = {}
-  let cursor = START_DATE
+  // Cursor = last day fully applied, so a resume starts the day AFTER it (restarting on it
+  // would double-count that day). Ends at yesterday (UTC): today is incomplete.
+  let start = START_DATE
   if (!FRESH) {
     if (fs.existsSync(OUT_PATH)) out = JSON.parse(fs.readFileSync(OUT_PATH, 'utf8'))
-    if (fs.existsSync(CURSOR_PATH)) cursor = JSON.parse(fs.readFileSync(CURSOR_PATH, 'utf8')).lastDay
+    if (fs.existsSync(CURSOR_PATH)) start = addDays(JSON.parse(fs.readFileSync(CURSOR_PATH, 'utf8')).lastDay, 1)
   }
 
-  const days = allDays(cursor, addDays(TODAY, 1))
-  console.log(`Backfilling ${days.length} days, from ${cursor} through ${TODAY}`)
+  const YESTERDAY = addDays(TODAY, -1)
+  const days = allDays(start, TODAY)
+  console.log(`Backfilling ${days.length} days, from ${start} through ${YESTERDAY}`)
 
   // Process in ordered chunks (not a free-for-all work pool): the cursor can only safely
   // advance past days that are ALL confirmed done, and under concurrency, days can finish
@@ -87,7 +90,7 @@ async function main() {
   }
 
   fs.writeFileSync(OUT_PATH, JSON.stringify(out))
-  fs.writeFileSync(CURSOR_PATH, JSON.stringify({ lastDay: TODAY }))
+  fs.writeFileSync(CURSOR_PATH, JSON.stringify({ lastDay: YESTERDAY }))
   console.log(`Done. ${done} days processed, ${totalRows} total rows, ${errors} errors, ${Object.keys(out).length} players with data.`)
 }
 

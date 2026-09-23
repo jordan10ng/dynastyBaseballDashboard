@@ -74,6 +74,12 @@ jobs:
           DATA_BASE: ${{ github.workspace }}/data
         run: node scripts/flag-statcast-backfill.js
 
+      - name: Build Statcast tool grades (display-only, not read by scores/ranks)
+        continue-on-error: true
+        env:
+          DATA_BASE: ${{ github.workspace }}/data
+        run: python3 scripts/build-statcast-tools.py
+
       - name: Sync Fantrax rosters
         continue-on-error: true   # cookie expiry shouldn't block the stats commit
         env:
@@ -85,6 +91,6 @@ jobs:
         run: |
           git config user.name "DIAMOND Bot"
           git config user.email "jordanwlong@gmail.com"
-          git add data/history/2026.json data/model/norms.json data/model/mlb-tools.json data/model/regression.json data/model/hot-sheet.json data/model/pool-stats.json data/model/blend-rank.json data/model/model-rank.json data/model/call-ups.json data/players.json data/db.json data/statcast-totals.json data/statcast-cursor.json data/statcast-backfill-queue.json
+          git add data/history/2026.json data/model/norms.json data/model/mlb-tools.json data/model/regression.json data/model/hot-sheet.json data/model/pool-stats.json data/model/blend-rank.json data/model/model-rank.json data/model/call-ups.json data/players.json data/db.json data/statcast-totals.json data/statcast-cursor.json data/statcast-backfill-queue.json data/model/statcast-tools.json
           git diff --cached --quiet || git commit -m "chore: daily sync $(date -u '+%Y-%m-%d')"
           git push --force

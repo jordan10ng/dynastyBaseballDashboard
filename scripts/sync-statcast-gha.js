@@ -31,7 +31,9 @@ async function main() {
   const out = fs.existsSync(OUT_PATH) ? JSON.parse(fs.readFileSync(OUT_PATH, 'utf8')) : {}
   const cursor = fs.existsSync(CURSOR_PATH) ? JSON.parse(fs.readFileSync(CURSOR_PATH, 'utf8')).lastDay : START_DATE
 
-  const days = allDays(addDays(cursor, 1), addDays(TODAY, 1))
+  // Through yesterday (UTC) only -- today is incomplete (or unplayed at the 1am PT run), and
+  // the cursor must never claim a day whose games haven't all landed.
+  const days = allDays(addDays(cursor, 1), TODAY)
   if (!days.length) { console.log(`Already synced through ${cursor}, nothing to do.`); return }
   console.log(`Syncing ${days.length} day(s): ${days[0]} through ${days[days.length - 1]}`)
 
