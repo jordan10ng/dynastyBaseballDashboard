@@ -61,9 +61,9 @@ jobs:
           DATA_BASE: ${{ github.workspace }}/data
         run: node scripts/build-scores.js && node scripts/build-model-rank.js && node scripts/build-blend-rank.js && node scripts/build-callups.js && node scripts/build-comp-pool.js
 
-      - name: Sync Statcast totals (additive, no raw pitches stored)
+      - name: Sync Statcast totals (day-chunked league-wide pull, additive, no raw pitches stored)
         continue-on-error: true   # Savant rate-limits shouldn't block the stats commit
-        timeout-minutes: 15       # hard cap -- must never be able to eat the whole job's budget
+        timeout-minutes: 8        # a handful of day-requests now, not one per player -- should take seconds
         env:
           DATA_BASE: ${{ github.workspace }}/data
         run: node scripts/sync-statcast-gha.js
@@ -79,6 +79,6 @@ jobs:
         run: |
           git config user.name "DIAMOND Bot"
           git config user.email "jordanwlong@gmail.com"
-          git add data/history/2026.json data/model/norms.json data/model/mlb-tools.json data/model/regression.json data/model/hot-sheet.json data/model/pool-stats.json data/model/blend-rank.json data/model/model-rank.json data/model/call-ups.json data/players.json data/db.json data/statcast-totals.json
+          git add data/history/2026.json data/model/norms.json data/model/mlb-tools.json data/model/regression.json data/model/hot-sheet.json data/model/pool-stats.json data/model/blend-rank.json data/model/model-rank.json data/model/call-ups.json data/players.json data/db.json data/statcast-totals.json data/statcast-cursor.json
           git diff --cached --quiet || git commit -m "chore: daily sync $(date -u '+%Y-%m-%d')"
           git push --force

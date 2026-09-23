@@ -1,74 +1,94 @@
 // One-time backfill: data/statcast-totals.json
-// Pulls full-career Statcast (2015-present) per player from Baseball Savant,
-// reduces to additive per-season/game_type/pitch_type totals (no raw rows stored).
-// Resumable: players already present in the output are skipped unless --fresh.
-// Usage: node scripts/backfill-statcast.js [--limit=N] [--fresh] [--concurrency=N]
+// Pulls Statcast day-by-day, league-wide (2015-present), and fans each day's rows out
+// to whichever tracked players (players.json) were involved -- one request per calendar
+// day covers every player at once, instead of one request per player (which is what
+// made this unreliable on GitHub Actions: 9,558 requests/run vs ~3,000 total, ever).
+// Resumable via a day cursor. Usage: node scripts/backfill-statcast.js [--fresh] [--concurrency=N]
 const fs = require('fs')
 const path = require('path')
 const os = require('os')
-const { fetchCSV, parseStatcastCSV, reduceRows, isTwoWayPositions, savantUrl } = require('../lib/statcast-reduce')
+const { fetchCSV, parseStatcastCSV, dayUrl, addDays, buildPlayerIndex, applyDayRows } = require('../lib/statcast-reduce')
 
 const BASE = process.env.DATA_BASE || path.join(os.homedir(), 'Desktop/fantasy-baseball/data')
 const PLAYERS_PATH = path.join(BASE, 'players.json')
 const OUT_PATH = path.join(BASE, 'statcast-totals.json')
+const CURSOR_PATH = path.join(BASE, 'statcast-cursor.json')
 const START_DATE = '2015-01-01'
 const TODAY = new Date().toISOString().slice(0, 10)
 
 const args = process.argv.slice(2)
-const LIMIT = (() => { const a = args.find(x => x.startsWith('--limit=')); return a ? parseInt(a.split('=')[1]) : Infinity })()
 const FRESH = args.includes('--fresh')
-const CONCURRENCY = (() => { const a = args.find(x => x.startsWith('--concurrency=')); return a ? parseInt(a.split('=')[1]) : 3 })()
-const SAVE_EVERY = 50
+const CONCURRENCY = (() => { const a = args.find(x => x.startsWith('--concurrency=')); return a ? parseInt(a.split('=')[1]) : 4 })()
+const SAVE_EVERY = 20
 
 function sleep(ms) { return new Promise(r => setTimeout(r, ms)) }
 
-async function pullOne(mlbamId, playerType) {
-  const csv = await fetchCSV(savantUrl(playerType, mlbamId, START_DATE, TODAY))
-  const rows = parseStatcastCSV(csv)
-  return reduceRows(rows, playerType === 'pitcher')
+function allDays(start, endExclusive) {
+  const days = []
+  for (let d = start; d < endExclusive; d = addDays(d, 1)) days.push(d)
+  return days
 }
 
 async function main() {
   const players = JSON.parse(fs.readFileSync(PLAYERS_PATH, 'utf8'))
   const arr = Array.isArray(players) ? players : Object.values(players)
-  const candidates = arr.filter(p => p.mlbam_id)
+  const playerIndex = buildPlayerIndex(arr)
+  console.log(`Tracking ${Object.keys(playerIndex).length} players with mlbam_id`)
 
   let out = {}
-  if (!FRESH && fs.existsSync(OUT_PATH)) out = JSON.parse(fs.readFileSync(OUT_PATH, 'utf8'))
+  let cursor = START_DATE
+  if (!FRESH) {
+    if (fs.existsSync(OUT_PATH)) out = JSON.parse(fs.readFileSync(OUT_PATH, 'utf8'))
+    if (fs.existsSync(CURSOR_PATH)) cursor = JSON.parse(fs.readFileSync(CURSOR_PATH, 'utf8')).lastDay
+  }
 
-  const todo = candidates.filter(p => !out[p.mlbam_id]).slice(0, LIMIT)
-  console.log(`${candidates.length} candidates, ${todo.length} to backfill (${candidates.length - todo.length} already done)`)
+  const days = allDays(cursor, addDays(TODAY, 1))
+  console.log(`Backfilling ${days.length} days, from ${cursor} through ${TODAY}`)
 
-  let done = 0, empty = 0, errors = 0
-  let idx = 0
+  // Process in ordered chunks (not a free-for-all work pool): the cursor can only safely
+  // advance past days that are ALL confirmed done, and under concurrency, days can finish
+  // out of order -- chunking keeps "cursor = end of last chunk" a safe resume point.
+  let done = 0, errors = 0, totalRows = 0
+  const chunksPerSave = Math.max(1, Math.round(SAVE_EVERY / CONCURRENCY))
 
-  async function worker() {
-    while (idx < todo.length) {
-      const p = todo[idx++]
-      const mlbamId = p.mlbam_id
-      const { hasArm, hasBat } = isTwoWayPositions(p.positions)
-      try {
-        const entry = { _meta: { lastSyncDate: TODAY, hasArm, hasBat } }
-        if (hasBat) { entry.bat = await pullOne(mlbamId, 'batter'); await sleep(200) }
-        if (hasArm) { entry.pitch = await pullOne(mlbamId, 'pitcher'); await sleep(200) }
-        const hasData = (entry.bat && Object.keys(entry.bat).length) || (entry.pitch && Object.keys(entry.pitch).length)
-        out[mlbamId] = entry
-        if (!hasData) empty++
-      } catch (e) {
-        errors++
-        console.error(`  ${p.name} (${mlbamId}): ${e.message}`)
-      }
-      done++
-      if (done % SAVE_EVERY === 0) {
-        fs.writeFileSync(OUT_PATH, JSON.stringify(out))
-        console.log(`  ${done}/${todo.length} (empty=${empty} errors=${errors})`)
-      }
+  async function fetchDay(day) {
+    try {
+      const csv = await fetchCSV(dayUrl(day))
+      const rows = parseStatcastCSV(csv)
+      applyDayRows(out, playerIndex, rows)
+      totalRows += rows.length
+    } catch (e) {
+      errors++
+      console.error(`  ${day}: ${e.message}`)
+    }
+    done++
+    await sleep(150)
+  }
+
+  let chunkNum = 0
+  for (let i = 0; i < days.length; i += CONCURRENCY) {
+    const chunk = days.slice(i, i + CONCURRENCY)
+    await Promise.all(chunk.map(fetchDay))
+    chunkNum++
+    const chunkEnd = chunk[chunk.length - 1]
+    const isLast = i + CONCURRENCY >= days.length
+    if (chunkNum % chunksPerSave === 0 || isLast) {
+      fs.writeFileSync(OUT_PATH, JSON.stringify(out))
+      fs.writeFileSync(CURSOR_PATH, JSON.stringify({ lastDay: chunkEnd }))
+      console.log(`  ${done}/${days.length} days, through ${chunkEnd} (rows=${totalRows} errors=${errors})`)
     }
   }
 
-  await Promise.all(Array.from({ length: CONCURRENCY }, worker))
+  // stamp every tracked player that ended up with data
+  for (const id in out) {
+    if (!out[id]._meta) out[id]._meta = {}
+    out[id]._meta.hasArm = playerIndex[id]?.hasArm ?? false
+    out[id]._meta.hasBat = playerIndex[id]?.hasBat ?? false
+  }
+
   fs.writeFileSync(OUT_PATH, JSON.stringify(out))
-  console.log(`Done. ${done} processed, ${empty} empty, ${errors} errors. Wrote ${OUT_PATH}`)
+  fs.writeFileSync(CURSOR_PATH, JSON.stringify({ lastDay: TODAY }))
+  console.log(`Done. ${done} days processed, ${totalRows} total rows, ${errors} errors, ${Object.keys(out).length} players with data.`)
 }
 
 main()
