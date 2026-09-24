@@ -110,6 +110,8 @@ function splitsToRow(splits: any[], group: string, isMLB: boolean): any {
 // 11-17 = MiLB levels) does list them by name, so resolve unlinked players here
 // before the stats fetch. Ambiguous (non-unique) name matches are skipped rather
 // than guessed, since a wrong mlbam_id silently corrupts that player's stats.
+// Candidates must also match the Fantrax age (±1) -- name-only matching once
+// linked ~200 prospects to retired namesakes (e.g. David Ortiz Jr. → Big Papi).
 const ROSTER_SPORT_IDS = [1, 11, 12, 13, 14, 15, 16, 17]
 
 async function resolveMissingMlbamIds(players: Record<string, any>): Promise<number> {
@@ -122,15 +124,15 @@ async function resolveMissingMlbamIds(players: Record<string, any>): Promise<num
   // silently merged onto the same id (this exact bug corrupted stats for both).
   const claimedIds = new Set(Object.values(players).filter((p: any) => p.mlbam_id).map((p: any) => String(p.mlbam_id)))
 
-  const nameToIds: Record<string, Set<number>> = {}
+  const nameToIds: Record<string, Map<number, any>> = {}
   for (const sportId of ROSTER_SPORT_IDS) {
     try {
       const res = await fetch(`https://statsapi.mlb.com/api/v1/sports/${sportId}/players?season=${CURRENT_SEASON}`)
       const data = res.ok ? await res.json() : null
       for (const person of data?.people ?? []) {
         if (!person.fullName || !person.id) continue
-        if (!nameToIds[person.fullName]) nameToIds[person.fullName] = new Set()
-        nameToIds[person.fullName].add(person.id)
+        if (!nameToIds[person.fullName]) nameToIds[person.fullName] = new Map()
+        nameToIds[person.fullName].set(person.id, person)
       }
     } catch {}
   }
@@ -138,11 +140,12 @@ async function resolveMissingMlbamIds(players: Record<string, any>): Promise<num
   let resolved = 0
   for (const player of missing as any[]) {
     const ids = nameToIds[player.name]
-    if (!ids) continue
-    const candidates = Array.from(ids).filter(id => !claimedIds.has(String(id)))
+    if (!ids || player.age == null) continue
+    const candidates = Array.from(ids.values()).filter((c: any) => !claimedIds.has(String(c.id)) && c.currentAge != null && Math.abs(c.currentAge - player.age) <= 1)
     if (candidates.length === 1) {
-      player.mlbam_id = String(candidates[0])
-      claimedIds.add(String(candidates[0]))
+      player.mlbam_id = String(candidates[0].id)
+      if (candidates[0].birthDate) player.birthDate = candidates[0].birthDate
+      claimedIds.add(String(candidates[0].id))
       resolved++
     }
   }

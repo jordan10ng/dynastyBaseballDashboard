@@ -292,11 +292,26 @@ const advInputStyle = {
 
 const ROW_HEIGHT = 58
 
+// Season toggle: current + 4 prior seasons, then career
+const CURRENT_YEAR = new Date().getFullYear()
+const SEASON_OPTIONS = [...Array.from({ length: 5 }, (_, i) => String(CURRENT_YEAR - i)), 'career']
+const NO_STATS: Record<string, any> = {}
+
 export default function PlayersPage() {
   const [allPlayers, setAllPlayers] = useState<any[]>([])
   const [allTeams, setAllTeams] = useState<any[]>([])
   const [allRosters, setAllRosters] = useState<any[]>([])
   const [statsMap, setStatsMap] = useState<Record<string, any>>({})
+  // Past seasons / career fetched on first pick, then kept; current season is statsMap
+  const [season, setSeason] = useState(String(CURRENT_YEAR))
+  const [seasonStats, setSeasonStats] = useState<Record<string, Record<string, any>>>({})
+  useEffect(() => {
+    if (season === String(CURRENT_YEAR) || seasonStats[season]) return
+    fetch(`/api/stats?season=${season}`).then(r => r.json())
+      .then(d => setSeasonStats(prev => ({ ...prev, [season]: d.stats ?? {} })))
+      .catch(() => setSeasonStats(prev => ({ ...prev, [season]: {} })))
+  }, [season, seasonStats])
+  const baseStatsMap = season === String(CURRENT_YEAR) ? statsMap : (seasonStats[season] ?? NO_STATS)
   const [mlbToolsMap, setMlbToolsMap] = useState<Record<string, any>>({})
   const [regression, setRegression] = useState<any>(null)
   const [norms, setNorms] = useState<any>(null)
@@ -426,15 +441,15 @@ export default function PlayersPage() {
   // Level filter re-sums each player's per-level lines; players with no stats at
   // the selected levels drop out. _level stays the current level for the name tag.
   const viewStatsMap = useMemo(() => {
-    if (selectedLevelFilters.length === 0) return statsMap
+    if (selectedLevelFilters.length === 0) return baseStatsMap
     const levels = LEVEL_RANK.filter(l => selectedLevelFilters.includes(l))
     const out: Record<string, any> = {}
-    for (const [id, s] of Object.entries(statsMap)) {
+    for (const [id, s] of Object.entries(baseStatsMap)) {
       const parts = levels.map(l => s._byLevel?.[l]).filter(Boolean)
       if (parts.length) out[id] = { ...sumStatObjs(parts), _level: s._currentLevel ?? s._level }
     }
     return out
-  }, [statsMap, selectedLevelFilters])
+  }, [baseStatsMap, selectedLevelFilters])
 
   // Pre-compute stat lines once
   // For two-way players, pick hit or pitch stat object based on filter
@@ -582,7 +597,7 @@ export default function PlayersPage() {
           if (!selectedPosFilters.some(sp => playerPos.includes(sp))) return false
         }
         if (selectedLevelFilters.length > 0) {
-          const hasStats = statsMap[p.id] || statsMap[p.id + '_pit']
+          const hasStats = baseStatsMap[p.id] || baseStatsMap[p.id + '_pit']
           if (hasStats ? !(viewStatsMap[p.id] || viewStatsMap[p.id + '_pit']) : !selectedLevelFilters.includes(normalizeLevel(p.level))) return false
         }
         if (batArmsFilter !== 'all' && statFilters.length > 0) {
@@ -651,7 +666,7 @@ export default function PlayersPage() {
     return result
   }, [allPlayers, search, minorsFilter, batArmsFilter, ownFilter, selectedLeague, selectedTeam,
       rankMin, rankMax, ageMin, ageMax, selectedMlbTeam, selectedPosFilters, selectedLevelFilters,
-      sortMode, statSortKey, toolSortKey, showStatCols, showToolCols, activeCols, statsMap, viewStatsMap,
+      sortMode, statSortKey, toolSortKey, showStatCols, showToolCols, activeCols, baseStatsMap, viewStatsMap,
       statFilters, minorsIds, ownershipMap, globalOwnership, playerToolsMap, availableToolKeys, aflOnly])
 
   const grouped = useMemo(() => {
@@ -796,6 +811,11 @@ export default function PlayersPage() {
             {([{ val: 'stats', label: 'Stats' }, { val: 'tools', label: 'Tools' }, { val: 'raw', label: 'Raw' }] as { val: DataView; label: string }[]).map(opt => (
               <button key={opt.val} onClick={() => { setDataView(opt.val); setStatSortKey(''); setToolSortKey(''); if (opt.val === 'raw') setMinorsFilter('minors') }} style={btn(dataView === opt.val)}>{opt.label}</button>
             ))}
+            <select value={season} onChange={e => setSeason(e.target.value)} title="Stat season"
+              style={{ ...advInputStyle, width: 'auto', cursor: 'pointer', marginLeft: 4, borderColor: season !== String(CURRENT_YEAR) ? '#3b82f6' : 'var(--border)' }}>
+              {SEASON_OPTIONS.map(s => <option key={s} value={s}>{s === 'career' ? 'Career' : s}</option>)}
+            </select>
+            {season !== String(CURRENT_YEAR) && !seasonStats[season] && <span style={{ color: 'var(--muted)', fontSize: '0.7rem', alignSelf: 'center' }}>loading…</span>}
           </div>
         )}
 

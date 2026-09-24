@@ -28,10 +28,34 @@ const ipToOuts = (ip: string | number | undefined) => {
   return parseInt(whole) * 3 + parseInt(frac ?? '0')
 }
 
+// One season's raw history rows → rows safe to sum. Prior-year files list a
+// traded player's per-team lines plus a combined line (blank team) per
+// type/level/league — keep only the combined one. Mexican League rows are
+// tagged AAA but aren't affiliated ball, so drop them. Exact dupes dropped too.
+export function cleanSeasonRows(rows: any[]): any[] {
+  const seen = new Set<string>()
+  const uniq = rows.filter(r => {
+    if (/mexican/i.test(r.league ?? '')) return false
+    const k = JSON.stringify(r)
+    if (seen.has(k)) return false
+    seen.add(k)
+    return true
+  })
+  const key = (r: any) => `${r.type}|${r.level}|${r.league ?? ''}`
+  const hasTotal = new Set(uniq.filter(r => !r.team).map(key))
+  return uniq.filter(r => !r.team || !hasTotal.has(key(r)))
+}
+
 // Opponent OBP from counts — no sac flies stored, so reads a hair high
 export function calcOObp(s: any): string | null {
   const den = (s.atBats ?? 0) + (s.baseOnBalls ?? 0) + (s.hitByPitch ?? 0)
   return den ? fmt3(((s.hits ?? 0) + (s.baseOnBalls ?? 0) + (s.hitByPitch ?? 0)) / den) : null
+}
+
+// Opponent SLG — needs doubles/triples allowed, which only prior-year rows carry
+export function calcOSlg(s: any): string | null {
+  if (!s.atBats || s.doubles == null || s.triples == null) return null
+  return fmt3(((s.hits ?? 0) + s.doubles + 2 * s.triples + 3 * (s.homeRuns ?? 0)) / s.atBats)
 }
 
 export function sumStatObjs(objs: any[]): any {
@@ -42,7 +66,8 @@ export function sumStatObjs(objs: any[]): any {
   const out: any = { ...objs[0] }
   for (const k of COUNT_KEYS) {
     const vals = objs.map(o => o[k]).filter(v => typeof v === 'number')
-    out[k] = vals.length ? vals.reduce((a, b) => a + b, 0) : undefined
+    // All-or-nothing: a partial sum (e.g. 2026 pitching rows lack doubles) would mislead
+    out[k] = vals.length === objs.length ? vals.reduce((a, b) => a + b, 0) : undefined
   }
 
   if (out.group === 'pitching') {
@@ -52,7 +77,7 @@ export function sumStatObjs(objs: any[]): any {
     out.whip = outs ? ((out.hits + out.baseOnBalls) / (outs / 3)).toFixed(2) : null
     out.oAvg = out.atBats ? fmt3(out.hits / out.atBats) : null
     out.oObp = calcOObp(out)
-    out.oSlg = null
+    out.oSlg = calcOSlg(out)
   } else {
     out.avg = out.atBats ? fmt3(out.hits / out.atBats) : null
     out.obp = out.plateAppearances ? fmt3((out.hits + out.baseOnBalls + out.hitByPitch) / out.plateAppearances) : null

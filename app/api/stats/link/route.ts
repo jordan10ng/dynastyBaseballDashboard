@@ -18,7 +18,11 @@ function parseCSV(text: string): Record<string, string>[] {
   })
 }
 
-async function lookupByName(name: string): Promise<string | null> {
+// Name search returns retired namesakes too (this once linked ~200 prospects to
+// old players), so require an exact name, Fantrax age ±1, an id nobody else
+// holds, and exactly one such candidate -- otherwise leave the player unlinked.
+async function lookupByName(name: string, age: number | null, claimed: Set<string>): Promise<string | null> {
+  if (age == null) return null
   try {
     const res = await fetch(
       `https://statsapi.mlb.com/api/v1/people/search?names=${encodeURIComponent(name)}&sportIds=1,11,12,13,14,15,16`
@@ -27,20 +31,24 @@ async function lookupByName(name: string): Promise<string | null> {
     const data = await res.json()
     const people = data.people ?? []
     if (people.length === 0) return null
-    const exact = people.find((p: any) => p.fullName?.toLowerCase() === name.toLowerCase())
-    const hit = exact ?? people[0]
-    return hit?.id ? String(hit.id) : null
+    const year = new Date().getFullYear()
+    const hits = people.filter((p: any) =>
+      p.id && !claimed.has(String(p.id)) &&
+      p.fullName?.toLowerCase() === name.toLowerCase() &&
+      p.birthDate && Math.abs(year - parseInt(p.birthDate) - age) <= 1)
+    return hits.length === 1 ? String(hits[0].id) : null
   } catch {
     return null
   }
 }
 
-async function processChunk(chunk: [string, any][], players: any): Promise<{ matched: number; failed: number }> {
+async function processChunk(chunk: [string, any][], players: any, claimed: Set<string>): Promise<{ matched: number; failed: number }> {
   let matched = 0
   let failed = 0
   await Promise.all(chunk.map(async ([id, player]) => {
-    const mlbamId = await lookupByName(player.name)
-    if (mlbamId) {
+    const mlbamId = await lookupByName(player.name, player.age ?? null, claimed)
+    if (mlbamId && !claimed.has(mlbamId)) {
+      claimed.add(mlbamId)
       players[id].mlbam_id = mlbamId
       matched++
     } else {
@@ -75,10 +83,12 @@ export async function POST() {
     }
   }
 
+  const claimed = new Set(Object.values(players).filter((p: any) => p.mlbam_id).map((p: any) => String(p.mlbam_id)))
   for (const [id, player] of Object.entries(players) as any[]) {
     if (player.mlbam_id) { alreadyLinked++; continue }
     const match = razzMap[id]
-    if (match) {
+    if (match && !claimed.has(match.mlbam_id)) {
+      claimed.add(match.mlbam_id)
       players[id].mlbam_id = match.mlbam_id
       players[id].fangraphs_id = match.fangraphs_id
       razzMatched++
@@ -96,7 +106,7 @@ export async function POST() {
 
   for (let i = 0; i < unmatched.length; i += CHUNK_SIZE) {
     const chunk = unmatched.slice(i, i + CHUNK_SIZE)
-    const result = await processChunk(chunk, players)
+    const result = await processChunk(chunk, players, claimed)
     apiMatched += result.matched
     failed += result.failed
 
