@@ -13,7 +13,7 @@ const players  = JSON.parse(fs.readFileSync(PLAYERS_PATH, 'utf8'));
 const mlbTools = JSON.parse(fs.readFileSync(MLBTOOLS_PATH, 'utf8'));
 const history  = JSON.parse(fs.readFileSync(HISTORY_PATH, 'utf8'));
 
-const LEVEL_ORDER = ['MLB','AAA','AA','High-A','Single-A','ROK','DSL'];
+const LEVEL_ORDER = ['MLB','AAA','AA','High-A','Single-A','Complex','ROK','DSL'];
 
 function resolveLevel(mlbam_id) {
   const rows = (history[String(mlbam_id)] || []).filter(r => r._season === new Date().getFullYear());

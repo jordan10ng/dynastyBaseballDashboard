@@ -109,10 +109,11 @@ export async function GET(req: Request) {
         _synced: row._synced,
       })
 
-      // Name tag always shows where the player is NOW — for past seasons/career,
-      // take the highest current-season level, else the roster level.
+      // Name tag: a single season shows that season's level (its own _level);
+      // career shows where the player is NOW — highest current-season level,
+      // else the roster level.
       const nowLevel = (type: string) => {
-        if (season === CURRENT_SEASON) return null
+        if (season !== 'career') return null
         const ls = (current[mlbamId] ?? []).filter(r => r.type === type).map(r => normLevel(r.level))
         return LEVEL_RANK.find(l => ls.includes(l)) ?? players[fantraxId]?.level ?? null
       }

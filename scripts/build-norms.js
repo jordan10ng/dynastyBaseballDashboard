@@ -4,7 +4,9 @@ const BASE = process.env.DATA_BASE || (os.homedir() + '/Desktop/fantasy-baseball
 const HISTORY_DIR = BASE + '/history/'
 const OUT_PATH = BASE + '/model/norms.json'
 
-const YEARS = ['2015','2016','2017','2018','2019','2021','2022','2023','2024','2025','2026']
+// Every season file from 2015 on, so a new season is picked up automatically.
+// 2020 stays out: MLB-only 60-game season, no MiLB.
+const YEARS = fs.readdirSync(HISTORY_DIR).map(f => f.match(/^(\d{4})\.json$/)?.[1]).filter(y => y && +y >= 2015 && y !== '2020').sort()
 const MIN_PA = 0
 const MIN_IP = 20
 const MIN_LEAGUE_N = 50

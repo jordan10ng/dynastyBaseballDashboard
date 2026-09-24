@@ -13,7 +13,7 @@ function fmt3(n: number): string {
   return n.toFixed(3).replace(/^0\./, '.')
 }
 
-const LEVEL_ORDER = ['AAA','AA','High-A','Single-A','ROK','ACL','FCL','DSL']
+const LEVEL_ORDER = ['AAA','AA','High-A','Single-A','Complex','ROK','ACL','FCL','DSL']
 
 const SPORT_ID_TO_LEVEL: Record<number,string> = { 1: 'MLB', 11: 'AAA', 12: 'AA', 13: 'High-A', 14: 'Single-A', 15: 'ROK', 16: 'ROK', 17: 'DSL', 19: 'ROK' };
 function sportAbbrToLevel(sport: any): string {
@@ -26,6 +26,15 @@ function sportAbbrToLevel(sport: any): string {
   if (abbr === 'A' || abbr === 'LoA' || abbr === 'A(Short)') return 'Single-A';
   if (abbr === 'ROK' || abbr === 'Rk') return 'ROK';
   return 'Other';
+}
+
+// Rookie ball (sportId 16) covers both the complex leagues and the DSL. Split
+// them by league name to match the prior-season history labels ('Complex' /
+// 'DSL') that norms and the model are keyed on -- a bare 'ROK' fell through to
+// last season's Complex norms.
+function milbLevel(s: any): string {
+  if (s.sport?.id === 16) return /dominican/i.test(s.league?.name ?? '') ? 'DSL' : 'Complex'
+  return sportAbbrToLevel(s.sport)
 }
 
 function splitsToRow(splits: any[], group: string, isMLB: boolean): any {
@@ -54,7 +63,7 @@ function splitsToRow(splits: any[], group: string, isMLB: boolean): any {
 
   const team = splits[0]?.team?.name ?? ''
   const level = isMLB ? 'MLB' : (() => {
-    const levels = splits.map((s: any) => sportAbbrToLevel(s.sport))
+    const levels = splits.map((s: any) => milbLevel(s))
     for (const lv of LEVEL_ORDER) {
       if (levels.includes(lv)) return lv
     }
@@ -167,7 +176,7 @@ async function fetchRows(mlbamId: string, group: string): Promise<any[] | null> 
 
     const rows: any[] = []
     if (mlbSplits.length > 0) rows.push(splitsToRow(mlbSplits.map((s: any) => ({...s.stat, team: s.team, sport: s.sport})), group, true))
-    if (milbSplits.length > 0) { const bySport: Record<string,any[]> = {}; for (const s of milbSplits) { const key = String(s.sport?.id ?? "other"); if (!bySport[key]) bySport[key] = []; bySport[key].push(s); } for (const gs of Object.values(bySport)) { rows.push(splitsToRow(gs.map((s: any) => ({...s.stat, team: s.team, sport: s.sport})), group, false)); } }
+    if (milbSplits.length > 0) { const bySport: Record<string,any[]> = {}; for (const s of milbSplits) { const key = milbLevel(s); if (!bySport[key]) bySport[key] = []; bySport[key].push(s); } for (const gs of Object.values(bySport)) { rows.push(splitsToRow(gs.map((s: any) => ({...s.stat, team: s.team, sport: s.sport, league: s.league})), group, false)); } }
     return rows.length > 0 ? rows : null
   } catch {
     return null

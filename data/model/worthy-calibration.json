@@ -1,15 +1,15 @@
 {
   "hitter": {
-    "intercept": -32.8378,
+    "intercept": -32.8363,
     "coef_overall": 0.3214,
-    "coef_xbh_aaa": 0.9122,
+    "coef_xbh_aaa": 0.9117,
     "n": 493,
     "auc": 0.712
   },
   "pitcher": {
-    "intercept": -27.8053,
+    "intercept": -27.8083,
     "coef_overall": 0.2698,
     "n": 638,
-    "auc": 0.7529
+    "auc": 0.753
   }
 }
