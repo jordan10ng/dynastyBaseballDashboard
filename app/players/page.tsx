@@ -3,6 +3,7 @@ import { useState, useEffect, useMemo, useCallback, useRef } from 'react'
 import { FixedSizeList as List } from "../../components/players/VirtualList"
 import { PlayerRow, StatCol } from '../../components/players/PlayerRow'
 import { PlayerDrawer } from '../../components/players/PlayerDrawer'
+import { sumStatObjs, normLevel, LEVEL_RANK } from '../../lib/sum-stat-rows'
 import { isAFLPlayer } from '../../lib/afl' // TEMPORARY — remove with lib/afl.ts + data/afl-2026.json when AFL ends
 
 const LEAGUES: { id: string; label: string }[] = [
@@ -32,13 +33,7 @@ const BAT_POSITIONS = ['C','1B','2B','SS','3B','INF','LF','CF','RF','OF','UT']
 const ARM_POSITIONS = ['SP','RP','P']
 const ALL_POSITIONS = [...BAT_POSITIONS, ...ARM_POSITIONS]
 const LEVEL_OPTIONS = ['MLB','AAA','AA','A+','A','ROK']
-const normalizeLevel = (l: string | undefined) => {
-  if (!l) return ''
-  if (l === 'High-A') return 'A+'
-  if (l === 'Single-A') return 'A'
-  if (l === 'Rookie' || l === 'ROK' || l === 'Complex' || l === 'DSL') return 'ROK'
-  return l
-}
+const normalizeLevel = normLevel
 
 const POS_GROUPS = [
   { label: 'Catcher (C)', positions: ['C'] },
@@ -428,17 +423,30 @@ export default function PlayersPage() {
     return map
   }, [allPlayers, mlbToolsMap])
 
+  // Level filter re-sums each player's per-level lines; players with no stats at
+  // the selected levels drop out. _level stays the current level for the name tag.
+  const viewStatsMap = useMemo(() => {
+    if (selectedLevelFilters.length === 0) return statsMap
+    const levels = LEVEL_RANK.filter(l => selectedLevelFilters.includes(l))
+    const out: Record<string, any> = {}
+    for (const [id, s] of Object.entries(statsMap)) {
+      const parts = levels.map(l => s._byLevel?.[l]).filter(Boolean)
+      if (parts.length) out[id] = { ...sumStatObjs(parts), _level: s._currentLevel ?? s._level }
+    }
+    return out
+  }, [statsMap, selectedLevelFilters])
+
   // Pre-compute stat lines once
   // For two-way players, pick hit or pitch stat object based on filter
   const effectiveStats = useCallback((p: any) => {
     const tw = isTwoWayPlayer(p.positions)
-    if (tw && batArmsFilter === 'arms') return statsMap[p.id + '_pit'] ?? statsMap[p.id]
+    if (tw && batArmsFilter === 'arms') return viewStatsMap[p.id + '_pit'] ?? viewStatsMap[p.id]
     if (tw && batArmsFilter === 'bats') {
-      const s = statsMap[p.id]
+      const s = viewStatsMap[p.id]
       return (s?.group === 'pitching') ? null : s
     }
-    return statsMap[p.id]
-  }, [statsMap, batArmsFilter])
+    return viewStatsMap[p.id]
+  }, [viewStatsMap, batArmsFilter])
 
   const statLineMap = useMemo(() => {
     const map: Record<string, string> = {}
@@ -574,10 +582,11 @@ export default function PlayersPage() {
           if (!selectedPosFilters.some(sp => playerPos.includes(sp))) return false
         }
         if (selectedLevelFilters.length > 0) {
-          if (!selectedLevelFilters.includes(normalizeLevel(statsMap[p.id]?._level ?? p.level))) return false
+          const hasStats = statsMap[p.id] || statsMap[p.id + '_pit']
+          if (hasStats ? !(viewStatsMap[p.id] || viewStatsMap[p.id + '_pit']) : !selectedLevelFilters.includes(normalizeLevel(p.level))) return false
         }
         if (batArmsFilter !== 'all' && statFilters.length > 0) {
-          const playerStats = statsMap[p.id]
+          const playerStats = viewStatsMap[p.id]
           const playerTools = playerToolsMap[p.id]
           for (const sf of statFilters) {
             if (sf.kind === 'raw') {
@@ -642,7 +651,7 @@ export default function PlayersPage() {
     return result
   }, [allPlayers, search, minorsFilter, batArmsFilter, ownFilter, selectedLeague, selectedTeam,
       rankMin, rankMax, ageMin, ageMax, selectedMlbTeam, selectedPosFilters, selectedLevelFilters,
-      sortMode, statSortKey, toolSortKey, showStatCols, showToolCols, activeCols, statsMap,
+      sortMode, statSortKey, toolSortKey, showStatCols, showToolCols, activeCols, statsMap, viewStatsMap,
       statFilters, minorsIds, ownershipMap, globalOwnership, playerToolsMap, availableToolKeys, aflOnly])
 
   const grouped = useMemo(() => {
@@ -712,7 +721,7 @@ export default function PlayersPage() {
         />
       </div>
     )
-  }, [filtered, statsMap, statLineMap, playerToolsMap, minorsIds, ownershipMap, globalOwnership,
+  }, [filtered, effectiveStats, statLineMap, playerToolsMap, minorsIds, ownershipMap, globalOwnership,
       cols, showExtraCol, showOwnership, showStatCols, showToolCols, showRawCols, activeCols, activeToolKeys, activeRawKeys,
       statSortKey, toolSortKey, sortMode, minorsRankMap, minorsFilter])
 
@@ -907,7 +916,7 @@ export default function PlayersPage() {
                 const pOwn = globalOwnership[p.id] || {}
                 const tools = playerToolsMap[p.id]
                 const ovr = tools?.overall ?? null
-                const s = statsMap[p.id]
+                const s = viewStatsMap[p.id]
                 const level = normalizeLevel(s?._level ?? p.level) || '—'
                 return (
                   <div key={p.id} onClick={() => setSelectedPlayer(p)} style={{ display: 'grid', gridTemplateColumns: '36px 1fr 44px', gap: '0.4rem', padding: '0.5rem 0rem', borderBottom: '1px solid rgba(48,54,61,0.4)', alignItems: 'center', cursor: 'pointer', background: 'transparent' }}>

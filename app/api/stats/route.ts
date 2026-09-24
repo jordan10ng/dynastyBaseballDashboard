@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 import { loadPlayers } from '@/lib/db'
 import fs from 'fs'
 import path from 'path'
+import { sumStatObjs, calcOObp, normLevel, LEVEL_RANK } from '@/lib/sum-stat-rows'
 
 const CURRENT_SEASON = new Date().getFullYear()
 const HISTORY_PATH = path.join(process.cwd(), `data/history/${CURRENT_SEASON}.json`)
@@ -71,20 +72,31 @@ export async function GET() {
         _synced: row._synced,
       })
 
+      // MLB line if any, else all MiLB levels summed. _byLevel lets the players
+      // page re-sum by level filter; _currentLevel is the highest level played.
+      const build = (rows: any[]) => {
+        const grouped: Record<string, any[]> = {}
+        for (const r of rows) {
+          const o = toStatObj(r, mlbamId)
+          if (o.group === 'pitching' && o.oObp == null) o.oObp = calcOObp(o)
+          ;(grouped[normLevel(o._level)] ??= []).push(o)
+        }
+        const levels = LEVEL_RANK.filter(l => grouped[l])
+        const _byLevel = Object.fromEntries(levels.map(l => [l, sumStatObjs(grouped[l])]))
+        const base = _byLevel.MLB ?? sumStatObjs(levels.map(l => _byLevel[l]))
+        return { ...base, _byLevel, _currentLevel: base._level }
+      }
+
       const pitchRows = currentRows.filter(r => r.type === 'pitching')
       const hitRows   = currentRows.filter(r => r.type === 'hitting')
       const isTwoWay  = pitchRows.length > 0 && hitRows.length > 0
 
       if (isTwoWay) {
         // Store both — hitting under fantraxId, pitching under fantraxId + '_pit'
-        const bestHit   = hitRows.find(r => r.level === 'MLB') ?? hitRows[0]
-        const bestPitch = pitchRows.find(r => r.level === 'MLB') ?? pitchRows[0]
-        stats[fantraxId]          = toStatObj(bestHit, mlbamId)
-        stats[fantraxId + '_pit'] = toStatObj(bestPitch, mlbamId)
+        stats[fantraxId]          = build(hitRows)
+        stats[fantraxId + '_pit'] = build(pitchRows)
       } else {
-        const mlbRow = currentRows.find(r => r.level === 'MLB')
-        const row = mlbRow ?? currentRows[0]
-        stats[fantraxId] = toStatObj(row, mlbamId)
+        stats[fantraxId] = build(currentRows)
       }
     }
 
