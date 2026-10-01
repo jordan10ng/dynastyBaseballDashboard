@@ -1,0 +1,902 @@
+{
+  "season": 2026,
+  "source": {
+    "spreadsheetId": "1acBSwbC23-1jecOn6Ck1vjAy24sVnW2oMNkWSll9A5A",
+    "tab": "Draft Board"
+  },
+  "importedAt": "2026-10-01T13:31:23.837Z",
+  "slots": [
+    "C",
+    "INF",
+    "INF",
+    "INF",
+    "INF",
+    "OF",
+    "OF",
+    "OF",
+    "Util",
+    "P",
+    "P",
+    "P",
+    "P",
+    "Bench",
+    "Bench",
+    "Bench",
+    "Bench",
+    "Bench",
+    "Bench",
+    "Bench"
+  ],
+  "teams": [
+    {
+      "name": "Matt",
+      "roster": [
+        {
+          "slot": "C",
+          "name": "Nathan Flewelling",
+          "pos": "C",
+          "round": 3,
+          "mlbam_id": "807083"
+        },
+        {
+          "slot": "INF",
+          "name": "Caleb Bonemer",
+          "pos": "INF",
+          "round": 1,
+          "mlbam_id": "815352"
+        },
+        {
+          "slot": "INF",
+          "name": "Welbyn Francisca",
+          "pos": "INF",
+          "round": 4,
+          "mlbam_id": "806988"
+        },
+        {
+          "slot": "INF",
+          "name": "Jhonny Severino",
+          "pos": "INF",
+          "round": 7,
+          "mlbam_id": "703177"
+        },
+        {
+          "slot": "INF",
+          "name": "Brandon Butterworth",
+          "pos": "INF",
+          "round": 11,
+          "mlbam_id": "822578"
+        },
+        {
+          "slot": "OF",
+          "name": "Yasser Mercedes",
+          "pos": "OF",
+          "round": 5,
+          "mlbam_id": "703160"
+        },
+        {
+          "slot": "OF",
+          "name": "Max Williams",
+          "pos": "OF",
+          "round": 6,
+          "mlbam_id": "703637"
+        },
+        {
+          "slot": "OF",
+          "name": "Nehomar Ochoa",
+          "pos": "OF",
+          "round": 10,
+          "mlbam_id": "806441"
+        },
+        {
+          "slot": "Util",
+          "name": "Andy Perez",
+          "pos": "INF",
+          "round": 13,
+          "mlbam_id": "700321"
+        },
+        {
+          "slot": "P",
+          "name": "Briggs McKenzie",
+          "pos": "P",
+          "round": 2,
+          "mlbam_id": "828987"
+        },
+        {
+          "slot": "P",
+          "name": "Braxton Bragg",
+          "pos": "P",
+          "round": 8,
+          "mlbam_id": "688867"
+        },
+        {
+          "slot": "P",
+          "name": "Jake Bloss",
+          "pos": "P",
+          "round": 9,
+          "mlbam_id": "814005"
+        },
+        {
+          "slot": "P",
+          "name": "Fernando Perez",
+          "pos": "P",
+          "round": 12,
+          "mlbam_id": "800125"
+        },
+        {
+          "slot": "Bench",
+          "name": "Cade McGee",
+          "pos": "INF",
+          "round": 14,
+          "mlbam_id": "801629"
+        },
+        {
+          "slot": "Bench",
+          "name": "Paxton Kling",
+          "pos": "OF",
+          "round": 15,
+          "mlbam_id": "702265"
+        },
+        {
+          "slot": "Bench",
+          "name": null,
+          "pos": null,
+          "round": null,
+          "mlbam_id": null
+        },
+        {
+          "slot": "Bench",
+          "name": null,
+          "pos": null,
+          "round": null,
+          "mlbam_id": null
+        },
+        {
+          "slot": "Bench",
+          "name": null,
+          "pos": null,
+          "round": null,
+          "mlbam_id": null
+        },
+        {
+          "slot": "Bench",
+          "name": null,
+          "pos": null,
+          "round": null,
+          "mlbam_id": null
+        },
+        {
+          "slot": "Bench",
+          "name": null,
+          "pos": null,
+          "round": null,
+          "mlbam_id": null
+        }
+      ]
+    },
+    {
+      "name": "Brett",
+      "roster": [
+        {
+          "slot": "C",
+          "name": "Ty Harvey",
+          "pos": "C",
+          "round": 13,
+          "mlbam_id": "829210"
+        },
+        {
+          "slot": "INF",
+          "name": "Wyatt Sanford",
+          "pos": "INF",
+          "round": 2,
+          "mlbam_id": "815608"
+        },
+        {
+          "slot": "INF",
+          "name": "Myles Bailey",
+          "pos": "INF",
+          "round": 7,
+          "mlbam_id": "815343"
+        },
+        {
+          "slot": "INF",
+          "name": "Colby Shelton",
+          "pos": "INF",
+          "round": 8,
+          "mlbam_id": "701333"
+        },
+        {
+          "slot": "INF",
+          "name": "Anthony DePino",
+          "pos": "INF",
+          "round": 15,
+          "mlbam_id": "834962"
+        },
+        {
+          "slot": "OF",
+          "name": "Zyhir Hope",
+          "pos": "OF",
+          "round": 1,
+          "mlbam_id": "814307"
+        },
+        {
+          "slot": "OF",
+          "name": "Dakota Jordan",
+          "pos": "OF",
+          "round": 3,
+          "mlbam_id": "702607"
+        },
+        {
+          "slot": "OF",
+          "name": "Brendan Summerhill",
+          "pos": "OF",
+          "round": 6,
+          "mlbam_id": "804911"
+        },
+        {
+          "slot": "Util",
+          "name": "Isaiah Drake",
+          "pos": "OF",
+          "round": 9,
+          "mlbam_id": "806061"
+        },
+        {
+          "slot": "P",
+          "name": "Patrick Forbes",
+          "pos": "P",
+          "round": 4,
+          "mlbam_id": "804467"
+        },
+        {
+          "slot": "P",
+          "name": "Brandon Clarke",
+          "pos": "P",
+          "round": 5,
+          "mlbam_id": "700251"
+        },
+        {
+          "slot": "P",
+          "name": "Luke Fox",
+          "pos": "P",
+          "round": 10,
+          "mlbam_id": "803183"
+        },
+        {
+          "slot": "P",
+          "name": "Kiefer Lord",
+          "pos": "P",
+          "round": 12,
+          "mlbam_id": "811296"
+        },
+        {
+          "slot": "Bench",
+          "name": "Jacob McCombs",
+          "pos": "OF",
+          "round": 11,
+          "mlbam_id": "829643"
+        },
+        {
+          "slot": "Bench",
+          "name": "Drake George",
+          "pos": "P",
+          "round": 14,
+          "mlbam_id": "825095"
+        },
+        {
+          "slot": "Bench",
+          "name": null,
+          "pos": null,
+          "round": null,
+          "mlbam_id": null
+        },
+        {
+          "slot": "Bench",
+          "name": null,
+          "pos": null,
+          "round": null,
+          "mlbam_id": null
+        },
+        {
+          "slot": "Bench",
+          "name": null,
+          "pos": null,
+          "round": null,
+          "mlbam_id": null
+        },
+        {
+          "slot": "Bench",
+          "name": null,
+          "pos": null,
+          "round": null,
+          "mlbam_id": null
+        },
+        {
+          "slot": "Bench",
+          "name": null,
+          "pos": null,
+          "round": null,
+          "mlbam_id": null
+        }
+      ]
+    },
+    {
+      "name": "Soo",
+      "roster": [
+        {
+          "slot": "C",
+          "name": "Boston Smith",
+          "pos": "C",
+          "round": 3,
+          "mlbam_id": "695722"
+        },
+        {
+          "slot": "INF",
+          "name": "Dax Kilby",
+          "pos": "INF",
+          "round": 2,
+          "mlbam_id": "828076"
+        },
+        {
+          "slot": "INF",
+          "name": "Chase Harlan",
+          "pos": "INF",
+          "round": 4,
+          "mlbam_id": "815792"
+        },
+        {
+          "slot": "INF",
+          "name": "Carter Graham",
+          "pos": "INF",
+          "round": 6,
+          "mlbam_id": "807728"
+        },
+        {
+          "slot": "INF",
+          "name": "Core Jackson",
+          "pos": "INF",
+          "round": 10,
+          "mlbam_id": "692110"
+        },
+        {
+          "slot": "OF",
+          "name": "Eduardo Quintero",
+          "pos": "OF",
+          "round": 1,
+          "mlbam_id": "808234"
+        },
+        {
+          "slot": "OF",
+          "name": "Zion Rose",
+          "pos": "OF",
+          "round": 5,
+          "mlbam_id": "805799"
+        },
+        {
+          "slot": "OF",
+          "name": "Dillon Lewis",
+          "pos": "OF",
+          "round": 9,
+          "mlbam_id": "827665"
+        },
+        {
+          "slot": "Util",
+          "name": "Carlos Sanchez",
+          "pos": "INF",
+          "round": 13,
+          "mlbam_id": "800176"
+        },
+        {
+          "slot": "P",
+          "name": "Luke Holman",
+          "pos": "P",
+          "round": 7,
+          "mlbam_id": "695705"
+        },
+        {
+          "slot": "P",
+          "name": "Miguel Mendez",
+          "pos": "P",
+          "round": 8,
+          "mlbam_id": "700280"
+        },
+        {
+          "slot": "P",
+          "name": "Marlon Nieves",
+          "pos": "P",
+          "round": 11,
+          "mlbam_id": "812363"
+        },
+        {
+          "slot": "P",
+          "name": "Kannon Kemp",
+          "pos": "P",
+          "round": 12,
+          "mlbam_id": "807748"
+        },
+        {
+          "slot": "Bench",
+          "name": "Joe Ariola",
+          "pos": "P",
+          "round": 14,
+          "mlbam_id": "813409"
+        },
+        {
+          "slot": "Bench",
+          "name": "Mason White",
+          "pos": "INF",
+          "round": 15,
+          "mlbam_id": "702517"
+        },
+        {
+          "slot": "Bench",
+          "name": null,
+          "pos": null,
+          "round": null,
+          "mlbam_id": null
+        },
+        {
+          "slot": "Bench",
+          "name": null,
+          "pos": null,
+          "round": null,
+          "mlbam_id": null
+        },
+        {
+          "slot": "Bench",
+          "name": null,
+          "pos": null,
+          "round": null,
+          "mlbam_id": null
+        },
+        {
+          "slot": "Bench",
+          "name": null,
+          "pos": null,
+          "round": null,
+          "mlbam_id": null
+        },
+        {
+          "slot": "Bench",
+          "name": null,
+          "pos": null,
+          "round": null,
+          "mlbam_id": null
+        }
+      ]
+    },
+    {
+      "name": "Rath",
+      "roster": [
+        {
+          "slot": "C",
+          "name": null,
+          "pos": null,
+          "round": null,
+          "mlbam_id": null
+        },
+        {
+          "slot": "INF",
+          "name": "Eric Bitonti",
+          "pos": "INF",
+          "round": 4,
+          "mlbam_id": "800724"
+        },
+        {
+          "slot": "INF",
+          "name": "Jake Munroe",
+          "pos": "INF",
+          "round": 5,
+          "mlbam_id": "827719"
+        },
+        {
+          "slot": "INF",
+          "name": "Kaeden Kent",
+          "pos": "INF",
+          "round": 8,
+          "mlbam_id": "809763"
+        },
+        {
+          "slot": "INF",
+          "name": "Yassel Soler",
+          "pos": "INF",
+          "round": 9,
+          "mlbam_id": "807957"
+        },
+        {
+          "slot": "OF",
+          "name": "Charles Davalan",
+          "pos": "OF",
+          "round": 1,
+          "mlbam_id": "804560"
+        },
+        {
+          "slot": "OF",
+          "name": "Braylon Payne",
+          "pos": "OF",
+          "round": 2,
+          "mlbam_id": "815520"
+        },
+        {
+          "slot": "OF",
+          "name": "Tai Peete",
+          "pos": "OF",
+          "round": 3,
+          "mlbam_id": "806191"
+        },
+        {
+          "slot": "Util",
+          "name": "Alex McCoy",
+          "pos": "OF",
+          "round": 7,
+          "mlbam_id": "801932"
+        },
+        {
+          "slot": "P",
+          "name": "Tekoah Roby",
+          "pos": "P",
+          "round": 6,
+          "mlbam_id": "694358"
+        },
+        {
+          "slot": "P",
+          "name": "Winyer Chourio",
+          "pos": "P",
+          "round": 10,
+          "mlbam_id": "826466"
+        },
+        {
+          "slot": "P",
+          "name": "Ryan Birchard",
+          "pos": "P",
+          "round": 11,
+          "mlbam_id": "804670"
+        },
+        {
+          "slot": "P",
+          "name": "Yereny Teus",
+          "pos": "P",
+          "round": 12,
+          "mlbam_id": "806711"
+        },
+        {
+          "slot": "Bench",
+          "name": "Brandon Eike",
+          "pos": "INF",
+          "round": 13,
+          "mlbam_id": "694806"
+        },
+        {
+          "slot": "Bench",
+          "name": "J.T. Etheridge",
+          "pos": "P",
+          "round": 14,
+          "mlbam_id": "822950"
+        },
+        {
+          "slot": "Bench",
+          "name": "Peyton Olejnik",
+          "pos": "P",
+          "round": 15,
+          "mlbam_id": "803021"
+        },
+        {
+          "slot": "Bench",
+          "name": null,
+          "pos": null,
+          "round": null,
+          "mlbam_id": null
+        },
+        {
+          "slot": "Bench",
+          "name": null,
+          "pos": null,
+          "round": null,
+          "mlbam_id": null
+        },
+        {
+          "slot": "Bench",
+          "name": null,
+          "pos": null,
+          "round": null,
+          "mlbam_id": null
+        },
+        {
+          "slot": "Bench",
+          "name": null,
+          "pos": null,
+          "round": null,
+          "mlbam_id": null
+        }
+      ]
+    },
+    {
+      "name": "Colin",
+      "roster": [
+        {
+          "slot": "C",
+          "name": "Easton Carmichael",
+          "pos": "C",
+          "round": 10,
+          "mlbam_id": "702695"
+        },
+        {
+          "slot": "INF",
+          "name": "Arjun Nimmala",
+          "pos": "INF",
+          "round": 1,
+          "mlbam_id": "805796"
+        },
+        {
+          "slot": "INF",
+          "name": "Bryce Rainer",
+          "pos": "INF",
+          "round": 2,
+          "mlbam_id": "800614"
+        },
+        {
+          "slot": "INF",
+          "name": "Aroon Escobar",
+          "pos": "INF",
+          "round": 4,
+          "mlbam_id": "800169"
+        },
+        {
+          "slot": "INF",
+          "name": "Cole Mathis",
+          "pos": "INF",
+          "round": 8,
+          "mlbam_id": "695573"
+        },
+        {
+          "slot": "OF",
+          "name": "Dante Nori",
+          "pos": "OF",
+          "round": 5,
+          "mlbam_id": "807276"
+        },
+        {
+          "slot": "OF",
+          "name": "Breyson Guedez",
+          "pos": "OF",
+          "round": 6,
+          "mlbam_id": "829052"
+        },
+        {
+          "slot": "OF",
+          "name": "Vance Honeycutt",
+          "pos": "OF",
+          "round": 9,
+          "mlbam_id": "701689"
+        },
+        {
+          "slot": "Util",
+          "name": "Cole Conn",
+          "pos": "C",
+          "round": 14,
+          "mlbam_id": "813833"
+        },
+        {
+          "slot": "P",
+          "name": "Jarlin Susana",
+          "pos": "P",
+          "round": 3,
+          "mlbam_id": "703186"
+        },
+        {
+          "slot": "P",
+          "name": "Jesus Gamez",
+          "pos": "P",
+          "round": 7,
+          "mlbam_id": "804966"
+        },
+        {
+          "slot": "P",
+          "name": "Patrick Reilly",
+          "pos": "P",
+          "round": 11,
+          "mlbam_id": "694345"
+        },
+        {
+          "slot": "P",
+          "name": "Miqueas Mercedes",
+          "pos": "P",
+          "round": 12,
+          "mlbam_id": "823650"
+        },
+        {
+          "slot": "Bench",
+          "name": "Stu Flesland III",
+          "pos": "P",
+          "round": 13,
+          "mlbam_id": "687317"
+        },
+        {
+          "slot": "Bench",
+          "name": null,
+          "pos": null,
+          "round": null,
+          "mlbam_id": null
+        },
+        {
+          "slot": "Bench",
+          "name": null,
+          "pos": null,
+          "round": null,
+          "mlbam_id": null
+        },
+        {
+          "slot": "Bench",
+          "name": null,
+          "pos": null,
+          "round": null,
+          "mlbam_id": null
+        },
+        {
+          "slot": "Bench",
+          "name": null,
+          "pos": null,
+          "round": null,
+          "mlbam_id": null
+        },
+        {
+          "slot": "Bench",
+          "name": null,
+          "pos": null,
+          "round": null,
+          "mlbam_id": null
+        },
+        {
+          "slot": "Bench",
+          "name": null,
+          "pos": null,
+          "round": null,
+          "mlbam_id": null
+        }
+      ]
+    },
+    {
+      "name": "Jordan",
+      "roster": [
+        {
+          "slot": "C",
+          "name": "Sammy Hernandez",
+          "pos": "C",
+          "round": 12,
+          "mlbam_id": "803679"
+        },
+        {
+          "slot": "INF",
+          "name": "Tate Southisene",
+          "pos": "INF",
+          "round": 1,
+          "mlbam_id": "816111"
+        },
+        {
+          "slot": "INF",
+          "name": "Demetrio Crisantes",
+          "pos": "INF",
+          "round": 2,
+          "mlbam_id": "702679"
+        },
+        {
+          "slot": "INF",
+          "name": "Luke Hill",
+          "pos": "INF",
+          "round": 5,
+          "mlbam_id": "702619"
+        },
+        {
+          "slot": "INF",
+          "name": "Kyle DeBarge",
+          "pos": "INF",
+          "round": 14,
+          "mlbam_id": "814414"
+        },
+        {
+          "slot": "OF",
+          "name": "Ike Irish",
+          "pos": "OF",
+          "round": 3,
+          "mlbam_id": "702610"
+        },
+        {
+          "slot": "OF",
+          "name": "Jared Thomas",
+          "pos": "OF",
+          "round": 4,
+          "mlbam_id": "703606"
+        },
+        {
+          "slot": "OF",
+          "name": "Owen Carey",
+          "pos": "OF",
+          "round": 6,
+          "mlbam_id": "826928"
+        },
+        {
+          "slot": "Util",
+          "name": "Kade Snell",
+          "pos": "OF",
+          "round": 9,
+          "mlbam_id": "820835"
+        },
+        {
+          "slot": "P",
+          "name": "Justin Lamkin",
+          "pos": "P",
+          "round": 7,
+          "mlbam_id": "703610"
+        },
+        {
+          "slot": "P",
+          "name": "Sean Sullivan",
+          "pos": "P",
+          "round": 8,
+          "mlbam_id": "807743"
+        },
+        {
+          "slot": "P",
+          "name": "Ryan Lambert",
+          "pos": "P",
+          "round": 10,
+          "mlbam_id": "822038"
+        },
+        {
+          "slot": "P",
+          "name": "R.J. Sales",
+          "pos": "P",
+          "round": 11,
+          "mlbam_id": "701680"
+        },
+        {
+          "slot": "Bench",
+          "name": "Magnus Ellerts",
+          "pos": "P",
+          "round": 13,
+          "mlbam_id": "701884"
+        },
+        {
+          "slot": "Bench",
+          "name": null,
+          "pos": null,
+          "round": null,
+          "mlbam_id": null
+        },
+        {
+          "slot": "Bench",
+          "name": null,
+          "pos": null,
+          "round": null,
+          "mlbam_id": null
+        },
+        {
+          "slot": "Bench",
+          "name": null,
+          "pos": null,
+          "round": null,
+          "mlbam_id": null
+        },
+        {
+          "slot": "Bench",
+          "name": null,
+          "pos": null,
+          "round": null,
+          "mlbam_id": null
+        },
+        {
+          "slot": "Bench",
+          "name": null,
+          "pos": null,
+          "round": null,
+          "mlbam_id": null
+        },
+        {
+          "slot": "Bench",
+          "name": null,
+          "pos": null,
+          "round": null,
+          "mlbam_id": null
+        }
+      ]
+    }
+  ]
+}

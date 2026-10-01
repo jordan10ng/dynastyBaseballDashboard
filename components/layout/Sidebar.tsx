@@ -2,7 +2,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
-import { LayoutDashboard, Users, ListOrdered, ArrowLeftRight, RefreshCw, Flame, Trophy, ArrowUpFromLine } from 'lucide-react'
+import { LayoutDashboard, Users, ListOrdered, ArrowLeftRight, RefreshCw, Flame, Trophy, ArrowUpFromLine, Sun } from 'lucide-react'
 
 const ALL_NAV = [
   { href: '/',          label: 'Home',     icon: LayoutDashboard, admin: false },
@@ -10,6 +10,7 @@ const ALL_NAV = [
   { href: '/hot-sheet', label: 'Hot',      icon: Flame,           admin: false },
   { href: '/call-ups',  label: 'Call-Ups', icon: ArrowUpFromLine, admin: false },
   { href: '/leagues/0ehfuam0mg7wqpn7', label: 'League', icon: Trophy, admin: false },
+  { href: '/afl',       label: 'AFL',      icon: Sun,             admin: false },
   { href: '/rankings',  label: 'Rankings', icon: ListOrdered,     admin: true  },
   { href: '/trade',     label: 'Trade',    icon: ArrowLeftRight,  admin: false },
   { href: '/sync',      label: 'Sync',     icon: RefreshCw,       admin: true  },
