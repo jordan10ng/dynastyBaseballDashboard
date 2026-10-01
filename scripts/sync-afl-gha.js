@@ -6,7 +6,8 @@ const os = require('os')
 const https = require('https')
 
 const BASE = process.env.DATA_BASE || path.join(os.homedir(), 'Desktop/fantasy-baseball/data')
-const SEASON = new Date().getFullYear()
+// Optional season arg for one-off backfills (e.g. `node scripts/sync-afl-gha.js 2025`); nightly uses current year
+const SEASON = Number(process.argv[2]) || new Date().getFullYear()
 const OUT_PATH = path.join(BASE, `afl-stats-${SEASON}.json`)
 const AFL_SPORT_ID = 17
 const AFL_LEAGUE_ID = 119

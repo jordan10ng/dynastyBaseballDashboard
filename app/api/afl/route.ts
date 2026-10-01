@@ -33,10 +33,20 @@ function fmtIP(outs: number): string {
   return `${Math.floor(outs / 3)}.${outs % 3}`
 }
 
-export async function GET() {
-  const season = new Date().getFullYear()
+// Seasons with a roster file on disk (afl-rosters-YYYY.json), newest first
+function availableSeasons(): number[] {
+  try {
+    return fs.readdirSync(path.join(process.cwd(), 'data'))
+      .map(f => f.match(/^afl-rosters-(\d{4})\.json$/)?.[1]).filter(Boolean).map(Number).sort((a, b) => b - a)
+  } catch { return [] }
+}
+
+export async function GET(req: Request) {
+  const seasons = availableSeasons()
+  const requested = Number(new URL(req.url).searchParams.get('season'))
+  const season = seasons.includes(requested) ? requested : seasons[0] ?? new Date().getFullYear()
   const rosters = readJson(`afl-rosters-${season}.json`)
-  if (!rosters) return NextResponse.json({ season, syncedAt: null, hasStats: false, teams: [], players: [] })
+  if (!rosters) return NextResponse.json({ season, seasons, syncedAt: null, hasStats: false, teams: [], players: [] })
   const stats = readJson(`afl-stats-${season}.json`) ?? { hitting: {}, pitching: {} }
   const hasStats = Object.keys(stats.hitting ?? {}).length > 0 || Object.keys(stats.pitching ?? {}).length > 0
 
@@ -86,5 +96,5 @@ export async function GET() {
   const lead = ranked[0]?.pts ?? 0
   ranked.forEach((t, i) => { t.rank = i > 0 && t.pts === ranked[i - 1].pts ? ranked[i - 1].rank : i + 1; t.gap = t.pts - lead })
 
-  return NextResponse.json({ season, syncedAt: stats.syncedAt ?? null, importedAt: rosters.importedAt ?? null, hasStats, teams: ranked, players })
+  return NextResponse.json({ season, seasons, syncedAt: stats.syncedAt ?? null, importedAt: rosters.importedAt ?? null, hasStats, teams: ranked, players })
 }
