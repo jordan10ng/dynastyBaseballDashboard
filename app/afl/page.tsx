@@ -94,6 +94,7 @@ export default function AFLPage() {
   const [isMobile, setIsMobile] = useState(false)
   const [team, setTeam] = useState<string>('Jordan')
   const [topFilter, setTopFilter] = useState<TopFilter>('all')
+  const [season, setSeason] = useState<number | null>(null)
   const [drawerPid, setDrawerPid] = useState<string | null>(null)
   const [drawerReady, setDrawerReady] = useState(false)
   useEffect(() => { if (drawerPid) setDrawerReady(true) }, [drawerPid])
@@ -106,8 +107,8 @@ export default function AFLPage() {
   }, [])
 
   useEffect(() => {
-    fetch('/api/afl').then(r => r.json()).then(setData).catch(() => setData({ teams: [], players: [] }))
-  }, [])
+    fetch(season ? `/api/afl?season=${season}` : '/api/afl').then(r => r.json()).then(setData).catch(() => setData({ teams: [], players: [] }))
+  }, [season])
 
   const teams: any[] = data?.teams ?? []
   const activeTeam = teams.find(t => t.name === team) ?? teams[0]
@@ -198,17 +199,25 @@ export default function AFLPage() {
   const pitRows = lineup.filter(r => r.name ? r.pos === 'P' : r.slot === 'P')
   const openBench = lineup.filter(r => !r.name && r.slot === 'Bench').length
   const leaderPts = teams[0]?.pts ?? 0
+  const isFinal = data.season < new Date().getFullYear()
 
   return (
     <div style={{ padding: isMobile ? '1rem 1rem 88px' : '2rem', maxWidth: 1200 }}>
       {/* Header */}
-      <div style={{ marginBottom: '1.25rem' }}>
-        <div style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '1.4rem', color: 'var(--text)', letterSpacing: '-0.02em' }}>
-          🌵 AFL Fantasy {data.season}
+      <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', gap: '0.5rem', flexWrap: 'wrap', marginBottom: '1.25rem' }}>
+        <div>
+          <div style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '1.4rem', color: 'var(--text)', letterSpacing: '-0.02em' }}>
+            🌵 AFL Fantasy {data.season}
+          </div>
+          <div style={{ fontSize: '0.75rem', color: 'var(--muted)', marginTop: '0.2rem' }}>
+            Season-total best ball · 1 C · 4 INF · 3 OF · 1 UT · 4 P{isFinal ? ' · Final' : updated ? ` · Updated ${updated}` : ''}
+          </div>
         </div>
-        <div style={{ fontSize: '0.75rem', color: 'var(--muted)', marginTop: '0.2rem' }}>
-          Season-total best ball · 1 C · 4 INF · 3 OF · 1 UT · 4 P{updated ? ` · Updated ${updated}` : ''}
-        </div>
+        {(data.seasons?.length ?? 0) > 1 && (
+          <div style={{ display: 'flex', gap: 4 }}>
+            {data.seasons.map((y: number) => <button key={y} onClick={() => setSeason(y)} style={btn(data.season === y)}>{y}</button>)}
+          </div>
+        )}
       </div>
 
       {/* Leaderboard */}
