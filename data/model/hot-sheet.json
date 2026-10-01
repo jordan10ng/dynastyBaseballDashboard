@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-30T15:32:45.909Z",
+  "generatedAt": "2026-10-01T15:55:37.582Z",
   "season": {
     "bats": [
       {
@@ -9,23 +9,23 @@
         "positions": "1B,INF,RF,OF",
         "isPit": false,
         "isTwoWay": false,
-        "overall": 113,
+        "overall": 114,
         "sample": 551,
         "confidence": {
           "hit": 86,
           "power": 82,
           "speed": 90
         },
-        "delta": 25,
+        "delta": 26,
         "prevOverall": 88,
         "ipPerGs": null,
         "deltas": {
-          "season": 25,
+          "season": 26,
           "d7": null,
           "d15": null,
           "d30": 0,
           "d60": 4,
-          "d90": 7
+          "d90": 6
         }
       },
       {
@@ -180,7 +180,7 @@
           "d7": null,
           "d15": null,
           "d30": 1,
-          "d60": 3,
+          "d60": 2,
           "d90": 3
         }
       },
@@ -206,7 +206,7 @@
           "d7": null,
           "d15": null,
           "d30": 1,
-          "d60": 1,
+          "d60": 2,
           "d90": 3
         }
       },
@@ -258,7 +258,7 @@
           "d7": null,
           "d15": null,
           "d30": 2,
-          "d60": 4,
+          "d60": 3,
           "d90": 3
         }
       },
@@ -282,7 +282,7 @@
         "deltas": {
           "season": 15,
           "d7": null,
-          "d15": 1,
+          "d15": 0,
           "d30": 2,
           "d60": 7,
           "d90": 8
@@ -337,7 +337,7 @@
           "d15": null,
           "d30": 0,
           "d60": 2,
-          "d90": 4
+          "d90": 5
         }
       },
       {
@@ -362,7 +362,7 @@
           "d7": null,
           "d15": null,
           "d30": 1,
-          "d60": 0,
+          "d60": 1,
           "d90": 2
         }
       },
@@ -413,7 +413,7 @@
           "season": 14,
           "d7": null,
           "d15": 1,
-          "d30": 2,
+          "d30": 1,
           "d60": 3,
           "d90": 7
         }
@@ -441,7 +441,7 @@
           "d15": null,
           "d30": null,
           "d60": 3,
-          "d90": 9
+          "d90": 8
         }
       },
       {
@@ -519,7 +519,7 @@
           "d15": null,
           "d30": null,
           "d60": 2,
-          "d90": 7
+          "d90": 6
         }
       },
       {
@@ -622,8 +622,8 @@
           "d7": null,
           "d15": null,
           "d30": null,
-          "d60": 0,
-          "d90": 4
+          "d60": 1,
+          "d90": 3
         }
       },
       {
@@ -675,7 +675,7 @@
           "d15": null,
           "d30": 0,
           "d60": -1,
-          "d90": 3
+          "d90": 1
         }
       },
       {
@@ -752,7 +752,7 @@
           "d7": null,
           "d15": null,
           "d30": 0,
-          "d60": 0,
+          "d60": 1,
           "d90": 2
         }
       },
@@ -779,7 +779,7 @@
           "d15": null,
           "d30": 1,
           "d60": 3,
-          "d90": 4
+          "d90": 3
         }
       },
       {
@@ -805,7 +805,7 @@
           "d15": null,
           "d30": null,
           "d60": 2,
-          "d90": 5
+          "d90": 4
         }
       },
       {
@@ -882,8 +882,8 @@
           "d7": null,
           "d15": null,
           "d30": -2,
-          "d60": -1,
-          "d90": 3
+          "d60": -2,
+          "d90": 4
         }
       },
       {
@@ -909,7 +909,7 @@
           "d15": null,
           "d30": null,
           "d60": null,
-          "d90": 4
+          "d90": 2
         }
       },
       {
@@ -935,7 +935,7 @@
           "d15": null,
           "d30": null,
           "d60": 2,
-          "d90": 5
+          "d90": 4
         }
       },
       {
@@ -987,7 +987,7 @@
           "d15": null,
           "d30": null,
           "d60": 3,
-          "d90": 6
+          "d90": 5
         }
       },
       {
@@ -1013,7 +1013,7 @@
           "d15": null,
           "d30": null,
           "d60": 1,
-          "d90": 5
+          "d90": 3
         }
       },
       {
@@ -1038,7 +1038,7 @@
           "d7": null,
           "d15": null,
           "d30": 1,
-          "d60": 2,
+          "d60": 1,
           "d90": 3
         }
       },
@@ -1090,7 +1090,7 @@
           "d7": null,
           "d15": null,
           "d30": 1,
-          "d60": 1,
+          "d60": 2,
           "d90": 3
         }
       },
@@ -1169,7 +1169,7 @@
           "d15": null,
           "d30": 0,
           "d60": 0,
-          "d90": 2
+          "d90": 1
         }
       },
       {
@@ -1247,7 +1247,7 @@
           "d15": null,
           "d30": null,
           "d60": 0,
-          "d90": -5
+          "d90": -4
         }
       },
       {
@@ -1298,8 +1298,8 @@
           "d7": null,
           "d15": null,
           "d30": 2,
-          "d60": 7,
-          "d90": 9
+          "d60": 6,
+          "d90": 8
         }
       }
     ],
@@ -1376,7 +1376,7 @@
           "d15": null,
           "d30": null,
           "d60": null,
-          "d90": 2
+          "d90": 1
         }
       },
       {
@@ -1401,7 +1401,7 @@
           "d15": null,
           "d30": 0,
           "d60": 2,
-          "d90": 2
+          "d90": 0
         }
       },
       {
@@ -1500,7 +1500,7 @@
           "d7": null,
           "d15": null,
           "d30": 2,
-          "d60": 7,
+          "d60": 6,
           "d90": 7
         }
       },
@@ -1550,7 +1550,7 @@
           "d7": null,
           "d15": null,
           "d30": 0,
-          "d60": 4,
+          "d60": 3,
           "d90": 4
         }
       },
@@ -1676,7 +1676,7 @@
           "d15": null,
           "d30": 1,
           "d60": -1,
-          "d90": -1
+          "d90": -2
         }
       },
       {
@@ -1750,7 +1750,7 @@
           "d7": null,
           "d15": null,
           "d30": 0,
-          "d60": 1,
+          "d60": 0,
           "d90": 2
         }
       },
@@ -2101,7 +2101,7 @@
           "d15": null,
           "d30": null,
           "d60": 2,
-          "d90": 2
+          "d90": 3
         }
       },
       {
@@ -2125,7 +2125,7 @@
           "d7": null,
           "d15": null,
           "d30": -2,
-          "d60": -2,
+          "d60": -1,
           "d90": -2
         }
       },
@@ -2401,7 +2401,7 @@
           "d15": null,
           "d30": null,
           "d60": 2,
-          "d90": 6
+          "d90": 5
         }
       },
       {
@@ -2450,7 +2450,7 @@
           "d7": null,
           "d15": null,
           "d30": 1,
-          "d60": 3,
+          "d60": 2,
           "d90": 4
         }
       },
@@ -2500,7 +2500,7 @@
           "d7": null,
           "d15": null,
           "d30": 1,
-          "d60": 0,
+          "d60": 2,
           "d90": 3
         }
       },
@@ -2606,7 +2606,7 @@
           "d7": null,
           "d15": 0,
           "d30": 0,
-          "d60": 9,
+          "d60": 8,
           "d90": 10
         }
       },
@@ -2663,32 +2663,6 @@
         }
       },
       {
-        "id": "072ds",
-        "name": "Santiago Solarte",
-        "rank": 1945,
-        "positions": "SS,INF",
-        "isPit": false,
-        "isTwoWay": false,
-        "overall": 102,
-        "sample": 209,
-        "confidence": {
-          "hit": 70,
-          "power": 64,
-          "speed": 78
-        },
-        "delta": 9,
-        "prevOverall": 88,
-        "ipPerGs": null,
-        "deltas": {
-          "season": 14,
-          "d7": null,
-          "d15": null,
-          "d30": null,
-          "d60": 3,
-          "d90": 9
-        }
-      },
-      {
         "id": "0730o",
         "name": "Jaims Martinez",
         "rank": 3052,
@@ -2711,32 +2685,6 @@
           "d15": null,
           "d30": null,
           "d60": 1,
-          "d90": 9
-        }
-      },
-      {
-        "id": "06za1",
-        "name": "Ty Doucette",
-        "rank": 3529,
-        "positions": "1B,INF",
-        "isPit": false,
-        "isTwoWay": false,
-        "overall": 99,
-        "sample": 314,
-        "confidence": {
-          "hit": 78,
-          "power": 72,
-          "speed": 84
-        },
-        "delta": 9,
-        "prevOverall": 88,
-        "ipPerGs": null,
-        "deltas": {
-          "season": 11,
-          "d7": null,
-          "d15": null,
-          "d30": 2,
-          "d60": 7,
           "d90": 9
         }
       },
@@ -2767,32 +2715,6 @@
         }
       },
       {
-        "id": "06mnp",
-        "name": "Rainiel Rodriguez",
-        "rank": 86,
-        "positions": "C",
-        "isPit": false,
-        "isTwoWay": false,
-        "overall": 122,
-        "sample": 1067,
-        "confidence": {
-          "hit": 92,
-          "power": 90,
-          "speed": 95
-        },
-        "delta": 8,
-        "prevOverall": 121,
-        "ipPerGs": null,
-        "deltas": {
-          "season": 1,
-          "d7": null,
-          "d15": null,
-          "d30": 1,
-          "d60": 6,
-          "d90": 8
-        }
-      },
-      {
         "id": "06mhy",
         "name": "Brandon Compton",
         "rank": 705,
@@ -2814,7 +2736,7 @@
           "d7": null,
           "d15": 1,
           "d30": -1,
-          "d60": 4,
+          "d60": 3,
           "d90": 8
         }
       },
@@ -2864,7 +2786,7 @@
         "deltas": {
           "season": 15,
           "d7": null,
-          "d15": 1,
+          "d15": 0,
           "d30": 2,
           "d60": 7,
           "d90": 8
@@ -2918,7 +2840,59 @@
           "d7": 0,
           "d15": 0,
           "d30": 2,
-          "d60": 5,
+          "d60": 6,
+          "d90": 8
+        }
+      },
+      {
+        "id": "072ds",
+        "name": "Santiago Solarte",
+        "rank": 1945,
+        "positions": "SS,INF",
+        "isPit": false,
+        "isTwoWay": false,
+        "overall": 102,
+        "sample": 209,
+        "confidence": {
+          "hit": 70,
+          "power": 64,
+          "speed": 78
+        },
+        "delta": 8,
+        "prevOverall": 88,
+        "ipPerGs": null,
+        "deltas": {
+          "season": 14,
+          "d7": null,
+          "d15": null,
+          "d30": null,
+          "d60": 3,
+          "d90": 8
+        }
+      },
+      {
+        "id": "06za1",
+        "name": "Ty Doucette",
+        "rank": 3529,
+        "positions": "1B,INF",
+        "isPit": false,
+        "isTwoWay": false,
+        "overall": 99,
+        "sample": 314,
+        "confidence": {
+          "hit": 78,
+          "power": 72,
+          "speed": 84
+        },
+        "delta": 8,
+        "prevOverall": 88,
+        "ipPerGs": null,
+        "deltas": {
+          "season": 11,
+          "d7": null,
+          "d15": null,
+          "d30": 2,
+          "d60": 6,
           "d90": 8
         }
       },
@@ -2949,54 +2923,28 @@
         }
       },
       {
-        "id": "072wh",
-        "name": "Fernando Graterol",
-        "rank": 4541,
+        "id": "06mnp",
+        "name": "Rainiel Rodriguez",
+        "rank": 86,
         "positions": "C",
         "isPit": false,
         "isTwoWay": false,
-        "overall": 96,
-        "sample": 147,
+        "overall": 122,
+        "sample": 1067,
         "confidence": {
-          "hit": 62,
-          "power": 55,
-          "speed": 71
-        },
-        "delta": 8,
-        "prevOverall": 88,
-        "ipPerGs": null,
-        "deltas": {
-          "season": 8,
-          "d7": null,
-          "d15": null,
-          "d30": null,
-          "d60": 4,
-          "d90": 8
-        }
-      },
-      {
-        "id": "06ifw",
-        "name": "Josiah Hartshorn",
-        "rank": 218,
-        "positions": "1B,INF,RF,OF",
-        "isPit": false,
-        "isTwoWay": false,
-        "overall": 113,
-        "sample": 551,
-        "confidence": {
-          "hit": 86,
-          "power": 82,
-          "speed": 90
+          "hit": 92,
+          "power": 90,
+          "speed": 95
         },
         "delta": 7,
-        "prevOverall": 88,
+        "prevOverall": 121,
         "ipPerGs": null,
         "deltas": {
-          "season": 25,
+          "season": 1,
           "d7": null,
           "d15": null,
-          "d30": 0,
-          "d60": 4,
+          "d30": 1,
+          "d60": 6,
           "d90": 7
         }
       },
@@ -3073,34 +3021,8 @@
           "season": 14,
           "d7": null,
           "d15": 1,
-          "d30": 2,
-          "d60": 3,
-          "d90": 7
-        }
-      },
-      {
-        "id": "06cgg",
-        "name": "Billy Amick",
-        "rank": 1868,
-        "positions": "1B,3B,INF",
-        "isPit": false,
-        "isTwoWay": false,
-        "overall": 104,
-        "sample": 862,
-        "confidence": {
-          "hit": 91,
-          "power": 88,
-          "speed": 93
-        },
-        "delta": 7,
-        "prevOverall": 99,
-        "ipPerGs": null,
-        "deltas": {
-          "season": 5,
-          "d7": null,
-          "d15": -1,
           "d30": 1,
-          "d60": 4,
+          "d60": 3,
           "d90": 7
         }
       },
@@ -3126,33 +3048,7 @@
           "d7": null,
           "d15": 0,
           "d30": -1,
-          "d60": 2,
-          "d90": 7
-        }
-      },
-      {
-        "id": "072hf",
-        "name": "Joniel Hernandez",
-        "rank": 981,
-        "positions": "SS,INF",
-        "isPit": false,
-        "isTwoWay": false,
-        "overall": 102,
-        "sample": 235,
-        "confidence": {
-          "hit": 72,
-          "power": 66,
-          "speed": 80
-        },
-        "delta": 7,
-        "prevOverall": 88,
-        "ipPerGs": null,
-        "deltas": {
-          "season": 14,
-          "d7": null,
-          "d15": null,
-          "d30": null,
-          "d60": 2,
+          "d60": 3,
           "d90": 7
         }
       },
@@ -3204,7 +3100,7 @@
           "d7": null,
           "d15": null,
           "d30": 0,
-          "d60": 7,
+          "d60": 6,
           "d90": 7
         }
       },
@@ -3235,54 +3131,54 @@
         }
       },
       {
-        "id": "070dc",
-        "name": "David McCann",
-        "rank": 4919,
+        "id": "072wh",
+        "name": "Fernando Graterol",
+        "rank": 4541,
         "positions": "C",
         "isPit": false,
         "isTwoWay": false,
-        "overall": 95,
-        "sample": 260,
+        "overall": 96,
+        "sample": 147,
         "confidence": {
-          "hit": 74,
-          "power": 68,
-          "speed": 81
+          "hit": 62,
+          "power": 55,
+          "speed": 71
         },
         "delta": 7,
         "prevOverall": 88,
         "ipPerGs": null,
         "deltas": {
-          "season": 7,
+          "season": 8,
           "d7": null,
           "d15": null,
-          "d30": 0,
+          "d30": null,
           "d60": 4,
           "d90": 7
         }
       },
       {
-        "id": "05u2m",
-        "name": "Theo Gillen",
-        "rank": 79,
-        "positions": "CF,OF",
+        "id": "06ifw",
+        "name": "Josiah Hartshorn",
+        "rank": 218,
+        "positions": "1B,INF,RF,OF",
         "isPit": false,
         "isTwoWay": false,
-        "overall": 112,
-        "sample": 879,
+        "overall": 114,
+        "sample": 551,
         "confidence": {
-          "hit": 91,
-          "power": 88,
-          "speed": 94
+          "hit": 86,
+          "power": 82,
+          "speed": 90
         },
         "delta": 6,
-        "prevOverall": 104,
+        "prevOverall": 88,
         "ipPerGs": null,
         "deltas": {
-          "season": 8,
+          "season": 26,
           "d7": null,
           "d15": null,
-          "d30": 1,
-          "d60": 1,
+          "d30": 0,
+          "d60": 4,
           "d90": 6
         }
       },
@@ -3301,14 +3197,14 @@
           "speed": 94
         },
         "delta": 6,
-        "prevOverall": 104,
+        "prevOverall": 103,
         "ipPerGs": null,
         "deltas": {
-          "season": 6,
+          "season": 7,
           "d7": null,
           "d15": null,
           "d30": 0,
-          "d60": 3,
+          "d60": 2,
           "d90": 6
         }
       },
@@ -3339,6 +3235,32 @@
         }
       },
       {
+        "id": "06ieq",
+        "name": "Luke Stevenson",
+        "rank": 1014,
+        "positions": "C",
+        "isPit": false,
+        "isTwoWay": false,
+        "overall": 105,
+        "sample": 570,
+        "confidence": {
+          "hit": 86,
+          "power": 83,
+          "speed": 90
+        },
+        "delta": 6,
+        "prevOverall": 101,
+        "ipPerGs": null,
+        "deltas": {
+          "season": 4,
+          "d7": null,
+          "d15": null,
+          "d30": 0,
+          "d60": 1,
+          "d90": 6
+        }
+      },
+      {
         "id": "0724b",
         "name": "Angeibel Gomez",
         "rank": 315,
@@ -3365,76 +3287,24 @@
         }
       },
       {
-        "id": "072co",
-        "name": "JP Smith",
-        "rank": 2236,
-        "positions": "1B,INF",
-        "isPit": false,
-        "isTwoWay": false,
-        "overall": 101,
-        "sample": 534,
-        "confidence": {
-          "hit": 86,
-          "power": 82,
-          "speed": 90
-        },
-        "delta": 6,
-        "prevOverall": 95,
-        "ipPerGs": null,
-        "deltas": {
-          "season": 6,
-          "d7": null,
-          "d15": null,
-          "d30": -1,
-          "d60": 4,
-          "d90": 6
-        }
-      },
-      {
-        "id": "0731m",
-        "name": "Svert Reinoso",
-        "rank": 1850,
+        "id": "072hf",
+        "name": "Joniel Hernandez",
+        "rank": 981,
         "positions": "SS,INF",
         "isPit": false,
         "isTwoWay": false,
-        "overall": 100,
-        "sample": 187,
+        "overall": 102,
+        "sample": 235,
         "confidence": {
-          "hit": 68,
-          "power": 61,
-          "speed": 76
+          "hit": 72,
+          "power": 66,
+          "speed": 80
         },
         "delta": 6,
         "prevOverall": 88,
         "ipPerGs": null,
         "deltas": {
-          "season": 12,
-          "d7": null,
-          "d15": null,
-          "d30": null,
-          "d60": 3,
-          "d90": 6
-        }
-      },
-      {
-        "id": "073af",
-        "name": "Angel Ramirez",
-        "rank": 4183,
-        "positions": "CF,OF",
-        "isPit": false,
-        "isTwoWay": false,
-        "overall": 97,
-        "sample": 129,
-        "confidence": {
-          "hit": 59,
-          "power": 52,
-          "speed": 68
-        },
-        "delta": 6,
-        "prevOverall": 88,
-        "ipPerGs": null,
-        "deltas": {
-          "season": 9,
+          "season": 14,
           "d7": null,
           "d15": null,
           "d30": null,
@@ -3469,6 +3339,32 @@
         }
       },
       {
+        "id": "070dc",
+        "name": "David McCann",
+        "rank": 4919,
+        "positions": "C",
+        "isPit": false,
+        "isTwoWay": false,
+        "overall": 95,
+        "sample": 260,
+        "confidence": {
+          "hit": 74,
+          "power": 68,
+          "speed": 81
+        },
+        "delta": 6,
+        "prevOverall": 88,
+        "ipPerGs": null,
+        "deltas": {
+          "season": 7,
+          "d7": null,
+          "d15": null,
+          "d30": 0,
+          "d60": 5,
+          "d90": 6
+        }
+      },
+      {
         "id": "05gbg",
         "name": "Zac Veen",
         "rank": 673,
@@ -3490,6 +3386,32 @@
           "d7": 0,
           "d15": 0,
           "d30": 0,
+          "d60": 3,
+          "d90": 5
+        }
+      },
+      {
+        "id": "05yid",
+        "name": "Michael Arroyo",
+        "rank": 389,
+        "positions": "2B,INF",
+        "isPit": false,
+        "isTwoWay": false,
+        "overall": 117,
+        "sample": 2134,
+        "confidence": {
+          "hit": 96,
+          "power": 95,
+          "speed": 97
+        },
+        "delta": 5,
+        "prevOverall": 116,
+        "ipPerGs": null,
+        "deltas": {
+          "season": 1,
+          "d7": 0,
+          "d15": 0,
+          "d30": 1,
           "d60": 3,
           "d90": 5
         }
@@ -3521,27 +3443,27 @@
         }
       },
       {
-        "id": "06ieq",
-        "name": "Luke Stevenson",
-        "rank": 1014,
-        "positions": "C",
+        "id": "05u2m",
+        "name": "Theo Gillen",
+        "rank": 79,
+        "positions": "CF,OF",
         "isPit": false,
         "isTwoWay": false,
-        "overall": 105,
-        "sample": 570,
+        "overall": 112,
+        "sample": 879,
         "confidence": {
-          "hit": 86,
-          "power": 83,
-          "speed": 90
+          "hit": 91,
+          "power": 88,
+          "speed": 94
         },
         "delta": 5,
-        "prevOverall": 101,
+        "prevOverall": 104,
         "ipPerGs": null,
         "deltas": {
-          "season": 4,
+          "season": 8,
           "d7": null,
           "d15": null,
-          "d30": 0,
+          "d30": 1,
           "d60": 1,
           "d90": 5
         }
@@ -3595,6 +3517,58 @@
           "d15": 1,
           "d30": -1,
           "d60": 4,
+          "d90": 5
+        }
+      },
+      {
+        "id": "06cgg",
+        "name": "Billy Amick",
+        "rank": 1868,
+        "positions": "1B,3B,INF",
+        "isPit": false,
+        "isTwoWay": false,
+        "overall": 104,
+        "sample": 862,
+        "confidence": {
+          "hit": 91,
+          "power": 88,
+          "speed": 93
+        },
+        "delta": 5,
+        "prevOverall": 99,
+        "ipPerGs": null,
+        "deltas": {
+          "season": 5,
+          "d7": null,
+          "d15": -1,
+          "d30": 1,
+          "d60": 4,
+          "d90": 5
+        }
+      },
+      {
+        "id": "06alw",
+        "name": "Coy James",
+        "rank": 1067,
+        "positions": "SS,INF",
+        "isPit": false,
+        "isTwoWay": false,
+        "overall": 103,
+        "sample": 507,
+        "confidence": {
+          "hit": 85,
+          "power": 81,
+          "speed": 89
+        },
+        "delta": 5,
+        "prevOverall": 88,
+        "ipPerGs": null,
+        "deltas": {
+          "season": 15,
+          "d7": null,
+          "d15": null,
+          "d30": 0,
+          "d60": 2,
           "d90": 5
         }
       },
@@ -3729,58 +3703,6 @@
         }
       },
       {
-        "id": "06yq5",
-        "name": "Dixon Williams",
-        "rank": 1769,
-        "positions": "2B,INF",
-        "isPit": false,
-        "isTwoWay": false,
-        "overall": 102,
-        "sample": 602,
-        "confidence": {
-          "hit": 87,
-          "power": 83,
-          "speed": 91
-        },
-        "delta": 5,
-        "prevOverall": 99,
-        "ipPerGs": null,
-        "deltas": {
-          "season": 3,
-          "d7": null,
-          "d15": null,
-          "d30": 0,
-          "d60": 4,
-          "d90": 5
-        }
-      },
-      {
-        "id": "072p5",
-        "name": "Albert Fermin",
-        "rank": 672,
-        "positions": "SS,INF",
-        "isPit": false,
-        "isTwoWay": false,
-        "overall": 101,
-        "sample": 202,
-        "confidence": {
-          "hit": 69,
-          "power": 63,
-          "speed": 77
-        },
-        "delta": 5,
-        "prevOverall": 88,
-        "ipPerGs": null,
-        "deltas": {
-          "season": 13,
-          "d7": null,
-          "d15": null,
-          "d30": null,
-          "d60": 2,
-          "d90": 5
-        }
-      },
-      {
         "id": "06l5p",
         "name": "Isaiah Jackson",
         "rank": 2778,
@@ -3807,42 +3729,42 @@
         }
       },
       {
-        "id": "07247",
-        "name": "Elian Rosario",
-        "rank": 1819,
-        "positions": "3B,INF",
+        "id": "072co",
+        "name": "JP Smith",
+        "rank": 2236,
+        "positions": "1B,INF",
         "isPit": false,
         "isTwoWay": false,
-        "overall": 100,
-        "sample": 217,
+        "overall": 101,
+        "sample": 534,
         "confidence": {
-          "hit": 71,
-          "power": 64,
-          "speed": 78
+          "hit": 86,
+          "power": 82,
+          "speed": 90
         },
         "delta": 5,
-        "prevOverall": 88,
+        "prevOverall": 95,
         "ipPerGs": null,
         "deltas": {
-          "season": 12,
+          "season": 6,
           "d7": null,
           "d15": null,
-          "d30": null,
-          "d60": 2,
+          "d30": -1,
+          "d60": 4,
           "d90": 5
         }
       },
       {
-        "id": "076g3",
-        "name": "Enrique Oropeza",
-        "rank": 2208,
-        "positions": "RF,OF",
+        "id": "0731m",
+        "name": "Svert Reinoso",
+        "rank": 1850,
+        "positions": "SS,INF",
         "isPit": false,
         "isTwoWay": false,
         "overall": 100,
-        "sample": 186,
+        "sample": 187,
         "confidence": {
-          "hit": 67,
+          "hit": 68,
           "power": 61,
           "speed": 76
         },
@@ -3854,7 +3776,85 @@
           "d7": null,
           "d15": null,
           "d30": null,
-          "d60": 1,
+          "d60": 3,
+          "d90": 5
+        }
+      },
+      {
+        "id": "0664t",
+        "name": "Brett Squires",
+        "rank": 2056,
+        "positions": "1B,INF",
+        "isPit": false,
+        "isTwoWay": false,
+        "overall": 100,
+        "sample": 1811,
+        "confidence": {
+          "hit": 95,
+          "power": 94,
+          "speed": 97
+        },
+        "delta": 5,
+        "prevOverall": 91,
+        "ipPerGs": null,
+        "deltas": {
+          "season": 9,
+          "d7": null,
+          "d15": 0,
+          "d30": 1,
+          "d60": 3,
+          "d90": 5
+        }
+      },
+      {
+        "id": "05uam",
+        "name": "Cody Schrier",
+        "rank": 3409,
+        "positions": "1B,INF",
+        "isPit": false,
+        "isTwoWay": false,
+        "overall": 100,
+        "sample": 572,
+        "confidence": {
+          "hit": 86,
+          "power": 83,
+          "speed": 91
+        },
+        "delta": 5,
+        "prevOverall": 94,
+        "ipPerGs": null,
+        "deltas": {
+          "season": 6,
+          "d7": null,
+          "d15": null,
+          "d30": 0,
+          "d60": 3,
+          "d90": 5
+        }
+      },
+      {
+        "id": "05uav",
+        "name": "Cody Morissette",
+        "rank": 2668,
+        "positions": "2B,INF",
+        "isPit": false,
+        "isTwoWay": false,
+        "overall": 100,
+        "sample": 2123,
+        "confidence": {
+          "hit": 96,
+          "power": 95,
+          "speed": 97
+        },
+        "delta": 5,
+        "prevOverall": 95,
+        "ipPerGs": null,
+        "deltas": {
+          "season": 5,
+          "d7": null,
+          "d15": 1,
+          "d30": 2,
+          "d60": 3,
           "d90": 5
         }
       }
@@ -4056,7 +4056,7 @@
           "d7": null,
           "d15": null,
           "d30": 2,
-          "d60": 7,
+          "d60": 6,
           "d90": 7
         }
       },
@@ -4081,7 +4081,7 @@
           "d7": null,
           "d15": null,
           "d30": 2,
-          "d60": 5,
+          "d60": 3,
           "d90": 7
         }
       },
@@ -4106,7 +4106,7 @@
           "d7": null,
           "d15": null,
           "d30": null,
-          "d60": 1,
+          "d60": 0,
           "d90": 6
         }
       },
@@ -4186,31 +4186,6 @@
         }
       },
       {
-        "id": "070dm",
-        "name": "Cesar Acosta",
-        "rank": 2497,
-        "positions": "SP",
-        "isPit": true,
-        "isTwoWay": false,
-        "overall": 105,
-        "sample": 83,
-        "confidence": {
-          "stuff": 81,
-          "control": 67
-        },
-        "delta": 6,
-        "prevOverall": 97,
-        "ipPerGs": 4.696969696969696,
-        "deltas": {
-          "season": 8,
-          "d7": null,
-          "d15": null,
-          "d30": null,
-          "d60": 2,
-          "d90": 6
-        }
-      },
-      {
         "id": "060m8",
         "name": "Jurrangelo Cijntje",
         "rank": 566,
@@ -4286,6 +4261,31 @@
         }
       },
       {
+        "id": "06krw",
+        "name": "Eliazar Dishmey",
+        "rank": 1099,
+        "positions": "SP",
+        "isPit": true,
+        "isTwoWay": false,
+        "overall": 110,
+        "sample": 315,
+        "confidence": {
+          "stuff": 94,
+          "control": 89
+        },
+        "delta": 5,
+        "prevOverall": 104,
+        "ipPerGs": 4.550724637681159,
+        "deltas": {
+          "season": 6,
+          "d7": null,
+          "d15": null,
+          "d30": 0,
+          "d60": 3,
+          "d90": 5
+        }
+      },
+      {
         "id": "06qra",
         "name": "Bryce Mayer",
         "rank": 1431,
@@ -4306,7 +4306,7 @@
           "d7": null,
           "d15": 1,
           "d30": 0,
-          "d60": 3,
+          "d60": 1,
           "d90": 5
         }
       },
@@ -4332,6 +4332,31 @@
           "d15": 0,
           "d30": 2,
           "d60": 5,
+          "d90": 5
+        }
+      },
+      {
+        "id": "070dm",
+        "name": "Cesar Acosta",
+        "rank": 2497,
+        "positions": "SP",
+        "isPit": true,
+        "isTwoWay": false,
+        "overall": 105,
+        "sample": 83,
+        "confidence": {
+          "stuff": 81,
+          "control": 67
+        },
+        "delta": 5,
+        "prevOverall": 97,
+        "ipPerGs": 4.696969696969696,
+        "deltas": {
+          "season": 8,
+          "d7": null,
+          "d15": null,
+          "d30": null,
+          "d60": 2,
           "d90": 5
         }
       },
@@ -4431,7 +4456,7 @@
           "d7": null,
           "d15": null,
           "d30": 2,
-          "d60": 5,
+          "d60": 4,
           "d90": 5
         }
       },
@@ -4486,31 +4511,6 @@
         }
       },
       {
-        "id": "06krw",
-        "name": "Eliazar Dishmey",
-        "rank": 1099,
-        "positions": "SP",
-        "isPit": true,
-        "isTwoWay": false,
-        "overall": 110,
-        "sample": 315,
-        "confidence": {
-          "stuff": 94,
-          "control": 89
-        },
-        "delta": 4,
-        "prevOverall": 104,
-        "ipPerGs": 4.550724637681159,
-        "deltas": {
-          "season": 6,
-          "d7": null,
-          "d15": null,
-          "d30": 0,
-          "d60": 3,
-          "d90": 4
-        }
-      },
-      {
         "id": "06o03",
         "name": "Daniel Eagen",
         "rank": 628,
@@ -4561,31 +4561,6 @@
         }
       },
       {
-        "id": "06qti",
-        "name": "Lucas Elissalt",
-        "rank": 1678,
-        "positions": "SP",
-        "isPit": true,
-        "isTwoWay": false,
-        "overall": 105,
-        "sample": 182,
-        "confidence": {
-          "stuff": 90,
-          "control": 82
-        },
-        "delta": 4,
-        "prevOverall": 103,
-        "ipPerGs": 4.028985507246377,
-        "deltas": {
-          "season": 2,
-          "d7": null,
-          "d15": null,
-          "d30": -1,
-          "d60": 2,
-          "d90": 4
-        }
-      },
-      {
         "id": "06pge",
         "name": "John Holobetz",
         "rank": 1256,
@@ -4631,7 +4606,7 @@
           "d7": null,
           "d15": null,
           "d30": 1,
-          "d60": 4,
+          "d60": 2,
           "d90": 4
         }
       },
@@ -4656,7 +4631,7 @@
           "d7": null,
           "d15": null,
           "d30": 0,
-          "d60": 4,
+          "d60": 3,
           "d90": 4
         }
       },
@@ -4831,7 +4806,7 @@
           "d7": null,
           "d15": null,
           "d30": 1,
-          "d60": 3,
+          "d60": 2,
           "d90": 4
         }
       },
@@ -4982,6 +4957,31 @@
           "d15": 0,
           "d30": 0,
           "d60": 4,
+          "d90": 3
+        }
+      },
+      {
+        "id": "06qti",
+        "name": "Lucas Elissalt",
+        "rank": 1678,
+        "positions": "SP",
+        "isPit": true,
+        "isTwoWay": false,
+        "overall": 105,
+        "sample": 182,
+        "confidence": {
+          "stuff": 90,
+          "control": 82
+        },
+        "delta": 3,
+        "prevOverall": 103,
+        "ipPerGs": 4.028985507246377,
+        "deltas": {
+          "season": 2,
+          "d7": null,
+          "d15": null,
+          "d30": -1,
+          "d60": 2,
           "d90": 3
         }
       },
@@ -5141,6 +5141,32 @@
         }
       },
       {
+        "id": "077qm",
+        "name": "Owen Hull",
+        "rank": 2013,
+        "positions": "CF,OF",
+        "isPit": false,
+        "isTwoWay": false,
+        "overall": 97,
+        "sample": 116,
+        "confidence": {
+          "hit": 56,
+          "power": 49,
+          "speed": 66
+        },
+        "delta": 9,
+        "prevOverall": 88,
+        "ipPerGs": null,
+        "deltas": {
+          "season": 9,
+          "d7": null,
+          "d15": null,
+          "d30": 0,
+          "d60": 9,
+          "d90": null
+        }
+      },
+      {
         "id": "067yp",
         "name": "Ralphy Velazquez",
         "rank": 150,
@@ -5154,7 +5180,7 @@
           "power": 93,
           "speed": 96
         },
-        "delta": 9,
+        "delta": 8,
         "prevOverall": 120,
         "ipPerGs": null,
         "deltas": {
@@ -5162,7 +5188,7 @@
           "d7": null,
           "d15": 0,
           "d30": 0,
-          "d60": 9,
+          "d60": 8,
           "d90": 10
         }
       },
@@ -5238,62 +5264,10 @@
         "deltas": {
           "season": 15,
           "d7": null,
-          "d15": 1,
+          "d15": 0,
           "d30": 2,
           "d60": 7,
           "d90": 8
-        }
-      },
-      {
-        "id": "06gij",
-        "name": "Avery Owusu-Asiedu",
-        "rank": 1606,
-        "positions": "LF,CF,OF",
-        "isPit": false,
-        "isTwoWay": false,
-        "overall": 101,
-        "sample": 1315,
-        "confidence": {
-          "hit": 94,
-          "power": 92,
-          "speed": 96
-        },
-        "delta": 7,
-        "prevOverall": 95,
-        "ipPerGs": null,
-        "deltas": {
-          "season": 6,
-          "d7": null,
-          "d15": null,
-          "d30": 0,
-          "d60": 7,
-          "d90": 7
-        }
-      },
-      {
-        "id": "06za1",
-        "name": "Ty Doucette",
-        "rank": 3529,
-        "positions": "1B,INF",
-        "isPit": false,
-        "isTwoWay": false,
-        "overall": 99,
-        "sample": 314,
-        "confidence": {
-          "hit": 78,
-          "power": 72,
-          "speed": 84
-        },
-        "delta": 7,
-        "prevOverall": 88,
-        "ipPerGs": null,
-        "deltas": {
-          "season": 11,
-          "d7": null,
-          "d15": null,
-          "d30": 2,
-          "d60": 7,
-          "d90": 9
         }
       },
       {
@@ -5345,7 +5319,111 @@
           "d15": null,
           "d30": 1,
           "d60": 6,
+          "d90": 7
+        }
+      },
+      {
+        "id": "06fqt",
+        "name": "Scott Bandura",
+        "rank": 2125,
+        "positions": "LF,RF,OF",
+        "isPit": false,
+        "isTwoWay": false,
+        "overall": 105,
+        "sample": 1638,
+        "confidence": {
+          "hit": 95,
+          "power": 93,
+          "speed": 96
+        },
+        "delta": 6,
+        "prevOverall": 97,
+        "ipPerGs": null,
+        "deltas": {
+          "season": 8,
+          "d7": 0,
+          "d15": 0,
+          "d30": 2,
+          "d60": 6,
           "d90": 8
+        }
+      },
+      {
+        "id": "06gij",
+        "name": "Avery Owusu-Asiedu",
+        "rank": 1606,
+        "positions": "LF,CF,OF",
+        "isPit": false,
+        "isTwoWay": false,
+        "overall": 101,
+        "sample": 1315,
+        "confidence": {
+          "hit": 94,
+          "power": 92,
+          "speed": 96
+        },
+        "delta": 6,
+        "prevOverall": 95,
+        "ipPerGs": null,
+        "deltas": {
+          "season": 6,
+          "d7": null,
+          "d15": null,
+          "d30": 0,
+          "d60": 6,
+          "d90": 7
+        }
+      },
+      {
+        "id": "06za1",
+        "name": "Ty Doucette",
+        "rank": 3529,
+        "positions": "1B,INF",
+        "isPit": false,
+        "isTwoWay": false,
+        "overall": 99,
+        "sample": 314,
+        "confidence": {
+          "hit": 78,
+          "power": 72,
+          "speed": 84
+        },
+        "delta": 6,
+        "prevOverall": 88,
+        "ipPerGs": null,
+        "deltas": {
+          "season": 11,
+          "d7": null,
+          "d15": null,
+          "d30": 2,
+          "d60": 6,
+          "d90": 8
+        }
+      },
+      {
+        "id": "06oo7",
+        "name": "Sean Keys",
+        "rank": 494,
+        "positions": "1B,3B,INF",
+        "isPit": false,
+        "isTwoWay": false,
+        "overall": 117,
+        "sample": 1053,
+        "confidence": {
+          "hit": 92,
+          "power": 90,
+          "speed": 95
+        },
+        "delta": 5,
+        "prevOverall": 108,
+        "ipPerGs": null,
+        "deltas": {
+          "season": 9,
+          "d7": 0,
+          "d15": 0,
+          "d30": 0,
+          "d60": 5,
+          "d90": 2
         }
       },
       {
@@ -5371,7 +5449,7 @@
           "d15": 1,
           "d30": 3,
           "d60": 5,
-          "d90": 4
+          "d90": 3
         }
       },
       {
@@ -5401,6 +5479,32 @@
         }
       },
       {
+        "id": "05jq9",
+        "name": "Cayden Wallace",
+        "rank": 2082,
+        "positions": "3B,INF",
+        "isPit": false,
+        "isTwoWay": false,
+        "overall": 107,
+        "sample": 1943,
+        "confidence": {
+          "hit": 96,
+          "power": 94,
+          "speed": 97
+        },
+        "delta": 5,
+        "prevOverall": 101,
+        "ipPerGs": null,
+        "deltas": {
+          "season": 6,
+          "d7": null,
+          "d15": 1,
+          "d30": 2,
+          "d60": 5,
+          "d90": 4
+        }
+      },
+      {
         "id": "060uv",
         "name": "Leandro Pineda",
         "rank": 2417,
@@ -5424,32 +5528,6 @@
           "d30": 1,
           "d60": 5,
           "d90": 6
-        }
-      },
-      {
-        "id": "06fqt",
-        "name": "Scott Bandura",
-        "rank": 2125,
-        "positions": "LF,RF,OF",
-        "isPit": false,
-        "isTwoWay": false,
-        "overall": 105,
-        "sample": 1638,
-        "confidence": {
-          "hit": 95,
-          "power": 93,
-          "speed": 96
-        },
-        "delta": 5,
-        "prevOverall": 97,
-        "ipPerGs": null,
-        "deltas": {
-          "season": 8,
-          "d7": 0,
-          "d15": 0,
-          "d30": 2,
-          "d60": 5,
-          "d90": 8
         }
       },
       {
@@ -5479,6 +5557,32 @@
         }
       },
       {
+        "id": "06bpt",
+        "name": "Anthony Martinez",
+        "rank": 2331,
+        "positions": "UT",
+        "isPit": false,
+        "isTwoWay": false,
+        "overall": 100,
+        "sample": 391,
+        "confidence": {
+          "hit": 81,
+          "power": 77,
+          "speed": 87
+        },
+        "delta": 5,
+        "prevOverall": 96,
+        "ipPerGs": null,
+        "deltas": {
+          "season": 4,
+          "d7": null,
+          "d15": null,
+          "d30": 0,
+          "d60": 5,
+          "d90": 5
+        }
+      },
+      {
         "id": "06gvf",
         "name": "Cole Conn",
         "rank": 2660,
@@ -5498,7 +5602,7 @@
         "deltas": {
           "season": 6,
           "d7": null,
-          "d15": 2,
+          "d15": 1,
           "d30": 3,
           "d60": 5,
           "d90": 4
@@ -5531,6 +5635,32 @@
         }
       },
       {
+        "id": "070dc",
+        "name": "David McCann",
+        "rank": 4919,
+        "positions": "C",
+        "isPit": false,
+        "isTwoWay": false,
+        "overall": 95,
+        "sample": 260,
+        "confidence": {
+          "hit": 74,
+          "power": 68,
+          "speed": 81
+        },
+        "delta": 5,
+        "prevOverall": 88,
+        "ipPerGs": null,
+        "deltas": {
+          "season": 7,
+          "d7": null,
+          "d15": null,
+          "d30": 0,
+          "d60": 5,
+          "d90": 6
+        }
+      },
+      {
         "id": "06ahv",
         "name": "Luke Shliger",
         "rank": 3299,
@@ -5554,58 +5684,6 @@
           "d30": 3,
           "d60": 5,
           "d90": 4
-        }
-      },
-      {
-        "id": "06oo7",
-        "name": "Sean Keys",
-        "rank": 494,
-        "positions": "1B,3B,INF",
-        "isPit": false,
-        "isTwoWay": false,
-        "overall": 117,
-        "sample": 1053,
-        "confidence": {
-          "hit": 92,
-          "power": 90,
-          "speed": 95
-        },
-        "delta": 4,
-        "prevOverall": 108,
-        "ipPerGs": null,
-        "deltas": {
-          "season": 9,
-          "d7": 0,
-          "d15": 0,
-          "d30": 0,
-          "d60": 4,
-          "d90": 2
-        }
-      },
-      {
-        "id": "06n8y",
-        "name": "Eli Willits",
-        "rank": 76,
-        "positions": "SS,INF",
-        "isPit": false,
-        "isTwoWay": false,
-        "overall": 115,
-        "sample": 592,
-        "confidence": {
-          "hit": 87,
-          "power": 83,
-          "speed": 91
-        },
-        "delta": 4,
-        "prevOverall": 100,
-        "ipPerGs": null,
-        "deltas": {
-          "season": 15,
-          "d7": null,
-          "d15": null,
-          "d30": 2,
-          "d60": 4,
-          "d90": 3
         }
       },
       {
@@ -5641,7 +5719,7 @@
         "positions": "1B,INF,RF,OF",
         "isPit": false,
         "isTwoWay": false,
-        "overall": 113,
+        "overall": 114,
         "sample": 551,
         "confidence": {
           "hit": 86,
@@ -5652,12 +5730,12 @@
         "prevOverall": 88,
         "ipPerGs": null,
         "deltas": {
-          "season": 25,
+          "season": 26,
           "d7": null,
           "d15": null,
           "d30": 0,
           "d60": 4,
-          "d90": 7
+          "d90": 6
         }
       },
       {
@@ -5684,58 +5762,6 @@
           "d30": 0,
           "d60": 4,
           "d90": 4
-        }
-      },
-      {
-        "id": "06mhy",
-        "name": "Brandon Compton",
-        "rank": 705,
-        "positions": "LF,OF",
-        "isPit": false,
-        "isTwoWay": false,
-        "overall": 108,
-        "sample": 676,
-        "confidence": {
-          "hit": 88,
-          "power": 85,
-          "speed": 92
-        },
-        "delta": 4,
-        "prevOverall": 102,
-        "ipPerGs": null,
-        "deltas": {
-          "season": 6,
-          "d7": null,
-          "d15": 1,
-          "d30": -1,
-          "d60": 4,
-          "d90": 8
-        }
-      },
-      {
-        "id": "05jq9",
-        "name": "Cayden Wallace",
-        "rank": 2082,
-        "positions": "3B,INF",
-        "isPit": false,
-        "isTwoWay": false,
-        "overall": 107,
-        "sample": 1943,
-        "confidence": {
-          "hit": 96,
-          "power": 94,
-          "speed": 97
-        },
-        "delta": 4,
-        "prevOverall": 101,
-        "ipPerGs": null,
-        "deltas": {
-          "season": 6,
-          "d7": null,
-          "d15": 0,
-          "d30": 1,
-          "d60": 4,
-          "d90": 3
         }
       },
       {
@@ -5787,7 +5813,7 @@
           "d15": -1,
           "d30": 1,
           "d60": 4,
-          "d90": 7
+          "d90": 5
         }
       },
       {
@@ -5865,7 +5891,7 @@
           "d15": null,
           "d30": 0,
           "d60": 4,
-          "d90": 5
+          "d90": 4
         }
       },
       {
@@ -5917,33 +5943,33 @@
           "d15": null,
           "d30": -1,
           "d60": 4,
-          "d90": 6
+          "d90": 5
         }
       },
       {
-        "id": "06bpt",
-        "name": "Anthony Martinez",
-        "rank": 2331,
-        "positions": "UT",
+        "id": "06j3i",
+        "name": "Will Turner",
+        "rank": 2808,
+        "positions": "RF,OF",
         "isPit": false,
         "isTwoWay": false,
-        "overall": 100,
-        "sample": 391,
+        "overall": 101,
+        "sample": 698,
         "confidence": {
-          "hit": 81,
-          "power": 77,
-          "speed": 87
+          "hit": 89,
+          "power": 85,
+          "speed": 92
         },
         "delta": 4,
         "prevOverall": 96,
         "ipPerGs": null,
         "deltas": {
-          "season": 4,
+          "season": 5,
           "d7": null,
           "d15": null,
-          "d30": 0,
+          "d30": 2,
           "d60": 4,
-          "d90": 5
+          "d90": 1
         }
       },
       {
@@ -5992,7 +6018,7 @@
         "deltas": {
           "season": 1,
           "d7": null,
-          "d15": 1,
+          "d15": 0,
           "d30": 1,
           "d60": 4,
           "d90": 3
@@ -6021,7 +6047,7 @@
           "d15": null,
           "d30": null,
           "d60": 4,
-          "d90": 8
+          "d90": 7
         }
       },
       {
@@ -6048,32 +6074,6 @@
           "d30": 0,
           "d60": 4,
           "d90": null
-        }
-      },
-      {
-        "id": "070dc",
-        "name": "David McCann",
-        "rank": 4919,
-        "positions": "C",
-        "isPit": false,
-        "isTwoWay": false,
-        "overall": 95,
-        "sample": 260,
-        "confidence": {
-          "hit": 74,
-          "power": 68,
-          "speed": 81
-        },
-        "delta": 4,
-        "prevOverall": 88,
-        "ipPerGs": null,
-        "deltas": {
-          "season": 7,
-          "d7": null,
-          "d15": null,
-          "d30": 0,
-          "d60": 4,
-          "d90": 7
         }
       },
       {
@@ -6151,7 +6151,33 @@
           "d15": 0,
           "d30": 1,
           "d60": 3,
-          "d90": 4
+          "d90": 5
+        }
+      },
+      {
+        "id": "06n8y",
+        "name": "Eli Willits",
+        "rank": 76,
+        "positions": "SS,INF",
+        "isPit": false,
+        "isTwoWay": false,
+        "overall": 115,
+        "sample": 592,
+        "confidence": {
+          "hit": 87,
+          "power": 83,
+          "speed": 91
+        },
+        "delta": 3,
+        "prevOverall": 100,
+        "ipPerGs": null,
+        "deltas": {
+          "season": 15,
+          "d7": null,
+          "d15": null,
+          "d30": 2,
+          "d60": 3,
+          "d90": 3
         }
       },
       {
@@ -6259,32 +6285,6 @@
         }
       },
       {
-        "id": "06nln",
-        "name": "Enddy Azocar",
-        "rank": 720,
-        "positions": "CF,OF",
-        "isPit": false,
-        "isTwoWay": false,
-        "overall": 110,
-        "sample": 967,
-        "confidence": {
-          "hit": 91,
-          "power": 89,
-          "speed": 94
-        },
-        "delta": 3,
-        "prevOverall": 104,
-        "ipPerGs": null,
-        "deltas": {
-          "season": 6,
-          "d7": null,
-          "d15": null,
-          "d30": 0,
-          "d60": 3,
-          "d90": 6
-        }
-      },
-      {
         "id": "06dqr",
         "name": "Ethan Anderson",
         "rank": 1971,
@@ -6304,10 +6304,36 @@
         "deltas": {
           "season": 8,
           "d7": null,
-          "d15": 3,
+          "d15": 2,
           "d30": 3,
           "d60": 3,
-          "d90": 3
+          "d90": 2
+        }
+      },
+      {
+        "id": "06mhy",
+        "name": "Brandon Compton",
+        "rank": 705,
+        "positions": "LF,OF",
+        "isPit": false,
+        "isTwoWay": false,
+        "overall": 108,
+        "sample": 676,
+        "confidence": {
+          "hit": 88,
+          "power": 85,
+          "speed": 92
+        },
+        "delta": 3,
+        "prevOverall": 102,
+        "ipPerGs": null,
+        "deltas": {
+          "season": 6,
+          "d7": null,
+          "d15": 1,
+          "d30": -1,
+          "d60": 3,
+          "d90": 8
         }
       },
       {
@@ -6337,6 +6363,32 @@
         }
       },
       {
+        "id": "06o0h",
+        "name": "Luis Escudero",
+        "rank": 1936,
+        "positions": "2B,INF",
+        "isPit": false,
+        "isTwoWay": false,
+        "overall": 107,
+        "sample": 703,
+        "confidence": {
+          "hit": 89,
+          "power": 85,
+          "speed": 92
+        },
+        "delta": 3,
+        "prevOverall": 104,
+        "ipPerGs": null,
+        "deltas": {
+          "season": 3,
+          "d7": null,
+          "d15": null,
+          "d30": 1,
+          "d60": 3,
+          "d90": 2
+        }
+      },
+      {
         "id": "06yyn",
         "name": "Franklin Primera",
         "rank": 680,
@@ -6360,58 +6412,6 @@
           "d30": 0,
           "d60": 3,
           "d90": 4
-        }
-      },
-      {
-        "id": "0724c",
-        "name": "Francisco Renteria",
-        "rank": 503,
-        "positions": "CF,OF",
-        "isPit": false,
-        "isTwoWay": false,
-        "overall": 105,
-        "sample": 234,
-        "confidence": {
-          "hit": 72,
-          "power": 66,
-          "speed": 80
-        },
-        "delta": 3,
-        "prevOverall": 88,
-        "ipPerGs": null,
-        "deltas": {
-          "season": 17,
-          "d7": null,
-          "d15": null,
-          "d30": null,
-          "d60": 3,
-          "d90": 8
-        }
-      },
-      {
-        "id": "05t5m",
-        "name": "Jacob Berry",
-        "rank": 2437,
-        "positions": "2B,3B,INF,RF,OF",
-        "isPit": false,
-        "isTwoWay": false,
-        "overall": 105,
-        "sample": 2023,
-        "confidence": {
-          "hit": 96,
-          "power": 94,
-          "speed": 97
-        },
-        "delta": 3,
-        "prevOverall": 102,
-        "ipPerGs": null,
-        "deltas": {
-          "season": 3,
-          "d7": null,
-          "d15": 1,
-          "d30": 1,
-          "d60": 3,
-          "d90": 3
         }
       }
     ],
@@ -6464,31 +6464,6 @@
           "d30": 1,
           "d60": 7,
           "d90": 10
-        }
-      },
-      {
-        "id": "06icx",
-        "name": "Tyler Bremner",
-        "rank": 349,
-        "positions": "SP",
-        "isPit": true,
-        "isTwoWay": false,
-        "overall": 103,
-        "sample": 73,
-        "confidence": {
-          "stuff": 78,
-          "control": 64
-        },
-        "delta": 7,
-        "prevOverall": 88,
-        "ipPerGs": 3.8245614035087723,
-        "deltas": {
-          "season": 15,
-          "d7": null,
-          "d15": null,
-          "d30": 2,
-          "d60": 7,
-          "d90": 7
         }
       },
       {
@@ -6592,6 +6567,31 @@
         }
       },
       {
+        "id": "06icx",
+        "name": "Tyler Bremner",
+        "rank": 349,
+        "positions": "SP",
+        "isPit": true,
+        "isTwoWay": false,
+        "overall": 103,
+        "sample": 73,
+        "confidence": {
+          "stuff": 78,
+          "control": 64
+        },
+        "delta": 6,
+        "prevOverall": 88,
+        "ipPerGs": 3.8245614035087723,
+        "deltas": {
+          "season": 15,
+          "d7": null,
+          "d15": null,
+          "d30": 2,
+          "d60": 6,
+          "d90": 7
+        }
+      },
+      {
         "id": "06hna",
         "name": "Adler Cecil",
         "rank": 3938,
@@ -6692,31 +6692,6 @@
         }
       },
       {
-        "id": "06yjx",
-        "name": "Tanner Franklin",
-        "rank": 519,
-        "positions": "SP",
-        "isPit": true,
-        "isTwoWay": false,
-        "overall": 102,
-        "sample": 111,
-        "confidence": {
-          "stuff": 85,
-          "control": 74
-        },
-        "delta": 5,
-        "prevOverall": 100,
-        "ipPerGs": 4.2,
-        "deltas": {
-          "season": 2,
-          "d7": null,
-          "d15": null,
-          "d30": 2,
-          "d60": 5,
-          "d90": 7
-        }
-      },
-      {
         "id": "06qhu",
         "name": "Brandt Thompson",
         "rank": 2444,
@@ -6739,31 +6714,6 @@
           "d30": 2,
           "d60": 5,
           "d90": 2
-        }
-      },
-      {
-        "id": "06cqx",
-        "name": "Steven Echavarria",
-        "rank": 1862,
-        "positions": "SP",
-        "isPit": true,
-        "isTwoWay": false,
-        "overall": 99,
-        "sample": 279,
-        "confidence": {
-          "stuff": 93,
-          "control": 87
-        },
-        "delta": 5,
-        "prevOverall": 94,
-        "ipPerGs": 4.693333333333333,
-        "deltas": {
-          "season": 5,
-          "d7": null,
-          "d15": null,
-          "d30": 2,
-          "d60": 5,
-          "d90": 5
         }
       },
       {
@@ -6842,31 +6792,6 @@
         }
       },
       {
-        "id": "05jpm",
-        "name": "Patrick Reilly",
-        "rank": 2248,
-        "positions": "SP",
-        "isPit": true,
-        "isTwoWay": false,
-        "overall": 104,
-        "sample": 193,
-        "confidence": {
-          "stuff": 91,
-          "control": 83
-        },
-        "delta": 4,
-        "prevOverall": 101,
-        "ipPerGs": 4.076923076923077,
-        "deltas": {
-          "season": 3,
-          "d7": null,
-          "d15": null,
-          "d30": 1,
-          "d60": 4,
-          "d90": 4
-        }
-      },
-      {
         "id": "06qwt",
         "name": "Ben Jacobs",
         "rank": 948,
@@ -6892,31 +6817,6 @@
         }
       },
       {
-        "id": "06zrd",
-        "name": "Dylan Brown",
-        "rank": 1706,
-        "positions": "SP",
-        "isPit": true,
-        "isTwoWay": false,
-        "overall": 103,
-        "sample": 107,
-        "confidence": {
-          "stuff": 84,
-          "control": 73
-        },
-        "delta": 4,
-        "prevOverall": 88,
-        "ipPerGs": 4.848484848484848,
-        "deltas": {
-          "season": 15,
-          "d7": null,
-          "d15": null,
-          "d30": 0,
-          "d60": 4,
-          "d90": 4
-        }
-      },
-      {
         "id": "06kxc",
         "name": "Zach Root",
         "rank": 626,
@@ -6937,6 +6837,31 @@
           "d7": null,
           "d15": null,
           "d30": null,
+          "d60": 4,
+          "d90": 5
+        }
+      },
+      {
+        "id": "06cqx",
+        "name": "Steven Echavarria",
+        "rank": 1862,
+        "positions": "SP",
+        "isPit": true,
+        "isTwoWay": false,
+        "overall": 99,
+        "sample": 279,
+        "confidence": {
+          "stuff": 93,
+          "control": 87
+        },
+        "delta": 4,
+        "prevOverall": 94,
+        "ipPerGs": 4.693333333333333,
+        "deltas": {
+          "season": 5,
+          "d7": null,
+          "d15": null,
+          "d30": 2,
           "d60": 4,
           "d90": 5
         }
@@ -6988,7 +6913,7 @@
           "d15": null,
           "d30": 0,
           "d60": 3,
-          "d90": 4
+          "d90": 5
         }
       },
       {
@@ -7017,31 +6942,6 @@
         }
       },
       {
-        "id": "06qra",
-        "name": "Bryce Mayer",
-        "rank": 1431,
-        "positions": "SP",
-        "isPit": true,
-        "isTwoWay": false,
-        "overall": 108,
-        "sample": 196,
-        "confidence": {
-          "stuff": 91,
-          "control": 83
-        },
-        "delta": 3,
-        "prevOverall": 104,
-        "ipPerGs": 4.25,
-        "deltas": {
-          "season": 4,
-          "d7": null,
-          "d15": 1,
-          "d30": 0,
-          "d60": 3,
-          "d90": 5
-        }
-      },
-      {
         "id": "066fg",
         "name": "Gage Stanifer",
         "rank": 778,
@@ -7060,7 +6960,7 @@
         "deltas": {
           "season": 1,
           "d7": null,
-          "d15": 2,
+          "d15": 0,
           "d30": 2,
           "d60": 3,
           "d90": 2
@@ -7114,6 +7014,31 @@
           "d30": 1,
           "d60": 3,
           "d90": 3
+        }
+      },
+      {
+        "id": "06zrd",
+        "name": "Dylan Brown",
+        "rank": 1706,
+        "positions": "SP",
+        "isPit": true,
+        "isTwoWay": false,
+        "overall": 103,
+        "sample": 107,
+        "confidence": {
+          "stuff": 84,
+          "control": 73
+        },
+        "delta": 3,
+        "prevOverall": 88,
+        "ipPerGs": 4.848484848484848,
+        "deltas": {
+          "season": 15,
+          "d7": null,
+          "d15": null,
+          "d30": 0,
+          "d60": 3,
+          "d90": 4
         }
       },
       {
@@ -7192,6 +7117,31 @@
         }
       },
       {
+        "id": "06yjx",
+        "name": "Tanner Franklin",
+        "rank": 519,
+        "positions": "SP",
+        "isPit": true,
+        "isTwoWay": false,
+        "overall": 102,
+        "sample": 111,
+        "confidence": {
+          "stuff": 85,
+          "control": 74
+        },
+        "delta": 3,
+        "prevOverall": 100,
+        "ipPerGs": 4.2,
+        "deltas": {
+          "season": 2,
+          "d7": null,
+          "d15": null,
+          "d30": 2,
+          "d60": 3,
+          "d90": 7
+        }
+      },
+      {
         "id": "072ep",
         "name": "Mikey Cascino",
         "rank": 2637,
@@ -7267,28 +7217,28 @@
         }
       },
       {
-        "id": "06yxi",
-        "name": "Dean Livingston",
-        "rank": 1170,
+        "id": "06c4z",
+        "name": "Grant Kipp",
+        "rank": 2710,
         "positions": "SP",
         "isPit": true,
         "isTwoWay": false,
         "overall": 96,
-        "sample": 82,
+        "sample": 362,
         "confidence": {
-          "stuff": 80,
-          "control": 67
+          "stuff": 95,
+          "control": 90
         },
         "delta": 3,
-        "prevOverall": 88,
-        "ipPerGs": 4.537037037037036,
+        "prevOverall": 91,
+        "ipPerGs": 3.68,
         "deltas": {
-          "season": 8,
+          "season": 5,
           "d7": null,
-          "d15": null,
-          "d30": 1,
+          "d15": 0,
+          "d30": 2,
           "d60": 3,
-          "d90": 4
+          "d90": 2
         }
       },
       {
@@ -7488,7 +7438,7 @@
           "d15": null,
           "d30": 0,
           "d60": 2,
-          "d90": 2
+          "d90": 0
         }
       },
       {
@@ -7513,7 +7463,7 @@
           "d15": null,
           "d30": null,
           "d60": 2,
-          "d90": 6
+          "d90": 5
         }
       },
       {
@@ -7563,7 +7513,7 @@
           "d15": null,
           "d30": -1,
           "d60": 2,
-          "d90": 4
+          "d90": 3
         }
       },
       {
@@ -7589,6 +7539,31 @@
           "d30": -2,
           "d60": 2,
           "d90": 2
+        }
+      },
+      {
+        "id": "05jpm",
+        "name": "Patrick Reilly",
+        "rank": 2248,
+        "positions": "SP",
+        "isPit": true,
+        "isTwoWay": false,
+        "overall": 104,
+        "sample": 193,
+        "confidence": {
+          "stuff": 91,
+          "control": 83
+        },
+        "delta": 2,
+        "prevOverall": 101,
+        "ipPerGs": 4.076923076923077,
+        "deltas": {
+          "season": 3,
+          "d7": null,
+          "d15": null,
+          "d30": 1,
+          "d60": 2,
+          "d90": 4
         }
       },
       {
@@ -7659,6 +7634,31 @@
         "ipPerGs": 3.972222222222222,
         "deltas": {
           "season": 14,
+          "d7": null,
+          "d15": null,
+          "d30": 0,
+          "d60": 2,
+          "d90": 4
+        }
+      },
+      {
+        "id": "06kxq",
+        "name": "Gabriel Chinchilla",
+        "rank": 2530,
+        "positions": "SP",
+        "isPit": true,
+        "isTwoWay": false,
+        "overall": 102,
+        "sample": 141,
+        "confidence": {
+          "stuff": 88,
+          "control": 78
+        },
+        "delta": 2,
+        "prevOverall": 99,
+        "ipPerGs": 3.6491228070175437,
+        "deltas": {
+          "season": 3,
           "d7": null,
           "d15": null,
           "d30": 0,
@@ -7768,10 +7768,10 @@
         "deltas": {
           "season": 8,
           "d7": null,
-          "d15": 3,
+          "d15": 2,
           "d30": 3,
           "d60": 3,
-          "d90": 3
+          "d90": 2
         }
       },
       {
@@ -7797,7 +7797,7 @@
           "d15": 1,
           "d30": 3,
           "d60": 5,
-          "d90": 4
+          "d90": 3
         }
       },
       {
@@ -7846,7 +7846,7 @@
         "deltas": {
           "season": 6,
           "d7": null,
-          "d15": 2,
+          "d15": 1,
           "d30": 3,
           "d60": 5,
           "d90": 4
@@ -7900,7 +7900,7 @@
           "d7": null,
           "d15": null,
           "d30": 2,
-          "d60": 4,
+          "d60": 3,
           "d90": 3
         }
       },
@@ -8009,6 +8009,32 @@
         }
       },
       {
+        "id": "05jq9",
+        "name": "Cayden Wallace",
+        "rank": 2082,
+        "positions": "3B,INF",
+        "isPit": false,
+        "isTwoWay": false,
+        "overall": 107,
+        "sample": 1943,
+        "confidence": {
+          "hit": 96,
+          "power": 94,
+          "speed": 97
+        },
+        "delta": 2,
+        "prevOverall": 101,
+        "ipPerGs": null,
+        "deltas": {
+          "season": 6,
+          "d7": null,
+          "d15": 1,
+          "d30": 2,
+          "d60": 5,
+          "d90": 4
+        }
+      },
+      {
         "id": "06c5r",
         "name": "Caden Bodine",
         "rank": 445,
@@ -8028,7 +8054,7 @@
         "deltas": {
           "season": 15,
           "d7": null,
-          "d15": 1,
+          "d15": 0,
           "d30": 2,
           "d60": 7,
           "d90": 8
@@ -8056,7 +8082,7 @@
           "d7": 0,
           "d15": 0,
           "d30": 2,
-          "d60": 5,
+          "d60": 6,
           "d90": 8
         }
       },
@@ -8084,32 +8110,6 @@
           "d30": 2,
           "d60": 3,
           "d90": 3
-        }
-      },
-      {
-        "id": "06433",
-        "name": "Kody Huff",
-        "rank": 2045,
-        "positions": "C",
-        "isPit": false,
-        "isTwoWay": false,
-        "overall": 104,
-        "sample": 1649,
-        "confidence": {
-          "hit": 95,
-          "power": 93,
-          "speed": 96
-        },
-        "delta": 2,
-        "prevOverall": 90,
-        "ipPerGs": null,
-        "deltas": {
-          "season": 14,
-          "d7": null,
-          "d15": 1,
-          "d30": 2,
-          "d60": 3,
-          "d90": 7
         }
       },
       {
@@ -8212,7 +8212,7 @@
           "d7": null,
           "d15": null,
           "d30": 2,
-          "d60": 3,
+          "d60": 4,
           "d90": 1
         }
       },
@@ -8236,7 +8236,7 @@
         "deltas": {
           "season": 5,
           "d7": null,
-          "d15": 0,
+          "d15": 1,
           "d30": 2,
           "d60": 3,
           "d90": 5
@@ -8265,7 +8265,7 @@
           "d15": 0,
           "d30": 2,
           "d60": 2,
-          "d90": 4
+          "d90": 3
         }
       },
       {
@@ -8290,7 +8290,7 @@
           "d7": null,
           "d15": null,
           "d30": 2,
-          "d60": 3,
+          "d60": 2,
           "d90": 3
         }
       },
@@ -8316,8 +8316,8 @@
           "d7": null,
           "d15": null,
           "d30": 2,
-          "d60": 7,
-          "d90": 9
+          "d60": 6,
+          "d90": 8
         }
       },
       {
@@ -8499,7 +8499,7 @@
           "d15": null,
           "d30": 1,
           "d60": 6,
-          "d90": 8
+          "d90": 7
         }
       },
       {
@@ -8577,7 +8577,7 @@
           "d15": 0,
           "d30": 1,
           "d60": 3,
-          "d90": 4
+          "d90": 5
         }
       },
       {
@@ -8629,7 +8629,7 @@
           "d15": null,
           "d30": 1,
           "d60": 1,
-          "d90": 6
+          "d90": 5
         }
       },
       {
@@ -8652,7 +8652,7 @@
         "deltas": {
           "season": 7,
           "d7": null,
-          "d15": 0,
+          "d15": 1,
           "d30": 1,
           "d60": -1,
           "d90": -6
@@ -8681,7 +8681,7 @@
           "d15": null,
           "d30": 1,
           "d60": 0,
-          "d90": 1
+          "d90": 2
         }
       },
       {
@@ -8707,7 +8707,7 @@
           "d15": null,
           "d30": 1,
           "d60": 2,
-          "d90": 2
+          "d90": 3
         }
       },
       {
@@ -8784,7 +8784,7 @@
           "d7": null,
           "d15": null,
           "d30": 1,
-          "d60": 2,
+          "d60": 1,
           "d90": 4
         }
       },
@@ -8810,7 +8810,7 @@
           "d7": null,
           "d15": null,
           "d30": 1,
-          "d60": -1,
+          "d60": -2,
           "d90": 1
         }
       },
@@ -8864,32 +8864,6 @@
           "d30": 1,
           "d60": 5,
           "d90": 8
-        }
-      },
-      {
-        "id": "05jq9",
-        "name": "Cayden Wallace",
-        "rank": 2082,
-        "positions": "3B,INF",
-        "isPit": false,
-        "isTwoWay": false,
-        "overall": 107,
-        "sample": 1943,
-        "confidence": {
-          "hit": 96,
-          "power": 94,
-          "speed": 97
-        },
-        "delta": 1,
-        "prevOverall": 101,
-        "ipPerGs": null,
-        "deltas": {
-          "season": 6,
-          "d7": null,
-          "d15": 0,
-          "d30": 1,
-          "d60": 4,
-          "d90": 3
         }
       },
       {
@@ -8966,8 +8940,34 @@
           "d7": null,
           "d15": null,
           "d30": 1,
-          "d60": 2,
+          "d60": 3,
           "d90": 2
+        }
+      },
+      {
+        "id": "04ooy",
+        "name": "Marco Luciano",
+        "rank": 1412,
+        "positions": "LF,CF,OF",
+        "isPit": false,
+        "isTwoWay": false,
+        "overall": 107,
+        "sample": 2656,
+        "confidence": {
+          "hit": 97,
+          "power": 96,
+          "speed": 98
+        },
+        "delta": 1,
+        "prevOverall": 105,
+        "ipPerGs": null,
+        "deltas": {
+          "season": 2,
+          "d7": null,
+          "d15": 1,
+          "d30": 1,
+          "d60": 2,
+          "d90": 1
         }
       }
     ],
@@ -9191,7 +9191,7 @@
         "deltas": {
           "season": 1,
           "d7": null,
-          "d15": 2,
+          "d15": 0,
           "d30": 2,
           "d60": 3,
           "d90": 2
@@ -9243,7 +9243,7 @@
           "d7": null,
           "d15": null,
           "d30": 2,
-          "d60": 7,
+          "d60": 6,
           "d90": 7
         }
       },
@@ -9293,7 +9293,7 @@
           "d7": null,
           "d15": null,
           "d30": 2,
-          "d60": 5,
+          "d60": 3,
           "d90": 7
         }
       },
@@ -9343,7 +9343,7 @@
           "d7": null,
           "d15": null,
           "d30": 2,
-          "d60": 5,
+          "d60": 4,
           "d90": 5
         }
       },
@@ -9393,7 +9393,7 @@
           "d7": null,
           "d15": 0,
           "d30": 2,
-          "d60": 2,
+          "d60": 3,
           "d90": 2
         }
       },
@@ -9643,7 +9643,7 @@
           "d7": null,
           "d15": null,
           "d30": 1,
-          "d60": 4,
+          "d60": 2,
           "d90": 4
         }
       },
@@ -9718,7 +9718,7 @@
           "d7": null,
           "d15": -1,
           "d30": 1,
-          "d60": 1,
+          "d60": -2,
           "d90": 1
         }
       },
@@ -9994,7 +9994,7 @@
           "d15": null,
           "d30": 1,
           "d60": -1,
-          "d90": -1
+          "d90": -2
         }
       },
       {
@@ -10044,7 +10044,7 @@
           "d15": null,
           "d30": 1,
           "d60": 2,
-          "d90": 2
+          "d90": 3
         }
       },
       {
@@ -10118,7 +10118,7 @@
           "d7": null,
           "d15": null,
           "d30": 1,
-          "d60": 3,
+          "d60": 2,
           "d90": 4
         }
       },
@@ -10143,7 +10143,7 @@
           "d7": null,
           "d15": null,
           "d30": 1,
-          "d60": 0,
+          "d60": 2,
           "d90": 3
         }
       },
@@ -10227,32 +10227,6 @@
   "d15": {
     "bats": [
       {
-        "id": "06dqr",
-        "name": "Ethan Anderson",
-        "rank": 1971,
-        "positions": "C,1B,INF",
-        "isPit": false,
-        "isTwoWay": false,
-        "overall": 108,
-        "sample": 829,
-        "confidence": {
-          "hit": 90,
-          "power": 87,
-          "speed": 93
-        },
-        "delta": 3,
-        "prevOverall": 100,
-        "ipPerGs": null,
-        "deltas": {
-          "season": 8,
-          "d7": null,
-          "d15": 3,
-          "d30": 3,
-          "d60": 3,
-          "d90": 3
-        }
-      },
-      {
         "id": "061yp",
         "name": "Allan Castro",
         "rank": 2371,
@@ -10279,6 +10253,32 @@
         }
       },
       {
+        "id": "06dqr",
+        "name": "Ethan Anderson",
+        "rank": 1971,
+        "positions": "C,1B,INF",
+        "isPit": false,
+        "isTwoWay": false,
+        "overall": 108,
+        "sample": 829,
+        "confidence": {
+          "hit": 90,
+          "power": 87,
+          "speed": 93
+        },
+        "delta": 2,
+        "prevOverall": 100,
+        "ipPerGs": null,
+        "deltas": {
+          "season": 8,
+          "d7": null,
+          "d15": 2,
+          "d30": 3,
+          "d60": 3,
+          "d90": 2
+        }
+      },
+      {
         "id": "06qnu",
         "name": "Jason Schiavone",
         "rank": 1812,
@@ -10292,42 +10292,16 @@
           "power": 88,
           "speed": 94
         },
-        "delta": 3,
+        "delta": 2,
         "prevOverall": 88,
         "ipPerGs": null,
         "deltas": {
           "season": 10,
           "d7": null,
-          "d15": 3,
+          "d15": 2,
           "d30": 1,
           "d60": 2,
           "d90": 1
-        }
-      },
-      {
-        "id": "06gvf",
-        "name": "Cole Conn",
-        "rank": 2660,
-        "positions": "C",
-        "isPit": false,
-        "isTwoWay": false,
-        "overall": 98,
-        "sample": 1173,
-        "confidence": {
-          "hit": 93,
-          "power": 91,
-          "speed": 95
-        },
-        "delta": 2,
-        "prevOverall": 92,
-        "ipPerGs": null,
-        "deltas": {
-          "season": 6,
-          "d7": null,
-          "d15": 2,
-          "d30": 3,
-          "d60": 5,
-          "d90": 4
         }
       },
       {
@@ -10357,6 +10331,32 @@
         }
       },
       {
+        "id": "06alk",
+        "name": "Charlie Condon",
+        "rank": 268,
+        "positions": "1B,INF",
+        "isPit": false,
+        "isTwoWay": false,
+        "overall": 112,
+        "sample": 1134,
+        "confidence": {
+          "hit": 93,
+          "power": 90,
+          "speed": 95
+        },
+        "delta": 1,
+        "prevOverall": 105,
+        "ipPerGs": null,
+        "deltas": {
+          "season": 7,
+          "d7": null,
+          "d15": 1,
+          "d30": 1,
+          "d60": -1,
+          "d90": -6
+        }
+      },
+      {
         "id": "05raq",
         "name": "Robert Moore",
         "rank": 2197,
@@ -10383,29 +10383,29 @@
         }
       },
       {
-        "id": "04yi5",
-        "name": "Eddys Leonard",
-        "rank": 2354,
-        "positions": "2B,3B,INF,LF,OF",
+        "id": "06dmp",
+        "name": "Max Anderson",
+        "rank": 849,
+        "positions": "2B,INF",
         "isPit": false,
         "isTwoWay": false,
-        "overall": 110,
-        "sample": 3236,
+        "overall": 111,
+        "sample": 1726,
         "confidence": {
-          "hit": 97,
-          "power": 96,
-          "speed": 98
+          "hit": 95,
+          "power": 93,
+          "speed": 97
         },
         "delta": 1,
-        "prevOverall": 109,
+        "prevOverall": 108,
         "ipPerGs": null,
         "deltas": {
-          "season": 1,
+          "season": 3,
           "d7": null,
           "d15": 1,
-          "d30": 0,
-          "d60": 0,
-          "d90": 0
+          "d30": -1,
+          "d60": -1,
+          "d90": 1
         }
       },
       {
@@ -10430,7 +10430,7 @@
           "d7": null,
           "d15": 1,
           "d30": -1,
-          "d60": 4,
+          "d60": 3,
           "d90": 8
         }
       },
@@ -10456,6 +10456,32 @@
           "d7": null,
           "d15": 1,
           "d30": 3,
+          "d60": 5,
+          "d90": 3
+        }
+      },
+      {
+        "id": "05jq9",
+        "name": "Cayden Wallace",
+        "rank": 2082,
+        "positions": "3B,INF",
+        "isPit": false,
+        "isTwoWay": false,
+        "overall": 107,
+        "sample": 1943,
+        "confidence": {
+          "hit": 96,
+          "power": 94,
+          "speed": 97
+        },
+        "delta": 1,
+        "prevOverall": 101,
+        "ipPerGs": null,
+        "deltas": {
+          "season": 6,
+          "d7": null,
+          "d15": 1,
+          "d30": 2,
           "d60": 5,
           "d90": 4
         }
@@ -10509,33 +10535,7 @@
           "d15": 1,
           "d30": 1,
           "d60": 2,
-          "d90": 2
-        }
-      },
-      {
-        "id": "06c5r",
-        "name": "Caden Bodine",
-        "rank": 445,
-        "positions": "C",
-        "isPit": false,
-        "isTwoWay": false,
-        "overall": 106,
-        "sample": 579,
-        "confidence": {
-          "hit": 87,
-          "power": 83,
-          "speed": 91
-        },
-        "delta": 1,
-        "prevOverall": 91,
-        "ipPerGs": null,
-        "deltas": {
-          "season": 15,
-          "d7": null,
-          "d15": 1,
-          "d30": 2,
-          "d60": 7,
-          "d90": 8
+          "d90": 1
         }
       },
       {
@@ -10585,7 +10585,7 @@
           "season": 14,
           "d7": null,
           "d15": 1,
-          "d30": 2,
+          "d30": 1,
           "d60": 3,
           "d90": 7
         }
@@ -10669,29 +10669,55 @@
         }
       },
       {
-        "id": "05jq1",
-        "name": "D'Andre Smith",
-        "rank": 2745,
-        "positions": "LF,RF,OF",
+        "id": "05uav",
+        "name": "Cody Morissette",
+        "rank": 2668,
+        "positions": "2B,INF",
+        "isPit": false,
+        "isTwoWay": false,
+        "overall": 100,
+        "sample": 2123,
+        "confidence": {
+          "hit": 96,
+          "power": 95,
+          "speed": 97
+        },
+        "delta": 1,
+        "prevOverall": 95,
+        "ipPerGs": null,
+        "deltas": {
+          "season": 5,
+          "d7": null,
+          "d15": 1,
+          "d30": 2,
+          "d60": 3,
+          "d90": 5
+        }
+      },
+      {
+        "id": "06gvf",
+        "name": "Cole Conn",
+        "rank": 2660,
+        "positions": "C",
         "isPit": false,
         "isTwoWay": false,
         "overall": 98,
-        "sample": 1163,
+        "sample": 1173,
         "confidence": {
           "hit": 93,
           "power": 91,
           "speed": 95
         },
         "delta": 1,
-        "prevOverall": 97,
+        "prevOverall": 92,
         "ipPerGs": null,
         "deltas": {
-          "season": 1,
+          "season": 6,
           "d7": null,
           "d15": 1,
-          "d30": 1,
-          "d60": 4,
-          "d90": 3
+          "d30": 3,
+          "d60": 5,
+          "d90": 4
         }
       },
       {
@@ -10745,31 +10771,6 @@
           "d30": 6,
           "d60": 8,
           "d90": 10
-        }
-      },
-      {
-        "id": "066fg",
-        "name": "Gage Stanifer",
-        "rank": 778,
-        "positions": "SP,RP",
-        "isPit": true,
-        "isTwoWay": false,
-        "overall": 108,
-        "sample": 313,
-        "confidence": {
-          "stuff": 94,
-          "control": 89
-        },
-        "delta": 2,
-        "prevOverall": 107,
-        "ipPerGs": 3.2473118279569895,
-        "deltas": {
-          "season": 1,
-          "d7": null,
-          "d15": 2,
-          "d30": 2,
-          "d60": 3,
-          "d90": 2
         }
       },
       {
@@ -10868,7 +10869,7 @@
           "d7": null,
           "d15": 1,
           "d30": 0,
-          "d60": 3,
+          "d60": 1,
           "d90": 5
         }
       },
