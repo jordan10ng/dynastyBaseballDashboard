@@ -2,7 +2,7 @@ name: Daily Stats + Model Sync
 
 on:
   schedule:
-    - cron: '0 9 * * *'  # 1am PT (9am UTC)
+    - cron: '23 9 * * *'  # 1:23am PT (9:23am UTC) -- off :00, GitHub delays top-of-hour schedules most
   workflow_dispatch:       # allow manual trigger from GitHub UI
 
 jobs:
