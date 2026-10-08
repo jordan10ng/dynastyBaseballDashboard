@@ -3,7 +3,8 @@
 // Data comes from /api/afl `days`: [{ date, teams: { [name]: { total, delta, rank, rankChange } }, players: [...] }]
 import { useState, useEffect, useRef, useMemo } from 'react'
 
-type Day = { date: string; teams: Record<string, { total: number; delta: number; rank: number; rankChange: number }>; players: any[] }
+type Move = { name: string; pos: string }
+type Day = { date: string; teams: Record<string, { total: number; delta: number; rank: number; rankChange: number; movedIn?: Move[]; movedOut?: Move[] }>; players: any[] }
 
 const ink = { text: 'var(--text)', muted: 'var(--muted)', border: 'var(--border)' }
 const display = { fontFamily: 'var(--font-display)', fontWeight: 700 as const }
@@ -55,6 +56,13 @@ export function LastNight({ day, color, isFinal, onPlayer }: { day: Day; color: 
               <div style={{ fontSize: '0.7rem', color: ink.muted, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                 {best ? <>{best.name} {best.pts}{!best.counted && ' (BN)'}</> : 'No games'}
               </div>
+              {/* Best-ball lineup changes caused by this day's games */}
+              {(t.movedIn?.length || t.movedOut?.length) ? (
+                <div style={{ marginTop: 5, paddingTop: 5, borderTop: `1px solid ${ink.border}`, fontSize: '0.68rem', lineHeight: 1.5 }}>
+                  {t.movedIn?.map(m => <div key={'in' + m.name} style={{ color: ink.text }}>▲ {m.name} <span style={{ color: ink.muted }}>{m.pos} in</span></div>)}
+                  {t.movedOut?.map(m => <div key={'out' + m.name} style={{ color: ink.muted }}>▼ {m.name} {m.pos} out</div>)}
+                </div>
+              ) : null}
             </div>
           )
         })}
