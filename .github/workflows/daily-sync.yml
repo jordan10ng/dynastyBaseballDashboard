@@ -98,6 +98,6 @@ jobs:
           git config user.name "DIAMOND Bot"
           git config user.email "jordanwlong@gmail.com"
           git add data/history/$(date -u +%Y).json data/model/norms.json data/model/mlb-tools.json data/model/regression.json data/model/hot-sheet.json data/model/pool-stats.json data/model/blend-rank.json data/model/model-rank.json data/model/call-ups.json data/players.json data/db.json data/statcast-totals.json data/statcast-cursor.json data/statcast-backfill-queue.json data/model/statcast-tools.json
-          if [ -f data/afl-stats-$(date -u +%Y).json ]; then git add data/afl-stats-$(date -u +%Y).json; fi
+          for f in data/afl-stats-$(date -u +%Y).json data/afl-daily-$(date -u +%Y).json; do if [ -f "$f" ]; then git add "$f"; fi; done
           git diff --cached --quiet || git commit -m "chore: daily sync $(date -u '+%Y-%m-%d')"
           git push --force

@@ -4,6 +4,7 @@
 import { useState, useEffect, useMemo } from 'react'
 import { PlayerDrawer } from '../../components/players/PlayerDrawer'
 import { useDrawerData } from '../../lib/useDrawerData'
+import { LastNight, SeasonChart, DailyLog } from '../../components/afl/AflDaily'
 
 // AFL-only color map — intentionally NOT the shared FRIEND_TEAMS map
 const AFL_COLORS: Record<string, string> = {
@@ -136,6 +137,7 @@ export default function AFLPage() {
     letterSpacing: '0.04em', cursor: 'pointer', whiteSpace: 'nowrap' as const,
   })
 
+  const hasDays = (data?.days?.length ?? 0) > 0
   const card = { background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 8, overflow: 'hidden' as const }
   const sectionTitle = { fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.8rem', letterSpacing: '0.08em', textTransform: 'uppercase' as const, color: 'var(--muted)', marginBottom: '0.5rem' }
   const th = { padding: '0.45rem 0.5rem', fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.68rem', letterSpacing: '0.06em', textTransform: 'uppercase' as const, color: 'var(--muted)', textAlign: 'right' as const, whiteSpace: 'nowrap' as const, borderBottom: '1px solid var(--border)', background: 'var(--bg-card)' }
@@ -158,12 +160,13 @@ export default function AFLPage() {
     const slotW = 46, nameW = isMobile ? 132 : 190
     return (
       <div style={{ overflowX: 'auto', WebkitOverflowScrolling: 'touch' }}>
-        <table style={{ borderCollapse: 'separate', borderSpacing: 0, width: '100%', minWidth: slotW + nameW + 56 + cols.length * 40 }}>
+        <table style={{ borderCollapse: 'separate', borderSpacing: 0, width: '100%', minWidth: slotW + nameW + 56 + (hasDays ? 44 : 0) + cols.length * 40 }}>
           <thead>
             <tr>
               <th style={{ ...th, ...stickyL(0), textAlign: 'left', width: slotW, minWidth: slotW }}>Slot</th>
               <th style={{ ...th, ...stickyL(slotW), textAlign: 'left', width: nameW, minWidth: nameW, borderRight: '1px solid var(--border)' }}>{kind === 'hit' ? 'Hitters' : 'Pitchers'}</th>
               <th style={{ ...th, color: 'var(--text)' }}>Pts</th>
+              {hasDays && <th style={th}>Last</th>}
               {cols.map(c => <th key={c} style={th}>{c}</th>)}
             </tr>
           </thead>
@@ -180,6 +183,7 @@ export default function AFLPage() {
                     {r.name && r.slot !== r.pos && <span style={{ marginLeft: 6, fontSize: '0.65rem', color: 'var(--muted)', fontFamily: 'var(--font-display)', fontWeight: 700 }}>{r.pos}</span>}
                   </td>
                   <td style={{ ...td, fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: '0.9rem', color: r.name ? 'var(--text)' : 'var(--muted)' }}>{r.name ? fmtPts(r.pts) : ''}</td>
+                  {hasDays && <td style={{ ...td, color: 'var(--muted)' }}>{r.name && r.lastPts != null ? (r.lastPts > 0 ? `+${r.lastPts}` : r.lastPts) : ''}</td>}
                   {cols.map(c => <td key={c} style={{ ...td, color: 'var(--muted)' }}>{r.name ? (r.stats?.[c] ?? (c === 'IP' ? '0.0' : 0)) : ''}</td>)}
                 </tr>
               )
@@ -200,6 +204,11 @@ export default function AFLPage() {
   const openBench = lineup.filter(r => !r.name && r.slot === 'Bench').length
   const leaderPts = teams[0]?.pts ?? 0
   const isFinal = data.season < new Date().getFullYear()
+  const days: any[] = data.days ?? []
+  // Most recent day any rostered player played — matches the API's per-player "Last" column
+  const lastDay = [...days].reverse().find(d => d.players.length > 0)
+  const teamOrder = teams.map(t => t.name)
+  const lbCols = isMobile ? '28px 1fr 56px 52px' : `40px 1fr 80px ${lastDay ? '70px ' : ''}80px 90px 90px`
 
   return (
     <div style={{ padding: isMobile ? '1rem 1rem 88px' : '2rem', maxWidth: 1200 }}>
@@ -220,22 +229,26 @@ export default function AFLPage() {
         )}
       </div>
 
+      {lastDay && <LastNight day={lastDay} color={aflColor} isFinal={isFinal} onPlayer={setDrawerPid} />}
+
       {/* Leaderboard */}
       <div style={{ ...card, marginBottom: '1.5rem' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '28px 1fr 56px 52px' : '40px 1fr 80px 80px 90px 90px', ...th, padding: '0.5rem 0.75rem', borderBottom: '1px solid var(--border)', background: 'transparent' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: lbCols, ...th, padding: '0.5rem 0.75rem', borderBottom: '1px solid var(--border)', background: 'transparent' }}>
           <div style={{ textAlign: 'left' }}>#</div>
           <div style={{ textAlign: 'left' }}>Team</div>
           <div>Pts</div>
+          {lastDay && !isMobile && <div>Last</div>}
           <div>Gap</div>
           {!isMobile && <><div>Hit</div><div>Pitch</div></>}
         </div>
         {teams.map(t => {
           const color = aflColor(t.name)
           const selected = activeTeam?.name === t.name
+          const last = lastDay?.teams?.[t.name]
           const hitShare = t.pts > 0 ? Math.max(0, t.hitPts) / (Math.max(0, t.hitPts) + Math.max(0, t.pitPts) || 1) : 0.5
           return (
             <div key={t.name} onClick={() => setTeam(t.name)} style={{
-              display: 'grid', gridTemplateColumns: isMobile ? '28px 1fr 56px 52px' : '40px 1fr 80px 80px 90px 90px',
+              display: 'grid', gridTemplateColumns: lbCols,
               alignItems: 'center', padding: '0.6rem 0.75rem', borderBottom: '1px solid var(--border)', cursor: 'pointer',
               background: selected ? `color-mix(in srgb, ${color} 8%, transparent)` : 'transparent',
               borderLeft: `3px solid ${selected ? color : 'transparent'}`,
@@ -258,7 +271,16 @@ export default function AFLPage() {
                   </div>
                 )}
               </div>
-              <div style={{ textAlign: 'right', fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: '1.1rem', color: 'var(--text)' }}>{fmtPts(t.pts)}</div>
+              <div style={{ textAlign: 'right', fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: '1.1rem', color: 'var(--text)' }}>
+                {fmtPts(t.pts)}
+                {isMobile && last && <div style={{ fontFamily: 'var(--font-body)', fontWeight: 400, fontSize: '0.68rem', color: 'var(--muted)' }}>{last.delta > 0 ? '+' : ''}{last.delta}{last.rankChange ? ` ${last.rankChange > 0 ? '▲' : '▼'}${Math.abs(last.rankChange)}` : ''}</div>}
+              </div>
+              {last && !isMobile && (
+                <div style={{ textAlign: 'right', fontSize: '0.85rem', color: 'var(--muted)', fontVariantNumeric: 'tabular-nums' }}>
+                  {last.delta > 0 ? '+' : ''}{last.delta}
+                  {last.rankChange !== 0 && <span style={{ fontSize: '0.7rem', marginLeft: 4 }}>{last.rankChange > 0 ? '▲' : '▼'}{Math.abs(last.rankChange)}</span>}
+                </div>
+              )}
               <div style={{ textAlign: 'right', fontSize: '0.8rem', color: 'var(--muted)', fontVariantNumeric: 'tabular-nums' }}>{t.pts === leaderPts ? '—' : fmtPts(t.gap)}</div>
               {!isMobile && <>
                 <div style={{ textAlign: 'right', fontSize: '0.85rem', color: 'var(--text)', fontVariantNumeric: 'tabular-nums' }}>{fmtPts(t.hitPts)}</div>
@@ -268,6 +290,9 @@ export default function AFLPage() {
           )
         })}
       </div>
+
+      {days.length > 0 && <SeasonChart days={days} teamOrder={teamOrder} color={aflColor} isMobile={isMobile} />}
+      {days.length > 0 && <DailyLog days={days} teamOrder={teamOrder} color={aflColor} isMobile={isMobile} onPlayer={setDrawerPid} />}
 
       {/* Team selector */}
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8, marginBottom: '0.75rem', flexWrap: 'wrap' }}>
