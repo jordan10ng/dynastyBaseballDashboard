@@ -58,6 +58,7 @@ function buildDays(rosters: any, daily: any, standings: Record<string, number>, 
   const cum = { hitting: {} as Record<string, any>, pitching: {} as Record<string, any> }
   const prev: Record<string, number> = {}
   const prevRank: Record<string, number> = {}
+  const prevActive: Record<string, Set<string>> = {}
   return dates.map((date, di) => {
     const day = daily.days[date]
     addLine(cum.hitting, day.hitting)
@@ -72,7 +73,14 @@ function buildDays(rosters: any, daily: any, standings: Record<string, number>, 
       })
       const { total, active } = bestBall(rows)
       const finalTotal = di === dates.length - 1 && t.name in standings ? standings[t.name] : total
-      teams[t.name] = { total: finalTotal, delta: finalTotal - (prev[t.name] ?? 0) }
+      // Lineup moves caused by this day's games (none on day one — there's no prior optimized lineup)
+      const nowActive = new Set<string>()
+      active.forEach(row => nowActive.add(row.r.name))
+      const before = prevActive[t.name]
+      const movedIn = before ? rows.filter((x: any) => nowActive.has(x.r.name) && !before.has(x.r.name)).map((x: any) => ({ name: x.r.name, pos: x.pos })) : []
+      const movedOut = before ? rows.filter((x: any) => !nowActive.has(x.r.name) && before.has(x.r.name)).map((x: any) => ({ name: x.r.name, pos: x.pos })) : []
+      prevActive[t.name] = nowActive
+      teams[t.name] = { total: finalTotal, delta: finalTotal - (prev[t.name] ?? 0), movedIn, movedOut }
       prev[t.name] = finalTotal
       for (const row of rows) {
         if (!row.dayLine) continue

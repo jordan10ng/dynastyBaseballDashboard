@@ -28,6 +28,8 @@ const TOP_FILTERS: { key: TopFilter; label: string }[] = [
   { key: 'INF', label: 'INF' }, { key: 'OF', label: 'OF' }, { key: 'C', label: 'C' },
 ]
 
+const fmtDayShort = (d: string) => new Date(`${d}T12:00:00`).toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' })
+
 function fmtPts(n: number | undefined): string {
   if (n == null) return '—'
   return String(Math.round(n * 10) / 10)
@@ -155,6 +157,11 @@ export default function AFLPage() {
     )
   }
 
+  // Lineup moves from the latest game day for the selected team (▲ IN / ▼ OUT tags)
+  const latest = [...(data?.days ?? [])].reverse().find((d: any) => d.players.length > 0)
+  const teamMoves = latest?.teams?.[activeTeam?.name]
+  const moves = { in: new Set<string>((teamMoves?.movedIn ?? []).map((m: any) => m.name)), out: new Set<string>((teamMoves?.movedOut ?? []).map((m: any) => m.name)) }
+
   const TeamTable = ({ rows, kind }: { rows: any[]; kind: 'hit' | 'pit' }) => {
     const cols = kind === 'hit' ? HIT_COLS : PIT_COLS
     const slotW = 46, nameW = isMobile ? 132 : 190
@@ -177,6 +184,8 @@ export default function AFLPage() {
                 <tr key={i} style={{ opacity: dim ? 0.45 : 1 }}>
                   <td style={{ ...td, ...stickyL(0), textAlign: 'left', fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.72rem', color: 'var(--muted)', letterSpacing: '0.04em' }}>
                     {r.slot === 'Bench' ? 'BN' : r.slot === 'Util' ? 'UT' : r.slot}
+                    {r.name && moves.in.has(r.name) && <span title="Moved into the lineup last game day" style={{ marginLeft: 3, color: 'var(--text)' }}>▲</span>}
+                    {r.name && moves.out.has(r.name) && <span title="Dropped out of the lineup last game day" style={{ marginLeft: 3 }}>▼</span>}
                   </td>
                   <td style={{ ...td, ...stickyL(slotW), textAlign: 'left', borderRight: '1px solid var(--border)', maxWidth: nameW, overflow: 'hidden', textOverflow: 'ellipsis' }}>
                     <PlayerName p={r} />
@@ -321,6 +330,11 @@ export default function AFLPage() {
           <TeamTable rows={hitRows} kind="hit" />
           <div style={{ height: 10, background: 'var(--bg)' }} />
           <TeamTable rows={pitRows} kind="pit" />
+          {(moves.in.size > 0 || moves.out.size > 0) && (
+            <div style={{ padding: '0.5rem 0.75rem 0', fontSize: '0.7rem', color: 'var(--muted)' }}>
+              ▲ moved into the lineup · ▼ dropped out — {fmtDayShort(latest.date)}
+            </div>
+          )}
           {openBench > 0 && (
             <div style={{ padding: '0.5rem 0.75rem', fontSize: '0.72rem', color: 'var(--muted)', opacity: 0.7, fontStyle: 'italic' }}>
               {openBench} open bench {openBench === 1 ? 'spot' : 'spots'}
