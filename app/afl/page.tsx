@@ -167,13 +167,14 @@ export default function AFLPage() {
     const slotW = 46, nameW = isMobile ? 132 : 190
     return (
       <div style={{ overflowX: 'auto', WebkitOverflowScrolling: 'touch' }}>
-        <table style={{ borderCollapse: 'separate', borderSpacing: 0, width: '100%', minWidth: slotW + nameW + 56 + (hasDays ? 44 : 0) + cols.length * 40 }}>
+        <table style={{ borderCollapse: 'separate', borderSpacing: 0, width: '100%', minWidth: slotW + nameW + 56 + (hasDays ? 44 : 0) + 44 + cols.length * 40 }}>
           <thead>
             <tr>
               <th style={{ ...th, ...stickyL(0), textAlign: 'left', width: slotW, minWidth: slotW }}>Slot</th>
               <th style={{ ...th, ...stickyL(slotW), textAlign: 'left', width: nameW, minWidth: nameW, borderRight: '1px solid var(--border)' }}>{kind === 'hit' ? 'Hitters' : 'Pitchers'}</th>
               <th style={{ ...th, color: 'var(--text)' }}>Pts</th>
               {hasDays && <th style={th}>Last</th>}
+              <th style={th} title="Points per game played">PPG</th>
               {cols.map(c => <th key={c} style={th}>{c}</th>)}
             </tr>
           </thead>
@@ -193,6 +194,7 @@ export default function AFLPage() {
                   </td>
                   <td style={{ ...td, fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: '0.9rem', color: r.name ? 'var(--text)' : 'var(--muted)' }}>{r.name ? fmtPts(r.pts) : ''}</td>
                   {hasDays && <td style={{ ...td, color: 'var(--muted)' }}>{r.name && r.lastPts != null ? (r.lastPts > 0 ? `+${r.lastPts}` : r.lastPts) : ''}</td>}
+                  <td style={{ ...td, color: 'var(--muted)' }}>{r.name && r.stats?.G ? (r.pts / r.stats.G).toFixed(1) : ''}</td>
                   {cols.map(c => <td key={c} style={{ ...td, color: 'var(--muted)' }}>{r.name ? (r.stats?.[c] ?? (c === 'IP' ? '0.0' : 0)) : ''}</td>)}
                 </tr>
               )
