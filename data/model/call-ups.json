@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-19T16:36:48.065Z",
+  "generatedAt": "2026-10-20T14:29:02.449Z",
   "bats": [
     {
       "id": "06hua",
@@ -13,7 +13,7 @@
       "toLevel": "MLB",
       "toRank": 6,
       "callupDate": "2026-09-21",
-      "daysAgo": 29,
+      "daysAgo": 30,
       "statLine": "6 G · .731 OPS · 31.8% K% · 4.5% BB% · 0 HR · 1 SB"
     },
     {
@@ -28,68 +28,8 @@
       "toLevel": "MLB",
       "toRank": 6,
       "callupDate": "2026-09-21",
-      "daysAgo": 29,
+      "daysAgo": 30,
       "statLine": "3 G · .000 OPS · 50.0% K% · 0.0% BB% · 0 HR · 0 SB"
-    },
-    {
-      "id": "0662o",
-      "mlbam_id": "806964",
-      "name": "Sebastian Walcott",
-      "positions": "SS,INF",
-      "rank": 80,
-      "isPit": false,
-      "isTwoWay": false,
-      "fromLevel": "AA",
-      "toLevel": "AAA",
-      "toRank": 5,
-      "callupDate": "2026-09-19",
-      "daysAgo": 31,
-      "statLine": "2 G · .583 OPS · 44.4% K% · 11.1% BB% · 0 HR · 1 SB"
-    },
-    {
-      "id": "066ip",
-      "mlbam_id": "701527",
-      "name": "Mike Sirota",
-      "positions": "CF,OF",
-      "rank": 106,
-      "isPit": false,
-      "isTwoWay": false,
-      "fromLevel": "AA",
-      "toLevel": "AAA",
-      "toRank": 5,
-      "callupDate": "2026-09-19",
-      "daysAgo": 31,
-      "statLine": "2 G · 1.056 OPS · 33.3% K% · 33.3% BB% · 0 HR · 0 SB"
-    },
-    {
-      "id": "06rl5",
-      "mlbam_id": "691276",
-      "name": "Luis Caicuto",
-      "positions": "C",
-      "rank": 3436,
-      "isPit": false,
-      "isTwoWay": false,
-      "fromLevel": "AA",
-      "toLevel": "AAA",
-      "toRank": 5,
-      "callupDate": "2026-09-19",
-      "daysAgo": 31,
-      "statLine": "1 G · 1.000 OPS · 25.0% K% · 0.0% BB% · 0 HR · 0 SB"
-    },
-    {
-      "id": "06zeq",
-      "mlbam_id": "814781",
-      "name": "Jonathan Hogart",
-      "positions": "RF,OF",
-      "rank": 7056,
-      "isPit": false,
-      "isTwoWay": false,
-      "fromLevel": "Single-A",
-      "toLevel": "AAA",
-      "toRank": 5,
-      "callupDate": "2026-09-19",
-      "daysAgo": 31,
-      "statLine": "1 G · .000 OPS · 100.0% K% · 0.0% BB% · 0 HR · 0 SB"
     }
   ],
   "arms": [
@@ -105,7 +45,7 @@
       "toLevel": "MLB",
       "toRank": 6,
       "callupDate": "2026-09-25",
-      "daysAgo": 25,
+      "daysAgo": 26,
       "statLine": "1 G · 0-0 · 1.0 IP · 18.00 ERA · 28.6% K% · 14.3% BB%"
     },
     {
@@ -120,7 +60,7 @@
       "toLevel": "AAA",
       "toRank": 5,
       "callupDate": "2026-09-20",
-      "daysAgo": 30,
+      "daysAgo": 31,
       "statLine": "1 G · 0-0 · 0.2 IP · 27.00 ERA · 16.7% K% · 33.3% BB%"
     },
     {
@@ -135,7 +75,7 @@
       "toLevel": "AAA",
       "toRank": 5,
       "callupDate": "2026-09-20",
-      "daysAgo": 30,
+      "daysAgo": 31,
       "statLine": "1 G · 0-0 · 0.2 IP · 0.00 ERA · 33.3% K% · 0.0% BB%"
     },
     {
@@ -150,53 +90,8 @@
       "toLevel": "AAA",
       "toRank": 5,
       "callupDate": "2026-09-20",
-      "daysAgo": 30,
+      "daysAgo": 31,
       "statLine": "1 G · 0-0 · 1.0 IP · 36.00 ERA · 0.0% K% · 12.5% BB%"
-    },
-    {
-      "id": "06nyu",
-      "mlbam_id": "805175",
-      "name": "Davis Polo",
-      "positions": "SP",
-      "rank": 1787,
-      "isPit": true,
-      "isTwoWay": false,
-      "fromLevel": "AA",
-      "toLevel": "AAA",
-      "toRank": 5,
-      "callupDate": "2026-09-19",
-      "daysAgo": 31,
-      "statLine": "1 G · 1-0 · 6.0 IP · 0.00 ERA · 13.6% K% · 9.1% BB%"
-    },
-    {
-      "id": "06xzz",
-      "mlbam_id": "811600",
-      "name": "Abraham Parra",
-      "positions": "SP,RP",
-      "rank": 2768,
-      "isPit": true,
-      "isTwoWay": false,
-      "fromLevel": "AA",
-      "toLevel": "AAA",
-      "toRank": 5,
-      "callupDate": "2026-09-19",
-      "daysAgo": 31,
-      "statLine": "1 G · 0-0 · 1.2 IP · 27.00 ERA · 9.1% K% · 9.1% BB%"
-    },
-    {
-      "id": "06qta",
-      "mlbam_id": "703670",
-      "name": "Pierce George",
-      "positions": "RP",
-      "rank": 7259,
-      "isPit": true,
-      "isTwoWay": false,
-      "fromLevel": "AA",
-      "toLevel": "AAA",
-      "toRank": 5,
-      "callupDate": "2026-09-19",
-      "daysAgo": 31,
-      "statLine": "1 G · 1-0 · 2.0 IP · 0.00 ERA · 33.3% K% · 22.2% BB%"
     }
   ]
 }
