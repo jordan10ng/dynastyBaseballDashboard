@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-20T14:29:02.449Z",
+  "generatedAt": "2026-10-21T14:38:20.311Z",
   "bats": [
     {
       "id": "06hua",
@@ -13,7 +13,7 @@
       "toLevel": "MLB",
       "toRank": 6,
       "callupDate": "2026-09-21",
-      "daysAgo": 30,
+      "daysAgo": 31,
       "statLine": "6 G · .731 OPS · 31.8% K% · 4.5% BB% · 0 HR · 1 SB"
     },
     {
@@ -28,7 +28,7 @@
       "toLevel": "MLB",
       "toRank": 6,
       "callupDate": "2026-09-21",
-      "daysAgo": 30,
+      "daysAgo": 31,
       "statLine": "3 G · .000 OPS · 50.0% K% · 0.0% BB% · 0 HR · 0 SB"
     }
   ],
@@ -45,53 +45,8 @@
       "toLevel": "MLB",
       "toRank": 6,
       "callupDate": "2026-09-25",
-      "daysAgo": 26,
+      "daysAgo": 27,
       "statLine": "1 G · 0-0 · 1.0 IP · 18.00 ERA · 28.6% K% · 14.3% BB%"
-    },
-    {
-      "id": "06fuo",
-      "mlbam_id": "807187",
-      "name": "Mathias LaCombe",
-      "positions": "SP",
-      "rank": 2332,
-      "isPit": true,
-      "isTwoWay": false,
-      "fromLevel": "AA",
-      "toLevel": "AAA",
-      "toRank": 5,
-      "callupDate": "2026-09-20",
-      "daysAgo": 31,
-      "statLine": "1 G · 0-0 · 0.2 IP · 27.00 ERA · 16.7% K% · 33.3% BB%"
-    },
-    {
-      "id": "07032",
-      "mlbam_id": "823230",
-      "name": "Tyler McLoughlin",
-      "positions": "SP,RP",
-      "rank": 6213,
-      "isPit": true,
-      "isTwoWay": false,
-      "fromLevel": "Single-A",
-      "toLevel": "AAA",
-      "toRank": 5,
-      "callupDate": "2026-09-20",
-      "daysAgo": 31,
-      "statLine": "1 G · 0-0 · 0.2 IP · 0.00 ERA · 33.3% K% · 0.0% BB%"
-    },
-    {
-      "id": "04apk",
-      "mlbam_id": "665993",
-      "name": "Cristhian Tortosa",
-      "positions": "RP",
-      "rank": 8455,
-      "isPit": true,
-      "isTwoWay": false,
-      "fromLevel": "AA",
-      "toLevel": "AAA",
-      "toRank": 5,
-      "callupDate": "2026-09-20",
-      "daysAgo": 31,
-      "statLine": "1 G · 0-0 · 1.0 IP · 36.00 ERA · 0.0% K% · 12.5% BB%"
     }
   ]
 }
