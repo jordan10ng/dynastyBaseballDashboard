@@ -1,37 +1,6 @@
 {
-  "generatedAt": "2026-10-21T14:38:20.311Z",
-  "bats": [
-    {
-      "id": "06hua",
-      "mlbam_id": "815589",
-      "name": "Bo Davidson",
-      "positions": "CF,OF",
-      "rank": 461,
-      "isPit": false,
-      "isTwoWay": false,
-      "fromLevel": "AAA",
-      "toLevel": "MLB",
-      "toRank": 6,
-      "callupDate": "2026-09-21",
-      "daysAgo": 31,
-      "statLine": "6 G · .731 OPS · 31.8% K% · 4.5% BB% · 0 HR · 1 SB"
-    },
-    {
-      "id": "05ge2",
-      "mlbam_id": "693306",
-      "name": "Aaron Sabato",
-      "positions": "1B,INF",
-      "rank": 2513,
-      "isPit": false,
-      "isTwoWay": false,
-      "fromLevel": "AAA",
-      "toLevel": "MLB",
-      "toRank": 6,
-      "callupDate": "2026-09-21",
-      "daysAgo": 31,
-      "statLine": "3 G · .000 OPS · 50.0% K% · 0.0% BB% · 0 HR · 0 SB"
-    }
-  ],
+  "generatedAt": "2026-10-22T14:38:14.419Z",
+  "bats": [],
   "arms": [
     {
       "id": "0622r",
@@ -45,7 +14,7 @@
       "toLevel": "MLB",
       "toRank": 6,
       "callupDate": "2026-09-25",
-      "daysAgo": 27,
+      "daysAgo": 28,
       "statLine": "1 G · 0-0 · 1.0 IP · 18.00 ERA · 28.6% K% · 14.3% BB%"
     }
   ]
