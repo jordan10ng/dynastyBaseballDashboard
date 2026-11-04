@@ -122356,7 +122356,7 @@
   "060ui": {
     "id": "060ui",
     "name": "RJ Petit",
-    "team": "COL",
+    "team": "DET",
     "positions": "RP",
     "level": "MLB",
     "age": 26,
@@ -172842,6 +172842,8 @@
     "level": "MiLB",
     "age": 20,
     "minors_rank": 77,
+    "mlbam_id": "815628",
+    "birthDate": "2005-06-30",
     "rank": 614
   },
   "03d7c": {
@@ -189751,7 +189753,9 @@
     "team": "CHW",
     "positions": "SP",
     "level": "MLB",
-    "age": 20
+    "age": 20,
+    "mlbam_id": "807001",
+    "birthDate": "2005-10-13"
   },
   "041rm": {
     "id": "041rm",
@@ -219159,7 +219163,9 @@
     "team": "BOS",
     "positions": "SP",
     "level": "MiLB",
-    "age": 17
+    "age": 17,
+    "mlbam_id": "837752",
+    "birthDate": "2008-10-16"
   },
   "0730d": {
     "id": "0730d",
@@ -229078,7 +229084,8 @@
     "positions": "RP",
     "level": "MLB",
     "age": 23,
-    "birthDate": "2000-11-02"
+    "birthDate": "2002-10-09",
+    "mlbam_id": "811286"
   },
   "03qko": {
     "id": "03qko",
@@ -281879,7 +281886,7 @@
   "06qia": {
     "id": "06qia",
     "name": "Nathan Archer",
-    "team": "CHW",
+    "team": "(N/A)",
     "positions": "LF,OF",
     "level": "MLB",
     "age": 23,
@@ -283912,7 +283919,9 @@
     "team": "BOS",
     "positions": "SP",
     "level": "MiLB",
-    "age": 22
+    "age": 22,
+    "mlbam_id": "702651",
+    "birthDate": "2003-09-04"
   },
   "06k88": {
     "id": "06k88",
@@ -284572,7 +284581,9 @@
     "team": "ATL",
     "positions": "SP",
     "level": "MiLB",
-    "age": 16
+    "age": 16,
+    "mlbam_id": "834738",
+    "birthDate": "2009-06-04"
   },
   "0701n": {
     "id": "0701n",
@@ -308306,7 +308317,9 @@
     "team": "CHC",
     "positions": "SS,INF",
     "level": "MiLB",
-    "age": 17
+    "age": 17,
+    "mlbam_id": "837841",
+    "birthDate": "2008-12-23"
   },
   "06hv6": {
     "id": "06hv6",
@@ -325138,7 +325151,9 @@
     "team": "NYY",
     "positions": "SP",
     "level": "MiLB",
-    "age": 17
+    "age": 17,
+    "mlbam_id": "834248",
+    "birthDate": "2009-02-05"
   },
   "06may": {
     "id": "06may",
@@ -492209,7 +492224,9 @@
     "team": "NYY",
     "positions": "RP",
     "level": "MiLB",
-    "age": 24
+    "age": 24,
+    "mlbam_id": "814512",
+    "birthDate": "2001-10-11"
   },
   "06klf": {
     "id": "06klf",
@@ -498222,7 +498239,9 @@
     "team": "MIA",
     "positions": "RP",
     "level": "MLB",
-    "age": 21
+    "age": 21,
+    "mlbam_id": "801270",
+    "birthDate": "2004-11-10"
   },
   "070d0": {
     "id": "070d0",
